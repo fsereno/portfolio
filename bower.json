@@ -1,0 +1,20 @@
+{
+  "name": "portfolio",
+  "description": "My Portfolio Repository",
+  "main": "index.html",
+  "authors": [
+    "Fabio Sereno"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/fsereno/portfolio",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}
