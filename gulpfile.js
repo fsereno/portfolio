@@ -20,7 +20,7 @@ gulp.task("typeScript", function () {
   .pipe(gulp.dest("app/js"));
 });
 
-gulp.task('html', function () {
+gulp.task('html',['sass'], function () {
   return gulp.src('app/*.html')
     .pipe(useref())
     .pipe(gulp.dest('dist'));
@@ -32,7 +32,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('app/css'));
 });
 
-gulp.task('build', ['typeScript','sass', 'html'], function () {
+gulp.task('build', ['typeScript', 'html'], function () {
   return gulp.src('dist/**/*');
 });
 
