@@ -5,7 +5,7 @@ class TestService implements ITestService {
 
     text() : void {
 
-        console.log("Tester");
+        console.log("This is a Service");
 
     }
 
