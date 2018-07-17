@@ -9,17 +9,30 @@ var pug = require("gulp-pug");
 var gulpSequence = require("gulp-sequence")
 
 gulp.task("typeScript", function () {
-  return browserify({
-      basedir: ".",
+  
+  var entries = [
+    "index/app.ts", 
+    "test/app.ts"
+  ]
+
+  entries.forEach(entry => {
+    
+    var dir = entry.split("/");
+
+    return browserify({
+      basedir: "app/typeScript/",
       debug: true,
-      entries: ["app/typeScript/application.ts"],
+      entries: entry,
       cache: {},
       packageCache: {}
-  })
-  .plugin(tsify)
-  .bundle()
-  .pipe(source("application.js"))
-  .pipe(gulp.dest("app/js"));
+    })
+    .plugin(tsify)
+    .bundle()
+    .pipe(source("app.js"))
+    .pipe(gulp.dest("app/js/"+dir[0]));
+
+  });
+  
 });
 
 gulp.task("sass", function () {
