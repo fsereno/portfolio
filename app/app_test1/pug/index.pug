@@ -1,0 +1,19 @@
+extends ../../pug/views/layouts/main.pug
+
+block styles
+  // build:css css/styles.css
+  link(rel="stylesheet" href="css/styles.css")
+  // endbuild
+
+block content
+  .container-fluid
+      h1.display-1
+        | Portfolio
+        small.text-muted index.html
+
+block scripts
+  // build:js js/app.js
+  script(src="js/app.js")
+  // endbuild
+  // build:js js/vendor.js
+  // endbuild

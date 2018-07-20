@@ -9,9 +9,29 @@ var pug = require("gulp-pug");
 var gulpSequence = require("gulp-sequence")
 
 var entries = [
-  "index", 
-  "test"
+  "app_test1", 
+  "app_test2"
 ]
+
+gulp.task("typeScriptEach", function () {
+
+  entries.forEach(entry => {
+
+    return browserify({
+      basedir: "app/"+entry+"/typeScript/",
+      debug: true,
+      entries: "app.ts",
+      cache: {},
+      packageCache: {}
+    })
+    .plugin(tsify)
+    .bundle()
+    .pipe(source("app.js"))
+    .pipe(gulp.dest("app/"+entry+"/js"));
+
+  });
+  
+});
 
 gulp.task("typeScript", function () {
 
@@ -53,6 +73,21 @@ gulp.task("sass", function () {
     .pipe(gulp.dest("app/css"));
 });
 
+gulp.task("pugEach", function buildHTML() {
+
+  entries.forEach(entry => {
+
+    return gulp.src("app/"+entry+"/pug/**/*.pug")
+    .pipe(pug({
+      pretty: true
+
+    }))
+    .pipe(gulp.dest("app/"+entry));
+
+  });
+
+});
+
 gulp.task("pug", function buildHTML() {
   return gulp.src("app/pug/**/*.pug")
   .pipe(pug({
@@ -60,6 +95,18 @@ gulp.task("pug", function buildHTML() {
 
   }))
   .pipe(gulp.dest("app"));
+});
+
+gulp.task("htmlEach",["typeScriptEach", "sassEach", "pugEach"], function () {
+  
+  entries.forEach(entry => {
+  
+    return gulp.src("app/"+entry+"/*.html")
+      .pipe(useref())
+      .pipe(gulp.dest("dist/"+entry));
+
+  });
+
 });
 
 gulp.task("html",["typeScript", "sass", "pug"], function () {
@@ -74,6 +121,13 @@ gulp.task("build", function(callback){
     callback);
 });
 
+gulp.task("buildEach", function(callback){
+	gulpSequence(
+    ["typeScriptEach", "sassEach", "pugEach", "htmlEach"],
+    callback);
+});
+
 gulp.task("default", function () {
-  gulp.start("build");
+  //gulp.start("build");
+  gulp.start("buildEach");
 });
