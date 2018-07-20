@@ -17,7 +17,7 @@ gulp.task("typeScript", function () {
 
   entries.forEach(entry => {
     
-    var dir = entry.split("/");
+    //var dir = entry.split("/");
 
     return browserify({
       basedir: "app/typeScript/",
@@ -29,10 +29,22 @@ gulp.task("typeScript", function () {
     .plugin(tsify)
     .bundle()
     .pipe(source("app.js"))
-    .pipe(gulp.dest("app/js/"+dir[0]));
+    .pipe(gulp.dest("app/js/"+entry));
 
   });
   
+});
+
+gulp.task("sassEach", function () {
+
+  entries.forEach(entry => {
+
+    return gulp.src("app/"+entry+"/sass/**/*.scss")
+      .pipe(sass().on("error", sass.logError))
+      .pipe(gulp.dest("app/"+entry+"/css"));
+
+  });
+
 });
 
 gulp.task("sass", function () {
