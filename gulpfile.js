@@ -8,12 +8,12 @@ var sass = require("gulp-sass");
 var pug = require("gulp-pug");
 var gulpSequence = require("gulp-sequence")
 
+var entries = [
+  "index/app", 
+  "test/app"
+]
+
 gulp.task("typeScript", function () {
-  
-  var entries = [
-    "index/app.ts", 
-    "test/app.ts"
-  ]
 
   entries.forEach(entry => {
     
@@ -22,7 +22,7 @@ gulp.task("typeScript", function () {
     return browserify({
       basedir: "app/typeScript/",
       debug: true,
-      entries: entry,
+      entries: entry+".ts",
       cache: {},
       packageCache: {}
     })
