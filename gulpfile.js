@@ -10,7 +10,8 @@ var gulpSequence = require("gulp-sequence")
 
 var entries = [
   "app_test1", 
-  "app_test2"
+  "app_test2",
+  "app_licence"
 ]
 
 gulp.task("typeScript", function () {
