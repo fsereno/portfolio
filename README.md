@@ -4,25 +4,33 @@
 
 > A Portfolio Repository
 
-- Most people will glance at your `README`, *maybe* star it, and leave
-- Ergo, people should understand instantly what your project is about based on your repo
+The purpose of this repository is to demonstrate skills in various languages, coding principles and patterns:
+
+- Pug (Compiled to: HTML)
+- TypeScript (Compiled to: JavaScript)
+- Sass (Compiled to: CSS)
+- SOLID (SOLID Design principles throughout)
 ---
 
 ## Contents
 
 - [Installation](#installation)
+- [Prerequisites](#prerequisites)
 - [Features](#features)
 - [License](#license)
+---
+
+## Global Prerequisites
+
+- Nodejs v ^11.8.3 (https://nodejs.org/en/)
+- Npm (https://www.npmjs.com/)
+- Bower (https://bower.io/search/)
+- Gulp (https://gulpjs.com/)
 ---
 
 ## Installation
 
 - Follow these steps to install this repo locally. Feel free to checkout the build process and view uncompiled code.
----
-
-**Prerequisites**
-> Nodejs v ^11.8.3 (https://nodejs.org/en/)
-> Npm, latest stable version (This will install as part of Nodejs)
 ---
 
 ### Clone
@@ -38,7 +46,7 @@
 
 ```shell
 $ npm install
-$ bower intall
+$ bower install
 ```
 ---
 
@@ -48,7 +56,7 @@ $ bower intall
 $ gulp
 ```
 
-- Open your browser and navigate to anyone of the examples. Once the build has succeded, a good place to start is dist/app_start/index.html
+- Open your browser and navigate to anyone of the examples. Once the build has succeeded, a good place to start is dist/app_start/index.html
 ---
 
 ## License
@@ -57,3 +65,4 @@ $ gulp
 
 - **[MIT license](http://fswebsitesolutions.com/porfolio/app_licence/index.html)**
 - Copyright 2018 © <a href="http://fswebsitesolutions.com/" target="_blank">FS Website Solutions</a>.
+
