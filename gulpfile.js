@@ -13,7 +13,7 @@ var entries = [
   "app_test2"
 ]
 
-gulp.task("typeScriptEach", function () {
+gulp.task("typeScript", function () {
 
   entries.forEach(entry => {
 
@@ -33,29 +33,7 @@ gulp.task("typeScriptEach", function () {
   
 });
 
-gulp.task("typeScript", function () {
-
-  entries.forEach(entry => {
-    
-    //var dir = entry.split("/");
-
-    return browserify({
-      basedir: "app/typeScript/",
-      debug: true,
-      entries: entry+"/app.ts",
-      cache: {},
-      packageCache: {}
-    })
-    .plugin(tsify)
-    .bundle()
-    .pipe(source("app.js"))
-    .pipe(gulp.dest("app/js/"+entry));
-
-  });
-  
-});
-
-gulp.task("sassEach", function () {
+gulp.task("sass", function () {
 
   entries.forEach(entry => {
 
@@ -67,13 +45,7 @@ gulp.task("sassEach", function () {
 
 });
 
-gulp.task("sass", function () {
-  return gulp.src("app/sass/**/*.scss")
-    .pipe(sass().on("error", sass.logError))
-    .pipe(gulp.dest("app/css"));
-});
-
-gulp.task("pugEach", function buildHTML() {
+gulp.task("pug", function buildHTML() {
 
   entries.forEach(entry => {
 
@@ -88,16 +60,7 @@ gulp.task("pugEach", function buildHTML() {
 
 });
 
-gulp.task("pug", function buildHTML() {
-  return gulp.src("app/pug/**/*.pug")
-  .pipe(pug({
-    pretty: true
-
-  }))
-  .pipe(gulp.dest("app"));
-});
-
-gulp.task("htmlEach",["typeScriptEach", "sassEach", "pugEach"], function () {
+gulp.task("html",["typeScript", "sass", "pug"], function () {
   
   entries.forEach(entry => {
   
@@ -109,25 +72,12 @@ gulp.task("htmlEach",["typeScriptEach", "sassEach", "pugEach"], function () {
 
 });
 
-gulp.task("html",["typeScript", "sass", "pug"], function () {
-  return gulp.src("app/*.html")
-    .pipe(useref())
-    .pipe(gulp.dest("dist"));
-});
-
 gulp.task("build", function(callback){
 	gulpSequence(
     ["typeScript", "sass", "pug", "html"],
     callback);
 });
 
-gulp.task("buildEach", function(callback){
-	gulpSequence(
-    ["typeScriptEach", "sassEach", "pugEach", "htmlEach"],
-    callback);
-});
-
 gulp.task("default", function () {
-  //gulp.start("build");
-  gulp.start("buildEach");
+  gulp.start("build");
 });
