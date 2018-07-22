@@ -16,11 +16,10 @@ The purpose of this repository is to demonstrate skills in various languages, co
 
 - [Installation](#installation)
 - [Prerequisites](#prerequisites)
-- [Features](#features)
 - [License](#license)
 ---
 
-## Global Prerequisites
+## Prerequisites
 
 - Nodejs v ^11.8.3 (https://nodejs.org/en/)
 - Npm (https://www.npmjs.com/)
