@@ -1,5 +1,3 @@
-<a href="http://fswebsitesolutions.com/"><img src="https://raw.githubusercontent.com/fsereno/portfolio/master/dist/images/FSWebsiteSolutionsLogo.jpg" title="FS Website Solutions" alt="FS Website Solutions" target="_blank"></a>
-
 # Fabio Sereno
 
 > A Portfolio Repository
