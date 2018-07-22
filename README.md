@@ -1,4 +1,4 @@
-<a href="http://fswebsitesolutions.com/"><img src="http://fswebsitesolutions.com/images/logo.png" title="FS Website Solutions" alt="FS Website Solutions" target="_blank"></a>
+<a href="http://fswebsitesolutions.com/"><img src="https://raw.githubusercontent.com/fsereno/portfolio/master/dist/images/FSWebsiteSolutionsLogo.jpg" title="FS Website Solutions" alt="FS Website Solutions" target="_blank"></a>
 
 # Fabio Sereno
 
