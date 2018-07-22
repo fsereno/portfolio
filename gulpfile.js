@@ -73,9 +73,14 @@ gulp.task("html",["typeScript", "sass", "pug"], function () {
 
 });
 
+gulp.task('images', function () {
+  return gulp.src('app/images/**/*')
+    .pipe(gulp.dest('dist/images'));
+});
+
 gulp.task("build", function(callback){
 	gulpSequence(
-    ["typeScript", "sass", "pug", "html"],
+    ["typeScript", "sass", "pug", "html", "images"],
     callback);
 });
 
