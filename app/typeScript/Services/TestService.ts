@@ -3,9 +3,11 @@ import { ITestService } from "../Interfaces/ITestService";
 
 class TestService implements ITestService {
 
-    text() : void {
+    text() : string {
 
-        console.log("This app 1");
+        var text = "This from the testService";
+        
+        return text;
 
     }
 

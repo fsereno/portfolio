@@ -1,5 +1,5 @@
 // Interfaces
-import { ITestService } from "../Interfaces/ITestService";
+import { ITestService } from "../../../typeScript/Interfaces/ITestService";
 
 class BaseController  {
     
@@ -23,7 +23,9 @@ class BaseController  {
 
         $(() => {
 
-            self.testService.text();
+            var text = self.testService.text();
+
+            console.log(text);
 
         });
 
