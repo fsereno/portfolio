@@ -3,15 +3,15 @@
 import { BaseController } from "./Controllers/baseController";
 
 // Services
-import { TestService } from "../../typeScript/Services/testService";
+import { TextService } from "../../typeScript/Services/textService";
 
 // Instantiate Services with dependency injection
-let testService = new TestService();
+let textService = new TextService();
 
 // Controllers
 let baseController = new BaseController
 (
-    testService
+    textService
 );
 
 baseController.init();

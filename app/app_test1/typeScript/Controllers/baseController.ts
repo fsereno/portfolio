@@ -1,18 +1,18 @@
 // Interfaces
-import { ITestService } from "../../../typeScript/Interfaces/ITestService";
+import { ITextService } from "../../../typeScript/Interfaces/ITextService";
 
 class BaseController  {
     
-    testService: ITestService;
+    textService: ITextService;
 
     constructor
     (
 
-        testService: ITestService
+        textService: ITextService
       
     ) 
     {
-        this.testService = testService;
+        this.textService = textService;
     }
 
     init(
@@ -23,7 +23,7 @@ class BaseController  {
 
         $(() => {
 
-            var text = self.testService.text();
+            var text = self.textService.Concat("Application ", "1");
 
             console.log(text);
 
