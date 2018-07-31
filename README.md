@@ -2,11 +2,14 @@
 
 # **Fabio Sereno** - Software Developer
 ### A Portfolio Repository
-The purpose of this repository is to demonstrate skills in various languages, coding principles and patterns:
+The purpose of this repository is to demonstrate skills in various technologies, coding principles and patterns:
 
+- Gulp (As the task runner)
 - Pug (Compiled to: HTML)
 - TypeScript (Compiled to: JavaScript)
 - Sass (Compiled to: CSS)
+- Mocha (For TS/JS unit testing)
+- Chai (For TS/JS unit test assertion)
 - SOLID (SOLID Design principles throughout)
 ---
 
