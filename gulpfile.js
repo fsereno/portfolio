@@ -7,6 +7,7 @@ var useref = require("gulp-useref");
 var sass = require("gulp-sass");
 var pug = require("gulp-pug");
 var gulpSequence = require("gulp-sequence")
+var mocha = require("gulp-mocha");
 
 var entries = [
   "app_test1", 
@@ -79,11 +80,20 @@ gulp.task('images', function () {
   
     return output;
 
-  });
+});
+
+gulp.task("mocha", function () {
+  return gulp.src("app/**/*.test.ts")
+      .pipe(mocha({
+          reporter: "spec",
+          require: ["ts-node/register"]
+      }));
+});
+
 
 gulp.task("build", function(callback){
 	gulpSequence(
-    ["typeScript", "sass", "pug", "html", "images"],
+    ["typeScript", "sass", "pug", "html", "images", "mocha"],
     callback);
 });
 
