@@ -10,8 +10,7 @@ var gulpSequence = require("gulp-sequence")
 var mocha = require("gulp-mocha");
 
 var entries = [
-  "app_test1", 
-  "app_licence"
+  "app_test1"
 ]
 
 function test1(){
