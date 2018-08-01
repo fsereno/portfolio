@@ -1,6 +1,8 @@
 // Interfaces
 import { ITextService } from "../../../typeScript/Interfaces/ITextService";
 
+// Models
+
 class BaseController  {
     
     textService: ITextService;
