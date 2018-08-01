@@ -14,6 +14,78 @@ var entries = [
   "app_licence"
 ]
 
+function test1(){
+  return "Test1";
+};
+function test2(){
+  return "Test2";
+};
+function test3(){
+  return "Test3";
+};
+
+gulp.task('promise', function() {
+  return Promise.all([
+    test1(),
+    test2(),
+    test3()
+  ]).then(function(values) {
+      console.log("tests completed");
+      console.log(values);
+  })
+});
+
+var fn = function asyncMultiply(v){ // sample async action
+  return new Promise(function(resolve, reject){
+    resolve(v);
+  });
+} 
+
+var typeScriptPromise = function typeScriptPromiseConstructor(file){
+  return new Promise(function(resolve, reject){   
+    resolve(function(){
+
+      return browserify({
+        basedir: "app/"+file+"/typeScript/",
+        debug: true,
+        entries: "app.ts",
+        cache: {},
+        packageCache: {}
+      })
+      .plugin(tsify)
+      .bundle()
+      .pipe(source("app.js"))
+      .pipe(gulp.dest("app/"+file+"/js"));
+
+    }
+
+    );
+  });
+} 
+
+gulp.task("ts3", function () {
+  
+  var actions = entries.map(typeScriptPromise);
+  var results = Promise.all(actions); // pass array of promises
+
+  results.then(data => // or just .then(console.log)
+      console.log(data), // [2, 4, 6, 8, 10]
+  );
+
+});
+
+
+gulp.task("ts2", function () {
+  
+  var actions = entries.map(fn);
+  var results = Promise.all(actions); // pass array of promises
+
+  results.then(data => // or just .then(console.log)
+      console.log(data) // [2, 4, 6, 8, 10]
+  );
+
+});
+
 gulp.task("typeScript", function () {
 
   entries.forEach(entry => {
