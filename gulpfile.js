@@ -14,38 +14,8 @@ var entries = [
   "app_test2"
 ]
 
-function test1(){
-  return "Test1";
-};
-function test2(){
-  return "Test2";
-};
-function test3(){
-  return "Test3";
-};
-
-gulp.task('promise', function() {
-  return Promise.all([
-    test1(),
-    test2(),
-    test3()
-  ]).then(function(values) {
-      console.log("tests completed");
-      console.log(values);
-  })
-});
-
-var fn = function asyncMultiply(v){ // sample async action
-  return new Promise(function(resolve, reject){
-    resolve(v);
-  });
-} 
-
 var typeScriptPromise = (file) => {
   return new Promise(function(resolve, reject){   
-    
-    console.log(file);
-
     var result = browserify({
       basedir: "app/"+file+"/typeScript/",
       debug: true,
@@ -57,69 +27,56 @@ var typeScriptPromise = (file) => {
     .bundle()
     .pipe(source("app.js"))
     .pipe(gulp.dest("app/"+file+"/js"));
-    
-    resolve(result);
-  
+    resolve(); 
   });
 } 
 
-var pugPromise = function pugPromiseConstructor(file){
-  return new Promise(function(resolve, reject){   
-    
-    console.log(file);
-
+var pugPromise = (file) => {
+  return new Promise(function(resolve, reject){     
     var result = gulp.src("app/"+file+"/pug/**/*.pug")
       .pipe(pug({
         pretty: true
-
       }))
       .pipe(gulp.dest("app/"+file));
-
-    resolve(result);
-  
+    resolve(); 
   });
 } 
 
-gulp.task("ts3", function () {
-  console.log("ts3 started");
-  var actions = entries.map(typeScriptPromise);
-  var results = Promise.all(actions); // pass array of promises
+var sassPromise = (file) => {
+  return new Promise(function(resolve, reject){     
+    var result = gulp.src("app/"+file+"/sass/**/*.scss")
+    .pipe(sass().on("error", sass.logError))
+    .pipe(gulp.dest("app/"+file+"/css"));
+    resolve(); 
+  });
+} 
 
-  results.then(data => // or just .then(console.log)
-      console.log(data), // [2, 4, 6, 8, 10]
-      gulp.start("pug2")
+gulp.task("typeScriptPromises", function () {
+  var actions = entries.map(typeScriptPromise),
+      results = Promise.all(actions);
+  results.then(data => 
+      gulp.start("pugPromises")
   );
-
 });
 
-
-gulp.task("pug2", function () {
-  console.log("pug2 started");
-  var actions = entries.map(pugPromise);
-  var results = Promise.all(actions); // pass array of promises
-
-  results.then(data => // or just .then(console.log)
-      console.log(data), // [2, 4, 6, 8, 10]
+gulp.task("pugPromises", function () {
+  var actions = entries.map(pugPromise),
+      results = Promise.all(actions);
+  results.then(data => 
+    gulp.start("sassPromises")
   );
-
 });
 
-
-gulp.task("ts2", function () {
-  
-  var actions = entries.map(fn);
-  var results = Promise.all(actions); // pass array of promises
-
-  results.then(data => // or just .then(console.log)
-      console.log(data) // [2, 4, 6, 8, 10]
+gulp.task("sassPromises", function () {
+  var actions = entries.map(sassPromise),
+      results = Promise.all(actions);
+  results.then(data => 
+      console.log("done")
   );
-
 });
 
 gulp.task("typeScript", function () {
-
   entries.forEach(entry => {
-
     return browserify({
       basedir: "app/"+entry+"/typeScript/",
       debug: true,
@@ -131,9 +88,7 @@ gulp.task("typeScript", function () {
     .bundle()
     .pipe(source("app.js"))
     .pipe(gulp.dest("app/"+entry+"/js"));
-
   });
-  
 });
 
 gulp.task("sass", function () {
@@ -149,39 +104,27 @@ gulp.task("sass", function () {
 });
 
 gulp.task("pug", function buildHTML() {
-
   entries.forEach(entry => {
-
     return gulp.src("app/"+entry+"/pug/**/*.pug")
     .pipe(pug({
       pretty: true
-
     }))
     .pipe(gulp.dest("app/"+entry));
-
   });
-
 });
 
 gulp.task("html",["typeScript", "sass", "pug"], function () {
-  
   entries.forEach(entry => {
-  
     return gulp.src("app/"+entry+"/*.html")
       .pipe(useref())
       .pipe(gulp.dest("dist/"+entry));
-
   });
-
 });
 
 gulp.task('images', function () {
-  
   var output = gulp.src('app/images/**/*')
     .pipe(gulp.dest('dist/images'));
-  
     return output;
-
 });
 
 gulp.task("mocha", function () {
