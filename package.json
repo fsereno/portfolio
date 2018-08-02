@@ -22,6 +22,7 @@
     "bower": "^1.8.4",
     "browserify": "^16.2.2",
     "chai": "^4.1.2",
+    "check-files-exist": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-load-plugins": "^1.5.0",
     "gulp-mocha": "^6.0.0",

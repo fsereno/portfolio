@@ -8,6 +8,8 @@ var sass = require("gulp-sass");
 var pug = require("gulp-pug");
 var gulpSequence = require("gulp-sequence")
 var mocha = require("gulp-mocha");
+var fs = require('fs');
+var checkFilesExist = require('check-files-exist');
 
 var entries = [
   "app_test1",
@@ -27,18 +29,70 @@ var typeScriptPromise = (file) => {
     .bundle()
     .pipe(source("app.js"))
     .pipe(gulp.dest("app/"+file+"/js"));
+    
+    
     resolve(); 
+  
+  
   });
 } 
 
+gulp.task("setup", function () {
+
+  let promises = [delayES8(1000), delayES8(3000)];
+
+  Promise.all(promises).
+    then((results) => {
+      sayHello();
+    })
+    .catch((err) => console.log(err));
+
+  /*delayES8(1000)
+    .then((results) => {     
+      sayHello()
+    }).then(results => {
+      return delayES8(3000)
+    }).then((results) => {     
+      sayHello()
+    })
+    .catch((err) => console.log(err));*/
+});
+
+function delay(time) {
+  return new Promise((resolve, reject) => {
+    if(isNaN(time)){
+      reject(new Error("Delay requires a valid number"));
+    } else {
+      setTimeout(resolve, time);
+    }
+  });
+}
+
+
+async function delayES8(time){
+
+  await delay(time) // this could do gulp stuff
+
+  return;
+
+}
+
+function sayHello(){
+  console.log("hello");
+}
+
 var pugPromise = (file) => {
-  return new Promise(function(resolve, reject){     
+  
+  return new Promise(function(resolve, reject){        
+  
     var result = gulp.src("app/"+file+"/pug/**/*.pug")
       .pipe(pug({
         pretty: true
       }))
       .pipe(gulp.dest("app/"+file));
-    resolve(); 
+      
+    resolve(htmlPromise(file));
+  
   });
 } 
 
@@ -51,16 +105,21 @@ var sassPromise = (file) => {
   });
 } 
 
+function htmlPromise(file) {
+  return new Promise(function(resolve, reject){  
+    
+    var filePath = "app/"+file+"/index.html";
+    var result = gulp.src(filePath)
+    //.pipe(useref())
+    .pipe(gulp.dest("dist/"+file));     
+    
+    resolve();
+    
+  });
+} 
+
 gulp.task("typeScriptPromises", function () {
   var actions = entries.map(typeScriptPromise),
-      results = Promise.all(actions);
-  results.then(data => 
-      gulp.start("pugPromises")
-  );
-});
-
-gulp.task("pugPromises", function () {
-  var actions = entries.map(pugPromise),
       results = Promise.all(actions);
   results.then(data => 
     gulp.start("sassPromises")
@@ -71,9 +130,27 @@ gulp.task("sassPromises", function () {
   var actions = entries.map(sassPromise),
       results = Promise.all(actions);
   results.then(data => 
-      console.log("done")
+    gulp.start("pugPromises")
   );
 });
+
+gulp.task("pugPromises", function () {
+  var actions = entries.map(pugPromise),
+      results = Promise.all(actions);
+  results.then(response => {
+
+    console.log(response);
+
+    //return response;
+  });
+});
+/*gulp.task("htmlPromises", function () {
+  var actions = entries.map(htmlPromise),
+      results = Promise.all(actions);
+  results.then(data => 
+      console.log("done")
+  );
+});*/
 
 gulp.task("typeScript", function () {
   entries.forEach(entry => {
@@ -92,15 +169,11 @@ gulp.task("typeScript", function () {
 });
 
 gulp.task("sass", function () {
-
   entries.forEach(entry => {
-
     return gulp.src("app/"+entry+"/sass/**/*.scss")
       .pipe(sass().on("error", sass.logError))
       .pipe(gulp.dest("app/"+entry+"/css"));
-
   });
-
 });
 
 gulp.task("pug", function buildHTML() {
