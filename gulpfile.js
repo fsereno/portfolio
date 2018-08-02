@@ -53,10 +53,17 @@ gulp.task("setup", function () {
 });
 
 gulp.task("setup3", function () {
-    let promises = [doTasks()];
+    let promises = [pugPromises(),sassPromises(),typeScriptPromises()];
+    //let promises = [pugPromises(),sassPromises(),typeScriptPromises()];
+
+    //await pugPromises();
+  //await sassPromises();
+  //await typeScriptPromises();
+  //await userefPromises();
     Promise.all(promises).
       then((results) => {
         userefPromises();
+        //Promise.resolve(userefPromises())
         //sayHello(); // this is resolve ?
         
       })
@@ -129,12 +136,13 @@ function replaceReferences(callBack, folder) {
 var userefPromise = (folder) => {
   return new Promise((resolve, reject) => {
     var file = "app/"+folder+"/index.html";
-    checkFilesExist([file], __dirname)
+    replaceReferences(resolve, folder);
+    /*checkFilesExist([file])
       .then(function () {
         replaceReferences(resolve, folder);
     }, (err) => {
       reject(new Error("No file found to replaceReferences " + file));
-    })
+    })*/
   });
 }
 
