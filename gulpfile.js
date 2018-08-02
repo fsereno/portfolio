@@ -16,26 +16,10 @@ var entries = [
   "app_test2"
 ]
 
-var typeScriptPromise = (file) => {
-  return new Promise(function(resolve, reject){   
-    var result = browserify({
-      basedir: "app/"+file+"/typeScript/",
-      debug: true,
-      entries: "app.ts",
-      cache: {},
-      packageCache: {}
-    })
-    .plugin(tsify)
-    .bundle()
-    .pipe(source("app.js"))
-    .pipe(gulp.dest("app/"+file+"/js"));
-    
-    
-    resolve(); 
-  
-  
-  });
-} 
+var entries2 = [
+  1000,
+ 3000
+]
 
 gulp.task("setup", function () {
 
@@ -43,19 +27,26 @@ gulp.task("setup", function () {
 
   Promise.all(promises).
     then((results) => {
+      sayHello(); // this is resolve ?
+    })
+    .catch((err) => console.log(err));
+});
+
+gulp.task("setup2", function () {
+
+  let pugPromises = entries.map(pugPromise)
+
+  //console.log(pugPromises);
+
+  //let promises = [delayES8(1000), delayES8(3000)];
+
+  Promise.all(pugPromises).
+    then((results) => {
+      //console.log(results)
+
       sayHello();
     })
     .catch((err) => console.log(err));
-
-  /*delayES8(1000)
-    .then((results) => {     
-      sayHello()
-    }).then(results => {
-      return delayES8(3000)
-    }).then((results) => {     
-      sayHello()
-    })
-    .catch((err) => console.log(err));*/
 });
 
 function delay(time) {
@@ -68,89 +59,46 @@ function delay(time) {
   });
 }
 
+function buildHTML(callBack, folder) {
+  gulp.src("app/"+folder+"/pug/**/*.pug")
+    .pipe(pug({
+      pretty: true
+    }))
+    .pipe(gulp.dest("app/"+folder));
+  callBack();
+};
+
+var pugPromise = (folder) => {
+  return new Promise((resolve, reject) => {
+
+    var file = "app/"+folder+"/pug/**/*.pug";
+
+    checkFilesExist([file], __dirname)
+      .then(function () {
+        buildHTML(resolve, folder);
+      //setTimeout(resolve, 1000);
+    }, (err) => {
+      console.log(file);
+
+      reject(new Error("No file found to pug"));
+    })
+    
+  });
+}
+
+async function pugPromiseAsync(){
+  await pugPromise();
+  return;
+}
 
 async function delayES8(time){
-
   await delay(time) // this could do gulp stuff
-
   return;
-
 }
 
 function sayHello(){
   console.log("hello");
 }
-
-var pugPromise = (file) => {
-  
-  return new Promise(function(resolve, reject){        
-  
-    var result = gulp.src("app/"+file+"/pug/**/*.pug")
-      .pipe(pug({
-        pretty: true
-      }))
-      .pipe(gulp.dest("app/"+file));
-      
-    resolve(htmlPromise(file));
-  
-  });
-} 
-
-var sassPromise = (file) => {
-  return new Promise(function(resolve, reject){     
-    var result = gulp.src("app/"+file+"/sass/**/*.scss")
-    .pipe(sass().on("error", sass.logError))
-    .pipe(gulp.dest("app/"+file+"/css"));
-    resolve(); 
-  });
-} 
-
-function htmlPromise(file) {
-  return new Promise(function(resolve, reject){  
-    
-    var filePath = "app/"+file+"/index.html";
-    var result = gulp.src(filePath)
-    //.pipe(useref())
-    .pipe(gulp.dest("dist/"+file));     
-    
-    resolve();
-    
-  });
-} 
-
-gulp.task("typeScriptPromises", function () {
-  var actions = entries.map(typeScriptPromise),
-      results = Promise.all(actions);
-  results.then(data => 
-    gulp.start("sassPromises")
-  );
-});
-
-gulp.task("sassPromises", function () {
-  var actions = entries.map(sassPromise),
-      results = Promise.all(actions);
-  results.then(data => 
-    gulp.start("pugPromises")
-  );
-});
-
-gulp.task("pugPromises", function () {
-  var actions = entries.map(pugPromise),
-      results = Promise.all(actions);
-  results.then(response => {
-
-    console.log(response);
-
-    //return response;
-  });
-});
-/*gulp.task("htmlPromises", function () {
-  var actions = entries.map(htmlPromise),
-      results = Promise.all(actions);
-  results.then(data => 
-      console.log("done")
-  );
-});*/
 
 gulp.task("typeScript", function () {
   entries.forEach(entry => {
