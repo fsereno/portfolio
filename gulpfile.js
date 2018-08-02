@@ -10,7 +10,8 @@ var gulpSequence = require("gulp-sequence")
 var mocha = require("gulp-mocha");
 
 var entries = [
-  "app_test1"
+  "app_test1",
+  "app_test2"
 ]
 
 function test1(){
@@ -40,31 +41,61 @@ var fn = function asyncMultiply(v){ // sample async action
   });
 } 
 
-var typeScriptPromise = function typeScriptPromiseConstructor(file){
+var typeScriptPromise = (file) => {
   return new Promise(function(resolve, reject){   
-    resolve(function(){
+    
+    console.log(file);
 
-      return browserify({
-        basedir: "app/"+file+"/typeScript/",
-        debug: true,
-        entries: "app.ts",
-        cache: {},
-        packageCache: {}
-      })
-      .plugin(tsify)
-      .bundle()
-      .pipe(source("app.js"))
-      .pipe(gulp.dest("app/"+file+"/js"));
+    var result = browserify({
+      basedir: "app/"+file+"/typeScript/",
+      debug: true,
+      entries: "app.ts",
+      cache: {},
+      packageCache: {}
+    })
+    .plugin(tsify)
+    .bundle()
+    .pipe(source("app.js"))
+    .pipe(gulp.dest("app/"+file+"/js"));
+    
+    resolve(result);
+  
+  });
+} 
 
-    }
+var pugPromise = function pugPromiseConstructor(file){
+  return new Promise(function(resolve, reject){   
+    
+    console.log(file);
 
-    );
+    var result = gulp.src("app/"+file+"/pug/**/*.pug")
+      .pipe(pug({
+        pretty: true
+
+      }))
+      .pipe(gulp.dest("app/"+file));
+
+    resolve(result);
+  
   });
 } 
 
 gulp.task("ts3", function () {
-  
+  console.log("ts3 started");
   var actions = entries.map(typeScriptPromise);
+  var results = Promise.all(actions); // pass array of promises
+
+  results.then(data => // or just .then(console.log)
+      console.log(data), // [2, 4, 6, 8, 10]
+      gulp.start("pug2")
+  );
+
+});
+
+
+gulp.task("pug2", function () {
+  console.log("pug2 started");
+  var actions = entries.map(pugPromise);
   var results = Promise.all(actions); // pass array of promises
 
   results.then(data => // or just .then(console.log)
