@@ -21,6 +21,26 @@ var entries2 = [
  3000
 ]
 
+function pugPromises() {
+  console.log("pugPromises")
+  return entries.map(pugPromise)
+};
+
+function sassPromises() {
+  console.log("sassPromises")
+  return entries.map(sassPromise)
+};
+
+function typeScriptPromises() {
+  console.log("typeScriptPromises")
+  return entries.map(typeScriptPromise)
+};
+
+function userefPromises() {
+  console.log("userefPromises")
+  return entries.map(userefPromise)
+};
+
 gulp.task("setup", function () {
 
   let promises = [delayES8(1000), delayES8(3000)];
@@ -31,6 +51,18 @@ gulp.task("setup", function () {
     })
     .catch((err) => console.log(err));
 });
+
+gulp.task("setup3", function () {
+    let promises = [doTasks()];
+    Promise.all(promises).
+      then((results) => {
+        userefPromises();
+        //sayHello(); // this is resolve ?
+        
+      })
+      .catch((err) => console.log(err));
+});
+
 
 gulp.task("setup2", function () {
 
@@ -65,34 +97,93 @@ function buildHTML(callBack, folder) {
       pretty: true
     }))
     .pipe(gulp.dest("app/"+folder));
+};
+
+function compileSass(callBack, folder) {
+  gulp.src("app/"+folder+"/sass/styles.scss")
+    .pipe(sass().on("error", sass.logError))
+    .pipe(gulp.dest("app/"+folder+"/css"));
+};
+
+function compileTypeScript(callBack, folder) {
+  browserify({
+    basedir: "app/"+folder+"/typeScript/",
+    debug: true,
+    entries: "app.ts",
+    cache: {},
+    packageCache: {}
+  })
+    .plugin(tsify)
+    .bundle()
+    .pipe(source("app.js"))
+    .pipe(gulp.dest("app/"+folder+"/js"));
+};
+
+function replaceReferences(callBack, folder) {
+  gulp.src("app/"+folder+"/*.html")
+    .pipe(useref())
+    .pipe(gulp.dest("dist/"+folder));
   callBack();
 };
 
-var pugPromise = (folder) => {
+var userefPromise = (folder) => {
   return new Promise((resolve, reject) => {
-
-    var file = "app/"+folder+"/pug/**/*.pug";
-
+    var file = "app/"+folder+"/index.html";
     checkFilesExist([file], __dirname)
       .then(function () {
-        buildHTML(resolve, folder);
-      //setTimeout(resolve, 1000);
+        replaceReferences(resolve, folder);
     }, (err) => {
-      console.log(file);
-
-      reject(new Error("No file found to pug"));
+      reject(new Error("No file found to replaceReferences " + file));
     })
-    
   });
 }
 
-async function pugPromiseAsync(){
-  await pugPromise();
-  return;
+var pugPromise = (folder) => {
+  return new Promise((resolve, reject) => {
+    var file = "app/"+folder+"/pug/**/*.pug";
+    checkFilesExist([file], __dirname)
+      .then(function () {
+        buildHTML(resolve, folder);
+    }, (err) => {
+      reject(new Error("No file found to buildHTML"));
+    })
+  });
+}
+
+var sassPromise = (folder) => {
+  return new Promise((resolve, reject) => {
+    var file = "app/"+folder+"/sass/**/styles.scss";
+    checkFilesExist([file], __dirname)
+      .then(function () {
+        compileSass(resolve, folder);
+    }, (err) => {
+      reject(new Error("No file found to compileSass"));
+    })
+  });
+}
+
+var typeScriptPromise = (folder) => {
+  return new Promise((resolve, reject) => {
+    var file = "app/"+folder+"/typeScript/app.ts";
+    checkFilesExist([file], __dirname)
+      .then(function () {
+        compileTypeScript(resolve, folder);
+    }, (err) => {
+      reject(new Error("No file found to compileTypeScript"));
+    })
+  });
 }
 
 async function delayES8(time){
   await delay(time) // this could do gulp stuff
+  return;
+}
+
+async function doTasks(){
+  await pugPromises();
+  await sassPromises();
+  await typeScriptPromises();
+  //await userefPromises();
   return;
 }
 
@@ -166,3 +257,12 @@ gulp.task("build", function(callback){
 gulp.task("default", function () {
   gulp.start("build");
 });
+
+gulp.task('build2', ["html", "images", "mocha"], function () {
+  return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
+});
+
+gulp.task('default', ['clean'], function () {
+  gulp.start('build');
+});
+
