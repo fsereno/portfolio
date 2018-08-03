@@ -1,10 +1,3 @@
-/* usage
-
-  > gulp dev - To build development resources 
-  > gulp prod - To publish production resources to dist
-
-*/
-
 "use strict";
 var gulp = require("gulp");
 var browserify = require("browserify");
@@ -15,71 +8,55 @@ var sass = require("gulp-sass");
 var pug = require("gulp-pug");
 var gulpSequence = require("gulp-sequence")
 var mocha = require("gulp-mocha");
+var fs = require('fs');
+var checkFilesExist = require('check-files-exist');
 
 var entries = [
   "app_test1",
   "app_test2"
 ]
 
-function FolderModel(css, js, html, folder){
-  this.folder = folder;
-  this.css = css;
-  this.js = js;
-  this.html = html;
-}
+gulp.task("typeScriptEach", function () {
+  entries.forEach(entry => {
+    return browserify({
+      basedir: "app/"+entry+"/typeScript/",
+      debug: true,
+      entries: "app.ts",
+      cache: {},
+      packageCache: {}
+    })
+    .plugin(tsify)
+    .bundle()
+    .pipe(source("app.js"))
+    .pipe(gulp.dest("app/"+entry+"/js"));
+  });
+});
 
-function BuildModel(folder, built){
-  this.folder = folder;
-  this.built = built;
-}
+gulp.task("sassEach", function () {
+  entries.forEach(entry => {
+    return gulp.src("app/"+entry+"/sass/**/*.scss")
+      .pipe(sass().on("error", sass.logError))
+      .pipe(gulp.dest("app/"+entry+"/css"));
+  });
+});
 
-let cssTask = (folder) => {
-  return gulp.src("app/"+folder+"/sass/styles.scss")
-  .pipe(sass().on("error", sass.logError))
-  .pipe(gulp.dest("app/"+folder+"/css"));
-};
+gulp.task("pugEach", function buildHTML() {
+  entries.forEach(entry => {
+    return gulp.src("app/"+entry+"/pug/**/*.pug")
+    .pipe(pug({
+      pretty: true
+    }))
+    .pipe(gulp.dest("app/"+entry));
+  });
+});
 
-var jsTask = (folder) => {
-  return browserify({
-    basedir: "app/"+folder+"/typeScript/",
-    debug: true,
-    entries: "app.ts",
-    cache: {},
-    packageCache: {}
-  })
-  .plugin(tsify)
-  .bundle()
-  .pipe(source("app.js"))
-  .pipe(gulp.dest("app/"+folder+"/js"));
-};
-
-var htmlTask = (folder) => {
-  return gulp.src("app/"+folder+"/pug/index.pug")
-  .pipe(pug({
-    pretty: true
-  }))
-  .pipe(gulp.dest("app/"+folder))
-};
-
-var userefTask = (folder) => {
-  return gulp.src("app/"+folder+"/index.html")
-  .pipe(useref())
-  .pipe(gulp.dest("dist/"+folder));
-};
-
-var defaultPromises = async (folder) => {
-  var css = await cssTask(folder);
-  var js = await jsTask(folder);
-  var html = await htmlTask(folder);
-  var folderModel = new FolderModel(css,js,html,folder);
-  return Promise.resolve(folderModel)
-}
-
-var buildPromises = async (folder) => {
-  var useref = await userefTask(folder);
-  var buildModel = new BuildModel(folder, true);
-  return Promise.resolve(buildModel)
-}
+gulp.task("htmlEach",["typeScriptEach", "sassEach", "pugEach"], function () {
+  entries.forEach(entry => {
+    return gulp.src("app/"+entry+"/*.html")
+      .pipe(useref())
+      .pipe(gulp.dest("dist/"+entry));
+  });
+});
 
 gulp.task('images', function () {
   var output = gulp.src('app/images/**/*')
@@ -89,26 +66,33 @@ gulp.task('images', function () {
 
 gulp.task("mocha", function () {
   return gulp.src("app/**/*.test.ts")
-    .pipe(mocha({
-        reporter: "spec",
-        require: ["ts-node/register"]
-    }));
+      .pipe(mocha({
+          reporter: "spec",
+          require: ["ts-node/register"]
+      }));
 });
 
-gulp.task("build",["images", "mocha"], () => {
-  var promises = entries.map(buildPromises);
-  Promise.all(promises).then((results)=>{
-    results.forEach(result => {
-      console.log("Build task complete for " + result.folder);
-    });
-  });
-})
 
-gulp.task("default", () => {
-  var promises = entries.map(defaultPromises);
-  Promise.all(promises).then((results)=>{
-    results.forEach(result => {
-      console.log("Default task complete for " + result.folder);
-    });
-  })
+gulp.task("build", function(callback){
+	gulpSequence(
+    ["typeScriptEach", "sassEach", "pugEach"],
+    callBack)
 });
+
+function callBack(){
+
+  console.log("hello");
+
+}
+
+gulp.task("publish", function(callback){
+	gulpSequence(
+    ["htmlEach", "images", "mocha"],
+    callback);
+});
+
+gulp.task("default", function () {
+  gulp.start("build");
+});
+
+
