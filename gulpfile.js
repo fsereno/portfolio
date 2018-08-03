@@ -1,3 +1,10 @@
+/* usage
+
+  > gulp dev - To build development resources 
+  > gulp prod - To publish production resources to dist
+
+*/
+
 "use strict";
 var gulp = require("gulp");
 var browserify = require("browserify");
@@ -8,8 +15,6 @@ var sass = require("gulp-sass");
 var pug = require("gulp-pug");
 var gulpSequence = require("gulp-sequence")
 var mocha = require("gulp-mocha");
-var fs = require('fs');
-var checkFilesExist = require('check-files-exist');
 
 var entries = [
   "app_test1",
@@ -23,9 +28,15 @@ function FolderModel(css, js, html, folder){
   this.html = html;
 }
 
+function BuildModel(folder, built){
+  this.folder = folder;
+  this.built = built;
+}
+
 let cssTask = (folder) => {
   return gulp.src("app/"+folder+"/sass/styles.scss")
   .pipe(sass().on("error", sass.logError))
+  .pipe(gulp.dest("app/"+folder+"/css"));
 };
 
 var jsTask = (folder) => {
@@ -39,6 +50,7 @@ var jsTask = (folder) => {
   .plugin(tsify)
   .bundle()
   .pipe(source("app.js"))
+  .pipe(gulp.dest("app/"+folder+"/js"));
 };
 
 var htmlTask = (folder) => {
@@ -46,13 +58,16 @@ var htmlTask = (folder) => {
   .pipe(pug({
     pretty: true
   }))
+  .pipe(gulp.dest("app/"+folder))
 };
 
-var getPromises = (folder) => {
-  return build(folder);
-}
+var userefTask = (folder) => {
+  return gulp.src("app/"+folder+"/index.html")
+  .pipe(useref())
+  .pipe(gulp.dest("dist/"+folder));
+};
 
-var build = async (folder) => {
+var defaultPromises = async (folder) => {
   var css = await cssTask(folder);
   var js = await jsTask(folder);
   var html = await htmlTask(folder);
@@ -60,13 +75,42 @@ var build = async (folder) => {
   return Promise.resolve(folderModel)
 }
 
-gulp.task("default", () => {
-  var promises = entries.map(getPromises);
+var buildPromises = async (folder) => {
+  var useref = await userefTask(folder);
+  var buildModel = new BuildModel(folder, true);
+  return Promise.resolve(buildModel)
+}
+
+gulp.task('images', function () {
+  var output = gulp.src('app/images/**/*')
+    .pipe(gulp.dest('dist/images'));
+    return output;
+});
+
+gulp.task("mocha", function () {
+  return gulp.src("app/**/*.test.ts")
+    .pipe(mocha({
+        reporter: "spec",
+        require: ["ts-node/register"]
+    }));
+});
+
+gulp.task("build",["images", "mocha"], () => {
+  var promises = entries.map(buildPromises);
   Promise.all(promises).then((results)=>{
     results.forEach(result => {
-      result.css.pipe(gulp.dest("app/"+result.folder+"/css"))
-      result.js.pipe(gulp.dest("app/"+result.folder+"/js"));
-      result.html.pipe(gulp.dest("app/"+result.folder));
+      console.log("Build task complete for " + result.folder);
+    });
+  });
+})
+
+gulp.task("default", () => {
+  var promises = entries.map(defaultPromises);
+  Promise.all(promises).then((results)=>{
+    results.forEach(result => {
+
+      // pipe the resources here, will be more reliable ?
+      console.log("Default task complete for " + result.folder);
     });
   })
 });
