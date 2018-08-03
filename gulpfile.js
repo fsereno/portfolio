@@ -108,8 +108,6 @@ gulp.task("default", () => {
   var promises = entries.map(defaultPromises);
   Promise.all(promises).then((results)=>{
     results.forEach(result => {
-
-      // pipe the resources here, will be more reliable ?
       console.log("Default task complete for " + result.folder);
     });
   })
