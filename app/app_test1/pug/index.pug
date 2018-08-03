@@ -1,8 +1,8 @@
 extends ../../pug/layouts/main.pug
 
 block styles
-  // build:css css/styles.css
-  link(rel="stylesheet" href="css/styles.css")
+  // build:css ../css/build/styles.css
+  link(rel="stylesheet" href="../css/styles.css")
   // endbuild
 
 block content
@@ -12,8 +12,8 @@ block content
         small.text-muted application 1a
 
 block scripts
-  // build:js js/app.js
-  script(src="js/app.js")
+  // build:js ../js/build/app.js
+  script(src="../js/app.js")
   // endbuild
-  // build:js js/vendor.js
+  // build:js ..js/build/vendor.js
   // endbuild

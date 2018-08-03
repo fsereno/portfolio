@@ -12,8 +12,7 @@ var fs = require('fs');
 var checkFilesExist = require('check-files-exist');
 
 var entries = [
-  "app_test1",
-  "app_test2"
+  "app_test1"
 ]
 
 var entries2 = [
@@ -51,6 +50,22 @@ gulp.task("setup", function () {
     })
     .catch((err) => console.log(err));
 });
+
+gulp.task("setup4", function () {
+ 
+  pugPromises();
+ /*doTasks().then((result)=>{
+
+    console.log(result);
+
+    pugPromises();
+  
+
+ });*/
+
+ 
+});
+
 
 gulp.task("setup3", function () {
     let promises = [pugPromises(),sassPromises(),typeScriptPromises()];
@@ -98,11 +113,13 @@ function delay(time) {
   });
 }
 
-function buildHTML(callBack, folder) {
-  gulp.src("app/"+folder+"/pug/**/*.pug")
+function buildHTML(folder) {
+  return gulp.src("app/"+folder+"/pug/**/*.pug")
     .pipe(pug({
       pretty: true
     }))
+    .pipe(sassCompilePromise(folder))
+    .pipe(useref())
     .pipe(gulp.dest("app/"+folder));
 };
 
@@ -127,16 +144,17 @@ function compileTypeScript(callBack, folder) {
 };
 
 function replaceReferences(callBack, folder) {
-  gulp.src("app/"+folder+"/*.html")
+  return gulp.src("app/"+folder+"/*.html")
     .pipe(useref())
     .pipe(gulp.dest("dist/"+folder));
-  callBack();
 };
 
 var userefPromise = (folder) => {
   return new Promise((resolve, reject) => {
-    var file = "app/"+folder+"/index.html";
+    //var file = "app/"+folder+"/index.html";
     replaceReferences(resolve, folder);
+
+    
     /*checkFilesExist([file])
       .then(function () {
         replaceReferences(resolve, folder);
@@ -148,14 +166,24 @@ var userefPromise = (folder) => {
 
 var pugPromise = (folder) => {
   return new Promise((resolve, reject) => {
-    var file = "app/"+folder+"/pug/**/*.pug";
-    checkFilesExist([file], __dirname)
-      .then(function () {
-        buildHTML(resolve, folder);
-    }, (err) => {
-      reject(new Error("No file found to buildHTML"));
-    })
+    var file = "app/"+folder+"/pug/**/index.pug";
+    //checkFilesExist([file], __dirname)
+     // .then(function () {
+        var html = buildHTML(folder);
+        resolve(html);
+    //}, (err) => {
+     // reject(new Error("No file found to buildHTML"));
+   // })
   });
+}
+
+function sassCompilePromise(folder) {
+  return new Promise((resolve, reject) => {
+    
+    var result = gulp.src("app/"+folder+"/sass/styles.scss")
+      .pipe(sass().on("error", sass.logError))
+      .pipe(gulp.dest("app/"+folder+"/css"));
+    });
 }
 
 var sassPromise = (folder) => {
@@ -187,19 +215,23 @@ async function delayES8(time){
   return;
 }
 
-async function doTasks(){
-  await pugPromises();
-  await sassPromises();
-  await typeScriptPromises();
-  //await userefPromises();
-  return;
+async function doTasks(){ 
+  //var sass = await sassPromises();
+  //var ts = await typeScriptPromises();
+  /*var result = {
+
+    sass: sass,
+    ts: ts
+
+  }*/
+  return result
 }
 
 function sayHello(){
   console.log("hello");
 }
 
-gulp.task("typeScript", function () {
+gulp.task("typeScriptEach", function () {
   entries.forEach(entry => {
     return browserify({
       basedir: "app/"+entry+"/typeScript/",
@@ -215,7 +247,7 @@ gulp.task("typeScript", function () {
   });
 });
 
-gulp.task("sass", function () {
+gulp.task("sassEach", function () {
   entries.forEach(entry => {
     return gulp.src("app/"+entry+"/sass/**/*.scss")
       .pipe(sass().on("error", sass.logError))
@@ -223,7 +255,17 @@ gulp.task("sass", function () {
   });
 });
 
-gulp.task("pug", function buildHTML() {
+gulp.task("sass", function () {
+ 
+    sassPromises()
+ 
+});
+
+gulp.task('watch', function() {
+  gulp.watch('app/**/*.scss', ['sass'])
+});
+
+gulp.task("pugEach", function buildHTML() {
   entries.forEach(entry => {
     return gulp.src("app/"+entry+"/pug/**/*.pug")
     .pipe(pug({
@@ -233,7 +275,7 @@ gulp.task("pug", function buildHTML() {
   });
 });
 
-gulp.task("html",["typeScript", "sass", "pug"], function () {
+gulp.task("htmlEach",["typeScriptEach", "sassEach", "pugEach"], function () {
   entries.forEach(entry => {
     return gulp.src("app/"+entry+"/*.html")
       .pipe(useref())
@@ -258,7 +300,7 @@ gulp.task("mocha", function () {
 
 gulp.task("build", function(callback){
 	gulpSequence(
-    ["typeScript", "sass", "pug", "html", "images", "mocha"],
+    ["typeScriptEach", "sassEach", "pugEach", "htmlEach", "images", "mocha"],
     callback);
 });
 
@@ -266,11 +308,4 @@ gulp.task("default", function () {
   gulp.start("build");
 });
 
-gulp.task('build2', ["html", "images", "mocha"], function () {
-  return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
-});
-
-gulp.task('default', ['clean'], function () {
-  gulp.start('build');
-});
 
