@@ -8,8 +8,7 @@ var sass = require("gulp-sass");
 var pug = require("gulp-pug");
 var gulpSequence = require("gulp-sequence")
 var mocha = require("gulp-mocha");
-var fs = require('fs');
-var checkFilesExist = require('check-files-exist');
+var cache = require('gulp-cached');
 
 var entries = [
   "app_test1",
@@ -35,6 +34,7 @@ gulp.task("typeScriptEach", function () {
 gulp.task("sassEach", function () {
   entries.forEach(entry => {
     return gulp.src("app/"+entry+"/sass/**/*.scss")
+      .pipe(cache('sassEach'))
       .pipe(sass().on("error", sass.logError))
       .pipe(gulp.dest("app/"+entry+"/css"));
   });
