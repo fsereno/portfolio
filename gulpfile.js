@@ -1,6 +1,7 @@
 /* usage
 
   > gulp default - To build development resources 
+  > gulp watch - To watch for changes on scss,ts,pug and re-compile.
   > gulp publish - To publish production resources to dist
 
 */
@@ -57,22 +58,21 @@ function htmlTask(folder) {
   .pipe(gulp.dest("app/"+folder))
 };
 
+function userefTask(folder) {
+  return gulp.src("app/"+folder+"/index.html")
+  .pipe(useref())
+  .pipe(gulp.dest("dist/"+folder));
+};
+
 function setupWatcherOnChangeEvent(watcher, dir, method){
   watcher.on('change', function(file, stats) {
     var windowsOS = (/\\/).test(file.path);
     var fileArray = windowsOS ? file.path.split("\\") : file.path.split("/");
     var folder = fileArray[fileArray.indexOf(dir) - 1];
-    console.log(file);
-    console.log(folder);
     method(folder);
+    console.log("Modified: " + file.path);
   });
 }
-
-var userefTask = (folder) => {
-  return gulp.src("app/"+folder+"/index.html")
-  .pipe(useref())
-  .pipe(gulp.dest("dist/"+folder));
-};
 
 var defaultTasks = (folder) => {
   runThis(folder, cssTask);
