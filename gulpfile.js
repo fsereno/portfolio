@@ -13,7 +13,6 @@ var tsify = require("tsify");
 var useref = require("gulp-useref");
 var sass = require("gulp-sass");
 var pug = require("gulp-pug");
-var gulpSequence = require("gulp-sequence")
 var mocha = require("gulp-mocha");
 
 var entries = [
@@ -33,38 +32,17 @@ function PublishModel(folder, built){
   this.built = built;
 }
 
-let cssTask = (folder) => {
-  return cssTaskMethod(folder);
+let runThis = (folder, method) => {
+  return method(folder);
 };
 
-function cssTaskMethod(folder){
+function cssTask(folder){
  return gulp.src("app/"+folder+"/sass/styles.scss")
   .pipe(sass().on("error", sass.logError))
   .pipe(gulp.dest("app/"+folder+"/css"));
 }
 
-let watchThis = (resources, dir) => {  
-  var watcher = gulp.watch(resources);
-  setupWatcherOnChangeEvent(watcher, dir);
-};
-
-function setupWatcherOnChangeEvent(watcher, dir){
-
-  watcher.on('change', function(file, stats) {
-    var fileArray = file.path.split("\\");
-    var folder = fileArray[fileArray.indexOf(dir) - 1];
-
-    console.log(folder);
-    console.log(global);
-  });
-
-}
-
-gulp.task("test", function(){  
-  cssTaskMethod(folder);
-})
-
-var jsTask = (folder) => {
+function jsTask(folder){
   return browserify({
     basedir: "app/"+folder+"/typeScript/",
     debug: true,
@@ -76,7 +54,23 @@ var jsTask = (folder) => {
   .bundle()
   .pipe(source("app.js"))
   .pipe(gulp.dest("app/"+folder+"/js"));
+}
+
+let watchThis = (resources, dir, method) => {  
+  var watcher = gulp.watch(resources);
+  setupWatcherOnChangeEvent(watcher, dir, method);
 };
+
+function setupWatcherOnChangeEvent(watcher, dir, method){
+  watcher.on('change', function(file, stats) {
+    var windowsOS = (/\\/).test(file.path);
+    var fileArray = windowsOS ? file.path.split("\\") : file.path.split("/");
+    var folder = fileArray[fileArray.indexOf(dir) - 1];
+    console.log(file);
+    console.log(folder);
+    method(folder);
+  });
+}
 
 var htmlTask = (folder) => {
   return gulp.src("app/"+folder+"/pug/index.pug")
@@ -93,20 +87,15 @@ var userefTask = (folder) => {
 };
 
 var defaultPromises = async (folder) => {
-  var css = await cssTask(folder);
-  var js = await jsTask(folder);
+  var css = await runThis(folder, cssTask);
+  var js = await runThis(folder, jsTask);
   var html = await htmlTask(folder);
   var buildModel = new BuildModel(css,js,html,folder);
   return Promise.resolve(buildModel)
 }
 
-var defaultWatches = async (folder) => {
-  var css = await watchThis("app/**/sass/styles.scss", "sass");
-  var buildModel = new BuildModel(css, null, null, folder);
-  return Promise.resolve(buildModel)
-}
-
-var buildPromises = async (folder) => {
+var publishPromises = async (folder) => {
+  await userefTask(folder)
   var publishModel = new PublishModel(folder, true);
   return Promise.resolve(publishModel)
 }
@@ -125,33 +114,25 @@ gulp.task("mocha", function () {
     }));
 });
 
-/*gulp.task("watch", () => {
-  var promises = entries.map(defaultWatches);
-  Promise.all(promises).then((results)=>{
-    results.forEach(result => {
-      console.log("Watching " + result.folder);
-    });
-  })
-});*/
-
 gulp.task("watch", () => {
-  watchThis("app/**/sass/styles.scss", "sass");
+  watchThis("app/**/sass/*.scss", "sass", cssTask);
+  watchThis("app/**/typeScript/**/*.ts", "typeScript", jsTask);
 });
 
-gulp.task("publish",["images", "mocha"], () => {
-  var promises = entries.map(buildPromises);
+gulp.task("publish", () => {
+  var promises = entries.map(publishPromises);
   Promise.all(promises).then((results)=>{
     results.forEach(result => {
-      console.log("Build task complete for " + result.folder);
+      console.log("Publish task run for " + result.folder);
     });
-  });
-})
+  })
+});
 
 gulp.task("default", () => {
   var promises = entries.map(defaultPromises);
   Promise.all(promises).then((results)=>{
     results.forEach(result => {
-      console.log("Default task complete for " + result.folder);
+      console.log("Default task run for " + result.folder);
     });
   })
 });
