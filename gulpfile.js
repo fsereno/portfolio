@@ -56,6 +56,14 @@ function jsTask(folder){
   .pipe(gulp.dest("app/"+folder+"/js"));
 }
 
+function htmlTask(folder) {
+  return gulp.src("app/"+folder+"/pug/index.pug")
+  .pipe(pug({
+    pretty: true
+  }))
+  .pipe(gulp.dest("app/"+folder))
+};
+
 let watchThis = (resources, dir, method) => {  
   var watcher = gulp.watch(resources);
   setupWatcherOnChangeEvent(watcher, dir, method);
@@ -72,13 +80,7 @@ function setupWatcherOnChangeEvent(watcher, dir, method){
   });
 }
 
-var htmlTask = (folder) => {
-  return gulp.src("app/"+folder+"/pug/index.pug")
-  .pipe(pug({
-    pretty: true
-  }))
-  .pipe(gulp.dest("app/"+folder))
-};
+
 
 var userefTask = (folder) => {
   return gulp.src("app/"+folder+"/index.html")
@@ -86,12 +88,18 @@ var userefTask = (folder) => {
   .pipe(gulp.dest("dist/"+folder));
 };
 
-var defaultPromises = async (folder) => {
+/*var defaultPromises = async (folder) => {
   var css = await runThis(folder, cssTask);
   var js = await runThis(folder, jsTask);
-  var html = await htmlTask(folder);
+  var html = await runThis(folder, htmlTask);
   var buildModel = new BuildModel(css,js,html,folder);
   return Promise.resolve(buildModel)
+}*/
+
+var defaultTasks = (folder) => {
+  runThis(folder, cssTask);
+  runThis(folder, jsTask);
+  runThis(folder, htmlTask);
 }
 
 var publishPromises = async (folder) => {
@@ -129,10 +137,5 @@ gulp.task("publish", () => {
 });
 
 gulp.task("default", () => {
-  var promises = entries.map(defaultPromises);
-  Promise.all(promises).then((results)=>{
-    results.forEach(result => {
-      console.log("Default task run for " + result.folder);
-    });
-  })
+  entries.map(defaultTasks);
 });
