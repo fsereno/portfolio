@@ -1,7 +1,7 @@
 /* usage
 
   > gulp default - To build development resources 
-  > gulp build - To publish production resources to dist
+  > gulp publish - To publish production resources to dist
 
 */
 
@@ -21,14 +21,16 @@ var entries = [
   "app_test2"
 ]
 
-function FolderModel(css, js, html, folder){
+var watch = null;
+
+function BuildModel(css, js, html, folder){
   this.folder = folder;
   this.css = css;
   this.js = js;
   this.html = html;
 }
 
-function BuildModel(folder, built){
+function PublishModel(folder, built){
   this.folder = folder;
   this.built = built;
 }
@@ -38,6 +40,19 @@ let cssTask = (folder) => {
   .pipe(sass().on("error", sass.logError))
   .pipe(gulp.dest("app/"+folder+"/css"));
 };
+
+let cssWatch = (folder) => {  
+  watch = folder;
+  gulp.watch("app/"+folder+"/sass/styles.scss", ["test"]);
+};
+
+gulp.task("test", function(){
+  cssTask(watch);
+})
+
+/*let cssWatch = (folder) => {  
+  gulp.watch("app/"+folder+"/sass/styles.scss", cssTask(folder));
+};*/
 
 var jsTask = (folder) => {
   return browserify({
@@ -71,14 +86,19 @@ var defaultPromises = async (folder) => {
   var css = await cssTask(folder);
   var js = await jsTask(folder);
   var html = await htmlTask(folder);
-  var folderModel = new FolderModel(css,js,html,folder);
-  return Promise.resolve(folderModel)
+  var buildModel = new BuildModel(css,js,html,folder);
+  return Promise.resolve(buildModel)
+}
+
+var defaultWatches = async (folder) => {
+  var css = await cssWatch(folder);
+  var buildModel = new BuildModel(css, null, null, folder);
+  return Promise.resolve(buildModel)
 }
 
 var buildPromises = async (folder) => {
-  var useref = await userefTask(folder);
-  var buildModel = new BuildModel(folder, true);
-  return Promise.resolve(buildModel)
+  var publishModel = new PublishModel(folder, true);
+  return Promise.resolve(publishModel)
 }
 
 gulp.task('images', function () {
@@ -95,7 +115,16 @@ gulp.task("mocha", function () {
     }));
 });
 
-gulp.task("build",["images", "mocha"], () => {
+gulp.task("watch", () => {
+  var promises = entries.map(defaultWatches);
+  Promise.all(promises).then((results)=>{
+    results.forEach(result => {
+      console.log("Watching " + result.folder);
+    });
+  })
+});
+
+gulp.task("publish",["images", "mocha"], () => {
   var promises = entries.map(buildPromises);
   Promise.all(promises).then((results)=>{
     results.forEach(result => {
