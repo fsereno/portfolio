@@ -21,8 +21,6 @@ var entries = [
   "app_test2"
 ]
 
-var watch = null;
-
 function BuildModel(css, js, html, folder){
   this.folder = folder;
   this.css = css;
@@ -36,23 +34,35 @@ function PublishModel(folder, built){
 }
 
 let cssTask = (folder) => {
-  return gulp.src("app/"+folder+"/sass/styles.scss")
+  return cssTaskMethod(folder);
+};
+
+function cssTaskMethod(folder){
+ return gulp.src("app/"+folder+"/sass/styles.scss")
   .pipe(sass().on("error", sass.logError))
   .pipe(gulp.dest("app/"+folder+"/css"));
+}
+
+let watchThis = (resources, dir) => {  
+  var watcher = gulp.watch(resources);
+  setupWatcherOnChangeEvent(watcher, dir);
 };
 
-let cssWatch = (folder) => {  
-  watch = folder;
-  gulp.watch("app/"+folder+"/sass/styles.scss", ["test"]);
-};
+function setupWatcherOnChangeEvent(watcher, dir){
 
-gulp.task("test", function(){
-  cssTask(watch);
+  watcher.on('change', function(file, stats) {
+    var fileArray = file.path.split("\\");
+    var folder = fileArray[fileArray.indexOf(dir) - 1];
+
+    console.log(folder);
+    console.log(global);
+  });
+
+}
+
+gulp.task("test", function(){  
+  cssTaskMethod(folder);
 })
-
-/*let cssWatch = (folder) => {  
-  gulp.watch("app/"+folder+"/sass/styles.scss", cssTask(folder));
-};*/
 
 var jsTask = (folder) => {
   return browserify({
@@ -91,7 +101,7 @@ var defaultPromises = async (folder) => {
 }
 
 var defaultWatches = async (folder) => {
-  var css = await cssWatch(folder);
+  var css = await watchThis("app/**/sass/styles.scss", "sass");
   var buildModel = new BuildModel(css, null, null, folder);
   return Promise.resolve(buildModel)
 }
@@ -115,13 +125,17 @@ gulp.task("mocha", function () {
     }));
 });
 
-gulp.task("watch", () => {
+/*gulp.task("watch", () => {
   var promises = entries.map(defaultWatches);
   Promise.all(promises).then((results)=>{
     results.forEach(result => {
       console.log("Watching " + result.folder);
     });
   })
+});*/
+
+gulp.task("watch", () => {
+  watchThis("app/**/sass/styles.scss", "sass");
 });
 
 gulp.task("publish",["images", "mocha"], () => {
