@@ -20,20 +20,13 @@ var entries = [
   "app_test2"
 ]
 
-function BuildModel(css, js, html, folder){
-  this.folder = folder;
-  this.css = css;
-  this.js = js;
-  this.html = html;
-}
-
-function PublishModel(folder, built){
-  this.folder = folder;
-  this.built = built;
-}
-
 let runThis = (folder, method) => {
-  return method(folder);
+  method(folder);
+};
+
+let watchThis = (resources, dir, method) => {  
+  var watcher = gulp.watch(resources);
+  setupWatcherOnChangeEvent(watcher, dir, method);
 };
 
 function cssTask(folder){
@@ -64,11 +57,6 @@ function htmlTask(folder) {
   .pipe(gulp.dest("app/"+folder))
 };
 
-let watchThis = (resources, dir, method) => {  
-  var watcher = gulp.watch(resources);
-  setupWatcherOnChangeEvent(watcher, dir, method);
-};
-
 function setupWatcherOnChangeEvent(watcher, dir, method){
   watcher.on('change', function(file, stats) {
     var windowsOS = (/\\/).test(file.path);
@@ -80,21 +68,11 @@ function setupWatcherOnChangeEvent(watcher, dir, method){
   });
 }
 
-
-
 var userefTask = (folder) => {
   return gulp.src("app/"+folder+"/index.html")
   .pipe(useref())
   .pipe(gulp.dest("dist/"+folder));
 };
-
-/*var defaultPromises = async (folder) => {
-  var css = await runThis(folder, cssTask);
-  var js = await runThis(folder, jsTask);
-  var html = await runThis(folder, htmlTask);
-  var buildModel = new BuildModel(css,js,html,folder);
-  return Promise.resolve(buildModel)
-}*/
 
 var defaultTasks = (folder) => {
   runThis(folder, cssTask);
@@ -102,10 +80,8 @@ var defaultTasks = (folder) => {
   runThis(folder, htmlTask);
 }
 
-var publishPromises = async (folder) => {
-  await userefTask(folder)
-  var publishModel = new PublishModel(folder, true);
-  return Promise.resolve(publishModel)
+var publishTasks = (folder) => {
+  userefTask(folder)
 }
 
 gulp.task('images', function () {
@@ -125,15 +101,11 @@ gulp.task("mocha", function () {
 gulp.task("watch", () => {
   watchThis("app/**/sass/*.scss", "sass", cssTask);
   watchThis("app/**/typeScript/**/*.ts", "typeScript", jsTask);
+  watchThis("app/**/pug/*.pug", "pug", htmlTask);
 });
 
-gulp.task("publish", () => {
-  var promises = entries.map(publishPromises);
-  Promise.all(promises).then((results)=>{
-    results.forEach(result => {
-      console.log("Publish task run for " + result.folder);
-    });
-  })
+gulp.task("publish",["mocha", "images"], () => {
+  entries.map(publishTasks);
 });
 
 gulp.task("default", () => {
