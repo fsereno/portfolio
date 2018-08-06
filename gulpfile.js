@@ -1,7 +1,7 @@
 /* usage
 
-  > gulp dev - To build development resources 
-  > gulp prod - To publish production resources to dist
+  > gulp default - To build development resources 
+  > gulp build - To publish production resources to dist
 
 */
 
