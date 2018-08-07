@@ -53,7 +53,7 @@ $ bower install
 
 ## Tasks
 
-#### Run the defalt Gulp build task
+#### Run the default Gulp build task
 
 ```shell
 $ gulp
@@ -83,3 +83,4 @@ $ gulp publish
 
 - **[MIT license](http://fswebsitesolutions.com/porfolio/app_licence/index.html)**
 - Copyright 2018 © <a href="http://fswebsitesolutions.com/" target="_blank">FS Website Solutions</a>.
+
