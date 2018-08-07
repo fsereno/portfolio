@@ -1,23 +1,25 @@
-/* usage
+/* 
 
-  > gulp default - To build development resources and start watching resources
-  > gulp watch - To watch for changes on scss,ts,pug and re-compile.
+usage
+ 
+  > gulp default - To build development resources, start the dev server and watch for changes.
+    Navigate to http://localhost:8080 to see the application running.
+  
   > gulp publish - To publish production resources to dist
 
 */
 
 "use strict";
-var gulp = require("gulp");
-var browserify = require("browserify");
-var source = require("vinyl-source-stream");
-var tsify = require("tsify");
-var useref = require("gulp-useref");
-var sass = require("gulp-sass");
-var pug = require("gulp-pug");
-var mocha = require("gulp-mocha");
-var connect = require("gulp-connect");
-
-var appConfig = require("./appConfig.json");
+var gulp = require("gulp"),
+    browserify = require("browserify"),
+    source = require("vinyl-source-stream"),
+    tsify = require("tsify"),
+    useref = require("gulp-useref"),
+    sass = require("gulp-sass"),
+    pug = require("gulp-pug"),
+    mocha = require("gulp-mocha"),
+    connect = require("gulp-connect"),
+    appConfig = require("./appConfig.json");
 
 let runThis = (folder, method) => {
   method(folder);
@@ -106,6 +108,13 @@ gulp.task("watch", () => {
   watchThis("app/**/pug/*.pug", "pug", htmlTask);
 });
 
+gulp.task("connect", function() {
+  connect.server({
+   root: ["./app/"+appConfig.prefix+appConfig.entry, ".", "./app"],
+   livereload: true
+ })
+});
+
 gulp.task("publish",["mocha", "images"], () => {
   appConfig.applications.map(publishTasks);
 });
@@ -114,11 +123,3 @@ gulp.task("default",["connect", "watch"], () => {
   appConfig.applications.map(defaultTasks);
 });
 
-gulp.task("connect", function() {
-   connect.server({
-    root: ["./app/"+appConfig.prefix+appConfig.entry, ".", "./app"],
-    livereload: true
-  })
-});
-
-//root: "app/"+appConfig.prefix+appConfig.entry,
