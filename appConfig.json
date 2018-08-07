@@ -1,15 +1,21 @@
 {
     "prefix": "app_",
     "entry": "home",
+    "masterTemplateDir": "master",
     
     "applications": [
+
         {
             "name": "Entry Application",
             "folder": "home"
         },
         {
-            "name": "Application 1",
-            "folder": "test1"
+            "name": "Application master template",
+            "folder": "master"
+        },
+        {
+            "name": "Application 3",
+            "folder": "test3"
         }
 
     ]

@@ -19,8 +19,9 @@ var gulp = require("gulp"),
     pug = require("gulp-pug"),
     mocha = require("gulp-mocha"),
     connect = require("gulp-connect"),
-    logger = require('gulp-logger'),
-    logSymbols = require('log-symbols'),
+    logger = require("gulp-logger"),
+    logSymbols = require("log-symbols"),
+    directoryExists = require("directory-exists"),
     appConfig = require("./appConfig.json");
 
 let runThis = (folder, method) => {
@@ -35,9 +36,9 @@ let watchThis = (resources, dir, method) => {
 function cssTask(folder){
  return gulp.src("app/"+folder+"/sass/styles.scss")
  .pipe(logger({
-    before: 'cssTask started...',
-    after: 'cssTask complete!',
-    extname: '.css',
+    before: "CSS task started...",
+    after: "CSS task complete!",
+    extname: ".css",
     showChange: false,
     dest: "../css",
     beforeEach: "Compiled to: ",
@@ -62,9 +63,9 @@ function jsTask(folder){
   .pipe(gulp.dest("app/"+folder+"/js"))
   .pipe(connect.reload())
   .pipe(logger({
-    before: 'jsTask started...',
-    after: 'jsTask complete!',
-    extname: '.js',
+    before: "JS task started...",
+    after: "JS task complete!",
+    extname: ".js",
     showChange: false,
     dest: "../js",
     beforeEach: "Compiled to: ",
@@ -75,9 +76,9 @@ function jsTask(folder){
 function htmlTask(folder) {
   return gulp.src("app/"+folder+"/pug/index.pug")
   .pipe(logger({
-    before: 'htmlTask started...',
-    after: 'htmlTask complete!',
-    extname: '.html',
+    before: "HTML task started...",
+    after: "HTML task complete!",
+    extname: ".html",
     showChange: false,
     dest: "../",
     beforeEach: "Compiled to: ",
@@ -94,9 +95,9 @@ function htmlTask(folder) {
 function userefTask(folder) {
   return gulp.src("app/"+folder+"/index.html")
   .pipe(logger({
-    before: 'userefTask started...',
-    after: 'userefTask complete!',
-    extname: '.html',
+    before: "Useref task started...",
+    after: "Useref task complete!",
+    extname: ".html",
     showChange: false,
     dest: "../../dist/"+folder+"/",
     beforeEach: "Compiled to: ",
@@ -107,7 +108,7 @@ function userefTask(folder) {
 };
 
 function setupWatcherOnChangeEvent(watcher, dir, method){
-  watcher.on('change', function(file, stats) {
+  watcher.on("change", function(file, stats) {
     var windowsOS = (/\\/).test(file.path);
     var fileArray = windowsOS ? file.path.split("\\") : file.path.split("/");
     var folder = fileArray[fileArray.indexOf(dir) - 1];
@@ -126,9 +127,9 @@ var publishTasks = (application) => {
   runThis(appConfig.prefix+application.folder, userefTask);
 }
 
-gulp.task('images', () => {
-  var output = gulp.src('app/images/**/*')
-    .pipe(gulp.dest('dist/images'));
+gulp.task("images", () => {
+  var output = gulp.src("app/images/**/*")
+    .pipe(gulp.dest("dist/images"));
     return output;
 });
 
@@ -153,6 +154,26 @@ gulp.task("connect", function() {
  })
 });
 
+gulp.task("create", () => {
+  appConfig.applications.forEach(application => {
+    directoryExists("app/"+appConfig.prefix+application.folder)
+      .then(result => {
+        if(result === false){
+          return gulp.src("app/"+appConfig.prefix+appConfig.masterTemplateDir+"/**/*")
+          .pipe(logger({
+              before: "Create task started...",
+              after: "Crete task complete!",
+              showChange: false,
+              dest: "../../"+appConfig.prefix+application.folder,
+              beforeEach: "Created: ",
+              afterEach: " " + logSymbols.success
+            }))
+            .pipe(gulp.dest("app/"+appConfig.prefix+application.folder));
+        }
+      });
+  });
+});
+
 gulp.task("publish",["mocha", "images"], () => {
   appConfig.applications.map(publishTasks);
 });
@@ -160,4 +181,3 @@ gulp.task("publish",["mocha", "images"], () => {
 gulp.task("default",["mocha", "connect", "watch"], () => {
   appConfig.applications.map(defaultTasks);
 });
-

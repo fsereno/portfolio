@@ -13,7 +13,7 @@ block content
         | Applications
       ul
         each application, index in locals.appConfig.applications
-          if application.folder != locals.appConfig.entry
+          if application.folder !== locals.appConfig.entry && application.folder !== locals.appConfig.masterTemplateDir
             li
               a(href="../"+locals.appConfig.prefix+application.folder+"/index.html")= application.name     
 block scripts

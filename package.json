@@ -23,6 +23,7 @@
     "browserify": "^16.2.2",
     "chai": "^4.1.2",
     "check-files-exist": "^1.0.1",
+    "directory-exists": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-cached": "^1.1.1",
     "gulp-connect": "^5.5.0",
