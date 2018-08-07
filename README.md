@@ -15,8 +15,9 @@ The purpose of this repository is to demonstrate skills in various technologies,
 
 ## Contents
 
-- [Installation](#installation)
 - [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Tasks](#tasks)
 - [License](#license)
 ---
 
@@ -50,13 +51,30 @@ $ bower install
 ```
 ---
 
-### Run the defalt Gulp build task
+## Tasks
+
+#### Run the defalt Gulp build task
 
 ```shell
 $ gulp
 ```
+##### This will:
+- Build the initial development resources (pug, sass, ts).
+- Start the development server.
+- Watch for any changes on development resources.
+- Live Reload any changes straight to the browser.
+- Open your browser and navigate to http://localhost:8080
 
-- Open your browser and navigate to anyone of the examples. Once the build has succeeded, a good place to start is dist/app_start/index.html
+#### Run the Publish Gulp task
+
+```shell
+$ gulp publish
+```
+##### This will:
+- Build the production directory.
+- Bundle the necessary resources into “app” and “vendor” files (js, css).
+- Replace resource urls with production urls.
+- Run all Unit Tests from the ./app/tests directory using Mocha and Chai
 ---
 
 ## License
@@ -65,4 +83,3 @@ $ gulp
 
 - **[MIT license](http://fswebsitesolutions.com/porfolio/app_licence/index.html)**
 - Copyright 2018 © <a href="http://fswebsitesolutions.com/" target="_blank">FS Website Solutions</a>.
-
