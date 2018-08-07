@@ -9,7 +9,12 @@ block content
   .container-fluid
       h1.display-1
         | Portfolio
-        small.text-muted application 1dddd
+      h4
+        | Applications
+      ul
+        each application, index in locals.applications
+          li
+            a(href="../"+locals.prefix+application.folder+"/index.html")= application.name
 
 block scripts
   // build:js js/app.js

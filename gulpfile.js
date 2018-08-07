@@ -49,7 +49,8 @@ function jsTask(folder){
 function htmlTask(folder) {
   return gulp.src("app/"+folder+"/pug/index.pug")
   .pipe(pug({
-    pretty: true
+    pretty: true,
+    locals:appConfig
   }))
   .pipe(gulp.dest("app/"+folder))
 };

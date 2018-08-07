@@ -3,8 +3,8 @@
     
     "applications": [
         {
-            "name": "Application Test 1",
-            "folder": "test1"
+            "name": "Entry Application",
+            "folder": "start"
         },
         {
             "name": "Application Test 2",
