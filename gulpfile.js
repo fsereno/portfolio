@@ -75,6 +75,7 @@ function setupWatcherOnChangeEvent(watcher, dir, method){
     var folder = fileArray[fileArray.indexOf(dir) - 1];
     method(folder);
     console.log("Modified: " + file.path);
+    gulp.start("mocha");
   });
 }
 
