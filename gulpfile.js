@@ -1,6 +1,6 @@
 /* usage
 
-  > gulp default - To build development resources 
+  > gulp default - To build development resources and start watching resources
   > gulp watch - To watch for changes on scss,ts,pug and re-compile.
   > gulp publish - To publish production resources to dist
 
@@ -15,6 +15,8 @@ var useref = require("gulp-useref");
 var sass = require("gulp-sass");
 var pug = require("gulp-pug");
 var mocha = require("gulp-mocha");
+var connect = require("gulp-connect");
+
 var appConfig = require("./appConfig.json");
 
 let runThis = (folder, method) => {
@@ -29,7 +31,8 @@ let watchThis = (resources, dir, method) => {
 function cssTask(folder){
  return gulp.src("app/"+folder+"/sass/styles.scss")
   .pipe(sass().on("error", sass.logError))
-  .pipe(gulp.dest("app/"+folder+"/css"));
+  .pipe(gulp.dest("app/"+folder+"/css"))
+  .pipe(connect.reload());
 }
 
 function jsTask(folder){
@@ -43,7 +46,8 @@ function jsTask(folder){
   .plugin(tsify)
   .bundle()
   .pipe(source("app.js"))
-  .pipe(gulp.dest("app/"+folder+"/js"));
+  .pipe(gulp.dest("app/"+folder+"/js"))
+  .pipe(connect.reload());
 }
 
 function htmlTask(folder) {
@@ -53,6 +57,7 @@ function htmlTask(folder) {
     locals:{appConfig: appConfig, application: folder}
   }))
   .pipe(gulp.dest("app/"+folder))
+  .pipe(connect.reload());
 };
 
 function userefTask(folder) {
@@ -81,13 +86,13 @@ var publishTasks = (application) => {
   runThis(appConfig.prefix+application.folder, userefTask);
 }
 
-gulp.task('images', function () {
+gulp.task('images', () => {
   var output = gulp.src('app/images/**/*')
     .pipe(gulp.dest('dist/images'));
     return output;
 });
 
-gulp.task("mocha", function () {
+gulp.task("mocha", () => {
   return gulp.src("app/**/*.test.ts")
     .pipe(mocha({
         reporter: "spec",
@@ -105,6 +110,15 @@ gulp.task("publish",["mocha", "images"], () => {
   appConfig.applications.map(publishTasks);
 });
 
-gulp.task("default",["watch"], () => {
+gulp.task("default",["connect", "watch"], () => {
   appConfig.applications.map(defaultTasks);
 });
+
+gulp.task("connect", function() {
+   connect.server({
+    root: ["./app/"+appConfig.prefix+appConfig.entry, ".", "./app"],
+    livereload: true
+  })
+});
+
+//root: "app/"+appConfig.prefix+appConfig.entry,

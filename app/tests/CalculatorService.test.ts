@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import CalculatorService from "../typeScript/Services/CalculatorService";
+import { CalculatorService } from "../typeScript/Services/CalculatorService";
 
 describe("Calculator", () => {
     describe("Add", () => {

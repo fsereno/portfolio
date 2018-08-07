@@ -25,6 +25,7 @@
     "check-files-exist": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-cached": "^1.1.1",
+    "gulp-connect": "^5.5.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-mocha": "^6.0.0",
     "gulp-pug": "^4.0.1",

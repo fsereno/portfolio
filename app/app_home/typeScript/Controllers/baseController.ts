@@ -25,7 +25,7 @@ class BaseController  {
 
         $(() => {
 
-            var text = self.textService.Concat("Application ", "1cc");
+            var text = self.textService.Concat("Application ", "1");
 
             console.log(text);
 
