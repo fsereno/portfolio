@@ -19,6 +19,8 @@ var gulp = require("gulp"),
     pug = require("gulp-pug"),
     mocha = require("gulp-mocha"),
     connect = require("gulp-connect"),
+    logger = require('gulp-logger'),
+    logSymbols = require('log-symbols'),
     appConfig = require("./appConfig.json");
 
 let runThis = (folder, method) => {
@@ -32,6 +34,15 @@ let watchThis = (resources, dir, method) => {
 
 function cssTask(folder){
  return gulp.src("app/"+folder+"/sass/styles.scss")
+ .pipe(logger({
+    before: 'cssTask started...',
+    after: 'cssTask complete!',
+    extname: '.css',
+    showChange: false,
+    dest: "../css",
+    beforeEach: "Compiled to: ",
+    afterEach: " " + logSymbols.success
+  }))
   .pipe(sass().on("error", sass.logError))
   .pipe(gulp.dest("app/"+folder+"/css"))
   .pipe(connect.reload());
@@ -49,11 +60,29 @@ function jsTask(folder){
   .bundle()
   .pipe(source("app.js"))
   .pipe(gulp.dest("app/"+folder+"/js"))
-  .pipe(connect.reload());
+  .pipe(connect.reload())
+  .pipe(logger({
+    before: 'jsTask started...',
+    after: 'jsTask complete!',
+    extname: '.js',
+    showChange: false,
+    dest: "../js",
+    beforeEach: "Compiled to: ",
+    afterEach: " " + logSymbols.success
+  }));
 }
 
 function htmlTask(folder) {
   return gulp.src("app/"+folder+"/pug/index.pug")
+  .pipe(logger({
+    before: 'htmlTask started...',
+    after: 'htmlTask complete!',
+    extname: '.html',
+    showChange: false,
+    dest: "../",
+    beforeEach: "Compiled to: ",
+    afterEach: " " + logSymbols.success
+  }))
   .pipe(pug({
     pretty: true,
     locals:{appConfig: appConfig, application: folder}
@@ -64,6 +93,15 @@ function htmlTask(folder) {
 
 function userefTask(folder) {
   return gulp.src("app/"+folder+"/index.html")
+  .pipe(logger({
+    before: 'userefTask started...',
+    after: 'userefTask complete!',
+    extname: '.html',
+    showChange: false,
+    dest: "../../dist/"+folder+"/",
+    beforeEach: "Compiled to: ",
+    afterEach: " " + logSymbols.success
+  }))
   .pipe(useref())
   .pipe(gulp.dest("dist/"+folder));
 };
@@ -74,7 +112,6 @@ function setupWatcherOnChangeEvent(watcher, dir, method){
     var fileArray = windowsOS ? file.path.split("\\") : file.path.split("/");
     var folder = fileArray[fileArray.indexOf(dir) - 1];
     method(folder);
-    console.log("Modified: " + file.path);
     gulp.start("mocha");
   });
 }
@@ -120,7 +157,7 @@ gulp.task("publish",["mocha", "images"], () => {
   appConfig.applications.map(publishTasks);
 });
 
-gulp.task("default",["connect", "watch"], () => {
+gulp.task("default",["mocha", "connect", "watch"], () => {
   appConfig.applications.map(defaultTasks);
 });
 
