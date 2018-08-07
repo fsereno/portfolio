@@ -1,0 +1,16 @@
+{
+    "prefix": "app_",
+    
+    "applications": [
+        {
+            "name": "Application Test 1",
+            "folder": "test1"
+        },
+        {
+            "name": "Application Test 2",
+            "folder": "test2"
+        }
+
+    ]
+
+}

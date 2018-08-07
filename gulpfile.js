@@ -15,11 +15,7 @@ var useref = require("gulp-useref");
 var sass = require("gulp-sass");
 var pug = require("gulp-pug");
 var mocha = require("gulp-mocha");
-
-var entries = [
-  "app_test1",
-  "app_test2"
-]
+var appConfig = require("./appConfig.json");
 
 let runThis = (folder, method) => {
   method(folder);
@@ -74,14 +70,14 @@ function setupWatcherOnChangeEvent(watcher, dir, method){
   });
 }
 
-var defaultTasks = (folder) => {
-  runThis(folder, cssTask);
-  runThis(folder, jsTask);
-  runThis(folder, htmlTask);
+var defaultTasks = (application) => {
+  runThis(appConfig.prefix+application.folder, cssTask);
+  runThis(appConfig.prefix+application.folder, jsTask);
+  runThis(appConfig.prefix+application.folder, htmlTask);
 }
 
-var publishTasks = (folder) => {
-  userefTask(folder)
+var publishTasks = (application) => {
+  runThis(appConfig.prefix+application.folder, userefTask);
 }
 
 gulp.task('images', function () {
@@ -105,9 +101,9 @@ gulp.task("watch", () => {
 });
 
 gulp.task("publish",["mocha", "images"], () => {
-  entries.map(publishTasks);
+  appConfig.applications.map(publishTasks);
 });
 
 gulp.task("default", () => {
-  entries.map(defaultTasks);
+  appConfig.applications.map(defaultTasks);
 });
