@@ -9,8 +9,13 @@ block content
   .container-fluid
       h1.display-1
         | Portfolio
-        small.text-muted application 2jj
-
+      h4
+        | Applications
+      ul
+        each application, index in locals.appConfig.applications
+          if application.folder != locals.appConfig.entry
+            li
+              a(href="../"+locals.appConfig.prefix+application.folder+"/index.html")= application.name     
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

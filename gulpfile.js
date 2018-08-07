@@ -50,7 +50,7 @@ function htmlTask(folder) {
   return gulp.src("app/"+folder+"/pug/index.pug")
   .pipe(pug({
     pretty: true,
-    locals:appConfig
+    locals:{appConfig: appConfig, application: folder}
   }))
   .pipe(gulp.dest("app/"+folder))
 };
@@ -105,6 +105,6 @@ gulp.task("publish",["mocha", "images"], () => {
   appConfig.applications.map(publishTasks);
 });
 
-gulp.task("default", () => {
+gulp.task("default",["watch"], () => {
   appConfig.applications.map(defaultTasks);
 });

@@ -8,13 +8,7 @@ block styles
 block content
   .container-fluid
       h1.display-1
-        | Portfolio
-      h4
-        | Applications
-      ul
-        each application, index in locals.applications
-          li
-            a(href="../"+locals.prefix+application.folder+"/index.html")= application.name
+        | Application 1
 
 block scripts
   // build:js js/app.js

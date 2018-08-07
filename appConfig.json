@@ -1,14 +1,15 @@
 {
     "prefix": "app_",
+    "entry": "home",
     
     "applications": [
         {
             "name": "Entry Application",
-            "folder": "start"
+            "folder": "home"
         },
         {
-            "name": "Application Test 2",
-            "folder": "test2"
+            "name": "Application Test 1",
+            "folder": "test1"
         }
 
     ]
