@@ -110,10 +110,6 @@ function userefTask(application) {
 function createTask(application){
   return directoryExists("app/"+appConfig.prefix+application.folder)
     .then(result => {       
-
-      console.log(application.folder);
-      console.log(result);
-
       if(result === false) {
         gulp.src("app/"+appConfig.prefix+appConfig.masterTemplateDir+"/**/*")
         .pipe(logger({
@@ -132,11 +128,17 @@ function createTask(application){
 function setupWatcherOnChangeEvent(watcher, dir, method){
   watcher.on("change", function(file, stats) {
     var windowsOS = (/\\/).test(file.path);
-    var fileArray = windowsOS ? file.path.split("\\") : file.path.split("/");
-    var folder = fileArray[fileArray.indexOf(dir) - 1].replace("app_", "");
+    var filePathArray = windowsOS ? file.path.split("\\") : file.path.split("/");
+    var folder = filePathArray[filePathArray.indexOf(dir) - 1];
+    folder = folder != undefined ? folder.replace("app_", "") : folder;
     var applicationIndex = appConfig.applications.map((a)=>{return a["folder"]}).indexOf(folder);
     var application = appConfig.applications[applicationIndex];    
-    method(application);
+    if(dir !== "/" && applicationIndex && application !== undefined) {
+      method(application);
+    } else {
+      // working on watching resources in the root level folders
+      newappConfig.applications.map(defaultTasks);
+    }
     gulp.start("mocha");
   });
 }
@@ -173,6 +175,7 @@ gulp.task("watch", () => {
   watchThis("app/**/sass/*.scss", "sass", cssTask);
   watchThis("app/**/typeScript/**/*.ts", "typeScript", jsTask);
   watchThis("app/**/pug/*.pug", "pug", htmlTask);
+  watchThis("./appConfig.json", "/", htmlTask);
 });
 
 gulp.task("connect", function() {
