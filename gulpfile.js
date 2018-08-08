@@ -133,11 +133,10 @@ function setupWatcherOnChangeEvent(watcher, dir, method){
     folder = folder != undefined ? folder.replace("app_", "") : folder;
     var applicationIndex = appConfig.applications.map((a)=>{return a["folder"]}).indexOf(folder);
     var application = appConfig.applications[applicationIndex];    
-    if(dir !== "/" && applicationIndex && application !== undefined) {
+    if(dir !== "/" && application !== undefined && method !== null) {
       method(application);
     } else {
-      // working on watching resources in the root level folders
-      newappConfig.applications.map(defaultTasks);
+      appConfig.applications.map(defaultTasks);
     }
     gulp.start("mocha");
   });
@@ -175,7 +174,9 @@ gulp.task("watch", () => {
   watchThis("app/**/sass/*.scss", "sass", cssTask);
   watchThis("app/**/typeScript/**/*.ts", "typeScript", jsTask);
   watchThis("app/**/pug/*.pug", "pug", htmlTask);
-  watchThis("./appConfig.json", "/", htmlTask);
+  watchThis("app/pug/**/*.pug", "/", null);
+  watchThis("app/sass/**/*.scss", "/", null);
+  watchThis("app/typeScript/**/*.ts", "/", null);
 });
 
 gulp.task("connect", function() {
