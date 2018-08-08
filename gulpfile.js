@@ -24,8 +24,8 @@ var gulp = require("gulp"),
     directoryExists = require("directory-exists"),
     appConfig = require("./appConfig.json");
 
-let runThis = (folder, method) => {
-  method(folder);
+let runThis = (application, method) => {
+  method(application);
 };
 
 let watchThis = (resources, dir, method) => {  
@@ -33,8 +33,8 @@ let watchThis = (resources, dir, method) => {
   setupWatcherOnChangeEvent(watcher, dir, method);
 };
 
-function cssTask(folder){
- return gulp.src("app/"+folder+"/sass/styles.scss")
+function cssTask(application){
+ return gulp.src("app/"+appConfig.prefix+application.folder+"/sass/styles.scss")
  .pipe(logger({
     before: "CSS task started...",
     after: "CSS task complete!",
@@ -45,13 +45,13 @@ function cssTask(folder){
     afterEach: " " + logSymbols.success
   }))
   .pipe(sass().on("error", sass.logError))
-  .pipe(gulp.dest("app/"+folder+"/css"))
+  .pipe(gulp.dest("app/"+appConfig.prefix+application.folder+"/css"))
   .pipe(connect.reload());
 }
 
-function jsTask(folder){
+function jsTask(application){
   return browserify({
-    basedir: "app/"+folder+"/typeScript/",
+    basedir: "app/"+appConfig.prefix+application.folder+"/typeScript/",
     debug: true,
     entries: "app.ts",
     cache: {},
@@ -60,7 +60,7 @@ function jsTask(folder){
   .plugin(tsify)
   .bundle()
   .pipe(source("app.js"))
-  .pipe(gulp.dest("app/"+folder+"/js"))
+  .pipe(gulp.dest("app/"+appConfig.prefix+application.folder+"/js"))
   .pipe(connect.reload())
   .pipe(logger({
     before: "JS task started...",
@@ -73,8 +73,8 @@ function jsTask(folder){
   }));
 }
 
-function htmlTask(folder) {
-  return gulp.src("app/"+folder+"/pug/index.pug")
+function htmlTask(application) {
+  return gulp.src("app/"+appConfig.prefix+application.folder+"/pug/index.pug")
   .pipe(logger({
     before: "HTML task started...",
     after: "HTML task complete!",
@@ -86,45 +86,73 @@ function htmlTask(folder) {
   }))
   .pipe(pug({
     pretty: true,
-    locals:{appConfig: appConfig, application: folder}
+    locals:{appConfig: appConfig, application: application}
   }))
-  .pipe(gulp.dest("app/"+folder))
+  .pipe(gulp.dest("app/"+appConfig.prefix+application.folder))
   .pipe(connect.reload());
 };
 
-function userefTask(folder) {
-  return gulp.src("app/"+folder+"/index.html")
+function userefTask(application) {
+  return gulp.src("app/"+appConfig.prefix+application.folder+"/index.html")
   .pipe(logger({
     before: "Useref task started...",
     after: "Useref task complete!",
     extname: ".html",
     showChange: false,
-    dest: "../../dist/"+folder+"/",
+    dest: "../../dist/"+appConfig.prefix+application.folder+"/",
     beforeEach: "Compiled to: ",
     afterEach: " " + logSymbols.success
   }))
   .pipe(useref())
-  .pipe(gulp.dest("dist/"+folder));
+  .pipe(gulp.dest("dist/"+appConfig.prefix+application.folder));
 };
+
+function createTask(application){
+  return directoryExists("app/"+appConfig.prefix+application.folder)
+    .then(result => {       
+
+      console.log(application.folder);
+      console.log(result);
+
+      if(result === false) {
+        gulp.src("app/"+appConfig.prefix+appConfig.masterTemplateDir+"/**/*")
+        .pipe(logger({
+            before: "Create task started...",
+            after: "Crete task complete!",
+            showChange: false,
+            dest: "../../"+appConfig.prefix+application.folder,
+            beforeEach: "Created: ",
+            afterEach: " " + logSymbols.success
+        }))
+        .pipe(gulp.dest("app/"+appConfig.prefix+application.folder));
+      }
+    });
+}
 
 function setupWatcherOnChangeEvent(watcher, dir, method){
   watcher.on("change", function(file, stats) {
     var windowsOS = (/\\/).test(file.path);
     var fileArray = windowsOS ? file.path.split("\\") : file.path.split("/");
-    var folder = fileArray[fileArray.indexOf(dir) - 1];
-    method(folder);
+    var folder = fileArray[fileArray.indexOf(dir) - 1].replace("app_", "");
+    var applicationIndex = appConfig.applications.map((a)=>{return a["folder"]}).indexOf(folder);
+    var application = appConfig.applications[applicationIndex];    
+    method(application);
     gulp.start("mocha");
   });
 }
 
 var defaultTasks = (application) => {
-  runThis(appConfig.prefix+application.folder, cssTask);
-  runThis(appConfig.prefix+application.folder, jsTask);
-  runThis(appConfig.prefix+application.folder, htmlTask);
+  runThis(application, cssTask);
+  runThis(application, jsTask);
+  runThis(application, htmlTask);
 }
 
 var publishTasks = (application) => {
-  runThis(appConfig.prefix+application.folder, userefTask);
+  runThis(application, userefTask);
+}
+
+var createTasks = (application) => {
+  runThis(application, createTask);
 }
 
 gulp.task("images", () => {
@@ -155,23 +183,7 @@ gulp.task("connect", function() {
 });
 
 gulp.task("create", () => {
-  appConfig.applications.forEach(application => {
-    directoryExists("app/"+appConfig.prefix+application.folder)
-      .then(result => {
-        if(result === false){
-          return gulp.src("app/"+appConfig.prefix+appConfig.masterTemplateDir+"/**/*")
-          .pipe(logger({
-              before: "Create task started...",
-              after: "Crete task complete!",
-              showChange: false,
-              dest: "../../"+appConfig.prefix+application.folder,
-              beforeEach: "Created: ",
-              afterEach: " " + logSymbols.success
-            }))
-            .pipe(gulp.dest("app/"+appConfig.prefix+application.folder));
-        }
-      });
-  });
+  appConfig.applications.map(createTasks);
 });
 
 gulp.task("publish",["mocha", "images"], () => {

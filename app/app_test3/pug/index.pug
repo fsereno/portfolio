@@ -7,9 +7,7 @@ block styles
 
 block content
   .container-fluid
-      h1.display-1
-        | Application Master Template
-
+      h1.display-1= locals.application.name
 block scripts
   // build:js js/app.js
   script(src="js/app.js")
