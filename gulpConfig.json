@@ -16,6 +16,10 @@
         {
             "name": "Application 2",
             "folder": "test2"
+        },
+        {
+            "name": "MIT Licence",
+            "folder": "licence"
         }
 
     ]
