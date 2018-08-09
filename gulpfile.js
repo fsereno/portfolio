@@ -7,6 +7,9 @@ usage
   
   > gulp publish - To publish production resources to dist
 
+  > gulp create - Update the config.json file with additional applications.
+    Run this command and a new application will be created based on app_master.
+
 */
 
 "use strict";

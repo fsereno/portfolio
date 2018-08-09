@@ -74,7 +74,18 @@ $ gulp publish
 - Build the production directory.
 - Bundle the necessary resources into “app” and “vendor” files (js, css).
 - Replace resource urls with production urls.
-- Run all Unit Tests from the ./app/tests directory using Mocha and Chai
+- Run all Unit Tests from the ./app/tests directory using Mocha and Chai.
+
+#### Run the Create Gulp task
+
+```shell
+$ gulp create
+```
+##### This will allow you to:
+- Update the config.json file with additional applications.
+- Then run this command to build applications based on the config.json file.
+- New applications are built based on the app_master template application.
+- If all applications already exist, nothing will be overwritten.
 ---
 
 ## License
@@ -83,4 +94,3 @@ $ gulp publish
 
 - **[MIT license](http://fswebsitesolutions.com/porfolio/app_licence/index.html)**
 - Copyright 2018 © <a href="http://fswebsitesolutions.com/" target="_blank">FS Website Solutions</a>.
-
