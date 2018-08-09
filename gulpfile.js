@@ -94,12 +94,12 @@ let userefTask = (application) => {
     "Useref task complete!",
     ".html",
     false,
-    "../../dist/"+config.prefix+application.folder+"/",
+    "../../"+config.publishDir+"/"+config.prefix+application.folder+"/",
     "Compiled to: ",
     " " + logSymbols.success
   )))
   .pipe(useref())
-  .pipe(gulp.dest("dist/"+config.prefix+application.folder));
+  .pipe(gulp.dest(config.publishDir+"/"+config.prefix+application.folder));
 };
 
 let createTask = (application) => {
@@ -141,7 +141,7 @@ let createTasks = (application) => {
 
 gulp.task("images", () => {
   var output = gulp.src(config.developmentDir+"/images/**/*")
-    .pipe(gulp.dest("dist/images"));
+    .pipe(gulp.dest(config.publishDir+"/images"));
     return output;
 });
 
