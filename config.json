@@ -8,16 +8,19 @@
     "applications": [
 
         {
-            "name": "Portfolio",
+            "name": "Portfolio:",
+            "description": "An examples repository.",
             "folder": "home"
         },
         {
             "name": "Application master template",
+            "description": "The template application, use by >gulp create.",
             "folder": "master"
         },
         {
-            "name": "Application 2",
-            "folder": "test2"
+            "name": "Find the total values",
+            "description": "Find the necessary values from an unknown number of arrays, which make a total value from the 1st array.",
+            "folder": "totalValues"
         },
         {
             "name": "MIT Licence",

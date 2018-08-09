@@ -1,6 +1,9 @@
 /* 
 
-usage
+  Author: Fabio Sereno.
+  Description: Gulpfile.js, tasks for building individual applications.
+
+Usage...
  
   > gulp default - To build development resources, start the dev server and watch for changes.
     Navigate to http://localhost:8080 to see the application running.
@@ -13,7 +16,7 @@ usage
 */
 
 "use strict";
-var gulp = require("gulp"),
+let gulp = require("gulp"),
     browserify = require("browserify"),
     source = require("vinyl-source-stream"),
     tsify = require("tsify"),
