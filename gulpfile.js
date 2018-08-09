@@ -22,16 +22,8 @@ var gulp = require("gulp"),
     logger = require("gulp-logger"),
     logSymbols = require("log-symbols"),
     directoryExists = require("directory-exists"),
-    appConfig = require("./appConfig.json");
-
-let runThis = (application, method) => {
-  method(application);
-};
-
-let watchThis = (resources, dir, method) => {  
-  var watcher = gulp.watch(resources);
-  setupWatcherOnChangeEvent(watcher, dir, method);
-};
+    appConfig = require("./appConfig.json"),
+    gulpHelpers = require("./gulpHelpers");
 
 function cssTask(application){
  return gulp.src("app/"+appConfig.prefix+application.folder+"/sass/styles.scss")
@@ -125,35 +117,22 @@ function createTask(application){
     });
 }
 
-function setupWatcherOnChangeEvent(watcher, dir, method){
-  watcher.on("change", function(file, stats) {
-    var windowsOS = (/\\/).test(file.path);
-    var filePathArray = windowsOS ? file.path.split("\\") : file.path.split("/");
-    var folder = filePathArray[filePathArray.indexOf(dir) - 1];
-    folder = folder != undefined ? folder.replace("app_", "") : folder;
-    var applicationIndex = appConfig.applications.map((a)=>{return a["folder"]}).indexOf(folder);
-    var application = appConfig.applications[applicationIndex];    
-    if(dir !== "/" && application !== undefined && method !== null) {
-      method(application);
-    } else {
-      appConfig.applications.map(defaultTasks);
-    }
-    gulp.start("mocha");
-  });
+function mochaTaskCallBack() {
+  gulp.start("mocha");
 }
 
 var defaultTasks = (application) => {
-  runThis(application, cssTask);
-  runThis(application, jsTask);
-  runThis(application, htmlTask);
+  gulpHelpers.runThis(application, cssTask);
+  gulpHelpers.runThis(application, jsTask);
+  gulpHelpers.runThis(application, htmlTask);
 }
 
 var publishTasks = (application) => {
-  runThis(application, userefTask);
+  gulpHelpers.runThis(application, userefTask);
 }
 
 var createTasks = (application) => {
-  runThis(application, createTask);
+  gulpHelpers.runThis(application, createTask);
 }
 
 gulp.task("images", () => {
@@ -171,12 +150,12 @@ gulp.task("mocha", () => {
 });
 
 gulp.task("watch", () => {
-  watchThis("app/**/sass/*.scss", "sass", cssTask);
-  watchThis("app/**/typeScript/**/*.ts", "typeScript", jsTask);
-  watchThis("app/**/pug/*.pug", "pug", htmlTask);
-  watchThis("app/pug/**/*.pug", "/", null);
-  watchThis("app/sass/**/*.scss", "/", null);
-  watchThis("app/typeScript/**/*.ts", "/", null);
+  gulpHelpers.watchThis(gulp.watch("app/**/sass/*.scss"), "sass", cssTask, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch("app/**/typeScript/**/*.ts"), "typeScript", jsTask, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch("app/**/pug/*.pug"), "pug", htmlTask, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch("app/pug/**/*.pug"), "/", null, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch("app/sass/**/*.scss"), "/", null, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch("app/typeScript/**/*.ts"), "/", null, mochaTaskCallBack);
 });
 
 gulp.task("connect", function() {
