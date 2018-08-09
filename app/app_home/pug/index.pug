@@ -11,10 +11,10 @@ block content
       h4
         | Applications
       ul
-        each application, index in locals.appConfig.applications
-          if application.folder !== locals.appConfig.entry && application.folder !== locals.appConfig.masterTemplateDir
+        each application, index in locals.config.applications
+          if application.folder !== locals.config.entry && application.folder !== locals.config.masterTemplateDir
             li
-              a(href="../"+locals.appConfig.prefix+application.folder+"/index.html")= application.name     
+              a(href="../"+locals.config.prefix+application.folder+"/index.html")= application.name     
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

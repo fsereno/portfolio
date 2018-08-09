@@ -25,7 +25,7 @@ class BaseController  {
 
         $(() => {
 
-            var text = self.textService.Concat("Application ", "Master Template");
+            var text = self.textService.Concat("Application ", "2");
 
             console.log(text);
 
