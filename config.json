@@ -2,6 +2,8 @@
     "prefix": "app_",
     "entry": "home",
     "masterTemplateDir": "master",
+    "developmentDir": "app",
+    "publishDir": "dist",
     
     "applications": [
 

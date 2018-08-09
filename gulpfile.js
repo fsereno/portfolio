@@ -29,7 +29,7 @@ var gulp = require("gulp"),
     gulpHelpers = require("./gulpHelpers");
 
 let cssTask = (application) => {
- return gulp.src("app/"+config.prefix+application.folder+"/sass/styles.scss")
+ return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
  .pipe(logger(gulpHelpers.populateLoggerOptions(
     "CSS task started...",
     "CSS task complete!",
@@ -40,13 +40,13 @@ let cssTask = (application) => {
     " " + logSymbols.success
   )))
   .pipe(sass().on("error", sass.logError))
-  .pipe(gulp.dest("app/"+config.prefix+application.folder+"/css"))
+  .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder+"/css"))
   .pipe(connect.reload());
 }
 
 let jsTask = (application) => {
   return browserify({
-    basedir: "app/"+config.prefix+application.folder+"/typeScript/",
+    basedir: config.developmentDir+"/"+config.prefix+application.folder+"/typeScript/",
     debug: true,
     entries: "app.ts",
     cache: {},
@@ -55,7 +55,7 @@ let jsTask = (application) => {
   .plugin(tsify)
   .bundle()
   .pipe(source("app.js"))
-  .pipe(gulp.dest("app/"+config.prefix+application.folder+"/js"))
+  .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder+"/js"))
   .pipe(connect.reload())
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "JS task started...",
@@ -69,7 +69,7 @@ let jsTask = (application) => {
 }
 
 let htmlTask = (application) => {
-  return gulp.src("app/"+config.prefix+application.folder+"/pug/index.pug")
+  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/pug/index.pug")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "HTML task started...",
     "HTML task complete!",
@@ -83,12 +83,12 @@ let htmlTask = (application) => {
     pretty: true,
     locals:{config: config, application: application}
   }))
-  .pipe(gulp.dest("app/"+config.prefix+application.folder))
+  .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder))
   .pipe(connect.reload());
 };
 
 let userefTask = (application) => {
-  return gulp.src("app/"+config.prefix+application.folder+"/index.html")
+  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/index.html")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "Useref task started...",
     "Useref task complete!",
@@ -103,10 +103,10 @@ let userefTask = (application) => {
 };
 
 let createTask = (application) => {
-  return directoryExists("app/"+config.prefix+application.folder)
+  return directoryExists(config.developmentDir+"/"+config.prefix+application.folder)
     .then(result => {       
       if(result === false) {
-        gulp.src("app/"+config.prefix+config.masterTemplateDir+"/**/*")
+        gulp.src(config.developmentDir+"/"+config.prefix+config.masterTemplateDir+"/**/*")
         .pipe(logger(gulpHelpers.populateLoggerOptions(
             "Create task started...",
             "Crete task complete!",
@@ -116,7 +116,7 @@ let createTask = (application) => {
             "Created: ",
             " " + logSymbols.success
         )))
-        .pipe(gulp.dest("app/"+config.prefix+application.folder));
+        .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder));
       }
     });
 }
@@ -140,13 +140,13 @@ let createTasks = (application) => {
 }
 
 gulp.task("images", () => {
-  var output = gulp.src("app/images/**/*")
+  var output = gulp.src(config.developmentDir+"/images/**/*")
     .pipe(gulp.dest("dist/images"));
     return output;
 });
 
 gulp.task("mocha", () => {
-  return gulp.src("app/**/*.test.ts")
+  return gulp.src(config.developmentDir+"/**/*.test.ts")
     .pipe(mocha({
         reporter: "spec",
         require: ["ts-node/register"]
@@ -154,17 +154,17 @@ gulp.task("mocha", () => {
 });
 
 gulp.task("watch", () => {
-  gulpHelpers.watchThis(gulp.watch("app/**/sass/*.scss"), "sass", cssTask, mochaTaskCallBack);
-  gulpHelpers.watchThis(gulp.watch("app/**/typeScript/**/*.ts"), "typeScript", jsTask, mochaTaskCallBack);
-  gulpHelpers.watchThis(gulp.watch("app/**/pug/*.pug"), "pug", htmlTask, mochaTaskCallBack);
-  gulpHelpers.watchThis(gulp.watch("app/pug/**/*.pug"), "/", null, mochaTaskCallBack);
-  gulpHelpers.watchThis(gulp.watch("app/sass/**/*.scss"), "/", null, mochaTaskCallBack);
-  gulpHelpers.watchThis(gulp.watch("app/typeScript/**/*.ts"), "/", null, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", jsTask, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null, mochaTaskCallBack);
 });
 
 gulp.task("connect", function() {
   connect.server({
-   root: ["./app/"+config.prefix+config.entry, ".", "./app"],
+   root: ["./"+config.developmentDir+"/"+config.prefix+config.entry, ".", "./"+config.developmentDir],
    livereload: true
  })
 });
