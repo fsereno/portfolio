@@ -1,24 +1,24 @@
-var gulpConfig = require("./gulpConfig.json");
+var config = require("./config.json");
 
 module.exports = {
-    constructor: () => { return gulpConfig },
+    constructor: () => { return config },
     runThis: (application, method) => {
       method(application);
     },
     setupWatcherOnChangeEvent: (watcher, dir, method, callBack) => {
       watcher.on("change", function(file, stats) {
         let windowsOS = (/\\/).test(file.path),
-            gulpConfig = module.exports.constructor();
+            config = module.exports.constructor();
             filePathArray = windowsOS ? file.path.split("\\") : file.path.split("/"),
             folderFromFilePath = filePathArray[filePathArray.indexOf(dir) - 1],
             folder = folderFromFilePath != undefined ? folderFromFilePath.replace("app_", "") : folderFromFilePath,
-            applicationIndex = gulpConfig.applications.map((a)=>{return a["folder"]}).indexOf(folder),
-            application = gulpConfig.applications[applicationIndex];
+            applicationIndex = config.applications.map((a)=>{return a["folder"]}).indexOf(folder),
+            application = config.applications[applicationIndex];
   
         if(dir !== "/" && application !== undefined && method !== null) {
           method(application);
         } else {
-          gulpConfig.applications.map(defaultTasks);
+          config.applications.map(defaultTasks);
         }
         callBack();
       });
