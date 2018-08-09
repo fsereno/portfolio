@@ -18,11 +18,6 @@
             "folder": "master"
         },
         {
-            "name": "Find the total values",
-            "description": "Find the necessary values from an unknown number of arrays, which make a total value from the 1st array.",
-            "folder": "totalValues"
-        },
-        {
             "name": "MIT Licence",
             "folder": "licence"
         }
