@@ -27,12 +27,24 @@ class BaseController  {
 
             console.log(text);
 
-            $("#findReplaceForm").on("submit", (e) => {
+            $("#findReplaceForm").validate({
+
+                submitHandler: (form)=>{
+
+                    let valid = $(form).valid();
+                    console.log(valid);    
+                    console.log("form submitted");
+
+                }
+
+            });
+
+            /*$("#findReplaceForm").on("submit", (e) => {
 
                 e.preventDefault();
                 console.log("form submitted");
 
-            });
+            });*/
 
         });
 

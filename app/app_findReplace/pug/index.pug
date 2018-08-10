@@ -15,12 +15,11 @@ block content
           form#findReplaceForm
             .form-group
               label(for='findInput') Find this:
-              input#findInput.form-control(type='text', placeholder='Find...', required)
-              small#findHelp.form-text.text-muted What do you want to find ?
+              input#findInput.form-control(name="findInput", type='text', placeholder='Find...', required)
             .form-group
               label(for='replaceInput') Replace with:
-              input#replaceInput.form-control(type='text', placeholder='Replace with...', required)
-              small#replaceHelp.form-text.text-muted What do you want to replace it with ?
+              input#replaceInput.form-control(name="replaceInput", type='text', placeholder='Replace with...', required)
+             
             button.btn.btn-primary(type='submit') Submit
 
 block scripts

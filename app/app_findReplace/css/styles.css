@@ -2,5 +2,8 @@
   padding: 20px 0;
   display: block; }
 
+.error {
+  color: red; }
+
 body h1 {
   color: #000000; }

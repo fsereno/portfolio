@@ -1,6 +1,15 @@
+@import "./colours.scss";
+
 .link {
     &.home {
         padding:20px 0;
         display: block;
     }
+}
+
+
+.error {
+
+    color: $red;
+
 }
