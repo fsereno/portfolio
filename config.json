@@ -29,9 +29,9 @@
             "include": false
         },
         {
-            "name": "Application 1",
-            "description": "This is an example application.",
-            "folder": "test1",
+            "name": "Find and Replace",
+            "description": "A simple find and replace method, witten in TypeScript.",
+            "folder": "findReplace",
             "active": true,
             "include": true
         }

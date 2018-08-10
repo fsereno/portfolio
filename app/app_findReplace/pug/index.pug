@@ -1,0 +1,31 @@
+extends ../../pug/layouts/main.pug
+
+block styles
+  // build:css css/styles.css
+  link(rel="stylesheet" href="css/styles.css")
+  // endbuild
+
+block content
+      h1.display-1= locals.application.name
+      .row
+        .col-lg-12
+          p.lead#textToReplace Hello world!
+      .row
+        .col-lg-3
+          form
+            .form-group
+              label(for='findInput') Find this:
+              input#findInput.form-control(type='text', placeholder='Find...')
+              small#findHelp.form-text.text-muted What do you want to find ?
+            .form-group
+              label(for='replaceInput') Replace with:
+              input#replaceInput.form-control(type='text', placeholder='Replace with...')
+              small#replaceHelp.form-text.text-muted What do you want to replace it with ?
+            button.btn.btn-primary(type='submit') Submit
+
+block scripts
+  // build:js js/app.js
+  script(src="js/app.js")
+  // endbuild
+  // build:js js/vendor.js
+  // endbuild

@@ -124,10 +124,6 @@ let createTask = (application) => {
     });
 }
 
-let mochaTaskCallBack = () => {
-  gulp.start("mocha");
-}
-
 let defaultTasks = (application) => {
   gulpHelpers.runThis(application, cssTask);
   gulpHelpers.runThis(application, jsTask);
@@ -140,6 +136,14 @@ let publishTasks = (application) => {
 
 let createTasks = (application) => {
   gulpHelpers.runThis(application, createTask);
+}
+
+let mochaTaskCallBack = () => {
+  gulp.start("mocha");
+}
+
+let defaultTasksCallBack = () => {
+  config.applications.map(defaultTasks);
 }
 
 gulp.task("images", () => {
@@ -157,12 +161,12 @@ gulp.task("mocha", () => {
 });
 
 gulp.task("watch", () => {
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, mochaTaskCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", jsTask, mochaTaskCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask, mochaTaskCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null, mochaTaskCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null, mochaTaskCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null, mochaTaskCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, mochaTaskCallBack, defaultTasksCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", jsTask, mochaTaskCallBack, defaultTasksCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask, mochaTaskCallBack, defaultTasksCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null, mochaTaskCallBack, defaultTasksCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null, mochaTaskCallBack, defaultTasksCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null, mochaTaskCallBack, defaultTasksCallBack);
 });
 
 gulp.task("connect", function() {

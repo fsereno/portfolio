@@ -14,7 +14,27 @@
   </head>
   <body>
     <div class="container-fluid">
-      <h1 class="display-1">Application master template</h1>
+      <h1 class="display-1">Find and Replace</h1>
+      <div class="row">
+        <div class="col-lg-12">
+          <p class="lead" id="textToReplace">Hello world!</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <form>
+            <div class="form-group">
+              <label for="findInput">Find this:</label>
+              <input class="form-control" id="findInput" type="text" placeholder="Find..."><small class="form-text text-muted" id="findHelp">What do you want to find ?</small>
+            </div>
+            <div class="form-group">
+              <label for="replaceInput">Replace with:</label>
+              <input class="form-control" id="replaceInput" type="text" placeholder="Replace with..."><small class="form-text text-muted" id="replaceHelp">What do you want to replace it with ?</small>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-2"><a class="link home" href="../app_home/index.html">Back Home</a></div>
       </div>
