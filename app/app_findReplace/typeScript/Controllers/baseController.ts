@@ -1,20 +1,24 @@
 // Interfaces
 import { ITextService } from "../../../typeScript/Interfaces/ITextService";
-
+import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
+import { TextService } from "../../../typeScript/Services/textService";
 // Models
 
 class BaseController  {
     
     textService: ITextService;
+    validatorService: IValidatorService;
 
     constructor
     (
 
-        textService: ITextService
+        textService: ITextService,
+        validatorService: IValidatorService
       
     ) 
     {
         this.textService = textService;
+        this.validatorService = validatorService;
     }
 
     init() {
@@ -23,30 +27,26 @@ class BaseController  {
 
         jQuery(() => {
 
-            jQuery.validator.addMethod("nonNumeric", function(value, element) {
-                return this.optional(element) || isNaN(Number(value));
-            });
-
-            jQuery("#findReplaceForm").validate({
-
-                submitHandler: (form)=>{
-
-                    let valid = jQuery(form).valid();
-                    let findThis = jQuery("#findInput").val().toString();
-                    let inThis = jQuery("#textToReplace").text();
-                    let replaceWithThis = jQuery("#replaceInput").val().toString();
-
-                    if(valid){
-
-                        let textReplaced = self.textService.FindReplace(
-                            findThis,inThis,replaceWithThis);
-
-                        jQuery("#textToReplace").text(textReplaced);
-
-                    }
-                }
-            });
+            self.validatorService.validateForm("findReplaceForm", self.replaceTextCallBack);
+        
         });
+    }
+
+    replaceTextCallBack(valid: boolean){
+
+        let textService = new TextService();
+        let findThis = jQuery("#findInput").val().toString();
+        let inThis = jQuery("#textToReplace").text();
+        let replaceWithThis = jQuery("#replaceInput").val().toString();
+
+        if(valid){
+
+            let textReplaced = textService.FindReplace(
+                findThis,inThis,replaceWithThis);
+
+            jQuery("#textToReplace").text(textReplaced);
+
+        }
     }
 }
 
