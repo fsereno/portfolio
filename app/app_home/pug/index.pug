@@ -12,11 +12,13 @@ block content
         small.text-muted Software Developer  
       h6
         | Applications
-      ul
-        each application, index in locals.config.applications
-          if application.folder !== locals.config.entry && application.folder !== locals.config.masterTemplateDir
-            li
-              a(href="../"+locals.config.prefix+application.folder+"/index.html")= application.name     
+      
+      if locals.config.applications.length > 0
+        ul
+          each application, index in locals.config.applications
+            if application.active !== false && application.include !== false
+              li
+                a(href="../"+locals.config.prefix+application.folder+"/index.html")= application.name     
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

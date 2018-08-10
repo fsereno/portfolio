@@ -10,16 +10,30 @@
         {
             "name": "Portfolio:",
             "description": "An examples repository.",
-            "folder": "home"
+            "folder": "home",
+            "active": true,
+            "include": false
         },
         {
             "name": "Application master template",
             "description": "The template application, use by >gulp create.",
-            "folder": "master"
+            "folder": "master",
+            "active": true,
+            "include": false
         },
         {
             "name": "MIT Licence",
-            "folder": "licence"
+            "description": "MIT Licence for this repository.",
+            "folder": "licence",
+            "active": true,
+            "include": false
+        },
+        {
+            "name": "Application 1",
+            "description": "This is an example application.",
+            "folder": "test1",
+            "active": true,
+            "include": true
         }
 
     ]
