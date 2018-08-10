@@ -15,10 +15,22 @@ block content
           form#findReplaceForm
             .form-group
               label(for='findInput') Find this:
-              input#findInput.form-control(name="findInput", type='text', placeholder='Find...', required)
+              input#findInput.form-control(
+                name="findInput", 
+                type='text', 
+                placeholder='Find...', 
+                required, 
+                data-rule-nonNumeric="true",
+                data-msg-nonNumeric="Only alphabatic characters allowed.")
             .form-group
               label(for='replaceInput') Replace with:
-              input#replaceInput.form-control(name="replaceInput", type='text', placeholder='Replace with...', required)
+              input#replaceInput.form-control(
+                name="replaceInput", 
+                type='text', 
+                placeholder='Replace with...', 
+                required, 
+                data-rule-nonNumeric="true",
+                data-msg-nonNumeric="Only alphabatic characters allowed.")
              
             button.btn.btn-primary(type='submit') Submit
 

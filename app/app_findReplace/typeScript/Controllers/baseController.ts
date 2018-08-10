@@ -21,23 +21,27 @@ class BaseController  {
 
         const self = this;
 
-        $(() => {
+        jQuery(() => {
 
-            $("#findReplaceForm").validate({
+            jQuery.validator.addMethod("nonNumeric", function(value, element) {
+                return this.optional(element) || isNaN(Number(value));
+            });
+
+            jQuery("#findReplaceForm").validate({
 
                 submitHandler: (form)=>{
 
-                    let valid = $(form).valid();
-                    let findThis = $("#findInput").val().toString();
-                    let inThis = $("#textToReplace").text();
-                    let replaceWithThis = $("#replaceInput").val().toString();
+                    let valid = jQuery(form).valid();
+                    let findThis = jQuery("#findInput").val().toString();
+                    let inThis = jQuery("#textToReplace").text();
+                    let replaceWithThis = jQuery("#replaceInput").val().toString();
 
                     if(valid){
 
                         let textReplaced = self.textService.FindReplace(
                             findThis,inThis,replaceWithThis);
 
-                        $("#textToReplace").text(textReplaced);
+                        jQuery("#textToReplace").text(textReplaced);
 
                     }
                 }
