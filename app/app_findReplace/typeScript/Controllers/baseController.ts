@@ -23,33 +23,27 @@ class BaseController  {
 
         $(() => {
 
-            var text = self.textService.Concat("Application ", "Master Template");
-
-            console.log(text);
-
             $("#findReplaceForm").validate({
 
                 submitHandler: (form)=>{
 
                     let valid = $(form).valid();
-                    console.log(valid);    
-                    console.log("form submitted");
+                    let findThis = $("#findInput").val().toString();
+                    let inThis = $("#textToReplace").text();
+                    let replaceWithThis = $("#replaceInput").val().toString();
 
+                    if(valid){
+
+                        let textReplaced = self.textService.FindReplace(
+                            findThis,inThis,replaceWithThis);
+
+                        $("#textToReplace").text(textReplaced);
+
+                    }
                 }
-
             });
-
-            /*$("#findReplaceForm").on("submit", (e) => {
-
-                e.preventDefault();
-                console.log("form submitted");
-
-            });*/
-
         });
-
     }
-       
 }
 
 export { BaseController };

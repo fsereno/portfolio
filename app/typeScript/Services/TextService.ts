@@ -6,9 +6,14 @@ export class TextService implements ITextService
         return a + " " + b;
     }
 
-    public Find(findThis: string, inThis: string): string{
+    public FindReplace(
+        findThis: string, 
+        inThis: string, 
+        replaceWithThis: string): string{
 
-        return "test";
+        let result = inThis.replace(findThis, replaceWithThis);
+        
+        return result;
 
     }
 }
