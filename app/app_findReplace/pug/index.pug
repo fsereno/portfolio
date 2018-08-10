@@ -12,14 +12,14 @@ block content
           p.lead#textToReplace Hello world!
       .row
         .col-lg-3
-          form
+          form#findReplaceForm
             .form-group
               label(for='findInput') Find this:
-              input#findInput.form-control(type='text', placeholder='Find...')
+              input#findInput.form-control(type='text', placeholder='Find...', required)
               small#findHelp.form-text.text-muted What do you want to find ?
             .form-group
               label(for='replaceInput') Replace with:
-              input#replaceInput.form-control(type='text', placeholder='Replace with...')
+              input#replaceInput.form-control(type='text', placeholder='Replace with...', required)
               small#replaceHelp.form-text.text-muted What do you want to replace it with ?
             button.btn.btn-primary(type='submit') Submit
 

@@ -17,9 +17,7 @@ class BaseController  {
         this.textService = textService;
     }
 
-    init(
-        
-    ) {
+    init() {
 
         const self = this;
 
@@ -28,6 +26,13 @@ class BaseController  {
             var text = self.textService.Concat("Application ", "Master Template");
 
             console.log(text);
+
+            $("#findReplaceForm").on("submit", (e) => {
+
+                e.preventDefault();
+                console.log("form submitted");
+
+            });
 
         });
 

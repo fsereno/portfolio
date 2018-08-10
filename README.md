@@ -43,11 +43,10 @@ The purpose of this repository is to demonstrate skills in various technologies,
 
 - open your prefered command line:
 
-> install npm and bower packages
+> install npm packages
 
 ```shell
 $ npm install
-$ bower install
 ```
 ---
 

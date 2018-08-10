@@ -17,9 +17,7 @@ class BaseController  {
         this.textService = textService;
     }
 
-    init(
-        
-    ) {
+    init() {
 
         const self = this;
 

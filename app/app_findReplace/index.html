@@ -6,7 +6,7 @@
     <meta name="description" content="Portfolio">
     <meta name="author" content="Fabio Sereno">
     <!-- build:css css/vendor.css-->
-    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <!-- endbuild-->
     <!-- build:css css/styles.css-->
     <link rel="stylesheet" href="css/styles.css">
@@ -22,14 +22,14 @@
       </div>
       <div class="row">
         <div class="col-lg-3">
-          <form>
+          <form id="findReplaceForm">
             <div class="form-group">
               <label for="findInput">Find this:</label>
-              <input class="form-control" id="findInput" type="text" placeholder="Find..."><small class="form-text text-muted" id="findHelp">What do you want to find ?</small>
+              <input class="form-control" id="findInput" type="text" placeholder="Find..." required><small class="form-text text-muted" id="findHelp">What do you want to find ?</small>
             </div>
             <div class="form-group">
               <label for="replaceInput">Replace with:</label>
-              <input class="form-control" id="replaceInput" type="text" placeholder="Replace with..."><small class="form-text text-muted" id="replaceHelp">What do you want to replace it with ?</small>
+              <input class="form-control" id="replaceInput" type="text" placeholder="Replace with..." required><small class="form-text text-muted" id="replaceHelp">What do you want to replace it with ?</small>
             </div>
             <button class="btn btn-primary" type="submit">Submit</button>
           </form>
@@ -40,8 +40,8 @@
       </div>
     </div>
     <!-- build:js js/vendor.js-->
-    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../../bower_components/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- endbuild-->
     <!-- build:js js/app.js-->
     <script src="js/app.js"></script>
