@@ -11,7 +11,8 @@ export class ValidatorService implements IValidatorService
 
     }
 
-    validateForm(formId: string, options: JQueryValidation.ValidationOptions): void {
-        jQuery("#"+formId).validate(options);
+    validateForm(formId: string, options: JQueryValidation.ValidationOptions): JQueryValidation.Validator {
+        let validator = jQuery("#"+formId).validate(options);
+        return validator;
     }
 }

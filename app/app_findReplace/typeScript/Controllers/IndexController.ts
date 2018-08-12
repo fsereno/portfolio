@@ -52,7 +52,7 @@ export class IndexController  {
                 }   
             }
         }
-
+        
         self.validatorService.validateForm(formId, validateFormOptions);
     }
 }

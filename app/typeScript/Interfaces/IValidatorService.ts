@@ -1,3 +1,3 @@
 export interface IValidatorService  {
-   validateForm(formId: string, options: JQueryValidation.ValidationOptions): void;
+   validateForm(formId: string, options: JQueryValidation.ValidationOptions): JQueryValidation.Validator;
 }
