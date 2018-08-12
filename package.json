@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/fsereno/portfolio#readme",
   "devDependencies": {
+    "@types/chai": "^4.1.4",
     "@types/jquery": "^3.3.4",
     "@types/jquery.validation": "^1.16.4",
     "@types/mocha": "^5.2.5",
