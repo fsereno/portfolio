@@ -9,20 +9,23 @@
 
         {
             "name": "Portfolio:",
-            "description": "An examples repository.",
+            "subHeading": "Fabio Sereno",
+            "description": "Software Developer",
             "folder": "home",
             "active": true,
             "include": false
         },
         {
             "name": "Application master template",
-            "description": "The template application, use by >gulp create.",
+            "subHeading": "",
+            "description": "The template application, use with >gulp create.",
             "folder": "master",
             "active": true,
             "include": false
         },
         {
             "name": "MIT Licence",
+            "subHeading": "",
             "description": "MIT Licence for this repository.",
             "folder": "licence",
             "active": true,
@@ -30,7 +33,8 @@
         },
         {
             "name": "Find and Replace",
-            "description": "A simple find and replace method, witten in TypeScript.",
+            "subHeading": "",
+            "description": "A simple find and replace method, written with TypeScript.",
             "folder": "findReplace",
             "active": true,
             "include": true

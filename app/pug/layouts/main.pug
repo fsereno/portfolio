@@ -10,6 +10,9 @@ html(lang="en")
   body
     .container-fluid
       h1.display-1= locals.application.name
+      h3= locals.application.subHeading
+        small.text-muted= " " + locals.application.description
+      hr
       block content
       include ../includes/_navigation.pug
     block footer
