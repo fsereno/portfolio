@@ -9,6 +9,7 @@ html(lang="en")
     block styles
   body
     .container-fluid
+      h1.display-1= locals.application.name
       block content
       include ../includes/_navigation.pug
     block footer
