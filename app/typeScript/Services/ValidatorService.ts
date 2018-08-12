@@ -1,4 +1,3 @@
-import { ITextService } from "../Interfaces/ITextService";
 import { IValidatorService } from "../Interfaces/IValidatorService";
 
 export class ValidatorService implements IValidatorService
@@ -12,18 +11,7 @@ export class ValidatorService implements IValidatorService
 
     }
 
-    validateForm(formId: string, callBack: (valid: boolean) => void): void {
-
-        jQuery("#"+formId).validate({
-
-            submitHandler: (form)=>{
-
-                let valid = jQuery(form).valid();
-
-                if (typeof callBack === 'function'){
-                    callBack(valid);
-                }
-            }
-        });
+    validateForm(formId: string, options: JQueryValidation.ValidationOptions): void {
+        jQuery("#"+formId).validate(options);
     }
 }

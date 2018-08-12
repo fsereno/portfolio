@@ -27,26 +27,35 @@ class BaseController  {
 
         jQuery(() => {
 
-            self.validatorService.validateForm("findReplaceForm", self.replaceTextCallBack);
+            self.validateForm("findReplaceForm");
         
         });
     }
 
-    replaceTextCallBack(valid: boolean){
+    validateForm(formId: string){
 
-        let textService = new TextService();
-        let findThis = jQuery("#findInput").val().toString();
-        let inThis = jQuery("#textToReplace").text();
-        let replaceWithThis = jQuery("#replaceInput").val().toString();
+        const self = this;
+        let validateFormOptions = {
+            
+            submitHandler: (form: HTMLElement)=>{
 
-        if(valid){
+                let valid = jQuery(form).valid();
+                let findThis = jQuery("#findInput").val().toString();
+                let inThis = jQuery("#textToReplace").text();
+                let replaceWithThis = jQuery("#replaceInput").val().toString();
 
-            let textReplaced = textService.FindReplace(
-                findThis,inThis,replaceWithThis);
+                if(valid){
 
-            jQuery("#textToReplace").text(textReplaced);
+                    let textReplaced = self.textService.FindReplace(
+                        findThis,inThis,replaceWithThis);
 
+                    jQuery("#textToReplace").text(textReplaced);
+
+                }   
+            }
         }
+
+        self.validatorService.validateForm(formId, validateFormOptions);
     }
 }
 

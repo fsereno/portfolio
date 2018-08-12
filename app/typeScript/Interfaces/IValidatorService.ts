@@ -1,5 +1,3 @@
 export interface IValidatorService  {
-    
-    validateForm(formId: string, callBack: (valid: boolean) => void): void;
-    
+   validateForm(formId: string, options: JQueryValidation.ValidationOptions): void;
 }
