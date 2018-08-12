@@ -1,6 +1,6 @@
 
 // Controllers
-import { BaseController } from "./Controllers/baseController";
+import { IndexController } from "./Controllers/IndexController";
 
 // Services
 import { TextService } from "../../typeScript/Services/textService";
@@ -9,9 +9,9 @@ import { TextService } from "../../typeScript/Services/textService";
 let textService = new TextService();
 
 // Controllers
-let baseController = new BaseController
+let indexController = new IndexController
 (
     textService
 );
 
-baseController.init();
+indexController.init();

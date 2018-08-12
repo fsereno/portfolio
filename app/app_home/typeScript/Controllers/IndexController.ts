@@ -3,7 +3,7 @@ import { ITextService } from "../../../typeScript/Interfaces/ITextService";
 
 // Models
 
-class BaseController  {
+class IndexController  {
     
     textService: ITextService;
 
@@ -17,15 +17,13 @@ class BaseController  {
         this.textService = textService;
     }
 
-    init(
-        
-    ) {
+    init() {
 
         const self = this;
 
         $(() => {
 
-            var text = self.textService.Concat("Application ", "Master Template");
+            var text = self.textService.Concat("Application ", "1");
 
             console.log(text);
 
@@ -35,4 +33,4 @@ class BaseController  {
        
 }
 
-export { BaseController };
+export { IndexController };

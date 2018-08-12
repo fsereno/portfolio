@@ -1,10 +1,8 @@
 // Interfaces
 import { ITextService } from "../../../typeScript/Interfaces/ITextService";
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
-import { TextService } from "../../../typeScript/Services/textService";
-// Models
 
-class BaseController  {
+class IndexController  {
     
     textService: ITextService;
     validatorService: IValidatorService;
@@ -59,4 +57,4 @@ class BaseController  {
     }
 }
 
-export { BaseController };
+export { IndexController };

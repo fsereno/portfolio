@@ -3,7 +3,7 @@ import { ITextService } from "../../../typeScript/Interfaces/ITextService";
 
 // Models
 
-class BaseController  {
+class IndexController  {
     
     textService: ITextService;
 
@@ -33,4 +33,4 @@ class BaseController  {
        
 }
 
-export { BaseController };
+export { IndexController };
