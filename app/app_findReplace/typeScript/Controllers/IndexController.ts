@@ -2,7 +2,7 @@
 import { ITextService } from "../../../typeScript/Interfaces/ITextService";
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 
-class IndexController  {
+export class IndexController  {
     
     textService: ITextService;
     validatorService: IValidatorService;
@@ -56,5 +56,3 @@ class IndexController  {
         self.validatorService.validateForm(formId, validateFormOptions);
     }
 }
-
-export { IndexController };
