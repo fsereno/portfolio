@@ -8,7 +8,7 @@ block styles
 block content
       .row
         .col-lg-12
-          p.lead#textToReplace Find world in this sentence and replace world with something else.
+          h4#textToReplace Find a word in this sentence and replace it with something else.
       .row
         .col-lg-3
           form#findReplaceForm
@@ -17,7 +17,7 @@ block content
               input#findInput.form-control(
                 name="findInput", 
                 type='text', 
-                placeholder='Find...', 
+                placeholder='Find this...', 
                 required, 
                 data-rule-nonNumeric="true",
                 data-msg-nonNumeric="Only alphabatic characters allowed.")

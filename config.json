@@ -34,7 +34,7 @@
         {
             "name": "Find and Replace",
             "subHeading": "",
-            "description": "A simple find and replace method, written with TypeScript.",
+            "description": "A simple find and replace method, written with TypeScript, Sass and Pug.",
             "folder": "findReplace",
             "active": true,
             "include": true
