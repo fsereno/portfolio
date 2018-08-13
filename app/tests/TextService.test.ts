@@ -11,11 +11,11 @@ describe("TextService", () => {
         });
     });
     describe("FindReplace", () => {
-        it("Should return Hello Tom! when findThis = world, inThis = Hello World and replaceWithThis = Tom", () => {
+        it("Should return Hello Tom when findThis = world, inThis = Hello World and replaceWithThis = Tom", () => {
             let textService = new TextService();
-            let result = textService.FindReplace("World", "Hello World!", "Tom");
+            let result = textService.FindReplace("World", "Hello World.", "Tom");
 
-            expect(result).to.equal("Hello Tom!");
+            expect(result).to.equal("Hello Tom");
         });
     })
 });

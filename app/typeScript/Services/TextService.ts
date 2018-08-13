@@ -11,9 +11,26 @@ export class TextService implements ITextService
         inThis: string, 
         replaceWithThis: string): string{
 
-        let result = inThis.replace(findThis, replaceWithThis);
+            let regex = new RegExp(findThis),
+                inThisArray = inThis.split(" "),
+                newWordArray: string[] = [];
+
+            inThisArray.forEach(word => {
+                
+                if(regex.test(word)){
+
+                    newWordArray.push(replaceWithThis)
+
+                } else {
+
+                    newWordArray.push(word);
+
+                }
+
+            });
+
+            let result = newWordArray.join(" ");
         
         return result;
-
     }
 }
