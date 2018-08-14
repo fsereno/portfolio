@@ -37,17 +37,17 @@ export class IndexController  {
             
             submitHandler: (form: HTMLElement)=>{
 
-                let valid = jQuery(form).valid();
-                let findThis = jQuery("#findInput").val().toString();
-                let inThis = jQuery("#textToReplace").text();
-                let replaceWithThis = jQuery("#replaceInput").val().toString();
+                let valid = jQuery(form).valid(),
+                    findThis = jQuery("#findInput").val().toString(),
+                    inThis = jQuery("#result").text(),
+                    replaceWithThis = jQuery("#replaceInput").val().toString();
 
                 if(valid){
 
                     let textReplaced = self.textService.FindReplace(
                         findThis,inThis,replaceWithThis);
 
-                    jQuery("#textToReplace").text(textReplaced);
+                    jQuery("#result").text(textReplaced);
 
                 }   
             }

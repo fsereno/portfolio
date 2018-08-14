@@ -6,7 +6,29 @@ block styles
   // endbuild
 
 block content
-  p Content here...
+      .row
+        .col-lg-12
+          h3 Result: 
+            span#result 0
+      .row
+        .col-lg-3
+          form#percentageCalculatorForm
+            .form-group
+              label(for='percentageInput') What is the following percentage:
+              input#percentageInput.form-control(
+                name="percentageInput", 
+                type='number', 
+                placeholder='10', 
+                required)
+            .form-group
+              label(for='percentageOfInput') Of this number:
+              input#percentageOfInput.form-control(
+                name="percentageOfInput", 
+                type='number', 
+                placeholder='100', 
+                required)
+             
+            button.btn.btn-primary(type='submit') Submit
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

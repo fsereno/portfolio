@@ -5,5 +5,8 @@
 .error {
   color: red; }
 
+span#result {
+  font-weight: 100; }
+
 body h1 {
   color: #000000; }

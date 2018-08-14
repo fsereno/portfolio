@@ -1,34 +1,59 @@
 // Interfaces
-import { ITextService } from "../../../typeScript/Interfaces/ITextService";
-
-// Models
+import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
+import { ICalculatorService } from "../../../typeScript/Interfaces/ICalculatorService";
 
 export class IndexController  {
     
-    textService: ITextService;
+    validatorService: IValidatorService;
+    calculatorService: ICalculatorService
 
     constructor
     (
 
-        textService: ITextService
+        validatorService: IValidatorService,
+        calculatorService: ICalculatorService
       
     ) 
     {
-        this.textService = textService;
+        this.validatorService = validatorService;
+        this.calculatorService = calculatorService;
     }
 
     init() {
 
         const self = this;
 
-        $(() => {
+        jQuery(() => {
 
-            var text = self.textService.Concat("Application ", "Master Template");
-
-            console.log(text);
+            self.validateForm("percentageCalculatorForm");
 
         });
 
+    }
+
+    validateForm(formId: string){
+
+        const self = this;
+        let validateFormOptions = {
+            
+            submitHandler: (form: HTMLElement)=>{
+
+                let valid = jQuery(form).valid(),
+                    percentage = Number(jQuery("#percentageInput").val()),
+                    ofThisNumber = Number(jQuery("#percentageOfInput").val());
+
+                if(valid){
+
+                    let result = self.calculatorService.PercentageOf(percentage, ofThisNumber);
+
+                    jQuery("#result").text(result.toString());
+
+                }   
+            }
+        }
+
+        self.validatorService.ValidateForm(formId, validateFormOptions);
+        
     }
        
 }
