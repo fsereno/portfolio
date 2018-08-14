@@ -12,6 +12,9 @@ html(lang="en")
       h1.display-1= locals.application.name
       h3= locals.application.subHeading
         small.text-muted= " " + locals.application.description
+      if (locals.application.repoUrl !== undefined)
+        p Repository url:
+          a(href=locals.config.repoRootUrl+locals.application.repoUrl, target="_blank")= " " + locals.config.repoRootUrl+locals.application.repoUrl
       hr
       block content
       include ../includes/_navigation.pug

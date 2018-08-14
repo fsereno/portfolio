@@ -4,6 +4,7 @@
     "masterTemplateDir": "master",
     "developmentDir": "app",
     "publishDir": "dist",
+    "repoRootUrl": "https://github.com/fsereno/",
     
     "applications": [
 
@@ -13,7 +14,8 @@
             "description": "Software Developer",
             "folder": "home",
             "active": true,
-            "include": false
+            "include": false,
+            "repoUrl": "portfolio/"
         },
         {
             "name": "Application master template",
@@ -34,10 +36,11 @@
         {
             "name": "Find and Replace",
             "subHeading": "",
-            "description": "A simple find and replace method, written with TypeScript, Sass and Pug.",
+            "description": "A simple find and replace method, written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all of them.",
             "folder": "findReplace",
             "active": true,
-            "include": true
+            "include": true,
+            "repoUrl": "portfolio/tree/dev/app/app_findReplace"
         }
 
     ]

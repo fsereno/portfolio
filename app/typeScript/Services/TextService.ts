@@ -11,26 +11,16 @@ export class TextService implements ITextService
         inThis: string, 
         replaceWithThis: string): string{
 
-            let regex = new RegExp(findThis),
+            let regex = new RegExp(findThis, "g"),
                 inThisArray = inThis.split(" "),
-                newWordArray: string[] = [];
+                newWordArray: string[] = [],
+                count = (inThis.match(regex) || []).length,
+                result = inThis.replace(findThis, replaceWithThis)
 
-            inThisArray.forEach(word => {
-                
-                if(regex.test(word)){
-
-                    newWordArray.push(replaceWithThis)
-
-                } else {
-
-                    newWordArray.push(word);
-
-                }
-
-            });
-
-            let result = newWordArray.join(" ");
-        
+            for (let index = 0; index < count; index++) {
+                result = result.replace(findThis, replaceWithThis)
+            }
+       
         return result;
     }
 }
