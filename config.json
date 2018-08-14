@@ -4,7 +4,7 @@
     "masterTemplateDir": "master",
     "developmentDir": "app",
     "publishDir": "dist",
-    "repoRootUrl": "https://github.com/fsereno/",
+    "repoRootUrl": "https://github.com/fsereno/portfolio",
     
     "applications": [
 
@@ -15,7 +15,7 @@
             "folder": "home",
             "active": true,
             "include": false,
-            "repoUrl": "portfolio/"
+            "repoUrl": "/"
         },
         {
             "name": "Application master template",
@@ -31,7 +31,8 @@
             "description": "MIT Licence for this repository.",
             "folder": "licence",
             "active": true,
-            "include": false
+            "include": false,
+            "repoUrl": "/tree/dev/app/app_licence"
         },
         {
             "name": "Find and Replace",
@@ -40,7 +41,7 @@
             "folder": "findReplace",
             "active": true,
             "include": true,
-            "repoUrl": "portfolio/tree/dev/app/app_findReplace"
+            "repoUrl": "/tree/dev/app/app_findReplace"
         }
 
     ]
