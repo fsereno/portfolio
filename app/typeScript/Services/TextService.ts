@@ -12,13 +12,11 @@ export class TextService implements ITextService
         replaceWithThis: string): string{
 
             let regex = new RegExp(findThis, "g"),
-                inThisArray = inThis.split(" "),
-                newWordArray: string[] = [],
                 count = (inThis.match(regex) || []).length,
-                result = inThis.replace(findThis, replaceWithThis)
+                result = inThis.replace(findThis, replaceWithThis);
 
             for (let index = 0; index < count; index++) {
-                result = result.replace(findThis, replaceWithThis)
+                result = result.replace(findThis, replaceWithThis);
             }
        
         return result;
