@@ -42,6 +42,15 @@
             "active": true,
             "include": true,
             "repoUrl": "/tree/dev/app/app_findReplace"
+        },
+        {
+            "name": "Percentage Calculator",
+            "subHeading": "",
+            "description": "A simple percentage calculator method, written with TypeScript, Sass and Pug.",
+            "folder": "percentageCalculator",
+            "active": true,
+            "include": true,
+            "repoUrl": "/tree/dev/app/app_percentageCalculator"
         }
 
     ]
