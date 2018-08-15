@@ -4,6 +4,7 @@
     "masterTemplateDir": "master",
     "developmentDir": "app",
     "publishDir": "dist",
+    "folderRoot": "/tree/dev/app/",
     "repoRootUrl": "https://github.com/fsereno/portfolio",
     
     "applications": [
@@ -15,7 +16,7 @@
             "folder": "home",
             "active": true,
             "include": false,
-            "repoUrl": "/"
+            "folderRoot": "/"
         },
         {
             "name": "Application master template",
@@ -23,7 +24,7 @@
             "description": "The template application, use with >gulp create.",
             "folder": "master",
             "active": true,
-            "include": false
+            "include": false            
         },
         {
             "name": "MIT Licence",
@@ -31,8 +32,7 @@
             "description": "MIT Licence for this repository.",
             "folder": "licence",
             "active": true,
-            "include": false,
-            "repoUrl": "/tree/dev/app/app_licence"
+            "include": false
         },
         {
             "name": "Find and Replace",
@@ -40,8 +40,7 @@
             "description": "A simple find and replace method, written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all of them.",
             "folder": "findReplace",
             "active": true,
-            "include": true,
-            "repoUrl": "/tree/dev/app/app_findReplace"
+            "include": true
         },
         {
             "name": "Percentage Calculator",
@@ -49,8 +48,7 @@
             "description": "A simple percentage calculator method, written with TypeScript, Sass and Pug.",
             "folder": "percentageCalculator",
             "active": true,
-            "include": true,
-            "repoUrl": "/tree/dev/app/app_percentageCalculator"
+            "include": true
         }
 
     ]

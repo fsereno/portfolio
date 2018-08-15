@@ -12,9 +12,11 @@ html(lang="en")
       h1.display-1= locals.application.name
       h3= locals.application.subHeading
         small.text-muted= " " + locals.application.description
-      if (locals.application.repoUrl !== undefined)
-        p Repository url:
-          a(href=locals.config.repoRootUrl+locals.application.repoUrl, target="_blank")= " " + locals.config.repoRootUrl+locals.application.repoUrl
+      p Repository url:
+        if (locals.application.folderRoot !== undefined)
+          a(href=locals.config.repoRootUrl+locals.application.folderRoot, target="_blank")= " " + locals.config.repoRootUrl+locals.application.folderRoot
+        else 
+          a(href=locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder, target="_blank")= " " + locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder
       hr
       block content
       include ../includes/_navigation.pug
