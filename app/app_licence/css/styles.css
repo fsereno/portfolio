@@ -6,7 +6,10 @@
   color: red; }
 
 span#result {
-  font-weight: 100; }
+  font-weight: 100;
+  border: 1px solid #ced4da;
+  padding: .375rem .75rem;
+  border-radius: .25rem; }
 
 body h1 {
   color: red; }
