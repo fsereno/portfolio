@@ -1,20 +1,22 @@
 // Interfaces
 import { ITextService } from "../../../typeScript/Interfaces/ITextService";
-
-// Models
+import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 
 export class IndexController  {
     
     textService: ITextService;
+    validatorService: IValidatorService;
 
     constructor
     (
 
-        textService: ITextService
+        textService: ITextService,
+        validatorService: IValidatorService
       
     ) 
     {
         this.textService = textService;
+        this.validatorService = validatorService;
     }
 
     init() {
@@ -23,19 +25,33 @@ export class IndexController  {
 
         jQuery(() => {
 
-            var text = self.textService.Concat("Application ", "Master Template");
-
-            console.log(text);
-
-        });
+            self.validateForm("unscrabblerForm");
         
-
+        });
     }
 
     validateForm(formId: string){
 
-        //Example method
-        
+        const self = this;
+        let validateFormOptions = {
+            
+            submitHandler: (form: HTMLElement)=>{
+
+                let valid = jQuery(form).valid(),
+                    findThis = jQuery("#findInput").val().toString(),
+                    inThis = jQuery("#result").text();
+
+                if(valid){
+
+                    let unscrabbled = self.textService.Unscrabble(
+                        findThis,inThis);
+
+                    console.log(unscrabbled)
+
+                }   
+            }
+        }
+
+        self.validatorService.ValidateForm(formId, validateFormOptions);
     }
-       
 }

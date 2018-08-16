@@ -20,4 +20,14 @@ export class TextService implements ITextService
        
         return inThis;
     }
+
+    public Unscrabble(
+        findThis: string, 
+        inThis: string) : boolean {
+
+        let result = true;
+
+        return result;
+
+    }
 }

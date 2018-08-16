@@ -6,7 +6,22 @@ block styles
   // endbuild
 
 block content
-  p Content here...
+      .row.splitter
+        .col-lg-12
+          h3 Find words in this: 
+            span#result Pseleedbnopos
+      .row
+        .col-lg-3
+          form#unscrabblerForm
+            .form-group
+              label(for='findInput') Enter a word to see if it can be found:
+              input#findInput.form-control(
+                name="findInput", 
+                type='text', 
+                placeholder='Sleep...', 
+                required)
+             
+            button.btn.btn-primary(type='submit') Submit
 block scripts
   // build:js js/app.js
   script(src="js/app.js")
