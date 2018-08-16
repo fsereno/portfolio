@@ -45,7 +45,7 @@ export class IndexController  {
 
                     let unscrabbled = self.textService.Unscrabble(
                         findThis,inThis);
-
+                    
                     console.log(unscrabbled)
 
                 }   
