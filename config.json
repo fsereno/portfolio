@@ -49,6 +49,14 @@
             "folder": "percentageCalculator",
             "active": true,
             "include": true
+        },
+        {
+            "name": "Unscrabbler",
+            "subHeading": "",
+            "description": "A word finding, unscrabble tool. Written with TypeScript, Sass and Pug.",
+            "folder": "unscrabbler",
+            "active": true,
+            "include": true
         }
 
     ]
