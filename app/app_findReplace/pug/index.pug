@@ -14,25 +14,25 @@ block content
         .col-lg-3
           form#findReplaceForm
             .form-group
-              label(for='findInput') Find this:
+              label(for="findInput") Find this:
               input#findInput.form-control(
                 name="findInput", 
-                type='text', 
-                placeholder='Find this...', 
+                type="text", 
+                placeholder="Find this...", 
                 required, 
                 data-rule-nonNumeric="true",
                 data-msg-nonNumeric="Only alphabatic characters allowed.")
             .form-group
-              label(for='replaceInput') Replace with:
+              label(for="replaceInput") Replace with:
               input#replaceInput.form-control(
                 name="replaceInput", 
-                type='text', 
-                placeholder='Replace with...', 
+                type="text", 
+                placeholder="Replace with...", 
                 required, 
                 data-rule-nonNumeric="true",
                 data-msg-nonNumeric="Only alphabatic characters allowed.")
              
-            button.btn.btn-primary(type='submit') Submit
+            button.btn.btn-primary(type="submit") Submit
 
 block scripts
   // build:js js/app.js

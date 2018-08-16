@@ -14,21 +14,21 @@ block content
         .col-lg-3
           form#percentageCalculatorForm
             .form-group
-              label(for='percentageInput') What is the following percentage:
+              label(for="percentageInput") What is the following percentage:
               input#percentageInput.form-control(
                 name="percentageInput", 
-                type='number', 
-                placeholder='10', 
+                type="number", 
+                placeholder="10", 
                 required)
             .form-group
-              label(for='percentageOfInput') Of this number:
+              label(for="percentageOfInput") Of this number:
               input#percentageOfInput.form-control(
                 name="percentageOfInput", 
-                type='number', 
-                placeholder='100', 
+                type="number", 
+                placeholder="100", 
                 required)
              
-            button.btn.btn-primary(type='submit') Submit
+            button.btn.btn-primary(type="submit") Submit
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

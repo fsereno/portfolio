@@ -18,4 +18,12 @@ describe("TextService", () => {
             expect(result).to.equal("Hello Tom, replaced with Tom.");
         });
     });
+    describe("Unscrabble", () => {
+        it("Should return true when findThis = Sleep, inThis = Pseleedbnopos", () => {
+            let textService = new TextService(),
+                result = textService.Unscrabble("Sleep", "Pseleedbnopos");
+
+            expect(result).to.equal(true);
+        });
+    });
 });

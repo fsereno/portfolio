@@ -8,20 +8,28 @@ block styles
 block content
       .row.splitter
         .col-lg-12
-          h3 Find words in this: 
-            span#result Pseleedbnopos
+          h3 Result:  
+            span#result 
       .row
         .col-lg-3
           form#unscrabblerForm
             .form-group
-              label(for='findInput') Enter a word to see if it can be found:
+              label(for="scrabbleInput") Find words in this:
+              input#scrabbleInput.form-control(
+                name="scrabbleInput", 
+                type="text", 
+                placeholder="Scrabble...",
+                value="Pseleedbnopos"
+                readonly)
+            .form-group
+              label(for="findInput") Enter a word to see if it can be found:
               input#findInput.form-control(
                 name="findInput", 
-                type='text', 
-                placeholder='Sleep...', 
+                type="text", 
+                placeholder="Sleep...", 
                 required)
              
-            button.btn.btn-primary(type='submit') Submit
+            button.btn.btn-primary(type="submit") Submit
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

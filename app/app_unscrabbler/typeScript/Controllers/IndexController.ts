@@ -39,14 +39,14 @@ export class IndexController  {
 
                 let valid = jQuery(form).valid(),
                     findThis = jQuery("#findInput").val().toString(),
-                    inThis = jQuery("#result").text();
+                    inThis = jQuery("#scrabbleInput").val().toString();
 
                 if(valid){
 
-                    let unscrabbled = self.textService.Unscrabble(
+                    let result = self.textService.Unscrabble(
                         findThis,inThis);
                     
-                    console.log(unscrabbled)
+                    jQuery("#result").text(result.toString());
 
                 }   
             }
