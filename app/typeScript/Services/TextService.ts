@@ -59,4 +59,12 @@ export class TextService implements ITextService
         return result;
 
     }
+
+    Generate(length:number) : string {
+
+        let result = "Random String of " + length;
+
+        return result;
+
+    }
 }

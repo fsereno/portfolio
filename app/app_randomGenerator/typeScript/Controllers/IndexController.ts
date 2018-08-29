@@ -1,20 +1,22 @@
 // Interfaces
 import { ITextService } from "../../../typeScript/Interfaces/ITextService";
-
-// Models
+import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 
 export class IndexController  {
     
     textService: ITextService;
+    validatorService: IValidatorService;
 
     constructor
     (
 
-        textService: ITextService
+        textService: ITextService,
+        validatorService: IValidatorService
       
     ) 
     {
         this.textService = textService;
+        this.validatorService = validatorService;
     }
 
     init() {
@@ -23,19 +25,30 @@ export class IndexController  {
 
         jQuery(() => {
 
-            var text = self.textService.Concat("Application ", "Master Template");
-
-            console.log(text);
-
-        });
+            self.validateForm("randomGeneratorForm");
         
-
+        });
     }
 
     validateForm(formId: string){
 
-        //Example method
-        
+        const self = this;
+        let validateFormOptions = {
+            
+            submitHandler: (form: HTMLElement)=>{
+
+                let valid = jQuery(form).valid(),
+                    length = jQuery("#lengthInput").val();
+                
+                if(valid){
+
+                    let result = self.textService.Generate(Number(length));
+                    jQuery("#result").text(result);
+
+                }   
+            }
+        }
+
+        self.validatorService.ValidateForm(formId, validateFormOptions);
     }
-       
 }
