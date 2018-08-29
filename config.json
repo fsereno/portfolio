@@ -57,6 +57,14 @@
             "folder": "unscrabbler",
             "active": true,
             "include": true
+        },
+        {
+            "name": "Random Generator",
+            "subHeading": "",
+            "description": "A simple random generator. Generating a random string of A-B, 0-9 and a given length. Written with TypeScript, Sass and Pug.",
+            "folder": "randomGenerator",
+            "active": true,
+            "include": true
         }
 
     ]
