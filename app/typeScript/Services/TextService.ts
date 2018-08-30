@@ -62,7 +62,7 @@ export class TextService implements ITextService
 
     GetAlphaString() : string {
 
-        // Get from repository
+        // This would come from a repository
         var string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         return string;
 
@@ -70,7 +70,7 @@ export class TextService implements ITextService
 
     GetNumericString() : string {
 
-        // Get from repository
+        // This would come from a repository
         var string = "0123456789";
         return string;
 
