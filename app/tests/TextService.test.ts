@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import { TextService } from "../typeScript/Services/TextService";
+import { stringLiteral } from "babel-types";
 
 describe("TextService", () => {
     describe("Concat", () => {
@@ -24,6 +25,39 @@ describe("TextService", () => {
                 result = textService.Unscrabble("Sleep", "Pseleedbnopos");
 
             expect(result).to.equal(true);
+        });
+    });
+    describe("GetAlphaString", () => {
+        it("Should return a string", () => {
+            let textService = new TextService(),
+                result = textService.GetAlphaString();
+
+            expect(result).is.not.null;
+            expect(result).is.string;
+            expect(result).to.equal("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        });
+    });
+    describe("GetNumericString", () => {
+        it("Should return a string", () => {
+            let textService = new TextService(),
+                result = textService.GetNumericString();
+
+            expect(result).is.not.null;
+            expect(result).is.string;
+            expect(result).to.equal("0123456789");
+        });
+    });
+    describe("GenerateRandom", () => {
+        it("Should return a random string of length 10, if criteria = string[] and length = 10", () => {
+            let textService = new TextService(),
+                alpha = textService.GetAlphaString(),
+                numeric = textService.GetNumericString(),
+                criteria = [alpha, numeric],
+                result = textService.GenerateRandom(criteria, 10);
+
+            expect(result).is.not.null;
+            expect(result).is.string;
+            expect(result.length).to.equal(10);
         });
     });
 });

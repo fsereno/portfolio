@@ -88,12 +88,12 @@ export class TextService implements ITextService
     
                 array.forEach((char, i) => {
     
-                    let indexToPush = Math.floor(Math.random() * array.length) + 1;
+                    let indexToPush = Math.floor(Math.random() * array.length);
     
-                    if(i===indexToPush){
+                    if(i===indexToPush && output.length < length){
                         output.push(char);
                     }
-                    
+
                 });
             });
         }
