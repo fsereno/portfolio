@@ -60,9 +60,45 @@ export class TextService implements ITextService
 
     }
 
-    Generate(length:number) : string {
+    GetAlphaString() : string {
 
-        let result = "Random String of " + length;
+        // Get from repository
+        var string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        return string;
+
+    };
+
+    GetNumericString() : string {
+
+        // Get from repository
+        var string = "0123456789";
+        return string;
+
+    };
+
+    GenerateRandom(criteria: string[], length:number) : string {
+
+        let output: string[] = []
+
+        while(output.length < length) {
+
+            criteria.forEach(criterion => {
+            
+                let array = this.stringToArray(criterion);
+    
+                array.forEach((char, i) => {
+    
+                    let indexToPush = Math.floor(Math.random() * array.length) + 1;
+    
+                    if(i===indexToPush){
+                        output.push(char);
+                    }
+                    
+                });
+            });
+        }
+
+        let result = output.join("");
 
         return result;
 

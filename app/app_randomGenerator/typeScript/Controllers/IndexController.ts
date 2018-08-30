@@ -41,8 +41,12 @@ export class IndexController  {
                     length = jQuery("#lengthInput").val();
                 
                 if(valid){
+                    
+                    let alpha = self.textService.GetAlphaString(),
+                        numeric = self.textService.GetNumericString(),
+                        criteria = [alpha, numeric];
 
-                    let result = self.textService.Generate(Number(length));
+                    let result = self.textService.GenerateRandom(criteria, Number(length));
                     jQuery("#result").text(result);
 
                 }   
