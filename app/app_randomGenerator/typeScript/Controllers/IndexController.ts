@@ -42,8 +42,8 @@ export class IndexController  {
                 
                 if(valid){
                     
-                    let alpha = self.textService.GetAlphaString(),
-                        numeric = self.textService.GetNumericString(),
+                    let alpha = self.textService.AlphaString,
+                        numeric = self.textService.NumericString,
                         criteria = [alpha, numeric];
 
                     let result = self.textService.GenerateRandom(criteria, Number(length));

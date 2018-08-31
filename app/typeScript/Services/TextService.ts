@@ -2,6 +2,16 @@ import { ITextService } from "../Interfaces/ITextService";
 
 export class TextService implements ITextService
 {
+    public AlphaString: string;
+    public NumericString: string;
+
+    constructor(){
+
+        this.AlphaString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        this.NumericString = "0123456789";
+
+    }
+    
     public Concat(a :string,b:string): string {
         return a + " " + b;
     }
@@ -59,22 +69,6 @@ export class TextService implements ITextService
         return result;
 
     }
-
-    GetAlphaString() : string {
-
-        // This would come from a repository
-        var string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        return string;
-
-    };
-
-    GetNumericString() : string {
-
-        // This would come from a repository
-        var string = "0123456789";
-        return string;
-
-    };
 
     GenerateRandom(criteria: string[], length:number) : string {
 

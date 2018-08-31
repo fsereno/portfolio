@@ -27,31 +27,11 @@ describe("TextService", () => {
             expect(result).to.equal(true);
         });
     });
-    describe("GetAlphaString", () => {
-        it("Should return a string", () => {
-            let textService = new TextService(),
-                result = textService.GetAlphaString();
-
-            expect(result).is.not.null;
-            expect(result).is.string;
-            expect(result).to.equal("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-        });
-    });
-    describe("GetNumericString", () => {
-        it("Should return a string", () => {
-            let textService = new TextService(),
-                result = textService.GetNumericString();
-
-            expect(result).is.not.null;
-            expect(result).is.string;
-            expect(result).to.equal("0123456789");
-        });
-    });
     describe("GenerateRandom", () => {
         it("Should return a random string of length 10, if criteria = string[] and length = 10", () => {
             let textService = new TextService(),
-                alpha = textService.GetAlphaString(),
-                numeric = textService.GetNumericString(),
+                alpha = textService.AlphaString,
+                numeric = textService.NumericString,
                 criteria = [alpha, numeric],
                 result = textService.GenerateRandom(criteria, 10);
 
