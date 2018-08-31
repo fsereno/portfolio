@@ -1,5 +1,5 @@
 // Interfaces
-import { IStringService } from "../../../typeScript/Interfaces/ITextService";
+import { IStringService } from "../../../typeScript/Interfaces/IStringService";
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 
 export class IndexController  {

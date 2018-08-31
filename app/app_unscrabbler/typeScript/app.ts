@@ -3,7 +3,7 @@
 import { IndexController } from "./Controllers/IndexController";
 
 // Services
-import { TextService } from "../../typeScript/Services/textService";
+import { TextService } from "../../typeScript/Services/StringService";
 import { ValidatorService } from "../../typeScript/Services/validatorService";
 
 // Instantiate Services with dependency injection

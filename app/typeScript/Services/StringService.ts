@@ -1,4 +1,4 @@
-import { IStringService } from "../Interfaces/ITextService";
+import { IStringService } from "../Interfaces/IStringService";
 
 export class TextService implements IStringService
 {

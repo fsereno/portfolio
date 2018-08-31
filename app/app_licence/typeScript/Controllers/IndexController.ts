@@ -1,5 +1,5 @@
 // Interfaces
-import { IStringService } from "../../../typeScript/Interfaces/ITextService";
+import { IStringService } from "../../../typeScript/Interfaces/IStringService";
 
 // Models
 

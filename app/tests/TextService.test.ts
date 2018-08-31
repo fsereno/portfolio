@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { TextService } from "../typeScript/Services/TextService";
+import { TextService } from "../typeScript/Services/StringService";
 import { stringLiteral } from "babel-types";
 
 describe("TextService", () => {
