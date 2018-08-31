@@ -21,7 +21,7 @@ export class TextService implements ITextService
         return inThis;
     }
 
-    public stringToArray(input: string) : string[] {
+    public ToArray(input: string) : string[] {
         
         let result = [];
         
@@ -38,8 +38,8 @@ export class TextService implements ITextService
 
         let findThisNormalised = findThis.toLowerCase(),
             inThisNormalised = inThis.toLowerCase(),
-            scrabbleArray = this.stringToArray(inThisNormalised),
-            inputArray = this.stringToArray(findThisNormalised),
+            scrabbleArray = this.ToArray(inThisNormalised),
+            inputArray = this.ToArray(findThisNormalised),
             resultsArray = [];
 
         for (var i = 0; i < inputArray.length; i++) {
@@ -84,7 +84,7 @@ export class TextService implements ITextService
 
             criteria.forEach(criterion => {
             
-                let array = this.stringToArray(criterion);
+                let array = this.ToArray(criterion);
     
                 array.forEach((char, i) => {
     
