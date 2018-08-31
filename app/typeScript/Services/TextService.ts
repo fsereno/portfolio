@@ -1,6 +1,6 @@
-import { ITextService } from "../Interfaces/ITextService";
+import { IStringService } from "../Interfaces/ITextService";
 
-export class TextService implements ITextService
+export class TextService implements IStringService
 {
     public AlphaString: string;
     public NumericString: string;

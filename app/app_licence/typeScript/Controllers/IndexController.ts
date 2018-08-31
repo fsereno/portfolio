@@ -1,16 +1,16 @@
 // Interfaces
-import { ITextService } from "../../../typeScript/Interfaces/ITextService";
+import { IStringService } from "../../../typeScript/Interfaces/ITextService";
 
 // Models
 
 export class IndexController  {
     
-    textService: ITextService;
+    textService: IStringService;
 
     constructor
     (
 
-        textService: ITextService
+        textService: IStringService
       
     ) 
     {

@@ -1,5 +1,5 @@
 
-export interface ITextService  {
+export interface IStringService  {
 
     AlphaString: string;
     NumericString: string;
