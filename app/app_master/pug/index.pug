@@ -6,7 +6,23 @@ block styles
   // endbuild
 
 block content
-  p Content here...
+      .row.splitter
+        .col-lg-12
+          h3 Result: 
+            span#result
+      .row
+        .col-lg-3
+          form#inputForm
+            .form-group
+              label(for="input") Input:
+              input#input.form-control(
+                name="input", 
+                type="text", 
+                placeholder="Input...", 
+                required)
+             
+            button.btn.btn-primary(type="submit") Submit
+
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

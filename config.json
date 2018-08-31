@@ -21,7 +21,7 @@
         {
             "name": "Application master template",
             "subHeading": "",
-            "description": "The template application, use with >gulp create.",
+            "description": "The template application.",
             "folder": "master",
             "active": true,
             "include": false            
