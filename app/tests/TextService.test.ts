@@ -12,11 +12,11 @@ describe("TextService", () => {
         });
     });
     describe("FindReplace", () => {
-        it("Should return Hello Tom, replaced with Tom. when findThis = World, inThis = Hello World, replaced with World. and replaceWithThis = Tom", () => {
+        it("Should return 'Find this word in this sentence and replace it with this word. Try finding - 'this'..when findThis = this, inThis = Find this word in this sentence and replace it with this word. Try finding - 'this'", () => {
             let textService = new TextService(),
-                result = textService.FindReplace("World", "Hello World, replaced with World.", "Tom");
+                result = textService.FindReplace("a", "Find a word in this sentence and replace it with a word. Try finding - 'a'", "this");
 
-            expect(result).to.equal("Hello Tom, replaced with Tom.");
+            expect(result).to.equal("Find this word in this sentence and replace it with this word. Try finding - 'this'");
         });
     });
     describe("Unscrabble", () => {
