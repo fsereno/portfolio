@@ -1,6 +1,5 @@
 import { expect } from "chai";
 import { TextService } from "../typeScript/Services/StringService";
-import { stringLiteral } from "babel-types";
 
 describe("TextService", () => {
     describe("Concat", () => {
