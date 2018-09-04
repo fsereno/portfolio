@@ -20,7 +20,10 @@ export class TextService implements IStringService
         findThis: string, 
         inThis: string, 
         replaceWithThis: string): string{
-
+            // Perhaps a slightly move clever regex match could help with
+            // a bug where "a" as in the word, could be matched and
+            // replaced currently for "and" eg "and" > "thisnd"
+            // ([.|,|!|(|)|\s])?(Hello)([.|,|!|(|)|\s])?
             let regex = new RegExp(findThis, "g"),
                 count = (inThis.match(regex) || []).length;
                 
