@@ -3,7 +3,7 @@
     ul.nav
       if locals.config.prefix+locals.application.folder !== locals.config.prefix+locals.config.entry
         li.nav-item
-          a.nav-link(href="../"+locals.config.prefix+locals.config.entry+"/index.html") Home
+          a.nav-link(href="../"+locals.config.prefix+locals.config.entry+"/index.html") Back Home
       li.nav-item
         if (locals.application.folderRoot !== undefined)
           a.nav-link(href=locals.config.repoRootUrl+locals.application.folderRoot, target="_blank") Github Repository
