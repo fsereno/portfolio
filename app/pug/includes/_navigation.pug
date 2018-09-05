@@ -1,4 +1,11 @@
-if locals.config.prefix+locals.application.folder !== locals.config.prefix+locals.config.entry
-  .row
-    .col-md-2
-      a(class="link home", href="../"+locals.config.prefix+locals.config.entry+"/index.html") Back Home
+.row
+  .col-lg-12
+    ul.nav
+      if locals.config.prefix+locals.application.folder !== locals.config.prefix+locals.config.entry
+        li.nav-item
+          a.nav-link(href="../"+locals.config.prefix+locals.config.entry+"/index.html") Home
+      li.nav-item
+        if (locals.application.folderRoot !== undefined)
+          a.nav-link(href=locals.config.repoRootUrl+locals.application.folderRoot, target="_blank") Github Repository
+        else 
+          a.nav-link(href=locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder, target="_blank") Github Repository

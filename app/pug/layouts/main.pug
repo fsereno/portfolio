@@ -9,17 +9,17 @@ html(lang="en")
     block styles
   body
     .container-fluid
-      h1.display-1= locals.application.name
-      h3= locals.application.subHeading
-        small.text-muted= " " + locals.application.description
-      p Repository url:
-        if (locals.application.folderRoot !== undefined)
-          a(href=locals.config.repoRootUrl+locals.application.folderRoot, target="_blank")= " " + locals.config.repoRootUrl+locals.application.folderRoot
-        else 
-          a(href=locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder, target="_blank")= " " + locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder
+      .row
+        .col-lg-12
+          h1.display-1= locals.application.name
+      .row  
+        .col-lg-12
+          h3= locals.application.subHeading
+            small.text-muted= " " + locals.application.description
+      include ../includes/_navigation.pug
       hr
       block content
-      include ../includes/_navigation.pug
+      
     block footer
     include ../includes/_jsDeps.pug
     block scripts
