@@ -46,8 +46,8 @@ export class TextService implements IStringService
         findThis: string, 
         inThis: string) : boolean {
 
-        let findThisNormalised = findThis.toLowerCase(),
-            inThisNormalised = inThis.toLowerCase(),
+        let findThisNormalised = findThis.toUpperCase(),
+            inThisNormalised = inThis.toUpperCase(),
             scrabbleArray = this.ToArray(inThisNormalised),
             inputArray = this.ToArray(findThisNormalised),
             resultsArray = [];
