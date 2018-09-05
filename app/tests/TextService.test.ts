@@ -11,7 +11,7 @@ describe("TextService", () => {
         });
     });
     describe("FindReplace", () => {
-        it("Should return 'Find this word in this sentence and replace it with this word. Try finding - 'this'..when findThis = this, inThis = Find this word in this sentence and replace it with this word. Try finding - 'this'", () => {
+        it("Should return 'Find this word in this sentence and replace it with this word. Try finding - 'this'..when findThis = this, inThis = Find a word in this sentence and replace it with a word. Try finding - 'a'", () => {
             let textService = new TextService(),
                 result = textService.FindReplace("a", "Find a word in this sentence and replace it with a word. Try finding - 'a'", "this");
 
