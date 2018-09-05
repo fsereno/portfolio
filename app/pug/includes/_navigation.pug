@@ -9,3 +9,15 @@
           a.nav-link(href=locals.config.repoRootUrl+locals.application.folderRoot, target="_blank") Github Repository
         else 
           a.nav-link(href=locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder, target="_blank") Github Repository
+      if locals.config.prefix+locals.application.folder !== locals.config.prefix+locals.config.entry
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false') Applications
+          .dropdown-menu
+            each application, index in locals.config.applications
+              if application.active !== false && application.include !== false
+                if locals.application.folder === application.folder
+                  a.active.dropdown-item(href="../"+locals.config.prefix+application.folder+"/index.html")= application.name
+                else
+                  a.dropdown-item(href="../"+locals.config.prefix+application.folder+"/index.html")= application.name
+            .dropdown-divider
+            a.dropdown-item(href="../"+locals.config.prefix+locals.config.entry+"/index.html") Home
