@@ -152,6 +152,12 @@ gulp.task("images", () => {
     return output;
 });
 
+gulp.task("fonts", () => {
+  var output = gulp.src(config.developmentDir+"/fonts/**/*")
+    .pipe(gulp.dest(config.publishDir+"/fonts"));
+    return output;
+});
+
 gulp.task("mocha", () => {
   return gulp.src(config.developmentDir+"/**/*.test.ts")
     .pipe(mocha({
@@ -180,7 +186,7 @@ gulp.task("create", () => {
   config.applications.map(createTasks);
 });
 
-gulp.task("publish",["mocha", "images"], () => {
+gulp.task("publish",["mocha", "images", "fonts"], () => {
   config.applications.map(publishTasks);
 });
 

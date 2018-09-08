@@ -3,12 +3,18 @@
     ul.nav
       if locals.config.prefix+locals.application.folder !== locals.config.prefix+locals.config.entry
         li.nav-item
-          a.nav-link(href="../"+locals.config.prefix+locals.config.entry+"/index.html") Back Home
+          a.nav-link(href="../"+locals.config.prefix+locals.config.entry+"/index.html")
+            | Home 
+            i.fa.fa-home
       li.nav-item
         if (locals.application.folderRoot !== undefined)
-          a.nav-link(href=locals.config.repoRootUrl+locals.application.folderRoot, target="_blank") Github Repository
+          a.nav-link(href=locals.config.repoRootUrl+locals.application.folderRoot, target="_blank") 
+            | View on Github 
+            i.fa.fa-github-square
         else 
-          a.nav-link(href=locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder, target="_blank") Github Repository
+          a.nav-link(href=locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder, target="_blank") 
+            | View on Github 
+            i.fa.fa-github-square
       if locals.config.prefix+locals.application.folder !== locals.config.prefix+locals.config.entry
         li.nav-item.dropdown
           a.nav-link.dropdown-toggle(data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false') Applications
