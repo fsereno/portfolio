@@ -1,5 +1,6 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  a.navbar-brand(href='#') Navbar:
+  a.navbar-brand(href="../"+locals.config.prefix+locals.config.entry+"/index.html") 
+    img(src="../../images/FSLogo.jpeg")
   button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
     span.navbar-toggler-icon
   #navbarNavDropdown.collapse.navbar-collapse
@@ -30,4 +31,6 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
                             else
                                 a.dropdown-item(href="../"+locals.config.prefix+application.folder+"/index.html")= application.name
                     .dropdown-divider
-                    a.dropdown-item(href="../"+locals.config.prefix+locals.config.entry+"/index.html") Home
+                    a.dropdown-item(href="../"+locals.config.prefix+locals.config.entry+"/index.html") 
+                        | Home 
+                        i.fa.fa-home
