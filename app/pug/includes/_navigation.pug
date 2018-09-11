@@ -1,7 +1,14 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  a.navbar-brand(href="../"+locals.config.prefix+locals.config.entry+"/index.html") 
+  a.navbar-brand(
+      href="../"+locals.config.prefix+locals.config.entry+"/index.html") 
     img(src="../../images/FSLogo.jpeg")
-  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation')
+  button.navbar-toggler(
+      type='button' 
+      data-toggle='collapse' 
+      data-target='#navbarNavDropdown' 
+      aria-controls='navbarNavDropdown' 
+      aria-expanded='false' 
+      aria-label='Toggle navigation')
     span.navbar-toggler-icon
   #navbarNavDropdown.collapse.navbar-collapse
     ul.navbar-nav
@@ -11,25 +18,28 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
                     | Home 
                     i.fa.fa-home
         li.nav-item
-            if (locals.application.folderRoot !== undefined)
-                a.nav-link(href=locals.config.repoRootUrl+locals.application.folderRoot, target="_blank") 
-                    | View on Github 
-                    i.fa.fa-github-square
-            else 
-                a.nav-link(href=locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder, target="_blank") 
-                    | View on Github 
-                    i.fa.fa-github-square
+            a.nav-link(href=(locals.application.folderRoot !== undefined 
+                ? locals.config.repoRootUrl+locals.application.folderRoot 
+                : locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder), 
+                target="_blank")
+                | View on Github 
+                i.fa.fa-github-square
         if locals.config.prefix+locals.application.folder !== locals.config.prefix+locals.config.entry
             li.nav-item.dropdown
-                a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                a#navbarDropdownMenuLink.nav-link.dropdown-toggle(
+                    href='#' 
+                    role='button' 
+                    data-toggle='dropdown' 
+                    aria-haspopup='true' 
+                    aria-expanded='false')
                     | Applications
                 .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
                     each application, index in locals.config.applications
-                        if application.active !== false && application.include !== false
-                            if locals.application.folder === application.folder
-                                a.active.dropdown-item(href="../"+locals.config.prefix+application.folder+"/index.html")= application.name
-                            else
-                                a.dropdown-item(href="../"+locals.config.prefix+application.folder+"/index.html")= application.name
+                        if (application.active !== false && application.include !== false)
+                            a(class=(locals.application.folder === application.folder 
+                            ? "active" 
+                            : "") + " dropdown-item", 
+                            href="../"+locals.config.prefix+application.folder+"/index.html")= application.name
                     .dropdown-divider
                     a.dropdown-item(href="../"+locals.config.prefix+locals.config.entry+"/index.html") 
                         | Home 
