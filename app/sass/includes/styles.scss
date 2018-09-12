@@ -30,12 +30,17 @@ span#result {
 
 }
 
-a.navbar-brand {
+.navbar {
 
-    img {
+    padding: 0 0.3em;
 
-        width: 50px;
+    a.navbar-brand {
+
+        img {
+
+            width: 50px;
+
+        }
 
     }
-
 }
