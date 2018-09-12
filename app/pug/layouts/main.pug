@@ -14,8 +14,9 @@ html(lang="en")
           h1.display-1= locals.application.name
       .row  
         .col-lg-12
-          h3= locals.application.subHeading
-            small.text-muted= " " + locals.application.description
+          h4= locals.application.subHeading
+            small.text-muted= locals.application.description
+          hr
       include ../includes/_navigation.pug
       hr
       block content
