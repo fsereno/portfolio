@@ -15,5 +15,10 @@ span#result {
 .row.splitter {
   margin-bottom: .75rem; }
 
+.navbar {
+  padding: 0 0.3em; }
+  .navbar a.navbar-brand img {
+    width: 50px; }
+
 body h1 {
   color: red; }
