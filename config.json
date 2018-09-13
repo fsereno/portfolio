@@ -65,6 +65,14 @@
             "folder": "randomGenerator",
             "active": true,
             "include": true
+        },
+        {
+            "name": "Wiktionary Word Finder",
+            "subHeading": "",
+            "description": "A simple word lookup tool using the Wiktionary API. Written with TypeScript, Sass and Pug.",
+            "folder": "wiktionaryFinder",
+            "active": true,
+            "include": true
         }
 
     ]
