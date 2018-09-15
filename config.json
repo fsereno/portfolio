@@ -67,10 +67,10 @@
             "include": true
         },
         {
-            "name": "Wiktionary Word Finder",
+            "name": "dictionary Word Finder",
             "subHeading": "",
-            "description": "A simple word lookup tool using the Wiktionary API. Written with TypeScript, Sass and Pug.",
-            "folder": "wiktionaryFinder",
+            "description": "A simple dictionary word lookup tool. Written with TypeScript, Sass and Pug.",
+            "folder": "dictionaryFinder",
             "active": true,
             "include": true
         }

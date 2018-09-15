@@ -6,7 +6,6 @@ describe("TextService", () => {
         it("Should return Hello World when: a = Hello and b = World", () => {
             let textService = new TextService(),
                 result = textService.Concat("Hello","World");
-            console.log("HELLO");
             expect(result).to.equal("Hello World");
         });
     });
