@@ -4,18 +4,18 @@ import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorServ
 
 export class IndexController  {
     
-    textService: IStringService;
+    stringService: IStringService;
     validatorService: IValidatorService;
 
     constructor
     (
 
-        textService: IStringService,
+        stringService: IStringService,
         validatorService: IValidatorService
       
     ) 
     {
-        this.textService = textService;
+        this.stringService = stringService;
         this.validatorService = validatorService;
     }
 
@@ -42,11 +42,11 @@ export class IndexController  {
                 
                 if(valid){
                     
-                    let alpha = self.textService.AlphaString,
-                        numeric = self.textService.NumericString,
+                    let alpha = self.stringService.AlphaString,
+                        numeric = self.stringService.NumericString,
                         criteria = [alpha, numeric];
 
-                    let result = self.textService.GenerateRandom(criteria, Number(length));
+                    let result = self.stringService.GenerateRandom(criteria, Number(length));
                     jQuery("#result").text(result);
 
                 }   

@@ -3,17 +3,23 @@
 import { IndexController } from "./Controllers/IndexController";
 
 // Services
-import { TextService } from "../../typeScript/Services/StringService";
+import { DictionaryService } from "../../typeScript/Services/DictionaryService";
 import { ValidatorService } from "../../typeScript/Services/validatorService";
 
+// Repositories
+import { DictionaryRepository } from "../../typeScript/Repositories/DictionaryRepository";
+
+// Repositories
+let dictionaryRepository = new DictionaryRepository();
+
 // Instantiate Services with dependency injection
-let textService = new TextService();
+let dictionaryService = new DictionaryService(dictionaryRepository);
 let validatorService = new ValidatorService();
 
 // Controllers
 let indexController = new IndexController
 (
-    textService,
+    dictionaryService,
     validatorService
 );
 

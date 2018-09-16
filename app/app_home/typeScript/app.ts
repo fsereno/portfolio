@@ -3,15 +3,15 @@
 import { IndexController } from "./Controllers/IndexController";
 
 // Services
-import { TextService } from "../../typeScript/Services/StringService";
+import { StringService } from "../../typeScript/Services/StringService";
 
 // Instantiate Services with dependency injection
-let textService = new TextService();
+let stringService = new StringService();
 
 // Controllers
 let indexController = new IndexController
 (
-    textService
+    stringService
 );
 
 indexController.init();

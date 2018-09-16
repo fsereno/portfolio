@@ -1,21 +1,21 @@
 // Interfaces
-import { IStringService } from "../../../typeScript/Interfaces/IStringService";
+import { IDictionaryService } from "../../../typeScript/Interfaces/IDictionaryService";
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 
 export class IndexController  {
     
-    textService: IStringService;
+    dictionaryService: IDictionaryService;
     validatorService: IValidatorService;
 
     constructor
     (
 
-        textService: IStringService,
+        dictionaryService: IDictionaryService,
         validatorService: IValidatorService
       
     ) 
     {
-        this.textService = textService;
+        this.dictionaryService = dictionaryService;
         this.validatorService = validatorService;
     }
 
@@ -42,7 +42,9 @@ export class IndexController  {
 
                 if(valid){
 
-                    jQuery("#result").text(input);
+                    let result = this.dictionaryService.Find(input);
+
+                    jQuery("#result").text(result.toString());
 
                 }   
             }

@@ -4,18 +4,18 @@ import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorServ
 
 export class IndexController  {
     
-    textService: IStringService;
+    stringService: IStringService;
     validatorService: IValidatorService;
 
     constructor
     (
 
-        textService: IStringService,
+        stringService: IStringService,
         validatorService: IValidatorService
       
     ) 
     {
-        this.textService = textService;
+        this.stringService = stringService;
         this.validatorService = validatorService;
     }
 
@@ -43,7 +43,7 @@ export class IndexController  {
 
                 if(valid){
 
-                    let result = self.textService.Unscrabble(
+                    let result = self.stringService.Unscrabble(
                         findThis,inThis);
                     
                     jQuery("#result").text(result.toString());

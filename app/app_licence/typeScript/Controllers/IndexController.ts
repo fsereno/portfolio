@@ -5,16 +5,16 @@ import { IStringService } from "../../../typeScript/Interfaces/IStringService";
 
 export class IndexController  {
     
-    textService: IStringService;
+    stringService: IStringService;
 
     constructor
     (
 
-        textService: IStringService
+        stringService: IStringService
       
     ) 
     {
-        this.textService = textService;
+        this.stringService = stringService;
     }
 
     init(
@@ -25,7 +25,7 @@ export class IndexController  {
 
         $(() => {
 
-            var text = self.textService.Concat("Application ", "Master Template");
+            var text = self.stringService.Concat("Application ", "Master Template");
 
             console.log(text);
 

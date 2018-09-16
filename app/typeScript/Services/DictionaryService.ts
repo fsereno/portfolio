@@ -19,8 +19,13 @@ export class DictionaryService implements IDictionaryService
     Find (word: string): boolean {
 
         let dictionary = this.dictionaryRepository.Get(),
-            result = dictionary[word].length > 0;
+            inputArray = word.split("");
 
+            inputArray[0] = inputArray[0].toUpperCase();
+
+            let inputToUse = inputArray.join(""),
+            result = dictionary[inputToUse] !== undefined;
+            
         return result;
     }
 

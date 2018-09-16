@@ -67,7 +67,7 @@
             "include": true
         },
         {
-            "name": "dictionary Word Finder",
+            "name": "Dictionary Word Finder",
             "subHeading": "",
             "description": "A simple dictionary word lookup tool. Written with TypeScript, Sass and Pug.",
             "folder": "dictionaryFinder",
