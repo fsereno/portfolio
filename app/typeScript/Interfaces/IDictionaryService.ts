@@ -1,3 +1,5 @@
+import { DictionaryResultsModel } from "../Models/DictionaryResultsModel";
+
 export interface IDictionaryService  {
-    Find(word: string): boolean;
+    Find(word: string): DictionaryResultsModel;
 }

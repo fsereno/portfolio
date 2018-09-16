@@ -7,9 +7,9 @@ describe("DictionaryService", () => {
         it("Should return 'true' when: word = 'Avowance'", () => {
             let dictionaryRepository = new DictionaryRepository(),
                 dictionaryService = new DictionaryService(dictionaryRepository),
-                result = dictionaryService.Find("avowance");
+                dictionaryResultsModel = dictionaryService.Find("avowance");
 
-            expect(result).to.be.equal(true);
+            expect(dictionaryResultsModel.result).to.be.equal(true);
         });
     });
 });

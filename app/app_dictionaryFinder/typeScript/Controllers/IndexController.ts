@@ -42,9 +42,11 @@ export class IndexController  {
 
                 if(valid){
 
-                    let result = this.dictionaryService.Find(input);
+                    let dictionaryResultsModel = this.dictionaryService.Find(input),
+                        result = dictionaryResultsModel.result ? dictionaryResultsModel.result.toString() + ": " + dictionaryResultsModel.description
+                        : dictionaryResultsModel.result.toString();
 
-                    jQuery("#result").text(result.toString());
+                    jQuery("#result").text(result);
 
                 }   
             }
