@@ -9,7 +9,15 @@ block content
       .row.splitter
         .col-lg-12
           h3 Result:  
-            span#result 
+            span#result
+      .row.splitter
+        .col-lg-12
+          h3 Your Results:  
+            div#result
+      .row.splitter
+        .col-lg-12
+          h3 Unscrabbler Results:  
+            div#possibleResult
       .row
         .col-lg-3
           form#unscrabblerForm
@@ -30,6 +38,8 @@ block content
                 required)
              
             button.btn.btn-primary(type="submit") Submit
+            button.btn.btn-primary(type="submit") Find All
+            button.btn.btn-primary(type="submit") Reset
 block scripts
   // build:js js/app.js
   script(src="js/app.js")
