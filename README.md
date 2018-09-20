@@ -25,7 +25,6 @@ The purpose of this repository is to demonstrate skills in various technologies,
 
 - Nodejs v ^11.8.3 (https://nodejs.org/en/)
 - Npm (https://www.npmjs.com/)
-- Bower (https://bower.io/search/)
 - Gulp (https://gulpjs.com/)
 ---
 
