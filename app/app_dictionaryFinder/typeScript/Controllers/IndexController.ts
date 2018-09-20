@@ -43,7 +43,7 @@ export class IndexController  {
                 if(valid){
 
                     let dictionaryResultsModel = this.dictionaryService.Find(input),
-                        result = dictionaryResultsModel.result ? dictionaryResultsModel.result.toString() + ": " + dictionaryResultsModel.description
+                        result = dictionaryResultsModel.result ? dictionaryResultsModel.result.toString() + ": " + dictionaryResultsModel.word + ", " + dictionaryResultsModel.description
                         : dictionaryResultsModel.result.toString();
 
                     jQuery("#result").text(result);
