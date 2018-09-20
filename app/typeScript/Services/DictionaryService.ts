@@ -26,7 +26,7 @@ export class DictionaryService implements IDictionaryService
 
             let inputToUse = inputArray.join(""),
             result = dictionary[inputToUse] !== undefined,
-            description = result ?  dictionary[inputToUse] : "",
+            description = result ?  dictionary[inputToUse] : "No results found.",
             dictionaryResultsModel = new DictionaryResultsModel(result, description, inputToUse);
 
         return dictionaryResultsModel;

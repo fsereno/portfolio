@@ -4,12 +4,15 @@ import { DictionaryRepository } from "../typeScript/Repositories/DictionaryRepos
 
 describe("DictionaryService", () => {
     describe("Find", () => {
-        it("Should return 'true' when: word = 'Avowance'", () => {
+        it("Should return 'true' when: word = 'Avowance', Should return 'false' when: word = 'sdfsdfsd'", () => {
             let dictionaryRepository = new DictionaryRepository(),
                 dictionaryService = new DictionaryService(dictionaryRepository),
-                dictionaryResultsModel = dictionaryService.Find("avowance");
+                dictionaryResultsModelCase1 = dictionaryService.Find("avowance"),
+                dictionaryResultsModelCase2 = dictionaryService.Find("sdfsdfsd");
 
-            expect(dictionaryResultsModel.result).to.be.equal(true);
+            expect(dictionaryResultsModelCase1.result).to.be.equal(true);
+            expect(dictionaryResultsModelCase2.result).to.be.equal(false);
+            expect(dictionaryResultsModelCase2.description).to.be.equal("No results found.");
         });
     });
 });
