@@ -3,9 +3,6 @@ import { IStringService } from "../../../typeScript/Interfaces/IStringService";
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 import { IDictionaryService } from "../../../typeScript/Interfaces/IDictionaryService";
 
-//Models
-import { IndexViewModel } from "../../typeScript/ViewModels/IndexViewModel";
-
 export class IndexController  {
     
     stringService: IStringService;
