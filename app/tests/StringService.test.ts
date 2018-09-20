@@ -17,14 +17,6 @@ describe("StringService", () => {
             expect(result).to.equal("Find this word in this sentence and replace it with this word. Try finding - 'this'");
         });
     });
-    describe("Unscrabble", () => {
-        it("Should return true when findThis = Sleep, inThis = Pseleedbnopos", () => {
-            let stringService = new StringService(),
-                result = stringService.Unscrabble("Sleep", "Pseleedbnopos");
-
-            expect(result).to.equal(true);
-        });
-    });
     describe("GenerateRandom", () => {
         it("Should return a random string of length 10, if criteria = string[] and length = 10", () => {
             let stringService = new StringService(),

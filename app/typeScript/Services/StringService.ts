@@ -42,34 +42,6 @@ export class StringService implements IStringService
         return result;
     }
 
-    public Unscrabble(
-        findThis: string, 
-        inThis: string) : boolean {
-
-        let findThisNormalised = findThis.toUpperCase(),
-            inThisNormalised = inThis.toUpperCase(),
-            scrabbleArray = this.ToArray(inThisNormalised),
-            inputArray = this.ToArray(findThisNormalised),
-            resultsArray = [];
-
-        for (var i = 0; i < inputArray.length; i++) {
-            
-            let inputCharacter = inputArray[i],
-                indexOf = scrabbleArray.indexOf(inputCharacter);
-
-            if (indexOf>-1){
-                resultsArray.push(inputCharacter);
-                scrabbleArray.splice(indexOf, 1);
-            }
-        }
-
-        let resultArrayToString = resultsArray.join(""),
-            result = resultArrayToString === findThisNormalised;
-
-        return result;
-
-    }
-
     GenerateRandom(criteria: string[], length:number) : string {
 
         let output: string[] = []

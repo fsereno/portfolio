@@ -13,11 +13,11 @@ block content
       .row.splitter
         .col-lg-12
           h3 Your Results:  
-            div#result
+            div#yourResults
       .row.splitter
         .col-lg-12
           h3 Unscrabbler Results:  
-            div#possibleResult
+            div#unscrabblerResults
       .row
         .col-lg-3
           form#unscrabblerForm
@@ -38,7 +38,7 @@ block content
                 required)
              
             button.btn.btn-primary(type="submit") Submit
-            button.btn.btn-primary(type="submit") Find All
+            button.btn.btn-primary(type="submit") Unscrabble All
             button.btn.btn-primary(type="submit") Reset
 block scripts
   // build:js js/app.js
