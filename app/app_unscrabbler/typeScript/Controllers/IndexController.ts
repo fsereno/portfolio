@@ -34,7 +34,52 @@ export class IndexController  {
         jQuery(() => {
 
             self.validateForm("unscrabblerForm");
-        
+            self.reset();
+            self.unscrabbleAll();
+        });
+    }
+
+    reset(){
+
+        const self = this;
+
+        jQuery("#reset").on("click", () => {
+
+            // This will return from a repository eventually
+            let alpha = self.stringService.AlphaString,
+                        criteria = [alpha];
+
+            let ramdomString = self.stringService.GenerateRandom(criteria, 15);
+
+            // Populate new random string, use the stringService
+            jQuery("#scrabbleInput").val(ramdomString);
+
+            // Clear your results
+            jQuery("#yourResults").text("");
+
+            // Clear Unscrabblers results
+            jQuery("#unscrabblerResults").text("");
+            
+            // Clear found result
+            jQuery("#result").text("");
+
+        });
+
+    }
+
+    unscrabbleAll(){
+
+        const self = this;
+
+        jQuery("#unscrabbleAll").on("click", () => {
+
+            let scrabbledText = jQuery("#scrabbleInput").val().toString(),
+                
+                unscrabblerResults =  self.unscrabbleService.unscrabbleAll(scrabbledText),
+                result = unscrabblerResults.join(", ");
+
+            jQuery("#unscrabblerResults").text(result);
+
         });
     }
 
@@ -49,7 +94,7 @@ export class IndexController  {
                     findThis = jQuery("#findInput").val().toString(),
                     inThis = jQuery("#scrabbleInput").val().toString(),
                     yourResults = jQuery("#yourResults").text(),
-                    yourResultsArray = yourResults.split(",");
+                    yourResultsArray: string[] = yourResults.length > 0 ? yourResults.split(",") : [];
 
                 if(valid){
 
@@ -72,7 +117,7 @@ export class IndexController  {
                     }
                         
                     jQuery("#result").text(outcome);
-                    jQuery("#yourResults").text(yourResultsArray.join(","));
+                    jQuery("#yourResults").text(yourResultsArray.join(", "));
 
                 }   
             }

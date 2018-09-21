@@ -18,7 +18,10 @@ let dictionaryRepository = new DictionaryRepository();
 let stringService = new StringService(),
     validatorService = new ValidatorService(),
     dictionaryService = new DictionaryService(dictionaryRepository),
-    unscrabbleService = new UnscrabbleService(stringService)
+    unscrabbleService = new UnscrabbleService(
+        stringService, 
+        dictionaryRepository
+    );
 
 // Controllers
 let indexController = new IndexController

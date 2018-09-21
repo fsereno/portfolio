@@ -1,6 +1,0 @@
-Word lookup idea
-
-https://en.wiktionary.org/w/api.php
-https://en.wiktionary.org/w/api.php?action=opensearch&search=Example
-
-["Example",["example","examples","exampler","exampled","examplexor","examplexans","examplexaturos","examplexandus","examplexatus","examplexaturus"],["","","","","","","","","",""],["https://en.wiktionary.org/wiki/example","https://en.wiktionary.org/wiki/examples","https://en.wiktionary.org/wiki/exampler","https://en.wiktionary.org/wiki/exampled","https://en.wiktionary.org/wiki/examplexor","https://en.wiktionary.org/wiki/examplexans","https://en.wiktionary.org/wiki/examplexaturos","https://en.wiktionary.org/wiki/examplexandus","https://en.wiktionary.org/wiki/examplexatus","https://en.wiktionary.org/wiki/examplexaturus"]]

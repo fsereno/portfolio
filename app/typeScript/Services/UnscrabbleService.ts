@@ -1,15 +1,20 @@
 import { IStringService } from "../Interfaces/IStringService";
 import { IUnscrabbleService } from "../Interfaces/IUnscrabbleService"
+import { IDictionaryRepository } from "../Interfaces/IDictionaryRepository";
 
 export class UnscrabbleService implements IUnscrabbleService
 {
-    stringService: IStringService;
+    private stringService: IStringService;
+    private dictionaryRepository: IDictionaryRepository;
 
     constructor
     (
-        stringService: IStringService
+        stringService: IStringService,
+        dictionaryRepository: IDictionaryRepository
+        
     ){
-        this.stringService = stringService;
+        this.stringService = stringService,
+        this.dictionaryRepository = dictionaryRepository;
     }
 
     public Unscrabble(
@@ -39,5 +44,29 @@ export class UnscrabbleService implements IUnscrabbleService
         return result;
 
     }
+
+    unscrabbleAll(randomString: string) : string[] {
+
+        const self = this;
+        
+        let result:string[] = [];
+
+        let dictionary = self.dictionaryRepository.Get();
+
+        Object.keys(dictionary).forEach((value, index) => {
+
+            let eachResult = self.Unscrabble(value, randomString);
+
+            if (eachResult) {
+
+                result.push(value);
+
+            }
+
+        });
+
+        return result;
+
+    };
 
 }
