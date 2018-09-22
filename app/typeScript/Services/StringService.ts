@@ -5,6 +5,8 @@ export class StringService implements IStringService
 {
     public AlphaString: string;
     public NumericString: string;
+    public Constonants: string;
+    public Vowels: string;
     private stringRepository: IStringRepository
 
     constructor
@@ -15,6 +17,8 @@ export class StringService implements IStringService
         this.stringRepository = stringRepository;
         this.AlphaString = this.stringRepository.AlphaString;
         this.NumericString = this.stringRepository.AlphaString;
+        this.Vowels = this.stringRepository.Vowels;
+        this.Constonants = this.stringRepository.Constonants;
         
     }
     

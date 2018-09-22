@@ -33,10 +33,28 @@ export class IndexController  {
 
         jQuery(() => {
 
-            self.validateForm("unscrabblerForm");
+            let randomString = self.generateRandomString();
+
+            jQuery("#scrabbleInput").val(randomString);
+
+            self.validateForm();
             self.reset();
             self.unscrabbleAll();
+            
         });
+    }
+
+    generateRandomString(): string{
+
+        const self = this;
+
+        let constonants = self.stringService.Constonants,
+            vowels = self.stringService.Vowels,
+            criteria = [constonants, vowels];
+
+        let randomString = self.stringService.GenerateRandom(criteria, 15);
+
+        return randomString
     }
 
     reset(){
@@ -45,14 +63,10 @@ export class IndexController  {
 
         jQuery("#reset").on("click", () => {
 
-            // This will return from a repository eventually
-            let alpha = self.stringService.AlphaString,
-                        criteria = [alpha];
-
-            let ramdomString = self.stringService.GenerateRandom(criteria, 15);
+            let randomString = self.generateRandomString();
 
             // Populate new random string, use the stringService
-            jQuery("#scrabbleInput").val(ramdomString);
+            jQuery("#scrabbleInput").val(randomString);
 
             // Clear your results
             jQuery("#yourResults").text("");
@@ -63,7 +77,22 @@ export class IndexController  {
             // Clear found result
             jQuery("#result").text("");
 
+            // Clear winner result
+            jQuery("#winnerResults").text("");
+
         });
+
+    }
+
+    winnerResult(){
+
+        const self = this;
+
+        let yourResults = jQuery("#yourResults").text(),
+            unscrabblerResults = jQuery("#unscrabblerResults").text(),
+            result = self.unscrabbleService.winner(yourResults, unscrabblerResults);
+
+        jQuery("#winnerResults").text(result);
 
     }
 
@@ -79,11 +108,12 @@ export class IndexController  {
                 result = unscrabblerResults.join(", ");
 
             jQuery("#unscrabblerResults").text(result);
-
+            self.winnerResult();
+            
         });
     }
 
-    validateForm(formId: string){
+    validateForm(){
 
         const self = this;
         let validateFormOptions = {
@@ -123,6 +153,6 @@ export class IndexController  {
             }
         }
 
-        self.validatorService.ValidateForm(formId, validateFormOptions);
+        self.validatorService.ValidateForm("unscrabblerForm", validateFormOptions);
     }
 }

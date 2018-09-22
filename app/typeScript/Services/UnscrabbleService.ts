@@ -1,6 +1,7 @@
 import { IStringService } from "../Interfaces/IStringService";
 import { IUnscrabbleService } from "../Interfaces/IUnscrabbleService"
 import { IDictionaryRepository } from "../Interfaces/IDictionaryRepository";
+import { returnStatement } from "babel-types";
 
 export class UnscrabbleService implements IUnscrabbleService
 {
@@ -67,6 +68,16 @@ export class UnscrabbleService implements IUnscrabbleService
 
         return result;
 
+    };
+
+    winner(yourResults: string, unscrabblerResults: string) : string {
+
+        let yourResultsArray = yourResults.split(","),
+            unscrabblerResultsArray = unscrabblerResults.split(","),
+            result = yourResultsArray.length > unscrabblerResultsArray.length ? "You!" : "Unscrabbler!";
+
+        return result;
+        
     };
 
 }

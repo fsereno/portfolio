@@ -18,6 +18,10 @@ block content
         .col-lg-12
           h3 Unscrabbler Results:  
             div#unscrabblerResults.result
+      .row.splitter
+        .col-lg-12
+          h3 Winner:  
+            span#winnerResults.result
       .row
         .col-lg-3
           form#unscrabblerForm
@@ -27,14 +31,13 @@ block content
                 name="scrabbleInput", 
                 type="text", 
                 placeholder="Scrabble...",
-                value="Pseleedbnopos"
                 readonly)
             .form-group
               label(for="findInput") Enter a word to see if it can be found:
               input#findInput.form-control(
                 name="findInput", 
                 type="text", 
-                placeholder="Sleep...", 
+                placeholder="What can you find ?", 
                 required)
              
             button.btn.btn-primary(type="submit") Submit
