@@ -5,7 +5,7 @@ import { IStringService } from "../../../typeScript/Interfaces/IStringService";
 
 export class IndexController  {
     
-    stringService: IStringService;
+    private stringService: IStringService;
 
     constructor
     (

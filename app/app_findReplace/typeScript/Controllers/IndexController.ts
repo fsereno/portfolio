@@ -4,8 +4,8 @@ import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorServ
 
 export class IndexController  {
     
-    stringService: IStringService;
-    validatorService: IValidatorService;
+    private stringService: IStringService;
+    private validatorService: IValidatorService;
 
     constructor
     (

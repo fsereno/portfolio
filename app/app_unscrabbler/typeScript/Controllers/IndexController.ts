@@ -6,10 +6,10 @@ import { IUnscrabbleService } from "../../../typeScript/Interfaces/IUnscrabbleSe
 
 export class IndexController  {
     
-    stringService: IStringService;
-    validatorService: IValidatorService;
-    dictionaryService: IDictionaryService;
-    unscrabbleService: IUnscrabbleService;
+    private stringService: IStringService;
+    private validatorService: IValidatorService;
+    private dictionaryService: IDictionaryService;
+    private unscrabbleService: IUnscrabbleService;
 
     constructor
     (

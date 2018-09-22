@@ -12,10 +12,14 @@ import { UnscrabbleService } from "../../typeScript/Services/UnscrabbleService";
 import { DictionaryRepository } from "../../typeScript/Repositories/DictionaryRepository";
 
 // Repositories
+import { StringRepository } from "../../typeScript/Repositories/StringRepository";
+
+// Repositories
+let stringRepository = new StringRepository();
 let dictionaryRepository = new DictionaryRepository();
 
 // Services
-let stringService = new StringService(),
+let stringService = new StringService(stringRepository),
     validatorService = new ValidatorService(),
     dictionaryService = new DictionaryService(dictionaryRepository),
     unscrabbleService = new UnscrabbleService(

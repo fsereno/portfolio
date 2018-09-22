@@ -4,8 +4,8 @@ import { ICalculatorService } from "../../../typeScript/Interfaces/ICalculatorSe
 
 export class IndexController  {
     
-    validatorService: IValidatorService;
-    calculatorService: ICalculatorService
+    private validatorService: IValidatorService;
+    private calculatorService: ICalculatorService
 
     constructor
     (
