@@ -50,17 +50,23 @@ export class UnscrabbleService implements IUnscrabbleService
 
         const self = this;
         
-        let result:string[] = [];
+        let result:string[] = [],
+            dictionary = self.dictionaryRepository.Get();
 
-        let dictionary = self.dictionaryRepository.Get();
+        Object.keys(dictionary).forEach((word, index) => {
 
-        Object.keys(dictionary).forEach((value, index) => {
+            let wordArray = word.split(""),
+                firstLetterExists = randomString.indexOf(wordArray[0]);
 
-            let eachResult = self.Unscrabble(value, randomString);
+            if(firstLetterExists > -1) {
 
-            if (eachResult) {
+                let eachResult = self.Unscrabble(word, randomString);
 
-                result.push(value);
+                if (eachResult) {
+
+                    result.push(word);
+
+                }
 
             }
 
