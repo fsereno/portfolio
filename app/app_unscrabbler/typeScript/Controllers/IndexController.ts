@@ -1,5 +1,4 @@
 // Interfaces
-import { IStringService } from "../../../typeScript/Interfaces/IStringService";
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 import { IDictionaryService } from "../../../typeScript/Interfaces/IDictionaryService";
 import { IUnscrabbleService } from "../../../typeScript/Interfaces/IUnscrabbleService";
@@ -7,28 +6,44 @@ import { IRandomGeneratorService } from "../../../typeScript/Interfaces/IRandomG
 
 export class IndexController  {
     
-    private stringService: IStringService;
     private validatorService: IValidatorService;
     private dictionaryService: IDictionaryService;
     private unscrabbleService: IUnscrabbleService;
     private randomGeneratorService: IRandomGeneratorService;
 
+    private scrabbleInput: JQuery<HTMLElement>;
+    private yourResults: JQuery<HTMLElement>;
+    private unscrabblerResults: JQuery<HTMLElement>;
+    private result: JQuery<HTMLElement>;
+    private winnerResults: JQuery<HTMLElement>;
+    private resetBtn: JQuery<HTMLElement>;
+    private unscrabbleAllBtn: JQuery<HTMLElement>;
+    private findInput: JQuery<HTMLElement>;
+    private resultDescription: JQuery<HTMLElement>;
+
     constructor
     (
 
-        stringService: IStringService,
         validatorService: IValidatorService,
         dictionaryService: IDictionaryService,
         unscrabbleService: IUnscrabbleService,
         randomGeneratorService: IRandomGeneratorService
-
     ) 
     {
-        this.stringService = stringService;
         this.validatorService = validatorService;
         this.dictionaryService = dictionaryService;
         this.unscrabbleService = unscrabbleService;
         this.randomGeneratorService = randomGeneratorService;
+
+        this.scrabbleInput = jQuery("#scrabbleInput");
+        this.yourResults = jQuery("#yourResults");
+        this.unscrabblerResults = jQuery("#unscrabblerResults");
+        this.result = jQuery("#result");
+        this.winnerResults = jQuery("#winnerResults");
+        this.resetBtn = jQuery("#resetBtn");
+        this.unscrabbleAllBtn = jQuery("#unscrabbleAllBtn");
+        this.findInput = jQuery("#findInput");
+        this.resultDescription = jQuery("#resultDescription");
     }
 
     init() {
@@ -39,8 +54,7 @@ export class IndexController  {
 
             let randomString = self.generateRandomString();
 
-            jQuery("#scrabbleInput").val(randomString);
-
+            self.scrabbleInput.val(randomString);
             self.validateForm();
             self.reset();
             self.unscrabbleAll();
@@ -65,24 +79,16 @@ export class IndexController  {
 
         const self = this;
 
-        jQuery("#reset").on("click", () => {
+        self.resetBtn.on("click", () => {
 
             let randomString = self.generateRandomString();
 
-            // Populate new random string, use the stringService
-            jQuery("#scrabbleInput").val(randomString);
-
-            // Clear your results
-            jQuery("#yourResults").text("");
-
-            // Clear Unscrabblers results
-            jQuery("#unscrabblerResults").text("");
-            
-            // Clear found result
-            jQuery("#result").text("");
-
-            // Clear winner result
-            jQuery("#winnerResults").text("");
+            self.scrabbleInput.val(randomString);
+            self.yourResults.text("");
+            self.resultDescription.text("");
+            self.unscrabblerResults.text("");
+            self.result.text("");
+            self.winnerResults.text("");
 
         });
 
@@ -92,11 +98,11 @@ export class IndexController  {
 
         const self = this;
 
-        let yourResults = jQuery("#yourResults").text(),
-            unscrabblerResults = jQuery("#unscrabblerResults").text(),
+        let yourResults = self.yourResults.text(),
+            unscrabblerResults = self.unscrabblerResults.text(),
             result = self.unscrabbleService.winner(yourResults, unscrabblerResults);
 
-        jQuery("#winnerResults").text(result);
+        self.winnerResults.text(result);
 
     }
 
@@ -104,14 +110,14 @@ export class IndexController  {
 
         const self = this;
 
-        jQuery("#unscrabbleAll").on("click", () => {
+        self.unscrabbleAllBtn.on("click", () => {
 
-            let scrabbledText = jQuery("#scrabbleInput").val().toString(),
+            let scrabbledText = self.scrabbleInput.val().toString(),
                 
                 unscrabblerResults =  self.unscrabbleService.unscrabbleAll(scrabbledText),
                 result = unscrabblerResults.join(", ");
 
-            jQuery("#unscrabblerResults").text(result);
+            self.unscrabblerResults.text(result);
             self.winnerResult();
             
         });
@@ -125,9 +131,9 @@ export class IndexController  {
             submitHandler: (form: HTMLElement)=>{
 
                 let valid = jQuery(form).valid(),
-                    findThis = jQuery("#findInput").val().toString(),
-                    inThis = jQuery("#scrabbleInput").val().toString(),
-                    yourResults = jQuery("#yourResults").text(),
+                    findThis = self.findInput.val().toString(),
+                    inThis = self.scrabbleInput.val().toString(),
+                    yourResults = self.yourResults.text(),
                     yourResultsArray: string[] = yourResults.length > 0 ? yourResults.split(",") : [];
 
                 if(valid){
@@ -150,9 +156,9 @@ export class IndexController  {
                         
                     }
 
-                    jQuery("#result").text(outcome);
-                    jQuery("#resultDescription").text(dictionaryResultModel.description);
-                    jQuery("#yourResults").text(yourResultsArray.join(", "));
+                    self.result.text(outcome);
+                    self.resultDescription.text(dictionaryResultModel.description);
+                    self.yourResults.text(yourResultsArray.join(", "));
 
                 }   
             }

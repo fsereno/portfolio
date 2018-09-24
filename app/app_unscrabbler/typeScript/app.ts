@@ -33,7 +33,6 @@ let stringService = new StringService(),
 // Controllers
 let indexController = new IndexController
 (
-    stringService,
     validatorService,
     dictionaryService,
     unscrabbleService,
