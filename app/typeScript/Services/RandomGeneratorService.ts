@@ -4,8 +4,8 @@ import { IRandomGeneratorRepository } from "../Interfaces/IRandomGeneratorReposi
 
 export class RandomGeneratorService implements IRandomGeneratorService
 {
-    public AlphaString: string;
-    public NumericString: string;
+    public Alphas: string;
+    public Numerics: string;
     public Constonants: string;
     public Vowels: string;
     private stringService: IStringService;
@@ -19,8 +19,8 @@ export class RandomGeneratorService implements IRandomGeneratorService
 
         this.stringService = stringService;
         this.randomGeneratorRepository = randomGeneratorRepository;
-        this.AlphaString = this.randomGeneratorRepository.AlphaString;
-        this.NumericString = this.randomGeneratorRepository.AlphaString;
+        this.Alphas = this.randomGeneratorRepository.Alphas;
+        this.Numerics = this.randomGeneratorRepository.Numerics;
         this.Vowels = this.randomGeneratorRepository.Vowels;
         this.Constonants = this.randomGeneratorRepository.Constonants;
         

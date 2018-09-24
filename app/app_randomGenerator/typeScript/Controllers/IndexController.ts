@@ -1,24 +1,20 @@
 // Interfaces
-import { IStringService } from "../../../typeScript/Interfaces/IStringService";
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 import { IRandomGeneratorService } from "../../../typeScript/Interfaces/IRandomGeneratorService";
 
 export class IndexController  {
     
-    private stringService: IStringService;
     private validatorService: IValidatorService;
     private randomGeneratorService: IRandomGeneratorService;
 
     constructor
     (
 
-        stringService: IStringService,
         validatorService: IValidatorService,
         randomGeneratorService: IRandomGeneratorService
       
     ) 
     {
-        this.stringService = stringService;
         this.validatorService = validatorService;
         this.randomGeneratorService = randomGeneratorService;
     }
@@ -46,8 +42,8 @@ export class IndexController  {
                 
                 if(valid){
                     
-                    let alpha = self.randomGeneratorService.AlphaString,
-                        numeric = self.randomGeneratorService.NumericString,
+                    let alpha = self.randomGeneratorService.Alphas,
+                        numeric = self.randomGeneratorService.Numerics,
                         criteria = [alpha, numeric];
 
                     let result = self.randomGeneratorService.GenerateRandom(criteria, Number(length));

@@ -12,8 +12,8 @@ describe("RandomGeneraterService", () => {
                     stringService, 
                     randomGeneratorRepository
                     ),
-                alpha = randomGeneratorService.AlphaString,
-                numeric = randomGeneratorService.NumericString,
+                alpha = randomGeneratorService.Alphas,
+                numeric = randomGeneratorService.Numerics,
                 criteria = [alpha, numeric],
                 result = randomGeneratorService.GenerateRandom(criteria, 10);
 
