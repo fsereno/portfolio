@@ -26,21 +26,27 @@ export class UnscrabbleService implements IUnscrabbleService
             inThisNormalised = inThis.toUpperCase(),
             scrabbleArray = this.stringService.ToArray(inThisNormalised),
             inputArray = this.stringService.ToArray(findThisNormalised),
-            resultsArray = [];
+            resultsArray = [],
+            firstLetterExists = scrabbleArray.indexOf(inputArray[0]),
+            result = false;
 
-        for (var i = 0; i < inputArray.length; i++) {
-            
-            let inputCharacter = inputArray[i],
-                indexOf = scrabbleArray.indexOf(inputCharacter);
+        if(firstLetterExists > -1) {    
 
-            if (indexOf>-1){
-                resultsArray.push(inputCharacter);
-                scrabbleArray.splice(indexOf, 1);
+            for (var i = 0; i < inputArray.length; i++) {
+                
+                let inputCharacter = inputArray[i],
+                    indexOf = scrabbleArray.indexOf(inputCharacter);
+
+                if (indexOf>-1){
+                    resultsArray.push(inputCharacter);
+                    scrabbleArray.splice(indexOf, 1);
+                }
             }
-        }
 
-        let resultArrayToString = resultsArray.join(""),
+            let resultArrayToString = resultsArray.join("");
+               
             result = resultArrayToString === findThisNormalised;
+        }
 
         return result;
 
@@ -55,18 +61,11 @@ export class UnscrabbleService implements IUnscrabbleService
 
         Object.keys(dictionary).forEach((word, index) => {
 
-            let wordArray = word.split(""),
-                firstLetterExists = randomString.indexOf(wordArray[0]);
+            let eachResult = self.Unscrabble(word, randomString);
 
-            if(firstLetterExists > -1) {
+            if (eachResult) {
 
-                let eachResult = self.Unscrabble(word, randomString);
-
-                if (eachResult) {
-
-                    result.push(word);
-
-                }
+                result.push(word);
 
             }
 

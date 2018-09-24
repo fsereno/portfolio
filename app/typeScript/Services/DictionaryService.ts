@@ -25,9 +25,9 @@ export class DictionaryService implements IDictionaryService
             inputArray[0] = inputArray[0].toUpperCase();
 
             let inputToUse = inputArray.join(""),
-            result = dictionary[inputToUse] !== undefined,
-            description = result ?  dictionary[inputToUse] : "No results found.",
-            dictionaryResultsModel = new DictionaryResultsModel(result, description, inputToUse);
+                result = dictionary[inputToUse] !== undefined,
+                description = result ? dictionary[inputToUse] : "No results found.",
+                dictionaryResultsModel = new DictionaryResultsModel(result, description, inputToUse);
 
         return dictionaryResultsModel;
     }
