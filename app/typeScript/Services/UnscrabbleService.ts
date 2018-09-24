@@ -28,9 +28,10 @@ export class UnscrabbleService implements IUnscrabbleService
             inputArray = this.stringService.ToArray(findThisNormalised),
             resultsArray = [],
             firstLetterExists = scrabbleArray.indexOf(inputArray[0]),
+            lastLetterExists = scrabbleArray.indexOf(inputArray[inputArray.length-1]),
             result = false;
 
-        if(firstLetterExists > -1) {    
+        if(firstLetterExists > -1 && lastLetterExists > -1) {    
 
             for (var i = 0; i < inputArray.length; i++) {
                 
