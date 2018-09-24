@@ -10,6 +10,9 @@ block content
         .col-lg-12
           h3 Result:  
             span#result.result
+          h3 Description:
+            span#resultDescription.result
+      hr
       .row.splitter
         .col-lg-12
           h3 Your Results:  
@@ -18,13 +21,15 @@ block content
         .col-lg-12
           h3 Unscrabbler Results:  
             div#unscrabblerResults.result
+      hr
       .row.splitter
         .col-lg-12
           h3 Winner:  
             span#winnerResults.result
-      .row
-        .col-lg-3
-          form#unscrabblerForm
+      hr
+      form#unscrabblerForm
+        .row  
+          .col-lg-4
             .form-group
               label(for="scrabbleInput") Find words in this:
               input#scrabbleInput.form-control(
@@ -32,17 +37,20 @@ block content
                 type="text", 
                 placeholder="Scrabble...",
                 readonly)
+          .col-lg-4
             .form-group
-              label(for="findInput") Enter a word to see if it can be found:
-              input#findInput.form-control(
-                name="findInput", 
-                type="text", 
-                placeholder="What can you find ?", 
-                required)
-             
-            button.btn.btn-primary(type="submit") Submit
-            button#unscrabbleAll.btn.btn-primary(type="button") Unscrabble All
-            button#reset.btn.btn-primary(type="button") Reset
+                label(for="findInput") Enter a word to see if it can be found:
+                input#findInput.form-control(
+                  name="findInput", 
+                  type="text", 
+                  placeholder="What can you find ?", 
+                  required)    
+          .col-lg-4 
+              label Actions
+              .form-group
+                button.btn.btn-primary(type="submit") Submit
+                button#unscrabbleAll.btn.btn-primary(type="button") Unscrabble All
+                button#reset.btn.btn-primary(type="button") Reset
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

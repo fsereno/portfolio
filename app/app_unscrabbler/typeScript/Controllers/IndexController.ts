@@ -149,8 +149,9 @@ export class IndexController  {
                         yourResultsArray.push(findThis);
                         
                     }
-                        
+
                     jQuery("#result").text(outcome);
+                    jQuery("#resultDescription").text(dictionaryResultModel.description);
                     jQuery("#yourResults").text(yourResultsArray.join(", "));
 
                 }   
