@@ -13,8 +13,8 @@ import { DictionaryRepository } from "../../typeScript/Repositories/DictionaryRe
 let dictionaryRepository = new DictionaryRepository();
 
 // Instantiate Services with dependency injection
-let dictionaryService = new DictionaryService(dictionaryRepository);
-let validatorService = new ValidatorService();
+let dictionaryService = new DictionaryService(dictionaryRepository),
+    validatorService = new ValidatorService();
 
 // Controllers
 let indexController = new IndexController

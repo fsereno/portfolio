@@ -5,22 +5,28 @@ import { IndexController } from "./Controllers/IndexController";
 // Services
 import { StringService } from "../../typeScript/Services/StringService";
 import { ValidatorService } from "../../typeScript/Services/validatorService";
+import { RandomGeneratorService } from "../../typeScript/Services/RandomGeneratorService"
 
 // Repositories
-import { StringRepository } from "../../typeScript/Repositories/StringRepository";
+import { RandomGeneratorRepository } from "../../typeScript/Repositories/RandomGeneratorRepository";
 
 // Repositories
-let stringRepository = new StringRepository();
+let randomGeneratorRepository = new RandomGeneratorRepository();
 
 // Instantiate Services with dependency injection
-let stringService = new StringService(stringRepository);
-let validatorService = new ValidatorService();
+let stringService = new StringService(),
+    validatorService = new ValidatorService(),
+    randomGeneratorService = new RandomGeneratorService(
+    stringService,
+    randomGeneratorRepository
+    );
 
 // Controllers
 let indexController = new IndexController
 (
     stringService,
-    validatorService
+    validatorService,
+    randomGeneratorService
 );
 
 indexController.init();

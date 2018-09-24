@@ -3,6 +3,7 @@ import { IStringService } from "../../../typeScript/Interfaces/IStringService";
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 import { IDictionaryService } from "../../../typeScript/Interfaces/IDictionaryService";
 import { IUnscrabbleService } from "../../../typeScript/Interfaces/IUnscrabbleService";
+import { IRandomGeneratorService } from "../../../typeScript/Interfaces/IRandomGeneratorService";
 
 export class IndexController  {
     
@@ -10,6 +11,7 @@ export class IndexController  {
     private validatorService: IValidatorService;
     private dictionaryService: IDictionaryService;
     private unscrabbleService: IUnscrabbleService;
+    private randomGeneratorService: IRandomGeneratorService;
 
     constructor
     (
@@ -17,7 +19,8 @@ export class IndexController  {
         stringService: IStringService,
         validatorService: IValidatorService,
         dictionaryService: IDictionaryService,
-        unscrabbleService: IUnscrabbleService
+        unscrabbleService: IUnscrabbleService,
+        randomGeneratorService: IRandomGeneratorService
 
     ) 
     {
@@ -25,6 +28,7 @@ export class IndexController  {
         this.validatorService = validatorService;
         this.dictionaryService = dictionaryService;
         this.unscrabbleService = unscrabbleService;
+        this.randomGeneratorService = randomGeneratorService;
     }
 
     init() {
@@ -48,11 +52,11 @@ export class IndexController  {
 
         const self = this;
 
-        let constonants = self.stringService.Constonants,
-            vowels = self.stringService.Vowels,
+        let constonants = self.randomGeneratorService.Constonants,
+            vowels = self.randomGeneratorService.Vowels,
             criteria = [constonants, vowels];
 
-        let randomString = self.stringService.GenerateRandom(criteria, 15);
+        let randomString = self.randomGeneratorService.GenerateRandom(criteria, 15);
 
         return randomString
     }
