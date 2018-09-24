@@ -8,11 +8,13 @@ describe("DictionaryService", () => {
             let dictionaryRepository = new DictionaryRepository(),
                 dictionaryService = new DictionaryService(dictionaryRepository),
                 dictionaryResultsModelCase1 = dictionaryService.Find("avowance"),
-                dictionaryResultsModelCase2 = dictionaryService.Find("sdfsdfsd");
+                dictionaryResultsModelCase2 = dictionaryService.Find("sdfsdfsd"),
+                dictionaryResultsModelCase3 = dictionaryService.Find("AVOWANCE");
 
             expect(dictionaryResultsModelCase1.result).to.be.equal(true);
             expect(dictionaryResultsModelCase2.result).to.be.equal(false);
             expect(dictionaryResultsModelCase2.description).to.be.equal("No results found.");
+            expect(dictionaryResultsModelCase3.result).to.be.equal(true);
         });
     });
 });

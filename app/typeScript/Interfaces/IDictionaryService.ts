@@ -1,5 +1,5 @@
-import { DictionaryResultsModel } from "../Models/DictionaryResultsModel";
+import { DictionaryResultModel } from "../Models/DictionaryResultModel";
 
 export interface IDictionaryService  {
-    Find(word: string): DictionaryResultsModel;
+    Find(word: string): DictionaryResultModel;
 }

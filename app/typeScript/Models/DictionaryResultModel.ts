@@ -1,4 +1,4 @@
-export class DictionaryResultsModel {
+export class DictionaryResultModel {
 
     public result: boolean;
     public description: string;
