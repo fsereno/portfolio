@@ -14,10 +14,12 @@ describe("UnscrabbleService", () => {
                 stringService = new StringService(),
                 unscrabbleService = new UnscrabbleService(stringService, dictionaryRepository),
                 resultCase1 = unscrabbleService.Unscrabble("Sleep", "Pseleedbnopos"),
-                resultCase2 = unscrabbleService.Unscrabble("Xerox", "Pseleedbnopos");
+                resultCase2 = unscrabbleService.Unscrabble("sleep", "PSELEEDBNOPOS"),
+                resultCase3 = unscrabbleService.Unscrabble("Xerox", "Pseleedbnopos");
 
             expect(resultCase1).to.equal(true);
-            expect(resultCase2).to.equal(false);
+            expect(resultCase2).to.equal(true);
+            expect(resultCase3).to.equal(false);
         });
     });
     describe("UnscrabbleAll", () => {
