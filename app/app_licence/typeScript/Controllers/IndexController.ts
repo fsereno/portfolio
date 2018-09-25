@@ -27,8 +27,6 @@ export class IndexController  {
 
             var text = self.stringService.Concat("Application ", "Master Template");
 
-            console.log(text);
-
         });
 
     }

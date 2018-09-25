@@ -6,6 +6,9 @@ export class IndexController  {
     
     private validatorService: IValidatorService;
     private randomGeneratorService: IRandomGeneratorService;
+    private lengthInput: JQuery<HTMLElement>;
+    private result: JQuery<HTMLElement>;
+    private formId: string;
 
     constructor
     (
@@ -17,6 +20,9 @@ export class IndexController  {
     {
         this.validatorService = validatorService;
         this.randomGeneratorService = randomGeneratorService;
+        this.lengthInput = jQuery("#lengthInput");
+        this.result = jQuery("#result");
+        this.formId = "randomGeneratorForm";
     }
 
     init() {
@@ -25,12 +31,12 @@ export class IndexController  {
 
         jQuery(() => {
 
-            self.validateForm("randomGeneratorForm");
+            self.validateForm();
         
         });
     }
 
-    validateForm(formId: string){
+    validateForm(){
 
         const self = this;
         let validateFormOptions = {
@@ -38,7 +44,7 @@ export class IndexController  {
             submitHandler: (form: HTMLElement)=>{
 
                 let valid = jQuery(form).valid(),
-                    length = jQuery("#lengthInput").val();
+                    length = self.lengthInput.val();
                 
                 if(valid){
                     
@@ -47,12 +53,12 @@ export class IndexController  {
                         criteria = [alpha, numeric];
 
                     let result = self.randomGeneratorService.GenerateRandom(criteria, Number(length));
-                    jQuery("#result").text(result);
+                    self.result.text(result);
 
                 }   
             }
         }
 
-        self.validatorService.ValidateForm(formId, validateFormOptions);
+        self.validatorService.ValidateForm(self.formId, validateFormOptions);
     }
 }

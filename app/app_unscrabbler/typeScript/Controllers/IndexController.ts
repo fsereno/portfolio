@@ -20,6 +20,7 @@ export class IndexController  {
     private unscrabbleAllBtn: JQuery<HTMLElement>;
     private findInput: JQuery<HTMLElement>;
     private resultDescription: JQuery<HTMLElement>;
+    private formId: string;
 
     constructor
     (
@@ -44,6 +45,7 @@ export class IndexController  {
         this.unscrabbleAllBtn = jQuery("#unscrabbleAllBtn");
         this.findInput = jQuery("#findInput");
         this.resultDescription = jQuery("#resultDescription");
+        this.formId = "unscrabblerForm";
     }
 
     init() {
@@ -164,6 +166,6 @@ export class IndexController  {
             }
         }
 
-        self.validatorService.ValidateForm("unscrabblerForm", validateFormOptions);
+        self.validatorService.ValidateForm(self.formId, validateFormOptions);
     }
 }
