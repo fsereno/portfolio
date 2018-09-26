@@ -6,6 +6,10 @@ export class IndexController  {
     
     private stringService: IStringService;
     private validatorService: IValidatorService;
+    private findInput: JQuery<HTMLElement>;
+    private result: JQuery<HTMLElement>;
+    private replaceInput: JQuery<HTMLElement>;
+    private formId: string;
 
     constructor
     (
@@ -17,6 +21,10 @@ export class IndexController  {
     {
         this.stringService = stringService;
         this.validatorService = validatorService;
+        this.result = jQuery("#result");
+        this.findInput = jQuery("#findInput");
+        this.replaceInput = jQuery("#replaceInput");
+        this.formId = "findReplaceForm";
     }
 
     init() {
@@ -25,12 +33,12 @@ export class IndexController  {
 
         jQuery(() => {
 
-            self.validateForm("findReplaceForm");
+            self.validateForm();
         
         });
     }
 
-    validateForm(formId: string){
+    validateForm(){
 
         const self = this;
         let validateFormOptions = {
@@ -38,9 +46,9 @@ export class IndexController  {
             submitHandler: (form: HTMLElement)=>{
 
                 let valid = jQuery(form).valid(),
-                    findThis = jQuery("#findInput").val().toString(),
-                    inThis = jQuery("#result").text(),
-                    replaceWithThis = jQuery("#replaceInput").val().toString();
+                    findThis = self.findInput.val().toString(),
+                    inThis = self.result.text(),
+                    replaceWithThis = self.replaceInput.val().toString();
 
                 if(valid){
 
@@ -53,6 +61,6 @@ export class IndexController  {
             }
         }
 
-        self.validatorService.ValidateForm(formId, validateFormOptions);
+        self.validatorService.ValidateForm(self.formId, validateFormOptions);
     }
 }

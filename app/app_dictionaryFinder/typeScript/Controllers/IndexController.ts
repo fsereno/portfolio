@@ -6,6 +6,9 @@ export class IndexController  {
     
     private dictionaryService: IDictionaryService;
     private validatorService: IValidatorService;
+    private input: JQuery<HTMLElement>;
+    private result: JQuery<HTMLElement>;
+    private formId: string;
 
     constructor
     (
@@ -17,6 +20,9 @@ export class IndexController  {
     {
         this.dictionaryService = dictionaryService;
         this.validatorService = validatorService;
+        this.input = jQuery("#input");
+        this.result = jQuery("#result");
+        this.formId = "inputForm";
     }
 
     init() {
@@ -25,12 +31,12 @@ export class IndexController  {
 
         jQuery(() => {
 
-            self.validateForm("inputForm");
+            self.validateForm();
         
         });
     }
 
-    validateForm(formId: string){
+    validateForm(){
 
         const self = this;
         let validateFormOptions = {
@@ -38,19 +44,23 @@ export class IndexController  {
             submitHandler: (form: HTMLElement)=>{
 
                 let valid = jQuery(form).valid(),
-                    input = jQuery("#input").val().toString();
+                    input = self.input.val().toString();
 
                 if(valid){
 
                     let dictionaryResultsModel = this.dictionaryService.Find(input),
-                        result = dictionaryResultsModel.result.toString() + ": " + dictionaryResultsModel.word + ", " + dictionaryResultsModel.description;
+                        result = dictionaryResultsModel.result.toString() 
+                        + ": " 
+                        + dictionaryResultsModel.word 
+                        + ", " 
+                        + dictionaryResultsModel.description;
 
-                    jQuery("#result").text(result);
+                    self.result.text(result);
 
                 }   
             }
         }
 
-        self.validatorService.ValidateForm(formId, validateFormOptions);
+        self.validatorService.ValidateForm(self.formId, validateFormOptions);
     }
 }
