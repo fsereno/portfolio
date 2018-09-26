@@ -5,12 +5,11 @@
 .error {
   color: red; }
 
-span#result {
+span#result, .result {
   font-weight: 100;
-  border: 1px solid #ced4da;
   padding: .375rem .75rem;
   border-radius: .25rem;
-  line-height: 2em; }
+  line-height: 1em; }
 
 .row.splitter {
   margin-bottom: .75rem; }
