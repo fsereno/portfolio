@@ -10,7 +10,7 @@ block content
         | Applications
       
       if locals.config.applications.length > 0
-        ul
+        ul#applicatonList
           each application, index in locals.config.applications
             if application.active !== false && application.include !== false
               li
