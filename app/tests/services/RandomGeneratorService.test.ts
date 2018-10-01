@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import { RandomGeneratorService } from "../typeScript/Services/RandomGeneratorService";
-import { StringService } from "../typeScript/Services/StringService";
-import { RandomGeneratorRepository } from "../typeScript/Repositories/RandomGeneratorRepository";
+import { RandomGeneratorService } from "../../typeScript/Services/RandomGeneratorService";
+import { StringService } from "../../typeScript/Services/StringService";
+import { RandomGeneratorRepository } from "../../typeScript/Repositories/RandomGeneratorRepository";
 
 describe("RandomGeneraterService", () => {
     describe("GenerateRandom", () => {

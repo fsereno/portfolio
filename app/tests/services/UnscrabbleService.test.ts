@@ -1,11 +1,11 @@
 import { expect } from "chai";
 
 // Services
-import { UnscrabbleService } from "../typeScript/Services/UnscrabbleService";
-import { StringService } from "../typeScript/Services/StringService";
+import { UnscrabbleService } from "../../typeScript/Services/UnscrabbleService";
+import { StringService } from "../../typeScript/Services/StringService";
 
 // Repositories
-import { DictionaryRepository } from "../typeScript/Repositories/DictionaryRepository";
+import { DictionaryRepository } from "../../typeScript/Repositories/DictionaryRepository";
 
 describe("UnscrabbleService", () => {
     describe("Unscrabble", () => {

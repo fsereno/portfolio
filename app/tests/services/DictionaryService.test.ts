@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { DictionaryService } from "../typeScript/Services/DictionaryService";
-import { DictionaryRepository } from "../typeScript/Repositories/DictionaryRepository";
+import { DictionaryService } from "../../typeScript/Services/DictionaryService";
+import { DictionaryRepository } from "../../typeScript/Repositories/DictionaryRepository";
 
 describe("DictionaryService", () => {
     describe("Find", () => {

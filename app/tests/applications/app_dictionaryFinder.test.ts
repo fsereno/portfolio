@@ -1,30 +1,24 @@
 import Nightmare  = require("nightmare");
 import { expect } from "chai";
 
-describe("app_home", () => {
+describe("app_dictionaryFinder", () => {
     
         var url = 'http://localhost:8080/app_dictionaryFinder/index.html';
         
-        describe('Start page', () => {
-            it('should show form when loaded', () => {
-                new Nightmare({show:true})
+        describe('Dictionary Finder', function(){
+            it("Should return a string of length 358 when searching for 'Sleep'", function() {
+                this.timeout(10000);
+                return new Nightmare({show:false})
                     .goto(url)
                     .type('form#inputForm input[name="input"]', "Sleep")
                     .click('form#inputForm button[type="submit"]')
-                    
                     .evaluate(() => {
                         return jQuery("#result").text().length;
                     })
+                    .end()
                     .then((result)=>{
                         expect(result).to.be.equal(358);
                     })
-                    .catch((error) => {
-                        console.log("ERROR")
-                    })
-                    
             });
-
-            
         });
-    
 });

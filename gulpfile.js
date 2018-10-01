@@ -158,6 +158,14 @@ gulp.task("fonts", () => {
     return output;
 });
 
+gulp.task("mochaServices", () => {
+  return gulp.src(config.developmentDir+"/tests/services/*.test.ts")
+    .pipe(mocha({
+        reporter: "spec",
+        require: ["ts-node/register"]
+    }));
+});
+
 gulp.task("mocha", () => {
   return gulp.src(config.developmentDir+"/**/*.test.ts")
     .pipe(mocha({
@@ -186,7 +194,7 @@ gulp.task("create", () => {
   config.applications.map(createTasks);
 });
 
-gulp.task("publish",["mocha", "images", "fonts"], () => {
+gulp.task("publish",["mochaServices", "images", "fonts"], () => {
   config.applications.map(publishTasks);
 });
 

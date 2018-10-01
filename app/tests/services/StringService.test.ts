@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { StringService } from "../typeScript/Services/StringService";
+import { StringService } from "../../typeScript/Services/StringService";
 
 describe("StringService", () => {
     describe("Concat", () => {

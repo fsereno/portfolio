@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { ValidatorService } from "../typeScript/Services/ValidatorService";
+import { ValidatorService } from "../../typeScript/Services/ValidatorService";
 
 describe("ValidatorService", () => {
     describe("validateForm", () => {
