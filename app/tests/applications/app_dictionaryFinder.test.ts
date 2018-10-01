@@ -1,6 +1,6 @@
 import Nightmare  = require("nightmare");
 import { expect } from "chai";
-
+//https://wietse.loves.engineering/testing-promises-with-mocha-90df8b7d2e35
 describe("app_dictionaryFinder", () => {
     
         var url = 'http://localhost:8080/app_dictionaryFinder/index.html';
