@@ -1,8 +1,3 @@
-//let chai = require("chai");
-//let chaiAsPromised = require("chai-as-promised");
-//chai.use(chaiAsPromised)
-//let expect = chai.expect;
-
 import Nightmare  = require("nightmare");
 const   chai = require('chai'),
         chaiAsPromised = require('chai-as-promised'),
@@ -27,7 +22,7 @@ const   url = "http://localhost:8080/app_dictionaryFinder/index.html",
         }
 
 describe("app_dictionaryFinder", () => {
-    it("Search for 'Sleep', should return string of length '358'", function () {
+    it("Should return string of length '358', when searching for 'Sleep'", function () {
         this.timeout(0);
         return  nightmare.test(url).should.eventually.equal(358)
     });

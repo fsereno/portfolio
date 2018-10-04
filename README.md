@@ -4,12 +4,13 @@
 ### A Portfolio Repository
 The purpose of this repository is to demonstrate skills in various technologies, coding principles and patterns:
 
-- Gulp (As the task runner)
-- Pug (Compiled to: HTML)
-- TypeScript (Compiled to: JavaScript)
-- Sass (Compiled to: CSS)
-- Mocha (For TS/JS unit testing)
-- Chai (For TS/JS unit test assertion)
+- Gulp (https://gulpjs.com)
+- Pug (https://pugjs.org/api/getting-started.html)
+- TypeScript (https://www.typescriptlang.org)
+- Sass (https://sass-lang.com/)
+- Mocha (https://mochajs.org/)
+- Chai (https://www.chaijs.com/)
+- Nightmare (https://github.com/segmentio/nightmare)
 - SOLID (SOLID Design principles throughout)
 ---
 
