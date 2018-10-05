@@ -3,8 +3,8 @@ const   chai = require('chai'),
         chaiAsPromised = require('chai-as-promised'),
         sinonChai = require('sinon-chai'),
         should = chai.should(),
-        expectedResult:Number = 358,
-        application = "app_dictionaryFinder";
+        expectedResult:Number = 10,
+        application = "app_randomGenerator";
         
 chai.use(sinonChai); 
 chai.use(chaiAsPromised);
@@ -14,17 +14,18 @@ const   url = "http://localhost:8080/"+application+"/index.html",
             test: async (url) => {
                 return new Nightmare({show:false})
                 .goto(url)
-                .type('form#inputForm input[name="input"]', "Sleep")
-                .click('form#inputForm button#submit')
+                .type('#lengthInput', '10')
+                .click('#submit')
+                .end()
                 .evaluate(() => {
-                    return jQuery("#result").text().length;
+                    return jQuery("#result").text().length;         
                 })
                 .end();
             }
         }
 
 describe(application, () => {
-    it("Should return string of length '"+expectedResult+"', when searching for 'Sleep'", function() {
+    it("Should return a string of length "+ expectedResult + ", when input is 10.", function() {
         this.timeout(0);
         return  nightmare.test(url).should.eventually.equal(expectedResult)
     });

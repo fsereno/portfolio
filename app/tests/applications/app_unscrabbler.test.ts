@@ -3,8 +3,9 @@ const   chai = require('chai'),
         chaiAsPromised = require('chai-as-promised'),
         sinonChai = require('sinon-chai'),
         should = chai.should(),
-        expectedResult:Number = 358,
-        application = "app_dictionaryFinder";
+        expectedResult:boolean = true,
+        unscrabblerExpectedResults = 8564,
+        application = "app_unscrabbler";
         
 chai.use(sinonChai); 
 chai.use(chaiAsPromised);
@@ -14,17 +15,22 @@ const   url = "http://localhost:8080/"+application+"/index.html",
             test: async (url) => {
                 return new Nightmare({show:false})
                 .goto(url)
-                .type('form#inputForm input[name="input"]', "Sleep")
-                .click('form#inputForm button#submit')
+                .evaluate(function() {
+                    return jQuery("#scrabbleInput").val("").removeAttr("readonly");
+                })
+                .type('#scrabbleInput', 'CUMELTONQUAIFWE')
+                .type('#findInput', 'Quit')
+                .click('#submit')
+                .end()
                 .evaluate(() => {
-                    return jQuery("#result").text().length;
+                    return jQuery("#yourResults").text().length > 0;         
                 })
                 .end();
             }
         }
 
 describe(application, () => {
-    it("Should return string of length '"+expectedResult+"', when searching for 'Sleep'", function() {
+    it("Should return "+ expectedResult + ", when input is 'CUMELTONQUAIFWE' and 'Quit'.", function() {
         this.timeout(0);
         return  nightmare.test(url).should.eventually.equal(expectedResult)
     });

@@ -1,7 +1,11 @@
 <a href="http://fswebsitesolutions.com/"><img src="https://raw.githubusercontent.com/fsereno/portfolio/master/dist/images/FSLogo.jpeg" title="FS Website Solutions" alt="FS Website Solutions" target="_blank"></a>
 
 # **Fabio Sereno** - Software Developer
-### A Portfolio Repository
+Highly Experienced Full Stack Web Developer. Highly self-motivated, enthusiastic, professional and a team player. Possesses strong analytical and problem solving skills, code proficiency, and an ability to follow through with projects from initiation to completion with innovation and creativity.
+
+Very keen on learning and using the latest technologies, with a real passion for software development in general. Personal interests include exciting technologies such as Artificial Intelligence, Machine Learning, Virtual Reality and Blockchain development.
+
+### My Portfolio Repository
 The purpose of this repository is to demonstrate skills in various technologies, coding principles and patterns:
 
 - Gulp (https://gulpjs.com)
@@ -52,19 +56,29 @@ $ npm install
 
 ## Tasks
 
-#### Run the default Gulp build task
+#### Run the initial Gulp build task (Run this first)
+
+```shell
+$ gulp build
+```
+##### This will:
+- Build the initial development resources (pug, sass, ts).
+- Run Mocha Unti tests on backend Service code only
+
+#### Run the default Gulp task
 
 ```shell
 $ gulp
 ```
 ##### This will:
-- Build the initial development resources (pug, sass, ts).
+- Rebuild development resources (pug, sass, ts).
 - Start the development server.
+- Run Mocha Unit tests, both frontend and backend.
 - Watch for any changes on development resources.
 - Live Reload any changes straight to the browser.
 - Open your browser and navigate to http://localhost:8080
 
-#### Run the Publish Gulp task
+#### Run the Gulp Publish task
 
 ```shell
 $ gulp publish
@@ -75,7 +89,7 @@ $ gulp publish
 - Replace resource urls with production urls.
 - Run all Unit Tests from the ./app/tests directory using Mocha and Chai.
 
-#### Run the Create Gulp task
+#### Run the Gulp Create task
 
 ```shell
 $ gulp create

@@ -198,6 +198,10 @@ gulp.task("publish",["mochaServices", "images", "fonts"], () => {
   config.applications.map(publishTasks);
 });
 
+gulp.task("build", ["mochaServices"], () => {
+  config.applications.map(defaultTasks);
+});
+
 gulp.task("default",["mocha", "connect", "watch"], () => {
   config.applications.map(defaultTasks);
 });
