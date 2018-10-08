@@ -23,7 +23,7 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Tasks](#tasks)
-- [Code Examples](#code examples)
+- [CodeExamples](#codeexamples)
 - [License](#license)
 ---
 
@@ -102,7 +102,7 @@ $ gulp create
 - If all applications already exist, nothing will be overwritten.
 ---
 
-## Code Examples
+## CodeExamples
 
 #### app/C#/eventsAndDelegates.cs
 
