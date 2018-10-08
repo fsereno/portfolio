@@ -40,7 +40,7 @@ namespace EventsAndDelegates.HeatingSystem {
 	}	
 }
 
-namespace ProgrameNameSpace {
+namespace EventsAndDelegates.Programe {
 	
 	public class Programe {
 		
