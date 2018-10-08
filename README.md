@@ -23,6 +23,7 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Tasks](#tasks)
+- [Code Examples](#code examples)
 - [License](#license)
 ---
 
@@ -99,6 +100,18 @@ $ gulp create
 - Then run this command to build applications based on the config.json file.
 - New applications are built based on the app_master template application.
 - If all applications already exist, nothing will be overwritten.
+---
+
+## Code Examples
+
+#### app/C#/eventsAndDelegates.cs
+
+##### Example of Events and Delegates in C#
+- Shows how to define an Event.
+- How to define a Publisher.
+- How to define an Event Handler.
+- How to Subscribe to an Event.
+- Also shows understanding of Event Driven Services and understanding of loosley coupled SOA (Service Orientated Architecture)
 ---
 
 ## License
