@@ -63,6 +63,9 @@ namespace ProgrameNameSpace {
 			// Envoke the Encode method
  			heatingController.Engage(instruction);
 			Console.WriteLine("Process Complete, heating engaged!");
+            System.Console.WriteLine("Your heating will start at {0}", instruction.StartTime);
+            System.Console.WriteLine("Your heating will end at {0}", instruction.EndTime);
+            System.Console.WriteLine("Your heating will be at a temperature of {0} degrees", instruction.Degrees);
 		}
 	}
 
