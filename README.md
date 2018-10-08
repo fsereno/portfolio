@@ -64,7 +64,7 @@ $ gulp build
 ```
 ##### This will:
 - Build the initial development resources (pug, sass, ts).
-- Run Mocha Unti tests on backend Service code only
+- Run Mocha Unit tests on backend Service code only
 
 #### Run the default Gulp task
 
@@ -108,10 +108,11 @@ $ gulp create
 
 ##### Example of Events and Delegates in C#
 - Shows how to define an Event.
-- How to define a Publisher.
-- How to define an Event Handler.
-- How to Subscribe to an Event.
-- Also shows understanding of Event Driven Services and understanding of loosley coupled SOA (Service Orientated Architecture)
+- Shows how to define a Delegate.
+- Show how to define a Publisher.
+- Show how to define an Event Handler.
+- Show how to Subscribe to an Event.
+- Also shows understanding of Event Driven Services and understanding of loosely coupled SOA (Service Oriented Architecture)
 ---
 
 ## License
@@ -120,3 +121,4 @@ $ gulp create
 
 - **[MIT license](http://fswebsitesolutions.com/porfolio/app_licence/index.html)**
 - Copyright 2018 © <a href="http://fswebsitesolutions.com/" target="_blank">FS Website Solutions</a>.
+
