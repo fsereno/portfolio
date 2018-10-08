@@ -115,6 +115,12 @@ $ gulp create
 - Also shows understanding of Event Driven Services and understanding of loosely coupled SOA (Service Oriented Architecture)
 ---
 
+#### app/C#/generics.cs
+
+##### Example of Generics in C#
+- Shows how to define a Generic Type.
+- Shows how to pass multiple types to the same signature/method using Generic Types.
+
 ## License
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
