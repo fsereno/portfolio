@@ -5,7 +5,7 @@ Highly Experienced Full Stack Web Developer. Highly self-motivated, enthusiastic
 
 Very keen on learning and using the latest technologies, with a real passion for software development in general. Personal interests include exciting technologies such as Artificial Intelligence, Machine Learning, Virtual Reality and Blockchain development.
 
-### My Portfolio Repository
+## My Portfolio Repository
 The purpose of this repository is to demonstrate skills in various technologies, coding principles and patterns:
 
 - Gulp (https://gulpjs.com)
@@ -16,6 +16,7 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - Chai (https://www.chaijs.com/)
 - Nightmare (https://github.com/segmentio/nightmare)
 - SOLID (SOLID Design principles throughout)
+- Code Examples
 ---
 
 ## Contents
@@ -104,7 +105,7 @@ $ gulp create
 
 ## CodeExamples
 
-#### app/codeExamples/C#/eventsAndDelegates.cs
+### app/codeExamples/C#/eventsAndDelegates.cs
 
 ##### Example of Events and Delegates in C#
 - Shows how to define an Event.
@@ -115,21 +116,21 @@ $ gulp create
 - Also shows understanding of Event Driven Services and understanding of loosely coupled SOA (Service Oriented Architecture)
 ---
 
-#### app/codeExamples/C#/generics.cs
+### app/codeExamples/C#/generics.cs
 
 ##### Example of Generics in C#
 - Shows how to define a Generic Type.
 - Shows how to pass varying types to the same signature/method using Generic Types.
 ---
 
-#### app/codeExamples/C#/abstracts.cs
+### app/codeExamples/C#/abstracts.cs
 
 ##### Example of Abstracts in C#
 - Shows how to define an Abstract Class and Abstract Methods.
 - Shows how to inherit the Abstract Class and override methods.
 - Shows evidence of a basic understanding of the Liskov Substitution Principle.
 
-#### app/codeExamples/JS/closures.js
+### app/codeExamples/JS/closures.js
 
 ##### Example of Closures in JS
 - Shows how to create a “private” variable in JavaScript using a Closure.
@@ -137,7 +138,7 @@ $ gulp create
 - Only the method can increment out private variable.
 ---
 
-#### app/codeExamples/JS/prototypes.js
+### app/codeExamples/JS/prototypes.js
 
 ##### Example of Prototype Inheritance in JS
 - Shows how a JS object inherits from the Prototype.
@@ -145,7 +146,7 @@ $ gulp create
 - A more traditional OO approach is now possible as of EcmaScript 2015 (ES6).
 ---
 
-#### app/codeExamples/JS/promises.js
+### app/codeExamples/JS/promises.js
 
 ##### Example of Promises in JS
 - Shows an alternative, much cleaner approach to the Asynchronous JavsScript Callback problem. (Callback Hell!)
