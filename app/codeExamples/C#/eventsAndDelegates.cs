@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace EventsAndDelegates.HeatingSystem {
+namespace CodeExamples.EventsAndDelegates.HeatingSystem {
 	public class Instruction {
 		public DateTime StartTime;
         public DateTime EndTime;
@@ -38,7 +38,7 @@ namespace EventsAndDelegates.HeatingSystem {
 	}	
 }
 
-namespace EventsAndDelegates.Services {
+namespace CodeExamples.EventsAndDelegates.Services {
 	public class MailService 
 	{
 		public void OnHeatingEngaged(object source, EventArgs e)
@@ -58,19 +58,19 @@ namespace EventsAndDelegates.Services {
 	}
 }
 
-namespace EventsAndDelegates.Programe {
+namespace CodeExamples.EventsAndDelegates.Programe {
 	public class Programe {
 		public void Main(){
 			
-			var instruction = new EventsAndDelegates.HeatingSystem.Instruction(
+			var instruction = new CodeExamples.EventsAndDelegates.HeatingSystem.Instruction(
                 new DateTime(),
                 new DateTime(),
                 21
             );
 
-			var heatingController = new EventsAndDelegates.HeatingSystem.HeatingController(); // Publisher
-			var mailService = new EventsAndDelegates.Services.MailService(); // Subscriber
-			var messageService = new EventsAndDelegates.Services.MessageService(); // Subscriber
+			var heatingController = new CodeExamples.EventsAndDelegates.HeatingSystem.HeatingController(); // Publisher
+			var mailService = new CodeExamples.EventsAndDelegates.Services.MailService(); // Subscriber
+			var messageService = new CodeExamples.EventsAndDelegates.Services.MessageService(); // Subscriber
 
 			// Pointers / Subscribe to the Event
 			heatingController.HeatingEngaged += mailService.OnHeatingEngaged;
