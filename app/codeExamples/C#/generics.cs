@@ -1,8 +1,6 @@
 using System;
-using System.Threading;
 
 namespace Generics.Code {
-
 	public class ExampleComplexType
     {   
         public string Name;
@@ -12,7 +10,6 @@ namespace Generics.Code {
             this.Name = name;
         }
     }
-
     public class GenericList<T>
     {
         public void Add(T value)
@@ -35,7 +32,6 @@ namespace Generics.Programe
 
             var listofExampleComplexType = new Generics.Code.GenericList<Generics.Code.ExampleComplexType>();
             listofExampleComplexType.Add(exampleComplexType);
-	
 		}
 	}
 }
