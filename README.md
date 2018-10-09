@@ -145,6 +145,14 @@ $ gulp create
 - A more traditional OO approach is now possible as of EcmaScript 2015 (ES6).
 ---
 
+#### app/codeExamples/JS/promises.js
+
+##### Example of Promises in JS
+- Shows an alternative, much cleaner approach to the Asynchronous JavsScript Callback problem.
+- Demonstrates the 3 states of a Promise, Pending, Fulfilled and Rejected.
+- Shows how to define a Promise, how to call it and how to evaluate the result.
+---
+
 ## License
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
