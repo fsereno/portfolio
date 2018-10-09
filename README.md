@@ -129,7 +129,7 @@ $ gulp create
 - Shows how to inherit the Abstract Class and override methods.
 - Shows evidence of a basic understanding of the Liskov Substitution Principle.
 
-#### app/codeExamples/JS/Closures.js
+#### app/codeExamples/JS/closures.js
 
 ##### Example of Closures in JS
 - Shows how to create a “private” variable in JavaScript using a Closure.
@@ -137,6 +137,13 @@ $ gulp create
 - Only the method can increment out private variable.
 ---
 
+#### app/codeExamples/JS/prototypes.js
+
+##### Example of Prototype Inheritance in JS
+- Shows how a JS object inherits from the Prototype.
+- Shows how to extend a JS object without needing to break the Open Closed Principle.
+- A more traditional OO approach is now possible as of EcmaScript 2015 (ES6).
+---
 
 ## License
 
