@@ -1,4 +1,4 @@
-<a href="http://fswebsitesolutions.com/"><img src="https://raw.githubusercontent.com/fsereno/portfolio/master/dist/images/FSLogo.jpeg" title="FS Website Solutions" alt="FS Website Solutions" target="_blank"></a>
+<a href="http://fswebsitesolutions.com/"><img src="https://raw.githubusercontent.com/fsereno/portfolio/master/dist/images/FSLogo.jpeg" style="width:10em" title="FS Website Solutions" alt="FS Website Solutions" target="_blank"></a>
 
 # **Fabio Sereno** - Software Developer
 Highly Experienced Full Stack Web Developer. Highly self-motivated, enthusiastic, professional and a team player. Possesses strong analytical and problem solving skills, code proficiency, and an ability to follow through with projects from initiation to completion with innovation and creativity.
