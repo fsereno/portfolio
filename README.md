@@ -128,7 +128,6 @@ $ gulp create
 - Shows how to define an Abstract Class and Abstract Methods.
 - Shows how to inherit the Abstract Class and override methods.
 - Shows evidence of a basic understanding of the Liskov Substitution Principle.
-Types.
 
 ## License
 
