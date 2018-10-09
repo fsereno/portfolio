@@ -15,7 +15,7 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - Mocha (https://mochajs.org/)
 - Chai (https://www.chaijs.com/)
 - Nightmare (https://github.com/segmentio/nightmare)
-- SOLID (SOLID Design principles throughout)
+- SOLID (SOLID Design principles in mind, throughout)
 - Code Examples
 ---
 
@@ -105,7 +105,9 @@ $ gulp create
 
 ## CodeExamples
 
-### app/codeExamples/C#/eventsAndDelegates.cs
+### C# Events and Delegates
+
+#### app/codeExamples/C#/eventsAndDelegates.cs
 
 ##### Example of Events and Delegates in C#
 - Shows how to define an Event.
@@ -116,21 +118,27 @@ $ gulp create
 - Also shows understanding of Event Driven Services and understanding of loosely coupled SOA (Service Oriented Architecture)
 ---
 
-### app/codeExamples/C#/generics.cs
+### C# Generics
+
+#### app/codeExamples/C#/generics.cs
 
 ##### Example of Generics in C#
 - Shows how to define a Generic Type.
 - Shows how to pass varying types to the same signature/method using Generic Types.
 ---
 
-### app/codeExamples/C#/abstracts.cs
+### C# Abstracts
+
+#### app/codeExamples/C#/abstracts.cs
 
 ##### Example of Abstracts in C#
 - Shows how to define an Abstract Class and Abstract Methods.
 - Shows how to inherit the Abstract Class and override methods.
 - Shows evidence of a basic understanding of the Liskov Substitution Principle.
 
-### app/codeExamples/JS/closures.js
+### JS Closures
+
+#### app/codeExamples/JS/closures.js
 
 ##### Example of Closures in JS
 - Shows how to create a “private” variable in JavaScript using a Closure.
@@ -138,7 +146,9 @@ $ gulp create
 - Only the method can increment out private variable.
 ---
 
-### app/codeExamples/JS/prototypes.js
+### JS Prototypes
+
+#### app/codeExamples/JS/prototypes.js
 
 ##### Example of Prototype Inheritance in JS
 - Shows how a JS object inherits from the Prototype.
@@ -146,7 +156,9 @@ $ gulp create
 - A more traditional OO approach is now possible as of EcmaScript 2015 (ES6).
 ---
 
-### app/codeExamples/JS/promises.js
+### JS Promises
+
+#### app/codeExamples/JS/promises.js
 
 ##### Example of Promises in JS
 - Shows an alternative, much cleaner approach to the Asynchronous JavsScript Callback problem. (Callback Hell!)
