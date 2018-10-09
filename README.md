@@ -148,7 +148,7 @@ $ gulp create
 #### app/codeExamples/JS/promises.js
 
 ##### Example of Promises in JS
-- Shows an alternative, much cleaner approach to the Asynchronous JavsScript Callback problem.
+- Shows an alternative, much cleaner approach to the Asynchronous JavsScript Callback problem. (Callback Hell!)
 - Demonstrates the 3 states of a Promise, Pending, Fulfilled and Rejected.
 - Shows how to define a Promise, how to call it and how to evaluate the result.
 ---
