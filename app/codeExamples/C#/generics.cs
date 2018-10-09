@@ -1,6 +1,6 @@
 using System;
 
-namespace Generics.Code {
+namespace CodeExamples.Generics.Code {
 	public class ExampleComplexType
     {   
         public string Name;
@@ -25,12 +25,12 @@ namespace Generics.Programe
     {
 		public void Main()
         {
-            var exampleComplexType = new Generics.Code.ExampleComplexType("Example Type");
+            var exampleComplexType = new CodeExamples.Generics.Code.ExampleComplexType("Example Type");
 
-            var listofInts = new Generics.Code.GenericList<int>();
+            var listofInts = new CodeExamples.Generics.Code.GenericList<int>();
             listofInts.Add(10);
 
-            var listofExampleComplexType = new Generics.Code.GenericList<Generics.Code.ExampleComplexType>();
+            var listofExampleComplexType = new CodeExamples.Generics.Code.GenericList<CodeExamples.Generics.Code.ExampleComplexType>();
             listofExampleComplexType.Add(exampleComplexType);
 		}
 	}
