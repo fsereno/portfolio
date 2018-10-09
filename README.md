@@ -120,6 +120,15 @@ $ gulp create
 ##### Example of Generics in C#
 - Shows how to define a Generic Type.
 - Shows how to pass varying types to the same signature/method using Generic Types.
+---
+
+#### app/codeExamples/C#/abstracts.cs
+
+##### Example of Abstracts in C#
+- Shows how to define an Abstract Class and Abstract Methods.
+- Shows how to inherit the Abstract Class and override methods.
+- Shows evidence of a basic understanding of the Liskov Substitution Principle.
+Types.
 
 ## License
 
