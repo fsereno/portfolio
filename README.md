@@ -129,6 +129,15 @@ $ gulp create
 - Shows how to inherit the Abstract Class and override methods.
 - Shows evidence of a basic understanding of the Liskov Substitution Principle.
 
+#### app/codeExamples/JS/Closures.js
+
+##### Example of Closures in JS
+- Shows how to create a “private” variable in JavaScript using a Closure.
+- Shows how increment that variable externally, using a confined method.
+- Only the method can increment out private variable.
+---
+
+
 ## License
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
