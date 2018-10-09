@@ -105,7 +105,7 @@ $ gulp create
 
 ## CodeExamples
 
-### C# Events and Delegates
+### C# Events and Delegates
 
 #### app/codeExamples/C#/eventsAndDelegates.cs
 
