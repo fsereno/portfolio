@@ -104,18 +104,18 @@ $ gulp create
 
 ## CodeExamples
 
-#### app/C#/eventsAndDelegates.cs
+#### app/codeExamples/C#/eventsAndDelegates.cs
 
 ##### Example of Events and Delegates in C#
 - Shows how to define an Event.
+- Show how to define an Event Handler.
 - Shows how to define a Delegate.
 - Show how to define a Publisher.
-- Show how to define an Event Handler.
 - Show how to Subscribe to an Event.
 - Also shows understanding of Event Driven Services and understanding of loosely coupled SOA (Service Oriented Architecture)
 ---
 
-#### app/C#/generics.cs
+#### app/codeExamples/C#/generics.cs
 
 ##### Example of Generics in C#
 - Shows how to define a Generic Type.
