@@ -119,7 +119,7 @@ $ gulp create
 
 ##### Example of Generics in C#
 - Shows how to define a Generic Type.
-- Shows how to pass multiple types to the same signature/method using Generic Types.
+- Shows how to pass varying types to the same signature/method using Generic Types.
 
 ## License
 
