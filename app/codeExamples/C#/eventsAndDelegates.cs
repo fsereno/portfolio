@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 
 namespace EventsAndDelegates.HeatingSystem {
-
 	public class Instruction {
 		public DateTime StartTime;
         public DateTime EndTime;
@@ -40,7 +39,6 @@ namespace EventsAndDelegates.HeatingSystem {
 }
 
 namespace EventsAndDelegates.Services {
-
 	public class MailService 
 	{
 		public void OnHeatingEngaged(object source, EventArgs e)
@@ -62,7 +60,6 @@ namespace EventsAndDelegates.Services {
 
 namespace EventsAndDelegates.Programe {
 	public class Programe {
-		
 		public void Main(){
 			
 			var instruction = new EventsAndDelegates.HeatingSystem.Instruction(
