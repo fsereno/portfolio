@@ -23,15 +23,15 @@ var findDuplicatesV1 = (array) => {
 var findDuplicatesV2 = (array) => {
 
     var checked = {},
-        duplicate = {},
+        duplicates = {},
         resultArray = [];
 
     for(var i = 0; i < array.length; i++){
         if(checked[array[i]] === undefined){
             checked[array[i]] = true;
         } else {
-            if(duplicate[array[i]] === undefined) {
-                duplicate[array[i]] = true;
+            if(duplicates[array[i]] === undefined) {
+                duplicates[array[i]] = true;
                 resultArray.push(array[i]);
             }
         }
