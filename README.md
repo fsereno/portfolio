@@ -167,6 +167,16 @@ $ gulp create
 - Shows how to define a Promise, how to call it and how to evaluate the result.
 ---
 
+### JS Recursion
+
+#### app/codeExamples/JS/recursion.js
+
+##### Example of Recursion in JS
+- Shows understanding of Recursive Methods in general.
+- Recursion occurs only if: 1) The Fail Safe is not triggered, 2) the Target is not met.
+- Recursion results in nested method calls. Once the Target is met, the result from each call is returned as the call stack unwinds.
+---
+
 ## License
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
