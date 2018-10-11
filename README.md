@@ -106,7 +106,7 @@ $ gulp create
 - If all applications already exist, nothing will be overwritten.
 ---
 
-## Setup for .NetCore driven Applications
+## Setup for .NetCore Driven Applications
 
 - open your prefered command line:
 
