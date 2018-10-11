@@ -15,15 +15,14 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - Mocha (https://mochajs.org/)
 - Chai (https://www.chaijs.com/)
 - Nightmare (https://github.com/segmentio/nightmare)
+- DotnetCore (https://dotnet.github.io/)
 - SOLID (SOLID Design principles in mind, throughout)
-- Code Examples
 ---
 
 ## Contents
 
 - [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Tasks](#tasks)
+- [Installation + Usage](#installation)
 - [CodeExamples](#codeexamples)
 - [License](#license)
 ---
@@ -33,6 +32,7 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - Nodejs v ^11.8.3 (https://nodejs.org/en/)
 - Npm (https://www.npmjs.com/)
 - Gulp (https://gulpjs.com/)
+- .NetCore (https://www.microsoft.com/net/learn/dotnet/hello-world-tutorial)
 ---
 
 ## Installation
@@ -40,12 +40,12 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - Follow these steps to install this repo locally. Feel free to checkout the build process and view uncompiled code.
 ---
 
-### Clone
+## Clone
 
 - Clone this repo to your local machine using `https://github.com/fsereno/portfolio`
 ---
 
-### Setup
+## Setup For Node JS Driven Applications
 
 - open your prefered command line:
 
@@ -56,7 +56,7 @@ $ npm install
 ```
 ---
 
-## Tasks
+### Tasks
 
 #### Run the initial Gulp build task (Run this first)
 
@@ -66,6 +66,7 @@ $ gulp build
 ##### This will:
 - Build the initial development resources (pug, sass, ts).
 - Run Mocha Unit tests on backend Service code only
+---
 
 #### Run the default Gulp task
 
@@ -79,6 +80,7 @@ $ gulp
 - Watch for any changes on development resources.
 - Live Reload any changes straight to the browser.
 - Open your browser and navigate to http://localhost:8080
+---
 
 #### Run the Gulp Publish task
 
@@ -90,6 +92,7 @@ $ gulp publish
 - Bundle the necessary resources into “app” and “vendor” files (js, css).
 - Replace resource urls with production urls.
 - Run all Unit Tests from the ./app/tests directory using Mocha and Chai.
+---
 
 #### Run the Gulp Create task
 
@@ -101,6 +104,30 @@ $ gulp create
 - Then run this command to build applications based on the config.json file.
 - New applications are built based on the app_master template application.
 - If all applications already exist, nothing will be overwritten.
+---
+
+## Setup for .NetCore driven Applications
+
+- open your prefered command line:
+
+> install dotnet packages
+
+```shell
+$ cd app/app_dotnetCore
+$ dotnet restore
+```
+---
+
+### Tasks
+
+#### Go into /PrimeService.Tests and run the unit tests
+
+```shell
+$ dotnet test
+```
+##### This will:
+- Build the solution.
+- Run the NUnit unit tests.
 ---
 
 ## CodeExamples
@@ -135,6 +162,16 @@ $ gulp create
 - Shows how to define an Abstract Class and Abstract Methods.
 - Shows how to inherit the Abstract Class and override methods.
 - Shows evidence of a basic understanding of the Liskov Substitution Principle.
+---
+
+### .NetCore + NUnit
+
+#### app/app_dotnetCore/
+
+##### Example of a .NetCore Porject with NUnit in place
+- Shows understanding of how to create a .NetCore Solution/Project from scratch.
+- Shows knowledge of the dotnet CLI tools.
+- Show undertanding of how to create and write unit tests using NUnit.
 ---
 
 ### JS Closures
