@@ -168,10 +168,10 @@ $ dotnet test
 
 #### app/app_dotnetCore/
 
-##### Example of a .NetCore Porject with NUnit in place
+##### Example of a .NetCore Project with NUnit in place
 - Shows understanding of how to create a .NetCore Solution/Project from scratch.
 - Shows knowledge of the dotnet CLI tools.
-- Show undertanding of how to create and write unit tests using NUnit.
+- Show understanding of how to create and write unit tests using NUnit.
 ---
 
 ### JS Closures
