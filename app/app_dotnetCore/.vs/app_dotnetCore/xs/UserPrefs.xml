@@ -1,0 +1,21 @@
+﻿<Properties StartupConfiguration="{3D8737EE-A7FC-4799-9644-791FA0434DC3}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PrimeService.Tests/PrimeService_IsPrimeShould.cs">
+    <Files>
+      <File FileName="PrimeService.Tests/PrimeService_IsPrimeShould.cs" Line="32" Column="2" />
+    </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="app_dotnetCore" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.PrimeService.Tests PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
