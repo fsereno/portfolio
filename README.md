@@ -15,7 +15,7 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - Mocha (https://mochajs.org/)
 - Chai (https://www.chaijs.com/)
 - Nightmare (https://github.com/segmentio/nightmare)
-- DotnetCore (https://dotnet.github.io/)
+- .NetCore (https://dotnet.github.io/)
 - SOLID (SOLID Design principles in mind, throughout)
 ---
 

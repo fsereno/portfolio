@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeService", "PrimeService\PrimeService.csproj", "{EDA70EBD-B345-4C75-BF65-6CC2F102B952}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PrimeService.Tests", "PrimeService.Tests", "{3561A039-0B51-4DE5-A33A-BA3DDBDB196A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeService.Tests", "PrimeService.Tests\PrimeService.Tests.csproj", "{3D8737EE-A7FC-4799-9644-791FA0434DC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,19 @@ Global
 		{EDA70EBD-B345-4C75-BF65-6CC2F102B952}.Release|x64.Build.0 = Release|Any CPU
 		{EDA70EBD-B345-4C75-BF65-6CC2F102B952}.Release|x86.ActiveCfg = Release|Any CPU
 		{EDA70EBD-B345-4C75-BF65-6CC2F102B952}.Release|x86.Build.0 = Release|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Debug|x64.Build.0 = Debug|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Debug|x86.Build.0 = Debug|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Release|x64.ActiveCfg = Release|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Release|x64.Build.0 = Release|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Release|x86.ActiveCfg = Release|Any CPU
+		{3D8737EE-A7FC-4799-9644-791FA0434DC3}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal
