@@ -122,7 +122,7 @@ $ dotnet restore
 
 ### Tasks
 
-#### Go into /PrimeService.Tests and run the unit tests
+#### Go into /Services.Tests and run the unit tests
 
 ```shell
 $ dotnet test
