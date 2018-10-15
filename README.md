@@ -16,6 +16,7 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - Chai (https://www.chaijs.com/)
 - Nightmare (https://github.com/segmentio/nightmare)
 - .NetCore (https://dotnet.github.io/)
+- NUnit (https://nunit.org/)
 - SOLID (SOLID Design principles in mind, throughout)
 ---
 
