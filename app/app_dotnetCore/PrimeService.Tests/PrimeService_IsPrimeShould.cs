@@ -6,27 +6,24 @@ namespace Prime.UnitTests.Services
     [TestFixture]
     public class PrimeService_IsPrimeShould
     {
-        private readonly PrimeService _primeService;
+        private PrimeService _primeService;
 
-        public PrimeService_IsPrimeShould()
+        [SetUp]
+        public void BeforeEachTest()
         {
             _primeService = new PrimeService();
         }
 
-        [Test]
-        public void ReturnFalseGivenValueOf1()
+        [TestCase(1, true)]
+        public void ReturnFalseGivenValueOf1(int input, bool outcome)
         {
             // Arrange
-            var testCase1 = 1;
-            var testCase2 = 2;
-
             // Act
-            var testCase1Result = _primeService.IsPrime(testCase1);
-            var testCase2Result = _primeService.IsPrime(testCase2);
-
+            var result = _primeService.IsPrime(input);
+            
             // Assert
-            Assert.IsFalse(testCase1Result, "1 should not be prime");
-            Assert.IsTrue(testCase2Result, "2 Should be a prime number");
+            Assert.IsFalse(result);
+
         }
     }
 }

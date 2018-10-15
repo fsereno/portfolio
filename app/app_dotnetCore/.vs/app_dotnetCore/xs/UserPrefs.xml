@@ -6,7 +6,7 @@
     <Pads>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="app_dotnetCore" selected="True" />
+          <Node name="app_dotnetCore" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
