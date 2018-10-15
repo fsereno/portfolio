@@ -1,12 +1,15 @@
-﻿<Properties StartupConfiguration="{3D8737EE-A7FC-4799-9644-791FA0434DC3}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="PrimeService.Tests/PrimeService_IsPrimeShould.cs">
+﻿<Properties StartupConfiguration="{50CECBB0-893C-4F4D-BE7B-B9DED11D5B6D}|Default">
+  <MonoDevelop.Ide.ItemProperties.Services.Tests PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services.Tests/StringServiceTests.cs">
     <Files>
-      <File FileName="PrimeService.Tests/PrimeService_IsPrimeShould.cs" Line="32" Column="2" />
+      <File FileName="Services.Tests/StringServiceTests.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="app_dotnetCore" selected="True" />
+          <Node name="app_dotnetCore" expanded="True">
+            <Node name="Services.Tests" selected="True" />
+          </Node>
         </State>
       </Pad>
     </Pads>
@@ -17,5 +20,4 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.PrimeService.Tests PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
