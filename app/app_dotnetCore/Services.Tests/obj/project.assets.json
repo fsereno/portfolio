@@ -5700,13 +5700,13 @@
       "projectName": "Services.Tests",
       "projectPath": "/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/Services.Tests.csproj",
       "packagesPath": "/Users/fabiosereno/.nuget/packages/",
-      "outputPath": "/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj/",
+      "outputPath": "/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/fabiosereno/.nuget/NuGet/NuGet.Config"
+        "/Users/fabiosereno/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -5732,23 +5732,23 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "NUnit": {
+            "target": "Package",
+            "version": "3.11.0"
+          },
+          "NUnit3TestAdapter": {
+            "target": "Package",
+            "version": "3.10.0"
+          },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
-            "version": "[15.9.0, )"
+            "version": "15.9.0"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[2.1.0, )",
+            "version": "2.1",
             "autoReferenced": true
-          },
-          "NUnit": {
-            "target": "Package",
-            "version": "[3.11.0, )"
-          },
-          "NUnit3TestAdapter": {
-            "target": "Package",
-            "version": "[3.10.0, )"
           }
         },
         "imports": [
