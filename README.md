@@ -8,6 +8,7 @@ Very keen on learning and using the latest technologies, with a real passion for
 ## My Portfolio Repository
 The purpose of this repository is to demonstrate skills in various technologies, coding principles and patterns:
 
+- NodeJS (https://nodejs.org/en/)
 - Gulp (https://gulpjs.com)
 - Pug (https://pugjs.org/api/getting-started.html)
 - TypeScript (https://www.typescriptlang.org)
