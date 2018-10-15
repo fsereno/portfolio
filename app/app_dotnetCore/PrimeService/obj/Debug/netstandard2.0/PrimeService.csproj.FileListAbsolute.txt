@@ -1,9 +1,0 @@
-/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/PrimeService/bin/Debug/netstandard2.0/PrimeService.deps.json
-/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/PrimeService/bin/Debug/netstandard2.0/PrimeService.dll
-/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/PrimeService/bin/Debug/netstandard2.0/PrimeService.pdb
-/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/PrimeService/obj/Debug/netstandard2.0/PrimeService.csprojAssemblyReference.cache
-/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/PrimeService/obj/Debug/netstandard2.0/PrimeService.csproj.CoreCompileInputs.cache
-/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/PrimeService/obj/Debug/netstandard2.0/PrimeService.AssemblyInfoInputs.cache
-/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/PrimeService/obj/Debug/netstandard2.0/PrimeService.AssemblyInfo.cs
-/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/PrimeService/obj/Debug/netstandard2.0/PrimeService.dll
-/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/PrimeService/obj/Debug/netstandard2.0/PrimeService.pdb
