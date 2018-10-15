@@ -687,17 +687,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/fabiosereno/sites/VWInterview2/Services/Services.csproj",
+      "projectUniqueName": "/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/Services.csproj",
       "projectName": "Services",
-      "projectPath": "/Users/fabiosereno/sites/VWInterview2/Services/Services.csproj",
+      "projectPath": "/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/Services.csproj",
       "packagesPath": "/Users/fabiosereno/.nuget/packages/",
-      "outputPath": "/Users/fabiosereno/sites/VWInterview2/Services/obj",
+      "outputPath": "/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/fabiosereno/.config/NuGet/NuGet.Config"
+        "/Users/fabiosereno/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -722,7 +722,7 @@
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.1",
+            "version": "[2.1.0, )",
             "autoReferenced": true
           }
         },
