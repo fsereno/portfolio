@@ -5696,11 +5696,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/fabiosereno/sites/VWInterview2/Services.Tests/Services.Tests.csproj",
+      "projectUniqueName": "/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/Services.Tests.csproj",
       "projectName": "Services.Tests",
-      "projectPath": "/Users/fabiosereno/sites/VWInterview2/Services.Tests/Services.Tests.csproj",
+      "projectPath": "/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/Services.Tests.csproj",
       "packagesPath": "/Users/fabiosereno/.nuget/packages/",
-      "outputPath": "/Users/fabiosereno/sites/VWInterview2/Services.Tests/obj",
+      "outputPath": "/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -5717,8 +5717,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "/Users/fabiosereno/sites/VWInterview2/Services/Services.csproj": {
-              "projectPath": "/Users/fabiosereno/sites/VWInterview2/Services/Services.csproj"
+            "/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/Services.csproj": {
+              "projectPath": "/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/Services.csproj"
             }
           }
         }
