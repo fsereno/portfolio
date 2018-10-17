@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositorie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories.Tests", "Repositories.Tests\Repositories.Tests.csproj", "{F99E5289-2022-478D-8011-F1F26830ECE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domains", "Domains\Domains.csproj", "{55A0B450-765D-486A-B758-877854F0ED41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,18 @@ Global
 		{F99E5289-2022-478D-8011-F1F26830ECE1}.Release|x64.Build.0 = Release|Any CPU
 		{F99E5289-2022-478D-8011-F1F26830ECE1}.Release|x86.ActiveCfg = Release|Any CPU
 		{F99E5289-2022-478D-8011-F1F26830ECE1}.Release|x86.Build.0 = Release|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Debug|x64.Build.0 = Debug|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Debug|x86.Build.0 = Debug|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Release|x64.ActiveCfg = Release|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Release|x64.Build.0 = Release|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Release|x86.ActiveCfg = Release|Any CPU
+		{55A0B450-765D-486A-B758-877854F0ED41}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Repositories;
+using Domains;
 using NUnit.Framework;
 
 namespace Services.Tests

@@ -1,4 +1,5 @@
-﻿
+﻿using Domains;
+
 namespace Repositories
 {
     public interface IRepository<T> where T : Entity

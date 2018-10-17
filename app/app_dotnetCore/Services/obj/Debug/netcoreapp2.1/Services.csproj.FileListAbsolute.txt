@@ -19,3 +19,5 @@
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/obj/Debug/netcoreapp2.1/Services.csproj.CopyComplete
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/obj/Debug/netcoreapp2.1/Services.dll
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/obj/Debug/netcoreapp2.1/Services.pdb
+/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/bin/Debug/netcoreapp2.1/Domains.dll
+/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/bin/Debug/netcoreapp2.1/Domains.pdb

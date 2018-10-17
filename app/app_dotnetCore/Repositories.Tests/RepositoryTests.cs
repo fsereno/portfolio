@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Domains;
 using NUnit.Framework;
 
 namespace Repositories.Tests
