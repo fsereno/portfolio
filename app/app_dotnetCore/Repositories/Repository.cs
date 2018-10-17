@@ -17,7 +17,7 @@ namespace Repositories
         {
 
             var result = _collection.SingleOrDefault(
-                x=>x.Id == entity.Id);
+                x => x.Id == entity.Id);
 
             return result;
         }
@@ -38,7 +38,7 @@ namespace Repositories
             else
             {
                 throw new InvalidOperationException("You cannot add duplicate entities");
-            }       
+            }
         }
     }
 }

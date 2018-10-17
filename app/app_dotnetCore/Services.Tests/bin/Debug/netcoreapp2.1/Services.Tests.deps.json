@@ -1033,8 +1033,19 @@
         }
       },
       "Services/1.0.0": {
+        "dependencies": {
+          "Repositories": "1.0.0.0"
+        },
         "runtime": {
           "Services.dll": {}
+        }
+      },
+      "Repositories.Reference/1.0.0.0": {
+        "runtime": {
+          "Repositories.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
@@ -1544,6 +1555,11 @@
     },
     "Services/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Repositories.Reference/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

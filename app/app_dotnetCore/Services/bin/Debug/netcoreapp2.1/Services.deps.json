@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v2.1": {
       "Services/1.0.0": {
+        "dependencies": {
+          "Repositories": "1.0.0"
+        },
         "runtime": {
           "Services.dll": {}
+        }
+      },
+      "Repositories/1.0.0": {
+        "runtime": {
+          "Repositories.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Repositories/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
