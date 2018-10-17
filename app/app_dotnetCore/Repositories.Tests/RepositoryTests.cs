@@ -6,7 +6,7 @@ namespace Repositories.Tests
     [TestFixture]
     public class RepositoryTests
     {
-        private IRepository<Entity> _repository;
+        IRepository<Entity> _repository;
 
         [SetUp]
         public void BeforeEach()

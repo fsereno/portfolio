@@ -4,7 +4,7 @@ namespace Services
 {
     public interface IPersonService
     {
-        Person Get(Person person);
+        Entity Get(Person person);
 
         void Add(Person person);
 

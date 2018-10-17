@@ -7,18 +7,12 @@ namespace Services
     {
        
         readonly List<Person> _persons;
-        readonly IRepository<Person> _repository;
+        readonly IRepository<Entity> _repository;
 
         public PersonService(
-            IRepository<Person> repository)
+            IRepository<Entity> repository)
         {
             _repository = repository;
-
-        }
-
-        public PersonService(List<Person> persons)
-        {
-            _persons = persons;
 
         }
 
@@ -29,7 +23,7 @@ namespace Services
 
         }
 
-        public Person Get(Person person)
+        public Entity Get(Person person)
         {
            var result = _repository.Get(person);
             return result;
