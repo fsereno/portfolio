@@ -1,5 +1,4 @@
-﻿
-namespace Services
+﻿namespace Services
 {
     public interface IStringService
     {
