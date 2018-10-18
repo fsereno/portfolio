@@ -10,6 +10,5 @@ namespace Services
         void Add(Person person);
 
         List<Entity> SortById(List<Entity> collection); 
-
     }
 }

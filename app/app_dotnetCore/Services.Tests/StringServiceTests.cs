@@ -1,5 +1,4 @@
-﻿
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Services.Tests
 {
@@ -12,9 +11,7 @@ namespace Services.Tests
         [SetUp]
         public void BeforeEachTest()
         {
-
             _stringService = new StringService();
-
         }
 
         [TestCase("String 1", "String 2", "String 1 String 2")]
@@ -32,8 +29,6 @@ namespace Services.Tests
             // Assert
             Assert.That(result, Is.TypeOf<string>());
             Assert.That(result, Is.EqualTo(outcome));
-
         }
-
     }
 }

@@ -6,7 +6,6 @@ namespace Services
 {
     public class PersonService : IPersonService
     {
-        
         readonly IRepository<Entity> _repository;
 
         public PersonService(
@@ -15,7 +14,6 @@ namespace Services
             _repository = repository;
 
         }
-
         public void Add(Person person)
         {
             if (person == null)
@@ -26,7 +24,6 @@ namespace Services
             _repository.Add(person);
 
         }
-
         public Entity Get(Person person)
         {
             if (person == null)
@@ -37,7 +34,6 @@ namespace Services
             var result = _repository.Get(person);
             return result;
         }
-
         public List<Entity> SortById(List<Entity> collection)
         {
             if (collection == null)

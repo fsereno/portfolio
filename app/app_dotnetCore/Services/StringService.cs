@@ -9,11 +9,8 @@ namespace Services
 
             foreach(var stringInput in stringArray)
             {
-
                 result += stringInput + " ";
-
             }
-
             return result.Trim();
         }
     }

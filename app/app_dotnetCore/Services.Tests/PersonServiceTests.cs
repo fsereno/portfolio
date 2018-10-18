@@ -21,11 +21,8 @@ namespace Services.Tests
             persons.Add(new Person() { Id = 2, Age = 1 });
             persons.Add(new Person() { Id = 1, Age = 2 });
             
-
             _collection = persons;
-
             _repository = new Repository(persons);
-
             _personService = new PersonService(_repository);
         }
 
@@ -57,7 +54,6 @@ namespace Services.Tests
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.TypeOf<Person>());
             Assert.That(result.Id, Is.EqualTo(3));
-
         }
 
         [Test]
@@ -69,7 +65,6 @@ namespace Services.Tests
             var id = result.First().Id;
             //Assert
             Assert.That(id, Is.EqualTo(1));
-
         }
     }
 }
