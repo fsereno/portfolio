@@ -6,8 +6,7 @@ namespace Services
 {
     public class PersonService : IPersonService
     {
-       
-        readonly List<Person> _persons;
+        
         readonly IRepository<Entity> _repository;
 
         public PersonService(
@@ -19,6 +18,10 @@ namespace Services
 
         public void Add(Person person)
         {
+            if (person == null)
+            {
+                throw new System.ArgumentNullException(nameof(person));
+            }
 
             _repository.Add(person);
 
@@ -26,8 +29,24 @@ namespace Services
 
         public Entity Get(Person person)
         {
-           var result = _repository.Get(person);
+            if (person == null)
+            {
+                throw new System.ArgumentNullException(nameof(person));
+            }
+
+            var result = _repository.Get(person);
             return result;
+        }
+
+        public List<Entity> SortById(List<Entity> collection)
+        {
+            if (collection == null)
+            {
+                throw new System.ArgumentNullException(nameof(collection));
+            }
+
+            collection.Sort();
+            return collection;    
         }
     }
 }

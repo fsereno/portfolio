@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Repositories;
 using Domains;
 using NUnit.Framework;
@@ -10,13 +12,17 @@ namespace Services.Tests
     {
         IPersonService _personService;
         IRepository<Entity> _repository;
+        List<Entity> _collection;
 
         [SetUp]
         public void BeforeEach()
         {
             var persons = new List<Entity>();
-            persons.Add(new Person() { Id = 1 });
-            persons.Add(new Person() { Id = 2 });
+            persons.Add(new Person() { Id = 2, Age = 1 });
+            persons.Add(new Person() { Id = 1, Age = 2 });
+            
+
+            _collection = persons;
 
             _repository = new Repository(persons);
 
@@ -51,6 +57,18 @@ namespace Services.Tests
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.TypeOf<Person>());
             Assert.That(result.Id, Is.EqualTo(3));
+
+        }
+
+        [Test]
+        public void SortById()
+        {
+            //Arrange
+            //Act
+            var result = _personService.SortById(_collection);
+            var id = result.First().Id;
+            //Assert
+            Assert.That(id, Is.EqualTo(1));
 
         }
     }

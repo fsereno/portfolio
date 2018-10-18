@@ -1,11 +1,33 @@
 ﻿<Properties StartupConfiguration="{50CECBB0-893C-4F4D-BE7B-B9DED11D5B6D}|Default">
   <MonoDevelop.Ide.ItemProperties.Services.Tests PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Services.Tests/PersonServiceTests.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Repositories/Repository.cs">
     <Files>
-      <File FileName="Services/PersonService.cs" Line="1" Column="1" />
-      <File FileName="Services.Tests/PersonServiceTests.cs" Line="16" Column="10" />
+      <File FileName="Services/IPersonService.cs" Line="12" Column="56" />
+      <File FileName="Domains/Person.cs" Line="10" Column="1" />
+      <File FileName="Domains/Entity.cs" Line="15" Column="1" />
+      <File FileName="Services/PersonService.cs" Line="25" Column="3" />
+      <File FileName="Repositories/Repository.cs" Line="17" Column="38" />
     </Files>
     <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="app_dotnetCore" expanded="True">
+            <Node name="Repositories" expanded="True">
+              <Node name="Repository.cs" selected="True" />
+            </Node>
+            <Node name="Services" expanded="True" />
+            <Node name="Services.Tests" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State name="__root__">
+          <Node name="app_dotnetCore" expanded="True" selected="True" />
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
           <Node name="app_dotnetCore" expanded="True" selected="True" />
