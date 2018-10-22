@@ -47,74 +47,91 @@ function findNeighbours(size,x,y){
 
 }
 class Grid {
-    constructor(size, start, end)
+    constructor(size)
     {
         this.nodes = [];
         this.size = size;
         this.dictionary = {};
-        this.start = start;
-        this.end = end;
-
+        
         for (let n = 1; n <= this.size; n++) {
             for (let cell = 1; cell <= this.size; cell++) {
                 let nodeName = n+","+cell;
                 let node = new Node(nodeName, cell, n);
-                let neighbours = findNeighbours(this.size, cell, n);
-                
+                let neighbours = findNeighbours(this.size, cell, n);                
                 node.neighbours = neighbours;
-
-                node.neighbours.forEach(neighbour => {
-                    neighbour.neighbours = findNeighbours(this.size, neighbour.x, neighbour.y);
-                });
 
                 this.nodes.push(node);
                 this.dictionary[nodeName] = node;
             }
         }
     }
-}
 
-var grid = new Grid(4, "1,1", "3,2");
-var moves = {};
+    AddStart(start){
 
-for (let gridCell = 0; gridCell < grid.nodes.length; gridCell++) {
-    const cell = grid.nodes[gridCell];
-    if(moves[cell.name] === undefined){
-        moves[cell.name] = cell;
+        this.start = this.dictionary[start];
+        return this.start;
+
     }
-    for (let side = 0; side < cell.neighbours.length; side++) {
-        const neighbour = cell.neighbours[side];
-        
-        neighbour.searched = true;
 
-        if(moves[neighbour.name] === undefined){
-            moves[neighbour.name] = neighbour;
+    AddEnd(end){
+
+        this.end = this.dictionary[end];
+        return this.end;
+    }
+}
+//Grid(4, "1,1", "3,2");
+var grid = new Grid(4);
+var queue = [];
+
+var start = grid.AddStart("1,1");
+var end = grid.AddEnd("3,2");
+//console.log("Start neighbour")
+//console.log(start.neighbours);
+
+grid.start.searched = true;
+queue.push(start);
+
+while(queue.length > 0 ){
+
+    var current = queue.shift();
+
+    //console.log(current.name)
+    //console.log(end.name)
+    //console.log(queue.length);
+
+    if(current.name === end.name) {
+
+        console.log("Found! " +current.name);
+        break;
+    } else {
+
+        var neighbours = current.neighbours;
+
+        console.log(neighbours.length);
+
+        for (let i = 0; i < neighbours.length; i++) {
+            const neighbour = neighbours[i];
+
+            //console.log(neighbour.searched)
+            
+            if(!neighbour.searched){
+
+                neighbour.searched = true;
+                neighbour.parent = current;
+                queue.push(neighbour);
+
+                //console.log(neighbour)
+
+            }
         }
 
-        if(neighbour.name === grid.end){
 
-            //console.log("Found it");
-            //console.log(moves);
-            //break;
-        }
-    }    
+    }
 }
 
 grid.nodes.forEach(n => {
 
-   
- console.log("parent " + n.name);
+    console.log(n);
+   // console.log("parent " + n.name);
 
- n.neighbours.forEach(ne =>{
-
-    console.log("ne " + ne.name);
-
-    n.neighbours.forEach(ne2=>{
-        console.log("ne2 " + ne2.name);
-        //console.log(ne2.neighbours);
-
-    })
-
- })
-
-});
+})
