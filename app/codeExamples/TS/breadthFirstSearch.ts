@@ -68,7 +68,6 @@ class Grid {
         if(r!==null){
             neighbours.push(y+","+r);
         }
-
         return neighbours;
     }
 
@@ -102,9 +101,7 @@ class Grid {
             }
 
             for (let i = path.length-1; i >= 0; i--) {
-                
                 const move:string = path[i];
-            
                 text += move 
                 
                 if(i != 0) {
@@ -113,12 +110,10 @@ class Grid {
             }
             
         } else {
-
             text = "Path not found!";
         }
     
         return text;
-    
     }
 
     BreadthFirstSearch(){
@@ -134,11 +129,12 @@ class Grid {
 
                 let current: any = queue.shift();
 
-                /*if(current.name === this.end.name) {
+                if(current.name === this.end.name) {
 
                     console.log("Found it! " + current.name);
-                    
-                } else {*/
+                    break;
+
+                } else {
 
                     let neighbours: string[] = current.neighbours;
 
@@ -151,7 +147,7 @@ class Grid {
                             queue.push(neighbour);
                         }
                     }
-                //}
+                }
             }
 
         } else {
