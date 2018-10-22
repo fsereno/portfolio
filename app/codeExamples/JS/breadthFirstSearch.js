@@ -91,9 +91,17 @@ class Grid {
             }
         
             
-            path.forEach(move => {
-                text += move + " --> ";
-            });
+            for (let i = path.length-1; i >= 0; i--) {
+                
+                const move = path[i];
+            
+                text += move 
+                
+                if(i != 0) {
+                   text += " --> ";
+                }            
+            }
+            
         } else {
 
             text = "Path not found!";
@@ -145,7 +153,7 @@ class Grid {
 }
 
 //Programe
-let grid = new Grid(5);
+let grid = new Grid(4);
 let start = grid.AddStart("1,1");
 let end = grid.AddEnd("3,3");
 grid.BreadthFirstSearch();
