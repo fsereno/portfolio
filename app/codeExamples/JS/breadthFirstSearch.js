@@ -37,7 +37,7 @@ class Grid {
         let d = y+1 <= this.size ? y+1 : null;
         let l = x-1 >= 1 ? x-1 : null;
         let r = x+1 <= this.size ? x+1 : null;
-        var neighbours = [];
+        let neighbours = [];
 
         if(u!==null){
             neighbours.push(u+","+x);
@@ -57,32 +57,47 @@ class Grid {
 
     AddStart(start){
 
-        this.start = this.dictionary[start];
+        if(this.dictionary[start] !== undefined){
+            this.start = this.dictionary[start];
+        }
+        
         return this.start;
 
     }
 
     AddEnd(end){
 
-        this.end = this.dictionary[end];
+        if(this.dictionary[end] !==  undefined){
+            this.end = this.dictionary[end];
+        }
+        
         return this.end;
     }
 
     PrintPath(){
 
-        var next = this.end;
-        var path = [];
-        path.push(this.end.name);
-        while(next.parent !== null){
-    
-            path.push(next.parent);
-            next = this.dictionary[next.parent];
+        let path = [];
+        let text = "";
+        
+        if(this.end !== null) {
+            
+            let next = this.end;
+
+            path.push(this.end.name);
+            while(next.parent !== null){
+        
+                path.push(next.parent);
+                next = this.dictionary[next.parent];
+            }
+        
+            
+            path.forEach(move => {
+                text += move + " --> ";
+            });
+        } else {
+
+            text = "Path not found!";
         }
-    
-        var text = "";
-        path.forEach(move => {
-            text += move + " --> ";
-        });
     
         return text;
     
@@ -90,40 +105,48 @@ class Grid {
 
     BreadthFirstSearch(){
 
-        var queue = [];
-        this.start.searched = true;
-        queue.push(this.start);
+        let queue = [];
 
-        while(queue.length > 0 ){
+        if(this.start !== null && this.end !== null) {
 
-            var current = queue.shift();
+            this.start.searched = true;
+            queue.push(this.start);
 
-            if(current.name === end.name) {
+            while(queue.length > 0 ){
 
-                console.log("Found! " + current.name);
-                break;
+                let current = queue.shift();
 
-            } else {
+                /*if(current.name === this.end.name) {
 
-                var neighbours = current.neighbours;
-
-                for (let i = 0; i < neighbours.length; i++) {
-                    const neighbour = this.dictionary[neighbours[i]];
+                    console.log("Found it! " + current.name);
                     
-                    if(!neighbour.searched){
-                        neighbour.searched = true;
-                        neighbour.parent = current.name;
-                        queue.push(neighbour);
+                } else {*/
+
+                    let neighbours = current.neighbours;
+
+                    for (let i = 0; i < neighbours.length; i++) {
+                        const neighbour = this.dictionary[neighbours[i]];
+                        
+                        if(!neighbour.searched){
+                            neighbour.searched = true;
+                            neighbour.parent = current.name;
+                            queue.push(neighbour);
+                        }
                     }
-                }
+                //}
             }
+
+        } else {
+
+            console.log("Out of range!");
+
         }
     }
 }
 
 //Programe
-let grid = new Grid(4);
-let start = grid.AddStart("1,2");
-let end = grid.AddEnd("3,2");
+let grid = new Grid(5);
+let start = grid.AddStart("1,1");
+let end = grid.AddEnd("3,3");
 grid.BreadthFirstSearch();
 console.log(grid.PrintPath());
