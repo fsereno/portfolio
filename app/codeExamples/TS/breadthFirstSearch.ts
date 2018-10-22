@@ -1,13 +1,18 @@
-//"use strict";
+
 class node {
-    public name:string;
+    public name: string;
     public x: number;
     public y: number;
     public neighbours: string[];
     public searched: boolean;
     public parent: string;
-    
-    constructor(name: string, x:number, y:number){
+
+    constructor(
+        name: string,
+        x: number,
+        y: number
+        )
+    {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -17,12 +22,11 @@ class node {
     }   
 }
 
-class matrix {
-
+class Grid {
     public nodes: node[];
     public size: number;
     public dictionary: any;
-    public start: node
+    public start: node;
     public end: node;
 
     constructor(size: number)
@@ -33,25 +37,24 @@ class matrix {
         this.start = null;
         this.end = null;
         
-        for (let n = 1; n <= this.size; n++) {
-            for (let cell = 1; cell <= this.size; cell++) {
-                let nodeName = n+","+cell;
+        for (let n: number = 1; n <= this.size; n++) {
+            for (let cell: number = 1; cell <= this.size; cell++) {
+                let nodeName: string = n+","+cell;
                 let thisNode = new node(nodeName, cell, n);
                 let neighbours = this.FindNeighbours(cell, n);                
                 thisNode.neighbours = neighbours;
                 this.nodes.push(thisNode);
-                this.dictionary[nodeName] = node;
+                this.dictionary[nodeName] = thisNode;
             }
         }
     }
 
-    FindNeighbours(x: number, y:number) {
-
-        let u = y-1 >= 1 ? y-1 : null;
-        let d = y+1 <= this.size ? y+1 : null;
-        let l = x-1 >= 1 ? x-1 : null;
-        let r = x+1 <= this.size ? x+1 : null;
-        let neighbours = [];
+    FindNeighbours(x: number, y: number) {
+        let u: number = y-1 >= 1 ? y-1 : null;
+        let d: number = y+1 <= this.size ? y+1 : null;
+        let l: number = x-1 >= 1 ? x-1 : null;
+        let r: number = x+1 <= this.size ? x+1 : null;
+        let neighbours: string[] = [];
 
         if(u!==null){
             neighbours.push(u+","+x);
@@ -70,32 +73,26 @@ class matrix {
     }
 
     AddStart(start: string){
-
         if(this.dictionary[start] !== undefined){
             this.start = this.dictionary[start];
         }
-        
         return this.start;
-
     }
 
     AddEnd(end: string){
-
         if(this.dictionary[end] !==  undefined){
             this.end = this.dictionary[end];
         }
-        
         return this.end;
     }
 
     PrintPath(){
-
-        let path = [];
-        let text = "";
-        
-        if(this.end !== null && this.end.parent !== undefined) {
+        let path: string[] = [];
+        let text = new String();
+    
+        if(this.end !== null) {
             
-            let next = this.end;
+            let next: node = this.end;
             path.push(this.end.name);
             
             while(next.parent !== null){
@@ -106,7 +103,7 @@ class matrix {
 
             for (let i = path.length-1; i >= 0; i--) {
                 
-                const move = path[i];
+                const move:string = path[i];
             
                 text += move 
                 
@@ -126,7 +123,7 @@ class matrix {
 
     BreadthFirstSearch(){
 
-        let queue = [];
+        let queue: node[] = [];
 
         if(this.start !== null && this.end !== null) {
 
@@ -135,18 +132,18 @@ class matrix {
 
             while(queue.length > 0 ){
 
-                let current: node = queue.shift();
+                let current: any = queue.shift();
 
-                if(current.name === this.end.name) {
+                /*if(current.name === this.end.name) {
 
                     console.log("Found it! " + current.name);
-                    break;
-                } else {
+                    
+                } else {*/
 
-                    let neighbours = current.neighbours;
+                    let neighbours: string[] = current.neighbours;
 
                     for (let i = 0; i < neighbours.length; i++) {
-                        const neighbour = this.dictionary[neighbours[i]];
+                        const neighbour: node = this.dictionary[neighbours[i]];
                         
                         if(!neighbour.searched){
                             neighbour.searched = true;
@@ -154,19 +151,17 @@ class matrix {
                             queue.push(neighbour);
                         }
                     }
-                }
+                //}
             }
 
         } else {
-
             console.log("Out of range!");
-
         }
     }
 }
 
 //Programe
-let grid = new matrix(4);
+let grid = new Grid(4);
 let start = grid.AddStart("1,1");
 let end = grid.AddEnd("3,3");
 grid.BreadthFirstSearch();

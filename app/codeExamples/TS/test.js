@@ -1,4 +1,3 @@
-//"use strict";
 var node = /** @class */ (function () {
     function node(name, x, y) {
         this.name = name;
@@ -10,8 +9,8 @@ var node = /** @class */ (function () {
     }
     return node;
 }());
-var matrix = /** @class */ (function () {
-    function matrix(size) {
+var Grid = /** @class */ (function () {
+    function Grid(size) {
         this.nodes = [];
         this.size = size;
         this.dictionary = {};
@@ -24,11 +23,11 @@ var matrix = /** @class */ (function () {
                 var neighbours = this.FindNeighbours(cell, n);
                 thisNode.neighbours = neighbours;
                 this.nodes.push(thisNode);
-                this.dictionary[nodeName] = node;
+                this.dictionary[nodeName] = thisNode;
             }
         }
     }
-    matrix.prototype.FindNeighbours = function (x, y) {
+    Grid.prototype.FindNeighbours = function (x, y) {
         var u = y - 1 >= 1 ? y - 1 : null;
         var d = y + 1 <= this.size ? y + 1 : null;
         var l = x - 1 >= 1 ? x - 1 : null;
@@ -48,22 +47,22 @@ var matrix = /** @class */ (function () {
         }
         return neighbours;
     };
-    matrix.prototype.AddStart = function (start) {
+    Grid.prototype.AddStart = function (start) {
         if (this.dictionary[start] !== undefined) {
             this.start = this.dictionary[start];
         }
         return this.start;
     };
-    matrix.prototype.AddEnd = function (end) {
+    Grid.prototype.AddEnd = function (end) {
         if (this.dictionary[end] !== undefined) {
             this.end = this.dictionary[end];
         }
         return this.end;
     };
-    matrix.prototype.PrintPath = function () {
+    Grid.prototype.PrintPath = function () {
         var path = [];
-        var text = "";
-        if (this.end !== null && this.end.parent !== undefined) {
+        var text = new String();
+        if (this.end !== null) {
             var next = this.end;
             path.push(this.end.name);
             while (next.parent !== null) {
@@ -83,38 +82,38 @@ var matrix = /** @class */ (function () {
         }
         return text;
     };
-    matrix.prototype.BreadthFirstSearch = function () {
+    Grid.prototype.BreadthFirstSearch = function () {
         var queue = [];
         if (this.start !== null && this.end !== null) {
             this.start.searched = true;
             queue.push(this.start);
             while (queue.length > 0) {
                 var current = queue.shift();
-                if (current.name === this.end.name) {
+                /*if(current.name === this.end.name) {
+
                     console.log("Found it! " + current.name);
-                    break;
-                }
-                else {
-                    var neighbours = current.neighbours;
-                    for (var i = 0; i < neighbours.length; i++) {
-                        var neighbour = this.dictionary[neighbours[i]];
-                        if (!neighbour.searched) {
-                            neighbour.searched = true;
-                            neighbour.parent = current.name;
-                            queue.push(neighbour);
-                        }
+                    
+                } else {*/
+                var neighbours = current.neighbours;
+                for (var i = 0; i < neighbours.length; i++) {
+                    var neighbour = this.dictionary[neighbours[i]];
+                    if (!neighbour.searched) {
+                        neighbour.searched = true;
+                        neighbour.parent = current.name;
+                        queue.push(neighbour);
                     }
                 }
+                //}
             }
         }
         else {
             console.log("Out of range!");
         }
     };
-    return matrix;
+    return Grid;
 }());
 //Programe
-var grid = new matrix(4);
+var grid = new Grid(4);
 var start = grid.AddStart("1,1");
 var end = grid.AddEnd("3,3");
 grid.BreadthFirstSearch();
