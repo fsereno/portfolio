@@ -1,160 +1,121 @@
-"use strict";
-class Node {
-    constructor(name,x,y){
+var node = /** @class */ (function () {
+    function node(name, x, y) {
         this.name = name;
         this.x = x;
         this.y = y;
         this.neighbours = [];
         this.searched = false;
         this.parent = null;
-    }   
-}
-
-class Grid {
-    constructor(size)
-    {
+    }
+    return node;
+}());
+var Grid = /** @class */ (function () {
+    function Grid(size) {
         this.nodes = [];
         this.size = size;
         this.dictionary = {};
         this.start = null;
         this.end = null;
-        
-        for (let n = 1; n <= this.size; n++) {
-            for (let cell = 1; cell <= this.size; cell++) {
-                let nodeName = n+","+cell;
-                let node = new Node(nodeName, cell, n);
-                let neighbours = this.FindNeighbours(cell, n);                
-                node.neighbours = neighbours;
-                this.nodes.push(node);
-                this.dictionary[nodeName] = node;
+        for (var n = 1; n <= this.size; n++) {
+            for (var cell = 1; cell <= this.size; cell++) {
+                var nodeName = n + "," + cell;
+                var thisNode = new node(nodeName, cell, n);
+                var neighbours = this.FindNeighbours(cell, n);
+                thisNode.neighbours = neighbours;
+                this.nodes.push(thisNode);
+                this.dictionary[nodeName] = thisNode;
             }
         }
     }
-
-    FindNeighbours(x, y) {
-
-        let u = y-1 >= 1 ? y-1 : null;
-        let d = y+1 <= this.size ? y+1 : null;
-        let l = x-1 >= 1 ? x-1 : null;
-        let r = x+1 <= this.size ? x+1 : null;
-        let neighbours = [];
-
-        if(u!==null){
-            neighbours.push(u+","+x);
+    Grid.prototype.FindNeighbours = function (x, y) {
+        var u = y - 1 >= 1 ? y - 1 : null;
+        var d = y + 1 <= this.size ? y + 1 : null;
+        var l = x - 1 >= 1 ? x - 1 : null;
+        var r = x + 1 <= this.size ? x + 1 : null;
+        var neighbours = [];
+        if (u !== null) {
+            neighbours.push(u + "," + x);
         }
-        if(d!==null){
-            neighbours.push(d+","+x);
+        if (d !== null) {
+            neighbours.push(d + "," + x);
         }
-        if(l!==null){
-            neighbours.push(y+","+l);
+        if (l !== null) {
+            neighbours.push(y + "," + l);
         }
-        if(r!==null){
-            neighbours.push(y+","+r);
+        if (r !== null) {
+            neighbours.push(y + "," + r);
         }
-
         return neighbours;
-    }
-
-    AddStart(start){
-
-        if(this.dictionary[start] !== undefined){
+    };
+    Grid.prototype.AddStart = function (start) {
+        if (this.dictionary[start] !== undefined) {
             this.start = this.dictionary[start];
         }
-        
         return this.start;
-
-    }
-
-    AddEnd(end){
-
-        if(this.dictionary[end] !==  undefined){
+    };
+    Grid.prototype.AddEnd = function (end) {
+        if (this.dictionary[end] !== undefined) {
             this.end = this.dictionary[end];
         }
-        
         return this.end;
-    }
-
-    PrintPath(){
-
-        let path = [];
-        let text = "";
-        
-        if(this.end !== null) {
-            
-            let next = this.end;
-
+    };
+    Grid.prototype.PrintPath = function () {
+        var path = [];
+        var text = new String();
+        if (this.end !== null) {
+            var next = this.end;
             path.push(this.end.name);
-            while(next.parent !== null){
-        
+            while (next.parent !== null) {
                 path.push(next.parent);
                 next = this.dictionary[next.parent];
             }
-        
-            
-            for (let i = path.length-1; i >= 0; i--) {
-                
-                const move = path[i];
-            
-                text += move 
-                
-                if(i != 0) {
-                   text += " --> ";
-                }            
+            for (var i = path.length - 1; i >= 0; i--) {
+                var move = path[i];
+                text += move;
+                if (i != 0) {
+                    text += " --> ";
+                }
             }
-            
-        } else {
-
+        }
+        else {
             text = "Path not found!";
         }
-    
         return text;
-    
-    }
-
-    BreadthFirstSearch(){
-
-        let queue = [];
-
-        if(this.start !== null && this.end !== null) {
-
+    };
+    Grid.prototype.BreadthFirstSearch = function () {
+        var queue = [];
+        if (this.start !== null && this.end !== null) {
             this.start.searched = true;
             queue.push(this.start);
-
-            while(queue.length > 0 ){
-
-                let current = queue.shift();
-
-                /*if(current.name === this.end.name) {
-
+            while (queue.length > 0) {
+                var current = queue.shift();
+                if (current.name === this.end.name) {
                     console.log("Found it! " + current.name);
-                    
-                } else {*/
-
-                    let neighbours = current.neighbours;
-
-                    for (let i = 0; i < neighbours.length; i++) {
-                        const neighbour = this.dictionary[neighbours[i]];
-                        
-                        if(!neighbour.searched){
+                    break;
+                }
+                else {
+                    var neighbours = current.neighbours;
+                    for (var i = 0; i < neighbours.length; i++) {
+                        var neighbour = this.dictionary[neighbours[i]];
+                        if (!neighbour.searched) {
                             neighbour.searched = true;
                             neighbour.parent = current.name;
                             queue.push(neighbour);
                         }
                     }
-                //}
+                }
             }
-
-        } else {
-
-            console.log("Out of range!");
-
         }
-    }
-}
-
+        else {
+            console.log("Out of range!");
+        }
+    };
+    return Grid;
+}());
 //Programe
-let grid = new Grid(4);
-let start = grid.AddStart("1,1");
-let end = grid.AddEnd("3,3");
+var grid = new Grid(4);
+var start = grid.AddStart("1,1");
+var end = grid.AddEnd("3,3");
 grid.BreadthFirstSearch();
 console.log(grid.PrintPath());
+//# sourceMappingURL=breadthFirstSearch.js.map
