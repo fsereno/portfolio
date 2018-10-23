@@ -53,7 +53,7 @@ namespace Repositories.Tests
         }
 
         [Test]
-        public void AddUnHappyPath()
+        public void Add_ShouldThrowException_WhenNullIsPassed_UnHappyPath()
         {
             //Arrange
             //Act
