@@ -5,16 +5,16 @@ using Domains;
 
 namespace Repositories
 {
-    public class Repository : IRepository<Entity>
+    public class Repository<T> : IRepository<T> where T : Entity
     {
-        private readonly List<Entity> _collection;
+        private readonly List<T> _collection;
 
-        public Repository(List<Entity> collection)
+        public Repository(List<T> collection)
         {
             _collection = collection;
 
         }
-        public Entity Get(Entity entity)
+        public T Get(T entity)
         {
             if (entity == null)
             {
@@ -27,7 +27,7 @@ namespace Repositories
             return result;
         }
 
-        public void Add(Entity entity)
+        public void Add(T entity)
         {
             if (entity == null)
             {

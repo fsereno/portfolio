@@ -17,7 +17,7 @@ namespace Repositories.Tests
             persons.Add(new Person() { Id = 1 });
             persons.Add(new Person() { Id = 2 });
 
-            _repository = new Repository(persons);
+            _repository = new Repository<Entity>(persons);
         }
 
         [Test]
