@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Domains;
 using NUnit.Framework;
 
@@ -51,5 +52,15 @@ namespace Repositories.Tests
 
         }
 
+        [Test]
+        public void AddUnHappyPath()
+        {
+            //Arrange
+            //Act
+            //Assert
+            var result = Assert.Throws<ArgumentNullException>(() => _repository.Add(null));
+            Assert.That(result.Message, Is.EqualTo("Value cannot be null.\nParameter name: entity"));
+
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace Services.Tests
             persons.Add(new Person() { Id = 1, Age = 2 });
             
             _collection = persons;
-            _repository = new Repository(persons);
+            _repository = new Repository<Entity>(persons);
             _personService = new PersonService(_repository);
         }
 

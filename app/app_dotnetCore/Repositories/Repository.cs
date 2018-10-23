@@ -12,7 +12,6 @@ namespace Repositories
         public Repository(List<T> collection)
         {
             _collection = collection;
-
         }
         public T Get(T entity)
         {
@@ -26,7 +25,6 @@ namespace Repositories
 
             return result;
         }
-
         public void Add(T entity)
         {
             if (entity == null)
