@@ -8,13 +8,9 @@ export class DictionaryService implements IDictionaryService
     private dictionaryRepository: IDictionaryRepository;
 
     constructor(
-
         dictionaryRepository: IDictionaryRepository
-
     ){
-
         this.dictionaryRepository = dictionaryRepository;
-
     }
 
     Find (word: string): DictionaryResultModel {
