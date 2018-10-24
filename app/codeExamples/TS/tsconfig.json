@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
         "noImplicitAny": true,
-        "target": "es6",
+        "target": "es3",
         "sourceMap": true,
-        "outFile": "../../../../"
+        "outDir": "../JS/"
     }
 }

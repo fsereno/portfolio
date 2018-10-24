@@ -1032,7 +1032,24 @@
           }
         }
       },
+      "Domains/1.0.0": {
+        "runtime": {
+          "Domains.dll": {}
+        }
+      },
+      "Repositories/1.0.0": {
+        "dependencies": {
+          "Domains": "1.0.0"
+        },
+        "runtime": {
+          "Repositories.dll": {}
+        }
+      },
       "Services/1.0.0": {
+        "dependencies": {
+          "Domains": "1.0.0",
+          "Repositories": "1.0.0"
+        },
         "runtime": {
           "Services.dll": {}
         }
@@ -1541,6 +1558,16 @@
       "sha512": "sha512-91tvfHWHSrYFPolCwWYqbpo1YaoBUCQ3uNZ/O/zr0ev5BnkoATJoie16ywlMVUaXZtfSfNELxhtG3aqpTfwR4w==",
       "path": "system.xml.xpath.xmldocument/4.3.0",
       "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "Domains/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Repositories/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Services/1.0.0": {
       "type": "project",

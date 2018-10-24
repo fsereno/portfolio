@@ -26,7 +26,9 @@
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/bin/Debug/netcoreapp2.1/Services.Tests.dll
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/bin/Debug/netcoreapp2.1/Services.Tests.pdb
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/bin/Debug/netcoreapp2.1/Services.dll
+/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/bin/Debug/netcoreapp2.1/Repositories.dll
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/bin/Debug/netcoreapp2.1/Services.pdb
+/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/bin/Debug/netcoreapp2.1/Repositories.pdb
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj/Debug/netcoreapp2.1/Services.Tests.csprojAssemblyReference.cache
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj/Debug/netcoreapp2.1/Services.Tests.csproj.CoreCompileInputs.cache
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj/Debug/netcoreapp2.1/Services.Tests.AssemblyInfoInputs.cache
@@ -34,3 +36,5 @@
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj/Debug/netcoreapp2.1/Services.Tests.csproj.CopyComplete
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj/Debug/netcoreapp2.1/Services.Tests.dll
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj/Debug/netcoreapp2.1/Services.Tests.pdb
+/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/bin/Debug/netcoreapp2.1/Domains.dll
+/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/bin/Debug/netcoreapp2.1/Domains.pdb

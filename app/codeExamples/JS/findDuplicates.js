@@ -1,3 +1,4 @@
+"use strict";
 
 var arrayToUseNumeric = [2,7,5,1,7,4,6,3,4,6,8,7],
     arrayToUseAlpha = ["A","B","A","G","X","I","A","G","X","Z"];
