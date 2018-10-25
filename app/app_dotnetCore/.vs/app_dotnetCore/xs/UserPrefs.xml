@@ -1,34 +1,33 @@
 ﻿<Properties StartupConfiguration="{0072724C-6C01-42E4-808A-65DDF806A076}|Default">
   <MonoDevelop.Ide.ItemProperties.Services.Tests PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MVC/Views/Shared/_Layout.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MVC/Models/PersonViewModel.cs">
     <Files>
-      <File FileName="MVC/Controllers/HomeController.cs" Line="32" Column="38" />
-      <File FileName="MVC/Models/HomeViewModel.cs" Line="22" Column="1" />
-      <File FileName="MVC/Models/PersonViewModel.cs" Line="13" Column="30" />
-      <File FileName="Services.Tests/PersonServiceTests.cs" Line="61" Column="1" />
-      <File FileName="Services/PersonService.cs" Line="10" Column="1" />
-      <File FileName="MVC/Views/Home/Index.cshtml" Line="4" Column="30" />
-      <File FileName="MVC/Views/Shared/_Layout.cshtml" Line="31" Column="19" />
+      <File FileName="Services/PersonService.cs" Line="24" Column="28" />
+      <File FileName="MVC/Views/Home/Index.cshtml" Line="13" Column="25" />
+      <File FileName="MVC/Controllers/HomeController.cs" Line="41" Column="10" />
+      <File FileName="Repositories/Repository.cs" Line="35" Column="23" />
+      <File FileName="Repositories.Tests/RepositoryTests.cs" Line="17" Column="46" />
+      <File FileName="Services/StringService.cs" Line="1" Column="1" />
+      <File FileName="MVC/Models/PersonViewModel.cs" Line="7" Column="20" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="app_dotnetCore" expanded="True">
-            <Node name="Domains" expanded="True" />
             <Node name="MVC" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="PersonViewModel.cs" selected="True" />
+              </Node>
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
-                <Node name="Shared" expanded="True">
-                  <Node name="_Layout.cshtml" selected="True" />
-                </Node>
+                <Node name="Shared" expanded="True" />
               </Node>
+              <Node name="wwwroot" expanded="True" />
             </Node>
             <Node name="Repositories" expanded="True" />
             <Node name="Repositories.Tests" expanded="True" />
             <Node name="Services" expanded="True" />
-            <Node name="Services.Tests" expanded="True" />
           </Node>
         </State>
       </Pad>

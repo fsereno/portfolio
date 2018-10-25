@@ -31,7 +31,14 @@ namespace MVC.Controllers
 
             return View(homeViewModel);
         }
+        public IActionResult Update(int id, string name, int age)
+        {
+            var person = new Person() { Name = name, Age = age, Id = id };
+            _personService.Add(person);
 
+            return RedirectToAction("Index");
+
+        }
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
