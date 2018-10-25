@@ -24,19 +24,19 @@ namespace MVC
 
         public IConfiguration Configuration { get; }
 
-        private IRepository<Entity> _repository;
+        private IRepository<Person> _repository;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
-            var persons = new List<Entity>
+            var persons = new List<Person>
             {
                 new Person() { Id = 1 },
                 new Person() { Id = 2 }
             };
 
-            _repository = new Repository<Entity>(persons);
+            _repository = new Repository<Person>(persons);
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -48,7 +48,7 @@ namespace MVC
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddTransient<IPersonService>(x=> new PersonService(_repository));
+            services.AddTransient<IPersonService<Person>>(x=> new PersonService<Person>(_repository));
             services.AddTransient<IStringService, StringService>();
         }
 

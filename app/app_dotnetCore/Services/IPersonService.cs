@@ -3,12 +3,14 @@ using Domains;
 
 namespace Services
 {
-    public interface IPersonService
+    public interface IPersonService<T> where T : Person
     {
-        Entity Get(Person person);
+        T Get(T person);
 
-        void Add(Person person);
+        List<T> GetAll();
 
-        List<Entity> SortById(List<Entity> collection); 
+        void Add(T person);
+
+        List<T> SortById(List<T> collection); 
     }
 }

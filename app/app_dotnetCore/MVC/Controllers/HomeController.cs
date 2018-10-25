@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
 using Services;
+using Domains;
 
 namespace MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IPersonService _personService;
+        private readonly IPersonService<Person> _personService;
 
         public HomeController
         (
-            IPersonService personService
+            IPersonService<Person> personService
         )
         {
             _personService = personService;
@@ -23,6 +24,9 @@ namespace MVC.Controllers
        
         public IActionResult Index()
         {
+
+           // var persons = _personService.Get();
+
             return View();
         }
 
