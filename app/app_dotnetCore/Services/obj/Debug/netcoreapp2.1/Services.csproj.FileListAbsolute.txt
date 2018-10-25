@@ -10,8 +10,10 @@
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/bin/Debug/netcoreapp2.1/Services.deps.json
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/bin/Debug/netcoreapp2.1/Services.dll
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/bin/Debug/netcoreapp2.1/Services.pdb
+/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/bin/Debug/netcoreapp2.1/Domains.dll
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/bin/Debug/netcoreapp2.1/Repositories.dll
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/bin/Debug/netcoreapp2.1/Repositories.pdb
+/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/bin/Debug/netcoreapp2.1/Domains.pdb
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/obj/Debug/netcoreapp2.1/Services.csprojAssemblyReference.cache
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/obj/Debug/netcoreapp2.1/Services.csproj.CoreCompileInputs.cache
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/obj/Debug/netcoreapp2.1/Services.AssemblyInfoInputs.cache
@@ -19,5 +21,3 @@
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/obj/Debug/netcoreapp2.1/Services.csproj.CopyComplete
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/obj/Debug/netcoreapp2.1/Services.dll
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/obj/Debug/netcoreapp2.1/Services.pdb
-/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/bin/Debug/netcoreapp2.1/Domains.dll
-/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services/bin/Debug/netcoreapp2.1/Domains.pdb
