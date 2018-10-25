@@ -32,8 +32,8 @@ namespace MVC
 
             var persons = new List<Person>
             {
-                new Person() { Id = 1 },
-                new Person() { Id = 2 }
+                new Person() { Id = 1, Age = 20, Name = "James Brown" },
+                new Person() { Id = 2, Age = 45, Name = "Homma Simpson" }
             };
 
             _repository = new Repository<Person>(persons);

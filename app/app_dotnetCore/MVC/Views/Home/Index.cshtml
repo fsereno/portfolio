@@ -1,4 +1,6 @@
-﻿@{
+﻿@model HomeViewModel;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -84,11 +86,12 @@
         </ul>
     </div>
     <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
+        <h2>Persons</h2>
         <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
+            @foreach (var person in Model.Persons)
+            {
+                <li>Name: @person.Name, Age: @person.Age.ToString()</li>
+            }
         </ul>
     </div>
 </div>

@@ -25,9 +25,11 @@ namespace MVC.Controllers
         public IActionResult Index()
         {
 
-           // var persons = _personService.Get();
+            var persons = _personService.GetAll();
 
-            return View();
+            var homeViewModel = new HomeViewModel(persons);
+
+            return View(homeViewModel);
         }
 
         public IActionResult About()
