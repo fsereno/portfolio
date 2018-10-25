@@ -5,8 +5,8 @@
       <File FileName="Services/IPersonService.cs" Line="12" Column="56" />
       <File FileName="Domains/Person.cs" Line="10" Column="1" />
       <File FileName="Domains/Entity.cs" Line="15" Column="1" />
-      <File FileName="Services/PersonService.cs" Line="19" Column="38" />
-      <File FileName="Repositories/Repository.cs" Line="17" Column="38" />
+      <File FileName="Services/PersonService.cs" Line="19" Column="31" />
+      <File FileName="Repositories/Repository.cs" Line="17" Column="9" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -43,4 +43,5 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Repositories.Tests PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
