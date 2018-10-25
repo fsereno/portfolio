@@ -13,4 +13,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
 </Project>

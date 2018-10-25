@@ -17,7 +17,7 @@
 </div>
 <div class="row">
     <div class="col-md-3">
-        <form asp-controller="Home" asp-action="Update">
+        <form asp-controller="Home" asp-action="Update" id="personForm">
             <div class="form-group">
                 <label for="id">Id</label>
                 <input type="number" id="id" name="id" class="form-control" placeholder="Id..." required />
@@ -36,3 +36,9 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+
+    <script src="~/js/index.js"></script>
+
+}
