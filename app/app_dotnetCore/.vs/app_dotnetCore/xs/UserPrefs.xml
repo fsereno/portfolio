@@ -1,11 +1,14 @@
-﻿<Properties StartupConfiguration="{0072724C-6C01-42E4-808A-65DDF806A076}|Default">
+﻿<Properties StartupConfiguration="{89CD376A-2081-4639-A7FE-E6E059A42FEB}|Default">
   <MonoDevelop.Ide.ItemProperties.Services.Tests PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="MVCAngular/MVCAngular.csproj">
+    <Files>
+      <File FileName="MVCAngular/MVCAngular.csproj" Line="32" Column="5" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="app_dotnetCore" expanded="True">
-            <Node name="Services" expanded="True" />
+            <Node name="MVCAngular" expanded="True" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -34,4 +37,5 @@
   <MonoDevelop.Ide.ItemProperties.MVC PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.Repositories.Tests PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.MVCAngular PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
