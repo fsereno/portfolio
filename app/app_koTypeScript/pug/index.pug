@@ -1,0 +1,43 @@
+extends ../../pug/layouts/main.pug
+
+block styles
+  // build:css css/styles.css
+  link(rel="stylesheet" href="css/styles.css")
+  // endbuild
+
+block content    
+      .row.splitter
+        .col-lg-12
+          h3 Result: 
+            span#result       
+              | Input 1: 
+              strong(data-bind='text: language')
+              |, Input 2: 
+              strong(data-bind='text: framework')
+              | !
+      .row
+        .col-lg-3
+          form#inputForm
+            .form-group
+              label(for="language") Language:
+              input#language.form-control(
+                name="language", 
+                type="text", 
+                placeholder="Input...",
+                data-bind='value: language',
+                required)
+            .form-group
+              label(for="framework") Framework:
+              input#framework.form-control(
+                name="framework", 
+                type="text", 
+                placeholder="Input...",
+                data-bind='value: framework',
+                required)
+block scripts
+  // build:js js/app.js
+  script(src="js/app.js")
+  // endbuild
+  // build:js js/vendor.js
+  script(src="../../../node_modules/knockout/build/output/knockout-latest.js")
+  // endbuild
