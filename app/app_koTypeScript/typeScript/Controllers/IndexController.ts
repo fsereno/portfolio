@@ -5,8 +5,6 @@ import { KnockoutExampleModel } from "../../../typeScript/Models/KnockoutExample
 export class IndexController  {
     
     private validatorService: IValidatorService;
-    private input: JQuery<HTMLElement>;
-    private result: JQuery<HTMLElement>;
     private formId: string;
 
     constructor
@@ -15,8 +13,6 @@ export class IndexController  {
     ) 
     {
         this.validatorService = validatorService;
-        this.input = jQuery("#language");
-        this.result = jQuery("#framework");
         this.formId = "inputForm";
     }
 
@@ -35,27 +31,12 @@ export class IndexController  {
     validateForm(){
 
         const self = this;
-        /*let validateFormOptions = {
-            
-            submitHandler: (form: HTMLElement)=>{
-
-                let valid = jQuery(form).valid(),
-                    input = self.input.val().toString();
-
-                if(valid){
-
-                    self.result.text(input);
-
-                }   
-            }
-        }*/
-
         self.validatorService.ValidateForm(self.formId, null);
     }
 
     bindForm() {
 
-        ko.applyBindings(new KnockoutExampleModel("TypeScript", "Knockout"));
+        ko.applyBindings(new KnockoutExampleModel("Your name", 0));
 
     }
 }

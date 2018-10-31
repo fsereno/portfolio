@@ -1,10 +1,9 @@
-
 export class KnockoutExampleModel {
-    language: KnockoutObservable<string>
-    framework: KnockoutObservable<string>
+    Name: KnockoutObservable<string>
+    Age: KnockoutObservable<number>
 
-    constructor(language: string, framework: string) {
-        this.language = ko.observable(language);
-        this.framework = ko.observable(framework);
+    constructor(name: string, age: number) {
+        this.Name = ko.observable(name);
+        this.Age = ko.observable(age);
     }
 }

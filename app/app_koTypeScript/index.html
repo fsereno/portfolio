@@ -45,19 +45,19 @@
       <div class="row splitter">
         <div class="col-lg-12">
           <h3>Result: <span id="result">
-                    Input 1: <strong data-bind="text: language"></strong>, Input 2: <strong data-bind="text: framework"></strong>!</span></h3>
+                    Name: <strong data-bind="text: Name"></strong>, Age: <strong data-bind="text: Age"></strong>!</span></h3>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-3">
           <form id="inputForm">
             <div class="form-group">
-              <label for="language">Language:</label>
-              <input class="form-control" id="language" name="language" type="text" placeholder="Input..." data-bind="value: language" required>
+              <label for="name">Name:</label>
+              <input class="form-control" id="language" name="name" type="text" placeholder="Input..." data-bind="value: Name" required>
             </div>
             <div class="form-group">
-              <label for="framework">Framework:</label>
-              <input class="form-control" id="framework" name="framework" type="text" placeholder="Input..." data-bind="value: framework" required>
+              <label for="age">Age:</label>
+              <input class="form-control" id="framework" name="age" type="number" placeholder="Input..." data-bind="value: Age" required>
             </div>
           </form>
         </div>
@@ -72,7 +72,7 @@
     <script src="js/app.js"></script>
     <!-- endbuild-->
     <!-- build:js js/vendor.js-->
-    <script src="../../../node_modules/knockout/build/output/knockout-latest.js"></script>
+    <script src="../../node_modules/knockout/build/output/knockout-latest.js"></script>
     <!-- endbuild-->
   </body>
 </html>

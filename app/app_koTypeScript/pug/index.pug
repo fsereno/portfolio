@@ -10,34 +10,34 @@ block content
         .col-lg-12
           h3 Result: 
             span#result       
-              | Input 1: 
-              strong(data-bind='text: language')
-              |, Input 2: 
-              strong(data-bind='text: framework')
+              | Name: 
+              strong(data-bind='text: Name')
+              |, Age: 
+              strong(data-bind='text: Age')
               | !
       .row
         .col-lg-3
           form#inputForm
             .form-group
-              label(for="language") Language:
+              label(for="name") Name:
               input#language.form-control(
-                name="language", 
+                name="name", 
                 type="text", 
                 placeholder="Input...",
-                data-bind='value: language',
+                data-bind='value: Name',
                 required)
             .form-group
-              label(for="framework") Framework:
+              label(for="age") Age:
               input#framework.form-control(
-                name="framework", 
-                type="text", 
+                name="age", 
+                type="number", 
                 placeholder="Input...",
-                data-bind='value: framework',
+                data-bind='value: Age',
                 required)
 block scripts
   // build:js js/app.js
   script(src="js/app.js")
   // endbuild
   // build:js js/vendor.js
-  script(src="../../../node_modules/knockout/build/output/knockout-latest.js")
+  script(src="../../node_modules/knockout/build/output/knockout-latest.js")
   // endbuild
