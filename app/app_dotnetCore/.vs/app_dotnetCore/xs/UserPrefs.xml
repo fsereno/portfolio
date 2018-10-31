@@ -1,14 +1,15 @@
 ﻿<Properties StartupConfiguration="{89CD376A-2081-4639-A7FE-E6E059A42FEB}|Default">
   <MonoDevelop.Ide.ItemProperties.Services.Tests PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MVCAngular/MVCAngular.csproj">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MVC/Program.cs">
     <Files>
-      <File FileName="MVCAngular/MVCAngular.csproj" Line="32" Column="5" />
+      <File FileName="MVC/Program.cs" Line="25" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="app_dotnetCore" expanded="True">
-            <Node name="MVCAngular" expanded="True" selected="True" />
+          <Node name="app_dotnetCore" expanded="True" selected="True">
+            <Node name="MVC" expanded="True" />
+            <Node name="MVCAngular" expanded="True" />
           </Node>
         </State>
       </Pad>
