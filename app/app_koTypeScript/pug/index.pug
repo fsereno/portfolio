@@ -34,6 +34,11 @@ block content
                 placeholder="Input...",
                 data-bind='value: Age',
                 required)
+            .form-group
+              button#update.btn.btn-primary(
+                type="button",
+                data-bind="click: update"
+                ) Fetch new data
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

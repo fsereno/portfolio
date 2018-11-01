@@ -6,4 +6,9 @@ export class KnockoutExampleModel {
         this.Name = ko.observable(name);
         this.Age = ko.observable(age);
     }
+
+    public update() : void {
+        this.Name("New name");
+        this.Age(100);
+    }
 }

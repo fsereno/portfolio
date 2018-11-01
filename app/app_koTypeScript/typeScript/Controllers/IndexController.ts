@@ -1,9 +1,8 @@
 // Interfaces
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 import { KnockoutExampleModel } from "../../../typeScript/Models/KnockoutExampleModel";
-
 export class IndexController  {
-    
+
     private validatorService: IValidatorService;
     private formId: string;
 
@@ -15,28 +14,17 @@ export class IndexController  {
         this.validatorService = validatorService;
         this.formId = "inputForm";
     }
-
     init() {
-
         const self = this;
-
         jQuery(() => {
-
             self.validateForm();
-            self.bindForm();
-        
+            self.bind();
         });
     }
-
     validateForm(){
-
-        const self = this;
-        self.validatorService.ValidateForm(self.formId, null);
+        this.validatorService.ValidateForm(this.formId, null);
     }
-
-    bindForm() {
-
+    bind() {
         ko.applyBindings(new KnockoutExampleModel("Your name", 0));
-
-    }
+    }    
 }
