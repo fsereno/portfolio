@@ -37,8 +37,17 @@ block content
             .form-group
               button#update.btn.btn-primary(
                 type="button",
-                data-bind="click: fetch"
+                data-bind="click: add"
                 ) Fetch new data
+        .col-lg-9
+          table.table.table-striped
+            thead
+              th Name
+              th Age
+            tbody(data-bind="foreach: KnockoutExampleModels")
+              tr
+                td(data-bind="text: Name")
+                td(data-bind="text: Age")
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

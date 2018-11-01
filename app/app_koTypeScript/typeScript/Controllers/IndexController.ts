@@ -26,6 +26,6 @@ export class IndexController  {
         this.validatorService.ValidateForm(this.formId, null);
     }
     bind() {
-        ko.applyBindings(new KnockoutExampleModel("Your name", 0));
+        ko.applyBindings(new KnockoutExampleModels("Your name", 0));
     }    
 }
