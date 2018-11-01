@@ -1,6 +1,7 @@
 // Interfaces
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 import { KnockoutExampleModel } from "../../../typeScript/Models/KnockoutExampleModel";
+import { KnockoutExampleModels } from "../../../typeScript/Models/KnockoutExampleModels";
 export class IndexController  {
 
     private validatorService: IValidatorService;
