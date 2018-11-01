@@ -7,7 +7,7 @@ export class KnockoutExampleModel {
         this.Age = ko.observable(age);
     }
 
-    public update() : void {
+    public fetch() : void {
         this.Name("New name");
         this.Age(100);
     }
