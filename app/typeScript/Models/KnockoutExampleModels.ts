@@ -1,6 +1,6 @@
 import { KnockoutExampleModel } from "./KnockoutExampleModel";
 
-export class KnockoutExampleModels {
+export class KnockoutExampleModels { // look at extending KnockoutExampleModel
     KnockoutExampleModels: KnockoutObservableArray<KnockoutExampleModel>;
     Name: KnockoutObservable<string>
     Age: KnockoutObservable<number>
