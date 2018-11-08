@@ -10,7 +10,20 @@ var rec = (num) => {
     return num + rec(num - 1);
 }
 
-console.log("Basic " + rec(1));
+console.log("Basic " + rec(2));
+
+function FirstFactorial(num) { 
+    
+  if(num === 0){
+      
+      return 1;
+  }
+  
+  return num * FirstFactorial(num - 1)
+  
+}
+
+console.log("FirstFactorial " + FirstFactorial(8));
 
 // Complex Recursion Example
 function ChessboardTraveling(str) {
