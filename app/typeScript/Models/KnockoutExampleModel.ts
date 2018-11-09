@@ -1,14 +1,13 @@
 export class KnockoutExampleModel {
-    Name: KnockoutObservable<string>
-    Age: KnockoutObservable<number>
+    name: KnockoutObservable<string>;
+    age: KnockoutObservable<number>;
 
     constructor(name: string, age: number) {
-        this.Name = ko.observable(name);
-        this.Age = ko.observable(age);
+        this.name = ko.observable(name);
+        this.age = ko.observable(age);
     }
 
-    public fetch() : void {
-        this.Name("New name");
-        this.Age(100);
-    }
+    /*public remove() : void {
+        console.log(this.Name());
+    }*/
 }

@@ -11,43 +11,51 @@ block content
           h3 Result: 
             span#result       
               | Name: 
-              strong(data-bind='text: Name')
+              strong(data-bind='text: name')
               |, Age: 
-              strong(data-bind='text: Age')
+              strong(data-bind='text: age')
               | !
       .row
         .col-lg-3
-          form#inputForm
-            .form-group
-              label(for="name") Name:
-              input#language.form-control(
-                name="name", 
-                type="text", 
-                placeholder="Input...",
-                data-bind='value: Name',
-                required)
-            .form-group
-              label(for="age") Age:
-              input#framework.form-control(
-                name="age", 
-                type="number", 
-                placeholder="Input...",
-                data-bind='value: Age',
-                required)
-            .form-group
-              button#update.btn.btn-primary(
-                type="button",
-                data-bind="click: add"
-                ) Fetch new data
-        .col-lg-9
-          table.table.table-striped
-            thead
-              th Name
-              th Age
-            tbody(data-bind="foreach: KnockoutExampleModels")
-              tr
-                td(data-bind="text: Name")
-                td(data-bind="text: Age")
+          .card
+            .card-body
+              form#inputForm
+                .form-group
+                  label(for="name") Name:
+                  input#language.form-control(
+                    name="name", 
+                    type="text", 
+                    placeholder="Input...",
+                    data-bind='value: name',
+                    required)
+                .form-group
+                  label(for="age") Age:
+                  input#framework.form-control(
+                    name="age", 
+                    type="number", 
+                    placeholder="Input...",
+                    data-bind='value: age',
+                    required)
+                .form-group
+                  button#update.btn.btn-primary(
+                    type="button",
+                    data-bind="click: add"
+                    ) Add
+        .col-lg-6
+          .card
+            .card-body
+              table.table.table-striped
+                thead.thead-dark
+                  th Name
+                  th Age
+                  th Delete
+                tbody(data-bind="foreach: collection")
+                  tr
+                    td(data-bind="text: name")
+                    td(data-bind="text: age")
+                    td
+                      button(data-bind="click: $parent.remove")
+                        | Delete
 block scripts
   // build:js js/app.js
   script(src="js/app.js")
