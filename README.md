@@ -67,7 +67,7 @@ $ gulp build
 ```
 ##### This will:
 - Build the initial development resources (pug, sass, ts).
-- Run Mocha Unit tests on backend Service code only
+- Run Mocha Unit tests on TS Service code only
 ---
 
 #### Run the default Gulp task
@@ -94,6 +94,16 @@ $ gulp publish
 - Bundle the necessary resources into “app” and “vendor” files (js, css).
 - Replace resource urls with production urls.
 - Run all Unit Tests from the ./app/tests directory using Mocha and Chai.
+---
+
+#### Run the Gulp Nightmare (headless browser) task
+
+```shell
+$ gulp nightmare
+```
+##### This will:
+- Start the development server
+- Run all Nightmare Unit Tests from the ./app/tests/applications directory using Mocha, Chai and Nightmare.
 ---
 
 #### Run the Gulp Create task

@@ -166,7 +166,7 @@ gulp.task("mochaServices", () => {
     }));
 });
 
-gulp.task("mochaApps",["connect"], () => {
+gulp.task("nightmare",["connect"], () => {
   return gulp.src(config.developmentDir+"/tests/applications/**/*.test.ts")
     .pipe(mocha({
         reporter: "spec",
