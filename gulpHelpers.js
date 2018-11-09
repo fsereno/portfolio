@@ -5,7 +5,7 @@ module.exports = {
     runThis: (application, method) => {
       method(application);
     },
-    setupWatcherOnChangeEvent: (watcher, dir, method, unitTestCallBack, defaultTasksCallBack) => {
+    setupWatcherOnChangeEvent: (watcher, dir, method, defaultTasksCallBack) => {
       watcher.on("change", function(file, stats) {
         let windowsOS = (/\\/).test(file.path),
             config = module.exports.constructor();
@@ -18,9 +18,13 @@ module.exports = {
         if(dir !== "/" && application !== undefined && method !== null) {
           method(application);
         } else {
-          defaultTasksCallBack();
+          if(defaultTasksCallBack !== null || defaultTasksCallBack !== undefined ){
+            defaultTasksCallBack();
+          }
         }
-        unitTestCallBack();
+        /*if(unitTestCallBack !== null || unitTestCallBack !== undefined ) {
+          unitTestCallBack();
+        }*/
       });
     },
     watchThis: (watcher, dir, method, unitTestCallBack, defaultTasksCallBack) => {  

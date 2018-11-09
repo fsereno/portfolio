@@ -1,7 +1,6 @@
 // Interfaces
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
-import { KnockoutExampleModel } from "../../../typeScript/Models/KnockoutExampleModel";
-import { KnockoutExampleModels } from "../../../typeScript/Models/KnockoutExampleModels";
+import { PeopleViewModel } from "../Models/PeopleViewModel";
 export class IndexController  {
 
     private validatorService: IValidatorService;
@@ -26,6 +25,6 @@ export class IndexController  {
         this.validatorService.ValidateForm(this.formId, null);
     }
     bind() {
-        ko.applyBindings(new KnockoutExampleModels("Your name", 0));
+        ko.applyBindings(new PeopleViewModel("Your name Test 3", 0));
     }    
 }
