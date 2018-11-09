@@ -9,20 +9,15 @@ var rec = (num) => {
     // Recursion
     return num + rec(num - 1);
 }
-
 console.log("Basic " + rec(2));
 
+// First Factorial Example
 function FirstFactorial(num) { 
-    
   if(num === 0){
-      
       return 1;
   }
-  
   return num * FirstFactorial(num - 1)
-  
 }
-
 console.log("FirstFactorial " + FirstFactorial(8));
 
 // Complex Recursion Example
@@ -34,7 +29,7 @@ function ChessboardTraveling(str) {
 
   var   xDiff = a - x, 
         yDiff = b - y;
-  
+        
   return recur(xDiff, yDiff);
   
   function recur(xDiff, yDiff) {
@@ -45,10 +40,7 @@ function ChessboardTraveling(str) {
     var x = recur(xDiff - 1, yDiff),
         y = recur(xDiff, yDiff - 1),
         sum = x + y;
-
     return sum;
   }
-  
 }
-
 console.log("Complex " + ChessboardTraveling("(2 2)(4 3)"));
