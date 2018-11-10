@@ -23,7 +23,12 @@ export class PeopleViewModel {
         this.collection.push(new PeopleModel("Your name 4", 4))
     }
 
-    public remove = (item: PeopleModel) => {
+    public remove () {
+        //data-bind="click: $parent.remove"
+       
+    }
+
+    public removeConfirm = (item: PeopleModel) => {
         this.collection.remove(item);
     }
 }
