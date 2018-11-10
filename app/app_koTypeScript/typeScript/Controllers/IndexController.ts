@@ -25,6 +25,6 @@ export class IndexController  {
         this.validatorService.ValidateForm(this.formId, null);
     }
     bind() {
-        ko.applyBindings(new PeopleViewModel("Your name Test 3", 0));
+        ko.applyBindings(new PeopleViewModel("Your name", 0));
     }    
 }

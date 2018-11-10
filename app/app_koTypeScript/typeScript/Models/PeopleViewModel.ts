@@ -1,9 +1,9 @@
 import { PeopleModel } from "./PeopleModel";
-
 export class PeopleViewModel {
     collection: KnockoutObservableArray<PeopleModel>;
     name: KnockoutObservable<string>;
     age: KnockoutObservable<number>;
+    delete: PeopleModel;
 
     constructor(name: string, age: number) {
         this.collection = ko.observableArray(new Array<PeopleModel>());
@@ -23,12 +23,11 @@ export class PeopleViewModel {
         this.collection.push(new PeopleModel("Your name 4", 4))
     }
 
-    public remove () {
-        //data-bind="click: $parent.remove"
-       
+    public remove = (item: PeopleModel) => {
+        this.delete = item;
     }
 
-    public removeConfirm = (item: PeopleModel) => {
-        this.collection.remove(item);
+    public removeConfirm = () => {
+        this.collection.remove(this.delete);
     }
 }
