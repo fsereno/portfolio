@@ -37,10 +37,10 @@ block content
                     data-bind='value: age',
                     required)
                 .form-group
-                  button#update.btn.btn-primary(
+                  button#update.btn.btn-success(
                     type="button",
-                    data-bind="click: add"
-                    ) Add
+                    data-bind="click: add",
+                    ) Add item
         .col-lg-6
           .card
             .card-body
@@ -54,21 +54,37 @@ block content
                     td(data-bind="text: name")
                     td(data-bind="text: age")
                     td
-                      button(class="btn btn-danger", data-toggle="modal" data-target="#exampleModal" data-bind="click: $parent.remove")
+                      button(
+                        class="btn btn-danger", 
+                        data-toggle="modal", 
+                        data-target="#exampleModal",
+                        data-bind="click: $parent.remove")
                         i.fa.fa-trash
 
-      #exampleModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+      #exampleModal.modal.fade(
+        tabindex='-1',
+        role='dialog',
+        aria-labelledby='exampleModalLabel',
+        aria-hidden='true')
         .modal-dialog(role='document')
           .modal-content
             .modal-header
               h5#exampleModalLabel.modal-title Are you sure ?
-              button.close(type='button' data-dismiss='modal' aria-label='Close')
+              button.close(
+                type='button',
+                data-dismiss='modal',
+                aria-label='Close')
                 span(aria-hidden='true') &times;
             .modal-body
-              | Delete the item...
+              | Confirm you would like to delete the item.
             .modal-footer
-              button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-              button.btn.btn-primary(type='button', data-dismiss='modal', data-bind="click: removeConfirm") Confirm Delete
+              button.btn.btn-secondary(
+                type='button',
+                data-dismiss='modal') Close
+              button.btn.btn-primary(
+                type='button', 
+                data-dismiss='modal', 
+                data-bind="click: removeConfirm") Confirm Delete
 
 block scripts
   // build:js js/app.js

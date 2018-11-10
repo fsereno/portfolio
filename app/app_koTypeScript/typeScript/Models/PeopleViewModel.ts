@@ -17,10 +17,8 @@ export class PeopleViewModel {
     }
 
     public fetch() : void {
-        this.collection.push(new PeopleModel("Your name 1", 1))
-        this.collection.push(new PeopleModel("Your name 2", 2))
-        this.collection.push(new PeopleModel("Your name 3", 3))
-        this.collection.push(new PeopleModel("Your name 4", 4))
+        this.collection.push(new PeopleModel("James Bond", 23))
+        this.collection.push(new PeopleModel("Joe Bloggs", 34))
     }
 
     public remove = (item: PeopleModel) => {
