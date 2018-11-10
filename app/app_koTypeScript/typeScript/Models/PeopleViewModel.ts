@@ -1,6 +1,6 @@
 import { PeopleModel } from "./PeopleModel";
 
-export class PeopleViewModel { // look at extending KnockoutExampleModel
+export class PeopleViewModel {
     collection: KnockoutObservableArray<PeopleModel>;
     name: KnockoutObservable<string>;
     age: KnockoutObservable<number>;

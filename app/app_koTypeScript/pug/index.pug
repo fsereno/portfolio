@@ -54,8 +54,8 @@ block content
                     td(data-bind="text: name")
                     td(data-bind="text: age")
                     td
-                      button(data-bind="click: $parent.remove")
-                        | Delete
+                      button(class="btn btn-danger", data-bind="click: $parent.remove")
+                        i.fa.fa-trash
 block scripts
   // build:js js/app.js
   script(src="js/app.js")
