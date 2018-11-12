@@ -5,6 +5,7 @@ export class IndexController  {
 
     private validatorService: IValidatorService;
     private formId: string;
+    private editModalId: string;
 
     constructor
     (
@@ -12,7 +13,8 @@ export class IndexController  {
     ) 
     {
         this.validatorService = validatorService;
-        this.formId = "inputForm";
+        this.formId = "editForm";
+        this.editModalId = "editModal";
     }
     init() {
         const self = this;
@@ -25,6 +27,11 @@ export class IndexController  {
         this.validatorService.ValidateForm(this.formId, null);
     }
     bind() {
-        ko.applyBindings(new PeopleViewModel("Your name", 0));
+        ko.applyBindings(
+            new PeopleViewModel(
+                this.formId, 
+                this.editModalId
+                )
+        );
     }    
 }

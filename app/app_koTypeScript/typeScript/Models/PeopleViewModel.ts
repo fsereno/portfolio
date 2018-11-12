@@ -1,27 +1,22 @@
 import { PeopleModel } from "./PeopleModel";
 export class PeopleViewModel {
-    collection: KnockoutObservableArray<PeopleModel>;
-    name: KnockoutObservable<string>;
-    age: KnockoutObservable<number>;
-    nameToEdit: KnockoutObservable<string>;
-    ageToEdit: KnockoutObservable<number>;
-    itemToDelete: PeopleModel;
-    currentItem: PeopleModel;
+    private formId: string;
+    private editModalId: string;
+    private itemToDelete: PeopleModel;
+    private currentItem: PeopleModel;
+    public collection: KnockoutObservableArray<PeopleModel>;
+    public name: KnockoutObservable<string>;
+    public age: KnockoutObservable<number>;
 
-    constructor(name: string, age: number) {
+    constructor(formId: string, editModalId: string) {
+        this.formId = formId;
+        this.editModalId = editModalId;
         this.collection = ko.observableArray(new Array<PeopleModel>());
-        this.name = ko.observable(name);
-        this.age = ko.observable(age);
-        this.nameToEdit = ko.observable("");
-        this.ageToEdit = ko.observable(0);
+        this.name = ko.observable("");
+        this.age = ko.observable(0);
         this.currentItem = new PeopleModel("", 0);
         this.fetch();
     }   
-
-    public add(){
-        if(this.name().length > 0 && this.age() > 0)
-            this.collection.push(new PeopleModel(this.name(), this.age()));
-    }
 
     public fetch() : void {
         this.collection.push(new PeopleModel("James Bond", 23))
@@ -39,14 +34,26 @@ export class PeopleViewModel {
 
     public edit = (item: PeopleModel) => {
         this.currentItem = item;
-        this.nameToEdit(item.name);
-        this.ageToEdit(item.age);
+        this.name(item.name);
+        this.age(item.age);
+    }
+
+    public closeEdit = () => {
+        jQuery("#"+this.editModalId).modal("hide");
     }
 
     public update = () => {
-        if(this.collection.indexOf(this.currentItem) > -1) {
-            var replace = new PeopleModel(this.nameToEdit(), this.ageToEdit())
-            this.collection.replace(this.currentItem, replace);
+        if(jQuery("#"+this.formId).valid()){
+            if(this.collection.indexOf(this.currentItem) > -1) {
+                var replace = new PeopleModel(this.name(), this.age())
+                this.collection.replace(this.currentItem, replace);
+                this.closeEdit();
+            } else {
+                if(this.name().length > 0 && this.age() > 0) {
+                    this.collection.push(new PeopleModel(this.name(), this.age()));
+                    this.closeEdit();
+                }
+            }
         }
     }
 }

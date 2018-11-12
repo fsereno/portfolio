@@ -44,31 +44,6 @@
       <hr>
       <div class="row splitter">
         <div class="col-lg-12">
-          <h3>Result: <span id="result">
-                    Name: <strong data-bind="text: name"></strong>, Age: <strong data-bind="text: age"></strong>!</span></h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="card">
-            <div class="card-body">
-              <form id="inputForm">
-                <div class="form-group">
-                  <label for="name">Name:</label>
-                  <input class="form-control" id="language" name="name" type="text" placeholder="Input..." data-bind="value: name" required>
-                </div>
-                <div class="form-group">
-                  <label for="age">Age:</label>
-                  <input class="form-control" id="framework" name="age" type="number" placeholder="Input..." data-bind="value: age" required>
-                </div>
-                <div class="form-group">
-                  <button class="btn btn-success" id="update" type="button" data-bind="click: add">Add item</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
               <table class="table table-striped">
@@ -77,10 +52,13 @@
                   <th>Age</th>
                   <th>Edit</th>
                   <th>Delete</th>
+                  <th> 
+                    <button class="btn btn-success" data-toggle="modal" data-target="#editModal">Add item <i class="fa fa-plus"></i></button>
+                  </th>
                 </thead>
                 <tbody data-bind="if: collection().length === 0">
                   <tr>
-                    <td colspan="4">There are no rows to display</td>
+                    <td colspan="5">There are no rows to display</td>
                   </tr>
                 </tbody>
                 <tbody data-bind="foreach: collection">
@@ -90,7 +68,7 @@
                     <td>
                       <button class="btn btn-success" data-toggle="modal" data-target="#editModal" data-bind="click: $parent.edit"><i class="fa fa-edit"></i></button>
                     </td>
-                    <td>
+                    <td colspan="2">
                       <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-bind="click: $parent.remove"><i class="fa fa-trash"></i></button>
                     </td>
                   </tr>
@@ -126,17 +104,17 @@
               <form id="editForm">
                 <div class="form-group">
                   <label for="name">Name:</label>
-                  <input class="form-control" id="language" name="name" type="text" placeholder="Input..." data-bind="value: nameToEdit" required>
+                  <input class="form-control" id="language" name="name" type="text" placeholder="Input..." data-bind="value: name" required>
                 </div>
                 <div class="form-group">
                   <label for="age">Age:</label>
-                  <input class="form-control" id="framework" name="age" type="number" placeholder="Input..." data-bind="value: ageToEdit" required>
+                  <input class="form-control" id="framework" name="age" type="number" placeholder="Input..." data-bind="value: age" required>
                 </div>
               </form>
             </div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-              <button class="btn btn-success" type="button" data-dismiss="modal" data-bind="click: update">Save Changes</button>
+              <button class="btn btn-success" type="button" data-bind="click: update">Save Changes</button>
             </div>
           </div>
         </div>

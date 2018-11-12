@@ -8,40 +8,6 @@ block styles
 block content    
       .row.splitter
         .col-lg-12
-          h3 Result: 
-            span#result       
-              | Name: 
-              strong(data-bind='text: name')
-              |, Age: 
-              strong(data-bind='text: age')
-              | !
-      .row
-        .col-lg-3
-          .card
-            .card-body
-              form#inputForm
-                .form-group
-                  label(for="name") Name:
-                  input#language.form-control(
-                    name="name", 
-                    type="text", 
-                    placeholder="Input...",
-                    data-bind='value: name',
-                    required)
-                .form-group
-                  label(for="age") Age:
-                  input#framework.form-control(
-                    name="age", 
-                    type="number", 
-                    placeholder="Input...",
-                    data-bind='value: age',
-                    required)
-                .form-group
-                  button#update.btn.btn-success(
-                    type="button",
-                    data-bind="click: add",
-                    ) Add item
-        .col-lg-6
           .card
             .card-body
               table.table.table-striped
@@ -50,9 +16,16 @@ block content
                   th Age
                   th Edit
                   th Delete
+                  th 
+                    button(
+                        class="btn btn-success", 
+                        data-toggle="modal", 
+                        data-target="#editModal")
+                        | Add item 
+                        i.fa.fa-plus
                 tbody(data-bind="if: collection().length === 0")
                   tr
-                    td(colspan="4")
+                    td(colspan="5")
                       | There are no rows to display
                 tbody(data-bind="foreach: collection")
                   tr
@@ -65,7 +38,7 @@ block content
                         data-target="#editModal",
                         data-bind="click: $parent.edit")
                         i.fa.fa-edit
-                    td
+                    td(colspan="2")
                       button(
                         class="btn btn-danger", 
                         data-toggle="modal", 
@@ -119,7 +92,7 @@ block content
                     name="name", 
                     type="text", 
                     placeholder="Input...",
-                    data-bind='value: nameToEdit',
+                    data-bind='value: name',
                     required)
                 .form-group
                   label(for="age") Age:
@@ -127,15 +100,14 @@ block content
                     name="age", 
                     type="number", 
                     placeholder="Input...",
-                    data-bind='value: ageToEdit',
+                    data-bind='value: age',
                     required)
             .modal-footer
               button.btn.btn-secondary(
                 type='button',
                 data-dismiss='modal') Close
               button.btn.btn-success(
-                type='button', 
-                data-dismiss='modal', 
+                type='button',
                 data-bind="click: update") Save Changes
 
 block scripts
