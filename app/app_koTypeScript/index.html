@@ -75,14 +75,23 @@
                 <thead class="thead-dark">
                   <th>Name</th>
                   <th>Age</th>
+                  <th>Edit</th>
                   <th>Delete</th>
                 </thead>
+                <tbody data-bind="if: collection().length === 0">
+                  <tr>
+                    <td colspan="4">There are no rows to display</td>
+                  </tr>
+                </tbody>
                 <tbody data-bind="foreach: collection">
                   <tr>
                     <td data-bind="text: name"></td>
                     <td data-bind="text: age"></td>
                     <td>
-                      <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-bind="click: $parent.remove"><i class="fa fa-trash"></i></button>
+                      <button class="btn btn-success" data-toggle="modal" data-target="#editModal" data-bind="click: $parent.edit"><i class="fa fa-edit"></i></button>
+                    </td>
+                    <td>
+                      <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-bind="click: $parent.remove"><i class="fa fa-trash"></i></button>
                     </td>
                   </tr>
                 </tbody>
@@ -91,17 +100,43 @@
           </div>
         </div>
       </div>
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Are you sure ?</h5>
+              <h5 class="modal-title" id="deleteModalLabel">Are you sure ?</h5>
               <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">Confirm you would like to delete the item.</div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-              <button class="btn btn-primary" type="button" data-dismiss="modal" data-bind="click: removeConfirm">Confirm Delete</button>
+              <button class="btn btn-danger" type="button" data-dismiss="modal" data-bind="click: removeConfirm">Confirm Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editModalLabel">Edit Details</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form id="editForm">
+                <div class="form-group">
+                  <label for="name">Name:</label>
+                  <input class="form-control" id="language" name="name" type="text" placeholder="Input..." data-bind="value: nameToEdit" required>
+                </div>
+                <div class="form-group">
+                  <label for="age">Age:</label>
+                  <input class="form-control" id="framework" name="age" type="number" placeholder="Input..." data-bind="value: ageToEdit" required>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+              <button class="btn btn-success" type="button" data-dismiss="modal" data-bind="click: update">Save Changes</button>
             </div>
           </div>
         </div>

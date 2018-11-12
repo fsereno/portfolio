@@ -48,28 +48,40 @@ block content
                 thead.thead-dark
                   th Name
                   th Age
+                  th Edit
                   th Delete
+                tbody(data-bind="if: collection().length === 0")
+                  tr
+                    td(colspan="4")
+                      | There are no rows to display
                 tbody(data-bind="foreach: collection")
                   tr
                     td(data-bind="text: name")
                     td(data-bind="text: age")
                     td
                       button(
+                        class="btn btn-success", 
+                        data-toggle="modal", 
+                        data-target="#editModal",
+                        data-bind="click: $parent.edit")
+                        i.fa.fa-edit
+                    td
+                      button(
                         class="btn btn-danger", 
                         data-toggle="modal", 
-                        data-target="#exampleModal",
+                        data-target="#deleteModal",
                         data-bind="click: $parent.remove")
                         i.fa.fa-trash
-
-      #exampleModal.modal.fade(
+                          
+      #deleteModal.modal.fade(
         tabindex='-1',
         role='dialog',
-        aria-labelledby='exampleModalLabel',
+        aria-labelledby='deleteModalLabel',
         aria-hidden='true')
         .modal-dialog(role='document')
           .modal-content
             .modal-header
-              h5#exampleModalLabel.modal-title Are you sure ?
+              h5#deleteModalLabel.modal-title Are you sure ?
               button.close(
                 type='button',
                 data-dismiss='modal',
@@ -81,10 +93,50 @@ block content
               button.btn.btn-secondary(
                 type='button',
                 data-dismiss='modal') Close
-              button.btn.btn-primary(
+              button.btn.btn-danger(
                 type='button', 
                 data-dismiss='modal', 
                 data-bind="click: removeConfirm") Confirm Delete
+      #editModal.modal.fade(
+        tabindex='-1',
+        role='dialog',
+        aria-labelledby='editModalLabel',
+        aria-hidden='true')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#editModalLabel.modal-title Edit Details
+              button.close(
+                type='button',
+                data-dismiss='modal',
+                aria-label='Close')
+                span(aria-hidden='true') &times;
+            .modal-body
+              form#editForm
+                .form-group
+                  label(for="name") Name:
+                  input#language.form-control(
+                    name="name", 
+                    type="text", 
+                    placeholder="Input...",
+                    data-bind='value: nameToEdit',
+                    required)
+                .form-group
+                  label(for="age") Age:
+                  input#framework.form-control(
+                    name="age", 
+                    type="number", 
+                    placeholder="Input...",
+                    data-bind='value: ageToEdit',
+                    required)
+            .modal-footer
+              button.btn.btn-secondary(
+                type='button',
+                data-dismiss='modal') Close
+              button.btn.btn-success(
+                type='button', 
+                data-dismiss='modal', 
+                data-bind="click: update") Save Changes
 
 block scripts
   // build:js js/app.js
