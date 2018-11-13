@@ -2,11 +2,17 @@
 @import "../../sass/includes/styles.scss";
 
 body {
-
     h1 {
-
         color: $black;
-
     }
+    .table.itemTable{
 
+        thead {
+
+            tr th {
+                padding: 5px 10px;
+                line-height: 2.5em;
+            }
+        }
+    }
 }

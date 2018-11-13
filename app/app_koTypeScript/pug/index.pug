@@ -10,15 +10,16 @@ block content
         .col-lg-12
           .card
             .card-body
-              table.table.table-striped
+              table.table.table-striped.itemTable
                 thead.thead-dark
                   th Name
                   th Age
                   th Edit
                   th Delete
-                  th 
+                  th.text-right
                     button(
-                        class="btn btn-success", 
+                        class="btn btn-success",
+                        data-bind="click: clearEdit", 
                         data-toggle="modal", 
                         data-target="#editModal")
                         | Add item 
@@ -36,7 +37,7 @@ block content
                         class="btn btn-success", 
                         data-toggle="modal", 
                         data-target="#editModal",
-                        data-bind="click: $parent.edit")
+                        data-bind="click: $parent.populateEdit")
                         i.fa.fa-edit
                     td(colspan="2")
                       button(
