@@ -10,14 +10,14 @@ block content
         .col-lg-12
           .card
             .card-body
-              table.table.table-striped.itemTable
+              table#items.table.table-striped.itemTable
                 thead.thead-dark
                   th Name
                   th Age
                   th Edit
                   th Delete
                   th.text-right
-                    button(
+                    button#addItem(
                         class="btn btn-success",
                         data-bind="click: clearEdit", 
                         data-toggle="modal", 
@@ -89,7 +89,7 @@ block content
               form#editForm
                 .form-group
                   label(for="name") Name:
-                  input#language.form-control(
+                  input#name.form-control(
                     name="name", 
                     type="text", 
                     placeholder="Input...",
@@ -97,7 +97,7 @@ block content
                     required)
                 .form-group
                   label(for="age") Age:
-                  input#framework.form-control(
+                  input#age.form-control(
                     name="age", 
                     type="number", 
                     placeholder="Input...",
@@ -107,7 +107,7 @@ block content
               button.btn.btn-secondary(
                 type='button',
                 data-dismiss='modal') Close
-              button.btn.btn-success(
+              button#saveChanges.btn.btn-success(
                 type='button',
                 data-bind="click: update") Save Changes
 
