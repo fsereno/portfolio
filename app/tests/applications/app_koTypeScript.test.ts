@@ -30,7 +30,7 @@ describe(application, () => {
                             return jQuery("#items tr").length;
                         })
                         .end();
-                }
+                    }
             return test(url).should.eventually.equal(4);
         });
     });
@@ -45,11 +45,12 @@ describe(application, () => {
                         .wait(1000)
                         .click("#deleteConfirm")
                         .wait(1000)
+                        .end()
                         .evaluate(() => {
                             return jQuery("#items tr").length;
-                        });
+                        })
+                        .end();
                     }
-
             return test(url).should.eventually.equal(2);
         });
     });
