@@ -29,7 +29,7 @@ block content
                     td(colspan="5")
                       | There are no rows to display
                 tbody(data-bind="foreach: collection")
-                  tr
+                  tr(data-bind="attr: {'data-name': name}")
                     td(data-bind="text: name")
                     td(data-bind="text: age")
                     td

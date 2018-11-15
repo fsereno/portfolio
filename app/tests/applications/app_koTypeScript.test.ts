@@ -38,20 +38,42 @@ describe(application, () => {
         it("Should remove a single item, when the delete button is clicks, and confirmation is given. Table rows length should decrease by 1", 
             function() {
                 this.timeout(0);
-                    let test = async (url) => {
-                        return new Nightmare({show:false})
-                        .goto(url)
-                        .click("[data-target='#deleteModal']")
-                        .wait(1000)
-                        .click("#deleteConfirm")
-                        .wait(1000)
-                        .end()
-                        .evaluate(() => {
-                            return jQuery("#items tr").length;
-                        })
-                        .end();
-                    }
+                let test = async (url) => {
+                    return new Nightmare({show:false})
+                    .goto(url)
+                    .click("[data-target='#deleteModal']")
+                    .wait(1000)
+                    .click("#deleteConfirm")
+                    .wait(1000)
+                    .end()
+                    .evaluate(() => {
+                        return jQuery("#items tr").length;
+                    })
+                    .end();
+                }
             return test(url).should.eventually.equal(2);
+        });
+    });
+    describe("Edit item", () => {
+        it("Should change the first item in the table to 'Name' = 'Home Simpson', 'Age' = '52'", 
+            function(){
+                this.timeout(0);
+                let test = async (url) => {
+                    return new Nightmare({show:true})
+                    .goto(url)
+                    .click("#items tr[data-name='James Bond'] button[data-target='#editModal']")
+                    .wait(1000)
+                    .type('#name', '')
+                    .type('#name', 'Homer Simpson')
+                    .type('#age', '')
+                    .type('#age', '52')
+                    .click("#saveChanges")
+                    .wait(1000)
+                    .evaluate(()=>{
+                        return jQuery("#items tr:nth(1) td:nth(0)").text() + " " + jQuery("#items tr:nth(1) td:nth(1)").text();
+                    })
+                }
+            return test(url).should.eventually.equal("Homer Simpson 52");         
         });
     });
 });

@@ -62,7 +62,7 @@
                   </tr>
                 </tbody>
                 <tbody data-bind="foreach: collection">
-                  <tr>
+                  <tr data-bind="attr: {'data-name': name}">
                     <td data-bind="text: name"></td>
                     <td data-bind="text: age"></td>
                     <td>
