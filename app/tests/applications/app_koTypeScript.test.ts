@@ -59,7 +59,7 @@ describe(application, () => {
             function(){
                 this.timeout(0);
                 let test = async (url) => {
-                    return new Nightmare({show:true})
+                    return new Nightmare({show:false})
                     .goto(url)
                     .click("#items tr[data-name='James Bond'] button[data-target='#editModal']")
                     .wait(1000)
@@ -69,9 +69,11 @@ describe(application, () => {
                     .type('#age', '52')
                     .click("#saveChanges")
                     .wait(1000)
+                    .end()
                     .evaluate(()=>{
                         return jQuery("#items tr:nth(1) td:nth(0)").text() + " " + jQuery("#items tr:nth(1) td:nth(1)").text();
                     })
+                    .end();
                 }
             return test(url).should.eventually.equal("Homer Simpson 52");         
         });
