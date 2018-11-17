@@ -22,9 +22,7 @@ export class PeopleViewModel {
         this.collection.push(new PeopleModel("Joe Bloggs", 34))
     }
 
-    public remove = (item: PeopleModel) => {
-        this.context = item;
-    }
+    public remove = (item: PeopleModel) => this.context = item;
 
     public removeConfirm = () => {
         if(this.collection.indexOf(this.context) > -1)
@@ -42,13 +40,12 @@ export class PeopleViewModel {
         this.age(0);
     }
 
-    public closeEdit = () => {
-        jQuery("#"+this.editModalId).modal("hide");
-    }
+    public closeEdit = () => jQuery("#"+this.editModalId).modal("hide");
 
     public update = () => {
         if(jQuery("#"+this.formId).valid()){
-            if(this.collection.indexOf(this.context) > -1) {
+            if(this.collection.indexOf(this.context) > -1
+                && this.name().length > 0 && this.age() > 0) {
                 var replace = new PeopleModel(this.name(), this.age())
                 this.collection.replace(this.context, replace);
                 this.closeEdit();
