@@ -166,7 +166,11 @@ gulp.task("mochaServices", () => {
     }));
 });
 
-gulp.task("nightmare",["connect"], () => {
+gulp.task("nightmare", ["nightmareTests"], () => {
+  return connect.serverClose();
+});
+
+gulp.task("nightmareTests",["connect"], () => {
   return gulp.src(config.developmentDir+"/tests/applications/**/*.test.ts")
     .pipe(mocha({
         reporter: "spec",
@@ -184,7 +188,7 @@ gulp.task("watch", () => {
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null, defaultTasksCallBack);
 });
 
-gulp.task("connect", function() {
+gulp.task("connect", () => {
   connect.server({
    root: ["./"+config.developmentDir+"/"+config.prefix+config.entry, ".", "./"+config.developmentDir],
    livereload: true
