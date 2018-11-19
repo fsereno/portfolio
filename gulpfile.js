@@ -29,7 +29,8 @@ let gulp = require("gulp"),
     logSymbols = require("log-symbols"),
     directoryExists = require("directory-exists"),
     config = require("./config.json"),
-    gulpHelpers = require("./gulpHelpers");
+    gulpHelpers = require("./gulpHelpers"),
+    flatmap = require("gulp-flatMap");
 
 let cssTask = (application) => {
  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
@@ -162,13 +163,13 @@ gulp.task("mochaServiceTests", () => {
     }));
 });
 
-let connectServer = async () => {
-  return new Promise((resolve, reject)=>{
+let startServer = async () => {
+  return new Promise((resolve, reject) => {
     try{
       connect.server({
         root: ["./"+config.developmentDir+"/"+config.prefix+config.entry, ".", "./"+config.developmentDir],
         livereload: true
-      }, resolve("Done"))
+      }, () => resolve())
     }
     catch(err){
       reject(new Error(err))
@@ -177,9 +178,22 @@ let connectServer = async () => {
 }
 
 let nigthmare = async () => {
-  return new Promise((resolve, reject)=>{
+  return new Promise((resolve, reject) => {
+      gulp.src(config.developmentDir+"/tests/applications/**/*.test.ts")
+        .pipe(flatmap((stream) => {
+          return stream
+            .pipe(mocha({
+              reporter: "spec",
+              require: ["ts-node/register"]
+          }).on("error", (err) => reject(new Error(err))))
+        })).on("finish", () => resolve());
+    })
+}
+
+let endServer = async () => {
+  return new Promise((resolve, reject) => {
     try{
-      setTimeout(()=>{resolve("Done Nightmare")}, 4000);
+      connect.serverClose(() => resolve());
     }
     catch(err){
       reject(new Error(err))
@@ -187,16 +201,10 @@ let nigthmare = async () => {
   });
 }
 
-let closeServer = async () => {
-  return setTimeout(()=>{console.log("close server")}, 1000);
-}
-
-gulp.task("test", async () => {
-  let connect = await connectServer();
-  let nightmare = await nigthmare();
-
-  console.log(nightmare);
-  
+gulp.task("nightmare2", async () => {
+  await startServer();
+  await nigthmare();
+  await endServer();
 });
 
 gulp.task("mochaNightmareTests",["connect"], () => {
