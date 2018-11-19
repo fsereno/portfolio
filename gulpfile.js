@@ -138,10 +138,6 @@ let createTasks = (application) => {
   gulpHelpers.runThis(application, createTask);
 }
 
-let mochaServicesTaskCallBack = () => {
-  gulp.start("mochaServices");
-}
-
 let defaultTasksCallBack = () => {
   config.applications.map(defaultTasks);
 }
@@ -158,7 +154,7 @@ gulp.task("fonts", () => {
     return output;
 });
 
-gulp.task("mochaServices", () => {
+gulp.task("mochaServiceTests", () => {
   return gulp.src(config.developmentDir+"/tests/services/*.test.ts")
     .pipe(mocha({
         reporter: "spec",
@@ -166,16 +162,36 @@ gulp.task("mochaServices", () => {
     }));
 });
 
-gulp.task("nightmare", ["nightmareTests"], () => {
-  return connect.serverClose();
+let connectServer = async () => {
+  return setTimeout(()=>{console.log("connect")}, 3000);
+}
+
+let nigthmare = async () => {
+  return setTimeout(()=>{console.log("nightmare")}, 4000);
+}
+
+let closeServer = async () => {
+  return setTimeout(()=>{console.log("close server")}, 1000);
+}
+
+gulp.task("test", async () => {
+
+  let promises = [connectServer(), nigthmare(), closeServer()];
+
+  Promise.all(promises).then(()=>{console.log("done")})
+  
 });
 
-gulp.task("nightmareTests",["connect"], () => {
+gulp.task("mochaNightmareTests",["connect"], () => {
   return gulp.src(config.developmentDir+"/tests/applications/**/*.test.ts")
     .pipe(mocha({
         reporter: "spec",
         require: ["ts-node/register"]
     }));
+});
+
+gulp.task("nightmare", ["mochaNightmareTests"], () => {
+  return connect.serverClose();
 });
 
 gulp.task("watch", () => {
@@ -199,12 +215,17 @@ gulp.task("create", () => {
   config.applications.map(createTasks);
 });
 
-gulp.task("publish",["mochaServices", "images", "fonts"], () => {
+gulp.task("publish",["mochaServiceTests", "images", "fonts"], () => {
   config.applications.map(publishTasks);
 });
 
-gulp.task("build", ["mochaServices"], () => {
+gulp.task("build", ["mochaServiceTests"], () => {
   config.applications.map(defaultTasks);
+});
+
+// Rough idea for full build and tests being run, in the correct dequence, ideally will not use gulp.start
+gulp.task("full", ["build"], ()=>{
+  gulp.start("nightmare");
 });
 
 gulp.task("default",["connect", "watch"], () => {
