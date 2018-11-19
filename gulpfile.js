@@ -163,11 +163,28 @@ gulp.task("mochaServiceTests", () => {
 });
 
 let connectServer = async () => {
-  return setTimeout(()=>{console.log("connect")}, 3000);
+  return new Promise((resolve, reject)=>{
+    try{
+      connect.server({
+        root: ["./"+config.developmentDir+"/"+config.prefix+config.entry, ".", "./"+config.developmentDir],
+        livereload: true
+      }, resolve("Done"))
+    }
+    catch(err){
+      reject(new Error(err))
+    }
+  });
 }
 
 let nigthmare = async () => {
-  return setTimeout(()=>{console.log("nightmare")}, 4000);
+  return new Promise((resolve, reject)=>{
+    try{
+      setTimeout(()=>{resolve("Done Nightmare")}, 4000);
+    }
+    catch(err){
+      reject(new Error(err))
+    }
+  });
 }
 
 let closeServer = async () => {
@@ -175,10 +192,10 @@ let closeServer = async () => {
 }
 
 gulp.task("test", async () => {
+  let connect = await connectServer();
+  let nightmare = await nigthmare();
 
-  let promises = [connectServer(), nigthmare(), closeServer()];
-
-  Promise.all(promises).then(()=>{console.log("done")})
+  console.log(nightmare);
   
 });
 
