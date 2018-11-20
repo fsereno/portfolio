@@ -78,4 +78,21 @@ describe(application, () => {
             return test(url).should.eventually.equal("Homer Simpson 52");         
         });
     });
+    describe("Change Status", () => {
+        it("Should change the status of the item from 'Active' to 'Inactive', when the switch is clicked", 
+            function(){
+                this.timeout(0);
+                let test = async (url) => {
+                    return new Nightmare({show:false})
+                    .goto(url)
+                    .wait(1000)
+                    .end()
+                    .evaluate(()=>{
+                        return "Inactive";
+                    })
+                    .end();
+                }
+            return test(url).should.eventually.equal("Inactive");         
+        });
+    });
 });

@@ -1,6 +1,6 @@
 // Interfaces
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
-import { PeopleViewModel } from "../Models/PeopleViewModel";
+import { UserViewModel } from "../Models/UserViewModel";
 export class IndexController  {
 
     private validatorService: IValidatorService;
@@ -28,7 +28,7 @@ export class IndexController  {
     }
     bind() {
         ko.applyBindings(
-            new PeopleViewModel(
+            new UserViewModel(
                 this.formId, 
                 this.editModalId
                 )
