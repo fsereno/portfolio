@@ -38,9 +38,10 @@ export class UserViewModel {
         this.active(item.active);
     }
 
-    public clearEdit = () => {
+    public clear = () => {
         this.name("");
         this.age(0);
+        this.active(false);
     }
 
     public closeEdit = () => jQuery("#"+this.editModalId).modal("hide");
