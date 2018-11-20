@@ -5,14 +5,20 @@
 
 Usage...
  
-  > gulp default - To build development resources, start the dev server and watch for changes.
-    Navigate to http://localhost:8080 to see the application running.
+  > gulp default    - To build development resources, 
+                      start the dev server and watch for changes.
+                      Navigate to http://localhost:8080 to see the app running.
   
-  > gulp publish - To publish production resources to dist
+  > gulp build      - To build development resources and run unit tests on services.
 
-  > gulp create - Update the config.json file with additional applications.
-    Run this command and a new application will be created based on app_master.
+  > gulp nightmare  - To start development server, run Nightmare tests in a headless browser 
+                      and close the server when all tests are done.
 
+  > gulp publish    - To publish production resources to dist
+
+  > gulp create     - Update the config.json file with additional applications.
+                      Run this command and a new application will 
+                      be created based on app_master.
 */
 
 "use strict";
@@ -143,6 +149,51 @@ let defaultTasksCallBack = () => {
   config.applications.map(defaultTasks);
 }
 
+let startServerTask = () => {
+  return new Promise((resolve, reject) => {
+    try{
+      connect.server({
+        root: ["./"+config.developmentDir+"/"+config.prefix+config.entry, ".", "./"+config.developmentDir],
+        livereload: true
+      }, () => resolve())
+    }
+    catch(err){
+      reject(new Error(err))
+    }
+  });
+}
+
+let nigthmareTask = () => {
+  return new Promise((resolve, reject) => {
+      gulp.src(config.developmentDir+"/tests/applications/**/*.test.ts")
+        .pipe(flatmap((stream) => {
+          return stream
+            .pipe(mocha({
+              reporter: "spec",
+              require: ["ts-node/register"]
+          }).on("error", (err) => reject(new Error(err))))
+        })).on("finish", () => resolve());
+    })
+}
+
+let endServerTask = () => {
+  return new Promise((resolve, reject) => {
+    try{
+      connect.serverClose();
+      resolve();
+    }
+    catch(err){
+      reject(new Error(err))
+    }
+  });
+}
+
+let nightmareTasks = async () => {
+  await startServerTask();
+  await nigthmareTask();
+  await endServerTask();
+}
+
 gulp.task("images", () => {
   var output = gulp.src(config.developmentDir+"/images/**/*")
     .pipe(gulp.dest(config.publishDir+"/images"));
@@ -163,62 +214,6 @@ gulp.task("mochaServiceTests", () => {
     }));
 });
 
-let startServer = async () => {
-  return new Promise((resolve, reject) => {
-    try{
-      connect.server({
-        root: ["./"+config.developmentDir+"/"+config.prefix+config.entry, ".", "./"+config.developmentDir],
-        livereload: true
-      }, () => resolve())
-    }
-    catch(err){
-      reject(new Error(err))
-    }
-  });
-}
-
-let nigthmare = async () => {
-  return new Promise((resolve, reject) => {
-      gulp.src(config.developmentDir+"/tests/applications/**/*.test.ts")
-        .pipe(flatmap((stream) => {
-          return stream
-            .pipe(mocha({
-              reporter: "spec",
-              require: ["ts-node/register"]
-          }).on("error", (err) => reject(new Error(err))))
-        })).on("finish", () => resolve());
-    })
-}
-
-let endServer = async () => {
-  return new Promise((resolve, reject) => {
-    try{
-      connect.serverClose(() => resolve());
-    }
-    catch(err){
-      reject(new Error(err))
-    }
-  });
-}
-
-gulp.task("nightmare2", async () => {
-  await startServer();
-  await nigthmare();
-  await endServer();
-});
-
-gulp.task("mochaNightmareTests",["connect"], () => {
-  return gulp.src(config.developmentDir+"/tests/applications/**/*.test.ts")
-    .pipe(mocha({
-        reporter: "spec",
-        require: ["ts-node/register"]
-    }));
-});
-
-gulp.task("nightmare", ["mochaNightmareTests"], () => {
-  return connect.serverClose();
-});
-
 gulp.task("watch", () => {
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", jsTask, defaultTasksCallBack);
@@ -236,6 +231,10 @@ gulp.task("connect", () => {
  })
 });
 
+gulp.task("nightmare", () => {
+  return nightmareTasks();
+});
+
 gulp.task("create", () => {
   config.applications.map(createTasks);
 });
@@ -246,11 +245,6 @@ gulp.task("publish",["mochaServiceTests", "images", "fonts"], () => {
 
 gulp.task("build", ["mochaServiceTests"], () => {
   config.applications.map(defaultTasks);
-});
-
-// Rough idea for full build and tests being run, in the correct dequence, ideally will not use gulp.start
-gulp.task("full", ["build"], ()=>{
-  gulp.start("nightmare");
 });
 
 gulp.task("default",["connect", "watch"], () => {
