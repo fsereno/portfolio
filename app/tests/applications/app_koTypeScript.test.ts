@@ -85,14 +85,17 @@ describe(application, () => {
                 let test = async (url) => {
                     return new Nightmare({show:false})
                     .goto(url)
+                    .evaluate(()=>{
+                        return jQuery("#items tr[data-name='James Bond'] select.statusSelect option[value='false']").prop("selected", true)
+                    })
                     .wait(1000)
                     .end()
                     .evaluate(()=>{
-                        return "Inactive";
+                        return jQuery("#items tr[data-name='James Bond'] select.statusSelect option[value='true']").prop("selected")
                     })
                     .end();
                 }
-            return test(url).should.eventually.equal("Inactive");         
+            return test(url).should.eventually.equal(false);         
         });
     });
 });

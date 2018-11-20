@@ -16,6 +16,7 @@ block content
                   th Name
                   th Age
                   th Edit
+                  th Status
                   th Delete
                   th.text-right
                     button#addItem(
@@ -27,7 +28,7 @@ block content
                         i.fa.fa-plus
                 tbody(data-bind="if: collection().length === 0")
                   tr
-                    td(colspan="5")
+                    td(colspan="6")
                       | There are no rows to display
                 tbody(data-bind="foreach: collection")
                   tr(data-bind="attr: {'data-name': name}")
@@ -40,6 +41,12 @@ block content
                         data-target="#editModal",
                         data-bind="click: $parent.populateEdit")
                         i.fa.fa-edit
+                    td
+                      select(
+                        class="form-control statusSelect", 
+                        data-bind="value: active, event:{change: $parent.toggleStatus}")
+                          option(value="true") Active
+                          option(value="false") Inactive
                     td(colspan="2")
                       button(
                         class="btn btn-danger", 
@@ -104,6 +111,14 @@ block content
                     placeholder="Input...",
                     data-bind='value: age',
                     required)
+                .form-group
+                  label(for="active") Status:
+                  select(
+                      class="form-control statusSelect", 
+                      name="active", 
+                      data-bind="value: active")
+                        option(value="true") Active
+                        option(value="false") Inactive
             .modal-footer
               button.btn.btn-secondary(
                 type='button',

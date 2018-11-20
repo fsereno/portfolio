@@ -52,6 +52,7 @@
                   <th>Name</th>
                   <th>Age</th>
                   <th>Edit</th>
+                  <th>Status</th>
                   <th>Delete</th>
                   <th class="text-right">
                     <button class="btn btn-success" id="addItem" data-bind="click: clearEdit" data-toggle="modal" data-target="#editModal">Add item <i class="fa fa-plus"></i></button>
@@ -59,7 +60,7 @@
                 </thead>
                 <tbody data-bind="if: collection().length === 0">
                   <tr>
-                    <td colspan="5">There are no rows to display</td>
+                    <td colspan="6">There are no rows to display</td>
                   </tr>
                 </tbody>
                 <tbody data-bind="foreach: collection">
@@ -68,6 +69,12 @@
                     <td data-bind="text: age"></td>
                     <td>
                       <button class="btn btn-success" data-toggle="modal" data-target="#editModal" data-bind="click: $parent.populateEdit"><i class="fa fa-edit"></i></button>
+                    </td>
+                    <td>
+                      <select class="form-control statusSelect" data-bind="value: active, event:{change: $parent.toggleStatus}">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                      </select>
                     </td>
                     <td colspan="2">
                       <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-bind="click: $parent.remove"><i class="fa fa-trash"></i></button>
@@ -110,6 +117,13 @@
                 <div class="form-group">
                   <label for="age">Age:</label>
                   <input class="form-control" id="age" name="age" type="number" placeholder="Input..." data-bind="value: age" required>
+                </div>
+                <div class="form-group">
+                  <label for="active">Status:</label>
+                  <select class="form-control statusSelect" name="active" data-bind="value: active">
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
+                  </select>
                 </div>
               </form>
             </div>
