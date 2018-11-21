@@ -10,20 +10,20 @@ namespace Services.Tests
     [TestFixture]
     public class PersonServiceTests
     {
-        IPersonService _personService;
-        IRepository<Entity> _repository;
-        List<Entity> _collection;
+        IPersonService<Person> _personService;
+        IRepository<Person> _repository;
+        List<Person> _collection;
 
         [SetUp]
         public void BeforeEach()
         {
-            var persons = new List<Entity>();
+            var persons = new List<Person>();
             persons.Add(new Person() { Id = 2, Age = 1 });
             persons.Add(new Person() { Id = 1, Age = 2 });
             
             _collection = persons;
-            _repository = new Repository<Entity>(persons);
-            _personService = new PersonService(_repository);
+            _repository = new Repository<Person>(persons);
+            _personService = new PersonService<Person>(_repository);
         }
 
         [Test]
@@ -38,6 +38,19 @@ namespace Services.Tests
             //Assert
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.TypeOf<Person>());
+        }
+
+        [Test]
+        public void GetAll(){
+
+            //Arrange
+
+            //Act
+            var persons = _personService.GetAll();
+
+            //Assert
+            Assert.That(persons, Is.TypeOf<List<Person>>());
+
         }
 
         [Test]

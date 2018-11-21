@@ -5,14 +5,20 @@
 
 Usage...
  
-  > gulp default - To build development resources, start the dev server and watch for changes.
-    Navigate to http://localhost:8080 to see the application running.
+  > gulp default    - To build development resources, 
+                      start the dev server and watch for changes.
+                      Navigate to http://localhost:8080 to see the app running.
   
-  > gulp publish - To publish production resources to dist
+  > gulp build      - To build development resources and run unit tests on services.
 
-  > gulp create - Update the config.json file with additional applications.
-    Run this command and a new application will be created based on app_master.
+  > gulp nightmare  - To start development server, run Nightmare tests in a headless browser 
+                      and close the server when all tests are done.
 
+  > gulp publish    - To publish production resources to dist
+
+  > gulp create     - Update the config.json file with additional applications.
+                      Run this command and a new application will 
+                      be created based on app_master.
 */
 
 "use strict";
@@ -29,7 +35,8 @@ let gulp = require("gulp"),
     logSymbols = require("log-symbols"),
     directoryExists = require("directory-exists"),
     config = require("./config.json"),
-    gulpHelpers = require("./gulpHelpers");
+    gulpHelpers = require("./gulpHelpers"),
+    flatmap = require("gulp-flatMap");
 
 let cssTask = (application) => {
  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
@@ -138,12 +145,53 @@ let createTasks = (application) => {
   gulpHelpers.runThis(application, createTask);
 }
 
-let mochaTaskCallBack = () => {
-  gulp.start("mocha");
-}
-
 let defaultTasksCallBack = () => {
   config.applications.map(defaultTasks);
+}
+
+let startServerTask = () => {
+  return new Promise((resolve, reject) => {
+    try{
+      connect.server({
+        root: ["./"+config.developmentDir+"/"+config.prefix+config.entry, ".", "./"+config.developmentDir],
+        livereload: true
+      }, () => resolve())
+    }
+    catch(err){
+      reject(new Error(err))
+    }
+  });
+}
+
+let nigthmareTask = () => {
+  return new Promise((resolve, reject) => {
+      gulp.src(config.developmentDir+"/tests/applications/**/*.test.ts")
+        .pipe(flatmap((stream) => {
+          return stream
+            .pipe(mocha({
+              reporter: "spec",
+              require: ["ts-node/register"]
+          }).on("error", (err) => reject(new Error(err))))
+        })).on("finish", () => resolve());
+    })
+}
+
+let endServerTask = () => {
+  return new Promise((resolve, reject) => {
+    try{
+      connect.serverClose();
+      resolve();
+    }
+    catch(err){
+      reject(new Error(err))
+    }
+  });
+}
+
+let nightmareTasks = async () => {
+  await startServerTask();
+  await nigthmareTask();
+  await endServerTask();
 }
 
 gulp.task("images", () => {
@@ -158,7 +206,7 @@ gulp.task("fonts", () => {
     return output;
 });
 
-gulp.task("mochaServices", () => {
+gulp.task("mochaServiceTests", () => {
   return gulp.src(config.developmentDir+"/tests/services/*.test.ts")
     .pipe(mocha({
         reporter: "spec",
@@ -166,42 +214,39 @@ gulp.task("mochaServices", () => {
     }));
 });
 
-gulp.task("mocha", () => {
-  return gulp.src(config.developmentDir+"/**/*.test.ts")
-    .pipe(mocha({
-        reporter: "spec",
-        require: ["ts-node/register"]
-    }));
-});
-
 gulp.task("watch", () => {
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, mochaTaskCallBack, defaultTasksCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", jsTask, mochaTaskCallBack, defaultTasksCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask, mochaTaskCallBack, defaultTasksCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null, mochaTaskCallBack, defaultTasksCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null, mochaTaskCallBack, defaultTasksCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null, mochaTaskCallBack, defaultTasksCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, defaultTasksCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", jsTask, defaultTasksCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask, defaultTasksCallBack);
+  
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null, defaultTasksCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null, defaultTasksCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null, defaultTasksCallBack);
 });
 
-gulp.task("connect", function() {
+gulp.task("connect", () => {
   connect.server({
    root: ["./"+config.developmentDir+"/"+config.prefix+config.entry, ".", "./"+config.developmentDir],
    livereload: true
  })
 });
 
+gulp.task("nightmare", () => {
+  return nightmareTasks();
+});
+
 gulp.task("create", () => {
   config.applications.map(createTasks);
 });
 
-gulp.task("publish",["mochaServices", "images", "fonts"], () => {
+gulp.task("publish",["mochaServiceTests", "images", "fonts"], () => {
   config.applications.map(publishTasks);
 });
 
-gulp.task("build", ["mochaServices"], () => {
+gulp.task("build", ["mochaServiceTests"], () => {
   config.applications.map(defaultTasks);
 });
 
-gulp.task("default",["mocha", "connect", "watch"], () => {
+gulp.task("default",["connect", "watch"], () => {
   config.applications.map(defaultTasks);
 });

@@ -73,6 +73,14 @@
             "folder": "dictionaryFinder",
             "active": true,
             "include": true
+        },
+        {
+            "name": "Knockout + TypeScript",
+            "subHeading": "",
+            "description": "An example of KnockoutJS being enhanced by TypeScript. Written with KnockoutJS, TypeScript, Sass and Pug.",
+            "folder": "koTypeScript",
+            "active": true,
+            "include": true
         }
 
     ]

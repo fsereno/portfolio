@@ -1,20 +1,19 @@
-﻿<Properties StartupConfiguration="{50CECBB0-893C-4F4D-BE7B-B9DED11D5B6D}|Default">
+﻿<Properties StartupConfiguration="{89CD376A-2081-4639-A7FE-E6E059A42FEB}|Default">
   <MonoDevelop.Ide.ItemProperties.Services.Tests PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Services/PersonService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Repositories/Repository.cs">
     <Files>
-      <File FileName="Services/IPersonService.cs" Line="12" Column="56" />
-      <File FileName="Domains/Person.cs" Line="10" Column="1" />
-      <File FileName="Domains/Entity.cs" Line="15" Column="1" />
-      <File FileName="Services/PersonService.cs" Line="19" Column="38" />
-      <File FileName="Repositories/Repository.cs" Line="17" Column="38" />
+      <File FileName="Repositories/Repository.cs" Line="30" Column="32" />
+      <File FileName="Domains/Entity.cs" Line="1" Column="1" />
+      <File FileName="Repositories/IRepository.cs" Line="16" Column="1" />
+      <File FileName="Services.Tests/PersonServiceTests.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="app_dotnetCore" expanded="True">
-            <Node name="Repositories" expanded="True" />
-            <Node name="Services" expanded="True">
-              <Node name="PersonService.cs" selected="True" />
+            <Node name="Domains" expanded="True" />
+            <Node name="Repositories" expanded="True">
+              <Node name="Repository.cs" selected="True" />
             </Node>
             <Node name="Services.Tests" expanded="True" />
           </Node>
@@ -42,5 +41,8 @@
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.MVC PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Repositories.Tests PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.MVCAngular PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

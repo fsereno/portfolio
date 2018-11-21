@@ -5,7 +5,7 @@ using Domains;
 
 namespace Repositories
 {
-    public class Repository<T> : IRepository<T> where T : Entity
+    public class Repository<T> : IRepository<T> where T : Person
     {
         private readonly List<T> _collection;
 
@@ -42,6 +42,12 @@ namespace Repositories
             {
                 throw new InvalidOperationException("You cannot add duplicate entities");
             }
+        }
+
+        public List<T> GetAll()
+        {
+            var persons = _collection;
+            return persons; 
         }
     }
 }

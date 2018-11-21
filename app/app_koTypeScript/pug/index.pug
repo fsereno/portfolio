@@ -1,0 +1,133 @@
+extends ../../pug/layouts/main.pug
+
+block styles
+  // build:css css/styles.css
+  link(rel="stylesheet" href="css/styles.css")
+  // endbuild
+
+block content    
+      .row.splitter
+        .col-lg-12
+          h2 Table of users
+          .card
+            .card-body
+              table#items.table.table-striped.itemTable
+                thead.thead-dark
+                  th Name
+                  th Age
+                  th Edit
+                  th Status
+                  th Delete
+                  th.text-right
+                    button#addItem(
+                        class="btn btn-success",
+                        data-bind="click: clear", 
+                        data-toggle="modal", 
+                        data-target="#editModal")
+                        | Add user 
+                        i.fa.fa-plus
+                tbody(data-bind="if: usersCollection().length === 0")
+                  tr
+                    td(colspan="6")
+                      | There are no rows to display
+                tbody(data-bind="foreach: usersCollection")
+                  tr(data-bind="attr: {'data-name': name}")
+                    td(data-bind="text: name")
+                    td(data-bind="text: age")
+                    td
+                      button(
+                        class="btn btn-success", 
+                        data-toggle="modal", 
+                        data-target="#editModal",
+                        data-bind="click: $parent.populateEdit")
+                        i.fa.fa-edit
+                    td
+                      select(
+                        class="form-control statusSelect", 
+                        data-bind="options: $parent.statusCollection, value: status, event:{change: $parent.toggleStatus}")
+                    td(colspan="2")
+                      button(
+                        class="btn btn-danger", 
+                        data-toggle="modal", 
+                        data-target="#deleteModal",
+                        data-bind="click: $parent.remove")
+                        i.fa.fa-trash
+                          
+      #deleteModal.modal.fade(
+        tabindex='-1',
+        role='dialog',
+        aria-labelledby='deleteModalLabel',
+        aria-hidden='true')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#deleteModalLabel.modal-title Are you sure ?
+              button.close(
+                type='button',
+                data-dismiss='modal',
+                aria-label='Close')
+                span(aria-hidden='true') &times;
+            .modal-body
+              | Confirm you would like to delete the item.
+            .modal-footer
+              button.btn.btn-secondary(
+                type='button',
+                data-dismiss='modal') Close
+              button#deleteConfirm.btn.btn-danger(
+                type='button', 
+                data-dismiss='modal', 
+                data-bind="click: removeConfirm") Confirm Delete
+      #editModal.modal.fade(
+        tabindex='-1',
+        role='dialog',
+        aria-labelledby='editModalLabel',
+        aria-hidden='true')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#editModalLabel.modal-title Edit Details
+              button.close(
+                type='button',
+                data-dismiss='modal',
+                aria-label='Close')
+                span(aria-hidden='true') &times;
+            .modal-body
+              form#editForm
+                .form-group
+                  label(for="name") Name:
+                  input#name.form-control(
+                    name="name", 
+                    type="text", 
+                    placeholder="Input...",
+                    data-bind='value: name',
+                    required)
+                .form-group
+                  label(for="age") Age:
+                  input#age.form-control(
+                    name="age", 
+                    type="number", 
+                    placeholder="Input...",
+                    data-bind='value: age',
+                    required)
+                .form-group
+                  label(for="active") Status:
+                  select(
+                      class="form-control statusSelect", 
+                      name="status", 
+                      data-bind="value: status, options: statusCollection")
+                        
+            .modal-footer
+              button.btn.btn-secondary(
+                type='button',
+                data-dismiss='modal') Close
+              button#saveChanges.btn.btn-success(
+                type='button',
+                data-bind="click: update") Save Changes
+
+block scripts
+  // build:js js/app.js
+  script(src="js/app.js")
+  // endbuild
+  // build:js js/vendor.js
+  script(src="../../node_modules/knockout/build/output/knockout-latest.js")
+  // endbuild

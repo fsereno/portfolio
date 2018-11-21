@@ -4,17 +4,17 @@ using Domains;
 
 namespace Services
 {
-    public class PersonService : IPersonService
+    public class PersonService<T> : IPersonService<T> where T : Person
     {
-        readonly IRepository<Entity> _repository;
+        readonly IRepository<T> _repository;
 
         public PersonService(
-            IRepository<Entity> repository)
+            IRepository<T> repository)
         {
             _repository = repository;
 
         }
-        public void Add(Person person)
+        public void Add(T person)
         {
             if (person == null)
             {
@@ -24,7 +24,7 @@ namespace Services
             _repository.Add(person);
 
         }
-        public Entity Get(Person person)
+        public T Get(T person)
         {
             if (person == null)
             {
@@ -34,7 +34,15 @@ namespace Services
             var result = _repository.Get(person);
             return result;
         }
-        public List<Entity> SortById(List<Entity> collection)
+
+        public List<T> GetAll()
+        {
+            var persons = _repository.GetAll();
+
+            return persons;
+        }
+
+        public List<T> SortById(List<T> collection)
         {
             if (collection == null)
             {

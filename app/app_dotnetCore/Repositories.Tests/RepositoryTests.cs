@@ -8,17 +8,17 @@ namespace Repositories.Tests
     [TestFixture]
     public class RepositoryTests
     {
-        IRepository<Entity> _repository;
+        IRepository<Person> _repository;
 
         [SetUp]
         public void BeforeEach()
         {
 
-            var persons = new List<Entity>();
+            var persons = new List<Person>();
             persons.Add(new Person() { Id = 1 });
             persons.Add(new Person() { Id = 2 });
 
-            _repository = new Repository<Entity>(persons);
+            _repository = new Repository<Person>(persons);
         }
 
         [Test]
