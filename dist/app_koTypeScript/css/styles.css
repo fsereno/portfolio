@@ -21,3 +21,7 @@ span#result, .result {
 
 body h1 {
   color: #000000; }
+
+body .table.itemTable thead tr th {
+  padding: 5px 10px;
+  line-height: 2.5em; }
