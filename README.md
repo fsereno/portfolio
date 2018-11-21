@@ -16,6 +16,7 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - Mocha (https://mochajs.org/)
 - Chai (https://www.chaijs.com/)
 - Nightmare (https://github.com/segmentio/nightmare)
+- Knockout (https://knockoutjs.com/)
 - .NetCore (https://dotnet.github.io/)
 - NUnit (https://nunit.org/)
 - SOLID (SOLID Design principles in mind, throughout)
@@ -104,6 +105,7 @@ $ gulp nightmare
 ##### This will:
 - Start the development server
 - Run all Nightmare Unit Tests from the ./app/tests/applications directory using Mocha, Chai and Nightmare.
+- Stop the development server once all tests are complete.
 ---
 
 #### Run the Gulp Create task
