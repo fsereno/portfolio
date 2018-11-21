@@ -86,12 +86,12 @@ describe(application, () => {
                     return new Nightmare({show:false})
                     .goto(url)
                     .evaluate(()=>{
-                        return jQuery("#items tr[data-name='James Bond'] select.statusSelect option[value='false']").prop("selected", true)
+                        return jQuery("#items tr[data-name='James Bond'] select.statusSelect option[value='Active']").prop("selected", true)
                     })
                     .wait(1000)
                     .end()
                     .evaluate(()=>{
-                        return jQuery("#items tr[data-name='James Bond'] select.statusSelect option[value='true']").prop("selected")
+                        return jQuery("#items tr[data-name='James Bond'] select.statusSelect option[value='Inactive']").prop("selected")
                     })
                     .end();
                 }

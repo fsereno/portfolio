@@ -55,15 +55,15 @@
                   <th>Status</th>
                   <th>Delete</th>
                   <th class="text-right">
-                    <button class="btn btn-success" id="addItem" data-bind="click: clearEdit" data-toggle="modal" data-target="#editModal">Add item <i class="fa fa-plus"></i></button>
+                    <button class="btn btn-success" id="addItem" data-bind="click: clear" data-toggle="modal" data-target="#editModal">Add item <i class="fa fa-plus"></i></button>
                   </th>
                 </thead>
-                <tbody data-bind="if: collection().length === 0">
+                <tbody data-bind="if: usersCollection().length === 0">
                   <tr>
                     <td colspan="6">There are no rows to display</td>
                   </tr>
                 </tbody>
-                <tbody data-bind="foreach: collection">
+                <tbody data-bind="foreach: usersCollection">
                   <tr data-bind="attr: {'data-name': name}">
                     <td data-bind="text: name"></td>
                     <td data-bind="text: age"></td>
@@ -71,10 +71,7 @@
                       <button class="btn btn-success" data-toggle="modal" data-target="#editModal" data-bind="click: $parent.populateEdit"><i class="fa fa-edit"></i></button>
                     </td>
                     <td>
-                      <select class="form-control statusSelect" data-bind="value: active, event:{change: $parent.toggleStatus}">
-                        <option value="true">Active</option>
-                        <option value="false">Inactive</option>
-                      </select>
+                      <select class="form-control statusSelect" data-bind="options: $parent.statusCollection, value: status, event:{change: $parent.toggleStatus}"></select>
                     </td>
                     <td colspan="2">
                       <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-bind="click: $parent.remove"><i class="fa fa-trash"></i></button>
@@ -120,10 +117,7 @@
                 </div>
                 <div class="form-group">
                   <label for="active">Status:</label>
-                  <select class="form-control statusSelect" name="active" data-bind="value: active">
-                    <option value="true">Active</option>
-                    <option value="false">Inactive</option>
-                  </select>
+                  <select class="form-control statusSelect" name="status" data-bind="value: status, options: statusCollection"></select>
                 </div>
               </form>
             </div>

@@ -26,11 +26,11 @@ block content
                         data-target="#editModal")
                         | Add item 
                         i.fa.fa-plus
-                tbody(data-bind="if: collection().length === 0")
+                tbody(data-bind="if: usersCollection().length === 0")
                   tr
                     td(colspan="6")
                       | There are no rows to display
-                tbody(data-bind="foreach: collection")
+                tbody(data-bind="foreach: usersCollection")
                   tr(data-bind="attr: {'data-name': name}")
                     td(data-bind="text: name")
                     td(data-bind="text: age")
@@ -44,9 +44,7 @@ block content
                     td
                       select(
                         class="form-control statusSelect", 
-                        data-bind="value: active, event:{change: $parent.toggleStatus}")
-                          option(value="true") Active
-                          option(value="false") Inactive
+                        data-bind="options: $parent.statusCollection, value: status, event:{change: $parent.toggleStatus}")
                     td(colspan="2")
                       button(
                         class="btn btn-danger", 
@@ -115,10 +113,9 @@ block content
                   label(for="active") Status:
                   select(
                       class="form-control statusSelect", 
-                      name="active", 
-                      data-bind="value: active")
-                        option(value="true") Active
-                        option(value="false") Inactive
+                      name="status", 
+                      data-bind="value: status, options: statusCollection")
+                        
             .modal-footer
               button.btn.btn-secondary(
                 type='button',
