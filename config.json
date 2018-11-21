@@ -81,6 +81,14 @@
             "folder": "koTypeScript",
             "active": true,
             "include": true
+        },
+        {
+            "name": "A-Frame",
+            "subHeading": "",
+            "description": "An example an A-Frame VR application",
+            "folder": "aframe",
+            "active": true,
+            "include": true
         }
 
     ]

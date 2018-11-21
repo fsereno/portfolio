@@ -1,0 +1,31 @@
+extends ../../pug/layouts/main.pug
+
+block styles
+  // build:css css/styles.css
+  link(rel="stylesheet" href="css/styles.css")
+  // endbuild
+
+block content
+      .row.splitter
+        .col-lg-12
+          h3 Result: 
+            span#result
+      .row
+        .col-lg-3
+          form#inputForm
+            .form-group
+              label(for="input") Input:
+              input#input.form-control(
+                name="input", 
+                type="text", 
+                placeholder="Input...", 
+                required)
+             
+            button#submit.btn.btn-primary(type="submit") Submit
+
+block scripts
+  // build:js js/app.js
+  script(src="js/app.js")
+  // endbuild
+  // build:js js/vendor.js
+  // endbuild
