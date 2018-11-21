@@ -101,7 +101,7 @@ let htmlTask = (application) => {
 };
 
 let userefTask = (application) => {
-  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/index.html")
+  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/*.html")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "Useref task started...",
     "Useref task complete!",
