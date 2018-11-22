@@ -4,7 +4,9 @@ block head
   // build:css css/styles.css
   link(rel="stylesheet" href="css/styles.css")
   // endbuild
-  script(src="https://aframe.io/releases/0.8.0/aframe.min.js")
+  // build:js js/vendor.js
+  script(src="../../node_modules/aframe/dist/aframe-master.js")
+  // endbuild
 
 block content
     a-scene(antialias='true')
