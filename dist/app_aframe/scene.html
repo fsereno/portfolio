@@ -7,6 +7,8 @@
     <meta name="author" content="Fabio Sereno">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/vendor.js"></script>
+    <script src="js/app.js"></script>
+    <!--script(src="https://sandbox.donmccurdy.com/aframe-extras.js")-->
   </head>
   <body>
     <a-scene antialias="true">
@@ -16,7 +18,29 @@
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
       <a-sky color="#ECECEC"></a-sky>
       <a-entity camera="" look-controls=""></a-entity>
-      <a-entity daydream-controls="" line="color: red; opacity: 0.75"></a-entity>
+      <a-entity daydream-controls="" trackpad-listener=""></a-entity>
     </a-scene>
+    <!--a-scene.fullscreen(canvas='' inspector='' keyboard-shortcuts='' screenshot='' vr-mode-ui='' auto-enter-vr='')
+    a-assets
+      a-mixin#checkpoint
+      a-mixin#checkpoint-hovered(color='#6CEEB5')
+    
+    a-entity(camera='userHeight: 1.6' universal-controls='movementControls: checkpoint' checkpoint-controls='mode: animate' position='' rotation='' scale='' visible='' velocity='' hmd-controls='' gamepad-controls='' mouse-controls='')
+      a-entity(cursor='' position='0 0 -1' geometry='primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;' material='color: #CCC; shader: flat;' rotation='' scale='' visible='' raycaster='')
+    
+    a-grid(position='' rotation='' scale='' visible='' geometry='' material='')
+    
+    a-entity(position='1 0 1' rotation='' scale='' visible='')
+      a-cylinder(checkpoint='offset: 0 1.6 0' radius='1' height='0.1' position='0 0 -5.2' color='#39BB82' rotation='' scale='' visible='' material='' geometry='')
+      a-cylinder(checkpoint='offset: 0 1.6 0' radius='1' height='0.1' position='3 0 0' color='#39BB82' rotation='' scale='' visible='' material='' geometry='')
+      a-cylinder(checkpoint='offset: 0 1.6 0' radius='1' height='0.1' position='-3 0 0' color='#39BB82' rotation='' scale='' visible='' material='' geometry='')
+    
+    a-light(type='ambient' color='#fff' position='' rotation='' scale='' visible='' light='')
+    canvas.a-canvas(data-aframe-canvas='true' width='2560' height='910' style='width: 1280px; height: 455px;')
+    .a-enter-vr(aframe-injected='')
+      button.a-enter-vr-button(aframe-injected='')
+    .a-orientation-modal.a-hidden(aframe-injected='')
+      button(aframe-injected='') Exit VR
+    -->
   </body>
 </html>
