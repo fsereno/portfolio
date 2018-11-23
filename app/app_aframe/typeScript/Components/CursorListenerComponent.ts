@@ -8,12 +8,15 @@ export class CursorListenerComponent implements IComponent {
               var COLORS = ['red', 'green', 'blue'];
               this.el.addEventListener('click', function (evt:CustomEvent) {
                     console.log(evt);
-                    lastIndex = (lastIndex + 1) % COLORS.length;
+                    //lastIndex = (lastIndex + 1) % COLORS.length;
                     var coords = evt.detail.intersection.point;
-                    var z = coords.z + 0.70;
+                    var offset = 0.70;
+                    var x = coords.x;
+                    var y = coords.y;
+                    var z = coords.z + offset;
                     //this.setAttribute('color', COLORS[lastIndex]);
                     setTimeout(()=>{
-                        document.getElementById("camera").setAttribute("position", coords.x + " " + coords.y + " " + z);
+                        document.getElementById("camera").setAttribute("position", x + " " + y + " " + z);
                     }, 2000)
               });
             }
