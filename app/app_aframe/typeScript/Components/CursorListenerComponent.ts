@@ -9,6 +9,8 @@ export class CursorListenerComponent implements IComponent {
               this.el.addEventListener('click', function (evt:CustomEvent) {
                     console.log(evt);
                     //lastIndex = (lastIndex + 1) % COLORS.length;
+                    var cameraAnimate = document.querySelector("#cameraMove");
+                    var camera = document.querySelector("#camera");
                     var coords = evt.detail.intersection.point;
                     var offset = 0.70;
                     var x = coords.x;
@@ -16,7 +18,9 @@ export class CursorListenerComponent implements IComponent {
                     var z = coords.z + offset;
                     //this.setAttribute('color', COLORS[lastIndex]);
                     setTimeout(()=>{
-                        document.getElementById("camera").setAttribute("position", x + " " + y + " " + z);
+                        cameraAnimate.setAttribute("to", x + " " + y + " " + z);
+                        cameraAnimate.emit("animateThis");
+                        //camera.setAttribute("position", x + " " + y + " " + z)
                     }, 2000)
               });
             }
