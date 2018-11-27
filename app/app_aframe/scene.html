@@ -17,16 +17,33 @@
     <!-- endbuild-->
   </head>
   <body>
-    <a-scene antialias="true">
-      <a-box cursor-listener="" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere cursor-listener="" position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder cursor-listener="" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+    <!--a-scene(antialias='true')
+    a-box(cursor-listener='' position='-1 0.5 -3' rotation='0 45 0' color='#4CC3D9')
+    a-sphere(cursor-listener='' position='0 1.25 -5' radius='1.25' color='#EF2D5E')
+    a-cylinder(cursor-listener='' position='1 0.75 -3' radius='0.5' height='1.5' color='#FFC65D')
+    a-plane(position='0 0 -4' rotation='-90 0 0' width='4' height='4' color='#7BC8A4')
+    a-sky(color='#ECECEC')
+    a-entity(daydream-controls='' trackpad-listener='')
+    a-entity(id="camera" position="0.5 0.5 0")
+      a-entity(camera='' look-controls='')
+        a-entity(cursor='fuse: true; fuseTimeout: 1000' position='0 0 -1' geometry='primitive: ring; radiusInner: 0.02; radiusOuter: 0.03' material='color: black; shader: flat')
+    
+    -->
+    <a-scene class="fullscreen" antialias="true" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui=""> 
+      <!--canvas.a-canvas(data-aframe-canvas='true' width='600' height='300')-->
+      <a-box cursor-listener="" position="-2.396485355309477 0.17044278354629916 -1.2784967111576415" rotation="0 45 0" color="#4CC3D9" material="height:150" geometry=""></a-box>
+      <a-box cursor-listener="" position="-2.247944143170813 0.5 -3" rotation="0 45 0" color="#4CC3D9" material="" geometry=""></a-box>
+      <a-sphere cursor-listener="" position="-2.351906821394029 1.1190250360659881 -6.557333588202912" radius="1.25" color="#EF2D5E" material="" geometry=""></a-sphere>
+      <a-sphere cursor-listener="" position="0 0.43814192427346654 -7.343298393228059" radius="1.25" color="#EF2D5E" material="" geometry=""></a-sphere>
+      <a-sphere cursor-listener="" position="1.931588202730977 1.25 -6.479045681827272" radius="1.25" color="#EF2D5E" material="" geometry=""></a-sphere>
+      <a-cylinder cursor-listener="" position="1.8481173469007794 0.32516908650878706 -1.1396265113843513" radius="0.5" height="1.5" color="#FFC65D" material="" geometry=""></a-cylinder>
+      <a-cylinder cursor-listener="" position="1.4694071540450344 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" material="" geometry=""></a-cylinder>
+      <a-plane position="0.02992225946480581 0 -4.056020855132855" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" material="width:10000" geometry=""></a-plane>
+      <a-sky color="#ECECEC" material="" geometry=""></a-sky>
       <a-entity daydream-controls="" trackpad-listener=""></a-entity>
-      <a-entity id="camera" position="0.5 0.5 0">
-        <a-entity camera="" look-controls="">
-          <a-entity cursor="fuse: true; fuseTimeout: 1000" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat"></a-entity>
+      <a-entity id="camera" position="0.5 0.5 0" animation="property:position;delay:2000;dir:alternate;dur:2000;easing:easeInSine;startEvents:animateThis;to:0.5 0.5 -2.3">
+        <a-entity camera="" look-controls="" position="" rotation="" data-aframe-inspector-original-camera="">
+          <a-entity cursor="fuse:true;fuseTimeout:1000" position="0 0 -1" geometry="primitive:ring;radiusInner:0.02;radiusOuter:0.03" material="color:black;shader:flat" raycaster=""></a-entity>
         </a-entity>
       </a-entity>
     </a-scene>
