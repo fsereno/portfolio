@@ -10,6 +10,7 @@
     <!-- endbuild-->
     <!-- build:js js/vendor.js-->
     <script src="../../node_modules/aframe/dist/aframe-master.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
     <!-- endbuild-->
     <!-- build:js js/app.js-->
     <script src="js/app.js"></script>
@@ -27,7 +28,6 @@
         <a-entity camera="" look-controls="">
           <a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat"></a-entity>
         </a-entity>
-        <a-animation id="cameraMove" attribute="position" to="2 4 -8" repeat="0" begin="animateThis"></a-animation>
       </a-entity>
     </a-scene>
   </body>
