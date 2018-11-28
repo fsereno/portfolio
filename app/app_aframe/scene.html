@@ -10,8 +10,8 @@
     <!-- endbuild-->
     <!-- build:js js/vendor.js-->
     <script src="../../node_modules/aframe/dist/aframe-master.js"></script>
-    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
     <!-- endbuild-->
+    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
     <!-- build:js js/app.js-->
     <script src="js/app.js"></script>
     <!-- endbuild-->
@@ -65,7 +65,6 @@
       <a-entity daydream-controls="" trackpad-listener=""></a-entity>
       <a-entity id="camera" position="0.5 0.5 0" animation="property:position;delay:2000;dir:alternate;dur:2000;easing:easeInSine;startEvents:animateThis;to:0.5 0.5 -2.3">
         <a-entity camera="" look-controls="" position="" rotation="" data-aframe-inspector-original-camera="">
-          <!--a-entity(cursor='fuse:true;fuseTimeout:1000' position='0 0 -1' geometry='primitive:ring;radiusInner:0.02;radiusOuter:0.03' material='color:green;shader:flat' raycaster='')-->
           <a-entity position="0 0 -3" geometry="primitive: ring; radiusInner: 0.2; radiusOuter: 0.3;" material="color: cyan; shader: flat" cursor="maxDistance: 30; fuse: true;">
             <a-animation begin="click" easing="ease-in" attribute="scale" fill="forwards" from="0.2 0.2 0.2" to="1 1 1" dur="150"></a-animation>
             <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="backwards" from="1 1 1" to="0.2 0.2 0.2" dur="1500"></a-animation>
