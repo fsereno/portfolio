@@ -14,7 +14,7 @@ export class CursorListenerComponent implements IComponent {
                     
                     camera.setAttribute(
                         "animation", 
-                        "property: position; delay: 2000; dir: alternate; dur: 2000; easing: easeInSine; startEvents: animateThis; to:" + x + " 0.5"+ " " + z+";"
+                        "property: position; delay: 2000; dir: alternate; dur: 2000; easing: easeInSine; startEvents: animateThis; to:" + x + " " + y + " " + z+";"
                     );
                     
                     camera.emit("animateThis");
