@@ -1,6 +1,6 @@
 import {IComponent} from "../Interfaces/IComponent";
 
-export class CursorNavigatorComponent implements IComponent {
+export class NavigatorComponent implements IComponent {
     
     private cameraId: string;
     private onEvent: string;
@@ -16,7 +16,7 @@ export class CursorNavigatorComponent implements IComponent {
 
         let self = this;
 
-        AFRAME.registerComponent("cursor-navigate", {
+        AFRAME.registerComponent("navigate", {
             init: function() {              
               this.el.addEventListener(self.onEvent, function (e:CustomEvent) {
                     let camera = document.querySelector("#"+self.cameraId)
@@ -28,10 +28,10 @@ export class CursorNavigatorComponent implements IComponent {
                             z = coords.z + offset;
                         camera.setAttribute(
                             "animation", 
-                            "property: position; dir: alternate; dur: 2000; easing: easeInSine; startEvents: cursor-navigate-animate; to:" + x + " " + y + " " + z+";"
+                            "property: position; dir: alternate; dur: 2000; easing: easeInSine; startEvents: navigate-animate; to:" + x + " " + y + " " + z+";"
                         );
-                        camera.emit("cursor-navigate-animate");
-                        camera.emit("cursor-navigate-navigated");
+                        camera.emit("navigate-animate");
+                        camera.emit("navigate-navigated");
                     }
               });
             }
