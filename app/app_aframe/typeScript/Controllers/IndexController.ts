@@ -1,20 +1,25 @@
 import {IComponent} from "../Interfaces/IComponent";
+import { CursorColourChangeComponent } from '../Components/CursorColourChangeComponent';
 
 export class IndexController  {
     
     private trackPadListenerComponent: IComponent;
-    private cursorListenerComponent: IComponent;
+    private cursorNavigateComponent: IComponent;
+    private cursorColourChangeComponent: IComponent;
 
     constructor(
         trackPadListenerComponent: IComponent,
-        cursorListenerComponent: IComponent
+        cursorNavigateComponent: IComponent,
+        cursorColourChangeComponent:IComponent
     )
     {
         this.trackPadListenerComponent = trackPadListenerComponent;
-        this.cursorListenerComponent = cursorListenerComponent;
+        this.cursorNavigateComponent = cursorNavigateComponent;
+        this.cursorColourChangeComponent = cursorColourChangeComponent;
     }
     init() {
         this.trackPadListenerComponent.init();
-        this.cursorListenerComponent.init();
+        this.cursorNavigateComponent.init();
+        this.cursorColourChangeComponent.init();
     }
 }
