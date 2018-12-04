@@ -7,8 +7,7 @@ export class CursorColourChangeComponent implements IComponent {
                 let lastIndex = -1,
                     colours = ['red', 'green', 'blue'];
 
-                this.el.addEventListener('cursor-navigate-navigated', function (evt:CustomEvent) {
-                    console.log(evt);
+                this.el.addEventListener('navigate-navigated', function (evt:CustomEvent) {
                     lastIndex = (lastIndex + 1) % colours.length;    
                     this.setAttribute('color', colours[lastIndex]);
                 });
