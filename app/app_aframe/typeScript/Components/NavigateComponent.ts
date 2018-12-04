@@ -28,7 +28,7 @@ export class NavigatorComponent implements IComponent {
                             z = coords.z + offset;
                         camera.setAttribute(
                             "animation", 
-                            "property: position; dir: alternate; dur: 2000; easing: easeInSine; startEvents: navigate-animate; to:" + x + " " + y + " " + z+";"
+                            "property: position; dir: alternate; dur: 2000; easing: easeInOutSine; startEvents: navigate-animate; to:" + x + " " + y + " " + z+";"
                         );
                         camera.emit("navigate-animate");
                         camera.emit("navigate-navigated");
