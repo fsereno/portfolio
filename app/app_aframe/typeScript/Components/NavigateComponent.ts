@@ -17,7 +17,9 @@ export class NavigatorComponent implements IComponent {
         let self = this;
 
         AFRAME.registerComponent("navigate", {
-            init: function() {              
+            init: function() {    
+                
+                alert("navigate comp");
               this.el.addEventListener(self.onEvent, function (e:CustomEvent) {
                     let camera = document.querySelector("#"+self.cameraId)
                     if(camera !== null){
