@@ -3,9 +3,7 @@
 import { NavigateService } from './Services/NavigateService';
 
 // Components
-//import { TrackPadListenerComponent } from "./Components/TrackPadListenerComponent";
 import { CursorNavigateComponent } from "./Components/CursorNavigateComponent";
-//import { CursorNavigateComponent } from "./Components/CursorNavigateComponent";
 
 // Controllers
 import { IndexController } from "./Controllers/IndexController";
@@ -24,7 +22,6 @@ let cursorNavigateComponent = new CursorNavigateComponent(
 
 // Controllers
 let indexController = new IndexController(
-    //trackPadListenerComponent,
     cursorNavigateComponent,
     );
 indexController.init();

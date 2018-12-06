@@ -23,25 +23,12 @@ export class CursorNavigateComponent<T extends INavigateModel> implements ICompo
         AFRAME.registerComponent("cursor-navigate-component", {
             init: function() {
                 self.object.onEvents.forEach(event => {
-
-                    //console.log(event);
-
                     this.el.addEventListener(event, function (e:CustomEvent) {
                         self.object.event = e;
                         self.navigateService.init(self.object);
-                      });
+                    });
                 })
             }
         });
     }
-
-    /*private newMethod(self: this, e: CustomEvent<any>) {
-        let camera = document.querySelector("#" + self.cameraId);
-        if (camera !== null) {
-            let coords = e.detail.intersection.point, offset = 0.70, x = coords.x, y = !self.yConstraint ? coords.y : 0.0, z = coords.z + offset;
-            camera.setAttribute("animation", "property: position; dir: alternate; dur: 2000; easing: easeInOutSine; startEvents: navigate-animate; to:" + x + " " + y + " " + z + ";");
-            camera.emit("navigate-animate");
-            camera.emit("navigate-navigated");
-        }
-    }*/
 }

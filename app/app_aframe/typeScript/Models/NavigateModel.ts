@@ -1,7 +1,6 @@
 import { INavigateModel } from "../Interfaces/INavigateModel"
 
 export class NavigateModel implements INavigateModel {
-
     cameraId: string;
     yConstraint: boolean;
     event: CustomEvent<any>;
