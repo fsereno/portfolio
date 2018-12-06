@@ -15,7 +15,7 @@ import { NavigateModel } from './Models/NavigateModel';
 let navigateService = new NavigateService();
 
 // Components
-let cursorNavigateComponentModel = new NavigateModel("camera", false, "click");
+let cursorNavigateComponentModel = new NavigateModel("camera", false, ["click"]);
                            
 let cursorNavigateComponent = new CursorNavigateComponent(
     cursorNavigateComponentModel, 

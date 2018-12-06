@@ -5,16 +5,16 @@ export class NavigateModel implements INavigateModel {
     cameraId: string;
     yConstraint: boolean;
     event: CustomEvent<any>;
-    onEvent: string;
+    onEvents: string[];
 
     constructor
     (
         cameraId: string,
         yConstraint: boolean,
-        onEvent: string
+        onEvents: string[]
     ){
         this.cameraId = cameraId;
         this.yConstraint = yConstraint;
-        this.onEvent = onEvent;
+        this.onEvents = onEvents;
     }
 }

@@ -21,11 +21,16 @@ export class CursorNavigateComponent<T extends INavigateModel> implements ICompo
         let self = this;
 
         AFRAME.registerComponent("cursor-navigate-component", {
-            init: function() {    
-              this.el.addEventListener(self.object.onEvent, function (e:CustomEvent) {
-                    self.object.event = e;
-                    self.navigateService.init(self.object);
-              });
+            init: function() {
+                self.object.onEvents.forEach(event => {
+
+                    //console.log(event);
+
+                    this.el.addEventListener(event, function (e:CustomEvent) {
+                        self.object.event = e;
+                        self.navigateService.init(self.object);
+                      });
+                })
             }
         });
     }
