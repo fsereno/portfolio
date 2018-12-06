@@ -1,24 +1,25 @@
-import {IComponent} from "../Interfaces/IComponent";
+import { IComponent } from "../Interfaces/IComponent";
+import { INavigateModel } from '../Interfaces/INavigateModel';
 
 export class IndexController  {
-    
-    private trackPadListenerComponent: IComponent;
-    private navigateComponent: IComponent;
-    private cursorColourChangeComponent: IComponent;
+
+    //private trackPadListenerComponent: IComponent;
+    private cursorNavigateComponent: IComponent<INavigateModel>;
+    //private cursorColourChangeComponent: IComponent;
 
     constructor(
-        trackPadListenerComponent: IComponent,
-        cursorNavigateComponent: IComponent,
-        cursorColourChangeComponent:IComponent
+        //trackPadListenerComponent: IComponent,
+        cursorNavigateComponent: IComponent<INavigateModel>,
+        //cursorColourChangeComponent:IComponent
     )
     {
-        this.trackPadListenerComponent = trackPadListenerComponent;
-        this.navigateComponent = cursorNavigateComponent;
-        this.cursorColourChangeComponent = cursorColourChangeComponent;
+        //this.trackPadListenerComponent = trackPadListenerComponent;
+        this.cursorNavigateComponent = cursorNavigateComponent;
+        //this.cursorColourChangeComponent = cursorColourChangeComponent;
     }
     init() {
-        this.trackPadListenerComponent.init();
-        this.navigateComponent.init();
-        this.cursorColourChangeComponent.init();
+       // this.trackPadListenerComponent.init();
+        this.cursorNavigateComponent.init();
+       // this.cursorColourChangeComponent.init();
     }
 }
