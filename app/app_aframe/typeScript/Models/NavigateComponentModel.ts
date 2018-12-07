@@ -1,6 +1,6 @@
-import { INavigateModel } from "../Interfaces/INavigateModel"
+import { INavigateComponentModel } from "../Interfaces/INavigateComponentModel"
 
-export class NavigateModel implements INavigateModel {
+export class NavigateComponentModel implements INavigateComponentModel {
     cameraId: string;
     yConstraint: boolean;
     event: CustomEvent<any>;

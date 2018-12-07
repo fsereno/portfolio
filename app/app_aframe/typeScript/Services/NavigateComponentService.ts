@@ -1,7 +1,7 @@
-import { INavigateModel } from "../Interfaces/INavigateModel";
-import { INavigateService } from '../Interfaces/INavigateService';
+import { INavigateComponentModel } from "../Interfaces/INavigateComponentModel";
+import { INavigateComponentService } from '../Interfaces/INavigateComponentService';
 
-export class NavigateService<T extends INavigateModel> implements INavigateService<T> {
+export class NavigateComponentService<T extends INavigateComponentModel> implements INavigateComponentService<T> {
     public init(object: T) {
         let camera = document.querySelector("#" + object.cameraId);
         if (camera !== null) {

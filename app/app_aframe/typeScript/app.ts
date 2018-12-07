@@ -1,27 +1,31 @@
 
 // Services
-import { NavigateService } from './Services/NavigateService';
+import { NavigateComponentService } from './Services/NavigateComponentService';
 
 // Components
-import { CursorNavigateComponent } from "./Components/CursorNavigateComponent";
+import { NavigateComponent } from "./Components/NavigateComponent";
 
 // Controllers
 import { IndexController } from "./Controllers/IndexController";
-import { NavigateModel } from './Models/NavigateModel';
+import { NavigateComponentModel } from './Models/NavigateComponentModel';
 
 // Servies
-let navigateService = new NavigateService();
+let navigateService = new NavigateComponentService();
 
 // Components
-let cursorNavigateComponentModel = new NavigateModel("camera", false, ["click"]);
+let navigateComponentModel = new NavigateComponentModel(
+    "camera", 
+    false, 
+    ["click"]
+);
                            
-let cursorNavigateComponent = new CursorNavigateComponent(
-    cursorNavigateComponentModel, 
+let navigateComponent = new NavigateComponent(
+    navigateComponentModel, 
     navigateService
 );
 
 // Controllers
 let indexController = new IndexController(
-    cursorNavigateComponent,
+    navigateComponent,
     );
 indexController.init();

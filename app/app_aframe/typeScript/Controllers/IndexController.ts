@@ -1,12 +1,12 @@
 import { IComponent } from "../Interfaces/IComponent";
-import { INavigateModel } from '../Interfaces/INavigateModel';
+import { INavigateComponentModel } from '../Interfaces/INavigateComponentModel';
 
 export class IndexController  {
 
-    private cursorNavigateComponent: IComponent<INavigateModel>;
+    private cursorNavigateComponent: IComponent<INavigateComponentModel>;
 
     constructor(
-        cursorNavigateComponent: IComponent<INavigateModel>,
+        cursorNavigateComponent: IComponent<INavigateComponentModel>,
     )
     {
         this.cursorNavigateComponent = cursorNavigateComponent;
