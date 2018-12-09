@@ -14,6 +14,7 @@ let navigateService = new NavigateComponentService();
 
 // Components
 let navigateComponentModel = new NavigateComponentModel(
+    "navigate-component",
     "camera", 
     false, 
     ["click"]

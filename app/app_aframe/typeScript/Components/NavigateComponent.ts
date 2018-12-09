@@ -17,7 +17,7 @@ export class NavigateComponent<T extends INavigateComponentModel> implements ICo
     
     init(): void {
         let self = this;
-        AFRAME.registerComponent("navigate-component", {
+        AFRAME.registerComponent(self.object.name, {
             init: function() {
                 self.object.onEvents.forEach(event => {
                     this.el.addEventListener(event, function (e:CustomEvent) {
