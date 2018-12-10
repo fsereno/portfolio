@@ -1,5 +1,5 @@
-export interface INavigateComponentModel {
-    name: string;
+import { IModelComponent } from "./IModelComponent";
+export interface INavigateComponentModel extends IModelComponent {
     cameraId: string;
     yConstraint: boolean;
     event: CustomEvent<any>;

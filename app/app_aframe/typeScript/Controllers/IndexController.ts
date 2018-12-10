@@ -1,17 +1,22 @@
 import { IComponent } from "../Interfaces/IComponent";
 import { INavigateComponentModel } from '../Interfaces/INavigateComponentModel';
+import { ICubikComponentModel } from "../Interfaces/ICubikComponentModel";
 
 export class IndexController  {
 
-    private cursorNavigateComponent: IComponent<INavigateComponentModel>;
+    private navigateComponent: IComponent<INavigateComponentModel>;
+    private cubikComponent: IComponent<ICubikComponentModel>;
 
     constructor(
-        cursorNavigateComponent: IComponent<INavigateComponentModel>,
+        navigateComponent: IComponent<INavigateComponentModel>,
+        cubikComponent: IComponent<ICubikComponentModel>
     )
     {
-        this.cursorNavigateComponent = cursorNavigateComponent;
+        this.navigateComponent = navigateComponent;
+        this.cubikComponent = cubikComponent;
     }
     init() {
-        this.cursorNavigateComponent.init();
+        this.navigateComponent.init();
+        this.cubikComponent.init();
     }
 }
