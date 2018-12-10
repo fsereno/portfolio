@@ -15,10 +15,17 @@ export class CubikComponent<T extends ICubikComponentModel> implements IComponen
         let self = this;
         AFRAME.registerComponent(self.object.name, {
             init: function() {
-
                 document.querySelector("#"+self.object.scoreId).setAttribute(
-                    "text", "value", "Score: " + self.object.userScore + "/" + self.object.getCubeCount()
+                    "text", "value", self.object.userScore
+                );
+                document.querySelector("#"+self.object.targetId).setAttribute(
+                  "text", "value", self.object.getCubeCount()
+                );
+                this.el.addEventListener("navigate-navigated", function (e:CustomEvent) {
+                    document.querySelector("#"+self.object.scoreId).setAttribute(
+                        "text", "value", self.object.getScore()
                     );
+                });
             }
         });
     }

@@ -5,6 +5,7 @@ export class CubikComponentModel implements ICubikComponentModel {
     name: string;
     cubeClass: string;
     scoreId: string;
+    targetId: string;
     timeId: string;
     userScore: number; // need a dedicated player
     timeRemaining: Date;
@@ -15,6 +16,7 @@ export class CubikComponentModel implements ICubikComponentModel {
         name: string,
         cubeClass: string,
         scoreId: string,
+        targetId: string,
         timeId: string,
         userScore: number, // need a dedicated player
         timeRemaining: Date,
@@ -23,6 +25,7 @@ export class CubikComponentModel implements ICubikComponentModel {
         this.name = name;
         this.cubeClass = cubeClass;
         this.scoreId = scoreId;
+        this.targetId = targetId;
         this.timeId = timeId;
         this.userScore = userScore;
         this.timeRemaining = timeRemaining;
@@ -30,5 +33,5 @@ export class CubikComponentModel implements ICubikComponentModel {
     }
 
     getCubeCount = (): number => document.querySelectorAll("."+this.cubeClass).length;
-    
+    getScore = (): number => document.querySelectorAll("."+this.cubeClass+"[visible]").length;
 }

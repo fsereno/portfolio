@@ -28,6 +28,7 @@ let cubikComponentModel = new CubikComponentModel(
     "cubik-component",
     "cube",
     "score",
+    "target",
     "time",
     0,
     new Date(),
