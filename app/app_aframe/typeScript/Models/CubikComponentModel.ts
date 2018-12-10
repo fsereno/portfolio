@@ -32,6 +32,17 @@ export class CubikComponentModel implements ICubikComponentModel {
         this.cubeCount = cubeCount;
     }
 
-    getCubeCount = (): number => document.querySelectorAll("."+this.cubeClass).length;
-    getScore = (): number => document.querySelectorAll("."+this.cubeClass+"[visible]").length;
+    getCubeCount = (): number => document.querySelectorAll("."+this.cubeClass+".reward").length;
+    incrementUserScore = (): number => this.userScore++;
+    decreaseuUerScore = (): number => this.userScore--;
+    populateScoreOutput(): void {
+        document.querySelector("#"+this.scoreId).setAttribute(
+            "text", "value", this.userScore
+        );
+    };
+    populateTargetOutput(): void {
+        document.querySelector("#"+this.targetId).setAttribute(
+            "text", "value", this.getCubeCount()
+          );
+    };
 }

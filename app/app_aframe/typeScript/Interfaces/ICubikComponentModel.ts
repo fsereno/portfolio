@@ -8,5 +8,8 @@ export interface ICubikComponentModel {
     timeRemaining: Date;
     cubeCount: number;
     getCubeCount(): number;
-    getScore(): number;
+    incrementUserScore(): number;
+    decreaseuUerScore(): number;
+    populateScoreOutput(): void;
+    populateTargetOutput(): void;
 }

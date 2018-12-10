@@ -15,16 +15,29 @@ export class CubikComponent<T extends ICubikComponentModel> implements IComponen
         let self = this;
         AFRAME.registerComponent(self.object.name, {
             init: function() {
-                document.querySelector("#"+self.object.scoreId).setAttribute(
-                    "text", "value", self.object.userScore
-                );
-                document.querySelector("#"+self.object.targetId).setAttribute(
-                  "text", "value", self.object.getCubeCount()
-                );
-                this.el.addEventListener("navigate-navigated", function (e:CustomEvent) {
-                    document.querySelector("#"+self.object.scoreId).setAttribute(
-                        "text", "value", self.object.getScore()
-                    );
+                self.object.populateScoreOutput();
+                self.object.populateTargetOutput();
+                
+                let cubes = document.getElementsByClassName("cube");
+
+                for(let i=0; i<cubes.length; i++){
+
+                    cubes[i].setAttribute("id", "cube"+i);
+
+                    cubes[i].addEventListener("click",(e:CustomEvent)=>{
+                        
+                        let cube = e.srcElement;
+
+                        cube.classList.contains("error") ?  self.object.decreaseuUerScore() : self.object.incrementUserScore();
+                           
+                        cube.setAttribute("visible", "false");
+
+                        document.querySelector("#"+cube.getAttribute("id")).emit("collected");
+                    });
+                }            
+
+                this.el.addEventListener("collected", function (e:CustomEvent) {
+                    self.object.populateScoreOutput();
                 });
             }
         });
