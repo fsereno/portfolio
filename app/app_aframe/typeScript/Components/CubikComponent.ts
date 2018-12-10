@@ -15,10 +15,11 @@ export class CubikComponent<T extends ICubikComponentModel> implements IComponen
         let self = this;
         AFRAME.registerComponent(self.object.name, {
             init: function() {
-                self.object.populateScoreOutput();
-                self.object.populateTargetOutput();
                 
                 let cubes = document.getElementsByClassName("cube");
+
+                self.object.populateScoreOutput();
+                self.object.populateTargetOutput();
 
                 for(let i=0; i<cubes.length; i++){
 
@@ -28,7 +29,7 @@ export class CubikComponent<T extends ICubikComponentModel> implements IComponen
                         
                         let cube = e.srcElement;
 
-                        cube.classList.contains("error") ?  self.object.decreaseuUerScore() : self.object.incrementUserScore();
+                        cube.classList.contains("error") ?  self.object.player.decreaseuUerScore() : self.object.player.incrementUserScore();
                            
                         cube.setAttribute("visible", "false");
 
