@@ -1,15 +1,17 @@
 import { ICubikComponentModel } from "../Interfaces/ICubikComponentModel"
 import { IPlayer } from '../Interfaces/IPlayer';
+import { ITimerService } from '../../../typeScript/Interfaces/ITimerService';
+import { IUpdateService } from "../../../typeScript/Interfaces/IUpdateService";
 export class CubikComponentModel implements ICubikComponentModel {
         
     name: string;
     cubeClass: string;
     scoreId: string;
     targetId: string;
-    timeId: string;
-    timeRemaining: Date;
     cubeCount: number;
     player: IPlayer;
+    timerService: ITimerService;
+    updateService: IUpdateService;
 
     constructor
     (
@@ -17,30 +19,19 @@ export class CubikComponentModel implements ICubikComponentModel {
         cubeClass: string,
         scoreId: string,
         targetId: string,
-        timeId: string,
-        timeRemaining: Date,
         cubeCount: number,
-        player: IPlayer
+        player: IPlayer,
+        timerService: ITimerService,
+        updateService: IUpdateService
     ){
         this.name = name;
         this.cubeClass = cubeClass;
         this.scoreId = scoreId;
         this.targetId = targetId;
-        this.timeId = timeId;
-        this.timeRemaining = timeRemaining;
         this.cubeCount = cubeCount;
         this.player = player;
+        this.timerService = timerService;
+        this.updateService = updateService;
     }
-
     getCubeCount = (): number => document.querySelectorAll("."+this.cubeClass+".reward").length;
-    populateScoreOutput(): void {
-        document.querySelector("#"+this.scoreId).setAttribute(
-            "text", "value", this.player.score
-        );
-    };
-    populateTargetOutput(): void {
-        document.querySelector("#"+this.targetId).setAttribute(
-            "text", "value", this.getCubeCount()
-          );
-    };
 }

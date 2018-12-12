@@ -1,12 +1,11 @@
 import { IComponent } from "../Interfaces/IComponent";
 import { ICubikComponentModel } from "../Interfaces/ICubikComponentModel";
-
 export class CubikComponent<T extends ICubikComponentModel> implements IComponent<T> {
     
     object: T;
-
+    
     constructor(
-        object: T
+        object: T,
     ){
         this.object = object;
     }
@@ -18,8 +17,8 @@ export class CubikComponent<T extends ICubikComponentModel> implements IComponen
                 
                 let cubes = document.getElementsByClassName("cube");
 
-                self.object.populateScoreOutput();
-                self.object.populateTargetOutput();
+                self.object.updateService.update(self.object.scoreId, self.object.player.score);
+                self.object.updateService.update(self.object.targetId, self.object.getCubeCount());
 
                 for(let i=0; i<cubes.length; i++){
 
@@ -38,8 +37,10 @@ export class CubikComponent<T extends ICubikComponentModel> implements IComponen
                 }            
 
                 this.el.addEventListener("collected", function (e:CustomEvent) {
-                    self.object.populateScoreOutput();
+                    self.object.updateService.update(self.object.scoreId, self.object.player.score);
                 });
+
+                self.object.timerService.Start();
             }
         });
     }

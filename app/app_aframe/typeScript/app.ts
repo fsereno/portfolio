@@ -1,6 +1,8 @@
 
 // Services
 import { NavigateComponentService } from './Services/NavigateComponentService';
+import { TimerService } from '../../typeScript/Services/TimerService';
+import { UpdateService } from './Services/updateService';
 
 //Models
 import { NavigateComponentModel } from './Models/NavigateComponentModel';
@@ -16,6 +18,8 @@ import { Player } from './Models/Player';
 
 // Servies
 let navigateService = new NavigateComponentService();
+let updateService = new UpdateService();
+let timerService = new TimerService(10, "timer", updateService);
 
 // Models
 let navigateComponentModel = new NavigateComponentModel(
@@ -32,10 +36,10 @@ let cubikComponentModel = new CubikComponentModel(
     "cube",
     "score",
     "target",
-    "time",
-    new Date(),
     0,
-    player
+    player,
+    timerService,
+    updateService
 );
          
 //Components

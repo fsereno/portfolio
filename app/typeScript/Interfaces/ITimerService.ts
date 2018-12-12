@@ -1,5 +1,7 @@
+import { IUpdateService } from "./IUpdateService";
 export interface ITimerService {
     duration: number;
-    display: string;
-    Start();
+    target: string;
+    updateService: IUpdateService;
+    Start(): void;
 }
