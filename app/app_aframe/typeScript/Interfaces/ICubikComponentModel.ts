@@ -11,5 +11,4 @@ export interface ICubikComponentModel {
     timerService: ITimerService;
     updateService: IUpdateService;
     getCubeCount(): number;
-    //populate(id: string, value:number): void;
 }
