@@ -17,8 +17,8 @@ block content
       a-assets
         img#sky(src='../images/stars.png')
       a-box(class="cube error" animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='-3.691 -0.739 -7.835' rotation='138.893 277.787 0' color='red' height="1" geometry='')
-      a-box(class="cube reward" animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='-5.543 2.346 -5.929' rotation='138.893 277.787 0' color='blue' height="1" geometry='')
-      a-box(class="cube reward" animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='2.6 0.5 -3' rotation='138.893 277.787 0' color='blue' height="1" geometry='')
+      a-box(class="cube reward" animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='-5.543 2.346 -5.929' rotation='138.893 277.787 0' color='#3386FF' height="1" geometry='')
+      a-box(class="cube reward" animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='2.6 0.5 -3' rotation='138.893 277.787 0' color='#3386FF' height="1" geometry='')
       a-plane(visible="false")
       a-sky(src="#sky" material='' geometry='')      
       a-entity(light="type: Hemisphere; color: white; groundColor: purple;")
@@ -35,7 +35,7 @@ block content
               a-text(id="timer" position='0.23 0 0' value="0" color="green" width="2")
           a-entity(
             navigate-component=''
-            position='0 0 -3' 
+            position='0 0 -2' 
             geometry='primitive: ring; radiusInner: 0.2; radiusOuter: 0.3;' 
             material='color: yellow; shader: flat' 
             cursor='fuse: true;'

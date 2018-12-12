@@ -1,4 +1,4 @@
-import { IPlayer } from "./IPlayer";
+import { IPlayerModel } from "./IPlayerModel";
 import { ITimerService } from '../../../typeScript/Interfaces/ITimerService';
 import { IUpdateService } from "../../../typeScript/Interfaces/IUpdateService";
 export interface ICubikComponentModel {
@@ -7,7 +7,7 @@ export interface ICubikComponentModel {
     scoreId: string;
     targetId: string;
     cubeCount: number;
-    player: IPlayer;
+    player: IPlayerModel;
     timerService: ITimerService;
     updateService: IUpdateService;
     getCubeCount(): number;

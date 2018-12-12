@@ -1,6 +1,6 @@
-import { IPlayer } from '../Interfaces/IPlayer';
+import { IPlayerModel } from '../Interfaces/IPlayerModel';
 
-export class Player implements IPlayer {
+export class PlayerModel implements IPlayerModel {
     
     name: string;
     score: number;

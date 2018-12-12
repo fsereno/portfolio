@@ -1,7 +1,6 @@
 import { IComponent } from "../Interfaces/IComponent";
 import { INavigateComponentModel } from '../Interfaces/INavigateComponentModel';
 import { ICubikComponentModel } from "../Interfaces/ICubikComponentModel";
-
 export class IndexController  {
 
     private navigateComponent: IComponent<INavigateComponentModel>;

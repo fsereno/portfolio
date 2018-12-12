@@ -1,5 +1,5 @@
 import { ICubikComponentModel } from "../Interfaces/ICubikComponentModel"
-import { IPlayer } from '../Interfaces/IPlayer';
+import { IPlayerModel } from '../Interfaces/IPlayerModel';
 import { ITimerService } from '../../../typeScript/Interfaces/ITimerService';
 import { IUpdateService } from "../../../typeScript/Interfaces/IUpdateService";
 export class CubikComponentModel implements ICubikComponentModel {
@@ -9,7 +9,7 @@ export class CubikComponentModel implements ICubikComponentModel {
     scoreId: string;
     targetId: string;
     cubeCount: number;
-    player: IPlayer;
+    player: IPlayerModel;
     timerService: ITimerService;
     updateService: IUpdateService;
 
@@ -20,7 +20,7 @@ export class CubikComponentModel implements ICubikComponentModel {
         scoreId: string,
         targetId: string,
         cubeCount: number,
-        player: IPlayer,
+        player: IPlayerModel,
         timerService: ITimerService,
         updateService: IUpdateService
     ){

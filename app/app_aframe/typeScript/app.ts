@@ -14,7 +14,7 @@ import { CubikComponent } from './Components/CubikComponent';
 
 // Controllers
 import { IndexController } from "./Controllers/IndexController";
-import { Player } from './Models/Player';
+import { PlayerModel } from './Models/PlayerModel';
 
 // Servies
 let navigateService = new NavigateComponentService();
@@ -29,7 +29,7 @@ let navigateComponentModel = new NavigateComponentModel(
     ["click"]
 );
 
-let player = new Player("Joe Bloggs", 0);
+let player = new PlayerModel("Joe Bloggs", 0);
 
 let cubikComponentModel = new CubikComponentModel(
     "cubik-component",
