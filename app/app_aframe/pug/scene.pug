@@ -16,9 +16,9 @@ block content
     a-scene.fullscreen(debug='' antialias='true' inspector='' keyboard-shortcuts='' screenshot='' vr-mode-ui='' cubik-component='')
       a-assets
         img#sky(src='../images/stars.png')
-      a-box(class="cube error" animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='-3.691 -0.739 -7.835' rotation='138.893 277.787 0' color='red' height="1" geometry='')
-      a-box(class="cube reward" animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='-5.543 2.346 -5.929' rotation='138.893 277.787 0' color='#3386FF' height="1" geometry='')
-      a-box(class="cube reward" animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='2.6 0.5 -3' rotation='138.893 277.787 0' color='#3386FF' height="1" geometry='')
+      a-entity(class="cube error" animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='-3.691 -0.739 -7.835' height="1" geometry='primitive: box;' material="color:red")
+      a-entity(class="cube reward" animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='-5.543 2.346 -5.929' height="1" geometry='primitive: box' material="color:#3386FF")
+      a-entity(class="cube reward" animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='2.6 0.5 -3' height="1" geometry='primitive: box' material="color:#3386FF")
       a-plane(visible="false")
       a-sky(src="#sky" material='' geometry='')      
       a-entity(light="type: Hemisphere; color: white; groundColor: purple;")
