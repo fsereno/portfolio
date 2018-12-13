@@ -1,6 +1,5 @@
 import { ITimerService } from '../Interfaces/ITimerService';
 import { IUpdateService } from '../Interfaces/IUpdateService';
-
 export class TimerService implements ITimerService {
     duration: number;
     target: string;
@@ -17,17 +16,14 @@ export class TimerService implements ITimerService {
         this.updateService = updateService;
     }
     Start(): void  {
-
         let counter = this.duration,
             interval = setInterval(() => {
-            console.log(counter);
-            this.updateService.update(this.target,counter)
-            counter--;
-        
-            if(counter < 0 ){
-                clearInterval(interval);
-                console.log('Time is up!');
-            };
+                this.updateService.update(this.target,counter)
+                counter--;
+                if(counter < 0 ){
+                    clearInterval(interval);
+                    console.log('Time is up!');
+                };
             }, 1000);
     }
 }

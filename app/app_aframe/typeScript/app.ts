@@ -37,9 +37,7 @@ let cubikComponentModel = new CubikComponentModel(
     "score",
     "target",
     0,
-    player,
-    timerService,
-    updateService
+    player
 );
          
 //Components
@@ -49,7 +47,9 @@ let navigateComponent = new NavigateComponent(
 );
 
 let cubikComponent = new CubikComponent(
-    cubikComponentModel
+    cubikComponentModel,
+    timerService,
+    updateService
 );
 
 // Controllers

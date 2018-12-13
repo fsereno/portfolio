@@ -1,13 +1,22 @@
 import { IComponent } from "../Interfaces/IComponent";
 import { ICubikComponentModel } from "../Interfaces/ICubikComponentModel";
-export class CubikComponent<T extends ICubikComponentModel> implements IComponent<T> {
+import { ICubikComponent } from "../Interfaces/ICubikComponent";
+import { ITimerService } from "../../../typeScript/Interfaces/ITimerService";
+import { IUpdateService } from "../../../typeScript/Interfaces/IUpdateService";
+export class CubikComponent<T extends ICubikComponentModel> implements IComponent<T>, ICubikComponent {
     
     object: T;
+    timerService: ITimerService;
+    updateService: IUpdateService;
     
     constructor(
         object: T,
+        timerService: ITimerService,
+        updateService: IUpdateService
     ){
         this.object = object;
+        this.timerService = timerService;
+        this.updateService = updateService;
     }
     
     init(): void {
@@ -17,8 +26,8 @@ export class CubikComponent<T extends ICubikComponentModel> implements IComponen
                 
                 let cubes = document.getElementsByClassName("cube");
 
-                self.object.updateService.update(self.object.scoreId, self.object.player.score);
-                self.object.updateService.update(self.object.targetId, self.object.getCubeCount());
+                self.updateService.update(self.object.scoreId, self.object.player.score);
+                self.updateService.update(self.object.targetId, self.object.getCubeCount());
 
                 for(let i=0; i<cubes.length; i++){
 
@@ -37,10 +46,10 @@ export class CubikComponent<T extends ICubikComponentModel> implements IComponen
                 }            
 
                 this.el.addEventListener("collected", function (e:CustomEvent) {
-                    self.object.updateService.update(self.object.scoreId, self.object.player.score);
+                    self.updateService.update(self.object.scoreId, self.object.player.score);
                 });
 
-                self.object.timerService.Start();
+                self.timerService.Start();
             }
         });
     }
