@@ -42,6 +42,31 @@ export class CubikComponent<T extends ICubikComponentModel> implements IComponen
                         cube.setAttribute("visible", "false");
 
                         document.querySelector("#"+cube.getAttribute("id")).emit("collected");
+
+                        if(cube.classList.contains("spawn")){
+                            
+                            let entity = document.createElement('a-box'),
+                                currentPosition = cube.getAttributeNode("position").textContent,
+                                currentPositionArray = currentPosition.split(" "),
+                                newPosition = "";
+
+                            for(let i = 0; i <cube.attributes.length; i++){
+                                entity.setAttribute(cube.attributes[i].nodeName, cube.attributes[i].nodeValue);
+                            }
+
+                            //Set new position
+                            currentPositionArray.forEach(position =>{
+                                // this will become a random number eventually.
+                                let adjustment = Number(position) + 0.1; 
+                                newPosition+=adjustment;
+                            });
+
+                            //Enforce these attributes
+                            entity.setAttribute("position", newPosition);
+                            entity.setAttribute("color", "blue");
+
+                            this.el.appendChild(entity);
+                        }
                     });
                 }            
 
