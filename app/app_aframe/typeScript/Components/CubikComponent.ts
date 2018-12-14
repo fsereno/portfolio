@@ -21,6 +21,17 @@ export class CubikComponent<T extends ICubikComponentModel> implements IComponen
     
     init(): void {
         let self = this;
+
+        AFRAME.registerComponent("collectable", {
+            init: function () {  
+                this.el.addEventListener('click', function (evt:CustomEvent) {
+                    console.log(evt);
+                    //this.setAttribute('color', colours[lastIndex]);
+                });
+            }
+        });
+
+
         AFRAME.registerComponent(self.object.name, {
             init: function() {
                 
