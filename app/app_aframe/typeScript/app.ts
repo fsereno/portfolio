@@ -6,11 +6,11 @@ import { UpdateService } from './Services/updateService';
 
 //Models
 import { NavigateComponentModel } from './Models/NavigateComponentModel';
-import { CubikComponentModel } from './Models/CubikComponentModel';
+import { CubikModel } from './Models/CubikModel';
 
 // Components
 import { NavigateComponent } from "./Components/NavigateComponent";
-import { CubikComponent } from './Components/CubikComponent';
+import { CubikCollectableComponent } from './Components/CubikCollectableComponent';
 
 // Controllers
 import { IndexController } from "./Controllers/IndexController";
@@ -31,8 +31,8 @@ let navigateComponentModel = new NavigateComponentModel(
 
 let player = new PlayerModel("Joe Bloggs", 0);
 
-let cubikComponentModel = new CubikComponentModel(
-    "cubik-component",
+let cubikModel = new CubikModel(
+    "cubik-collectable-component",
     "cube",
     "score",
     "target",
@@ -46,8 +46,8 @@ let navigateComponent = new NavigateComponent(
     navigateService
 );
 
-let cubikComponent = new CubikComponent(
-    cubikComponentModel,
+let cubikCollectableComponent = new CubikCollectableComponent(
+    cubikModel,
     timerService,
     updateService
 );
@@ -55,6 +55,6 @@ let cubikComponent = new CubikComponent(
 // Controllers
 let indexController = new IndexController(
     navigateComponent,
-    cubikComponent
+    cubikCollectableComponent
     );
 indexController.init();

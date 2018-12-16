@@ -1,6 +1,6 @@
-import { ICubikComponentModel } from "../Interfaces/ICubikComponentModel"
+import { ICubikModel } from "../Interfaces/ICubikModel"
 import { IPlayerModel } from '../Interfaces/IPlayerModel';
-export class CubikComponentModel implements ICubikComponentModel {
+export class CubikModel implements ICubikModel {
         
     name: string;
     cubeClass: string;

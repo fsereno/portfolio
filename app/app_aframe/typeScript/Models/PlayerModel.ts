@@ -14,5 +14,5 @@ export class PlayerModel implements IPlayerModel {
     }
 
     incrementUserScore = (): number => this.score++;
-    decreaseuUerScore = (): number => this.score--;
+    decreaseUserScore = (): number => this.score--;
 }
