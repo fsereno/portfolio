@@ -3,7 +3,7 @@ import { ICubikModel } from "../Interfaces/ICubikModel";
 import { ICubikCollectableComponent } from "../Interfaces/ICubikCollectableComponent";
 import { ITimerService } from "../../../typeScript/Interfaces/ITimerService";
 import { IUpdateService } from "../../../typeScript/Interfaces/IUpdateService";
-export class CubikCollectableComponent<T extends ICubikModel> implements IComponent<T>, ICubikCollectableComponent {
+export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICubikCollectableComponent {
     
     object: T;
     timerService: ITimerService;

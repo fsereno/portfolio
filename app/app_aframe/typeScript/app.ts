@@ -10,7 +10,7 @@ import { CubikModel } from './Models/CubikModel';
 
 // Components
 import { NavigateComponent } from "./Components/NavigateComponent";
-import { CubikCollectableComponent } from './Components/CubikCollectableComponent';
+import { CubikComponent } from './Components/CubikComponent';
 
 // Controllers
 import { IndexController } from "./Controllers/IndexController";
@@ -48,7 +48,7 @@ let navigateComponent = new NavigateComponent(
     navigateService
 );
 
-let cubikCollectableComponent = new CubikCollectableComponent(
+let cubikComponent = new CubikComponent(
     cubikModel,
     timerService,
     updateService
@@ -57,6 +57,6 @@ let cubikCollectableComponent = new CubikCollectableComponent(
 // Controllers
 let indexController = new IndexController(
     navigateComponent,
-    cubikCollectableComponent
+    cubikComponent
     );
 indexController.init();
