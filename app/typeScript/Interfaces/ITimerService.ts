@@ -5,5 +5,7 @@ export interface ITimerService {
     target: string;
     completionMessage: string;
     updateService: IUpdateService;
+    interval: NodeJS.Timer;
     Start(): void;
+    Stop(): void;
 }

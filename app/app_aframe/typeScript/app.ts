@@ -39,7 +39,10 @@ let cubikModel = new CubikModel(
     "score",
     "target",
     0,
-    player
+    player,
+    "completeText",
+    "LEVEL COMPLETE!",
+    "YOU FAILED!"
 );
          
 //Components

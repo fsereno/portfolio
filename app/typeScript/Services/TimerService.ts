@@ -6,6 +6,7 @@ export class TimerService implements ITimerService {
     target: string;
     completionMessage: string;
     updateService: IUpdateService;
+    interval: NodeJS.Timer;
     constructor
     (
         duration: number,
@@ -21,15 +22,18 @@ export class TimerService implements ITimerService {
         this.updateService = updateService;
     }
     Start(): void  {
-        let internalCounter = this.duration,
-            interval = setInterval(() => {
+        let internalCounter = this.duration;
+            this.interval = setInterval(() => {
                 this.updateService.update(this.target,internalCounter);
                 this.counter = internalCounter;
                 internalCounter--;
                 if(internalCounter < 0 ){
-                    clearInterval(interval);
+                    this.Stop();
                     this.updateService.update(this.target,this.completionMessage);
                 };
             }, 1000);
+    }
+    Stop(): void {
+        clearInterval(this.interval);
     }
 }

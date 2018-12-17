@@ -5,5 +5,8 @@ export interface ICubikModel {
     targetId: string;
     cubeCount: number;
     player: IPlayerModel;
+    feedbackTextElementId: string;
+    successText: string;
+    failedText: string;
     getCubeCount(): number;
 }

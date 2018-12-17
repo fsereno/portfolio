@@ -34,12 +34,24 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
             init: function () {  
                 
                 let scene = document.querySelector("#scene");
+                let feedbackTextElement = document.querySelector("#"+self.object.feedbackTextElementId);
                 this.el.addEventListener('click', function (evt:CustomEvent) {
 
                     let cube = evt.srcElement;
                     
                     if(!cube.classList.contains("error"))
                         self.object.player.incrementUserScore();
+                    
+                    if(self.object.getCubeCount() === self.object.player.score){
+                        self.timerService.Stop();
+                        if(self.timerService.counter > 0){
+                            self.updateService.update(self.object.feedbackTextElementId, self.object.successText);
+                            feedbackTextElement.setAttribute("visible", "true");
+                        } else{
+                            self.updateService.update(self.object.feedbackTextElementId, self.object.failedText);
+                            feedbackTextElement.setAttribute("visible", "true");
+                        }                                             
+                    }
                            
                     cube.setAttribute("visible", "false");
                     
