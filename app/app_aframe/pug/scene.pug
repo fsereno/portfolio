@@ -13,7 +13,7 @@ block head
   // endbuild
 
 block content
-    a-scene#scene.fullscreen(debug='' antialias='true' inspector='' keyboard-shortcuts='' screenshot='' vr-mode-ui='')
+    a-scene#scene.fullscreen(debug='' antialias='true' inspector='' keyboard-shortcuts='' screenshot='' vr-mode-ui='' cubik-component='')
       a-assets
         img#sky(src='../images/stars.png')
       a-box.cube.error.spawn(cubik-collectable-component='' animation='easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true' position='-3.691 -0.739 -7.835' height="1" color="red")
@@ -28,11 +28,11 @@ block content
           a-entity(position='-1 -0.7 -1')
             a-text(position="0 0 0" value="Score: " color="green" width="2")
               a-text(id="score" position="0.27 0 0" value="0" color="green" width="2")
-              a-text(position="0.32 0 0" value="/" color="green" width="2")
-              a-text(id="target" position="0.36 0 0" value="0" color="green" width="2")
+              a-text(position="0.35 0 0" value="/" color="green" width="2")
+              a-text(id="target" position="0.41 0 0" value="0" color="green" width="2")
           a-entity(position='0.5 -0.7 -1')
             a-text(position='0 0 0' value="Time: " color="green" width="2")
-              a-text(id="timer" position='0.23 0 0' value="0" color="green" width="2")
+              a-text(id="timer" position='0.25 0 0' value="0" color="green" width="2")
           a-entity(
             navigate-component=''
             position='0 0 -2' 

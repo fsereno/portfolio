@@ -19,7 +19,11 @@ import { PlayerModel } from './Models/PlayerModel';
 // Servies
 let navigateService = new NavigateComponentService();
 let updateService = new UpdateService();
-let timerService = new TimerService(10, "timer", updateService);
+let timerService = new TimerService(
+    10, 
+    "timer", 
+    "Time is up!", 
+    updateService);
 
 // Models
 let navigateComponentModel = new NavigateComponentModel(

@@ -22,22 +22,24 @@ export class CubikCollectableComponent<T extends ICubikModel> implements ICompon
     init(): void {
         let self = this;
 
+        AFRAME.registerComponent("cubik-component", {
+            init:function(){
+                self.updateService.update(self.object.scoreId, self.object.player.score);
+                self.updateService.update(self.object.targetId, self.object.getCubeCount());
+                self.timerService.Start();
+            }
+        });
+
         AFRAME.registerComponent(self.object.name, {
             init: function () {  
                 
                 let scene = document.querySelector("#scene");
-
-                self.updateService.update(self.object.scoreId, self.object.player.score);
-                self.updateService.update(self.object.targetId, self.object.getCubeCount());
-                self.timerService.Start();
-    
                 this.el.addEventListener('click', function (evt:CustomEvent) {
 
                     let cube = evt.srcElement;
                     
-                    cube.classList.contains("error") 
-                        ? self.object.player.decreaseUserScore() 
-                        : self.object.player.incrementUserScore();
+                    if(!cube.classList.contains("error"))
+                        self.object.player.incrementUserScore();
                            
                     cube.setAttribute("visible", "false");
                     
@@ -67,13 +69,11 @@ export class CubikCollectableComponent<T extends ICubikModel> implements ICompon
                         entity.classList.add("reward");
                         entity.setAttribute("color", "green");
                         scene.appendChild(entity);
-
                         
                         self.updateService.update(self.object.scoreId, self.object.player.score);
                         self.updateService.update(self.object.targetId, self.object.getCubeCount());
                     }
 
-                    
                     self.updateService.update(self.object.scoreId, self.object.player.score);
                     self.updateService.update(self.object.targetId, self.object.getCubeCount());
                 });
