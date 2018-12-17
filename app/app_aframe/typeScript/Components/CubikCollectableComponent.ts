@@ -30,7 +30,7 @@ export class CubikCollectableComponent<T extends ICubikModel> implements ICompon
             }
         });
 
-        AFRAME.registerComponent(self.object.name, {
+        AFRAME.registerComponent("cubik-collectable-component", {
             init: function () {  
                 
                 let scene = document.querySelector("#scene");

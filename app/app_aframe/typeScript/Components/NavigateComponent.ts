@@ -1,7 +1,6 @@
 import { IComponent } from "../Interfaces/IComponent";
 import { INavigateComponentService } from '../Interfaces/INavigateComponentService';
 import { INavigateComponentModel } from "../Interfaces/INavigateComponentModel";
-
 export class NavigateComponent<T extends INavigateComponentModel> implements IComponent<T> {
     
     object: T;
@@ -17,7 +16,7 @@ export class NavigateComponent<T extends INavigateComponentModel> implements ICo
     
     init(): void {
         let self = this;
-        AFRAME.registerComponent(self.object.name, {
+        AFRAME.registerComponent("navigate-component", {
             init: function() {
                 self.object.onEvents.forEach(event => {
                     this.el.addEventListener(event, function (e:CustomEvent) {

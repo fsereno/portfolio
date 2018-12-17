@@ -27,7 +27,6 @@ let timerService = new TimerService(
 
 // Models
 let navigateComponentModel = new NavigateComponentModel(
-    "navigate-component",
     "player", 
     false, 
     ["click"]
@@ -36,7 +35,6 @@ let navigateComponentModel = new NavigateComponentModel(
 let player = new PlayerModel("Joe Bloggs", 0);
 
 let cubikModel = new CubikModel(
-    "cubik-collectable-component",
     "cube",
     "score",
     "target",

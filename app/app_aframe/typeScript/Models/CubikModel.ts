@@ -1,8 +1,6 @@
 import { ICubikModel } from "../Interfaces/ICubikModel"
 import { IPlayerModel } from '../Interfaces/IPlayerModel';
 export class CubikModel implements ICubikModel {
-        
-    name: string;
     cubeClass: string;
     scoreId: string;
     targetId: string;
@@ -11,14 +9,12 @@ export class CubikModel implements ICubikModel {
 
     constructor
     (
-        name: string,
         cubeClass: string,
         scoreId: string,
         targetId: string,
         cubeCount: number,
         player: IPlayerModel
     ){
-        this.name = name;
         this.cubeClass = cubeClass;
         this.scoreId = scoreId;
         this.targetId = targetId;
