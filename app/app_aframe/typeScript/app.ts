@@ -40,7 +40,7 @@ let cubikModel = new CubikModel(
     "target",
     0,
     player,
-    "completeText",
+    "feedbackText",
     "LEVEL COMPLETE!",
     "YOU FAILED!"
 );
