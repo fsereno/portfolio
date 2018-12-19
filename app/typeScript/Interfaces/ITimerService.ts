@@ -3,6 +3,7 @@ export interface ITimerService {
     duration: number;
     counter: number;
     target: string;
+    completionTargetId: string;
     completionMessage: string;
     updateService: IUpdateService;
     interval: NodeJS.Timer;

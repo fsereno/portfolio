@@ -28,20 +28,20 @@
       <a-entity light="type:directional;intensity:1" position="-10.295625982802726 5.773626234781356 1.475440803013563"></a-entity>
       <a-entity id="player" position="0.5 0 0">
         <a-entity camera="" look-controls="" position="" rotation="" data-aframe-inspector-original-camera="">
-          <a-entity position="-1 -0.7 -1">
-            <a-text position="0 0 0" value="Score: " color="green" width="2">
-              <a-text id="score" position="0.27 0 0" value="0" color="green" width="2"></a-text>
-              <a-text position="0.35 0 0" value="/" color="green" width="2"></a-text>
-              <a-text id="target" position="0.41 0 0" value="0" color="green" width="2"></a-text>
+          <a-entity position="-1.2 -0.3 -2">
+            <a-text position="0 0 0" value="Score: " color="green" width="3">
+              <a-text id="score" position="0.45 0 0" value="0" color="green" width="3"></a-text>
+              <a-text position="0.60 0 0" value="/" color="green" width="3"></a-text>
+              <a-text id="target" position="0.73 0 0" value="0" color="green" width="3"></a-text>
             </a-text>
           </a-entity>
-          <a-entity position="0.5 -0.7 -1">
-            <a-text position="0 0 0" value="Time: " color="green" width="2">
-              <a-text id="timer" position="0.25 0 0" value="0" color="green" width="2"></a-text>
+          <a-entity position="0.4 -0.3 -2">
+            <a-text position="0 0 0" value="Time: " color="green" width="3">
+              <a-text id="timer" position="0.40 0 0" value="0" color="green" width="3"></a-text>
             </a-text>
           </a-entity>
           <a-entity navigate-component="" position="0 0 -2" geometry="primitive: ring; radiusInner: 0.2; radiusOuter: 0.3;" material="color: yellow; shader: flat" cursor="fuse: true;" animation__click="startEvents:click; easing:easeInSine; property:scale; from:0.2 0.2 0.2; to:1 1 1; dur:250;" animation__fusing="startEvents:fusing; easing:easeOutSine; property:scale; from:1 1 1; to:0.2 0.2 0.2; dur:1500;"></a-entity>
-          <a-text id="feedbackText" visible="false" position="0 0.557 -2" align="center" value="LEVEL COMPLETE" color="green" width="10"></a-text>
+          <a-text id="feedbackText" visible="false" position="0 0.557 -2" align="center" value="LEVEL COMPLETE" color="green" width="3"></a-text>
         </a-entity>
       </a-entity>
     </a-scene>

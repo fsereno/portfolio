@@ -48,7 +48,7 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                             self.updateService.update(self.object.feedbackTextElementId, self.object.successText);
                             feedbackTextElement.setAttribute("visible", "true");
                         } else{
-                            self.updateService.update(self.object.feedbackTextElementId, self.object.failedText);
+                            //self.updateService.update(self.object.feedbackTextElementId, self.object.failedText);
                             feedbackTextElement.setAttribute("visible", "true");
                         }                                             
                     }
