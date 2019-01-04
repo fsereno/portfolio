@@ -1,8 +1,12 @@
+// Repositories
+import { RandomGeneratorRepository } from '../../typeScript/Repositories/RandomGeneratorRepository';
 
 // Services
 import { NavigateComponentService } from './Services/NavigateComponentService';
 import { TimerService } from '../../typeScript/Services/TimerService';
 import { UpdateService } from './Services/updateService';
+import { RandomGeneratorService } from '../../typeScript/Services/RandomGeneratorService';
+import { StringService } from '../../typeScript/Services/StringService';
 
 //Models
 import { NavigateComponentModel } from './Models/NavigateComponentModel';
@@ -16,6 +20,9 @@ import { CubikComponent } from './Components/CubikComponent';
 import { IndexController } from "./Controllers/IndexController";
 import { PlayerModel } from './Models/PlayerModel';
 
+// Repositories
+let randomGeneratorRepository = new RandomGeneratorRepository();
+
 // Servies
 let navigateService = new NavigateComponentService();
 let updateService = new UpdateService();
@@ -25,6 +32,10 @@ let timerService = new TimerService(
     "feedbackText", 
     "Game Over", 
     updateService);
+let stringService = new StringService();
+let randomGeneratorService = new RandomGeneratorService(
+    stringService, 
+    randomGeneratorRepository);
 
 // Models
 let navigateComponentModel = new NavigateComponentModel(
@@ -55,7 +66,8 @@ let navigateComponent = new NavigateComponent(
 let cubikComponent = new CubikComponent(
     cubikModel,
     timerService,
-    updateService
+    updateService,
+    randomGeneratorService
 );
 
 // Controllers

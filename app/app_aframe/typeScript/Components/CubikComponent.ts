@@ -3,20 +3,24 @@ import { ICubikModel } from "../Interfaces/ICubikModel";
 import { ICubikCollectableComponent } from "../Interfaces/ICubikCollectableComponent";
 import { ITimerService } from "../../../typeScript/Interfaces/ITimerService";
 import { IUpdateService } from "../../../typeScript/Interfaces/IUpdateService";
+import { IRandomGeneratorService } from '../../../typeScript/Interfaces/IRandomGeneratorService';
 export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICubikCollectableComponent {
     
     object: T;
     timerService: ITimerService;
     updateService: IUpdateService;
+    randomGeneratorService: IRandomGeneratorService;
     
     constructor(
         object: T,
         timerService: ITimerService,
-        updateService: IUpdateService
+        updateService: IUpdateService,
+        randomGeneratorService: IRandomGeneratorService
     ){
         this.object = object;
         this.timerService = timerService;
         this.updateService = updateService;
+        this.randomGeneratorService = randomGeneratorService;
     }
     
     init(): void {
@@ -58,30 +62,43 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                     if(cube.classList.contains("spawn")){
 
                         //there will be an amount to spwan, there could be more than 1...
-                        let entity = document.createElement('a-box'),
+                        let spwanAmount = Number(cube.getAttributeNode("data-spawn-amount").textContent);
+                        
+                        for(let a = 0; a < spwanAmount; a++) {
+
+                            let entity = document.createElement('a-box'),
                             currentPosition = cube.getAttributeNode("position").textContent,
                             currentPositionArray = currentPosition.split(" "),
                             newPosition = "";
+
+                            let numeric = self.randomGeneratorService.Numerics,
+                                criteria = [numeric];
+                            
+                            let offSet = self.randomGeneratorService.GenerateRandom(criteria, 1);
                         
-                        //Give the same attributes
-                        for(let i = 0; i <cube.attributes.length; i++){
-                            entity.setAttribute(cube.attributes[i].nodeName, cube.attributes[i].nodeValue);
+                            //Give the same attributes
+                            for(let i = 0; i <cube.attributes.length; i++){
+                                entity.setAttribute(cube.attributes[i].nodeName, cube.attributes[i].nodeValue);
+                            }
+
+                            //Set new position
+                            currentPositionArray.forEach(position =>{
+                                // this will become a random number eventually.
+                                let adjustment = Number(position) + (Number(offSet)/10);
+                                newPosition+=adjustment;
+                            });
+
+                            console.log(newPosition);
+
+                            //Enforce these attributes
+                            entity.setAttribute("position", newPosition);
+                            entity.classList.remove("error", "spawn");
+                            entity.classList.add("reward");
+                            entity.setAttribute("color", "green");
+                            scene.appendChild(entity);
+        
                         }
-
-                        //Set new position
-                        currentPositionArray.forEach(position =>{
-                            // this will become a random number eventually.
-                            let adjustment = Number(position) + 0.1; 
-                            newPosition+=adjustment;
-                        });
-
-                        //Enforce these attributes
-                        entity.setAttribute("position", newPosition);
-                        entity.classList.remove("error", "spawn");
-                        entity.classList.add("reward");
-                        entity.setAttribute("color", "green");
-                        scene.appendChild(entity);
-                        
+                                        
                         self.updateService.update(self.object.scoreId, self.object.player.score);
                         self.updateService.update(self.object.targetId, self.object.getCubeCount());
                     }
