@@ -26,13 +26,11 @@ block content
       a-entity#player(position='0.5 0 0')
         a-entity(camera='' look-controls='' position='' rotation='' data-aframe-inspector-original-camera='')
           a-entity(position='-1.2 -0.3 -2')
-            a-text(position="0 0 0" value="Score: " color="green" width="3")
-              a-text(id="score" position="0.45 0 0" value="0" color="green" width="3")
-              a-text(position="0.60 0 0" value="/" color="green" width="3")
-              a-text(id="target" position="0.73 0 0" value="0" color="green" width="3")
-          a-entity(position='0.4 -0.3 -2')
-            a-text(position='0 0 0' value="Time: " color="green" width="3")
-              a-text(id="timer" position='0.40 0 0' value="0" color="green" width="3")
+            a-text(id="score" position="0.45 0 0" value="0" color="green" width="3")
+            a-text(position="0.60 0 0" value="/" color="green" width="3")
+            a-text(id="target" position="0.73 0 0" value="0" color="green" width="3")
+          a-entity(position='-0.1 -0.3 -2')
+            a-text(id="timer" position='0.40 0 0' value="" color="green" width="3")
           a-entity(
             navigate-component=''
             position='0 0 -2' 
