@@ -37,8 +37,9 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
         AFRAME.registerComponent("cubik-collectable-component", {
             init: function () {  
                 
-                let scene = document.querySelector("#scene");
-                let feedbackTextElement = document.querySelector("#"+self.object.feedbackTextElementId);
+                let scene = document.querySelector("#scene"),
+                    feedbackTextElement = document.querySelector("#"+self.object.feedbackTextElementId);
+                
                 this.el.addEventListener('click', function (evt:CustomEvent) {
 
                     let cube = evt.srcElement;
@@ -52,7 +53,6 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                             self.updateService.update(self.object.feedbackTextElementId, self.object.successText);
                             feedbackTextElement.setAttribute("visible", "true");
                         } else{
-                            //self.updateService.update(self.object.feedbackTextElementId, self.object.failedText);
                             feedbackTextElement.setAttribute("visible", "true");
                         }                                             
                     }
@@ -61,20 +61,17 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                     
                     if(cube.classList.contains("spawn")){
 
-                        //there will be an amount to spwan, there could be more than 1...
                         let spwanAmount = Number(cube.getAttributeNode("data-spawn-amount").textContent);
                         
                         for(let a = 0; a < spwanAmount; a++) {
 
                             let entity = document.createElement('a-box'),
-                            currentPosition = cube.getAttributeNode("position").textContent,
-                            currentPositionArray = currentPosition.split(" "),
-                            newPosition = "";
+                                currentPosition = cube.getAttributeNode("position").textContent,
+                                currentPositionArray = currentPosition.split(" "),
+                                newPosition = "";
 
                             let numeric = self.randomGeneratorService.Numerics,
                                 criteria = [numeric];
-                            
-                            let offSet = self.randomGeneratorService.GenerateRandom(criteria, 1);
                         
                             //Give the same attributes
                             for(let i = 0; i <cube.attributes.length; i++){
@@ -83,12 +80,9 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
 
                             //Set new position
                             currentPositionArray.forEach(position =>{
-                                // this will become a random number eventually.
-                                let adjustment = Number(position) + (Number(offSet)/10);
-                                newPosition+=adjustment;
+                                let offSet = self.randomGeneratorService.GenerateRandom(criteria, 1);                                    
+                                newPosition+=offSet+" ";
                             });
-
-                            console.log(newPosition);
 
                             //Enforce these attributes
                             entity.setAttribute("position", newPosition);
