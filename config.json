@@ -81,6 +81,14 @@
             "folder": "koTypeScript",
             "active": true,
             "include": true
+        },
+        {
+            "name": "A-Frame VR Cubik Game",
+            "subHeading": "",
+            "description": "An example VR application. Using A-Frame, TypeScript, Sass and Pug.",
+            "folder": "aframe",
+            "active": true,
+            "include": true
         }
 
     ]

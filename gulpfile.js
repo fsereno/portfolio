@@ -36,7 +36,10 @@ let gulp = require("gulp"),
     directoryExists = require("directory-exists"),
     config = require("./config.json"),
     gulpHelpers = require("./gulpHelpers"),
-    flatmap = require("gulp-flatMap");
+    flatmap = require("gulp-flatMap"),
+    gulpif = require('gulp-if'),
+    uglify = require('gulp-uglify'),
+    minifyCss = require('gulp-clean-css');
 
 let cssTask = (application) => {
  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
@@ -79,7 +82,7 @@ let jsTask = (application) => {
 }
 
 let htmlTask = (application) => {
-  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/pug/index.pug")
+  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/pug/*.pug")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "HTML task started...",
     "HTML task complete!",
@@ -98,7 +101,7 @@ let htmlTask = (application) => {
 };
 
 let userefTask = (application) => {
-  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/index.html")
+  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/*.html")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "Useref task started...",
     "Useref task complete!",
@@ -109,6 +112,8 @@ let userefTask = (application) => {
     " " + logSymbols.success
   )))
   .pipe(useref())
+  .pipe(gulpif('*.js', uglify()))
+  .pipe(gulpif('*.css', minifyCss()))
   .pipe(gulp.dest(config.publishDir+"/"+config.prefix+application.folder));
 };
 
