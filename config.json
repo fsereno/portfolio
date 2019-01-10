@@ -83,9 +83,9 @@
             "include": true
         },
         {
-            "name": "A-Frame",
+            "name": "A-Frame VR Cubik Game",
             "subHeading": "",
-            "description": "An example an A-Frame VR application",
+            "description": "An example VR application. Using A-Frame, TypeScript, Sass and Pug.",
             "folder": "aframe",
             "active": true,
             "include": true
