@@ -26,7 +26,7 @@ export class RandomGeneratorService implements IRandomGeneratorService
         
     }
     
-    GenerateRandom(criteria: string[], length:number) : string {
+    GenerateRandomString(criteria: string[], length:number) : string {
 
         let output: string[] = []
 
@@ -38,7 +38,7 @@ export class RandomGeneratorService implements IRandomGeneratorService
     
                 array.forEach((char, i) => {
     
-                    let indexToPush = Math.floor(Math.random() * array.length);
+                    let indexToPush = this.Generate(array.length);
     
                     if(i===indexToPush && output.length < length){
                         output.push(char);
@@ -53,4 +53,6 @@ export class RandomGeneratorService implements IRandomGeneratorService
         return result;
 
     }
+
+    Generate = (target: number): number => Math.floor(Math.random() * target + 1);
 }

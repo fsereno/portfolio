@@ -72,7 +72,7 @@ export class IndexController  {
             vowels = self.randomGeneratorService.Vowels,
             criteria = [constonants, vowels];
 
-        let randomString = self.randomGeneratorService.GenerateRandom(criteria, 15);
+        let randomString = self.randomGeneratorService.GenerateRandomString(criteria, 15);
 
         return randomString
     }

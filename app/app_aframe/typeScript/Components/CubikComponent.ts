@@ -61,17 +61,14 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                     
                     if(cube.classList.contains("spawn")){
 
-                        let spwanAmount = Number(cube.getAttributeNode("data-spawn-amount").textContent);
+                        let spwanAmount = self.randomGeneratorService.Generate(20);
                         
                         for(let a = 0; a < spwanAmount; a++) {
 
                             let entity = document.createElement('a-box'),
                                 currentPosition = cube.getAttributeNode("position").textContent,
                                 currentPositionArray = currentPosition.split(" "),
-                                newPosition = "";
-
-                            let numeric = self.randomGeneratorService.Numerics,
-                                criteria = [numeric];
+                                newPosition = "";    
                         
                             //Give the same attributes
                             for(let i = 0; i <cube.attributes.length; i++){
@@ -80,7 +77,7 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
 
                             //Set new position
                             currentPositionArray.forEach(position =>{
-                                let offSet = self.randomGeneratorService.GenerateRandom(criteria, 1);                                    
+                                let offSet = self.randomGeneratorService.Generate(15);                
                                 newPosition+=offSet+" ";
                             });
 

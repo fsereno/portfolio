@@ -52,7 +52,7 @@ export class IndexController  {
                         numeric = self.randomGeneratorService.Numerics,
                         criteria = [alpha, numeric];
 
-                    let result = self.randomGeneratorService.GenerateRandom(criteria, Number(length));
+                    let result = self.randomGeneratorService.GenerateRandomString(criteria, Number(length));
                     self.result.text(result);
 
                 }   

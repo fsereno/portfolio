@@ -4,5 +4,6 @@ export interface IRandomGeneratorService  {
     Numerics: string;
     Constonants: string;
     Vowels: string;
-    GenerateRandom(criteria: string[], length:number) : string;
+    GenerateRandomString(criteria: string[], length:number) : string;
+    Generate(target:number): number;
 }

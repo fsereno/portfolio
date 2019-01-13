@@ -15,11 +15,27 @@ describe("RandomGeneraterService", () => {
                 alpha = randomGeneratorService.Alphas,
                 numeric = randomGeneratorService.Numerics,
                 criteria = [alpha, numeric],
-                result = randomGeneratorService.GenerateRandom(criteria, 10);
+                result = randomGeneratorService.GenerateRandomString(criteria, 10);
 
             expect(result).is.not.null;
             expect(result).is.string;
             expect(result.length).to.equal(10);
+        });
+    });
+    describe("Generate", () => {
+        it("Should return a random number of between 0 and 10, when target is = 10", () => {
+            let randomGeneratorRepository = new RandomGeneratorRepository(),
+                stringService = new StringService(),
+                randomGeneratorService = new RandomGeneratorService(
+                    stringService, 
+                    randomGeneratorRepository
+                    ),
+
+                result = randomGeneratorService.Generate(10);
+
+            expect(result).is.not.null;
+            expect(result).is.greaterThan(-1);
+            expect(result).is.lessThan(11);
         });
     });
 });
