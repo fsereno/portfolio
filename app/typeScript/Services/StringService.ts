@@ -1,9 +1,22 @@
 import { IStringService } from "../Interfaces/IStringService";
+import { IStringRepository } from "../Interfaces/IStringRepository";
 
 export class StringService implements IStringService
 {
+    stringRepository: IStringRepository;
+    Alphas: string;
+    Numerics: string;
+    Constonants: string;
+    Vowels: string;
 
-    constructor(){}
+    constructor(stringRepository: IStringRepository)
+    {
+        this.stringRepository = stringRepository;
+        this.Alphas = this.stringRepository.Alphas;
+        this.Numerics = this.stringRepository.Numerics;
+        this.Vowels = this.stringRepository.Vowels;
+        this.Constonants = this.stringRepository.Constonants;
+    }
     
     public Concat(a :string,b:string): string {
         

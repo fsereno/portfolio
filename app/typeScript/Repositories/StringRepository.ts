@@ -1,6 +1,6 @@
-import { IRandomGeneratorRepository } from "../Interfaces/IRandomGeneratorRepository";
+import { IStringRepository } from "../Interfaces/IStringRepository";
 
-export class RandomGeneratorRepository implements IRandomGeneratorRepository {
+export class StringRepository implements IStringRepository {
 
     public Alphas: string;
     public Numerics: string;

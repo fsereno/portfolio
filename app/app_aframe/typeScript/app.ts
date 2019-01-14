@@ -1,5 +1,5 @@
 // Repositories
-import { RandomGeneratorRepository } from '../../typeScript/Repositories/RandomGeneratorRepository';
+import { StringRepository } from '../../typeScript/Repositories/StringRepository';
 
 // Services
 import { NavigateComponentService } from './Services/NavigateComponentService';
@@ -21,7 +21,7 @@ import { IndexController } from "./Controllers/IndexController";
 import { PlayerModel } from './Models/PlayerModel';
 
 // Repositories
-let randomGeneratorRepository = new RandomGeneratorRepository();
+let stringRepository = new StringRepository();
 
 // Servies
 let navigateService = new NavigateComponentService();
@@ -32,10 +32,9 @@ let timerService = new TimerService(
     "feedbackText", 
     "Game Over", 
     updateService);
-let stringService = new StringService();
+let stringService = new StringService(stringRepository);
 let randomGeneratorService = new RandomGeneratorService(
-    stringService, 
-    randomGeneratorRepository);
+    stringService);
 
 // Models
 let navigateComponentModel = new NavigateComponentModel(

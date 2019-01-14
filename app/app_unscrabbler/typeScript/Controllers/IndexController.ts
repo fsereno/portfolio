@@ -3,6 +3,7 @@ import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorServ
 import { IDictionaryService } from "../../../typeScript/Interfaces/IDictionaryService";
 import { IUnscrabbleService } from "../../../typeScript/Interfaces/IUnscrabbleService";
 import { IRandomGeneratorService } from "../../../typeScript/Interfaces/IRandomGeneratorService";
+import { IStringService } from "../../../typeScript/Interfaces/IStringService";
 
 export class IndexController  {
     
@@ -10,6 +11,7 @@ export class IndexController  {
     private dictionaryService: IDictionaryService;
     private unscrabbleService: IUnscrabbleService;
     private randomGeneratorService: IRandomGeneratorService;
+    private stringService: IStringService;
 
     private scrabbleInput: JQuery<HTMLElement>;
     private yourResults: JQuery<HTMLElement>;
@@ -24,17 +26,18 @@ export class IndexController  {
 
     constructor
     (
-
         validatorService: IValidatorService,
         dictionaryService: IDictionaryService,
         unscrabbleService: IUnscrabbleService,
-        randomGeneratorService: IRandomGeneratorService
+        randomGeneratorService: IRandomGeneratorService,
+        stringService: IStringService
     ) 
     {
         this.validatorService = validatorService;
         this.dictionaryService = dictionaryService;
         this.unscrabbleService = unscrabbleService;
         this.randomGeneratorService = randomGeneratorService;
+        this.stringService = stringService;
 
         this.scrabbleInput = jQuery("#scrabbleInput");
         this.yourResults = jQuery("#yourResults");
@@ -68,8 +71,8 @@ export class IndexController  {
 
         const self = this;
 
-        let constonants = self.randomGeneratorService.Constonants,
-            vowels = self.randomGeneratorService.Vowels,
+        let constonants = self.stringService.Constonants,
+            vowels = self.stringService.Vowels,
             criteria = [constonants, vowels];
 
         let randomString = self.randomGeneratorService.GenerateRandomString(criteria, 15);

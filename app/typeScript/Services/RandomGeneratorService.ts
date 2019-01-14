@@ -1,29 +1,15 @@
 import { IStringService } from "../Interfaces/IStringService";
 import { IRandomGeneratorService } from "../Interfaces/IRandomGeneratorService";
-import { IRandomGeneratorRepository } from "../Interfaces/IRandomGeneratorRepository";
 
 export class RandomGeneratorService implements IRandomGeneratorService
 {
-    public Alphas: string;
-    public Numerics: string;
-    public Constonants: string;
-    public Vowels: string;
-    private stringService: IStringService;
-    private randomGeneratorRepository: IRandomGeneratorRepository
+    stringService: IStringService;
 
     constructor
     (
-        stringService: IStringService,
-        randomGeneratorRepository: IRandomGeneratorRepository
+        stringService: IStringService
     ){
-
-        this.stringService = stringService;
-        this.randomGeneratorRepository = randomGeneratorRepository;
-        this.Alphas = this.randomGeneratorRepository.Alphas;
-        this.Numerics = this.randomGeneratorRepository.Numerics;
-        this.Vowels = this.randomGeneratorRepository.Vowels;
-        this.Constonants = this.randomGeneratorRepository.Constonants;
-        
+        this.stringService = stringService;        
     }
     
     GenerateRandomString(criteria: string[], length:number) : string {
