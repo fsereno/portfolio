@@ -30,7 +30,7 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
             init:function(){
                 self.updateService.update(self.object.scoreId, self.object.player.score);
                 self.updateService.update(self.object.targetId, self.object.getCubeCount());
-                self.timerService.Start();
+                //self.timerService.Start();
             }
         });
 
@@ -43,19 +43,30 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                 this.el.addEventListener('click', function (evt:CustomEvent) {
 
                     let cube = evt.srcElement;
+
+                    if(cube.classList.contains("start")){
+                        self.updateService.update(self.object.scoreId, self.object.player.score);
+                        self.updateService.update(self.object.targetId, self.object.getCubeCount());
+                        self.timerService.Start();
+                    } else {
+
+                        if(!cube.classList.contains("error"))
+                            self.object.player.incrementUserScore();
                     
-                    if(!cube.classList.contains("error"))
-                        self.object.player.incrementUserScore();
-                    
-                    if(self.object.getCubeCount() === self.object.player.score){
-                        self.timerService.Stop();
-                        if(self.timerService.counter > 0){
-                            self.updateService.update(self.object.feedbackTextElementId, self.object.successText);
-                            feedbackTextElement.setAttribute("visible", "true");
-                        } else{
-                            feedbackTextElement.setAttribute("visible", "true");
-                        }                                             
+                        if(self.object.getCubeCount() === self.object.player.score){
+                            self.timerService.Stop();
+                            if(self.timerService.counter > 0){
+                                self.updateService.update(self.object.feedbackTextElementId, self.object.successText);
+                                feedbackTextElement.setAttribute("visible", "true");
+                            } else{
+                                feedbackTextElement.setAttribute("visible", "true");
+                            }                                             
+                        }
+
                     }
+                    
+                    
+                    
                            
                     cube.setAttribute("visible", "false");
                     
@@ -83,7 +94,7 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
 
                             //Enforce these attributes
                             entity.setAttribute("position", newPosition);
-                            entity.classList.remove("error", "spawn");
+                            entity.classList.remove("error", "spawn", "start");
                             entity.classList.add("reward");
                             entity.setAttribute("color", "green");
                             scene.appendChild(entity);
@@ -94,8 +105,7 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                         self.updateService.update(self.object.targetId, self.object.getCubeCount());
                     }
 
-                    self.updateService.update(self.object.scoreId, self.object.player.score);
-                    self.updateService.update(self.object.targetId, self.object.getCubeCount());
+                    
                 });
             }
         });
