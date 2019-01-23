@@ -10,7 +10,7 @@ namespace Services.Tests
     [TestFixture]
     public class HistoryServiceTests
     {
-        List<History> _collection;
+        private List<History> _collection;
 
         [SetUp]
         public void BeforeEach()
@@ -45,20 +45,6 @@ namespace Services.Tests
                 })
             });
 
-            /*/collection.Add(new History(555555, 1, DateTime.Now){
-                PreviousDates = new Queue<DateTime>(new List<DateTime>{
-                    DateTime.Now.AddMonths(-1),
-                    DateTime.Now.AddMonths(2),
-                    DateTime.Now.AddMonths(3)
-                    }
-                ),
-                PreviousNumberOfInvestments = new Queue<int>(new List<int>{
-                    1,
-                    1,
-                    1
-                })
-            });*/
-
             _collection = collection;
         }
 
@@ -85,19 +71,9 @@ namespace Services.Tests
                 };
 
                 foreach(var account in _collection){
-                    
-                    // If this is the first item, then assign the first date by peeking the next one
-                   
-                    /* if(i == 0){
-                        item.Date = account.PreviousDates.Peek();
-                    }*/
-
-                    // if the dates match we are in the same context
-                    //if(item.Date == account.PreviousDates.Peek()){
-                        item.Date = account.PreviousDates.Dequeue(); // Pop of the first
-                        item.NumberOfAccounts ++; // Increments by 1
-                        item.NumberOfInvestments += account.PreviousNumberOfInvestments.Dequeue(); // Pop of the first
-                    //}                    
+                        item.Date = account.PreviousDates.Dequeue();
+                        item.NumberOfAccounts ++;
+                        item.NumberOfInvestments += account.PreviousNumberOfInvestments.Dequeue();                    
                     i++;
                 }
 
