@@ -27,7 +27,6 @@ let stringRepository = new StringRepository();
 let navigateService = new NavigateComponentService();
 let updateService = new UpdateService();
 let timerService = new TimerService(
-    10, 
     "timer",
     "feedbackText", 
     "Game Over", 

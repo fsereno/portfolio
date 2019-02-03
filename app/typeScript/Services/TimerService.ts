@@ -10,14 +10,12 @@ export class TimerService implements ITimerService {
     interval: NodeJS.Timer;
     constructor
     (
-        duration: number,
         target: string,
         completionTargetId: string,
         completionMessage: string,
         updateService: IUpdateService
     )
     {
-        this.duration = duration;
         this.counter = 0;
         this.target = target;
         this.completionTargetId = completionTargetId;

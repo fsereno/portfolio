@@ -30,7 +30,6 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
             init:function(){
                 self.updateService.update(self.object.scoreId, self.object.player.score);
                 self.updateService.update(self.object.targetId, self.object.getCubeCount());
-                //self.timerService.Start();
             }
         });
 
@@ -44,10 +43,21 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
 
                     let cube = evt.srcElement;
 
+                    // Always remove any cube once clicked on
+                    cube.setAttribute("visible", "false");
+
                     if(cube.classList.contains("start")){
                         self.updateService.update(self.object.scoreId, self.object.player.score);
                         self.updateService.update(self.object.targetId, self.object.getCubeCount());
+                        
+                        
+                        // This will increment per new cube that get added.
+                        self.timerService.duration = 10;
                         self.timerService.Start();
+                    
+                    
+                    
+                    
                     } else {
 
                         if(!cube.classList.contains("error"))
@@ -64,11 +74,8 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                         }
 
                     }
+     
                     
-                    
-                    
-                           
-                    cube.setAttribute("visible", "false");
                     
                     if(cube.classList.contains("spawn")){
 
@@ -98,6 +105,7 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                             entity.classList.add("reward");
                             entity.setAttribute("color", "green");
                             scene.appendChild(entity);
+                            self.timerService.duration ++; // Inc by 1 second per new cube
         
                         }
                                         
