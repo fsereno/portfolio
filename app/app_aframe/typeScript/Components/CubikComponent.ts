@@ -30,57 +30,46 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
             init:function(){
                 self.updateService.update(self.object.scoreId, self.object.player.score);
                 self.updateService.update(self.object.targetId, self.object.getCubeCount());
+                self.timerService.duration = 0;
             }
         });
 
         AFRAME.registerComponent("cubik-collectable-component", {
-            init: function () {  
-                
-                let scene = document.querySelector("#scene"),
-                    feedbackTextElement = document.querySelector("#"+self.object.feedbackTextElementId);
-                
+            
+            init: function () {
+
+                let clickEvent = (e: CustomEvent) => {
+                    let cube = e.srcElement,
+                        feedbackTextElement = document.querySelector("#"+self.object.feedbackTextElementId);
+
+                    if(cube.classList.contains("reward")) {
+                        cube.setAttribute("visible", "false");
+                        self.object.player.incrementUserScore();
+                        self.updateService.update(self.object.scoreId, self.object.player.score);
+                    }
+                    if(self.object.getCubeCount() === self.object.player.score){
+                        self.timerService.Stop();
+                        if(self.timerService.counter > 0){
+                            self.updateService.update(self.object.feedbackTextElementId, self.object.successText);
+                            feedbackTextElement.setAttribute("visible", "true");
+                        } else {
+                            feedbackTextElement.setAttribute("visible", "true");
+                        }                                             
+                    }
+                }
+
                 this.el.addEventListener('click', function (evt:CustomEvent) {
 
-                    let cube = evt.srcElement;
-
-                    // Always remove any cube once clicked on
-                    cube.setAttribute("visible", "false");
-
+                    let scene = document.querySelector("#scene"),
+                        cube = evt.srcElement,
+                        spawnLimit = Number(cube.getAttributeNode("data-spawn-limit").textContent) || 0,
+                        timeValue = Number(cube.getAttributeNode("data-time-value").textContent) || 0,
+                        spwanAmount = self.randomGeneratorService.Generate(spawnLimit);
+                
                     if(cube.classList.contains("start")){
-                        self.updateService.update(self.object.scoreId, self.object.player.score);
-                        self.updateService.update(self.object.targetId, self.object.getCubeCount());
-                        
-                        
-                        // This will increment per new cube that get added.
-                        self.timerService.duration = 10;
-                        self.timerService.Start();
-                    
-                    
-                    
-                    
-                    } else {
 
-                        if(!cube.classList.contains("error"))
-                            self.object.player.incrementUserScore();
-                    
-                        if(self.object.getCubeCount() === self.object.player.score){
-                            self.timerService.Stop();
-                            if(self.timerService.counter > 0){
-                                self.updateService.update(self.object.feedbackTextElementId, self.object.successText);
-                                feedbackTextElement.setAttribute("visible", "true");
-                            } else{
-                                feedbackTextElement.setAttribute("visible", "true");
-                            }                                             
-                        }
+                        cube.setAttribute("visible", "false");
 
-                    }
-     
-                    
-                    
-                    if(cube.classList.contains("spawn")){
-
-                        let spwanAmount = self.randomGeneratorService.Generate(20);
-                        
                         for(let a = 0; a < spwanAmount; a++) {
 
                             let entity = document.createElement('a-box'),
@@ -88,7 +77,7 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                                 currentPositionArray = currentPosition.split(" "),
                                 newPosition = "";    
                         
-                            //Give the same attributes
+                            //Give the same attributes, ie classes etc
                             for(let i = 0; i <cube.attributes.length; i++){
                                 entity.setAttribute(cube.attributes[i].nodeName, cube.attributes[i].nodeValue);
                             }
@@ -101,19 +90,21 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
 
                             //Enforce these attributes
                             entity.setAttribute("position", newPosition);
-                            entity.classList.remove("error", "spawn", "start");
+                            entity.classList.remove("error", "start");
                             entity.classList.add("reward");
                             entity.setAttribute("color", "green");
+                            entity.addEventListener("click", (e: CustomEvent)=>{
+                                clickEvent(e);
+                            });
+                            
                             scene.appendChild(entity);
-                            self.timerService.duration ++; // Inc by 1 second per new cube
-        
+                            self.timerService.duration = self.timerService.duration + timeValue;
                         }
                                         
                         self.updateService.update(self.object.scoreId, self.object.player.score);
                         self.updateService.update(self.object.targetId, self.object.getCubeCount());
+                        self.timerService.Start();
                     }
-
-                    
                 });
             }
         });
