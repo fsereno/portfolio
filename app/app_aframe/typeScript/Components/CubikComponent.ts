@@ -38,7 +38,7 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
             
             init: function () {
 
-                let clickEvent = (e: CustomEvent) => {
+                let cubeClickHandler = (e: CustomEvent) => {
                     let cube = e.srcElement,
                         feedbackTextElement = document.querySelector("#"+self.object.feedbackTextElementId);
 
@@ -76,25 +76,22 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                                 currentPosition = cube.getAttributeNode("position").textContent,
                                 currentPositionArray = currentPosition.split(" "),
                                 newPosition = "";    
-                        
-                            //Give the same attributes, ie classes etc
+                    
                             for(let i = 0; i <cube.attributes.length; i++){
                                 entity.setAttribute(cube.attributes[i].nodeName, cube.attributes[i].nodeValue);
                             }
 
-                            //Set new position
                             currentPositionArray.forEach(position =>{
                                 let offSet = self.randomGeneratorService.Generate(15);                
                                 newPosition+=offSet+" ";
                             });
 
-                            //Enforce these attributes
                             entity.setAttribute("position", newPosition);
                             entity.classList.remove("error", "start");
                             entity.classList.add("reward");
                             entity.setAttribute("color", "green");
                             entity.addEventListener("click", (e: CustomEvent)=>{
-                                clickEvent(e);
+                                cubeClickHandler(e);
                             });
                             
                             scene.appendChild(entity);
