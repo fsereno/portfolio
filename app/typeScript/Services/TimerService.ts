@@ -21,6 +21,7 @@ export class TimerService implements ITimerService {
         this.completionTargetId = completionTargetId;
         this.completionMessage = completionMessage;
         this.updateService = updateService;
+        this.duration = 0;
     }
     Start(): void  {
         let internalCounter = this.duration;

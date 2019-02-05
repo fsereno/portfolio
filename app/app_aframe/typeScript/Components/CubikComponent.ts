@@ -27,36 +27,30 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
         let self = this;
 
         AFRAME.registerComponent("cubik-component", {
-            init:function(){
-                self.updateService.update(self.object.scoreId, self.object.player.score);
-                self.updateService.update(self.object.targetId, self.object.getCubeCount());
-                self.timerService.duration = 0;
-            }
-        });
-
-        AFRAME.registerComponent("cubik-collectable-component", {
             
             init: function () {
+                self.updateService.update(self.object.scoreId, self.object.player.score);
+                self.updateService.update(self.object.targetId, self.object.getCubeCount());
+                let availableColours = ["green", "red", "blue", "yellow", "purple", "orange"],
+                    cubeClickHandler = (e: CustomEvent) => {
+                        let cube = e.srcElement,
+                            feedbackTextElement = document.querySelector("#"+self.object.feedbackTextElementId);
 
-                let cubeClickHandler = (e: CustomEvent) => {
-                    let cube = e.srcElement,
-                        feedbackTextElement = document.querySelector("#"+self.object.feedbackTextElementId);
-
-                    if(cube.classList.contains("reward")) {
-                        cube.setAttribute("visible", "false");
-                        self.object.player.incrementUserScore();
-                        self.updateService.update(self.object.scoreId, self.object.player.score);
+                        if(cube.classList.contains("reward")) {
+                            cube.setAttribute("visible", "false");
+                            self.object.player.incrementUserScore();
+                            self.updateService.update(self.object.scoreId, self.object.player.score);
+                        }
+                        if(self.object.getCubeCount() === self.object.player.score){
+                            self.timerService.Stop();
+                            if(self.timerService.counter > 0){
+                                self.updateService.update(self.object.feedbackTextElementId, self.object.successText);
+                                feedbackTextElement.setAttribute("visible", "true");
+                            } else {
+                                feedbackTextElement.setAttribute("visible", "true");
+                            }                                             
+                        }
                     }
-                    if(self.object.getCubeCount() === self.object.player.score){
-                        self.timerService.Stop();
-                        if(self.timerService.counter > 0){
-                            self.updateService.update(self.object.feedbackTextElementId, self.object.successText);
-                            feedbackTextElement.setAttribute("visible", "true");
-                        } else {
-                            feedbackTextElement.setAttribute("visible", "true");
-                        }                                             
-                    }
-                }
 
                 this.el.addEventListener('click', function (evt:CustomEvent) {
 
@@ -75,7 +69,8 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                             let entity = document.createElement('a-box'),
                                 currentPosition = cube.getAttributeNode("position").textContent,
                                 currentPositionArray = currentPosition.split(" "),
-                                newPosition = "";    
+                                newPosition = "",
+                                colourIndex = self.randomGeneratorService.Generate(availableColours.length) - 1;    
                     
                             for(let i = 0; i <cube.attributes.length; i++){
                                 entity.setAttribute(cube.attributes[i].nodeName, cube.attributes[i].nodeValue);
@@ -89,7 +84,7 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                             entity.setAttribute("position", newPosition);
                             entity.classList.remove("error", "start");
                             entity.classList.add("reward");
-                            entity.setAttribute("color", "green");
+                            entity.setAttribute("color", availableColours[colourIndex]);
                             entity.addEventListener("click", (e: CustomEvent)=>{
                                 cubeClickHandler(e);
                             });
