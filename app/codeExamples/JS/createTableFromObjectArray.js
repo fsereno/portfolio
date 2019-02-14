@@ -1,3 +1,5 @@
+"use strict";
+
 var createTableFromObjectArray = (array) => {
     let table = document.createElement("table");
     for(let r = 0; r < array.length; r++){
