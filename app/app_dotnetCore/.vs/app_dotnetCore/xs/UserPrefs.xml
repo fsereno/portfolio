@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{0072724C-6C01-42E4-808A-65DDF806A076}|Default">
   <MonoDevelop.Ide.ItemProperties.Repositories.Tests PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Services.Tests/PersonServiceTests.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services/PersonService.cs">
     <Files>
       <File FileName="MVC/Controllers/HomeController.cs" Line="1" Column="1" />
-      <File FileName="Services/PersonService.cs" Line="29" Column="14" />
-      <File FileName="Services.Tests/PersonServiceTests.cs" Line="1" Column="1" />
+      <File FileName="Services/PersonService.cs" Line="24" Column="1" />
+      <File FileName="Services.Tests/PersonServiceTests.cs" Line="79" Column="44" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,10 +15,10 @@
               <Node name="Controllers" expanded="True" />
             </Node>
             <Node name="Repositories" expanded="True" />
-            <Node name="Services" expanded="True" />
-            <Node name="Services.Tests" expanded="True">
-              <Node name="PersonServiceTests.cs" selected="True" />
+            <Node name="Services" expanded="True">
+              <Node name="PersonService.cs" selected="True" />
             </Node>
+            <Node name="Services.Tests" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -32,7 +32,17 @@
       </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="app_dotnetCore" expanded="True" selected="True" />
+          <Node name="app_dotnetCore" expanded="True">
+            <Node name="Services.Tests" expanded="True">
+              <Node name="Services" expanded="True">
+                <Node name="Tests" expanded="True">
+                  <Node name="PersonServiceTests" expanded="True">
+                    <Node name="Add_Two_Identical_Records" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
