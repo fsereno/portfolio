@@ -28,8 +28,8 @@
         },
         {
             "name": "MIT Licence",
-            "subHeading": "",
-            "description": "MIT Licence for this repository.",
+            "subHeading": "MIT Licence for this repository.",
+            "description": "",
             "folder": "licence",
             "active": true,
             "include": false
@@ -84,7 +84,7 @@
         },
         {
             "name": "A-Frame VR Cubik Game",
-            "subHeading": "",
+            "subHeading": "Focus on the initial spinning cube to start the game.",
             "description": "An example VR application. Using A-Frame, TypeScript, Sass and Pug.",
             "folder": "aframe",
             "active": true,

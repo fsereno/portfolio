@@ -1,21 +1,18 @@
 ﻿<Properties StartupConfiguration="{89CD376A-2081-4639-A7FE-E6E059A42FEB}|Default">
   <MonoDevelop.Ide.ItemProperties.Services.Tests PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Repositories/Repository.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services.Tests/HistoryServiceTests.cs">
     <Files>
-      <File FileName="Repositories/Repository.cs" Line="30" Column="32" />
-      <File FileName="Domains/Entity.cs" Line="1" Column="1" />
-      <File FileName="Repositories/IRepository.cs" Line="16" Column="1" />
-      <File FileName="Services.Tests/PersonServiceTests.cs" Line="1" Column="1" />
+      <File FileName="Services.Tests/HistoryServiceTests.cs" Line="86" Column="17" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="app_dotnetCore" expanded="True">
             <Node name="Domains" expanded="True" />
-            <Node name="Repositories" expanded="True">
-              <Node name="Repository.cs" selected="True" />
+            <Node name="Repositories" expanded="True" />
+            <Node name="Services.Tests" expanded="True">
+              <Node name="HistoryServiceTests.cs" selected="True" />
             </Node>
-            <Node name="Services.Tests" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -29,7 +26,17 @@
       </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="app_dotnetCore" expanded="True" selected="True" />
+          <Node name="app_dotnetCore" expanded="True">
+            <Node name="Services.Tests" expanded="True">
+              <Node name="Services" expanded="True">
+                <Node name="Tests" expanded="True">
+                  <Node name="HistoryServiceTests" expanded="True">
+                    <Node name="Get" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
@@ -38,6 +45,11 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/PersonServiceTests.cs" relfile="Services.Tests/PersonServiceTests.cs" line="3" column="1" />
+      <Breakpoint file="/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/HistoryServiceTests.cs" relfile="Services.Tests/HistoryServiceTests.cs" line="71" column="1" />
+      <Breakpoint file="/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/HistoryServiceTests.cs" relfile="Services.Tests/HistoryServiceTests.cs" line="81" column="1" />
+      <Breakpoint file="/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/HistoryServiceTests.cs" relfile="Services.Tests/HistoryServiceTests.cs" line="82" column="1" />
+      <Breakpoint file="/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/HistoryServiceTests.cs" relfile="Services.Tests/HistoryServiceTests.cs" line="87" column="1" />
+      <Breakpoint file="/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/HistoryServiceTests.cs" relfile="Services.Tests/HistoryServiceTests.cs" line="90" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

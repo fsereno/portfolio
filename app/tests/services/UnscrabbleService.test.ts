@@ -6,12 +6,14 @@ import { StringService } from "../../typeScript/Services/StringService";
 
 // Repositories
 import { DictionaryRepository } from "../../typeScript/Repositories/DictionaryRepository";
+import { StringRepository } from "../../typeScript/Repositories/StringRepository";
 
 describe("UnscrabbleService", () => {
     describe("Unscrabble", () => {
         it("Should return true when findThis = Sleep, inThis = Pseleedbnopos", () => {
-            let dictionaryRepository = new DictionaryRepository(),
-                stringService = new StringService(),
+            let stringRepository = new StringRepository(),
+                dictionaryRepository = new DictionaryRepository(),
+                stringService = new StringService(stringRepository),
                 unscrabbleService = new UnscrabbleService(stringService, dictionaryRepository),
                 resultCase1 = unscrabbleService.Unscrabble("Sleep", "Pseleedbnopos"),
                 resultCase2 = unscrabbleService.Unscrabble("sleep", "PSELEEDBNOPOS"),
@@ -24,8 +26,9 @@ describe("UnscrabbleService", () => {
     });
     describe("UnscrabbleAll", () => {
         it("Should return an array of length 785 when randomString = ZWJAVAEGOOGLNTI", () => {
-            let dictionaryRepository = new DictionaryRepository(),
-                stringService = new StringService(),
+            let stringRepository = new StringRepository(),
+                dictionaryRepository = new DictionaryRepository(),
+                stringService = new StringService(stringRepository),
                 unscrabbleService = new UnscrabbleService(stringService, dictionaryRepository),
                 resultCase1 = unscrabbleService.unscrabbleAll("ZWJAVAEGOOGLNTI");
                

@@ -1,21 +1,22 @@
 // Interfaces
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 import { IRandomGeneratorService } from "../../../typeScript/Interfaces/IRandomGeneratorService";
+import { IStringService } from '../../../typeScript/Interfaces/IStringService';
 
 export class IndexController  {
     
     private validatorService: IValidatorService;
     private randomGeneratorService: IRandomGeneratorService;
+    private stringService: IStringService;
     private lengthInput: JQuery<HTMLElement>;
     private result: JQuery<HTMLElement>;
     private formId: string;
 
     constructor
     (
-
         validatorService: IValidatorService,
-        randomGeneratorService: IRandomGeneratorService
-      
+        randomGeneratorService: IRandomGeneratorService,
+        stringService: IStringService
     ) 
     {
         this.validatorService = validatorService;
@@ -48,11 +49,11 @@ export class IndexController  {
                 
                 if(valid){
                     
-                    let alpha = self.randomGeneratorService.Alphas,
-                        numeric = self.randomGeneratorService.Numerics,
+                    let alpha = self.stringService.Alphas,
+                        numeric = self.stringService.Numerics,
                         criteria = [alpha, numeric];
 
-                    let result = self.randomGeneratorService.GenerateRandom(criteria, Number(length));
+                    let result = self.randomGeneratorService.GenerateRandomString(criteria, Number(length));
                     self.result.text(result);
 
                 }   

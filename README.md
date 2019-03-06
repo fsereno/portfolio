@@ -98,6 +98,15 @@ $ gulp publish
 - Run all Unit Tests from the ./app/tests directory using Mocha and Chai.
 ---
 
+#### Run the Gulp Mocha task
+
+```shell
+$ gulp mocha
+```
+##### This will:
+- Run all TypeScript Service unit tests from the ./app/tests/services directory using Mocha and Chai.
+---
+
 #### Run the Gulp Nightmare (headless browser) task
 
 ```shell

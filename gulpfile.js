@@ -11,9 +11,11 @@ Usage...
   
   > gulp build      - To build development resources and run unit tests on services.
 
-  > gulp nightmare  - To start development server, run Nightmare tests in a headless browser 
+  > gulp frontendTests  - To start development server, run Nightmare tests in a headless browser 
                       and close the server when all tests are done.
 
+  > gulp serviceTests - Run all TypeScript Service unit tests.
+  
   > gulp publish    - To publish production resources to dist
 
   > gulp create     - Update the config.json file with additional applications.
@@ -168,7 +170,7 @@ let startServerTask = () => {
   });
 }
 
-let nigthmareTask = () => {
+let frontendTestTask = () => {
   return new Promise((resolve, reject) => {
       gulp.src(config.developmentDir+"/tests/applications/**/*.test.ts")
         .pipe(flatmap((stream) => {
@@ -193,9 +195,9 @@ let endServerTask = () => {
   });
 }
 
-let nightmareTasks = async () => {
+let frontendTestTasks = async () => {
   await startServerTask();
-  await nigthmareTask();
+  await frontendTestTask();
   await endServerTask();
 }
 
@@ -209,14 +211,6 @@ gulp.task("fonts", () => {
   var output = gulp.src(config.developmentDir+"/fonts/**/*")
     .pipe(gulp.dest(config.publishDir+"/fonts"));
     return output;
-});
-
-gulp.task("mochaServiceTests", () => {
-  return gulp.src(config.developmentDir+"/tests/services/*.test.ts")
-    .pipe(mocha({
-        reporter: "spec",
-        require: ["ts-node/register"]
-    }));
 });
 
 gulp.task("watch", () => {
@@ -236,19 +230,27 @@ gulp.task("connect", () => {
  })
 });
 
-gulp.task("nightmare", () => {
-  return nightmareTasks();
+gulp.task("serviceTests", () => {
+  return gulp.src(config.developmentDir+"/tests/services/*.test.ts")
+    .pipe(mocha({
+        reporter: "spec",
+        require: ["ts-node/register"]
+    }));
+});
+
+gulp.task("frontendTests", () => {
+  return frontendTestTasks();
 });
 
 gulp.task("create", () => {
   config.applications.map(createTasks);
 });
 
-gulp.task("publish",["mochaServiceTests", "images", "fonts"], () => {
+gulp.task("publish",["serviceTests", "images", "fonts"], () => {
   config.applications.map(publishTasks);
 });
 
-gulp.task("build", ["mochaServiceTests"], () => {
+gulp.task("build", ["serviceTests"], () => {
   config.applications.map(defaultTasks);
 });
 

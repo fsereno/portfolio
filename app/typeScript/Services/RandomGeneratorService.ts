@@ -1,32 +1,18 @@
 import { IStringService } from "../Interfaces/IStringService";
 import { IRandomGeneratorService } from "../Interfaces/IRandomGeneratorService";
-import { IRandomGeneratorRepository } from "../Interfaces/IRandomGeneratorRepository";
 
 export class RandomGeneratorService implements IRandomGeneratorService
 {
-    public Alphas: string;
-    public Numerics: string;
-    public Constonants: string;
-    public Vowels: string;
-    private stringService: IStringService;
-    private randomGeneratorRepository: IRandomGeneratorRepository
+    stringService: IStringService;
 
     constructor
     (
-        stringService: IStringService,
-        randomGeneratorRepository: IRandomGeneratorRepository
+        stringService: IStringService
     ){
-
-        this.stringService = stringService;
-        this.randomGeneratorRepository = randomGeneratorRepository;
-        this.Alphas = this.randomGeneratorRepository.Alphas;
-        this.Numerics = this.randomGeneratorRepository.Numerics;
-        this.Vowels = this.randomGeneratorRepository.Vowels;
-        this.Constonants = this.randomGeneratorRepository.Constonants;
-        
+        this.stringService = stringService;        
     }
     
-    GenerateRandom(criteria: string[], length:number) : string {
+    GenerateRandomString(criteria: string[], length:number) : string {
 
         let output: string[] = []
 
@@ -38,7 +24,7 @@ export class RandomGeneratorService implements IRandomGeneratorService
     
                 array.forEach((char, i) => {
     
-                    let indexToPush = Math.floor(Math.random() * array.length);
+                    let indexToPush = this.Generate(array.length);
     
                     if(i===indexToPush && output.length < length){
                         output.push(char);
@@ -53,4 +39,6 @@ export class RandomGeneratorService implements IRandomGeneratorService
         return result;
 
     }
+
+    Generate = (target: number): number => Math.floor(Math.random() * target + 1);
 }

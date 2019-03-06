@@ -11,14 +11,14 @@ import { RandomGeneratorService } from "../../typeScript/Services/RandomGenerato
 
 // Repositories
 import { DictionaryRepository } from "../../typeScript/Repositories/DictionaryRepository";
-import { RandomGeneratorRepository } from "../../typeScript/Repositories/RandomGeneratorRepository";
+import { StringRepository } from "../../typeScript/Repositories/StringRepository";
 
 // Repositories
 let dictionaryRepository = new DictionaryRepository(),
-    randomGeneratorRepository = new RandomGeneratorRepository();
+    stringRepository = new StringRepository();
 
 // Services
-let stringService = new StringService(),
+let stringService = new StringService(stringRepository),
     validatorService = new ValidatorService(),
     dictionaryService = new DictionaryService(dictionaryRepository),
     unscrabbleService = new UnscrabbleService(
@@ -26,9 +26,7 @@ let stringService = new StringService(),
         dictionaryRepository
     ),
     randomGeneratorService = new RandomGeneratorService(
-        stringService,
-        randomGeneratorRepository
-        );
+        stringService);
 
 // Controllers
 let indexController = new IndexController
@@ -36,7 +34,8 @@ let indexController = new IndexController
     validatorService,
     dictionaryService,
     unscrabbleService,
-    randomGeneratorService
+    randomGeneratorService,
+    stringService
 );
 
 indexController.init();
