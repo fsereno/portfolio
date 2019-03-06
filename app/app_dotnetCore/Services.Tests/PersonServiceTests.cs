@@ -70,6 +70,22 @@ namespace Services.Tests
         }
 
         [Test]
+        public void Add_Two_Identical_Records()
+        {
+            //Arrange
+            var newPerson1 = new Person() { Id = 1 };
+
+            //Act
+            _personService.Add(newPerson1);
+            var result = _personService.Get(newPerson1);
+
+            //Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result, Is.TypeOf<Person>());
+            Assert.That(result.Id, Is.EqualTo(1));
+        }
+
+        [Test]
         public void SortById()
         {
             //Arrange

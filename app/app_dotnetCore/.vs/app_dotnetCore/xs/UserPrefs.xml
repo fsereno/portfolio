@@ -1,17 +1,23 @@
-﻿<Properties StartupConfiguration="{89CD376A-2081-4639-A7FE-E6E059A42FEB}|Default">
-  <MonoDevelop.Ide.ItemProperties.Services.Tests PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Services.Tests/HistoryServiceTests.cs">
+﻿<Properties StartupConfiguration="{0072724C-6C01-42E4-808A-65DDF806A076}|Default">
+  <MonoDevelop.Ide.ItemProperties.Repositories.Tests PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services.Tests/PersonServiceTests.cs">
     <Files>
-      <File FileName="Services.Tests/HistoryServiceTests.cs" Line="86" Column="17" />
+      <File FileName="MVC/Controllers/HomeController.cs" Line="1" Column="1" />
+      <File FileName="Services/PersonService.cs" Line="29" Column="14" />
+      <File FileName="Services.Tests/PersonServiceTests.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="app_dotnetCore" expanded="True">
             <Node name="Domains" expanded="True" />
+            <Node name="MVC" expanded="True">
+              <Node name="Controllers" expanded="True" />
+            </Node>
             <Node name="Repositories" expanded="True" />
+            <Node name="Services" expanded="True" />
             <Node name="Services.Tests" expanded="True">
-              <Node name="HistoryServiceTests.cs" selected="True" />
+              <Node name="PersonServiceTests.cs" selected="True" />
             </Node>
           </Node>
         </State>
@@ -26,22 +32,15 @@
       </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="app_dotnetCore" expanded="True">
-            <Node name="Services.Tests" expanded="True">
-              <Node name="Services" expanded="True">
-                <Node name="Tests" expanded="True">
-                  <Node name="HistoryServiceTests" expanded="True">
-                    <Node name="Get" selected="True" />
-                  </Node>
-                </Node>
-              </Node>
-            </Node>
-          </Node>
+          <Node name="app_dotnetCore" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.MVC PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.MVCAngular PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/PersonServiceTests.cs" relfile="Services.Tests/PersonServiceTests.cs" line="3" column="1" />
@@ -52,9 +51,6 @@
       <Breakpoint file="/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/HistoryServiceTests.cs" relfile="Services.Tests/HistoryServiceTests.cs" line="90" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.MVC PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Repositories.Tests PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.ItemProperties.MVCAngular PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.Services.Tests PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
