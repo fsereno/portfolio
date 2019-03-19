@@ -1,7 +1,9 @@
-﻿using Microsoft.Data.DataView;
+﻿using System;
+using Microsoft.Data.DataView;
 using Microsoft.ML;
 using Microsoft.ML.Data;
-using System;
+
+using Entities;
 
 // CS0649 compiler warning is disabled because some fields are only 
 // assigned to dynamically by ML.NET at runtime
@@ -16,7 +18,7 @@ namespace myApp
         // input for prediction operations
         // - First 4 properties are inputs/features used to predict the label
         // - Label is what you are predicting, and is only set when training
-        public class IrisData
+        /* public class IrisData
         {
             [LoadColumn(0)]
             public float SepalLength;
@@ -32,14 +34,14 @@ namespace myApp
 
             [LoadColumn(4)]
             public string Label;
-        }
+        }*/
 
         // IrisPrediction is the result returned from prediction operations
-        public class IrisPrediction
+       /* public class IrisPrediction
         {
             [ColumnName("PredictedLabel")]
             public string PredictedLabels;
-        }
+        }*/
 
         static void Main(string[] args)
         {
