@@ -5,22 +5,18 @@ using Microsoft.ML.Data;
 
 using Entities;
 
-// CS0649 compiler warning is disabled because some fields are only 
-// assigned to dynamically by ML.NET at runtime
-#pragma warning disable CS0649
-
-namespace myApp
+namespace Services
 {
-    class Program
+    public class MLService
     {
-        static void Main(string[] args)
+        public string Predict()
         {
             // STEP 2: Create a ML.NET environment  
             MLContext mlContext = new MLContext();
 
             // If working in Visual Studio, make sure the 'Copy to Output Directory'
             // property of iris-data.txt is set to 'Copy always'
-            IDataView trainingDataView = mlContext.Data.LoadFromTextFile<IrisData>(path: "iris-data.txt", hasHeader: false, separatorChar: ',');
+            IDataView trainingDataView = mlContext.Data.LoadFromTextFile<IrisData>(path: "../Data/iris-data.txt", hasHeader: false, separatorChar: ',');
 
             // STEP 3: Transform your data and add a learner
             // Assign numeric values to text in the "Label" column, because only
@@ -46,11 +42,8 @@ namespace myApp
                     PetalLength = 0.2f,
                     PetalWidth = 5.1f,
                 });
-
-            Console.WriteLine($"Predicted flower type is: {prediction.PredictedLabels}");
-
-            Console.WriteLine("Press any key to exit....");
-            Console.ReadLine();
+            
+            return prediction.PredictedLabels;
         }
     }
 }
