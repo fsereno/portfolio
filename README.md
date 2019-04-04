@@ -6,7 +6,7 @@ Highly Experienced Full Stack Web Developer. Highly self-motivated, enthusiastic
 Very keen on learning and using the latest technologies, with a real passion for software development in general. Personal interests include exciting technologies such as Artificial Intelligence, Machine Learning, Virtual Reality and Blockchain development.
 
 ## My Portfolio Repository
-The purpose of this repository is to demonstrate skills in various technologies, coding principles and patterns:
+The purpose of this repository is to demonstrate skills in various technologies, coding principles and design patterns:
 
 - NodeJS (https://nodejs.org/en/)
 - Gulp (https://gulpjs.com)
@@ -18,8 +18,9 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - Nightmare (https://github.com/segmentio/nightmare)
 - Knockout (https://knockoutjs.com/)
 - A-Frame (https://aframe.io/)
-- .NetCore (https://dotnet.github.io/)
+- Dotnet Core (https://dotnet.github.io/)
 - NUnit (https://nunit.org/)
+- ML Dotnet (https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet)
 - SOLID (SOLID Design principles in mind, throughout)
 ---
 
