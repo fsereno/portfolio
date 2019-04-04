@@ -18,7 +18,20 @@ namespace app_mlDotnet_Program
         {
             MLContext mlContext = new MLContext();
             var mlService = new MLService(mlContext);
-            var result = mlService.Predict();
+            
+            var data = mlService.Get("../Data/iris-data.txt");
+            var pipeline = mlService.Transform();
+            var model = mlService.Train(pipeline, data);
+            var irisData = new IrisData()
+                {
+                    SepalLength = 3.3f,
+                    SepalWidth = 1.6f,
+                    PetalLength = 0.2f,
+                    PetalWidth = 5.1f,
+                };
+                
+            var prediction = mlService.Predict(irisData, model);
+            var result = prediction.PredictedLabels;
 
             Console.WriteLine($"Predicted flower type is: {result}");
             Console.WriteLine("Press any key to exit....");
