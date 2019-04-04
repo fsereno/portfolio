@@ -16,7 +16,8 @@ namespace app_mlDotnet_Program
     {
         static void Main(string[] args)
         {
-            var mlService = new MLService();
+            MLContext mlContext = new MLContext();
+            var mlService = new MLService(mlContext);
             var result = mlService.Predict();
 
             Console.WriteLine($"Predicted flower type is: {result}");
