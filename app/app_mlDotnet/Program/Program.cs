@@ -18,9 +18,12 @@ namespace app_mlDotnet_Program
         {
             MLContext mlContext = new MLContext();
             var mlService = new MLService(mlContext);
-            
+            var inputColumnName = "Label";
+            var outputColumnName = "Features";
+            var columnNames = new []{"SepalLength", "SepalWidth", "PetalLength", "PetalWidth"};
+
             var data = mlService.Get("../Data/iris-data.txt");
-            var pipeline = mlService.Transform();
+            var pipeline = mlService.Transform(inputColumnName, outputColumnName, columnNames);
             var model = mlService.Train(pipeline, data);
             var irisData = new IrisData()
                 {

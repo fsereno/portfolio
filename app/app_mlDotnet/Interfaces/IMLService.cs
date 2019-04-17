@@ -10,7 +10,7 @@ namespace Interfaces
     public interface IMLService
     {
         IDataView Get(string path);
-        Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> Transform();
+        Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> Transform(string inputColumnName, string outputColumnName, string[] columnNames);
         Microsoft.ML.Data.TransformerChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> Train(Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> pipeline, IDataView trainingDataView); 
         Entities.IrisPrediction Predict(IrisData irisData, Microsoft.ML.Data.TransformerChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> model);
     }

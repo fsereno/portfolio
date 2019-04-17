@@ -23,13 +23,12 @@ namespace Services
 
             return trainingDataView;
         }
-        public Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> Transform(){
+        public Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> Transform(string inputColumnName, string outputColumnName, string[] columnNames){
             
-            var outputColumnName = "Features";
-            var pipeline = MlContext.Transforms.Conversion.MapValueToKey("Label")
-                .Append(MlContext.Transforms.Concatenate(outputColumnName, "SepalLength", "SepalWidth", "PetalLength", "PetalWidth"))
+            var pipeline = MlContext.Transforms.Conversion.MapValueToKey(inputColumnName)
+                .Append(MlContext.Transforms.Concatenate(outputColumnName, columnNames))
                 .AppendCacheCheckpoint(MlContext)
-                .Append(MlContext.MulticlassClassification.Trainers.StochasticDualCoordinateAscent(labelColumnName: "Label", featureColumnName: outputColumnName))
+                .Append(MlContext.MulticlassClassification.Trainers.StochasticDualCoordinateAscent(labelColumnName: inputColumnName, featureColumnName: outputColumnName))
                 .Append(MlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
             
             return pipeline;
