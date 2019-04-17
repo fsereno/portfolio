@@ -21,9 +21,10 @@ namespace app_mlDotnet_Program
             var inputColumnName = "Label";
             var outputColumnName = "Features";
             var columnNames = new []{"SepalLength", "SepalWidth", "PetalLength", "PetalWidth"};
+            var predictionColumnName = "PredictedLabel";
 
             var data = mlService.Get("../Data/iris-data.txt");
-            var pipeline = mlService.Transform(inputColumnName, outputColumnName, columnNames);
+            var pipeline = mlService.Transform(inputColumnName, outputColumnName, columnNames, predictionColumnName);
             var model = mlService.Train(pipeline, data);
             var irisData = new IrisData()
                 {
