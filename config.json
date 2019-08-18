@@ -89,8 +89,14 @@
             "folder": "aframe",
             "active": true,
             "include": true
+        },
+        {
+            "name": "VR Controller Experiment",
+            "subHeading": "Taking a look at 6DOF controllers and WebVR.",
+            "description": "An example VR application with controllers. Using ThreeJS and WebVR.",
+            "folder": "vrcont",
+            "active": true,
+            "include": true
         }
-
     ]
-
 }

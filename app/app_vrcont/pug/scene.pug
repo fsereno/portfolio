@@ -1,0 +1,15 @@
+extends ../../pug/layouts/raw.pug
+
+block head
+  // build:css css/styles.css
+  link(rel="stylesheet" href="css/styles.css")
+  // endbuild
+block content
+  .scene
+block scripts
+  // build:js js/vendor.js
+  script(src="../../node_modules/three/build/three.js")
+  // endbuild  
+  // build:js js/app.js
+  script(src="js/app.js")
+  // endbuild
