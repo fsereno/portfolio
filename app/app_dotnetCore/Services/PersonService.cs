@@ -21,8 +21,12 @@ namespace Services
                 throw new System.ArgumentNullException(nameof(person));
             }
 
-            _repository.Add(person);
+            var exsits = _repository.Get(person);
 
+            if (exsits == null)
+            {
+                _repository.Add(person);
+            } 
         }
         public T Get(T person)
         {
