@@ -89,12 +89,12 @@
             "folder": "aframe",
             "active": true,
             "include": true
-        },
+        },        
         {
-            "name": "VR Controller Experiment",
-            "subHeading": "Taking a look at 6DOF controllers and WebVR.",
-            "description": "An example VR application with controllers. Using ThreeJS and WebVR.",
-            "folder": "vrcont",
+            "name": "Babel TypeScript Boilerplate",
+            "subHeading": "Experimenting with Babel and TypeScript",
+            "description": "An example application using Babel as compiler for TypeScript.",
+            "folder": "babelTs",
             "active": true,
             "include": true
         }
