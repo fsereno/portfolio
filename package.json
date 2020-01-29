@@ -4,7 +4,8 @@
   "description": "My Portfolio Repository",
   "main": "index.html",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./app/**/*.test.ts"
+    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./app/**/*.test.ts",
+    "check-types": "tsc"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,10 @@
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
     "@babel/preset-env": "^7.7.7",
+    "@babel/preset-typescript": "^7.8.3",
     "@types/aframe": "^0.8.0",
     "@types/bootstrap": "^4.1.2",
     "@types/chai": "^4.1.4",
@@ -29,6 +33,7 @@
     "@types/knockout": "^3.4.59",
     "@types/mocha": "^5.2.5",
     "@types/nightmare": "^2.10.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "bower": "^1.8.4",
     "browserify": "^16.2.2",
     "chai": "^4.1.2",
