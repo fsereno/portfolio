@@ -22,9 +22,6 @@ module.exports = {
             defaultTasksCallBack();
           }
         }
-        /*if(unitTestCallBack !== null || unitTestCallBack !== undefined ) {
-          unitTestCallBack();
-        }*/
       });
     },
     watchThis: (watcher, dir, method, unitTestCallBack, defaultTasksCallBack) => {  
@@ -39,7 +36,6 @@ module.exports = {
       beforeEach,
       afterEach
       ) => {
-
       let options = {
         before: before,
         after: after,
