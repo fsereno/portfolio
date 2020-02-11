@@ -96,7 +96,8 @@
             "description": "An example application using Babel as compiler for TypeScript.",
             "folder": "babelTs",
             "active": true,
-            "include": true
+            "include": true,
+            "excludeJSFromGlobalBuild": true
         }
     ]
 }

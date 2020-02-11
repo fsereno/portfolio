@@ -60,7 +60,8 @@ let cssTask = (application) => {
 }
 
 let jsTask = (application) => {
-  return browserify({
+  let result = typeof application.excludeJSFromGlobalBuild === "undefined" || application.excludeFromGlobalBuild === false
+  ? browserify({
     basedir: config.developmentDir+"/"+config.prefix+application.folder+"/typeScript/",
     debug: true,
     entries: "app.ts",
@@ -80,7 +81,8 @@ let jsTask = (application) => {
     "../js",
     "Compiled to: ",
     " " + logSymbols.success
-  )));
+  ))) : false;
+  return result; 
 }
 
 let htmlTask = (application) => {
