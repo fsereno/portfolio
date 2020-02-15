@@ -60,8 +60,10 @@ let cssTask = (application) => {
 }
 
 let jsTask = (application) => {
-  let result = typeof application.excludeJSFromGlobalBuild === "undefined" || application.excludeFromGlobalBuild === false
-  ? browserify({
+  if (gulpHelpers.globalBuildIsFalse(application.useGlobalBuild)) {
+    return false;
+  }
+  return browserify({
     basedir: config.developmentDir+"/"+config.prefix+application.folder+"/typeScript/",
     debug: true,
     entries: "app.ts",
@@ -81,8 +83,7 @@ let jsTask = (application) => {
     "../js",
     "Compiled to: ",
     " " + logSymbols.success
-  ))) : false;
-  return result; 
+  )));
 }
 
 let htmlTask = (application) => {

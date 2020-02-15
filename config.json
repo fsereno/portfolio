@@ -6,9 +6,7 @@
     "publishDir": "dist",
     "folderRoot": "/tree/dev/app/",
     "repoRootUrl": "https://github.com/fsereno/portfolio",
-    
     "applications": [
-
         {
             "name": "Portfolio:",
             "subHeading": "Fabio Sereno",
@@ -24,7 +22,7 @@
             "description": "The template application.",
             "folder": "master",
             "active": true,
-            "include": false            
+            "include": false
         },
         {
             "name": "MIT Licence",
@@ -89,7 +87,7 @@
             "folder": "aframe",
             "active": true,
             "include": true
-        },        
+        },
         {
             "name": "Babel TypeScript Boilerplate",
             "subHeading": "Experimenting with Babel and TypeScript",
@@ -97,7 +95,7 @@
             "folder": "babelTs",
             "active": true,
             "include": true,
-            "excludeJSFromGlobalBuild": true
+            "useGlobalBuild": false
         }
     ]
 }

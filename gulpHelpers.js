@@ -14,7 +14,6 @@ module.exports = {
             folder = folderFromFilePath != undefined ? folderFromFilePath.replace("app_", "") : folderFromFilePath,
             applicationIndex = config.applications.map((a)=>{return a["folder"]}).indexOf(folder),
             application = config.applications[applicationIndex];
-  
         if(dir !== "/" && application !== undefined && method !== null) {
           method(application);
         } else {
@@ -46,5 +45,6 @@ module.exports = {
         afterEach: afterEach
       }
       return options;
-    }
+    },
+    globalBuildIsFalse: (useGlobalBuild) => typeof useGlobalBuild !== "undefined" && useGlobalBuild === false
 }
