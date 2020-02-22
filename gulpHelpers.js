@@ -46,5 +46,6 @@ module.exports = {
       }
       return options;
     },
-    globalBuildIsFalse: (useGlobalBuild) => typeof useGlobalBuild !== "undefined" && useGlobalBuild === false
+    compileJsIsFalse: (compileJs) => typeof compileJs !== "undefined" && compileJs === false,
+    compileJsIsTrue: (compileJs) => (typeof compileJs === "undefined") || typeof compileJs !== "undefined" &&  compileJs === true
 }

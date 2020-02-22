@@ -89,13 +89,13 @@
             "include": true
         },
         {
-            "name": "Babel TypeScript Boilerplate",
-            "subHeading": "Experimenting with Babel and TypeScript",
-            "description": "An example application using Babel as compiler for TypeScript.",
+            "name": "Babel + TypeScript",
+            "subHeading": "Experimenting with Babel, TypeScript and Require JS",
+            "description": "An example application using Babel as compiler for TypeScript and Require JS as AMD module loader.",
             "folder": "babelTs",
             "active": true,
             "include": true,
-            "useGlobalBuild": false
+            "compileJs": false
         }
     ]
 }

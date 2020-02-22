@@ -61,7 +61,7 @@ let cssTask = (application) => {
 }
 
 let jsTask = (application) => {
-  if (gulpHelpers.globalBuildIsFalse(application.useGlobalBuild)) {
+  if (gulpHelpers.compileJsIsFalse(application.compileJs)) {
     return false;
   }
   return browserify({
@@ -123,6 +123,23 @@ let userefTask = (application) => {
   .pipe(gulp.dest(config.publishDir+"/"+config.prefix+application.folder));
 };
 
+let copyJsTask = (application) => {
+  if (gulpHelpers.compileJsIsTrue(application.compileJs)) {
+    return false;
+  }
+  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/js/*.js")
+    .pipe(logger(gulpHelpers.populateLoggerOptions(
+      "Copy JS task started...",
+      "Copy JS task complete!",
+      ".js",
+      false,
+      "../../"+config.publishDir+"/"+config.prefix+application.folder+"/js/",
+      "Compiled to: ",
+      " " + logSymbols.success
+    )))
+    .pipe(gulp.dest(config.publishDir+"/"+config.prefix+application.folder+"/js/"));
+}
+
 let createTask = (application) => {
   return directoryExists(config.developmentDir+"/"+config.prefix+application.folder)
     .then(result => {
@@ -150,6 +167,7 @@ let defaultTasks = (application) => {
 
 let publishTasks = (application) => {
   gulpHelpers.runThis(application, userefTask);
+  gulpHelpers.runThis(application, copyJsTask);
 }
 
 let createTasks = (application) => {
