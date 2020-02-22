@@ -20,10 +20,9 @@ block content
                 type="text", 
                 placeholder="Input...", 
                 required)
-             
             button#submit.btn.btn-primary(type="submit") Submit
 
 block scripts
-  // build:js js/vendor.js
-  script(data-main="js/test.js", src="../../node_modules/requirejs/require.js")
+  // build:js js/require.js data-main="js/app.js"
+  script(data-main="js/app.js", src="../../node_modules/requirejs/require.js")
   // endbuild

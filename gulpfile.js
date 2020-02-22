@@ -107,9 +107,6 @@ let htmlTask = (application) => {
 };
 
 let userefTask = (application) => {
-  if (gulpHelpers.globalBuildIsFalse(application.useGlobalBuild)) {
-    return false;
-  }
   return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/*.html")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "Useref task started...",
