@@ -1,4 +1,17 @@
-import { Person } from "./Person";
+
+// Controllers
+import { IndexController } from "./Controllers/IndexController";
+
+// Services
+
+// Instantiate Services with dependency injection
+
+// Controllers
+let indexController = new IndexController();
+
+indexController.init();
+
+/*import { Person } from "./Person";
 
 var person = new Person("james");
-console.log(person.name);
+console.log(person.name);*/
