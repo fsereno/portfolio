@@ -7,8 +7,4 @@ define(["./Controllers/IndexController"], function (_IndexController) {
   // Controllers
   var indexController = new _IndexController.IndexController();
   indexController.init();
-  /*import { Person } from "./Person";
-  
-  var person = new Person("james");
-  console.log(person.name);*/
 });

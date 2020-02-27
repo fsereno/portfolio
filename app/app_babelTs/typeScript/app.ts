@@ -10,8 +10,3 @@ import { IndexController } from "./Controllers/IndexController";
 let indexController = new IndexController();
 
 indexController.init();
-
-/*import { Person } from "./Person";
-
-var person = new Person("james");
-console.log(person.name);*/

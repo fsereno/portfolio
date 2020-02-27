@@ -91,7 +91,7 @@
         {
             "name": "Babel + TypeScript",
             "subHeading": "Experimenting with Babel, TypeScript and Require JS",
-            "description": "An example application using Babel as compiler for TypeScript and Require JS as AMD module loader.",
+            "description": "A basic string builder using Babel, TypeScript and Require JS with AMD modules.",
             "folder": "babelTs",
             "active": true,
             "include": true,

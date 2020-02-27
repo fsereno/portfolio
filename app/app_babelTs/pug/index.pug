@@ -10,6 +10,8 @@ block content
         .col-lg-12
           h3 Result: 
             span#result
+          p Counter: 
+            span#counter
       .row
         .col-lg-3
           form#inputForm
@@ -18,7 +20,7 @@ block content
               input#input.form-control(
                 name="input", 
                 type="text", 
-                placeholder="Input...", 
+                placeholder="Add to list...", 
                 required)
 
             button#submit.btn.btn-primary(type="submit") Submit

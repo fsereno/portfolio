@@ -14,7 +14,6 @@ define(["exports"], function (_exports) {
 
   function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-  // Interfaces
   var IndexController =
   /*#__PURE__*/
   function () {
@@ -27,28 +26,71 @@ define(["exports"], function (_exports) {
 
       _defineProperty(this, "result", void 0);
 
+      _defineProperty(this, "counter", void 0);
+
+      _defineProperty(this, "counterLimit", void 0);
+
       _defineProperty(this, "formId", void 0);
 
+      _defineProperty(this, "setCounter", function () {
+        var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+        return _this.counter.text(value);
+      });
+
+      _defineProperty(this, "incrementCounter", function (value) {
+        return Number(value + 1);
+      });
+
+      _defineProperty(this, "isCounterWithinLimit", function (value) {
+        return value <= Number(_this.counterLimit - 1);
+      });
+
       _defineProperty(this, "validateForm", function () {
-        var self = _this;
         jQuery("#".concat(_this.formId)).on("submit", function (e) {
           e.preventDefault();
-          var input = self.input.val().toString();
-          self.result.text(input);
+
+          var input = _this.input.val().toString();
+
+          var result = _this.result.text();
+
+          var counter = Number(_this.counter.text());
+
+          if (_this.thereIsAValue(input) && _this.isCounterWithinLimit(counter)) {
+            if (_this.thereIsAValue(result)) {
+              _this.result.text("".concat(result, ", ").concat(input));
+            } else {
+              _this.result.text(input);
+            }
+
+            var updatedCounter = _this.incrementCounter(counter);
+
+            _this.setCounter(updatedCounter);
+
+            _this.input.val();
+          }
         });
+      });
+
+      _defineProperty(this, "thereIsAValue", function (input) {
+        return typeof input !== "undefined" && input.length > 0;
       });
 
       this.input = jQuery("#input");
       this.result = jQuery("#result");
+      this.counter = jQuery("#counter");
+      this.counterLimit = 10;
       this.formId = "inputForm";
     }
 
     _createClass(IndexController, [{
       key: "init",
       value: function init() {
-        var self = this;
+        var _this2 = this;
+
         jQuery(function () {
-          self.validateForm();
+          _this2.validateForm();
+
+          _this2.setCounter();
         });
       }
     }]);
