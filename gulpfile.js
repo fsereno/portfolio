@@ -127,7 +127,7 @@ let copyJsTask = (application) => {
   if (gulpHelpers.compileJsIsTrue(application.compileJs)) {
     return false;
   }
-  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/js/*.js")
+  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/js/**/*.js")
     .pipe(logger(gulpHelpers.populateLoggerOptions(
       "Copy JS task started...",
       "Copy JS task complete!",
