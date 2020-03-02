@@ -8,9 +8,9 @@ block styles
 block content
       .row.splitter
         .col-lg-12
-          h3 Result: 
-            span#result
-          p Counter: 
+          h3 Result:
+          ul#result
+          p Counter:
             span#counter
       .row
         .col-lg-3
@@ -18,9 +18,9 @@ block content
             .form-group
               label(for="input") Input:
               input#input.form-control(
-                name="input", 
-                type="text", 
-                placeholder="Add to list...", 
+                name="input",
+                type="text",
+                placeholder="Add to list...",
                 required)
 
             button#submit.btn.btn-primary(type="submit") Submit

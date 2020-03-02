@@ -49,28 +49,38 @@ define(["exports"], function (_exports) {
         return typeof input !== "undefined" && input.length > 0;
       });
 
+      _defineProperty(this, "listHasItems", function () {
+        return typeof _this.result[0] !== "undefined" && _this.result[0].childNodes.length > 0;
+      });
+
+      _defineProperty(this, "buildListItem", function (input) {
+        if (_this.listHasItems()) {
+          var result = _this.result.html();
+
+          return "".concat(result, "<li>").concat(input, "</li>");
+        } else {
+          return "<li>".concat(input, "</li>");
+        }
+      });
+
       _defineProperty(this, "validateForm", function () {
         jQuery("#".concat(_this.formId)).on("submit", function (e) {
           e.preventDefault();
 
           var input = _this.input.val().toString();
 
-          var result = _this.result.text();
-
           var counter = Number(_this.counter.text());
 
           if (_this.thereIsAValue(input) && _this.isCounterWithinLimit(counter)) {
-            if (_this.thereIsAValue(result)) {
-              _this.result.text("".concat(result, ", ").concat(input));
-            } else {
-              _this.result.text(input);
-            }
+            var list = _this.buildListItem(input);
 
             var updatedCounter = _this.incrementCounter(counter);
 
+            _this.result.html(list);
+
             _this.setCounter(updatedCounter);
 
-            _this.input.val();
+            _this.input.val("");
           }
         });
       });

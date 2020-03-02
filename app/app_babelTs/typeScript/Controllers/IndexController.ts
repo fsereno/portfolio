@@ -22,24 +22,29 @@ export class IndexController  {
     setCounter = (value = 0) => this.counter.text(value);
     incrementCounter = (value:number):number => Number(value + 1);
     isCounterWithinLimit = (value:number): boolean => value <= Number(this.counterLimit - 1);
-    thereIsAValue = (input:string):boolean => typeof input !== "undefined" && input.length > 0;
+    thereIsAValue = (input:string) => typeof input !== "undefined" && input.length > 0 ;
+    listHasItems = ():boolean => typeof this.result[0] !== "undefined" && this.result[0].childNodes.length > 0;
+    buildListItem = (input: string) => {
+        if (this.listHasItems()) {
+            const result = this.result.html();
+            return `${result}<li>${input}</li>`;
+        } else {
+            return `<li>${input}</li>`;
+        }
+    };
     validateForm = () => {
         jQuery(`#${this.formId}`).on("submit",(e) => {
             e.preventDefault();
-
             const input = this.input.val().toString();
-            const result = this.result.text();
             const counter = Number(this.counter.text());
 
             if (this.thereIsAValue(input) && this.isCounterWithinLimit(counter)) {
-                if(this.thereIsAValue(result)) {
-                    this.result.text(`${result}, ${input}`);
-                } else {
-                    this.result.text(input);
-                }
+                const list = this.buildListItem(input);
                 const updatedCounter = this.incrementCounter(counter);
+
+                this.result.html(list);
                 this.setCounter(updatedCounter);
-                this.input.val();
+                this.input.val("");
             }
         });
     }
