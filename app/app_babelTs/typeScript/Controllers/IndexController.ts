@@ -1,49 +1,69 @@
+"use strict;"
 export class IndexController  {
 
     private input: JQuery<HTMLElement>;
     private result: JQuery<HTMLElement>;
-    private counter: JQuery<HTMLElement>;
+    private counterElement: JQuery<HTMLElement>;
     private counterLimit: number;
-    private formId: string;
+    private form: JQuery<HTMLElement>;
+    private couter: number;
 
     constructor() {
         this.input = jQuery("#input");
         this.result = jQuery("#result");
-        this.counter = jQuery("#counter");
+        this.counterElement = jQuery("#counter");
         this.counterLimit = 10;
-        this.formId = "inputForm";
+        this.couter = 0;
+        this.form = jQuery("#inputForm");
     }
     init() {
         jQuery(() => {
             this.validateForm();
-            this.setCounter();
+            this.updateCounter();
         });
     }
-    setCounter = (value = 0) => this.counter.text(value);
-    incrementCounter = (value:number):number => Number(value + 1);
+    updateCounter = () => this.counterElement.text(this.couter);
+    increaseCounter = () => this.couter = this.couter + 1;
+    decreaseCounter = () => this.couter = this.couter - 1;
     isCounterWithinLimit = (value:number): boolean => value <= Number(this.counterLimit - 1);
     thereIsAValue = (input:string) => typeof input !== "undefined" && input.length > 0 ;
     listHasItems = ():boolean => typeof this.result[0] !== "undefined" && this.result[0].childNodes.length > 0;
-    buildListItem = (input: string) => {
+    addListItem = (input: string):string => {
         if (this.listHasItems()) {
             const result = this.result.html();
-            return `${result}<li>${input}</li>`;
+            return `${result}<li>${input} <a href="#" class="delete">Delete</a></li>`;
         } else {
-            return `<li>${input}</li>`;
+            return `<li>${input} <a href="#" class="delete">Delete</a></li>`;
         }
     };
+    deleteListItem = (index: number) => {
+        const result = this.result[0].childNodes;
+        if (typeof result !== "undefined" && result.length > 0) {
+            result[index].remove();
+            this.decreaseCounter();
+            this.updateCounter();
+        }
+    }
+    bindDeleteItemHandler = () => {
+        this.result.find("li .delete").on("click", (e) => {
+            e.preventDefault();
+            const index = jQuery(e.currentTarget).index(".delete") || 0;
+            this.deleteListItem(index);
+        });
+    }
+    populateResult = (value:string) => this.result.html(value);
     validateForm = () => {
-        jQuery(`#${this.formId}`).on("submit",(e) => {
+        this.form.on("submit",(e) => {
             e.preventDefault();
             const input = this.input.val().toString();
-            const counter = Number(this.counter.text());
+            const counter = Number(this.counterElement.text());
 
             if (this.thereIsAValue(input) && this.isCounterWithinLimit(counter)) {
-                const list = this.buildListItem(input);
-                const updatedCounter = this.incrementCounter(counter);
-
-                this.result.html(list);
-                this.setCounter(updatedCounter);
+                const list = this.addListItem(input);
+                this.populateResult(list);
+                this.bindDeleteItemHandler();
+                this.increaseCounter();
+                this.updateCounter();
                 this.input.val("");
             }
         });

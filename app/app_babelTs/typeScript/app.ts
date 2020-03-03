@@ -1,12 +1,6 @@
+"use strict;"
 
-// Controllers
 import { IndexController } from "./Controllers/IndexController";
 
-// Services
-
-// Instantiate Services with dependency injection
-
-// Controllers
-let indexController = new IndexController();
-
+const indexController = new IndexController();
 indexController.init();
