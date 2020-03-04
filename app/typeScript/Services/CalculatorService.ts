@@ -8,7 +8,7 @@ export class CalculatorService implements ICalculatorService
     
     }
 
-    public PercentageOf(percentage:number, ofThisNumber: Number): Number {
+    public PercentageOf(percentage:number, ofThisNumber: number): number {
     
         let result = Number(percentage)/100*Number(ofThisNumber);
     
