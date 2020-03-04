@@ -1,3 +1,4 @@
+"use strict;"
 import { IStringRepository } from "./IStringRepository";
 
 export interface IStringService  {

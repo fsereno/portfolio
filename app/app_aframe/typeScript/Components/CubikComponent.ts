@@ -4,6 +4,7 @@ import { ICubikCollectableComponent } from "../Interfaces/ICubikCollectableCompo
 import { ITimerService } from "../../../typeScript/Interfaces/ITimerService";
 import { IUpdateService } from "../../../typeScript/Interfaces/IUpdateService";
 import { IRandomGeneratorService } from '../../../typeScript/Interfaces/IRandomGeneratorService';
+
 export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICubikCollectableComponent {
     
     object: T;

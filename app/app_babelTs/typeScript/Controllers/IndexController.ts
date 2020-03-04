@@ -26,7 +26,7 @@ export class IndexController  {
     private increaseCounter = () => this.couter = this.couter + 1;
     private decreaseCounter = () => this.couter = this.couter - 1;
     private isCounterWithinLimit = (value:number): boolean => value <= Number(this.counterLimit - 1);
-    private thereIsAValue = (input:string) => typeof input !== "undefined" && input.length > 0 ;
+    private thereIsAValue = (input:string):boolean => typeof input !== "undefined" && input.length > 0 ;
     private listHasItems = ():boolean => typeof this.result[0] !== "undefined" && this.result[0].childNodes.length > 0;
     private populateResult = (value:string) => this.result.html(value);
     private clearInput = () => this.input.val("");
@@ -53,7 +53,7 @@ export class IndexController  {
             this.deleteListItem(index);
         });
     }
-    private isFormValid = (input:string): boolean => {
+    private isFormValid = (input:string):boolean => {
         let isValid = false;
         const counter = Number(this.counterElement.text());
         if (this.thereIsAValue(input) && this.isCounterWithinLimit(counter)) {

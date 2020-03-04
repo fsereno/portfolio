@@ -1,5 +1,5 @@
+"use strict;"
 export class DictionaryResultModel {
-
     public result: boolean;
     public description: string;
     public word: string
@@ -13,5 +13,4 @@ export class DictionaryResultModel {
         this.description = description;
         this.word = word;
     }
-
 }

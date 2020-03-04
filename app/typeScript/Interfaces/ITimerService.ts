@@ -1,4 +1,6 @@
+"use strict;"
 import { IUpdateService } from "./IUpdateService";
+
 export interface ITimerService {
     duration: number;
     counter: number;

@@ -1,3 +1,4 @@
+"use strict;"
 import { IStringService } from "./IStringService";
 
 export interface IRandomGeneratorService  {

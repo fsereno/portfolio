@@ -5,7 +5,7 @@ export class PlayerModel implements IPlayerModel {
     name: string;
     score: number;
     
-    constructor(
+    constructor (
         name: string,
         score: number
     ){

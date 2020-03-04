@@ -6,7 +6,7 @@ export class IndexController  {
     private navigateComponent: IComponent<INavigateComponentModel>;
     private cubikComponent: IComponent<ICubikModel>;
 
-    constructor(
+    constructor (
         navigateComponent: IComponent<INavigateComponentModel>,
         cubikComponent: IComponent<ICubikModel>
     )
