@@ -11,8 +11,7 @@ class node {
         name: string,
         x: number,
         y: number
-        )
-    {
+    ) {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -29,8 +28,7 @@ class Grid {
     public start: node;
     public end: node;
 
-    constructor(size: number)
-    {
+    constructor(size: number) {
         this.nodes = [];
         this.size = size;
         this.dictionary = {};
@@ -39,7 +37,7 @@ class Grid {
 
         for (let n: number = 1; n <= this.size; n++) {
             for (let cell: number = 1; cell <= this.size; cell++) {
-                let nodeName: string = n+","+cell;
+                let nodeName: string = n + "," + cell;
                 let thisNode = new node(nodeName, cell, n);
                 let neighbours = this.FindNeighbours(cell, n);
                 thisNode.neighbours = neighbours;
@@ -50,62 +48,62 @@ class Grid {
     }
 
     FindNeighbours(x: number, y: number) {
-        let u: number = y-1 >= 1 ? y-1 : null;
-        let d: number = y+1 <= this.size ? y+1 : null;
-        let l: number = x-1 >= 1 ? x-1 : null;
-        let r: number = x+1 <= this.size ? x+1 : null;
+        let u: number = y - 1 >= 1 ? y - 1 : null;
+        let d: number = y + 1 <= this.size ? y + 1 : null;
+        let l: number = x - 1 >= 1 ? x - 1 : null;
+        let r: number = x + 1 <= this.size ? x + 1 : null;
         let neighbours: string[] = [];
 
-        if(u!==null){
-            neighbours.push(u+","+x);
+        if (u !== null) {
+            neighbours.push(u + "," + x);
         }
-        if(d!==null){
-            neighbours.push(d+","+x);
+        if (d !== null) {
+            neighbours.push(d + "," + x);
         }
-        if(l!==null){
-            neighbours.push(y+","+l);
+        if (l !== null) {
+            neighbours.push(y + "," + l);
         }
-        if(r!==null){
-            neighbours.push(y+","+r);
+        if (r !== null) {
+            neighbours.push(y + "," + r);
         }
         return neighbours;
     }
 
-    AddStart(start: string){
-        if(this.dictionary[start] !== undefined){
+    AddStart(start: string) {
+        if (this.dictionary[start] !== undefined) {
             this.start = this.dictionary[start];
         }
         return this.start;
     }
 
-    AddEnd(end: string){
-        if(this.dictionary[end] !==  undefined){
+    AddEnd(end: string) {
+        if (this.dictionary[end] !== undefined) {
             this.end = this.dictionary[end];
         }
         return this.end;
     }
 
-    PrintPath(){
+    PrintPath() {
         let path: string[] = [];
         let text = new String();
 
-        if(this.end !== null) {
+        if (this.end !== null) {
 
             let next: node = this.end;
             path.push(this.end.name);
 
-            while(next.parent !== null){
+            while (next.parent !== null) {
 
                 path.push(next.parent);
                 next = this.dictionary[next.parent];
             }
 
-            for (let i = path.length-1; i >= 0; i--) {
-                const move:string = path[i];
+            for (let i = path.length - 1; i >= 0; i--) {
+                const move: string = path[i];
                 text += move
 
-                if(i != 0) {
-                   text += " --> ";
+                if (i != 0) {
+                    text += " --> ";
                 }
             }
 
@@ -116,20 +114,20 @@ class Grid {
         return text;
     }
 
-    BreadthFirstSearch(){
+    BreadthFirstSearch() {
 
         let queue: node[] = [];
 
-        if(this.start !== null && this.end !== null) {
+        if (this.start !== null && this.end !== null) {
 
             this.start.searched = true;
             queue.push(this.start);
 
-            while(queue.length > 0 ){
+            while (queue.length > 0) {
 
                 let current: any = queue.shift();
 
-                if(current.name === this.end.name) {
+                if (current.name === this.end.name) {
 
                     console.log("Found it! " + current.name);
                     break;
@@ -141,7 +139,7 @@ class Grid {
                     for (let i = 0; i < neighbours.length; i++) {
                         const neighbour: node = this.dictionary[neighbours[i]];
 
-                        if(!neighbour.searched){
+                        if (!neighbour.searched) {
                             neighbour.searched = true;
                             neighbour.parent = current.name;
                             queue.push(neighbour);
