@@ -19,7 +19,7 @@ class node {
         this.neighbours = [];
         this.searched = false;
         this.parent = null;
-    }   
+    }
 }
 
 class Grid {
@@ -36,12 +36,12 @@ class Grid {
         this.dictionary = {};
         this.start = null;
         this.end = null;
-        
+
         for (let n: number = 1; n <= this.size; n++) {
             for (let cell: number = 1; cell <= this.size; cell++) {
                 let nodeName: string = n+","+cell;
                 let thisNode = new node(nodeName, cell, n);
-                let neighbours = this.FindNeighbours(cell, n);                
+                let neighbours = this.FindNeighbours(cell, n);
                 thisNode.neighbours = neighbours;
                 this.nodes.push(thisNode);
                 this.dictionary[nodeName] = thisNode;
@@ -88,31 +88,31 @@ class Grid {
     PrintPath(){
         let path: string[] = [];
         let text = new String();
-    
+
         if(this.end !== null) {
-            
+
             let next: node = this.end;
             path.push(this.end.name);
-            
+
             while(next.parent !== null){
-        
+
                 path.push(next.parent);
                 next = this.dictionary[next.parent];
             }
 
             for (let i = path.length-1; i >= 0; i--) {
                 const move:string = path[i];
-                text += move 
-                
+                text += move
+
                 if(i != 0) {
                    text += " --> ";
-                }            
+                }
             }
-            
+
         } else {
             text = "Path not found!";
         }
-    
+
         return text;
     }
 
@@ -140,7 +140,7 @@ class Grid {
 
                     for (let i = 0; i < neighbours.length; i++) {
                         const neighbour: node = this.dictionary[neighbours[i]];
-                        
+
                         if(!neighbour.searched){
                             neighbour.searched = true;
                             neighbour.parent = current.name;
