@@ -59,6 +59,14 @@ define(["exports"], function (_exports) {
         return typeof _this.result[0] !== "undefined" && _this.result[0].childNodes.length > 0;
       });
 
+      _defineProperty(this, "populateResult", function (value) {
+        return _this.result.html(value);
+      });
+
+      _defineProperty(this, "clearInput", function () {
+        return _this.input.val("");
+      });
+
       _defineProperty(this, "addListItem", function (input) {
         if (_this.listHasItems()) {
           var result = _this.result.html();
@@ -90,19 +98,24 @@ define(["exports"], function (_exports) {
         });
       });
 
-      _defineProperty(this, "populateResult", function (value) {
-        return _this.result.html(value);
+      _defineProperty(this, "isFormValid", function (input) {
+        var isValid = false;
+        var counter = Number(_this.counterElement.text());
+
+        if (_this.thereIsAValue(input) && _this.isCounterWithinLimit(counter)) {
+          isValid = true;
+        }
+
+        return isValid;
       });
 
-      _defineProperty(this, "validateForm", function () {
+      _defineProperty(this, "submitFormHandler", function () {
         _this.form.on("submit", function (e) {
           e.preventDefault();
 
           var input = _this.input.val().toString();
 
-          var counter = Number(_this.counterElement.text());
-
-          if (_this.thereIsAValue(input) && _this.isCounterWithinLimit(counter)) {
+          if (_this.isFormValid(input)) {
             var list = _this.addListItem(input);
 
             _this.populateResult(list);
@@ -113,8 +126,10 @@ define(["exports"], function (_exports) {
 
             _this.updateCounter();
 
-            _this.input.val("");
+            _this.clearInput();
           }
+
+          ;
         });
       });
 
@@ -132,7 +147,7 @@ define(["exports"], function (_exports) {
         var _this2 = this;
 
         jQuery(function () {
-          _this2.validateForm();
+          _this2.submitFormHandler();
 
           _this2.updateCounter();
         });

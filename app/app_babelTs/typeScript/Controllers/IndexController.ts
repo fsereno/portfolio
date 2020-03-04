@@ -16,19 +16,21 @@ export class IndexController  {
         this.couter = 0;
         this.form = jQuery("#inputForm");
     }
-    init() {
+    public init() {
         jQuery(() => {
-            this.validateForm();
+            this.submitFormHandler();
             this.updateCounter();
         });
     }
-    updateCounter = () => this.counterElement.text(this.couter);
-    increaseCounter = () => this.couter = this.couter + 1;
-    decreaseCounter = () => this.couter = this.couter - 1;
-    isCounterWithinLimit = (value:number): boolean => value <= Number(this.counterLimit - 1);
-    thereIsAValue = (input:string) => typeof input !== "undefined" && input.length > 0 ;
-    listHasItems = ():boolean => typeof this.result[0] !== "undefined" && this.result[0].childNodes.length > 0;
-    addListItem = (input: string):string => {
+    private updateCounter = () => this.counterElement.text(this.couter);
+    private increaseCounter = () => this.couter = this.couter + 1;
+    private decreaseCounter = () => this.couter = this.couter - 1;
+    private isCounterWithinLimit = (value:number): boolean => value <= Number(this.counterLimit - 1);
+    private thereIsAValue = (input:string) => typeof input !== "undefined" && input.length > 0 ;
+    private listHasItems = ():boolean => typeof this.result[0] !== "undefined" && this.result[0].childNodes.length > 0;
+    private populateResult = (value:string) => this.result.html(value);
+    private clearInput = () => this.input.val("");
+    private addListItem = (input: string):string => {
         if (this.listHasItems()) {
             const result = this.result.html();
             return `${result}<li>${input} <a href="#" class="delete">Delete</a></li>`;
@@ -36,7 +38,7 @@ export class IndexController  {
             return `<li>${input} <a href="#" class="delete">Delete</a></li>`;
         }
     };
-    deleteListItem = (index: number) => {
+    private deleteListItem = (index: number) => {
         const result = this.result[0].childNodes;
         if (typeof result !== "undefined" && result.length > 0) {
             result[index].remove();
@@ -44,28 +46,33 @@ export class IndexController  {
             this.updateCounter();
         }
     }
-    bindDeleteItemHandler = () => {
+    private bindDeleteItemHandler = () => {
         this.result.find("li .delete").on("click", (e) => {
             e.preventDefault();
             const index = jQuery(e.currentTarget).index(".delete") || 0;
             this.deleteListItem(index);
         });
     }
-    populateResult = (value:string) => this.result.html(value);
-    validateForm = () => {
+    private isFormValid = (input:string): boolean => {
+        let isValid = false;
+        const counter = Number(this.counterElement.text());
+        if (this.thereIsAValue(input) && this.isCounterWithinLimit(counter)) {
+            isValid = true;
+        }
+        return isValid;
+    }
+    private submitFormHandler = () => {
         this.form.on("submit",(e) => {
             e.preventDefault();
             const input = this.input.val().toString();
-            const counter = Number(this.counterElement.text());
-
-            if (this.thereIsAValue(input) && this.isCounterWithinLimit(counter)) {
+            if (this.isFormValid(input)) {
                 const list = this.addListItem(input);
                 this.populateResult(list);
                 this.bindDeleteItemHandler();
                 this.increaseCounter();
                 this.updateCounter();
-                this.input.val("");
-            }
+                this.clearInput();
+            };
         });
     }
 }
