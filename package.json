@@ -23,6 +23,7 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
     "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
     "@types/aframe": "^0.8.4",
     "@types/bootstrap": "^4.1.2",
@@ -34,6 +35,7 @@
     "@types/mocha": "^5.2.5",
     "@types/nightmare": "^2.10.4",
     "@types/three": "^0.93.31",
+    "babel-loader": "^8.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "bower": "^1.8.4",
     "browserify": "^16.2.2",
@@ -68,6 +70,8 @@
     "tsify": "^4.0.0",
     "typescript": "^2.9.2",
     "vinyl-source-stream": "^2.0.0",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
     "wiredep": "^4.0.0"
   },
   "dependencies": {
@@ -80,6 +84,8 @@
     "jquery": "^3.3.1",
     "jquery-validation": "^1.17.0",
     "knockout": "^3.4.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
     "three": "^0.107.0"
   }
 }
