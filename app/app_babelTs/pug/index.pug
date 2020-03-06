@@ -7,14 +7,16 @@ block styles
 
 block content
       .row.splitter
-        .col-lg-12
+        .col-lg-4
           h3 Result:
-          ul#result
-          p Counter: 
+          ul.list-group#result
+      .row.splitter
+        .col-lg-12
+          p Items: 
             span#counter
       .row
         .col-lg-3
-          form#inputForm
+          form#inputForm(autoComplete="off")
             .form-group
               label(for="input") Input:
               input#input.form-control(
@@ -23,7 +25,7 @@ block content
                 placeholder="Add to list...",
                 required)
 
-            button#submit.btn.btn-primary(type="submit") Submit
+            button#submit.btn.btn-primary(type="submit") Add item
 
 block scripts
   // build:js js/require.js data-main="js/app.js"

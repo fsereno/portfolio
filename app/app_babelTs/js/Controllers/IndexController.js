@@ -71,9 +71,9 @@ define(["exports"], function (_exports) {
         if (_this.listHasItems()) {
           var result = _this.result.html();
 
-          return "".concat(result, "<li>").concat(input, " <a href=\"#\" class=\"delete\">Delete</a></li>");
+          return "".concat(result, "<li class=\"list-group-item d-flex justify-content-between align-items-center\">").concat(input, " <a href=\"#\" class=\"badge badge-danger delete\">Delete</a></li>");
         } else {
-          return "<li>".concat(input, " <a href=\"#\" class=\"delete\">Delete</a></li>");
+          return "<li class=\"list-group-item d-flex justify-content-between align-items-center\">".concat(input, " <a href=\"#\" class=\"badge badge-danger delete\">Delete</a></li>");
         }
       });
 

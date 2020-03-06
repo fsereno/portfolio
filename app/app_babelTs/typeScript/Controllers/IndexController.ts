@@ -33,9 +33,9 @@ export class IndexController  {
     private addListItem = (input: string):string => {
         if (this.listHasItems()) {
             const result = this.result.html();
-            return `${result}<li>${input} <a href="#" class="delete">Delete</a></li>`;
+            return `${result}<li class="list-group-item d-flex justify-content-between align-items-center">${input} <a href="#" class="badge badge-danger delete">Delete</a></li>`;
         } else {
-            return `<li>${input} <a href="#" class="delete">Delete</a></li>`;
+            return `<li class="list-group-item d-flex justify-content-between align-items-center">${input} <a href="#" class="badge badge-danger delete">Delete</a></li>`;
         }
     };
     private deleteListItem = (index: number) => {
