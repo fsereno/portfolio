@@ -89,7 +89,7 @@
             "include": true
         },
         {
-            "name": "Babel + TypeScript",
+            "name": "To-Do List Basic",
             "subHeading": "Experimenting with Babel, TypeScript and Require JS",
             "description": "A basic list builder using Babel, TypeScript and Require JS with AMD modules.",
             "folder": "babelTs",
