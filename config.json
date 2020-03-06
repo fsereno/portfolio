@@ -105,6 +105,15 @@
             "active": true,
             "include": true,
             "compileJs": false
+        },
+        {
+            "name": "To-Do List (React)",
+            "subHeading": "A basic list builder.",
+            "description": "Experimenting with React, Babel, TypeScript and Webpack.",
+            "folder": "toDoReact",
+            "active": true,
+            "include": true,
+            "compileJs": false
         }
     ]
 }
