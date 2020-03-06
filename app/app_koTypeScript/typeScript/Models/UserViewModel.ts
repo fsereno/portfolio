@@ -27,7 +27,7 @@ export class UserViewModel {
         this.getStatus();
     }
 
-    public getUsers() : void {
+    public getUsers(): void {
         this.usersCollection.push(new userModel("James Bond", 23, false, this.statusLiterals.inactive));
         this.usersCollection.push(new userModel("Joe Bloggs", 34, false, this.statusLiterals.inactive));
     }
@@ -41,7 +41,7 @@ export class UserViewModel {
     public remove = (item: userModel) => this.context = item;
 
     public removeConfirm = () => {
-        if(this.usersCollection.indexOf(this.context) > -1) {
+        if (this.usersCollection.indexOf(this.context) > -1) {
             this.usersCollection.remove(this.context);
         }
     }
@@ -61,7 +61,7 @@ export class UserViewModel {
         this.status(this.statusLiterals.inactive);
     }
 
-    public closeEdit = () => jQuery("#"+this.editModalId).modal("hide");
+    public closeEdit = () => jQuery("#" + this.editModalId).modal("hide");
 
     public toggleStatus = (item: userModel) => {
         this.populateEdit(item);
@@ -69,18 +69,18 @@ export class UserViewModel {
     }
 
     public update = () => {
-        if(jQuery("#"+this.formId).valid()){
-            if(this.usersCollection.indexOf(this.context) > -1
+        if (jQuery("#" + this.formId).valid()) {
+            if (this.usersCollection.indexOf(this.context) > -1
                 && this.name().length > 0 && this.age() > 0) {
                 var replace = new userModel(
-                                this.name(),
-                                this.age(),
-                                this.active(),
-                                this.status())
+                    this.name(),
+                    this.age(),
+                    this.active(),
+                    this.status())
                 this.usersCollection.replace(this.context, replace);
                 this.closeEdit();
             } else {
-                if(this.name().length > 0 && this.age() > 0) {
+                if (this.name().length > 0 && this.age() > 0) {
                     this.usersCollection.push(new userModel(
                         this.name(),
                         this.age(),

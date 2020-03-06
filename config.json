@@ -89,10 +89,19 @@
             "include": true
         },
         {
-            "name": "To-Do List Basic",
-            "subHeading": "Experimenting with Babel, TypeScript and Require JS",
-            "description": "A basic list builder using Babel, TypeScript and Require JS with AMD modules.",
+            "name": "To-Do List (Basic)",
+            "subHeading": "A basic list builder.",
+            "description": "Experimenting with Babel, TypeScript and Require JS.",
             "folder": "babelTs",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "To-Do List (Vue)",
+            "subHeading": "A basic list builder.",
+            "description": "Experimenting with Vue, Babel, TypeScript and Webpack.",
+            "folder": "toDoVue",
             "active": true,
             "include": true,
             "compileJs": false
