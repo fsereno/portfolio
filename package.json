@@ -34,6 +34,7 @@
     "@types/knockout": "^3.4.59",
     "@types/mocha": "^5.2.5",
     "@types/nightmare": "^2.10.4",
+    "@types/react-dom": "^16.9.5",
     "@types/three": "^0.93.31",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
