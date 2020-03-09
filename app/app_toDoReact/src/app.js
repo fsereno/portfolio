@@ -1,41 +1,42 @@
 "use strict;"
 
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 
-const app = (function() {
-  function formatName(user) {
-    return user.firstName + " " + user.lastName;
-  }
-  function creatToDoItem(item) {
-  return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete">Delete</a></li>
-  }
-  function creatList(listItems) {
-  return <ul class="list-group">
-          {listItems.map((item) => {
-            return this.creatToDoItem(item)
-          })}
-        </ul>
-  }
-  return {
-    formatName: formatName,
-    creatToDoItem: creatToDoItem,
-    creatList: creatList
-  }
-})();
+class ToDoListForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ''
+    };
 
-let toDoList = [
-  "item 1",
-  "item 2",
-  "item 3"
-];
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-const output =
-<div class="row">
-  <div class="col-lg-4">
-    <h3>Result:</h3>
-    {app.creatList(toDoList)}
-  </div>
-</div>
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
 
-ReactDom.render(output, document.getElementById("result"));
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+
+ReactDOM.render(
+  <ToDoListForm />,
+  document.getElementById('result')
+);
