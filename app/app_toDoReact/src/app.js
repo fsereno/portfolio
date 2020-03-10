@@ -7,7 +7,8 @@ class ToDoListForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: '',
+      list: ["a", "b", "c"]
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,13 +26,21 @@ class ToDoListForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div>
+        <ul>
+          {this.state.list.map((item) => {
+            return <li>{item}</li>
+          })}
+        </ul>
+        <p>Test: {this.state.value}</p>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+            <input type="text" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     );
   }
 }
