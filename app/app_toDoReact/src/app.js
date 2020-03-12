@@ -8,7 +8,9 @@ class ToDoListForm extends React.Component {
     super(props);
     this.state = {
       value: '',
-      list: ["a", "b", "c"]
+      list: [],
+      counterLimit: 10,
+      counter: 0
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,26 +22,49 @@ class ToDoListForm extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
+    if (this.state.value.length > 0 && this.state.counter < this.state.counterLimit) {
+      this.state.list.push(this.state.value);
+      this.setState({
+        list: this.state.list,
+        value: "",
+        counter: this.state.counter + 1
+      });
+    }
   }
 
   render() {
     return (
       <div>
-        <ul>
-          {this.state.list.map((item) => {
-            return <li>{item}</li>
-          })}
-        </ul>
-        <p>Test: {this.state.value}</p>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <div class="row splitter">
+          <div class="col-lg-4">
+            <h3>Result:</h3>
+            <ul class="list-group">
+              {this.state.list.map((item) => {
+                return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete">Delete</a></li>
+              })}
+          </ul>
+          </div>
+        </div>
+        <div class="row splitter">
+          <div class="col-lg-12">
+            <p>Items: {this.state.counter}</p>
+            <p>Item to add: {this.state.value}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <form onSubmit={this.handleSubmit} autoComplete="off">
+              <div class="form-group">
+                  <label for="itemInput">
+                    Item:
+                  </label>
+                  <input class="form-control" name="itemInput" type="text" value={this.state.value} onChange={this.handleChange} />
+              </div>
+              <button class="btn btn-primary" type="submit">Add item</button>
+            </form>
+          </div>
+        </div>
       </div>
     );
   }
