@@ -10,7 +10,8 @@ class ToDoListForm extends React.Component {
       value: '',
       list: [],
       counterLimit: 10,
-      counter: 0
+      counter: 0,
+      selectedIndex: 0
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,6 +34,10 @@ class ToDoListForm extends React.Component {
     }
   }
 
+  handleDelete(event) {
+    event.preventDefault();
+  }
+
   render() {
     return (
       <div>
@@ -41,7 +46,7 @@ class ToDoListForm extends React.Component {
             <h3>Result:</h3>
             <ul class="list-group">
               {this.state.list.map((item) => {
-                return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete">Delete</a></li>
+                return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete" data-index={this.counter} onClick={this.handleDelete}>Delete</a></li>
               })}
           </ul>
           </div>
