@@ -16,6 +16,7 @@ class ToDoListForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete= this.handleDelete.bind(this);
   }
 
   handleChange(event) {
@@ -36,6 +37,12 @@ class ToDoListForm extends React.Component {
 
   handleDelete(event) {
     event.preventDefault();
+    let index = Number(event.target.dataset.index);
+    this.state.list.splice(index, 1);
+    this.setState({
+      list: this.state.list,
+      counter: this.state.counter - 1
+    });
   }
 
   render() {
@@ -45,8 +52,8 @@ class ToDoListForm extends React.Component {
           <div class="col-lg-4">
             <h3>Result:</h3>
             <ul class="list-group">
-              {this.state.list.map((item) => {
-                return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete" data-index={this.counter} onClick={this.handleDelete}>Delete</a></li>
+              {this.state.list.map((item, index) => {
+                return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
               })}
           </ul>
           </div>
