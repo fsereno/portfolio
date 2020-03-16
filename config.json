@@ -100,7 +100,7 @@
         {
             "name": "To-Do List (Vue)",
             "subHeading": "A basic list builder.",
-            "description": "Experimenting with Vue, Babel, TypeScript and Webpack.",
+            "description": "Experimenting with Vue, Babel, JavaAScript and Webpack.",
             "folder": "toDoVue",
             "active": true,
             "include": true,
@@ -109,7 +109,7 @@
         {
             "name": "To-Do List (React)",
             "subHeading": "A basic list builder.",
-            "description": "Experimenting with React, Babel, TypeScript and Webpack.",
+            "description": "Experimenting with React, Babel, JavaAScript and Webpack.",
             "folder": "toDoReact",
             "active": true,
             "include": true,

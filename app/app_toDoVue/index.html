@@ -23,7 +23,7 @@
       <div class="row"> 
         <div class="col-lg-12">
           <h4>A basic list builder.</h4>
-          <h5 class="text-muted">Experimenting with Vue, Babel, TypeScript and Webpack.</h5>
+          <h5 class="text-muted">Experimenting with Vue, Babel, JavaAScript and Webpack.</h5>
           <hr>
         </div>
       </div>
@@ -43,22 +43,12 @@
         </div>
       </nav>
       <hr>
-      <div class="row splitter">
-        <div class="col-lg-12">
-          <h3>Result: <span id="result"></span></h3>
-        </div>
+      <div id="result">{{ name }}
+        <ol>
+          <li v-for="item in items">{{ item }}</li>
+        </ol>
       </div>
-      <div class="row">
-        <div class="col-lg-3">
-          <form id="inputForm">
-            <div class="form-group">
-              <label for="input">Input:</label>
-              <input class="form-control" id="input" name="input" type="text" placeholder="Input..." required>
-            </div>
-            <button class="btn btn-primary" id="submit" type="submit">Submit</button>
-          </form>
-        </div>
-      </div>
+      <p>test</p>
     </div>
     <!-- build:js ../js/vendor.js-->
     <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
@@ -67,8 +57,6 @@
     <!-- endbuild-->
     <!-- build:js js/app.js-->
     <script src="js/app.js"></script>
-    <!-- endbuild-->
-    <!-- build:js js/vendor.js-->
     <!-- endbuild-->
   </body>
 </html>
