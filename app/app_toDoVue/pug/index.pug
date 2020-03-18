@@ -6,11 +6,33 @@ block styles
   // endbuild
 
 block content
-  div#result
-    | {{ name }}
-    ol
-      li(v-for="item in items") {{ item }}
-  p test
+    div#result
+      .row.splitter
+        .col-lg-4
+              h3 Result:
+              ul.list-group
+                li(class="list-group-item d-flex justify-content-between align-items-center", v-for="item in items")
+                  span {{ item }}
+                  a(href="#", class="badge badge-danger delete") Delete
+      .row.splitter
+        .col-lg-12
+          p Items: 
+            span {{ counter}}
+          p Item to add: 
+            span {{ name }}
+      .row
+        .col-lg-3
+          form#inputForm(autoComplete="off")
+            .form-group
+              label(for="input") Input:
+              input#input.form-control(
+                name="input",
+                type="text",
+                placeholder="Add to list...",
+                required,
+                v-model="name")
+
+            button#submit.btn.btn-primary(type="button", v-on:click="addItem") Add item
 
 block scripts
   // build:js js/app.js

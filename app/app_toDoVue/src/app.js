@@ -5,7 +5,17 @@ import Vue from 'vue';
 new Vue({
   el: '#result',
   data: {
-    name: "name",
-    items: [2, 4, 6, 8, 10]
+    name: "",
+    counter: 0,
+    counterLimit: 10,
+    items: [],
+  },
+  methods: {
+    addItem: function() {
+      if (this.name.length > 0) {
+        this.items.push(this.name);
+        this.name = "";
+      }
+    }
   }
 });
