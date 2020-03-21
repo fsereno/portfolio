@@ -17,6 +17,9 @@ new Vue({
         this.name = "";
         this.counter = this.counter + 1;
       }
+    },
+    deleteItem: function() {
+      alert("delete item");
     }
   }
 });
