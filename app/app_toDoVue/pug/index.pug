@@ -11,9 +11,9 @@ block content
         .col-lg-4
               h3 Result:
               ul.list-group
-                li(class="list-group-item d-flex justify-content-between align-items-center", v-for="item in items")
+                li(class="list-group-item d-flex justify-content-between align-items-center", v-for="(item, index) in items")
                   span {{ item }}
-                  a(href="#", class="badge badge-danger delete", v-on:click="deleteItem") Delete
+                  a(href="#", class="badge badge-danger delete", v-on:click="deleteItem", :data-index="index") Delete
       .row.splitter
         .col-lg-12
           p Items: 

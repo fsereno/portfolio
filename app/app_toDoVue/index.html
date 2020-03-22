@@ -48,7 +48,7 @@
           <div class="col-lg-4">
             <h3>Result:</h3>
             <ul class="list-group">
-              <li class="list-group-item d-flex justify-content-between align-items-center" v-for="item in items"><span>{{ item }}</span><a class="badge badge-danger delete" href="#" v-on:click="deleteItem">Delete</a></li>
+              <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(item, index) in items"><span>{{ item }}</span><a class="badge badge-danger delete" href="#" v-on:click="deleteItem" :data-index="index">Delete</a></li>
             </ul>
           </div>
         </div>

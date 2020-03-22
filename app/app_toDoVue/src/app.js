@@ -18,8 +18,10 @@ new Vue({
         this.counter = this.counter + 1;
       }
     },
-    deleteItem: function() {
-      alert("delete item");
+    deleteItem: function(event) {
+      let index = Number(event.target.dataset.index);
+      this.items.splice(index, 1);
+      this.counter = this.counter - 1;
     }
   }
 });
