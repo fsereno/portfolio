@@ -21,6 +21,7 @@ The purpose of this repository is to demonstrate skills in various technologies,
 - Dotnet Core (https://dotnet.github.io/)
 - NUnit (https://nunit.org/)
 - ML Dotnet (https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet)
+- ThreeJS (https://threejs.org/)
 - SOLID (SOLID Design principles in mind, throughout)
 ---
 

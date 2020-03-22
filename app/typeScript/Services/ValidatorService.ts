@@ -1,18 +1,16 @@
+"use strict;"
 import { IValidatorService } from "../Interfaces/IValidatorService";
 
-export class ValidatorService implements IValidatorService
-{
-    
-    constructor(){
+export class ValidatorService implements IValidatorService {
 
-        jQuery.validator.addMethod("nonNumeric", function(value, element) {
+    constructor() {
+        jQuery.validator.addMethod("nonNumeric", function (value, element) {
             return this.optional(element) || isNaN(Number(value));
         });
-
     }
 
     ValidateForm(formId: string, options: JQueryValidation.ValidationOptions): JQueryValidation.Validator {
-        let validator = jQuery("#"+formId).validate(options);
+        let validator = jQuery("#" + formId).validate(options);
         return validator;
     }
 }

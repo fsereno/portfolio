@@ -10,8 +10,7 @@ export class CubikModel implements ICubikModel {
     successText: string;
     failedText: string;
 
-    constructor
-    (
+    constructor (
         cubeClass: string,
         scoreId: string,
         targetId: string,

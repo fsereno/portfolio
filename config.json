@@ -6,9 +6,7 @@
     "publishDir": "dist",
     "folderRoot": "/tree/dev/app/",
     "repoRootUrl": "https://github.com/fsereno/portfolio",
-    
     "applications": [
-
         {
             "name": "Portfolio:",
             "subHeading": "Fabio Sereno",
@@ -24,7 +22,7 @@
             "description": "The template application.",
             "folder": "master",
             "active": true,
-            "include": false            
+            "include": false
         },
         {
             "name": "MIT Licence",
@@ -89,8 +87,33 @@
             "folder": "aframe",
             "active": true,
             "include": true
+        },
+        {
+            "name": "To-Do List (Basic)",
+            "subHeading": "A basic list builder.",
+            "description": "Experimenting with Babel, TypeScript and Require JS.",
+            "folder": "babelTs",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "To-Do List (Vue)",
+            "subHeading": "A basic list builder.",
+            "description": "Experimenting with Vue, Babel, JavaAScript and Webpack.",
+            "folder": "toDoVue",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "To-Do List (React)",
+            "subHeading": "A basic list builder.",
+            "description": "Experimenting with React, Babel, JavaAScript and Webpack.",
+            "folder": "toDoReact",
+            "active": true,
+            "include": true,
+            "compileJs": false
         }
-
     ]
-
 }

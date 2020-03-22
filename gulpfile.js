@@ -1,47 +1,48 @@
-/* 
+"use strict";
+
+/*
 
   Author: Fabio Sereno.
   Description: Gulpfile.js, tasks for building individual applications.
 
 Usage...
- 
-  > gulp default    - To build development resources, 
+
+  > gulp default    - To build development resources,
                       start the dev server and watch for changes.
                       Navigate to http://localhost:8080 to see the app running.
-  
+
   > gulp build      - To build development resources and run unit tests on services.
 
-  > gulp frontendTests  - To start development server, run Nightmare tests in a headless browser 
+  > gulp frontendTests  - To start development server, run Nightmare tests in a headless browser
                       and close the server when all tests are done.
 
   > gulp serviceTests - Run all TypeScript Service unit tests.
-  
+
   > gulp publish    - To publish production resources to dist
 
   > gulp create     - Update the config.json file with additional applications.
-                      Run this command and a new application will 
+                      Run this command and a new application will
                       be created based on app_master.
 */
 
-"use strict";
-let gulp = require("gulp"),
-    browserify = require("browserify"),
-    source = require("vinyl-source-stream"),
-    tsify = require("tsify"),
-    useref = require("gulp-useref"),
-    sass = require("gulp-sass"),
-    pug = require("gulp-pug"),
-    mocha = require("gulp-mocha"),
-    connect = require("gulp-connect"),
-    logger = require("gulp-logger"),
-    logSymbols = require("log-symbols"),
-    directoryExists = require("directory-exists"),
-    config = require("./config.json"),
-    gulpHelpers = require("./gulpHelpers"),
-    flatmap = require("gulp-flatMap"),
-    gulpif = require('gulp-if'),
-    uglify = require('gulp-uglify'),
-    minifyCss = require('gulp-clean-css');
+const gulp = require("gulp");
+const browserify = require("browserify");
+const source = require("vinyl-source-stream");
+const tsify = require("tsify");
+const useref = require("gulp-useref");
+const sass = require("gulp-sass");
+const pug = require("gulp-pug");
+const mocha = require("gulp-mocha");
+const connect = require("gulp-connect");
+const logger = require("gulp-logger");
+const logSymbols = require("log-symbols");
+const directoryExists = require("directory-exists");
+const config = require("./config.json");
+const gulpHelpers = require("./gulpHelpers");
+const flatmap = require("gulp-flatMap");
+const gulpif = require('gulp-if');
+const uglify = require('gulp-uglify');
+const minifyCss = require('gulp-clean-css');
 
 let cssTask = (application) => {
  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
@@ -60,6 +61,9 @@ let cssTask = (application) => {
 }
 
 let jsTask = (application) => {
+  if (gulpHelpers.compileJsIsFalse(application.compileJs)) {
+    return false;
+  }
   return browserify({
     basedir: config.developmentDir+"/"+config.prefix+application.folder+"/typeScript/",
     debug: true,
@@ -119,9 +123,26 @@ let userefTask = (application) => {
   .pipe(gulp.dest(config.publishDir+"/"+config.prefix+application.folder));
 };
 
+let copyJsTask = (application) => {
+  if (gulpHelpers.compileJsIsTrue(application.compileJs)) {
+    return false;
+  }
+  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/js/**/*.js")
+    .pipe(logger(gulpHelpers.populateLoggerOptions(
+      "Copy JS task started...",
+      "Copy JS task complete!",
+      ".js",
+      false,
+      "../../"+config.publishDir+"/"+config.prefix+application.folder+"/js/",
+      "Compiled to: ",
+      " " + logSymbols.success
+    )))
+    .pipe(gulp.dest(config.publishDir+"/"+config.prefix+application.folder+"/js/"));
+}
+
 let createTask = (application) => {
   return directoryExists(config.developmentDir+"/"+config.prefix+application.folder)
-    .then(result => {       
+    .then(result => {
       if(result === false) {
         gulp.src(config.developmentDir+"/"+config.prefix+config.masterTemplateDir+"/**/*")
         .pipe(logger(gulpHelpers.populateLoggerOptions(
@@ -146,6 +167,7 @@ let defaultTasks = (application) => {
 
 let publishTasks = (application) => {
   gulpHelpers.runThis(application, userefTask);
+  gulpHelpers.runThis(application, copyJsTask);
 }
 
 let createTasks = (application) => {
@@ -217,7 +239,7 @@ gulp.task("watch", () => {
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", jsTask, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask, defaultTasksCallBack);
-  
+
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null, defaultTasksCallBack);

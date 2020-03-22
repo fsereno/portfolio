@@ -4,9 +4,9 @@ export class userModel {
     active: boolean;
     status: string
     constructor(
-        name: string, 
-        age: number, 
-        active: boolean, 
+        name: string,
+        age: number,
+        active: boolean,
         status: string
     ) {
         this.name = name;

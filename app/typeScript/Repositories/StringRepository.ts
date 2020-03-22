@@ -1,3 +1,4 @@
+"use strict;"
 import { IStringRepository } from "../Interfaces/IStringRepository";
 
 export class StringRepository implements IStringRepository {
@@ -7,12 +8,10 @@ export class StringRepository implements IStringRepository {
     public Constonants: string;
     public Vowels: string;
 
-    constructor(){
-
+    constructor() {
         this.Alphas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         this.Numerics = "0123456789";
         this.Constonants = "BCDFGHJKLMNPQRSTVXZWY"
         this.Vowels = "AEIOU";
-        
     }
 }

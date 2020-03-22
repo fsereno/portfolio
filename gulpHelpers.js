@@ -14,7 +14,6 @@ module.exports = {
             folder = folderFromFilePath != undefined ? folderFromFilePath.replace("app_", "") : folderFromFilePath,
             applicationIndex = config.applications.map((a)=>{return a["folder"]}).indexOf(folder),
             application = config.applications[applicationIndex];
-  
         if(dir !== "/" && application !== undefined && method !== null) {
           method(application);
         } else {
@@ -22,9 +21,6 @@ module.exports = {
             defaultTasksCallBack();
           }
         }
-        /*if(unitTestCallBack !== null || unitTestCallBack !== undefined ) {
-          unitTestCallBack();
-        }*/
       });
     },
     watchThis: (watcher, dir, method, unitTestCallBack, defaultTasksCallBack) => {  
@@ -39,7 +35,6 @@ module.exports = {
       beforeEach,
       afterEach
       ) => {
-
       let options = {
         before: before,
         after: after,
@@ -50,5 +45,7 @@ module.exports = {
         afterEach: afterEach
       }
       return options;
-    }
+    },
+    compileJsIsFalse: (compileJs) => typeof compileJs !== "undefined" && compileJs === false,
+    compileJsIsTrue: (compileJs) => (typeof compileJs === "undefined") || typeof compileJs !== "undefined" &&  compileJs === true
 }

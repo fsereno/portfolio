@@ -6,8 +6,7 @@ export class NavigateComponentModel implements INavigateComponentModel {
     event: CustomEvent<any>;
     onEvents: string[];
 
-    constructor
-    (
+    constructor (
         cameraId: string,
         yConstraint: boolean,
         onEvents: string[]

@@ -1,3 +1,4 @@
+"use strict;"
 import { ITimerService } from '../Interfaces/ITimerService';
 import { IUpdateService } from '../Interfaces/IUpdateService';
 export class TimerService implements ITimerService {
@@ -8,14 +9,11 @@ export class TimerService implements ITimerService {
     completionMessage: string;
     updateService: IUpdateService;
     interval: NodeJS.Timer;
-    constructor
-    (
+    constructor(
         target: string,
         completionTargetId: string,
         completionMessage: string,
-        updateService: IUpdateService
-    )
-    {
+        updateService: IUpdateService) {
         this.counter = 0;
         this.target = target;
         this.completionTargetId = completionTargetId;
@@ -23,17 +21,17 @@ export class TimerService implements ITimerService {
         this.updateService = updateService;
         this.duration = 0;
     }
-    Start(): void  {
+    Start(): void {
         let internalCounter = this.duration;
-            this.interval = setInterval(() => {
-                this.updateService.update(this.target,internalCounter);
-                this.counter = internalCounter;
-                internalCounter--;
-                if(internalCounter < 0 ){
-                    this.Stop();
-                    this.updateService.update(this.completionTargetId,this.completionMessage);
-                };
-            }, 1000);
+        this.interval = setInterval(() => {
+            this.updateService.update(this.target, internalCounter);
+            this.counter = internalCounter;
+            internalCounter--;
+            if (internalCounter < 0) {
+                this.Stop();
+                this.updateService.update(this.completionTargetId, this.completionMessage);
+            };
+        }, 1000);
     }
     Stop(): void {
         clearInterval(this.interval);

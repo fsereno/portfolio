@@ -1,17 +1,11 @@
 "use strict";
 
-var add = (()=>{
-
-    var counter = 0;
-
-    return ()=>{
-        counter++;
-        return counter
+const add = function(numberToAdd) {
+    return (numberToAddTo) => {
+        return numberToAdd + numberToAddTo;
     };
+}
 
-})();
-
-console.log(add());
-console.log(add());
-console.log(add());
-console.log(add());
+const addFunction = add(5);
+const result = addFunction(1);
+console.log(result === 6);

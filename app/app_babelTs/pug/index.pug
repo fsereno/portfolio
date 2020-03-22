@@ -1,0 +1,33 @@
+extends ../../pug/layouts/main.pug
+
+block styles
+  // build:css css/styles.css
+  link(rel="stylesheet" href="css/styles.css")
+  // endbuild
+
+block content
+      .row.splitter
+        .col-lg-4
+          h3 Result:
+          ul.list-group#result
+      .row.splitter
+        .col-lg-12
+          p Items: 
+            span#counter
+      .row
+        .col-lg-3
+          form#inputForm(autoComplete="off")
+            .form-group
+              label(for="input") Input:
+              input#input.form-control(
+                name="input",
+                type="text",
+                placeholder="Add to list...",
+                required)
+
+            button#submit.btn.btn-primary(type="submit") Add item
+
+block scripts
+  // build:js js/require.js data-main="js/app.js"
+  script(data-main="js/app.js", src="../../node_modules/requirejs/require.js")
+  // endbuild

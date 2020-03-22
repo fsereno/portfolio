@@ -12,13 +12,12 @@ namespace Services
     {
         private MLContext MlContext;
         
-        public MLService(MLContext mlContext){
-            
+        public MLService(MLContext mlContext)
+        {    
             MlContext = mlContext;
-        
         }
-        public IDataView Get(string path){
-            
+        public IDataView Get(string path)
+        {    
             IDataView trainingDataView = MlContext.Data.LoadFromTextFile<IrisData>(
                 path: path, 
                 hasHeader: false, 
@@ -30,8 +29,8 @@ namespace Services
             string inputColumnName, 
             string outputColumnName, 
             string[] columnNames, 
-            string predictionColumnName){
-            
+            string predictionColumnName)
+        {    
             var pipeline = MlContext.Transforms.Conversion.MapValueToKey(inputColumnName)
                 .Append(MlContext.Transforms.Concatenate(outputColumnName, columnNames))
                 .AppendCacheCheckpoint(MlContext)
@@ -44,16 +43,15 @@ namespace Services
         }
         public Microsoft.ML.Data.TransformerChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> Train(
             Microsoft.ML.Data.EstimatorChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> pipeline, 
-            IDataView trainingDataView){
-            
+            IDataView trainingDataView)
+        {
             var model = pipeline.Fit(trainingDataView);
             
             return model;
         }
-        public Entities.IrisPrediction Predict(
-            IrisData irisData, 
-            Microsoft.ML.Data.TransformerChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> model){
-
+        public Entities.IrisPrediction Predict(IrisData irisData, 
+            Microsoft.ML.Data.TransformerChain<Microsoft.ML.Transforms.KeyToValueMappingTransformer> model)
+        {
             var prediction = model.CreatePredictionEngine<IrisData, IrisPrediction>(MlContext)
                 .Predict(irisData);
 
