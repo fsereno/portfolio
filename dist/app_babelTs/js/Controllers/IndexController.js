@@ -1,5 +1,6 @@
 define(["exports"], function (_exports) {
   "use strict";
+  "use strict;";
 
   Object.defineProperty(_exports, "__esModule", {
     value: true
@@ -26,19 +27,24 @@ define(["exports"], function (_exports) {
 
       _defineProperty(this, "result", void 0);
 
-      _defineProperty(this, "counter", void 0);
+      _defineProperty(this, "counterElement", void 0);
 
       _defineProperty(this, "counterLimit", void 0);
 
-      _defineProperty(this, "formId", void 0);
+      _defineProperty(this, "form", void 0);
 
-      _defineProperty(this, "setCounter", function () {
-        var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-        return _this.counter.text(value);
+      _defineProperty(this, "couter", void 0);
+
+      _defineProperty(this, "updateCounter", function () {
+        return _this.counterElement.text(_this.couter);
       });
 
-      _defineProperty(this, "incrementCounter", function (value) {
-        return Number(value + 1);
+      _defineProperty(this, "increaseCounter", function () {
+        return _this.couter = _this.couter + 1;
+      });
+
+      _defineProperty(this, "decreaseCounter", function () {
+        return _this.couter = _this.couter - 1;
       });
 
       _defineProperty(this, "isCounterWithinLimit", function (value) {
@@ -49,37 +55,90 @@ define(["exports"], function (_exports) {
         return typeof input !== "undefined" && input.length > 0;
       });
 
-      _defineProperty(this, "validateForm", function () {
-        jQuery("#".concat(_this.formId)).on("submit", function (e) {
+      _defineProperty(this, "listHasItems", function () {
+        return typeof _this.result[0] !== "undefined" && _this.result[0].childNodes.length > 0;
+      });
+
+      _defineProperty(this, "populateResult", function (value) {
+        return _this.result.html(value);
+      });
+
+      _defineProperty(this, "clearInput", function () {
+        return _this.input.val("");
+      });
+
+      _defineProperty(this, "addListItem", function (input) {
+        if (_this.listHasItems()) {
+          var result = _this.result.html();
+
+          return "".concat(result, "<li class=\"list-group-item d-flex justify-content-between align-items-center\">").concat(input, " <a href=\"#\" class=\"badge badge-danger delete\">Delete</a></li>");
+        } else {
+          return "<li class=\"list-group-item d-flex justify-content-between align-items-center\">".concat(input, " <a href=\"#\" class=\"badge badge-danger delete\">Delete</a></li>");
+        }
+      });
+
+      _defineProperty(this, "deleteListItem", function (index) {
+        var result = _this.result[0].childNodes;
+
+        if (typeof result !== "undefined" && result.length > 0) {
+          result[index].remove();
+
+          _this.decreaseCounter();
+
+          _this.updateCounter();
+        }
+      });
+
+      _defineProperty(this, "bindDeleteItemHandler", function () {
+        _this.result.find("li .delete").on("click", function (e) {
+          e.preventDefault();
+          var index = jQuery(e.currentTarget).index(".delete") || 0;
+
+          _this.deleteListItem(index);
+        });
+      });
+
+      _defineProperty(this, "isFormValid", function (input) {
+        var isValid = false;
+        var counter = Number(_this.counterElement.text());
+
+        if (_this.thereIsAValue(input) && _this.isCounterWithinLimit(counter)) {
+          isValid = true;
+        }
+
+        return isValid;
+      });
+
+      _defineProperty(this, "submitFormHandler", function () {
+        _this.form.on("submit", function (e) {
           e.preventDefault();
 
           var input = _this.input.val().toString();
 
-          var result = _this.result.text();
+          if (_this.isFormValid(input)) {
+            var list = _this.addListItem(input);
 
-          var counter = Number(_this.counter.text());
+            _this.populateResult(list);
 
-          if (_this.thereIsAValue(input) && _this.isCounterWithinLimit(counter)) {
-            if (_this.thereIsAValue(result)) {
-              _this.result.text("".concat(result, ", ").concat(input));
-            } else {
-              _this.result.text(input);
-            }
+            _this.bindDeleteItemHandler();
 
-            var updatedCounter = _this.incrementCounter(counter);
+            _this.increaseCounter();
 
-            _this.setCounter(updatedCounter);
+            _this.updateCounter();
 
-            _this.input.val();
+            _this.clearInput();
           }
+
+          ;
         });
       });
 
       this.input = jQuery("#input");
       this.result = jQuery("#result");
-      this.counter = jQuery("#counter");
+      this.counterElement = jQuery("#counter");
       this.counterLimit = 10;
-      this.formId = "inputForm";
+      this.couter = 0;
+      this.form = jQuery("#inputForm");
     }
 
     _createClass(IndexController, [{
@@ -88,9 +147,9 @@ define(["exports"], function (_exports) {
         var _this2 = this;
 
         jQuery(function () {
-          _this2.validateForm();
+          _this2.submitFormHandler();
 
-          _this2.setCounter();
+          _this2.updateCounter();
         });
       }
     }]);

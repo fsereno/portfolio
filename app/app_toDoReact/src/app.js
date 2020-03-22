@@ -69,9 +69,9 @@ class ToDoListForm extends React.Component {
             <form onSubmit={this.handleSubmit} autoComplete="off">
               <div class="form-group">
                   <label for="itemInput">
-                    Item:
+                    Input:
                   </label>
-                  <input class="form-control" name="itemInput" type="text" value={this.state.value} onChange={this.handleChange} />
+                  <input class="form-control" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
               </div>
               <button class="btn btn-primary" type="submit">Add item</button>
             </form>
