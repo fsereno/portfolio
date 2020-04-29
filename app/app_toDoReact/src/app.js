@@ -51,7 +51,7 @@ class ToDoListForm extends React.Component {
         <div class="row splitter">
           <div class="col-lg-4">
             <h3>Result:</h3>
-            <ul class="list-group">
+            <ul id="toDoList" class="list-group">
               {this.state.list.map((item, index) => {
                 return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
               })}
@@ -71,9 +71,9 @@ class ToDoListForm extends React.Component {
                   <label for="itemInput">
                     Input:
                   </label>
-                  <input class="form-control" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
+                  <input class="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
               </div>
-              <button class="btn btn-primary" type="submit">Add item</button>
+              <button id="submit" class="btn btn-primary" type="submit">Add item</button>
             </form>
           </div>
         </div>

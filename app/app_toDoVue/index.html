@@ -47,7 +47,7 @@
         <div class="row splitter">
           <div class="col-lg-4">
             <h3>Result:</h3>
-            <ul class="list-group">
+            <ul class="list-group" id="toDoList">
               <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(item, index) in items"><span>{{ item }}</span><a class="badge badge-danger delete" href="#" v-on:click="deleteItem" :data-index="index">Delete</a></li>
             </ul>
           </div>
@@ -63,7 +63,7 @@
             <form id="inputForm" autoComplete="off">
               <div class="form-group">
                 <label for="input">Input:</label>
-                <input class="form-control" id="input" name="input" type="text" placeholder="Add to list..." required v-model="name">
+                <input class="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required v-model="name">
               </div>
               <button class="btn btn-primary" id="submit" type="button" v-on:click="addItem">Add item</button>
             </form>
