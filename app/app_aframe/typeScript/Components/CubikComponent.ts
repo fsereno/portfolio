@@ -6,12 +6,12 @@ import { IUpdateService } from "../../../typeScript/Interfaces/IUpdateService";
 import { IRandomGeneratorService } from '../../../typeScript/Interfaces/IRandomGeneratorService';
 
 export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICubikCollectableComponent {
-    
+
     object: T;
     timerService: ITimerService;
     updateService: IUpdateService;
     randomGeneratorService: IRandomGeneratorService;
-    
+
     constructor(
         object: T,
         timerService: ITimerService,
@@ -23,17 +23,17 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
         this.updateService = updateService;
         this.randomGeneratorService = randomGeneratorService;
     }
-    
+
     init(): void {
         let self = this;
 
         AFRAME.registerComponent("cubik-component", {
-            
+
             init: function () {
                 self.updateService.update(self.object.scoreId, self.object.player.score);
                 self.updateService.update(self.object.targetId, self.object.getCubeCount());
                 let availableColours = ["green", "red", "blue", "yellow", "purple", "orange"],
-                    cubeClickHandler = (e: CustomEvent) => {
+                    cubeClickHandler = (e: any) => {
                         let cube = e.srcElement,
                             feedbackTextElement = document.querySelector("#"+self.object.feedbackTextElementId);
 
@@ -49,18 +49,18 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                                 feedbackTextElement.setAttribute("visible", "true");
                             } else {
                                 feedbackTextElement.setAttribute("visible", "true");
-                            }                                             
+                            }
                         }
                     }
 
-                this.el.addEventListener('click', function (evt:CustomEvent) {
+                this.el.addEventListener('click', function (evt: any) {
 
                     let scene = document.querySelector("#scene"),
                         cube = evt.srcElement,
                         spawnLimit = Number(cube.getAttributeNode("data-spawn-limit").textContent) || 0,
                         timeValue = Number(cube.getAttributeNode("data-time-value").textContent) || 0,
                         spwanAmount = self.randomGeneratorService.Generate(spawnLimit);
-                
+
                     if(cube.classList.contains("start")){
 
                         cube.setAttribute("visible", "false");
@@ -71,14 +71,14 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                                 currentPosition = cube.getAttributeNode("position").textContent,
                                 currentPositionArray = currentPosition.split(" "),
                                 newPosition = "",
-                                colourIndex = self.randomGeneratorService.Generate(availableColours.length) - 1;    
-                    
+                                colourIndex = self.randomGeneratorService.Generate(availableColours.length) - 1;
+
                             for(let i = 0; i <cube.attributes.length; i++){
                                 entity.setAttribute(cube.attributes[i].nodeName, cube.attributes[i].nodeValue);
                             }
 
-                            currentPositionArray.forEach(position =>{
-                                let offSet = self.randomGeneratorService.Generate(15);                
+                            currentPositionArray.forEach(() => {
+                                let offSet = self.randomGeneratorService.Generate(15);
                                 newPosition+=offSet+" ";
                             });
 
@@ -89,11 +89,11 @@ export class CubikComponent<T extends ICubikModel> implements IComponent<T>, ICu
                             entity.addEventListener("click", (e: CustomEvent)=>{
                                 cubeClickHandler(e);
                             });
-                            
+
                             scene.appendChild(entity);
                             self.timerService.duration = self.timerService.duration + timeValue;
                         }
-                                        
+
                         self.updateService.update(self.object.scoreId, self.object.player.score);
                         self.updateService.update(self.object.targetId, self.object.getCubeCount());
                         self.timerService.Start();

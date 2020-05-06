@@ -26,10 +26,10 @@
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
     "@types/aframe": "^0.8.4",
-    "@types/bootstrap": "^4.1.2",
+    "@types/bootstrap": "^4.3.2",
     "@types/chai": "^4.1.4",
     "@types/chai-as-promised": "^7.1.0",
-    "@types/jquery": "^3.3.4",
+    "@types/jquery": "^3.3.38",
     "@types/jquery.validation": "^1.16.4",
     "@types/knockout": "^3.4.59",
     "@types/mocha": "^5.2.5",
@@ -68,7 +68,7 @@
     "sinon-chai": "^3.2.0",
     "ts-node": "^7.0.0",
     "tsify": "^4.0.0",
-    "typescript": "^2.9.2",
+    "typescript": "^3.8.3",
     "vinyl-source-stream": "^2.0.0",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11",
@@ -86,7 +86,7 @@
     "knockout": "^3.4.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "three": "^0.107.0",
+    "three": "^0.116.1",
     "vue": "^2.6.11"
   }
 }
