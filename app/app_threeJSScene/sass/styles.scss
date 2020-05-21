@@ -3,10 +3,15 @@
 
 body {
 
+    margin: 0;
+    height: 100vh;
+
     h1 {
-
         color: $black;
-
     }
 
+}
+
+canvas {
+    display: block;
 }
