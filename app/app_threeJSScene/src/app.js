@@ -1,7 +1,8 @@
 "use strict;"
-//https://www.google.com/search?q=three+js+tutorial&oq=three+js+tut&aqs=chrome.0.0j69i57j0l6.3160j0j4&sourceid=chrome&ie=UTF-8#kpvalbx=_StDGXrC-EvCl1fAPj8q38Aw35
+//https://www.youtube.com/watch?v=6oFvqLfRnsU
 import * as THREE from 'three';
 import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
+import {TimelineMax, TweenMax, CSSPlugin, ScrollToPlugin, Draggable, Elastic, Expo} from "gsap/all";
 
 // Scene
 var scene = new THREE.Scene();
@@ -25,6 +26,9 @@ window.addEventListener("resize", () => {
   camera.updateProjectionMatrix();
 });
 
+let raycaster = new THREE.Raycaster();
+let mouse = new THREE.Vector2();
+
 // VR Button
 //document.body.appendChild( VRButton.createButton( renderer ))
 
@@ -41,9 +45,32 @@ scene.add( cube );
 scene.add( light );
 
 renderer.setAnimationLoop( function() {
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+  //cube.rotation.x += 0.01;
+  //cube.rotation.y += 0.01;
   renderer.render( scene, camera );
 });
+
+let onMouseMove = (event) => {
+  event.preventDefault();
+
+  mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+  mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  let intersects = raycaster.intersectObjects(scene.children, true);
+
+  for (let i = 0; i < intersects.length; i++) {
+    //intersects[i].object.material.color.set(0xff0000);
+    let tl = new TimelineMax();
+    tl.to(intersects[i].object.scale, 1, {x: 2, ease: Expo.easeOut});
+    tl.to(intersects[i].object.scale, .5, {x: .5, ease: Expo.easeOut});
+    tl.to(intersects[i].object.position, .5, {x: 2, ease: Expo.easeOut});
+    tl.to(intersects[i].object.position, .5, {y: Math.PI*.5, ease: Expo.easeOut}, "=-1.5");
+  }
+}
+
+window.addEventListener("mousemove", onMouseMove);
+
 
 console.log("test updated again");

@@ -117,7 +117,7 @@
         },
         {
             "name": "Three JS Scene",
-            "subHeading": "A basic Three JS scene.",
+            "subHeading": "A basic THREE JS scene.",
             "description": "Experimenting with Three JS, Babel and Webpack.",
             "folder": "threeJSScene",
             "active": true,
