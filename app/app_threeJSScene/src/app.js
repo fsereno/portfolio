@@ -64,7 +64,7 @@ let onMouseMove = (event) => {
     //intersects[i].object.material.color.set(0xff0000);
     let tl = new TimelineMax();
     tl.to(intersects[i].object.scale, 1, {x: 2, ease: Expo.easeOut});
-    tl.to(intersects[i].object.scale, .5, {x: .5, ease: Expo.easeOut});
+    tl.to(intersects[i].object.scale, .5, {y: .5, ease: Expo.easeOut});
     tl.to(intersects[i].object.position, .5, {x: 2, ease: Expo.easeOut});
     tl.to(intersects[i].object.position, .5, {y: Math.PI*.5, ease: Expo.easeOut}, "=-1.5");
   }
