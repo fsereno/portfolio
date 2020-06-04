@@ -34,39 +34,26 @@ let mouse = new THREE.Vector2();
 
 // cube
 var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-var cubeMaterial = new THREE.MeshLambertMaterial({ color: 0xFFCC00 });
-//var cube = new THREE.Mesh( cubeGeometry, cubeMaterial );
+var cubeMaterial = new THREE.MeshLambertMaterial({ color: 0xF7F7F7 });
 
-//scene.add( cube );
-
-var cubsStartingPoint = -10;
 for(var i = 0; i < 15; i++) {
-
   var cube = new THREE.Mesh( cubeGeometry, cubeMaterial );
   cube.position.x = (Math.random() - 0.5) * 10;
   cube.position.y = (Math.random() - 0.5) * 10;
   cube.position.z = (Math.random() - 0.5) * 10;
   scene.add(cube);
-  cubsStartingPoint += 1;
 }
 
-/*var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-var cubeMaterial = new THREE.MeshLambertMaterial({ color: 0xFFCC00 });
-var cube = new THREE.Mesh( cubeGeometry, cubeMaterial );
-cube.position.y = 2;*/
-
-//scene.add( cube );
-
 // light
-var light = new THREE.PointLight(0xFFFFFF, 1, 500);
-light.position.set(10, 0, 25);
+var light = new THREE.PointLight(0xFFFFFF, 1, 1000);
+light.position.set(0, 0, 0);
+scene.add( light );
 
-
+var light = new THREE.PointLight(0xFFFFFF, 2, 1000);
+light.position.set(0, 0, 25);
 scene.add( light );
 
 renderer.setAnimationLoop( function() {
-  //cube.rotation.x += 0.01;
-  //cube.rotation.y += 0.01;
   renderer.render( scene, camera );
 });
 
@@ -81,7 +68,6 @@ let cubeReact = (event) => {
   let intersects = raycaster.intersectObjects(scene.children, true);
 
   for (let i = 0; i < intersects.length; i++) {
-    //intersects[i].object.material.color.set(0xff0000);
     let tl = new TimelineMax();
     tl.to(intersects[i].object.scale, 1, {x: 2, ease: Expo.easeOut});
     tl.to(intersects[i].object.scale, .5, {y: .5, ease: Expo.easeOut});
@@ -91,6 +77,5 @@ let cubeReact = (event) => {
 }
 
 window.addEventListener("mousemove", cubeReact);
-
 
 console.log("test updated again");
