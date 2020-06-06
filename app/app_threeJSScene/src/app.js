@@ -68,11 +68,14 @@ let cubeReact = (event) => {
   let intersects = raycaster.intersectObjects(scene.children, true);
 
   for (let i = 0; i < intersects.length; i++) {
+    intersects[i].object.rotation.x += 0.01;
+    intersects[i].object.rotation.y += 0.01;
+
     let tl = new TimelineMax();
     tl.to(intersects[i].object.scale, 1, {x: 2, ease: Expo.easeOut});
     tl.to(intersects[i].object.scale, .5, {y: .5, ease: Expo.easeOut});
-    tl.to(intersects[i].object.position, .5, {x: 2, ease: Expo.easeOut});
-    tl.to(intersects[i].object.position, .5, {y: Math.PI*.5, ease: Expo.easeOut}, "=-1.5");
+    //tl.to(intersects[i].object.position, .5, {x: 2, ease: Expo.easeOut});
+    //tl.to(intersects[i].object.position, .5, {y: Math.PI*.5, ease: Expo.easeOut}, "=-1.5");
   }
 }
 
