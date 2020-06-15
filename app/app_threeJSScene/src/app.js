@@ -29,6 +29,11 @@ const helper = function() {
     document.body.appendChild( renderer.domElement );
   }
 
+  let createVRButton = () => {
+    renderer.xr.enabled = true;
+    document.body.appendChild( VRButton.createButton( renderer ) );
+  }
+
   let setResizeEventHandler = () => {
     window.addEventListener("resize", () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -89,6 +94,7 @@ const helper = function() {
     createCubes(15);
     addLight();
     addLight(0xFFFFFF, 2, 1000, 0, 0, 25);
+    createVRButton();
     setAnimationLoop();
     setCubeReactEventListener();
   }
