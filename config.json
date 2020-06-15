@@ -123,6 +123,15 @@
             "active": true,
             "include": true,
             "compileJs": false
+        },
+        {
+            "name": "Tic-Tac-Toe (React)",
+            "subHeading": "A Tic-Tac-Toe game built using React JS.",
+            "description": "Experimenting more complex aspects of React, Babel and Webpack.",
+            "folder": "ticTacToeReact",
+            "active": true,
+            "include": true,
+            "compileJs": false
         }
     ]
 }
