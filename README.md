@@ -35,9 +35,9 @@ The purpose of this repository is to demonstrate skills in various technologies,
 
 ## Prerequisites
 
-- Nodejs v ^11.8.3 (https://nodejs.org/en/)
+- Nodejs v ^12.14.0 (https://nodejs.org/en/)
 - Npm (https://www.npmjs.com/)
-- Gulp (https://gulpjs.com/)
+- Gulp CLI (https://gulpjs.com/)
 - .NetCore (https://www.microsoft.com/net/learn/dotnet/hello-world-tutorial)
 ---
 
@@ -52,13 +52,15 @@ The purpose of this repository is to demonstrate skills in various technologies,
 ---
 
 ## Setup For Node JS Driven Applications
+- Please ensure you have the Gulp command line tools installed before running any Gulp tasks.
 
-- open your prefered command line:
+- Open your prefered command line:
 
 > install npm packages
 
 ```shell
 $ npm install
+$ npm install --global gulp-cli
 ```
 ---
 
