@@ -268,14 +268,14 @@ gulp.task("create", () => {
   config.applications.map(createTasks);
 });
 
-gulp.task("publish",["serviceTests", "images", "fonts"], () => {
+gulp.task("publish", gulp.series(["serviceTests", "images", "fonts"], () => {
   config.applications.map(publishTasks);
-});
+}));
 
-gulp.task("build", ["serviceTests"], () => {
+gulp.task("build", gulp.series(["serviceTests"], () => {
   config.applications.map(defaultTasks);
-});
+}));
 
-gulp.task("default",["connect", "watch"], () => {
+gulp.task("default", gulp.series(["connect", "watch"], () => { 
   config.applications.map(defaultTasks);
-});
+}));
