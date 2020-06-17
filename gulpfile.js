@@ -272,8 +272,9 @@ gulp.task("publish", gulp.series(["serviceTests", "images", "fonts"], () => {
   config.applications.map(publishTasks);
 }));
 
-gulp.task("build", gulp.series(["serviceTests"], () => {
+gulp.task("build", gulp.series(["serviceTests"], (done) => {
   config.applications.map(defaultTasks);
+  done();
 }));
 
 gulp.task("default", gulp.series(["connect", "watch"], () => { 
