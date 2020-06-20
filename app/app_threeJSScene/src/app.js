@@ -1,7 +1,6 @@
 "use strict;"
 //https://www.youtube.com/watch?v=6oFvqLfRnsU
 import * as THREE from 'three';
-import { VRButton } from 'three/examples/jsm/webxr/VRButton.js';
 import {TimelineMax, TweenMax, CSSPlugin, ScrollToPlugin, Draggable, Elastic, Expo} from "gsap/all";
 
 const helper = function() {
@@ -23,15 +22,9 @@ const helper = function() {
   let setRenderer = () => {
     renderer.setClearColor("#e5e5e5");
     renderer.setSize( window.innerWidth, window.innerHeight );
-    renderer.xr.enabled = true;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     document.body.appendChild( renderer.domElement );
-  }
-
-  let createVRButton = () => {
-    renderer.xr.enabled = true;
-    document.body.appendChild( VRButton.createButton( renderer ) );
   }
 
   let setResizeEventHandler = () => {
@@ -94,7 +87,6 @@ const helper = function() {
     createCubes(15);
     addLight();
     addLight(0xFFFFFF, 2, 1000, 0, 0, 25);
-    createVRButton();
     setAnimationLoop();
     setCubeReactEventListener();
   }
