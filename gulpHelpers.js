@@ -7,13 +7,13 @@ module.exports = {
     },
     setupWatcherOnChangeEvent: (watcher, dir, method, defaultTasksCallBack) => {
       watcher.on("change", function(file, stats) {
-        let windowsOS = (/\\/).test(file.path),
-            config = module.exports.constructor();
-            filePathArray = windowsOS ? file.path.split("\\") : file.path.split("/"),
-            folderFromFilePath = filePathArray[filePathArray.indexOf(dir) - 1],
-            folder = folderFromFilePath != undefined ? folderFromFilePath.replace("app_", "") : folderFromFilePath,
-            applicationIndex = config.applications.map((a)=>{return a["folder"]}).indexOf(folder),
-            application = config.applications[applicationIndex];
+        let windowsOS = (/\\/).test(file);
+        let config = module.exports.constructor();
+        let filePathArray = windowsOS ? file.split("\\") : file.split("/");
+        let folderFromFilePath = filePathArray[filePathArray.indexOf(dir) - 1];
+        let folder = folderFromFilePath != undefined ? folderFromFilePath.replace("app_", "") : folderFromFilePath;
+        let applicationIndex = config.applications.map((a)=>{return a["folder"]}).indexOf(folder);
+        let application = config.applications[applicationIndex];
         if(dir !== "/" && application !== undefined && method !== null) {
           method(application);
         } else {
@@ -23,7 +23,7 @@ module.exports = {
         }
       });
     },
-    watchThis: (watcher, dir, method, unitTestCallBack, defaultTasksCallBack) => {  
+    watchThis: (watcher, dir, method, unitTestCallBack, defaultTasksCallBack) => { 
       module.exports.setupWatcherOnChangeEvent(watcher, dir, method, unitTestCallBack, defaultTasksCallBack);
     },
     populateLoggerOptions: (

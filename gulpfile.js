@@ -235,21 +235,19 @@ gulp.task("fonts", () => {
     return output;
 });
 
-gulp.task("watch", () => {
+gulp.task("watch", (done) => {
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", jsTask, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask, defaultTasksCallBack);
-
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null, defaultTasksCallBack);
+  done();
 });
 
-gulp.task("connect", () => {
-  connect.server({
-   root: ["./"+config.developmentDir+"/"+config.prefix+config.entry, ".", "./"+config.developmentDir],
-   livereload: true
- })
+gulp.task("connect", (done) => {
+  startServerTask();
+  done();
 });
 
 gulp.task("serviceTests", () => {
@@ -277,6 +275,6 @@ gulp.task("build", gulp.series(["serviceTests"], (done) => {
   done();
 }));
 
-gulp.task("default", gulp.series(["connect", "watch"], () => { 
+gulp.task("default", gulp.series(["build", "connect", "watch"], () => {
   config.applications.map(defaultTasks);
 }));
