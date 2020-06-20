@@ -275,6 +275,6 @@ gulp.task("build", gulp.series(["serviceTests"], (done) => {
   done();
 }));
 
-gulp.task("default", gulp.series(["build", "connect", "watch"], () => {
+gulp.task("default", gulp.series(["connect", "watch"], () => {
   config.applications.map(defaultTasks);
 }));
