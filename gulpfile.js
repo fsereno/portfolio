@@ -223,16 +223,32 @@ let frontendTestTasks = async () => {
   await endServerTask();
 }
 
-gulp.task("images", () => {
-  var output = gulp.src(config.developmentDir+"/images/**/*")
-    .pipe(gulp.dest(config.publishDir+"/images"));
-    return output;
+let fontsTask = () => {
+  return output = gulp.src(config.developmentDir+"/fonts/**/*")
+    .pipe(gulp.dest(config.publishDir+"/fonts"));
+}
+
+let imagesTask = () => {
+  return gulp.src(config.developmentDir+"/images/**/*")
+  .pipe(gulp.dest(config.publishDir+"/images"));
+}
+
+let serviceTestsTask = () => {
+  return gulp.src(config.developmentDir+"/tests/services/*.test.ts")
+    .pipe(mocha({
+        reporter: "spec",
+        require: ["ts-node/register"]
+    }));
+}
+
+gulp.task("images", (done) => {
+  imagesTask();
+  done();
 });
 
-gulp.task("fonts", () => {
-  var output = gulp.src(config.developmentDir+"/fonts/**/*")
-    .pipe(gulp.dest(config.publishDir+"/fonts"));
-    return output;
+gulp.task("fonts", (done) => {
+  fontsTask();
+  done();
 });
 
 gulp.task("watch", (done) => {
@@ -250,24 +266,24 @@ gulp.task("connect", (done) => {
   done();
 });
 
-gulp.task("serviceTests", () => {
-  return gulp.src(config.developmentDir+"/tests/services/*.test.ts")
-    .pipe(mocha({
-        reporter: "spec",
-        require: ["ts-node/register"]
-    }));
+gulp.task("serviceTests", (done) => {
+  serviceTestsTask();
+  done();
 });
 
-gulp.task("frontendTests", () => {
-  return frontendTestTasks();
+gulp.task("frontendTests", (done) => {
+  frontendTestTasks();
+  done();
 });
 
-gulp.task("create", () => {
+gulp.task("create", (done) => {
   config.applications.map(createTasks);
+  done();
 });
 
-gulp.task("publish", gulp.series(["serviceTests", "images", "fonts"], () => {
+gulp.task("publish", gulp.series(["serviceTests", "images", "fonts"], (done) => {
   config.applications.map(publishTasks);
+  done();
 }));
 
 gulp.task("build", gulp.series(["serviceTests"], (done) => {
@@ -275,6 +291,7 @@ gulp.task("build", gulp.series(["serviceTests"], (done) => {
   done();
 }));
 
-gulp.task("default", gulp.series(["connect", "watch"], () => {
+gulp.task("default", gulp.series(["connect", "watch"], (done) => {
   config.applications.map(defaultTasks);
+  done();
 }));
