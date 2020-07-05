@@ -37,14 +37,6 @@ function Square(props) {
 }
 
 class Board extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      squares: Array(9).fill(null),
-      xIsNext: true
-    }
-  }
-
   handleClick(i) {
     const squares = this.state.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
@@ -60,23 +52,15 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
-        value={this.state.squares[i]}
-        onClick={() => this.handleClick(i)}
+        value={this.props.squares[i]}
+        onClick={() => this.props.onClick(i)}
       />
     );
   }
-
+// Finally, we need to move the handleClick method from the Board component to the Game
   render() {
-    const winner = calculateWinner(this.state.squares);
-    let status;
-    if (winner) {
-      status = "Winner: " + winner;
-    } else {
-      status = "Next player: " + (this.state.xIsNext ?  "X" : "O");
-    }
     return (
       <div>
-        <div className="status">{status}</div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -99,14 +83,34 @@ class Board extends React.Component {
 
 class Game extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      history: [{
+        squares: Array(9).fill(null),
+      }],
+      xIsNext: true
+    }
+  }
   render() {
+    const history = this.state.history;
+    const current = history[history.length - 1];
+    const winner = calculateWinner(current.squares);
+    let status;
+
+    if(winner) {
+      status = "Winner: " + winner;
+    } else {
+      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+    }
+
     return (
       <div className="game">
         <div className="game-board">
           <Board/>
         </div>
         <div className="game-info">
-          <div>{/*todo */}</div>
+          <div>{status}</div>
           <ol>{/*todo*/}</ol>
         </div>
       </div>
