@@ -3,9 +3,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//https://reactjs.org/tutorial/tutorial.html
-//https://codepen.io/gaearon/pen/oWWQNa?editors=0010
-
 function Square(props) {
   return (
     <button
@@ -55,11 +52,18 @@ class Game extends React.Component {
       history: [{
         squares: Array(9).fill(null)
       }],
+      stepNumber: 0,
       xIsNext: true
     };
   }
+  jumpTo(step) {
+    this.setState({
+      stepNumber: step,
+      xIsNext: (step % 2) === 0
+    });
+  }
   handleClick(i) {
-    const history = this.state.history;
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
@@ -70,19 +74,19 @@ class Game extends React.Component {
       history: history.concat([{
         squares: squares
       }]),
+      stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
     });
   }
   render() {
     const history = this.state.history;
-    const current = history[history.length - 1];
+    const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
     const moves = history.map((step, move) => {
       const desc = move ?
         "Go to move #" + move :
         "Go to game start";
       return (
-        // n the Game component’s render method, we can add the key as <li key={move}>
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
@@ -121,7 +125,7 @@ ReactDOM.render(
 );
 
 function calculateWinner(squares) {
-  const lines = [
+  const possibleLines = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -131,8 +135,8 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6],
   ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
+  for (let i = 0; i < possibleLines.length; i++) {
+    const [a, b, c] = possibleLines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
     }
