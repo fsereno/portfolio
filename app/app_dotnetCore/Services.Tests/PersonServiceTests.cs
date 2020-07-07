@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Repositories;
 using Domains;
@@ -20,7 +19,7 @@ namespace Services.Tests
             var persons = new List<Person>();
             persons.Add(new Person() { Id = 2, Age = 1 });
             persons.Add(new Person() { Id = 1, Age = 2 });
-            
+
             _collection = persons;
             _repository = new Repository<Person>(persons);
             _personService = new PersonService<Person>(_repository);
@@ -44,13 +43,11 @@ namespace Services.Tests
         public void GetAll(){
 
             //Arrange
-
             //Act
             var persons = _personService.GetAll();
 
             //Assert
             Assert.That(persons, Is.TypeOf<List<Person>>());
-
         }
 
         [Test]

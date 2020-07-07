@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Repositories;
 using Domains;
 using NUnit.Framework;
 
@@ -16,7 +14,7 @@ namespace Services.Tests
         public void BeforeEach()
         {
             var collection = new List<QItem>();
-            
+
             collection.Add(new QItem(1, DateTime.Now){
                 PreviousNumberOfItems = new Queue<int>(new List<int>{
                     1,
@@ -49,7 +47,7 @@ namespace Services.Tests
         public void Get()
         {
             var listToReturn = new List<QItem>();
-            
+
             while(checkCount(_collection) > 0) {
 
                 var i = 0;
@@ -58,7 +56,7 @@ namespace Services.Tests
                 };
 
                 foreach(var account in _collection){
-                        item.NumberOfItems += account.PreviousNumberOfItems.Dequeue();                    
+                        item.NumberOfItems += account.PreviousNumberOfItems.Dequeue();
                     i++;
                 }
 
@@ -67,9 +65,8 @@ namespace Services.Tests
 
              // Assert
             Assert.That(listToReturn[0].NumberOfItems, Is.EqualTo(3));
-            Assert.That(listToReturn[1].NumberOfItems, Is.EqualTo(5)); 
-            Assert.That(listToReturn[2].NumberOfItems, Is.EqualTo(8)); 
-        
+            Assert.That(listToReturn[1].NumberOfItems, Is.EqualTo(5));
+            Assert.That(listToReturn[2].NumberOfItems, Is.EqualTo(8));
         }
     }
 }

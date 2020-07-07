@@ -2,7 +2,6 @@
 
 namespace Services.Tests
 {
-
     [TestFixture]
     public class StringServiceTests
     {
@@ -19,7 +18,6 @@ namespace Services.Tests
         public void ShouldReturnAConcatString_WhenInputIsAStringArray(
             string inputA, string inputB, string outcome)
         {
-
             // Arrange
             var input = new string[] { inputA, inputB};
 
