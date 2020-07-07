@@ -40,9 +40,8 @@ const directoryExists = require("directory-exists");
 const config = require("./config.json");
 const gulpHelpers = require("./gulpHelpers");
 const flatmap = require("gulp-flatMap");
-const gulpif = require('gulp-if');
 const uglify = require('gulp-uglify');
-const minifyCss = require('gulp-clean-css');
+let buffer = require('vinyl-buffer');
 
 let cssTask = (application) => {
  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
@@ -55,7 +54,7 @@ let cssTask = (application) => {
     "Compiled to: ",
     " " + logSymbols.success
   )))
-  .pipe(sass().on("error", sass.logError))
+  .pipe(sass({outputStyle: 'compressed'}).on("error", sass.logError))
   .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder+"/css"))
   .pipe(connect.reload());
 }
@@ -74,6 +73,8 @@ let jsTask = (application) => {
   .plugin(tsify)
   .bundle()
   .pipe(source("app.js"))
+  .pipe(buffer())
+  .pipe(uglify())
   .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder+"/js"))
   .pipe(connect.reload())
   .pipe(logger(gulpHelpers.populateLoggerOptions(
@@ -118,8 +119,6 @@ let userefTask = (application) => {
     " " + logSymbols.success
   )))
   .pipe(useref())
-  .pipe(gulpif('*.js', uglify()))
-  .pipe(gulpif('*.css', minifyCss()))
   .pipe(gulp.dest(config.publishDir+"/"+config.prefix+application.folder));
 };
 
@@ -224,7 +223,7 @@ let frontendTestTasks = async () => {
 }
 
 let fontsTask = () => {
-  return output = gulp.src(config.developmentDir+"/fonts/**/*")
+  return gulp.src(config.developmentDir+"/fonts/**/*")
     .pipe(gulp.dest(config.publishDir+"/fonts"));
 }
 
