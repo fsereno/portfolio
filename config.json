@@ -126,7 +126,7 @@
             "compileJs": false
         },
         {
-            "name": "AFrame React - Hello World",
+            "name": "AFrame React (Basic)",
             "subHeading": "An AFrame Hello World application with React JS.",
             "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
             "folder": "aframe",

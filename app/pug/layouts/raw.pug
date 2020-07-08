@@ -5,7 +5,13 @@ html(lang="en")
     title Portfolio
     meta(name="description" content="Portfolio")
     include ../includes/_metaAuthor.pug
-    block head
+    include ../includes/_styleDeps.pug
+    block styles
   body
-    block content  
+    .container-fluid
+      hr
+      block content
+
+    block footer
+    include ../includes/_jsDeps.pug
     block scripts
