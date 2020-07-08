@@ -39,7 +39,7 @@ const logSymbols = require("log-symbols");
 const directoryExists = require("directory-exists");
 const config = require("./config.json");
 const gulpHelpers = require("./gulpHelpers");
-const flatmap = require("gulp-flatMap");
+const flatmap = require("gulp-flatmap");
 const uglify = require('gulp-uglify');
 let buffer = require('vinyl-buffer');
 
