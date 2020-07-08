@@ -17,5 +17,5 @@ steps:
 
 - script: |
     npm install
-    gulp serviceTests --gulpfile gulpfile.js
+    gulp frontendTests --gulpfile gulpfile.js
   displayName: 'npm install and build'

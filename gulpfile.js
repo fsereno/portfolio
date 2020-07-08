@@ -275,6 +275,12 @@ gulp.task("frontendTests", (done) => {
   done();
 });
 
+gulp.task("tests", (done) => {
+  serviceTestsTask();
+  frontendTestTasks();
+  done();
+});
+
 gulp.task("create", (done) => {
   config.applications.map(createTasks);
   done();
