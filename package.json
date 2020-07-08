@@ -4,7 +4,7 @@
   "description": "My Portfolio Repository",
   "main": "index.html",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./app/tests/services/**/*.test.ts",
+    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./app/**/*.test.ts",
     "check-types": "tsc"
   },
   "repository": {
