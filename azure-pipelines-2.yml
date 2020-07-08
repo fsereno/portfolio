@@ -9,13 +9,17 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  buildConfiguration: 'Release'
+
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '12.x'
   displayName: 'Install Node.js'
 
 - script: |
     npm install
-    npm test
-  displayName: 'npm install and build'
+    gulp tests --gulpfile gulpfile.js
+    dotnet test app/app_dotnetCore --configuration $(buildConfiguration)
+  displayName: 'npm install, gulp tasks, dotnet project build and tests.'
