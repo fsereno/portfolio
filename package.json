@@ -85,7 +85,7 @@
     "gsap": "^3.2.6",
     "jquery": "^3.5.0",
     "jquery-validation": "^1.17.0",
-    "knockout": "^3.4.2",
+    "knockout": "^3.5.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "three": "^0.116.1",
