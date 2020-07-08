@@ -21,5 +21,5 @@ steps:
 - script: |
     npm install
     gulp tests --gulpfile gulpfile.js
-    dotnet build app/app_dotnetCore
+    dotnet test app/app_dotnetCore
   displayName: 'npm install and build'
