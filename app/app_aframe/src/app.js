@@ -26,5 +26,5 @@ class Scene extends React.Component {
 
 ReactDOM.render(
   <Scene />,
-  document.getElementById('result')
+  document.getElementById('body')
 );

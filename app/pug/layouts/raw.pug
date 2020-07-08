@@ -7,10 +7,8 @@ html(lang="en")
     include ../includes/_metaAuthor.pug
     include ../includes/_styleDeps.pug
     block styles
-  body
-    .container-fluid
-      hr
-      block content
+  body#body
+    block content
 
     block footer
     include ../includes/_jsDeps.pug
