@@ -81,14 +81,6 @@
             "include": true
         },
         {
-            "name": "A-Frame VR Cubik Game",
-            "subHeading": "Focus on the initial spinning cube to start the game.",
-            "description": "An example VR application. Using A-Frame, TypeScript, Sass and Pug.",
-            "folder": "aframe",
-            "active": true,
-            "include": true
-        },
-        {
             "name": "To-Do List (Basic)",
             "subHeading": "A basic list builder.",
             "description": "Experimenting with Babel, TypeScript and Require JS.",
@@ -129,6 +121,15 @@
             "subHeading": "A Tic-Tac-Toe game built using React JS.",
             "description": "Experimenting more complex aspects of React, Babel and Webpack.",
             "folder": "ticTacToeReact",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "AFrame React - Hello World",
+            "subHeading": "An AFrame Hello World application with React JS.",
+            "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
+            "folder": "aframe",
             "active": true,
             "include": true,
             "compileJs": false
