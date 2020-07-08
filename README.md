@@ -6,7 +6,9 @@ Highly Experienced Full Stack Web Developer. Highly self-motivated, enthusiastic
 Very keen on learning and using the latest technologies, with a real passion for software development in general. Personal interests include exciting technologies such as Artificial Intelligence, Machine Learning, Virtual Reality and Blockchain development.
 
 ## My Portfolio Repository
-The purpose of this repository is to demonstrate skills in various technologies, coding principles and design patterns:
+The purpose of this repository is to demonstrate skills in various technologies, coding principles and design patterns.
+
+This project is both built and managed with Azure DevOps for continuous integration and deployment (CI/CD).
 
 - NodeJS (https://nodejs.org/en/)
 - Gulp (https://gulpjs.com)
