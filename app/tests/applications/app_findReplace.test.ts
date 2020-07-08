@@ -3,7 +3,7 @@ const   chai = require('chai'),
         chaiAsPromised = require('chai-as-promised'),
         sinonChai = require('sinon-chai'),
         should = chai.should(),
-        expectedResult:string = 'Find this X word in this sentence and replace it with this different word. Try finding - "this".',
+        expectedResult:string = 'Find this word in this sentence and replace it with this different word. Try finding - "this".',
         application = "app_findReplace";
 
 chai.use(sinonChai); 

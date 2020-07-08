@@ -277,7 +277,6 @@ gulp.task("frontendTests", (done) => {
 
 gulp.task("tests", (done) => {
   serviceTestsTask();
-  frontendTestTasks();
   done();
 });
 
