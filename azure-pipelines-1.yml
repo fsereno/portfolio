@@ -22,4 +22,5 @@ steps:
     npm install
     gulp tests --gulpfile gulpfile.js
     dotnet test app/app_dotnetCore --configuration $(buildConfiguration)
+    gulp publish
   displayName: 'npm install, gulp tasks, dotnet project build and tests.'
