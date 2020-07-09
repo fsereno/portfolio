@@ -38,3 +38,4 @@
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj/Debug/netcoreapp2.1/Services.Tests.csproj.CopyComplete
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj/Debug/netcoreapp2.1/Services.Tests.dll
 /Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj/Debug/netcoreapp2.1/Services.Tests.pdb
+/Users/fabiosereno/sites/portfolio/app/app_dotnetCore/Services.Tests/obj/Debug/netcoreapp2.1/Services.Tests.genruntimeconfig.cache
