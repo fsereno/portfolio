@@ -40,7 +40,7 @@ export class StringService implements IStringService {
 
     public ToArray(input: string): string[] {
         let result = [];
-        for (var i = 0; i < input.length; i++) {
+        for (let i = 0; i < input.length; i++) {
             result.push(input[i]);
         }
         return result;

@@ -23,7 +23,7 @@ export class UnscrabbleService implements IUnscrabbleService {
         let result = false;
 
         if (firstLetterExists > -1 && lastLetterExists > -1) {
-            for (var i = 0; i < inputArray.length; i++) {
+            for (let i = 0; i < inputArray.length; i++) {
                 let inputCharacter = inputArray[i];
                 let indexOf = scrabbleArray.indexOf(inputCharacter);
                 if (indexOf > -1) {

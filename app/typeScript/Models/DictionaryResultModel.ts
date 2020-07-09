@@ -7,8 +7,7 @@ export class DictionaryResultModel {
     constructor(
         result: boolean,
         description: string,
-        word: string
-    ){
+        word: string) {
         this.result = result;
         this.description = description;
         this.word = word;
