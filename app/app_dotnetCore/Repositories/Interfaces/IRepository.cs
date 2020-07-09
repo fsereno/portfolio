@@ -10,6 +10,5 @@ namespace Repositories
         void Add(T entity);
 
         List<T> GetAll();
-
     }
 }

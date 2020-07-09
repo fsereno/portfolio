@@ -47,7 +47,7 @@ namespace Repositories
         public List<T> GetAll()
         {
             var persons = _collection;
-            return persons; 
+            return persons;
         }
     }
 }

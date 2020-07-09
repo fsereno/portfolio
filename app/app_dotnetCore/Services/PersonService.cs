@@ -12,7 +12,6 @@ namespace Services
             IRepository<T> repository)
         {
             _repository = repository;
-
         }
         public void Add(T person)
         {
@@ -26,7 +25,7 @@ namespace Services
             if (exsits == null)
             {
                 _repository.Add(person);
-            } 
+            }
         }
         public T Get(T person)
         {
@@ -54,7 +53,7 @@ namespace Services
             }
 
             collection.Sort();
-            return collection;    
+            return collection;
         }
     }
 }

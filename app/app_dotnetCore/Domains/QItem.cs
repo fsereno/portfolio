@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Domains
 {
     public class QItem
-    {        
+    {
         public int NumberOfItems { get; set; }
         public DateTime Date { get; set; }
         public Queue<int> PreviousNumberOfItems { get; set; }

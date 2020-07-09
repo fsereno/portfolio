@@ -49,7 +49,6 @@ namespace Repositories.Tests
             Assert.That(result, Is.Not.Null);
             Assert.That(result, Is.TypeOf<Person>());
             Assert.That(result.Id, Is.EqualTo(3));
-
         }
 
         [Test]
@@ -60,7 +59,6 @@ namespace Repositories.Tests
             //Assert
             var result = Assert.Throws<ArgumentNullException>(() => _repository.Add(null));
             Assert.That(result.Message, Is.EqualTo("Value cannot be null.\nParameter name: entity"));
-
         }
     }
 }
