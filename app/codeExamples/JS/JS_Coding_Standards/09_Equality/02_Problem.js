@@ -1,0 +1,1 @@
+"" != 0; // this would return false, meaning these are equal when they are not.

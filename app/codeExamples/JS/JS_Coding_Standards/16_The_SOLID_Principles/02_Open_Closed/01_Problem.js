@@ -10,7 +10,6 @@ const doMath = (firstNumber = 0, secondNumber = 0, operator = "+") => {
     return result;
 }
 
-
 let result = doMath(1, 2, "+");
 console.log(result);
 

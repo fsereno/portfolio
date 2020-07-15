@@ -1,0 +1,2 @@
+if (valid === true)
+  doThis();

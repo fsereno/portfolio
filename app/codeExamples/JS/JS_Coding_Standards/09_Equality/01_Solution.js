@@ -1,0 +1,1 @@
+"" === 0; // this equals false, and so it should!

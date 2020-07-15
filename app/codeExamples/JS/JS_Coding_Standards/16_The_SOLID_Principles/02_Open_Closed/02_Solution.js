@@ -1,12 +1,11 @@
-class MathFactory {
+const MathFactory = function() {
 
-    add = (firstNumber = 0, secondNumber = 0) => firstNumber + secondNumber;
+    this.add = (firstNumber = 0, secondNumber = 0) => firstNumber + secondNumber;
 
-    subtract = (firstNumber = 0, secondNumber = 0) => firstNumber - secondNumber;
+    this.subtract = (firstNumber = 0, secondNumber = 0) => firstNumber - secondNumber;
 
-    multiply = (firstNumber = 0, secondNumber = 0) => firstNumber * secondNumber;
-
-  }
+    this.multiply = (firstNumber = 0, secondNumber = 0) => firstNumber * secondNumber;
+}
 
 let mathUtil = new MathFactory();
 

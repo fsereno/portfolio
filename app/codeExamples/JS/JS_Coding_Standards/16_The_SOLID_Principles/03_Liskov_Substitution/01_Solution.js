@@ -1,30 +1,36 @@
 class Animal {
-    walk() {
-        console.log("The Animal is walking.");
+    move() {
+        console.log("The Animal is moving.");
     }
     sleep() {
         console.log("The Animal is sleeping.");
     }
+    communicate() {
+        console.log("The Animal is communicating.");
+    }
 }
 
 class Dog extends Animal {
-    walk() {
+    move() {
         console.log("The Dog is walking.");
     }
     sleep() {
         console.log("The Dog is sleeping.");
     }
-    eat(){
-        console.log("The Dog is eating.");
+    communicate() {
+        console.log("The Dog is barking.")
     }
 }
 
 class Cat extends Animal {
-    walk() {
+    move() {
         console.log("The Cat is walking.");
     }
     sleep() {
         console.log("The Cat is sleeping.");
+    }
+    communicate() {
+        console.log("The Cat is meowing.")
     }
 }
 
@@ -33,5 +39,5 @@ let cat = new Cat();
 let animals = [dog, cat];
 
 animals.forEach((animal) => {
-    animal.eat();
+    animal.communicate();
 });

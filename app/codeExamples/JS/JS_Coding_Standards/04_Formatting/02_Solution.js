@@ -1,0 +1,3 @@
+if (valid === true) {
+    doSomething();
+}
