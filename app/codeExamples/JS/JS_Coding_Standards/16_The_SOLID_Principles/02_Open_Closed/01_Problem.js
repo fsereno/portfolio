@@ -6,6 +6,8 @@ const doMath = (firstNumber = 0, secondNumber = 0, operator = "+") => {
         result = firstNumber - secondNumber;
     } else if (operator === "x") {
         result = firstNumber * secondNumber;
+    } else if (operator === "/") {
+        result = firstNumber / secondNumber;
     }
     return result;
 }
@@ -17,4 +19,7 @@ result = doMath(2, 1, "-");
 console.log(result);
 
 result = doMath(1, 2, "x");
+console.log(result);
+
+result = doMath(6, 2, "/");
 console.log(result);
