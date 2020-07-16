@@ -1,4 +1,4 @@
-let methodFactory = function() {
+const methodFactory = function() {
     return function(prop) {
         return !isNaN(prop) ? prop + 1 : 0;
     }
