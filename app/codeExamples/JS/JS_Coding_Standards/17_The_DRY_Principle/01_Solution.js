@@ -1,5 +1,3 @@
-"use strict;"
-
 class Car {
     constructor(make, colour, isHybrid) {
         this.make = make;

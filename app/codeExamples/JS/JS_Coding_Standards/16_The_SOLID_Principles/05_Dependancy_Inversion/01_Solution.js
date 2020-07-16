@@ -1,5 +1,5 @@
 let userDataFactory = (function() {
-    const get = () => {
+    const get = async () => {
         // this object would typically come from an API call
         let data =  {
             name: "Anna",
@@ -16,6 +16,8 @@ let userDataFactory = (function() {
     }
 })();
 
-let user = userDataFactory.get();
-userDataFactory.printName();
-userDataFactory.printFavouriteColour();
+(async() => {
+    let user = await userDataFactory.get();
+    userDataFactory.printName(user);
+    userDataFactory.printFavouriteColour(user);
+})();
