@@ -1,18 +1,11 @@
-let persons = [];
+let name = "James"
+let age = 23;
+console.log(`${name} ${age}`)
 
-persons.push({
-  name: "James",
-  age: 23
-});
+name = "Anna"
+age = 30;
+console.log(`${name} ${age}`)
 
-persons.push({
-  name: "Anna",
-  age: 30
-});
-
-persons.push({
-  name: "Tim",
-  age: 18
-});
-
-persons.forEach((person) => console.log(`${person.name} ${person.age}`));
+name = "Tim"
+age = 18;
+console.log(`${name} ${age}`)

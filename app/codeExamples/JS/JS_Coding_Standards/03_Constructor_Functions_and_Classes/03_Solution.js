@@ -1,8 +1,10 @@
 let persons = [];
 
-let Person = function(name, age) {
-  this.name = name;
-  this.age = age;
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
 }
 
 persons.push(new Person("James", 23));
