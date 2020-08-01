@@ -1,0 +1,14 @@
+extends ../../pug/layouts/raw.pug
+
+block styles
+  // build:js js/vendor.js
+  script(src="../../node_modules/aframe/dist/aframe.min.js")
+  // endbuild
+  // build:css css/styles.css
+  link(rel="stylesheet" href="css/styles.css")
+  // endbuild
+
+block scripts
+  // build:js js/app.js
+  script(src="js/app.js")
+  // endbuild

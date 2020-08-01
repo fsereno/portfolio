@@ -135,10 +135,10 @@
             "compileJs": false
         },
         {
-            "name": "AFrame React (Teleport)",
-            "subHeading": "A complex AFrame application with React JS.",
+            "name": "AFrame React (Complex)",
+            "subHeading": "A more complex AFrame application with React JS.",
             "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
-            "folder": "aframeTeleport",
+            "folder": "aframeComplex",
             "active": true,
             "include": true,
             "compileJs": false
