@@ -1,3 +1,3 @@
-function isInvalidInput(input) {
+function validateInput(input) {
     return input === 0;
 };
