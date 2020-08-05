@@ -32,6 +32,9 @@ class Scene extends React.Component {
         <a-cylinder color-change position="1 0.75 -3" radius="0.5" height="1.5" color={this.state.color}></a-cylinder>
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
         <a-sky color="#ECECEC"></a-sky>
+        <a-camera>
+          <a-cursor></a-cursor>
+        </a-camera>
       </a-scene>
     );
   }
