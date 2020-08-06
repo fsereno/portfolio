@@ -1,0 +1,52 @@
+extends ../../pug/layouts/raw.pug
+
+block head
+  // build:css css/styles.css
+  link(rel="stylesheet" href="css/styles.css")
+  // endbuild
+  // build:js js/vendor.js
+  script(src="../../node_modules/aframe/dist/aframe-master.js")
+  script(src="../../node_modules/aframe-animation-component/dist/aframe-animation-component.js")
+  // endbuild  
+  // build:js js/app.js
+  script(src="js/app.js")
+  // endbuild
+
+block content
+    a-scene#scene.fullscreen(
+      debug="" 
+      antialias="true" 
+      inspector="" 
+      keyboard-shortcuts="" 
+      screenshot="" 
+      vr-mode-ui="")
+      a-assets
+        img#sky(src="../images/stars.png")
+      a-box.cube.start(
+        cubik-component="" 
+        data-time-value="5" 
+        data-spawn-limit="20" 
+        animation="easing:easeInOutQuad;property:rotation;dur:5000;from:0 0 0;to:180 360 0;loop:true" 
+        position="-3.691 -0.739 -7.835" 
+        height="1" 
+        color="yellow")
+      a-plane(visible="false")
+      a-sky(src="#sky" material="" geometry="")      
+      a-entity(light="type: Hemisphere; color: white; groundColor: purple;")
+      a-entity(light="type:directional;intensity:1" position="-10.295625982802726 5.773626234781356 1.475440803013563")
+      a-entity#player(position="0.5 0 0")
+        a-entity(camera="" look-controls="" position="" rotation="" data-aframe-inspector-original-camera="")
+          a-entity(position="-1.2 -0.3 -2")
+            a-text(id="score" position="0.60 0 0" value="0" color="green" width="3")
+            a-text(id="target" position="0.60  0.2 0 0" value="0" color="green" width="3")
+          a-entity(position="-0.1 -0.3 -2")
+            a-text(id="timer" position="0.40 0 0" value="" color="green" width="3")
+          a-entity(
+            navigate-component=""
+            position="0 0 -2" 
+            geometry="primitive: ring; radiusInner: 0.2; radiusOuter: 0.3;" 
+            material="color: green; shader: flat" 
+            cursor="fuse: true;"
+            animation__click="startEvents:click; easing:easeInSine; property:scale; from:0.2 0.2 0.2; to:1 1 1; dur:250;"
+            animation__fusing="startEvents:fusing; easing:easeOutSine; property:scale; from:1 1 1; to:0.2 0.2 0.2; dur:1500;")
+          a-text#feedbackText(visible="false" position="0 0.5 -2" align="center" value="LEVEL COMPLETE" color="green" width="3")
