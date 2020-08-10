@@ -8,7 +8,12 @@ class Scene extends React.Component {
     super(props);
     this.state = {
       message: "Hello World!",
-      color: "#4CC3D9"
+      color: "#4CC3D9",
+      cubes: [
+        { position: "-1 0.5 -3" },
+        { position: "0 0.5 -5" },
+        { position: "1 0.5 -3" }
+      ]
     };
   }
 
@@ -26,9 +31,11 @@ class Scene extends React.Component {
     let text = `value: ${this.state.message}; color: #ee1111; height: 13.53; lineHeight: 0.54; width: 2.71; wrapCount: 36.5; xOffset: 1.02; zOffset: 0.51`;
     return (
       <a-scene cursor="rayOrigin: mouse">
-        <a-box onClick={() => this.handleColourChangeClick()} position="-1 0.5 -3" rotation="0 45 0" color={this.state.color} text={text}></a-box>
-        <a-box onClick={() => this.handleColourChangeClick()} position="0 0.5 -5" rotation="0 45 0" color={this.state.color} text={text}></a-box>
-        <a-box onClick={() => this.handleColourChangeClick()} position="1 0.5 -3" rotation="0 45 0" color={this.state.color} text={text}></a-box>
+        {this.state.cubes.map((cube) => {
+          return(
+            <a-box onClick={() => this.handleColourChangeClick()} position={cube.position} rotation="0 45 0" color={this.state.color} text={text}></a-box>
+          );
+        })}
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
         <a-sky color="#ECECEC"></a-sky>
         <a-entity id="player" position="0.5 0.5 0">
