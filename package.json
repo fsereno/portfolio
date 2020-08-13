@@ -77,6 +77,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
+    "@reduxjs/toolkit": "^1.4.0",
     "aframe": "^1.0.4",
     "aframe-animation-component": "^5.1.2",
     "aframe-cursor-teleport-component": "0.0.3",
@@ -90,6 +91,7 @@
     "knockout": "^3.5.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "redux": "^4.0.5",
     "three": "^0.116.1",
     "vue": "^2.6.11"
   }

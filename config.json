@@ -91,7 +91,7 @@
         },
         {
             "name": "To-Do List (Vue)",
-            "subHeading": "A basic list builder.",
+            "subHeading": "A basic list builder using Vue.",
             "description": "Experimenting with Vue, Babel and Webpack.",
             "folder": "toDoVue",
             "active": true,
@@ -100,7 +100,7 @@
         },
         {
             "name": "To-Do List (React)",
-            "subHeading": "A basic list builder.",
+            "subHeading": "A basic list builder using React.",
             "description": "Experimenting with React, Babel and Webpack.",
             "folder": "toDoReact",
             "active": true,
@@ -139,6 +139,15 @@
             "subHeading": "A more complex AFrame application with React JS.",
             "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
             "folder": "aframeComplex",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "React Redux App (Basic)",
+            "subHeading": "A basic React Redux application.",
+            "description": "Experimenting how to use Redux with React, Babel and Webpack.",
+            "folder": "reactRedux",
             "active": true,
             "include": true,
             "compileJs": false

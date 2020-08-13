@@ -24,6 +24,8 @@ This project is both built and managed with Azure DevOps for continuous integrat
 - NUnit (https://nunit.org/)
 - ML Dotnet (https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet)
 - ThreeJS (https://threejs.org/)
+- React (https://reactjs.org/)
+- Vue (https://vuejs.org/)
 - SOLID (SOLID Design principles in mind, throughout)
 ---
 
