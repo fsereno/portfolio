@@ -2,14 +2,25 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { configureStore, createAction, createReducer } from '@reduxjs/toolkit';
+
+const addToDo = createAction("ADD_TODO");
+
+const todoReducer = createReducer([], {
+  ADD_TODO: (state, action) => {
+    state.push(action.payload);
+  }
+});
+
+const store = configureStore({
+  reducer: todoReducer
+});
 
 class ToDoListForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       value: '',
-      list: [],
       counterLimit: 10,
       counter: 0,
       selectedIndex: 0
@@ -18,6 +29,7 @@ class ToDoListForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete= this.handleDelete.bind(this);
+
   }
 
   handleChange(event) {
@@ -27,9 +39,13 @@ class ToDoListForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.value.length > 0 && this.state.counter < this.state.counterLimit) {
-      this.state.list.push(this.state.value);
+
+      let action = addToDo();
+      action = addToDo(this.state.value);
+
+      store.dispatch( action );
+
       this.setState({
-        list: this.state.list,
         value: "",
         counter: this.state.counter + 1
       });
@@ -53,9 +69,11 @@ class ToDoListForm extends React.Component {
           <div class="col-lg-4">
             <h3>Result:</h3>
             <ul id="toDoList" class="list-group">
-              {this.state.list.map((item, index) => {
-                return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
-              })}
+              {
+                store.getState().map((item, index) => {
+                  return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
+                })
+              }
           </ul>
           </div>
         </div>
