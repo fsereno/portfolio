@@ -15,7 +15,7 @@ let describeCars = (cars = []) => {
 }
 
 let cars = [
-    new Car("Aldi", "Red", false),
+    new Car("Audi", "Red", false),
     new Car("Ford", "Blue", true),
     new Car("Honda", "Black", true),
     new Car("Lamborghini", "Black", false),
