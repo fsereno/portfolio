@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { configureStore, createAction, createReducer } from '@reduxjs/toolkit';
+import undoable from 'redux-undo';
 
 const addToDo = createAction("ADD_TODO");
 const removeToDo = createAction("REMOVE_TODO")
@@ -16,8 +17,10 @@ const todoReducer = createReducer([], {
   }
 });
 
+const undoableTodoReducer = undoable(todoReducer);
+
 const store = configureStore({
-  reducer: todoReducer
+  reducer: undoableTodoReducer
 });
 
 class ToDoListForm extends React.Component {
@@ -75,7 +78,7 @@ class ToDoListForm extends React.Component {
           <div class="col-lg-4">
             <h3>Result:</h3>
             <ul id="toDoList" class="list-group">
-              {store.getState().map((item, index) => {
+              {store.getState().present.map((item, index) => {
                   return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
                 })}
           </ul>
