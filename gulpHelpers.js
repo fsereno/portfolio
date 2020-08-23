@@ -11,7 +11,7 @@ module.exports = {
         let config = module.exports.constructor();
         let filePathArray = windowsOS ? file.split("\\") : file.split("/");
         let folderFromFilePath = filePathArray[filePathArray.indexOf(dir) - 1];
-        let folder = folderFromFilePath != undefined ? folderFromFilePath.replace("app_", "") : folderFromFilePath;
+        let folder = folderFromFilePath !== undefined ? folderFromFilePath.replace("app_", "") : folderFromFilePath;
         let applicationIndex = config.applications.map((a)=>{return a["folder"]}).indexOf(folder);
         let application = config.applications[applicationIndex];
         if(dir !== "/" && application !== undefined && method !== null) {

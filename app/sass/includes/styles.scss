@@ -30,11 +30,15 @@ span#result, .result {
 }
 
 .navbar {
-
+    margin: 0 0 20px 0;
     padding: 0 0.3em;
 
-    a.navbar-brand {
+    .dropdown-item.active {
+        background-color: $darkGrey;
+    }
 
+    a.navbar-brand {
+        margin-right:0;
         img {
 
             width: 50px;
@@ -42,8 +46,4 @@ span#result, .result {
         }
 
     }
-}
-
-.card.min-height-160 {
-    min-height: 160px;
 }

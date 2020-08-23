@@ -7,12 +7,12 @@
     "folderRoot": "/tree/master/app/",
     "repoRootUrl": "https://github.com/fsereno/portfolio",
     "heading": "Fabio Sereno",
-    "subHeading": " : Software developer",
+    "subHeading": "Software developer",
     "applications": [
         {
-            "name": "Portfolio:",
-            "subHeading": "sub heading",
-            "description": "description",
+            "name": "Portfolio",
+            "subHeading": "By Fabio Sereno",
+            "description": "This is my Portfolio repository, showing technical abilities and exploring the latest trends and standards.",
             "folder": "home",
             "active": true,
             "include": false,
@@ -36,55 +36,55 @@
         },
         {
             "name": "Find and Replace",
-            "subHeading": "",
-            "description": "A simple find and replace method, written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all.",
+            "subHeading": "A simple find and replace method",
+            "description": "Written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all.",
             "folder": "findReplace",
             "active": true,
             "include": true
         },
         {
             "name": "Percentage Calculator",
-            "subHeading": "",
-            "description": "A simple percentage calculator method, written with TypeScript, Sass and Pug.",
+            "subHeading": "A simple percentage calculator method",
+            "description": "Written with TypeScript, Sass and Pug.",
             "folder": "percentageCalculator",
             "active": true,
             "include": true
         },
         {
-            "name": "Unscrabbler",
-            "subHeading": "",
-            "description": "An Unscrabble game, can you beat Unscrabbler?. Written with TypeScript, Sass and Pug.",
+            "name": "Un-Scrabbler",
+            "subHeading": "An game of Un-scrabble",
+            "description": "Can you beat Unscrabbler?. Written with TypeScript, Sass and Pug.",
             "folder": "unscrabbler",
             "active": true,
             "include": true
         },
         {
-            "name": "Random Generator",
-            "subHeading": "",
-            "description": "A simple random generator. Generating a random string of A-B, 0-9 and a given length. Written with TypeScript, Sass and Pug.",
+            "name": "Random String Generator",
+            "subHeading": "A simple random generator",
+            "description": "Generating a random string of A-B, 0-9 and a given length. Written with TypeScript, Sass and Pug.",
             "folder": "randomGenerator",
             "active": true,
             "include": true
         },
         {
             "name": "Dictionary Word Finder",
-            "subHeading": "",
-            "description": "A simple dictionary word lookup tool. Written with TypeScript, Sass and Pug.",
+            "subHeading": "A simple dictionary word lookup tool",
+            "description": "Experimenting with a large index lookup search. Written with TypeScript, Sass and Pug.",
             "folder": "dictionaryFinder",
             "active": true,
             "include": true
         },
         {
             "name": "Knockout + TypeScript",
-            "subHeading": "",
-            "description": "An example of KnockoutJS being enhanced by TypeScript. Written with KnockoutJS, TypeScript, Sass and Pug.",
+            "subHeading": "An example of KnockoutJS, enhanced by TypeScript",
+            "description": "Written with KnockoutJS, TypeScript, Sass and Pug.",
             "folder": "koTypeScript",
             "active": true,
             "include": true
         },
         {
             "name": "To-Do List (Basic)",
-            "subHeading": "A basic list builder.",
+            "subHeading": "A basic list builder",
             "description": "Experimenting with Babel, TypeScript and Require JS.",
             "folder": "babelTs",
             "active": true,
@@ -93,7 +93,7 @@
         },
         {
             "name": "To-Do List (Vue)",
-            "subHeading": "A basic list builder using Vue.",
+            "subHeading": "A basic list builder using Vue",
             "description": "Experimenting with Vue, Babel and Webpack.",
             "folder": "toDoVue",
             "active": true,
@@ -102,7 +102,7 @@
         },
         {
             "name": "To-Do List (React)",
-            "subHeading": "A basic list builder using React.",
+            "subHeading": "A basic list builder using React",
             "description": "Experimenting with React, Babel and Webpack.",
             "folder": "toDoReact",
             "active": true,
@@ -111,7 +111,7 @@
         },
         {
             "name": "To-Do List (React Redux)",
-            "subHeading": "A basic React Redux application.",
+            "subHeading": "A basic React Redux application",
             "description": "Experimenting how to use Redux with React, Babel and Webpack.",
             "folder": "reactRedux",
             "active": true,
@@ -119,9 +119,9 @@
             "compileJs": false
         },
         {
-            "name": "Three JS Scene",
-            "subHeading": "A basic THREE JS scene.",
-            "description": "Experimenting with Three JS, Babel and Webpack.",
+            "name": "Three Box Puzzle",
+            "subHeading": "A basic THREE JS scene",
+            "description": "An interactive Three JS scene, using Babel and Webpack.",
             "folder": "threeJSScene",
             "active": true,
             "include": true,
@@ -129,7 +129,7 @@
         },
         {
             "name": "Tic-Tac-Toe (React)",
-            "subHeading": "A Tic-Tac-Toe game built using React JS.",
+            "subHeading": "A Tic-Tac-Toe game built using React JS",
             "description": "Experimenting more complex aspects of React, Babel and Webpack.",
             "folder": "ticTacToeReact",
             "active": true,
@@ -138,7 +138,7 @@
         },
         {
             "name": "AFrame React (Basic)",
-            "subHeading": "An AFrame Hello World application with React JS.",
+            "subHeading": "An AFrame Hello World application with React JS",
             "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
             "folder": "aframe",
             "active": true,
@@ -147,7 +147,7 @@
         },
         {
             "name": "AFrame React (Complex)",
-            "subHeading": "A more complex AFrame application with React JS.",
+            "subHeading": "A more complex AFrame application with React JS",
             "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
             "folder": "aframeComplex",
             "active": true,

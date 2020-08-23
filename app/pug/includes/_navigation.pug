@@ -1,7 +1,7 @@
-nav.navbar.navbar-expand-lg.navbar-light.bg-light
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   a.navbar-brand(
       href="../"+locals.config.prefix+locals.config.entry+"/index.html") 
-    img(src="../images/FSLogo.jpeg")
+    img(src="../images/FSLogo.png")
   button.navbar-toggler(
       type='button' 
       data-toggle='collapse' 
@@ -16,14 +16,14 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
             li.nav-item
                 a.nav-link(href="../"+locals.config.prefix+locals.config.entry+"/index.html")
                     | Home 
-                    i.fa.fa-home
+                    i.fa.fa-home.ml-1
         li.nav-item
             a.nav-link(href=(locals.application.folderRoot !== undefined 
                 ? locals.config.repoRootUrl+locals.application.folderRoot 
                 : locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder), 
                 target="_blank")
-                | View on Github 
-                i.fa.fa-github-square
+                | View on Github
+                i.fa.fa-github-square.ml-2
         if locals.config.prefix+locals.application.folder !== locals.config.prefix+locals.config.entry
             li.nav-item.dropdown
                 a#navbarDropdownMenuLink.nav-link.dropdown-toggle(

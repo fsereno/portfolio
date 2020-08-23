@@ -9,20 +9,19 @@ html(lang="en")
     block styles
   body
     .container-fluid
-      .row.text-right.mt-2
+      .row.text-right.mt-3
         .col-lg-12
           h5= locals.config.heading
-            span.text-muted= locals.config.subHeading
+            span.badge.text-muted= locals.config.subHeading
       .row
         .col-lg-12
           h3.display-2= locals.application.name
       .row
         .col-lg-12
-          h4= locals.application.subHeading
-          h5.text-muted= locals.application.description
+          h4.font-italic= locals.application.subHeading
+          p.text-muted= locals.application.description
           hr
       include ../includes/_navigation.pug
-      hr
       block content
 
     block footer
