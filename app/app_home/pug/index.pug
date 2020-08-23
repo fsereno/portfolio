@@ -6,15 +6,19 @@ block styles
   // endbuild
 
 block content
-      h6
-        | Applications
-      
       if locals.config.applications.length > 0
-        ul#applicatonList
-          each application, index in locals.config.applications
-            if application.active !== false && application.include !== false
-              li
-                a(href="../"+locals.config.prefix+application.folder+"/index.html")= application.name     
+          .row
+            each application, index in locals.config.applications
+              if application.active !== false && application.include !== false
+                .col-sm-6.mb-4
+                  .card.min-height-160
+                    .card-body
+                      h5.card-title= application.name
+                      h6.card-subtitle.mb-2.text-muted= application.subHeading
+                      p.card-text= application.description
+                      a.card-link(href="../"+locals.config.prefix+application.folder+"/index.html") Go
+                      a.card-link(href=locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+application.folder, target="_blank") View on Github
+
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

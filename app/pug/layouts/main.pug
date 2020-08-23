@@ -9,10 +9,14 @@ html(lang="en")
     block styles
   body
     .container-fluid
+      .row.text-right.mt-2
+        .col-lg-12
+          h5= locals.config.heading
+            span.text-muted= locals.config.subHeading
       .row
         .col-lg-12
-          h1.display-1= locals.application.name
-      .row  
+          h3.display-2= locals.application.name
+      .row
         .col-lg-12
           h4= locals.application.subHeading
           h5.text-muted= locals.application.description
@@ -20,7 +24,7 @@ html(lang="en")
       include ../includes/_navigation.pug
       hr
       block content
-      
+
     block footer
     include ../includes/_jsDeps.pug
     block scripts

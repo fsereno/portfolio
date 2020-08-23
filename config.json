@@ -4,13 +4,15 @@
     "masterTemplateDir": "master",
     "developmentDir": "app",
     "publishDir": "dist",
-    "folderRoot": "/tree/dev/app/",
+    "folderRoot": "/tree/master/app/",
     "repoRootUrl": "https://github.com/fsereno/portfolio",
+    "heading": "Fabio Sereno",
+    "subHeading": " : Software developer",
     "applications": [
         {
             "name": "Portfolio:",
-            "subHeading": "Fabio Sereno",
-            "description": "Software Developer",
+            "subHeading": "sub heading",
+            "description": "description",
             "folder": "home",
             "active": true,
             "include": false,
@@ -35,7 +37,7 @@
         {
             "name": "Find and Replace",
             "subHeading": "",
-            "description": "A simple find and replace method, written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all of them.",
+            "description": "A simple find and replace method, written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all.",
             "folder": "findReplace",
             "active": true,
             "include": true
