@@ -1,0 +1,10 @@
+$large: 1200px;
+$medium: 991px;
+
+@media screen and (max-width: $medium) {
+    .navbar {
+        .navbar-nav .nav-link {
+            padding-bottom: 1rem;
+        }
+    }
+}
