@@ -39,3 +39,13 @@ span#result, .result {
         }
     }
 }
+
+.min-height-160 {
+    min-height: 160px;
+}
+
+.card {
+    .card-title {
+        min-height: 50px;
+    }
+}
