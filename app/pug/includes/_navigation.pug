@@ -1,46 +1,46 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   a.navbar-brand(
-      href="../"+locals.config.prefix+locals.config.entry+"/index.html") 
-    img(src="../images/FSLogo.png")
+      href="../"+locals.config.prefix+locals.config.entry+"/index.html")
+    img#navbarImage(src="../images/FSLogo.png").pull-left
+    span#titleHeading.d-flex= locals.config.heading
+    span#titleSubHeading.d-flex.text-muted= locals.config.subHeading
   button.navbar-toggler(
-      type='button' 
-      data-toggle='collapse' 
-      data-target='#navbarNavDropdown' 
-      aria-controls='navbarNavDropdown' 
-      aria-expanded='false' 
+      type='button'
+      data-toggle='collapse'
+      data-target='#navbarNavDropdown'
+      aria-controls='navbarNavDropdown'
+      aria-expanded='false'
       aria-label='Toggle navigation')
     span.navbar-toggler-icon
-  #navbarNavDropdown.collapse.navbar-collapse
+  #navbarNavDropdown.collapse.navbar-collapse.flex-row-reverse
     ul.navbar-nav
-        if locals.config.prefix+locals.application.folder !== locals.config.prefix+locals.config.entry
-            li.nav-item
-                a.nav-link(href="../"+locals.config.prefix+locals.config.entry+"/index.html")
-                    | Home 
-                    i.fa.fa-home.ml-1
         li.nav-item
-            a.nav-link(href=(locals.application.folderRoot !== undefined 
-                ? locals.config.repoRootUrl+locals.application.folderRoot 
-                : locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder), 
+            a.nav-link(href="../"+locals.config.prefix+locals.config.entry+"/index.html")
+                | Home
+                i.fa.fa-home.ml-1
+        li.nav-item
+            a.nav-link(href=(locals.application.folderRoot !== undefined
+                ? locals.config.repoRootUrl+locals.application.folderRoot
+                : locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder),
                 target="_blank")
                 | View on Github
                 i.fa.fa-github-square.ml-2
-        if locals.config.prefix+locals.application.folder !== locals.config.prefix+locals.config.entry
-            li.nav-item.dropdown
-                a#navbarDropdownMenuLink.nav-link.dropdown-toggle(
-                    href='#' 
-                    role='button' 
-                    data-toggle='dropdown' 
-                    aria-haspopup='true' 
-                    aria-expanded='false')
-                    | Applications
-                .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
-                    each application, index in locals.config.applications
-                        if (application.active !== false && application.include !== false)
-                            a(class=(locals.application.folder === application.folder 
-                            ? "active" 
-                            : "") + " dropdown-item", 
-                            href="../"+locals.config.prefix+application.folder+"/index.html")= application.name
-                    .dropdown-divider
-                    a.dropdown-item(href="../"+locals.config.prefix+locals.config.entry+"/index.html") 
-                        | Home 
-                        i.fa.fa-home
+        li.nav-item.dropdown
+            a#navbarDropdownMenuLink.nav-link.dropdown-toggle(
+                href='#'
+                role='button'
+                data-toggle='dropdown'
+                aria-haspopup='true'
+                aria-expanded='false')
+                | Applications
+            .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdownMenuLink')
+                each application, index in locals.config.applications
+                    if (application.active !== false && application.include !== false)
+                        a(class=(locals.application.folder === application.folder
+                        ? "active"
+                        : "") + " dropdown-item",
+                        href="../"+locals.config.prefix+application.folder+"/index.html")= application.name
+                .dropdown-divider
+                a.dropdown-item(href="../"+locals.config.prefix+locals.config.entry+"/index.html")
+                    | Home
+                    i.fa.fa-home.ml-1

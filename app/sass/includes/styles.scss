@@ -1,12 +1,6 @@
 @import "./colours.scss";
 @import "./mediaQueries.scss";
-
-.link {
-    &.home {
-        padding:20px 0;
-        display: block;
-    }
-}
+@import "./navbar.scss";
 
 .error {
     color: $red;
@@ -23,29 +17,6 @@ span#result, .result {
     margin-bottom: .75rem;
 }
 
-.navbar {
-    margin: 0 0 20px 0;
-    padding: 0 0.3em;
-    .dropdown-item.active {
-        background-color: $darkGrey;
-    }
-    .navbar-nav .nav-link {
-        padding-left: 1rem;
-    }
-    a.navbar-brand {
-        margin-right:0;
-        img {
-            width: 50px;
-        }
-    }
-}
-
 .min-height-160 {
     min-height: 160px;
-}
-
-.card {
-    .card-title {
-        min-height: 50px;
-    }
 }

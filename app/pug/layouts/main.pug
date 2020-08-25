@@ -4,24 +4,24 @@ html(lang="en")
     meta(charset="utf-8")
     title Portfolio
     meta(name="description" content="Portfolio")
+    meta(name='viewport', content='width=device-width, initial-scale=1, minimal-ui')    
+    title [COMPANY_NAME]
     include ../includes/_metaAuthor.pug
     include ../includes/_styleDeps.pug
     block styles
   body
     .container-fluid
-      .row.text-right.mt-3
+      .row.mt-3
         .col-lg-12
-          h5= locals.config.heading
-            span.badge.text-muted= locals.config.subHeading
+          include ../includes/_navigation.pug
       .row
         .col-lg-12
-          h3.display-2= locals.application.name
+          h2.display-4= locals.application.name
       .row
         .col-lg-12
-          h4.font-italic= locals.application.subHeading
+          h5.font-italic= locals.application.subHeading
           p.text-muted= locals.application.description
           hr
-      include ../includes/_navigation.pug
       block content
 
     block footer

@@ -1,0 +1,39 @@
+.link {
+    &.home {
+        padding:20px 0;
+        display: block;
+    }
+}
+
+.navbar {
+
+    margin: 0 0 20px 0;
+    padding: 0 0.3em;
+
+    .dropdown-item {
+        padding: 1rem 1.5rem;
+        &.active, &:active {
+            background-color: $darkGrey;
+        }
+    }
+
+    .nav-link {
+        padding-left: 1rem;
+    }
+
+    a.navbar-brand {
+        margin-right:0;
+        img {
+            width: 50px;
+        }
+    }
+    #titleHeading {
+        line-height: 25px;
+    }
+    #titleSubHeading {
+        line-height: 25px;
+    }
+    #navbarImage {
+        margin: 0 .25rem 0 0;
+    }
+}
