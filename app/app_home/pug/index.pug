@@ -6,27 +6,21 @@ block styles
   // endbuild
 
 block content
-      h2 Applications
+      p.lead Applications
       if locals.config.applications.length > 0
-          .row.mt-3
+          .card-columns
             each application, index in locals.config.applications
               if application.active !== false && application.include !== false
-                .col-sm-6.col-md-3.mb-4
-                  .card.shadow-sm.p-3.bg-white.rounded.min-height-160
+                  .card.shadow.p-3.bg-white.rounded.min-height-160
                     .card-body
-                      .row
-                        .col-12
                           h5.card-title= application.name
-                      .row
-                        .col-lg-4.col-md-12
-                          a.card-link.badge.badge-secondary(href="../"+locals.config.prefix+application.folder+"/index.html") 
-                            | View
+                          p.card-text= application.subHeading
+                          a.btn.btn-dark.mr-2.mb-2(href="../"+locals.config.prefix+application.folder+"/index.html")
+                            | View app
                             i.fa.fa-eye.ml-2
-                        .col-lg-4.col-md-12
-                          a.card-link.badge.badge-secondary(href=locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+application.folder, target="_blank")
-                            | View on Github
+                          a.btn.btn-dark.mb-2(href=locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+application.folder, target="_blank")
+                            | View code
                             i.fa.fa-github-square.ml-2
-
 block scripts
   // build:js js/app.js
   script(src="js/app.js")

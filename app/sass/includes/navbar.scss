@@ -5,6 +5,14 @@
     }
 }
 
+.navbar-dark {
+    .navbar-nav {
+        .nav-link {
+            color: $white;
+        }
+    }
+}
+
 .navbar {
 
     margin: 0 0 20px 0;
@@ -32,6 +40,7 @@
     }
     #titleSubHeading {
         line-height: 25px;
+        color: $lightGrey;
     }
     #navbarImage {
         margin: 0 .25rem 0 0;

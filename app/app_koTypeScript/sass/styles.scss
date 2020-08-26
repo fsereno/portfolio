@@ -6,10 +6,9 @@ body {
         color: $black;
     }
     .table.itemTable{
-
         thead {
-
             tr th {
+                color: $white;
                 padding: 5px 10px;
                 line-height: 2.5em;
             }

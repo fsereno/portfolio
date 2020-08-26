@@ -114,9 +114,9 @@ class ToDoListForm extends React.Component {
                   </label>
                   <input class="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
               </div>
-              <button id="submit" class="btn btn-primary mr-1" type="submit">Add item</button>
+              <button id="submit" class="btn btn-dark mr-1" type="submit">Add item</button>
               <button id="undo" class="btn btn-danger mr-1" type="button" onClick={this.handleUndo}>Undo</button>
-              <button id="undo" class="btn btn-success mr-1" type="button" onClick={this.handleRedo}>Redo</button>
+              <button id="undo" class="btn btn-dark mr-1" type="button" onClick={this.handleRedo}>Redo</button>
             </form>
           </div>
         </div>

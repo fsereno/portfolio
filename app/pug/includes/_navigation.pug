@@ -3,7 +3,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
       href="../"+locals.config.prefix+locals.config.entry+"/index.html")
     img#navbarImage(src="../images/FSLogo.png").pull-left
     span#titleHeading.d-flex= locals.config.heading
-    span#titleSubHeading.d-flex.text-muted= locals.config.subHeading
+    span#titleSubHeading.d-flex= locals.config.subHeading
   button.navbar-toggler(
       type='button'
       data-toggle='collapse'
@@ -41,6 +41,9 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
                         : "") + " dropdown-item",
                         href="../"+locals.config.prefix+application.folder+"/index.html")= application.name
                 .dropdown-divider
-                a.dropdown-item(href="../"+locals.config.prefix+locals.config.entry+"/index.html")
+                a(class=(locals.config.entry === application.folder
+                ? "active"
+                : "") + " dropdown-item",
+                href="../"+locals.config.prefix+locals.config.entry+"/index.html")
                     | Home
                     i.fa.fa-home.ml-1

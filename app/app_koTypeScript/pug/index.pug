@@ -12,15 +12,14 @@ block content
           .card
             .card-body
               table#items.table.table-striped.itemTable
-                thead.thead-dark
+                thead.bg-dark
                   th Name
                   th Age
                   th Edit
                   th Status
                   th Delete
                   th.text-right
-                    button#addItem(
-                        class="btn btn-success",
+                    button#addItem.btn.btn-light(
                         data-bind="click: clear", 
                         data-toggle="modal", 
                         data-target="#editModal")
@@ -35,8 +34,7 @@ block content
                     td(data-bind="text: name")
                     td(data-bind="text: age")
                     td
-                      button(
-                        class="btn btn-success", 
+                      button.btn.btn-dark(
                         data-toggle="modal", 
                         data-target="#editModal",
                         data-bind="click: $parent.populateEdit")
@@ -120,7 +118,7 @@ block content
               button.btn.btn-secondary(
                 type='button',
                 data-dismiss='modal') Close
-              button#saveChanges.btn.btn-success(
+              button#saveChanges.btn.btn-dark(
                 type='button',
                 data-bind="click: update") Save Changes
 
