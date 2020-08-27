@@ -18,13 +18,6 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
             a.nav-link(href="../"+locals.config.prefix+locals.config.entry+"/index.html")
                 | Home
                 i.fa.fa-home.ml-1
-        li.nav-item
-            a.nav-link(href=(locals.application.folderRoot !== undefined
-                ? locals.config.repoRootUrl+locals.application.folderRoot
-                : locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder),
-                target="_blank")
-                | View on Github
-                i.fa.fa-github-square.ml-2
         li.nav-item.dropdown
             a#navbarDropdownMenuLink.nav-link.dropdown-toggle(
                 href='#'
@@ -47,3 +40,14 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
                 href="../"+locals.config.prefix+locals.config.entry+"/index.html")
                     | Home
                     i.fa.fa-home.ml-1
+        li.nav-item
+            a.nav-link(href=(locals.application.folderRoot !== undefined
+                ? locals.config.repoRootUrl+locals.application.folderRoot
+                : locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder),
+                target="_blank")
+                | View on Github
+                i.fa.fa-github-square.ml-2
+        li.nav-item
+            a.nav-link(href=locals.config.linkedInUrl, target="_blank")
+                | Linkedin
+                i.fa.fa-linkedin.ml-2

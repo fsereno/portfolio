@@ -6,13 +6,14 @@
     "publishDir": "dist",
     "folderRoot": "/tree/master/app/",
     "repoRootUrl": "https://github.com/fsereno/portfolio",
+    "linkedInUrl": "https://www.linkedin.com/in/fabio-sereno-6a97b986/",
     "heading": "Fabio Sereno",
     "subHeading": "Software developer",
     "applications": [
         {
             "name": "Portfolio",
             "subHeading": "By Fabio Sereno",
-            "description": "This is my Portfolio repository, showing technical abilities and exploring the latest trends and standards.",
+            "description": "Highly Experienced Full Stack Web Developer of 10+ years (6+ in the FinTech sector). Highly self-motivated, enthusiastic, professional and a team player. Possesses strong analytical and problem solving skills, code proficiency, and an ability to follow through with projects from initiation to completion with innovation and creativity.",
             "folder": "home",
             "active": true,
             "include": false,
