@@ -154,6 +154,15 @@
             "active": true,
             "include": true,
             "compileJs": false
+        },
+        {
+            "name": ".Net Core, AWS Shopping Cart",
+            "subHeading": "A serverless application (SAM), using .Net Core and AWS",
+            "description": "Exploring the abilities of AWS Lambda, using .Net Core along with an AWS RESTful Gateway API.",
+            "folder": "awsDotNetCoreShoppingCart",
+            "active": true,
+            "include": true,
+            "compileJs": false
         }
     ]
 }
