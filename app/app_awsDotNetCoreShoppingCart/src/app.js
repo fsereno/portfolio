@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const API_ENDPOINT = "https://www.something.com";
+const API_ENDPOINT_GET = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/values";
 const API_SUBMIT_CLASSES_VALID = "btn btn-outline-dark api-submit"
 const API_SUBMIT_CLASSES_NOT_VALID = "btn btn-dark disabled api-submit"
 const ANSWER  = 15;
@@ -13,15 +13,13 @@ class ShoppingListApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      get: '',
+      get: API_ENDPOINT_GET,
       add: '',
       delete: '',
       answer: '',
       isValidBtnClasses: API_SUBMIT_CLASSES_NOT_VALID,
       isValid: false
     };
-
-    this.handleChange = this.handleChange.bind(this);
     this.handleGetSubmit = this.handleGetSubmit.bind(this);
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
     this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
@@ -44,13 +42,11 @@ class ShoppingListApp extends React.Component {
     }
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
   handleGetSubmit(event) {
     event.preventDefault();
-    this.open('https://usefulangle.com')
+    let input = event.target.elements[0].value;
+    let endpoint =  input.length > 0 ? `${this.state.get}/${input}` : this.state.get;
+    this.open(endpoint)
   }
 
   handleAddSubmit(event) {
