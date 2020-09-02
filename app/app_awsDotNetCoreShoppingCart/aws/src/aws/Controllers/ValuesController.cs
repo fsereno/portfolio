@@ -9,18 +9,25 @@ namespace aws.Controllers
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
+        private string[] basket = new string[] { "value1", "value2" };
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return this.basket;
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            var index = id - 1;
+            var isInRange = index < this.basket.Length;
+            if (isInRange) {
+                return this.basket[index];
+            }
+            return "The item you are looking for does not exist";
         }
 
         // POST api/values

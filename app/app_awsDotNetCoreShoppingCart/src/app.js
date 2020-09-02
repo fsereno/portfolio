@@ -79,7 +79,7 @@ class ShoppingListApp extends React.Component {
                 </div>
             </form>
             <form onSubmit={this.handleGetSubmit} autoComplete="off">
-                <label for="basic-url">Leave empty to get all items, or pass an ID</label>
+                <label for="basic-url">Leave empty to get all items, or pass an index</label>
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="Input" aria-label="4 x 4 - 1 = ?" />
                   <div class="input-group-append">

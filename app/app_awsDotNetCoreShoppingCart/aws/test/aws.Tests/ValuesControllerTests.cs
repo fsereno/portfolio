@@ -18,8 +18,6 @@ namespace aws.Tests
 {
     public class ValuesControllerTests
     {
-
-
         [Fact]
         public async Task TestGet()
         {
@@ -36,6 +34,36 @@ namespace aws.Tests
             Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
         }
 
+        [Fact]
+        public async Task TestGetItem()
+        {
+            var lambdaFunction = new LambdaEntryPoint();
+            var requestStr = File.ReadAllText("./SampleRequests/ValuesController-GetItem.json");
+            var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
+            var context = new TestLambdaContext();
+            var response = await lambdaFunction.FunctionHandlerAsync(request, context);
 
+            Assert.Equal(200, response.StatusCode);
+            Assert.Equal("value2", response.Body);
+            Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
+            Assert.Equal("text/plain; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
+
+        }
+
+        [Fact]
+        public async Task TestGetItemOutOfRange()
+        {
+            var lambdaFunction = new LambdaEntryPoint();
+            var requestStr = File.ReadAllText("./SampleRequests/ValuesController-GetItemOutOfRange.json");
+            var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
+            var context = new TestLambdaContext();
+            var response = await lambdaFunction.FunctionHandlerAsync(request, context);
+
+            Assert.Equal(200, response.StatusCode);
+            Assert.Equal("The item you are looking for does not exist", response.Body);
+            Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
+            Assert.Equal("text/plain; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
+
+        }
     }
 }
