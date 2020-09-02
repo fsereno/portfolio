@@ -9,7 +9,7 @@ namespace aws.Controllers
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
-        private string[] basket = new string[] { "value1", "value2" };
+        private string[] basket = new string[] { "Item 1", "Item 2" };
 
         // GET api/values
         [HttpGet]

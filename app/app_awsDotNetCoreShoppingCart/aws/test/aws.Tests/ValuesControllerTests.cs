@@ -29,7 +29,7 @@ namespace aws.Tests
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
 
             Assert.Equal(200, response.StatusCode);
-            Assert.Equal("[\"value1\",\"value2\"]", response.Body);
+            Assert.Equal("[\"Item 1\",\"Item 2\"]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
         }
@@ -44,7 +44,7 @@ namespace aws.Tests
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
 
             Assert.Equal(200, response.StatusCode);
-            Assert.Equal("value2", response.Body);
+            Assert.Equal("Item 2", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.Equal("text/plain; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
 
