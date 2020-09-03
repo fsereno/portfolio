@@ -12,14 +12,14 @@ namespace aws.Controllers
         private string[] basket = new string[] { "Item 1", "Item 2" };
 
         // GET api/values
-        [HttpGet]
+        [HttpGet("all")]
         public IEnumerable<string> Get()
         {
             return this.basket;
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet("item/{id}")]
         public string Get(int id)
         {
             var index = id - 1;
@@ -30,11 +30,30 @@ namespace aws.Controllers
             return "The item you are looking for does not exist";
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
+
+        [HttpGet("add/{value}")]
+        public IEnumerable<string> Post(string value)
         {
+            if (!String.IsNullOrEmpty(value)) {
+                var basket = this.basket.ToList();
+                basket.Add(value);
+                this.basket = basket.ToArray();
+            }
+
+            return this.basket;
         }
+        // POST api/values
+        /*[HttpGet("add/{value}")]
+        public IEnumerable<string> Get(string value)
+        {
+            if (!String.IsNullOrEmpty(value)) {
+                var basket = this.basket.ToList();
+                basket.Add(value);
+                this.basket = basket.ToArray();
+            }
+
+            return this.basket;
+        }*/
 
         // PUT api/values/5
         [HttpPut("{id}")]

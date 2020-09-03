@@ -1,11 +1,11 @@
 {
   "resource": "/{proxy+}",
-  "path": "/api/s3proxy/foo.txt",
+  "path": "/api/values/add/Item 3",
   "httpMethod": "GET",
   "headers": null,
   "queryStringParameters": null,
   "pathParameters": {
-    "proxy": "api/s3proxy/foo.txt"
+    "proxy": "api/values/add/Item 3"
   },
   "stageVariables": null,
   "requestContext": {
