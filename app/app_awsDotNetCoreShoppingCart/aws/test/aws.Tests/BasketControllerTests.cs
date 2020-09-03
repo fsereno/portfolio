@@ -42,7 +42,6 @@ namespace aws.Tests
             Assert.Equal("Item 2", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.Equal("text/plain; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
-
         }
 
         [Fact]
@@ -58,7 +57,6 @@ namespace aws.Tests
             Assert.Equal("The item you are looking for does not exist", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.Equal("text/plain; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
-
         }
 
         [Fact]
@@ -72,6 +70,21 @@ namespace aws.Tests
 
             Assert.Equal(200, response.StatusCode);
             Assert.Equal("[\"Item 1\",\"Item 2\",\"Item 3\"]", response.Body);
+            Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
+            Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
+        }
+
+        [Fact]
+        public async Task TestDeleteItem()
+        {
+            var lambdaFunction = new LambdaEntryPoint();
+            var requestStr = File.ReadAllText("./SampleRequests/BasketController-DeleteItem.json");
+            var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
+            var context = new TestLambdaContext();
+            var response = await lambdaFunction.FunctionHandlerAsync(request, context);
+
+            Assert.Equal(200, response.StatusCode);
+            Assert.Equal("[\"Item 1\"]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
         }

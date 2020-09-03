@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using Utils;
+
 namespace aws
 {
     public class Startup
@@ -31,6 +33,7 @@ namespace aws
 
             // Add S3 to the ASP.NET Core dependency injection framework.
             services.AddAWSService<Amazon.S3.IAmazonS3>();
+            services.AddScoped<IBasketUtil, BasketUtil>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

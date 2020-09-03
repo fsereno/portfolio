@@ -61,7 +61,9 @@ class ShoppingListApp extends React.Component {
 
   handleDeleteSubmit(event) {
     event.preventDefault();
-    this.open('https://bbc.co.uk');
+    let input = event.target.elements[0].value;
+    let endpoint =  `${this.state.deleteItem}/${input}`;
+    this.open(endpoint)
   }
 
   handlePuzzleSubmit(event) {
