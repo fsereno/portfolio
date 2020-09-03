@@ -42,18 +42,6 @@ namespace aws.Controllers
 
             return this.basket;
         }
-        // POST api/values
-        /*[HttpGet("add/{value}")]
-        public IEnumerable<string> Get(string value)
-        {
-            if (!String.IsNullOrEmpty(value)) {
-                var basket = this.basket.ToList();
-                basket.Add(value);
-                this.basket = basket.ToArray();
-            }
-
-            return this.basket;
-        }*/
 
         // PUT api/values/5
         [HttpPut("{id}")]
