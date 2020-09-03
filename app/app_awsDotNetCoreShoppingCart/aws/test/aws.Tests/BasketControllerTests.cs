@@ -12,13 +12,13 @@ using aws;
 
 namespace aws.Tests
 {
-    public class ValuesControllerTests
+    public class BasketControllerTests
     {
         [Fact]
         public async Task TestGet()
         {
             var lambdaFunction = new LambdaEntryPoint();
-            var requestStr = File.ReadAllText("./SampleRequests/ValuesController-Get.json");
+            var requestStr = File.ReadAllText("./SampleRequests/BasketController-Get.json");
             var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
             var context = new TestLambdaContext();
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
@@ -33,7 +33,7 @@ namespace aws.Tests
         public async Task TestGetItem()
         {
             var lambdaFunction = new LambdaEntryPoint();
-            var requestStr = File.ReadAllText("./SampleRequests/ValuesController-GetItem.json");
+            var requestStr = File.ReadAllText("./SampleRequests/BasketController-GetItem.json");
             var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
             var context = new TestLambdaContext();
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
@@ -49,7 +49,7 @@ namespace aws.Tests
         public async Task TestGetItemOutOfRange()
         {
             var lambdaFunction = new LambdaEntryPoint();
-            var requestStr = File.ReadAllText("./SampleRequests/ValuesController-GetItemOutOfRange.json");
+            var requestStr = File.ReadAllText("./SampleRequests/BasketController-GetItemOutOfRange.json");
             var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
             var context = new TestLambdaContext();
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
@@ -65,7 +65,7 @@ namespace aws.Tests
         public async Task TestAddItem()
         {
             var lambdaFunction = new LambdaEntryPoint();
-            var requestStr = File.ReadAllText("./SampleRequests/ValuesController-AddItem.json");
+            var requestStr = File.ReadAllText("./SampleRequests/BasketController-AddItem.json");
             var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
             var context = new TestLambdaContext();
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);

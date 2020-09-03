@@ -1,11 +1,11 @@
 {
   "resource": "/{proxy+}",
-  "path": "/api/values/item/3",
+  "path": "/api/basket/getItem/2",
   "httpMethod": "GET",
   "headers": null,
   "queryStringParameters": null,
   "pathParameters": {
-    "proxy": "api/values/item/3"
+    "proxy": "api/basket/getItem/2"
   },
   "stageVariables": null,
   "requestContext": {

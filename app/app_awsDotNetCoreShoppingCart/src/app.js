@@ -67,6 +67,21 @@ class ShoppingListApp extends React.Component {
   render() {
     return (
       <div>
+        <div class="row splitter">
+          <div class="col-lg-12">
+            <p class="lead">
+              The shopping basket initially has the following structure:
+            </p>
+            <pre>
+              <code class="ng-binding">
+                [
+                  "Item 1",
+                  "Item 2"
+                ]
+              </code>
+            </pre>
+          </div>
+        </div>
        <div class="row splitter">
           <div class="col-lg-4">
             <form onSubmit={this.handlePuzzleSubmit} autoComplete="off">
