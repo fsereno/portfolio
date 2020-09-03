@@ -7,19 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace aws.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : ControllerBase
+    public class BasketController : ControllerBase
     {
         private string[] basket = new string[] { "Item 1", "Item 2" };
 
-        // GET api/values
-        [HttpGet("all")]
+        // GET api/basket/get
+        [HttpGet("get")]
         public IEnumerable<string> Get()
         {
             return this.basket;
         }
 
-        // GET api/values/5
-        [HttpGet("item/{id}")]
+        // GET api/basket/getItem
+        [HttpGet("getItem/{id}")]
         public string Get(int id)
         {
             var index = id - 1;
@@ -30,8 +30,8 @@ namespace aws.Controllers
             return "The item you are looking for does not exist";
         }
 
-
-        [HttpGet("add/{value}")]
+        // GET api/basket/addItem
+        [HttpGet("addItem/{value}")]
         public IEnumerable<string> Post(string value)
         {
             if (!String.IsNullOrEmpty(value)) {
