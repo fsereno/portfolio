@@ -2,4 +2,4 @@
 const gulp = require("gulp");
 const run = require('gulp-run-command').default;
 
-gulp.task('js', run("npx webpack"));
+gulp.task('default', run("npx webpack"));
