@@ -17,7 +17,7 @@ class ShoppingListApp extends React.Component {
       get: `${API_ENDPOINT}/get`,
       getItem: `${API_ENDPOINT}/getItem`,
       addItem: `${API_ENDPOINT}/addItem`,
-      deleteItem: '',
+      deleteItem: `${API_ENDPOINT}/deleteItem`,
       answer: '',
       isValidBtnClasses: API_SUBMIT_CLASSES_NOT_VALID,
       isValid: false,
