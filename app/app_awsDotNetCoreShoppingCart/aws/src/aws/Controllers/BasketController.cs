@@ -30,8 +30,7 @@ namespace aws.Controllers
         [HttpGet("getItem/{id}")]
         public string Get(int id)
         {
-            var position = 0;
-            var isInRange = this._basketUtil.IsInRange(id, this._basket, out position);
+            var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
             if (isInRange)
             {
                 return this._basket[position];
@@ -45,31 +44,33 @@ namespace aws.Controllers
         {
             if (!String.IsNullOrEmpty(value))
             {
-                var basket = this._basket;
-                basket.Add(value);
-                this._basket = basket;
+                this._basket.Add(value);
             }
 
             return this._basket;
         }
 
-        // PUT api/values/5
-        [HttpPut("updateItem/{id}/with/{value}")]
-        public void Put(int id, [FromBody]string value)
+        // GET api/basket/updateItem/1/with/value
+        [HttpGet("updateItem/{id}/with/{value}")]
+        public List<string> Put(int id, string value)
         {
+            var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
+            if(isInRange) {
+                var currentValue = this._basket[position];
+                this._basket[position] = value;
+            }
+
+            return this._basket;
         }
 
         // DELETE api/values/5
         [HttpGet("deleteItem/{id}")]
         public List<string> Delete(int id)
         {
-            var position = 0;
-            var isInRange = this._basketUtil.IsInRange(id, this._basket, out position);
+            var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
             if (isInRange)
             {
-                var basket = this._basket;
-                basket?.RemoveAt(position);
-                this._basket = basket;
+                this._basket?.RemoveAt(position);
             }
 
             return this._basket;

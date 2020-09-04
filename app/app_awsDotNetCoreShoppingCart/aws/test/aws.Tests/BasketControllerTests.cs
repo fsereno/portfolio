@@ -88,5 +88,20 @@ namespace aws.Tests
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
         }
+
+        [Fact]
+        public async Task TestUpdateItem()
+        {
+            var lambdaFunction = new LambdaEntryPoint();
+            var requestStr = File.ReadAllText("./SampleRequests/BasketController-UpdateItem.json");
+            var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
+            var context = new TestLambdaContext();
+            var response = await lambdaFunction.FunctionHandlerAsync(request, context);
+
+            Assert.Equal(200, response.StatusCode);
+            Assert.Equal("[\"Item 1\",\"Item 2a\"]", response.Body);
+            Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
+            Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
+        }
     }
 }
