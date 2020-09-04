@@ -21,7 +21,7 @@ namespace Utils.Tests
         {
             var sut = new BasketUtil();
             var position = 0;
-            var collection = new string[]{ "Item 1", "Item 2" };
+            var collection = new List<string>(){ "Item 1", "Item 2" };
             var result = sut.IsInRange(2, collection, out position);
             Assert.True(result);
             Assert.Equal(1, position);
@@ -32,7 +32,7 @@ namespace Utils.Tests
         {
             var sut = new BasketUtil();
             var position = 0;
-            var collection = new string[]{ "Item 1", "Item 2" };
+            var collection = new List<string>(){ "Item 1", "Item 2" };
             var result = sut.IsInRange(3, collection, out position);
             Assert.False(result);
             Assert.Equal(2, position);
