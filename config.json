@@ -36,6 +36,87 @@
             "include": false
         },
         {
+            "name": "To-Do List (Basic)",
+            "subHeading": "A basic list builder",
+            "description": "Experimenting with Babel, TypeScript and Require JS.",
+            "folder": "babelTs",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "To-Do List (Vue)",
+            "subHeading": "A basic list builder using Vue",
+            "description": "Experimenting with Vue, Babel and Webpack.",
+            "folder": "toDoVue",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "To-Do List (React)",
+            "subHeading": "A basic list builder using React",
+            "description": "Experimenting with React, Babel and Webpack.",
+            "folder": "toDoReact",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "To-Do List (React Redux)",
+            "subHeading": "A basic React Redux application",
+            "description": "Experimenting how to use Redux with React, Babel and Webpack.",
+            "folder": "reactRedux",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "Tic-Tac-Toe (React)",
+            "subHeading": "A Tic-Tac-Toe game built using React JS",
+            "description": "Experimenting more complex aspects of React, Babel and Webpack.",
+            "folder": "ticTacToeReact",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "AWS Shopping Cart",
+            "subHeading": "A serverless application (SAM), using .Net Core and AWS",
+            "description": "Exploring the abilities of AWS Lambda, using .Net Core along with an AWS RESTful Gateway API.",
+            "folder": "awsDotNetCoreShoppingCart",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "Three Box Puzzle",
+            "subHeading": "A basic THREE JS scene",
+            "description": "An interactive Three JS scene, using Babel and Webpack.",
+            "folder": "threeJSScene",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "AFrame React (Basic)",
+            "subHeading": "An AFrame Hello World application with React JS",
+            "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
+            "folder": "aframe",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "AFrame React (Complex)",
+            "subHeading": "A more complex AFrame application with React JS",
+            "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
+            "folder": "aframeComplex",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
             "name": "Find and Replace",
             "subHeading": "A simple find and replace method",
             "description": "Written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all.",
@@ -82,87 +163,6 @@
             "folder": "koTypeScript",
             "active": true,
             "include": true
-        },
-        {
-            "name": "To-Do List (Basic)",
-            "subHeading": "A basic list builder",
-            "description": "Experimenting with Babel, TypeScript and Require JS.",
-            "folder": "babelTs",
-            "active": true,
-            "include": true,
-            "compileJs": false
-        },
-        {
-            "name": "To-Do List (Vue)",
-            "subHeading": "A basic list builder using Vue",
-            "description": "Experimenting with Vue, Babel and Webpack.",
-            "folder": "toDoVue",
-            "active": true,
-            "include": true,
-            "compileJs": false
-        },
-        {
-            "name": "To-Do List (React)",
-            "subHeading": "A basic list builder using React",
-            "description": "Experimenting with React, Babel and Webpack.",
-            "folder": "toDoReact",
-            "active": true,
-            "include": true,
-            "compileJs": false
-        },
-        {
-            "name": "To-Do List (React Redux)",
-            "subHeading": "A basic React Redux application",
-            "description": "Experimenting how to use Redux with React, Babel and Webpack.",
-            "folder": "reactRedux",
-            "active": true,
-            "include": true,
-            "compileJs": false
-        },
-        {
-            "name": "Three Box Puzzle",
-            "subHeading": "A basic THREE JS scene",
-            "description": "An interactive Three JS scene, using Babel and Webpack.",
-            "folder": "threeJSScene",
-            "active": true,
-            "include": true,
-            "compileJs": false
-        },
-        {
-            "name": "Tic-Tac-Toe (React)",
-            "subHeading": "A Tic-Tac-Toe game built using React JS",
-            "description": "Experimenting more complex aspects of React, Babel and Webpack.",
-            "folder": "ticTacToeReact",
-            "active": true,
-            "include": true,
-            "compileJs": false
-        },
-        {
-            "name": "AFrame React (Basic)",
-            "subHeading": "An AFrame Hello World application with React JS",
-            "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
-            "folder": "aframe",
-            "active": true,
-            "include": true,
-            "compileJs": false
-        },
-        {
-            "name": "AFrame React (Complex)",
-            "subHeading": "A more complex AFrame application with React JS",
-            "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
-            "folder": "aframeComplex",
-            "active": true,
-            "include": true,
-            "compileJs": false
-        },
-        {
-            "name": "AWS Shopping Cart",
-            "subHeading": "A serverless application (SAM), using .Net Core and AWS",
-            "description": "Exploring the abilities of AWS Lambda, using .Net Core along with an AWS RESTful Gateway API.",
-            "folder": "awsDotNetCoreShoppingCart",
-            "active": true,
-            "include": true,
-            "compileJs": false
         }
     ]
 }
