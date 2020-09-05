@@ -15,10 +15,9 @@ class ShoppingListApp extends React.Component {
     super(props);
     this.state = {
       get: `${API_ENDPOINT}/get`,
-      getItem: `${API_ENDPOINT}/getItem`,
-      addItem: `${API_ENDPOINT}/addItem`,
-      deleteItem: `${API_ENDPOINT}/deleteItem`,
-      updateItem: `${API_ENDPOINT}/updateItem`,
+      add: `${API_ENDPOINT}/add`,
+      delete: `${API_ENDPOINT}/delete`,
+      update: `${API_ENDPOINT}/update`,
       answer: '',
       isValidBtnClasses: API_SUBMIT_CLASSES_NOT_VALID,
       isValid: false,
@@ -50,14 +49,14 @@ class ShoppingListApp extends React.Component {
   handleGetSubmit(event) {
     event.preventDefault();
     let input = event.target.elements[0].value;
-    let endpoint =  input.length > 0 ? `${this.state.getItem}/${input}` : this.state.get;
+    let endpoint =  input.length > 0 ? `${this.state.get}/${input}` : this.state.get;
     this.open(endpoint)
   }
 
   handleAddSubmit(event) {
     event.preventDefault();
     let input = event.target.elements[0].value;
-    let endpoint =  `${this.state.addItem}/${input}`;
+    let endpoint =  `${this.state.add}/${input}`;
     this.open(endpoint)
   }
 
@@ -65,14 +64,14 @@ class ShoppingListApp extends React.Component {
     event.preventDefault();
     let index = event.target.elements[0].value;
     let value = event.target.elements[1].value;
-    let endpoint = `${this.state.updateItem}/${index}/with/${value}`;
+    let endpoint = `${this.state.update}/${index}/with/${value}`;
     this.open(endpoint);
   }
 
   handleDeleteSubmit(event) {
     event.preventDefault();
     let input = event.target.elements[0].value;
-    let endpoint =  `${this.state.deleteItem}/${input}`;
+    let endpoint =  `${this.state.delete}/${input}`;
     this.open(endpoint)
   }
 

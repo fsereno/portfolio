@@ -27,7 +27,7 @@ namespace aws.Controllers
         }
 
         // GET api/basket/getItem
-        [HttpGet("getItem/{id}")]
+        [HttpGet("get/{id}")]
         public string Get(int id)
         {
             var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
@@ -35,11 +35,12 @@ namespace aws.Controllers
             {
                 return this._basket[position];
             }
+
             return "The item you are looking for does not exist";
         }
 
         // GET api/basket/addItem
-        [HttpGet("addItem/{value}")]
+        [HttpGet("add/{value}")]
         public List<string> Post(string value)
         {
             if (!String.IsNullOrEmpty(value))
@@ -51,7 +52,7 @@ namespace aws.Controllers
         }
 
         // GET api/basket/updateItem/1/with/value
-        [HttpGet("updateItem/{id}/with/{value}")]
+        [HttpGet("update/{id}/with/{value}")]
         public List<string> Put(int id, string value)
         {
             var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
@@ -64,7 +65,7 @@ namespace aws.Controllers
         }
 
         // DELETE api/values/5
-        [HttpGet("deleteItem/{id}")]
+        [HttpGet("delete/{id}")]
         public List<string> Delete(int id)
         {
             var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);

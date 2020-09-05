@@ -1,11 +1,11 @@
 {
   "resource": "/{proxy+}",
-  "path": "/api/basket/deleteItem/4",
+  "path": "/api/basket/delete/4",
   "httpMethod": "GET",
   "headers": null,
   "queryStringParameters": null,
   "pathParameters": {
-    "proxy": "api/basket/deleteItem/4"
+    "proxy": "api/basket/delete/4"
   },
   "stageVariables": null,
   "requestContext": {
