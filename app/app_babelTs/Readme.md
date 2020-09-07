@@ -1,4 +1,4 @@
-# ToDo (Basic)
+# To-Do (Basic)
 
 With this application I have built a primitive To-Do list using only JQuery and TypeScript.
 

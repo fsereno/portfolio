@@ -1,4 +1,4 @@
-# ToDo React
+# To-Do React
 
 With this application I have built a simple To-Do list using React to handle user input and manage state.
 

@@ -1,4 +1,4 @@
-# ToDo Vue
+# To-Do Vue
 
 With this application I have built a simple To-Do list using Vue to handle user input and manage state.
 
