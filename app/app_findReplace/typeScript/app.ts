@@ -1,25 +1,16 @@
-// Repositories
+"use strict;"
 import { StringRepository } from '../../typeScript/Repositories/StringRepository';
-
-// Controllers
-import { IndexController } from "./Controllers/IndexController";
-
-// Services
+import { Component } from "./Components/component";
 import { StringService } from "../../typeScript/Services/StringService";
 import { ValidatorService } from "../../typeScript/Services/validatorService";
 
-// Repositories
 let stringRepository = new StringRepository();
+let stringService = new StringService(stringRepository);
+let validatorService = new ValidatorService();
 
-// Instantiate Services with dependency injection
-let stringService = new StringService(stringRepository),
-    validatorService = new ValidatorService();
-
-// Controllers
-let indexController = new IndexController
-(
+let component = new Component(
     stringService,
     validatorService
 );
 
-indexController.init();
+component.init();

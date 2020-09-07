@@ -1,10 +1,13 @@
 # Master application Readme tempalte
 
-### Sub heading ###
+With this application I have built...
 
-### Project Files ###
+### Explanation ###
 
-Code
+The interest in this application...
+
+Run the application from within the route directory, using the master Gulp file and the default Gulp task.
 ```
-    dotnet run
+    cd ../../
+    gulp
 ```

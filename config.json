@@ -90,7 +90,7 @@
             "compileJs": false
         },
         {
-            "name": "Three Box Puzzle",
+            "name": "Three JS Scene (Basic)",
             "subHeading": "A basic THREE JS scene",
             "description": "An interactive Three JS scene, using Babel and Webpack.",
             "folder": "threeJSScene",

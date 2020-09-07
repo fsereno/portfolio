@@ -24,13 +24,10 @@ export class StringService implements IStringService {
         return a + " " + b;
     }
 
-    public FindReplace(
-        findThis: string,
-        inThis: string,
-        replaceWithThis: string): string {
-        let searchRegex = new RegExp(findThis, "g"),
-            replaceRegex = new RegExp("\\b" + findThis + "\\b"),
-            count = (inThis.match(searchRegex) || []).length;
+    public FindReplace(findThis: string, inThis: string, replaceWithThis: string): string {
+        let searchRegex = new RegExp(findThis, "g");
+        let replaceRegex = new RegExp("\\b" + findThis + "\\b");
+        let count = (inThis.match(searchRegex) || []).length;
 
         for (let index = 0; index < count; index++) {
             inThis = inThis.replace(replaceRegex, replaceWithThis);

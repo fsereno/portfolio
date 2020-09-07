@@ -1,9 +1,9 @@
-// Interfaces
+"use strict;"
 import { IStringService } from "../../../typeScript/Interfaces/IStringService";
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 
-export class IndexController  {
-    
+export class Component {
+
     private stringService: IStringService;
     private validatorService: IValidatorService;
     private findInput: JQuery<HTMLElement>;
@@ -11,14 +11,9 @@ export class IndexController  {
     private replaceInput: JQuery<HTMLElement>;
     private formId: string;
 
-    constructor
-    (
-
+    constructor (
         stringService: IStringService,
-        validatorService: IValidatorService
-      
-    ) 
-    {
+        validatorService: IValidatorService) {
         this.stringService = stringService;
         this.validatorService = validatorService;
         this.result = jQuery("#result");
@@ -28,36 +23,25 @@ export class IndexController  {
     }
 
     init() {
-
         const self = this;
-
         jQuery(() => {
-
             self.validateForm();
-        
         });
     }
 
-    validateForm(){
-
+    validateForm() {
         const self = this;
         let validateFormOptions = {
-            
             submitHandler: (form: HTMLElement)=>{
+                let valid = jQuery(form).valid();
+                let findThis = self.findInput.val().toString();
+                let inThis = self.result.text();
+                let replaceWithThis = self.replaceInput.val().toString();
 
-                let valid = jQuery(form).valid(),
-                    findThis = self.findInput.val().toString(),
-                    inThis = self.result.text(),
-                    replaceWithThis = self.replaceInput.val().toString();
-
-                if(valid){
-
-                    let textReplaced = self.stringService.FindReplace(
-                        findThis,inThis,replaceWithThis);
-
+                if (valid) {
+                    let textReplaced = self.stringService.FindReplace(findThis,inThis,replaceWithThis);
                     jQuery("#result").text(textReplaced);
-
-                }   
+                }
             }
         }
 

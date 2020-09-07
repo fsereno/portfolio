@@ -1,4 +1,4 @@
-# AFrame React (Basic)
+# Three JS Scene (Basic)
 
 With this application I have built a simple 'Hello World' Three JS application.
 
