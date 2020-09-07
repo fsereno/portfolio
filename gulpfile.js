@@ -142,8 +142,9 @@ let copyJsTask = (application) => {
 let createTask = (application) => {
   return directoryExists(config.developmentDir+"/"+config.prefix+application.folder)
     .then(result => {
+      let templateDirectory = typeof application.masterTemplateDir !== "undefined" && application.masterTemplateDir.length > 0 ? application.masterTemplateDir : config.masterTemplateDir;
       if(result === false) {
-        gulp.src(config.developmentDir+"/"+config.prefix+config.masterTemplateDir+"/**/*")
+        gulp.src(`${config.developmentDir}/${config.prefix}${templateDirectory}/**/*`)
         .pipe(logger(gulpHelpers.populateLoggerOptions(
             "Create task started...",
             "Crete task complete!",
