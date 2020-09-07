@@ -3,7 +3,6 @@ let chai = require('chai');
 let chaiAsPromised = require('chai-as-promised');
 let sinonChai = require('sinon-chai');
 let should = chai.should();
-let expectedResult:boolean = true;
 let application = "app_toDoReact";
 
 chai.use(sinonChai);
@@ -13,7 +12,7 @@ const url = "http://localhost:8080/"+application+"/index.html";
 
 describe(application, () => {
     describe("Add Item", () => {
-        it("Should return "+ expectedResult + ", when an item is added.", function() {
+        it("Should add an item to the list.", function() {
             this.timeout(0);
             let test = async (url) => {
                 return new Nightmare({show:false})
@@ -30,7 +29,7 @@ describe(application, () => {
         });
     });
     describe("Delete Item", () => {
-        it("Should return "+ expectedResult + ", when an item is deleted.", function() {
+        it("Should first add an item to the list and then delete it.", function() {
             this.timeout(0);
             let test = async (url) => {
                 return new Nightmare({show:false})

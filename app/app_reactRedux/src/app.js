@@ -116,7 +116,7 @@ class ToDoListForm extends React.Component {
               </div>
               <button id="submit" class="btn btn-dark mr-1" type="submit">Add item</button>
               <button id="undo" class="btn btn-danger mr-1" type="button" onClick={this.handleUndo}>Undo</button>
-              <button id="undo" class="btn btn-dark mr-1" type="button" onClick={this.handleRedo}>Redo</button>
+              <button id="redo" class="btn btn-dark mr-1" type="button" onClick={this.handleRedo}>Redo</button>
             </form>
           </div>
         </div>
