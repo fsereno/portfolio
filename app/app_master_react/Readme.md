@@ -2,7 +2,7 @@
 
 With this application I have built
 
-### Sub heading ###
+### Explanation ###
 
 ### Project Files ###
 

@@ -2,6 +2,8 @@
 
 With this application I have built a simple shopping basket, consisting of primitive string values, with a React frontend and input data being processed via .Net Core running on AWS.
 
+### Explanation ###
+
 This project shows how to run an ASP.NET Core Web API project as an AWS Lambda exposed through Amazon API Gateway. The NuGet package [Amazon.Lambda.AspNetCoreServer](https://www.nuget.org/packages/Amazon.Lambda.AspNetCoreServer) contains a Lambda function that is used to translate requests from API Gateway into the ASP.NET Core framework and then the responses from ASP.NET Core back to API Gateway.
 
 ### Configuring for API Gateway HTTP API ###
