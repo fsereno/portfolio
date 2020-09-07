@@ -1,6 +1,6 @@
 # Find and Replace
 
-With this application I have built a simple Find and Replace tool.
+With this application I have built a simple Find and Replace tool, using TypeScript, Pug and Sass.
 
 ### Explanation ###
 

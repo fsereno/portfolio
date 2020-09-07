@@ -23,28 +23,26 @@ export class Component {
     }
 
     init() {
-        const self = this;
         jQuery(() => {
-            self.validateForm();
+            this.validateForm();
         });
     }
 
     validateForm() {
-        const self = this;
         let validateFormOptions = {
             submitHandler: (form: HTMLElement)=>{
                 let valid = jQuery(form).valid();
-                let findThis = self.findInput.val().toString();
-                let inThis = self.result.text();
-                let replaceWithThis = self.replaceInput.val().toString();
+                let findThis = this.findInput.val().toString();
+                let inThis = this.result.text();
+                let replaceWithThis = this.replaceInput.val().toString();
 
                 if (valid) {
-                    let textReplaced = self.stringService.FindReplace(findThis,inThis,replaceWithThis);
+                    let textReplaced = this.stringService.FindReplace(findThis,inThis,replaceWithThis);
                     jQuery("#result").text(textReplaced);
                 }
             }
         }
 
-        self.validatorService.ValidateForm(self.formId, validateFormOptions);
+        this.validatorService.ValidateForm(this.formId, validateFormOptions);
     }
 }

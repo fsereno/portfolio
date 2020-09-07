@@ -1,26 +1,18 @@
 
-// Controllers
-import { IndexController } from "./Controllers/IndexController";
-
-// Services
+"use strict;"
+import { Component } from './components/component';
 import { DictionaryService } from "../../typeScript/Services/DictionaryService";
 import { ValidatorService } from "../../typeScript/Services/validatorService";
-
-// Repositories
 import { DictionaryRepository } from "../../typeScript/Repositories/DictionaryRepository";
 
-// Repositories
 let dictionaryRepository = new DictionaryRepository();
+let dictionaryService = new DictionaryService(dictionaryRepository);
+let validatorService = new ValidatorService();
 
-// Instantiate Services with dependency injection
-let dictionaryService = new DictionaryService(dictionaryRepository),
-    validatorService = new ValidatorService();
-
-// Controllers
-let indexController = new IndexController
+let component = new Component
 (
     dictionaryService,
     validatorService
 );
 
-indexController.init();
+component.init();
