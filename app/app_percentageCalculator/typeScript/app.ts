@@ -1,19 +1,14 @@
 
-// Controllers
-import { IndexController } from "./Controllers/IndexController";
-
-// Services
+"use strict;"
+import { Component } from "./components/component";
 import { ValidatorService } from "../../typeScript/Services/validatorService";
 import { CalculatorService } from "../../typeScript/Services/calculatorService";
 
-// Instantiate Services with dependency injection
-let validatorService = new ValidatorService(),
-    calculatorService = new CalculatorService();
-
-// Controllers
-let indexController = new IndexController(
+let validatorService = new ValidatorService();
+let calculatorService = new CalculatorService();
+let component = new Component (
     validatorService,
     calculatorService
 );
 
-indexController.init();
+component.init();

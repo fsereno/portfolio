@@ -1,9 +1,9 @@
-// Interfaces
+"use strict;"
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 import { ICalculatorService } from "../../../typeScript/Interfaces/ICalculatorService";
 
-export class IndexController  {
-    
+export class Component  {
+
     private validatorService: IValidatorService;
     private calculatorService: ICalculatorService
     private result: JQuery<HTMLElement>;
@@ -11,14 +11,9 @@ export class IndexController  {
     private percentageOfInput: JQuery<HTMLElement>;
     private formId: string;
 
-    constructor
-    (
-
+    constructor(
         validatorService: IValidatorService,
-        calculatorService: ICalculatorService
-      
-    ) 
-    {
+        calculatorService: ICalculatorService) {
         this.validatorService = validatorService;
         this.calculatorService = calculatorService;
         this.result = jQuery("#result");
@@ -28,40 +23,24 @@ export class IndexController  {
     }
 
     init() {
-
-        const self = this;
-
         jQuery(() => {
-
-            self.validateForm();
-
+            this.validateForm();
         });
-
     }
 
-    validateForm(){
-
-        const self = this;
+    validateForm() {
         let validateFormOptions = {
-            
-            submitHandler: (form: HTMLElement)=>{
-
-                let valid = jQuery(form).valid(),
-                    percentage = Number(self.percentageInput.val()),
-                    ofThisNumber = Number(self.percentageOfInput.val());
-
-                if(valid){
-
-                    let result = self.calculatorService.PercentageOf(percentage, ofThisNumber);
-
-                    self.result.text(result.toString());
-
-                }   
+            submitHandler: (form: HTMLElement) => {
+                let valid = jQuery(form).valid();
+                let percentage = Number(this.percentageInput.val());
+                let ofThisNumber = Number(this.percentageOfInput.val());
+                if (valid) {
+                    let result = this.calculatorService.PercentageOf(percentage, ofThisNumber);
+                    this.result.text(result.toString());
+                }
             }
         }
 
-        self.validatorService.ValidateForm(self.formId, validateFormOptions);
-        
+        this.validatorService.ValidateForm(this.formId, validateFormOptions);
     }
-       
 }
