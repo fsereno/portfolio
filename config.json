@@ -118,7 +118,7 @@
         },
         {
             "name": "Find and Replace",
-            "subHeading": "A simple find and replace method",
+            "subHeading": "A simple Find and Replace method",
             "description": "Written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all.",
             "folder": "findReplace",
             "active": true,
@@ -133,9 +133,9 @@
             "include": true
         },
         {
-            "name": "Un-Scrabbler",
-            "subHeading": "An game of Un-scrabble",
-            "description": "Can you beat Unscrabbler?. Written with TypeScript, Sass and Pug.",
+            "name": "Un-Scrabbler Word Game",
+            "subHeading": "A simple Scrabble Word Game, can you beat Unscrabbler?",
+            "description": "Written with TypeScript, Sass and Pug.",
             "folder": "unscrabbler",
             "active": true,
             "include": true
