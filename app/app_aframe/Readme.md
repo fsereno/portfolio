@@ -2,7 +2,7 @@
 
 With this application I have built a simple 'Hello World' AFrame application, coupled with React as a means of managing state.
 
-### Technology stack used ###
+### Explanation ###
 
 I have used Webpack to bundle JS dependancies and Babel to transpile to the correct ES version.
 
