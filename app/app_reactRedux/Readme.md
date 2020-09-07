@@ -1,0 +1,22 @@
+# ToDo React Redux
+
+With this application I have extended the simple To-Do list using React to now use Redux to handle the application state.
+
+### Explanation ###
+
+I have used Webpack to bundle JS dependancies and Babel to transpile to the correct ES version.
+
+The interest in this stack is to continue exploring how React can be used for 2 way data binding between the DOM and application state. But with this application I have also introduced the use of Redux to help with implementing 'undo' functionality and the handling on immutable application state.
+
+### Project commands ###
+
+Build JavaScript by running the default Gulp task from within this directory
+```
+    gulp
+```
+
+Run the application from within the route directory, using the master Gulp file and the default Gulp task
+```
+    cd ../../
+    gulp
+```
