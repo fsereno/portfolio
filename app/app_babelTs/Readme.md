@@ -20,4 +20,3 @@ Run the application from within the route directory, using the master Gulp file 
     cd ../../
     gulp
 ```
-
