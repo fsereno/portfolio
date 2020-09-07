@@ -1,3 +1,4 @@
+"use strict;"
 import { userModel } from "./userModel";
 import { StatusLiterals } from "./StatusLiterals";
 export class UserViewModel {

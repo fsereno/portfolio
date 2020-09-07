@@ -18,8 +18,7 @@ let unscrabbleService = new UnscrabbleService(
     dictionaryRepository
 );
 let randomGeneratorService = new RandomGeneratorService(stringService);
-let component = new Component
-(
+let component = new Component (
     validatorService,
     dictionaryService,
     unscrabbleService,

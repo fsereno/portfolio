@@ -9,8 +9,7 @@ let dictionaryRepository = new DictionaryRepository();
 let dictionaryService = new DictionaryService(dictionaryRepository);
 let validatorService = new ValidatorService();
 
-let component = new Component
-(
+let component = new Component(
     dictionaryService,
     validatorService
 );

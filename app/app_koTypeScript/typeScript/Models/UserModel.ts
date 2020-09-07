@@ -1,3 +1,4 @@
+"use strict;"
 export class userModel {
     name: string;
     age: number;
@@ -7,8 +8,7 @@ export class userModel {
         name: string,
         age: number,
         active: boolean,
-        status: string
-    ) {
+        status: string) {
         this.name = name;
         this.age = age;
         this.active = active;

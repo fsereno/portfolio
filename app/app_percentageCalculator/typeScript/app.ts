@@ -11,8 +11,7 @@ let validatorService = new ValidatorService(),
     calculatorService = new CalculatorService();
 
 // Controllers
-let indexController = new IndexController
-(
+let indexController = new IndexController(
     validatorService,
     calculatorService
 );

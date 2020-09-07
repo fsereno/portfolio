@@ -1,26 +1,23 @@
-// Interfaces
+"use strict;"
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 import { UserViewModel } from "../Models/UserViewModel";
-export class IndexController  {
+
+export class Component  {
 
     private validatorService: IValidatorService;
     private formId: string;
     private editModalId: string;
 
-    constructor
-    (
-        validatorService: IValidatorService 
-    ) 
-    {
+    constructor(
+        validatorService: IValidatorService) {
         this.validatorService = validatorService;
         this.formId = "editForm";
         this.editModalId = "editModal";
     }
     init() {
-        const self = this;
         jQuery(() => {
-            self.validateForm();
-            self.bind();
+            this.validateForm();
+            this.bind();
         });
     }
     validateForm(){
@@ -28,10 +25,7 @@ export class IndexController  {
     }
     bind() {
         ko.applyBindings(
-            new UserViewModel(
-                this.formId, 
-                this.editModalId
-                )
+            new UserViewModel(this.formId, this.editModalId)
         );
-    }    
+    }
 }
