@@ -23,6 +23,7 @@ namespace aws.Controllers
         [HttpGet("get")]
         public IEnumerable<string> Get()
         {
+            this.SetResponseHeaders();
             return this._basket;
         }
 
@@ -30,6 +31,7 @@ namespace aws.Controllers
         [HttpGet("get/{id}")]
         public string Get(int id)
         {
+            this.SetResponseHeaders();
             var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
             if (isInRange)
             {
@@ -43,6 +45,7 @@ namespace aws.Controllers
         [HttpGet("add/{value}")]
         public List<string> Post(string value)
         {
+            this.SetResponseHeaders();
             if (!String.IsNullOrEmpty(value))
             {
                 this._basket.Add(value);
@@ -55,6 +58,7 @@ namespace aws.Controllers
         [HttpGet("update/{id}/with/{value}")]
         public List<string> Put(int id, string value)
         {
+            this.SetResponseHeaders();
             var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
             if(isInRange) {
                 var currentValue = this._basket[position];
@@ -68,6 +72,7 @@ namespace aws.Controllers
         [HttpGet("delete/{id}")]
         public List<string> Delete(int id)
         {
+            this.SetResponseHeaders();
             var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
             if (isInRange)
             {
@@ -75,6 +80,12 @@ namespace aws.Controllers
             }
 
             return this._basket;
+        }
+
+        private void SetResponseHeaders() {
+            Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'");
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            Response.Headers.Add("Access-Control-Allow-Methods", "GET");
         }
     }
 }

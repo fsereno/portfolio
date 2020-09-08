@@ -26,6 +26,9 @@ namespace aws.Tests
             Assert.Equal(200, response.StatusCode);
             Assert.Equal("[\"Item 1\",\"Item 2\"]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Methods"));
             Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
         }
 
