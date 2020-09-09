@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Utils;
+using Models;
 
 namespace aws.Controllers
 {
@@ -13,22 +14,10 @@ namespace aws.Controllers
         private List<string> _basket { get; set; }
         private readonly IBasketUtil _basketUtil;
 
-        public class TestModel {
-            public string Value { get; set; }
-        }
-
         public BasketController(IBasketUtil basketUtil)
         {
             this._basket = new List<string>() { "Item 1", "Item 2" };
             _basketUtil = basketUtil;
-        }
-
-        [HttpPost("tester")]
-        public string Tester([FromBody]TestModel fromBody)
-        {
-            this.SetResponseHeaders();
-            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
-            return fromBody.Value;
         }
 
         // GET api/basket/get
@@ -69,6 +58,18 @@ namespace aws.Controllers
             }
 
             return this._basket;
+        }
+
+        [HttpPost("add")]
+        public List<Item> Add([FromBody]AddRequest request)
+        {
+            this.SetResponseHeaders();
+            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
+            if (!String.IsNullOrEmpty(request.Item.Name))
+            {
+                request.Items.Add(request.Item);
+            }
+            return request.Items;
         }
 
         // GET api/basket/updateItem/1/with/value
