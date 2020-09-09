@@ -35,6 +35,23 @@ namespace aws.Controllers
             return this._items;
         }
 
+        // POST api/basket/get
+        [HttpPost("get")]
+        public Item Get([FromBody]GetRequest request)
+        {
+            this.SetResponseHeaders();
+            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
+
+            var isInRange = this._basketUtil.IsInRange(request.Index, request.Items, out int position);
+            if (isInRange)
+            {
+                return request.Items[position];
+            }
+
+            return new Item() { Name = "Item is out of range" };
+        }
+
+
         // GET api/basket/getItem
         [HttpGet("get/{id}")]
         public string Get(int id)
@@ -72,11 +89,11 @@ namespace aws.Controllers
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
-            if (!String.IsNullOrEmpty(request.Item.Name))
+            if (!String.IsNullOrEmpty(request?.Item?.Name))
             {
-                request.Items.Add(request.Item);
+                request?.Items.Add(request?.Item);
             }
-            return request.Items;
+            return request?.Items;
         }
 
         // GET api/basket/updateItem/1/with/value
