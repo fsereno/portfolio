@@ -32,5 +32,5 @@
     "httpMethod": "POST",
     "apiId": "t2yh6sjnmk"
   },
-  "body": "{\"index\":2,\"items\":[{\"name\":\"Apple\"},{\"name\":\"Banana\"}]}"
+  "body": "{\"index\":3,\"items\":[{\"name\":\"Apple\"},{\"name\":\"Banana\"}]}"
 }

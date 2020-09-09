@@ -42,15 +42,14 @@ namespace aws.Controllers
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
 
-            var isInRange = this._basketUtil.IsInRange(request.Index, request.Items, out int position);
+            var isInRange = this._basketUtil.IsInRange(request.Index, request?.Items, out int position);
             if (isInRange)
             {
-                return request.Items[position];
+                return request?.Items[position];
             }
 
             return new Item() { Name = "Item is out of range" };
         }
-
 
         // GET api/basket/getItem
         [HttpGet("get/{id}")]
@@ -91,7 +90,7 @@ namespace aws.Controllers
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
             if (!String.IsNullOrEmpty(request?.Item?.Name))
             {
-                request?.Items.Add(request?.Item);
+                request?.Items?.Add(request?.Item);
             }
             return request?.Items;
         }
@@ -104,14 +103,26 @@ namespace aws.Controllers
             Response.Headers.Add("Access-Control-Allow-Methods", "GET");
             var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
             if(isInRange) {
-                var currentValue = this._basket[position];
                 this._basket[position] = value;
             }
 
             return this._basket;
         }
 
-        // DELETE api/values/5
+        // POST api/basket/update
+        [HttpPost("update")]
+        public List<Item> Update([FromBody]UpdateRequest request)
+        {
+            this.SetResponseHeaders();
+            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
+            var isInRange = this._basketUtil.IsInRange(request.Index, request?.Items, out int position);
+            if (isInRange) {
+                request.Items[position] = request?.Item;
+            }
+            return request?.Items;
+        }
+
+        // DELETE api/basket/delete/5
         [HttpGet("delete/{id}")]
         public List<string> Delete(int id)
         {
@@ -124,6 +135,21 @@ namespace aws.Controllers
             }
 
             return this._basket;
+        }
+
+        // DELETE api/basket/delete
+        [HttpPost("delete")]
+        public List<Item> Delete([FromBody]GetRequest request)
+        {
+            this.SetResponseHeaders();
+            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
+            var isInRange = this._basketUtil.IsInRange(request.Index, request?.Items, out int position);
+            if (isInRange)
+            {
+                request.Items?.RemoveAt(position);
+            }
+
+            return request.Items;
         }
 
         private void SetResponseHeaders() {

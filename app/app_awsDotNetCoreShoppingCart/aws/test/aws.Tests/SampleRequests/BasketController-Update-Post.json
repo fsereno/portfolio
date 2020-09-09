@@ -1,13 +1,13 @@
 {
   "resource": "/{proxy+}",
-  "path": "/api/basket/get",
+  "path": "api/basket/update",
   "httpMethod": "POST",
   "headers": {
     "Content-Type": "application/json"
   },
   "queryStringParameters": null,
   "pathParameters": {
-    "proxy": "api/basket/get"
+    "proxy": "api/basket/update"
   },
   "stageVariables": null,
   "requestContext": {
@@ -32,5 +32,5 @@
     "httpMethod": "POST",
     "apiId": "t2yh6sjnmk"
   },
-  "body": "{\"index\":2,\"items\":[{\"name\":\"Apple\"},{\"name\":\"Banana\"}]}"
+  "body": "{\"index\":2,\"item\":{\"name\":\"Orange\"},\"items\":[{\"name\":\"Apple\"},{\"name\":\"Banana\"}]}"
 }
