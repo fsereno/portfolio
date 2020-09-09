@@ -1,0 +1,4 @@
+POST https://localhost:5001/api/basket/tester HTTP/1.1
+content-type: application/json
+
+{ "Value":"Hello world" }

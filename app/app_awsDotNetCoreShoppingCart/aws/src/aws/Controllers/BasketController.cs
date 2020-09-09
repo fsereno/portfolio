@@ -13,10 +13,22 @@ namespace aws.Controllers
         private List<string> _basket { get; set; }
         private readonly IBasketUtil _basketUtil;
 
+        public class TestModel {
+            public string Value { get; set; }
+        }
+
         public BasketController(IBasketUtil basketUtil)
         {
             this._basket = new List<string>() { "Item 1", "Item 2" };
             _basketUtil = basketUtil;
+        }
+
+        [HttpPost("tester")]
+        public string Tester([FromBody]TestModel fromBody)
+        {
+            this.SetResponseHeaders();
+            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
+            return fromBody.Value;
         }
 
         // GET api/basket/get
@@ -24,6 +36,7 @@ namespace aws.Controllers
         public IEnumerable<string> Get()
         {
             this.SetResponseHeaders();
+            Response.Headers.Add("Access-Control-Allow-Methods", "GET");
             return this._basket;
         }
 
@@ -32,6 +45,8 @@ namespace aws.Controllers
         public string Get(int id)
         {
             this.SetResponseHeaders();
+            Response.Headers.Add("Access-Control-Allow-Methods", "GET");
+
             var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
             if (isInRange)
             {
@@ -46,6 +61,8 @@ namespace aws.Controllers
         public List<string> Post(string value)
         {
             this.SetResponseHeaders();
+            Response.Headers.Add("Access-Control-Allow-Methods", "GET");
+
             if (!String.IsNullOrEmpty(value))
             {
                 this._basket.Add(value);
@@ -59,6 +76,7 @@ namespace aws.Controllers
         public List<string> Put(int id, string value)
         {
             this.SetResponseHeaders();
+            Response.Headers.Add("Access-Control-Allow-Methods", "GET");
             var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
             if(isInRange) {
                 var currentValue = this._basket[position];
@@ -73,6 +91,7 @@ namespace aws.Controllers
         public List<string> Delete(int id)
         {
             this.SetResponseHeaders();
+            Response.Headers.Add("Access-Control-Allow-Methods", "GET");
             var isInRange = this._basketUtil.IsInRange(id, this._basket, out int position);
             if (isInRange)
             {
@@ -85,7 +104,6 @@ namespace aws.Controllers
         private void SetResponseHeaders() {
             Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token");
             Response.Headers.Add("Access-Control-Allow-Origin", "*");
-            Response.Headers.Add("Access-Control-Allow-Methods", "GET");
         }
     }
 }

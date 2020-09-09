@@ -7,6 +7,21 @@
     {
         "type": "aws-sam",
         "request": "direct-invoke",
+        "name": "src:aws::aws.Controllers.BasketController::Tester (dotnetcore3.1)",
+        "invokeTarget": {
+            "target": "code",
+            "projectRoot": "app/app_awsDotNetCoreShoppingCart/aws/src/aws",
+            "lambdaHandler": "aws::aws.Controllers.BasketController::Tester"
+        },
+        "lambda": {
+            "runtime": "dotnetcore3.1",
+            "payload": {},
+            "environmentVariables": {}
+        }
+    },
+    {
+        "type": "aws-sam",
+        "request": "direct-invoke",
         "name": "src:aws::aws.Controllers.ValuesController::Get (dotnetcore3.1)",
         "invokeTarget": {
             "target": "code",
