@@ -24,7 +24,7 @@ namespace aws.Tests
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
 
             Assert.Equal(200, response.StatusCode);
-            Assert.Equal("[\"Item 1\",\"Item 2\"]", response.Body);
+            Assert.Equal("[{\"name\":\"Apple\"},{\"name\":\"Banana\"}]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));

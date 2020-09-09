@@ -12,21 +12,27 @@ namespace aws.Controllers
     public class BasketController : ControllerBase
     {
         private List<string> _basket { get; set; }
+        private List<Item> _items { get; set; }
         private readonly IBasketUtil _basketUtil;
 
         public BasketController(IBasketUtil basketUtil)
         {
             this._basket = new List<string>() { "Item 1", "Item 2" };
+            this._items = new List<Item>()
+            {
+                new Item() { Name = "Apple" },
+                new Item() { Name = "Banana" }
+            };
             _basketUtil = basketUtil;
         }
 
         // GET api/basket/get
         [HttpGet("get")]
-        public IEnumerable<string> Get()
+        public List<Item> Get()
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "GET");
-            return this._basket;
+            return this._items;
         }
 
         // GET api/basket/getItem
