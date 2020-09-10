@@ -55,7 +55,7 @@ namespace aws.Tests
         }
 
         [Fact]
-        public async Task TestGetItemPost()
+        public async Task Test_GetItem_Post()
         {
             var lambdaFunction = new LambdaEntryPoint();
             var requestStr = File.ReadAllText("./SampleRequests/BasketController-GetItem-Post.json");
@@ -95,7 +95,7 @@ namespace aws.Tests
         }
 
         [Fact]
-        public async Task TestGetItemOutOfRangePost()
+        public async Task Test_GetItem_OutOfRange_Post()
         {
             var lambdaFunction = new LambdaEntryPoint();
             var requestStr = File.ReadAllText("./SampleRequests/BasketController-GetItem-OutOfRange-Post.json");
@@ -104,7 +104,27 @@ namespace aws.Tests
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
 
             Assert.Equal(200, response.StatusCode);
-            Assert.Equal("{\"name\":\"Item is out of range\"}", response.Body);
+            Assert.Equal("{\"name\":\"\"}", response.Body);
+            Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Methods"));
+            Assert.Equal("Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", response.MultiValueHeaders["Access-Control-Allow-Headers"][0]);
+            Assert.Equal("*", response.MultiValueHeaders["Access-Control-Allow-Origin"][0]);
+            Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
+        }
+
+        [Fact]
+        public async Task Test_GetItem_NullReference_Post()
+        {
+            var lambdaFunction = new LambdaEntryPoint();
+            var requestStr = File.ReadAllText("./SampleRequests/BasketController-GetItem-NullRequest-Post.json");
+            var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
+            var context = new TestLambdaContext();
+            var response = await lambdaFunction.FunctionHandlerAsync(request, context);
+
+            Assert.Equal(200, response.StatusCode);
+            Assert.Equal("{\"name\":\"\"}", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));
@@ -135,7 +155,7 @@ namespace aws.Tests
         }
 
         [Fact]
-        public async Task TestAddPost()
+        public async Task Test_Add_Post()
         {
             var lambdaFunction = new LambdaEntryPoint();
             var requestStr = File.ReadAllText("./SampleRequests/BasketController-Add-Post.json");
@@ -145,6 +165,26 @@ namespace aws.Tests
 
             Assert.Equal(200, response.StatusCode);
             Assert.Equal("[{\"name\":\"Pear\"},{\"name\":\"Orange\"}]", response.Body);
+            Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Methods"));
+            Assert.Equal("Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", response.MultiValueHeaders["Access-Control-Allow-Headers"][0]);
+            Assert.Equal("*", response.MultiValueHeaders["Access-Control-Allow-Origin"][0]);
+            Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
+        }
+
+        [Fact]
+        public async Task Test_Add_NullRequest_Post()
+        {
+            var lambdaFunction = new LambdaEntryPoint();
+            var requestStr = File.ReadAllText("./SampleRequests/BasketController-Add-NullRequest-Post.json");
+            var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
+            var context = new TestLambdaContext();
+            var response = await lambdaFunction.FunctionHandlerAsync(request, context);
+
+            Assert.Equal(200, response.StatusCode);
+            Assert.Equal("[]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));
@@ -175,7 +215,7 @@ namespace aws.Tests
         }
 
         [Fact]
-        public async Task TestDeletePost()
+        public async Task Test_Delete_Post()
         {
             var lambdaFunction = new LambdaEntryPoint();
             var requestStr = File.ReadAllText("./SampleRequests/BasketController-Delete-Post.json");
@@ -195,7 +235,7 @@ namespace aws.Tests
         }
 
         [Fact]
-        public async Task TestDeleteOutOfRangePost()
+        public async Task Test_Delete_OutOfRange_Post()
         {
             var lambdaFunction = new LambdaEntryPoint();
             var requestStr = File.ReadAllText("./SampleRequests/BasketController-Delete-OutOfRange-Post.json");
@@ -205,6 +245,26 @@ namespace aws.Tests
 
             Assert.Equal(200, response.StatusCode);
             Assert.Equal("[{\"name\":\"Apple\"},{\"name\":\"Banana\"}]", response.Body);
+            Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Methods"));
+            Assert.Equal("Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", response.MultiValueHeaders["Access-Control-Allow-Headers"][0]);
+            Assert.Equal("*", response.MultiValueHeaders["Access-Control-Allow-Origin"][0]);
+            Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
+        }
+
+        [Fact]
+        public async Task Test_Delete_NullRequest_Post()
+        {
+            var lambdaFunction = new LambdaEntryPoint();
+            var requestStr = File.ReadAllText("./SampleRequests/BasketController-Delete-NullRequest-Post.json");
+            var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
+            var context = new TestLambdaContext();
+            var response = await lambdaFunction.FunctionHandlerAsync(request, context);
+
+            Assert.Equal(200, response.StatusCode);
+            Assert.Equal("[]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));
@@ -255,7 +315,7 @@ namespace aws.Tests
         }
 
         [Fact]
-        public async Task TestUpdatePost()
+        public async Task Test_Update_Post()
         {
             var lambdaFunction = new LambdaEntryPoint();
             var requestStr = File.ReadAllText("./SampleRequests/BasketController-Update-Post.json");
@@ -275,7 +335,7 @@ namespace aws.Tests
         }
 
         [Fact]
-        public async Task TestUpdateOutOfRangePost()
+        public async Task Test_Update_OutOfRange_Post()
         {
             var lambdaFunction = new LambdaEntryPoint();
             var requestStr = File.ReadAllText("./SampleRequests/BasketController-Update-OutOfRange-Post.json");
@@ -285,6 +345,26 @@ namespace aws.Tests
 
             Assert.Equal(200, response.StatusCode);
             Assert.Equal("[{\"name\":\"Apple\"},{\"name\":\"Banana\"}]", response.Body);
+            Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Methods"));
+            Assert.Equal("Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", response.MultiValueHeaders["Access-Control-Allow-Headers"][0]);
+            Assert.Equal("*", response.MultiValueHeaders["Access-Control-Allow-Origin"][0]);
+            Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
+        }
+
+        [Fact]
+        public async Task Test_Update_NullRequest_Post()
+        {
+            var lambdaFunction = new LambdaEntryPoint();
+            var requestStr = File.ReadAllText("./SampleRequests/BasketController-Update-NullRequest-Post.json");
+            var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
+            var context = new TestLambdaContext();
+            var response = await lambdaFunction.FunctionHandlerAsync(request, context);
+
+            Assert.Equal(200, response.StatusCode);
+            Assert.Equal("[]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));

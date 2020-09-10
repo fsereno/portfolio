@@ -42,13 +42,17 @@ namespace aws.Controllers
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
 
-            var isInRange = this._basketUtil.IsInRange(request.Index, request?.Items, out int position);
-            if (isInRange)
-            {
-                return request?.Items[position];
-            }
+            var result = new Item();
 
-            return new Item() { Name = "Item is out of range" };
+            if (request != null)
+            {
+                var isInRange = this._basketUtil.IsInRange(request.Index, request.Items, out int position);
+                if (isInRange)
+                {
+                    result = request.Items[position];
+                }
+            }
+            return result;
         }
 
         // GET api/basket/getItem
@@ -88,11 +92,15 @@ namespace aws.Controllers
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
-            if (!String.IsNullOrEmpty(request?.Item?.Name))
+
+            var result = new List<Item>();
+
+            if (request != null && !String.IsNullOrEmpty(request.Item?.Name))
             {
-                request?.Items?.Add(request?.Item);
+                request.Items?.Add(request.Item);
+                result = request.Items;
             }
-            return request?.Items;
+            return result;
         }
 
         // GET api/basket/updateItem/1/with/value
@@ -115,11 +123,18 @@ namespace aws.Controllers
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
-            var isInRange = this._basketUtil.IsInRange(request.Index, request?.Items, out int position);
-            if (isInRange) {
-                request.Items[position] = request?.Item;
+
+            var result = new List<Item>();
+
+            if (request != null)
+            {
+                var isInRange = this._basketUtil.IsInRange(request.Index, request.Items, out int position);
+                if (isInRange) {
+                    request.Items[position] = request.Item;
+                }
+                result = request.Items;
             }
-            return request?.Items;
+            return result;
         }
 
         // DELETE api/basket/delete/5
@@ -143,13 +158,20 @@ namespace aws.Controllers
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
-            var isInRange = this._basketUtil.IsInRange(request.Index, request?.Items, out int position);
-            if (isInRange)
+
+            var result = new List<Item>();
+
+            if (request != null)
             {
-                request.Items?.RemoveAt(position);
+                var isInRange = this._basketUtil.IsInRange(request.Index, request.Items, out int position);
+                if (isInRange)
+                {
+                    request.Items.RemoveAt(position);
+                }
+                result = request.Items;
             }
 
-            return request.Items;
+            return result;
         }
 
         private void SetResponseHeaders() {

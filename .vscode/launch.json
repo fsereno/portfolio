@@ -7,6 +7,21 @@
     {
         "type": "aws-sam",
         "request": "direct-invoke",
+        "name": "test:aws.Tests::aws.Tests.BasketControllerTests::TestAddPost (dotnetcore3.1)",
+        "invokeTarget": {
+            "target": "code",
+            "projectRoot": "app/app_awsDotNetCoreShoppingCart/aws/test/aws.Tests",
+            "lambdaHandler": "aws.Tests::aws.Tests.BasketControllerTests::TestAddPost"
+        },
+        "lambda": {
+            "runtime": "dotnetcore3.1",
+            "payload": {},
+            "environmentVariables": {}
+        }
+    },
+    {
+        "type": "aws-sam",
+        "request": "direct-invoke",
         "name": "src:aws::aws.Controllers.BasketController::Tester (dotnetcore3.1)",
         "invokeTarget": {
             "target": "code",
