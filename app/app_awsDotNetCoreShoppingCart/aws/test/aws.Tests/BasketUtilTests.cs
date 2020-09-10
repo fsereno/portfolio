@@ -18,7 +18,7 @@ namespace Utils.Tests
     public class BasketUtilTests
     {
         [Fact]
-        public void IsInRangeHappyTest()
+        public void Test_IsInRange_Happy_Test()
         {
             var sut = new BasketUtil();
             var position = 0;
@@ -33,7 +33,7 @@ namespace Utils.Tests
         }
 
         [Fact]
-        public void IsInRangeUnHappyTest()
+        public void Test_IsInRange_UnHappy_Test()
         {
             var sut = new BasketUtil();
             var position = 0;
@@ -45,6 +45,32 @@ namespace Utils.Tests
             var result = sut.IsInRange(3, collection, out position);
             Assert.False(result);
             Assert.Equal(2, position);
+        }
+
+        [Fact]
+        public void Test_IsInRange_Zero_Index_Test()
+        {
+            var sut = new BasketUtil();
+            var position = 0;
+            var collection = new List<Item>()
+            {
+                new Item() { Name = "Apple" },
+                new Item() { Name = "Banana" }
+            };
+            var result = sut.IsInRange(0, collection, out position);
+            Assert.False(result);
+            Assert.Equal(-1, position);
+        }
+
+        [Fact]
+        public void Test_IsInRange_Empty_Collection_Test()
+        {
+            var sut = new BasketUtil();
+            var position = 0;
+            var collection = new List<Item>();
+            var result = sut.IsInRange(1, collection, out position);
+            Assert.False(result);
+            Assert.Equal(-1, position);
         }
     }
 }

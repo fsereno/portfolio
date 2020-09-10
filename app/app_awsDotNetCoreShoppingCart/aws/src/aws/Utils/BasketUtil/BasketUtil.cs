@@ -10,7 +10,7 @@ namespace Utils
         {
             var isInRange = false;
             position = -1;
-            if (index > 0) {
+            if (index > 0 && collection?.Count > 0) {
                 position = index - 1;
                 isInRange = position < collection?.Count;
             }
