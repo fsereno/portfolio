@@ -1,0 +1,4 @@
+POST https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket/delete HTTP/1.1
+content-type: application/json
+
+{"index":1,"items":[{"name":"Apple"},{"name":"Banana"}]}

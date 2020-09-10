@@ -46,10 +46,11 @@ namespace aws.Controllers
 
             if (request != null)
             {
-                var isInRange = this._basketUtil.IsInRange(request.Index, request.Items, out int position);
+                var items = request.Items?.Count > 0 ? request.Items : this._items;
+                var isInRange = this._basketUtil.IsInRange(request.Index, items, out int position);
                 if (isInRange)
                 {
-                    result = request.Items[position];
+                    result = items[position];
                 }
             }
             return result;
@@ -170,7 +171,6 @@ namespace aws.Controllers
                 }
                 result = request.Items;
             }
-
             return result;
         }
 

@@ -14,6 +14,7 @@ class ShoppingListApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      items: [],
       get: `${API_ENDPOINT}/get`,
       add: `${API_ENDPOINT}/add`,
       delete: `${API_ENDPOINT}/delete`,
@@ -49,8 +50,16 @@ class ShoppingListApp extends React.Component {
   handleGetSubmit(event) {
     event.preventDefault();
     let input = event.target.elements[0].value;
-    let endpoint =  input.length > 0 ? `${this.state.get}/${input}` : this.state.get;
-    this.open(endpoint)
+    //let endpoint =  input.length > 0 ? `${this.state.get}/${input}` : this.state.get;
+    $.ajax({
+      url: this.state.get,
+      type: "GET"
+    }).done((response) => {
+      this.setState({
+        items: response
+      });
+    });
+    //this.open(endpoint)
   }
 
   handleAddSubmit(event) {
@@ -88,6 +97,11 @@ class ShoppingListApp extends React.Component {
             <p class="lead">
               The shopping basket initially has the following structure:
             </p>
+            <ul>
+              {this.state.items.map((item) => {
+                return <li>{item.name}</li>
+              })}
+            </ul>
             <pre>
               <code class="ng-binding">
                 [
