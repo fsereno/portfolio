@@ -28,7 +28,7 @@ namespace aws.Controllers
 
         // GET api/basket/get
         [HttpGet("get")]
-        public List<Item> Get()
+        public IList<Item> Get()
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "GET");
@@ -37,12 +37,12 @@ namespace aws.Controllers
 
         // POST api/basket/get
         [HttpPost("get")]
-        public Item Get([FromBody]GetRequest request)
+        public IList<Item> Get([FromBody]GetRequest request)
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
 
-            var result = new Item();
+            var result = new List<Item>();
 
             if (request != null)
             {
@@ -50,7 +50,7 @@ namespace aws.Controllers
                 var isInRange = this._basketUtil.IsInRange(request.Index, items, out int position);
                 if (isInRange)
                 {
-                    result = items[position];
+                    result.Add(items[position]);
                 }
             }
             return result;
@@ -74,7 +74,7 @@ namespace aws.Controllers
 
         // GET api/basket/addItem
         [HttpGet("add/{value}")]
-        public List<string> Post(string value)
+        public IList<string> Post(string value)
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "GET");
@@ -89,7 +89,7 @@ namespace aws.Controllers
 
         // POST api/basket/add
         [HttpPost("add")]
-        public List<Item> Add([FromBody]AddRequest request)
+        public IList<Item> Add([FromBody]AddRequest request)
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
@@ -106,7 +106,7 @@ namespace aws.Controllers
 
         // GET api/basket/updateItem/1/with/value
         [HttpGet("update/{id}/with/{value}")]
-        public List<string> Put(int id, string value)
+        public IList<string> Put(int id, string value)
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "GET");
@@ -120,7 +120,7 @@ namespace aws.Controllers
 
         // POST api/basket/update
         [HttpPost("update")]
-        public List<Item> Update([FromBody]UpdateRequest request)
+        public IList<Item> Update([FromBody]UpdateRequest request)
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");
@@ -140,7 +140,7 @@ namespace aws.Controllers
 
         // DELETE api/basket/delete/5
         [HttpGet("delete/{id}")]
-        public List<string> Delete(int id)
+        public IList<string> Delete(int id)
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "GET");
@@ -155,7 +155,7 @@ namespace aws.Controllers
 
         // DELETE api/basket/delete
         [HttpPost("delete")]
-        public List<Item> Delete([FromBody]GetRequest request)
+        public IList<Item> Delete([FromBody]GetRequest request)
         {
             this.SetResponseHeaders();
             Response.Headers.Add("Access-Control-Allow-Methods", "POST");

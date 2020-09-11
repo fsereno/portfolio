@@ -50,16 +50,25 @@ class ShoppingListApp extends React.Component {
   handleGetSubmit(event) {
     event.preventDefault();
     let input = event.target.elements[0].value;
-    //let endpoint =  input.length > 0 ? `${this.state.get}/${input}` : this.state.get;
-    $.ajax({
-      url: this.state.get,
-      type: "GET"
-    }).done((response) => {
-      this.setState({
-        items: response
-      });
+    let request = input.length > 0
+      ? {
+        url: this.state.get,
+        type: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        data: { "index":input,"items": this.state.items }
+      }
+      : {
+        url: this.state.get,
+        type: "GET"
+      }
+    $.ajax(request)
+      .done((response) => {
+        this.setState({
+          items: response
+        });
     });
-    //this.open(endpoint)
   }
 
   handleAddSubmit(event) {
