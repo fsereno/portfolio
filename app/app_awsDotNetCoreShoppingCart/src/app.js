@@ -50,14 +50,13 @@ class ShoppingListApp extends React.Component {
   handleGetSubmit(event) {
     event.preventDefault();
     let input = event.target.elements[0].value;
+    let index = Number(input);
     let request = input.length > 0
       ? {
         url: this.state.get,
         type: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        data: { "index":input,"items": this.state.items }
+        contentType: 'application/json;',
+        data: JSON.stringify({"index": index, "items":this.state.items})
       }
       : {
         url: this.state.get,
