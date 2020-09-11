@@ -1,6 +1,8 @@
 # ASP.NET Core Web API Serverless Application with React Interface
 
-With this application I have built a simple shopping basket, consisting of primitive string values, with a React frontend and input data being processed via .Net Core running on AWS.
+With this application I have built a simple shopping basket, each item consisting only of a primitive string value.
+
+The basket can be modified use the individual request inputs. The user interface and application state is React driven with data modification being processed via .Net Core running on AWS Lambda.
 
 ### Explanation ###
 
