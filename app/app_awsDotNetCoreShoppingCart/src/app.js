@@ -15,6 +15,7 @@ class ShoppingListApp extends React.Component {
     super(props);
     this.state = {
       items: [],
+      resultSet: [],
       get: `${API_ENDPOINT}/get`,
       add: `${API_ENDPOINT}/add`,
       delete: `${API_ENDPOINT}/delete`,
@@ -56,40 +57,96 @@ class ShoppingListApp extends React.Component {
         url: this.state.get,
         type: "POST",
         contentType: 'application/json;',
-        data: JSON.stringify({"index": index, "items":this.state.items})
+        data: JSON.stringify({
+          "index": index, 
+          "items":this.state.items
+        }),
+        success: (response) => {
+          this.setState({
+            resultSet: response
+          });
+        }
       }
       : {
         url: this.state.get,
-        type: "GET"
+        type: "GET",
+        success: (response) => {
+          this.setState({
+            resultSet: response,
+            items: response
+          });
+        }
       }
-    $.ajax(request)
-      .done((response) => {
-        this.setState({
-          items: response
-        });
-    });
+    $.ajax(request);
   }
 
   handleAddSubmit(event) {
     event.preventDefault();
     let input = event.target.elements[0].value;
-    let endpoint =  `${this.state.add}/${input}`;
-    this.open(endpoint)
+    let request = {
+      url: this.state.add,
+      type: "POST",
+      contentType: 'application/json;',
+      data: JSON.stringify({
+        "item":{
+          "name":input
+        },
+        "items":this.state.items
+      }),
+      success: (response) => {
+        this.setState({
+          resultSet: response,
+          items: response
+        });
+      }
+    }
+    $.ajax(request);
   }
 
   handleUpdateSubmit(event) {
     event.preventDefault();
-    let index = event.target.elements[0].value;
+    let index = Number(event.target.elements[0].value);
     let value = event.target.elements[1].value;
-    let endpoint = `${this.state.update}/${index}/with/${value}`;
-    this.open(endpoint);
+    let request = {
+      url: this.state.update,
+      type: "POST",
+      contentType: 'application/json;',
+      data: JSON.stringify({
+        "index":index,
+        "item":{
+          "name":value
+        },
+        "items":this.state.items
+      }),
+      success: (response) => {
+        this.setState({
+          resultSet: response,
+          items: response
+        });
+      }
+    }
+    $.ajax(request);
   }
 
   handleDeleteSubmit(event) {
     event.preventDefault();
-    let input = event.target.elements[0].value;
-    let endpoint =  `${this.state.delete}/${input}`;
-    this.open(endpoint)
+    let index = Number(event.target.elements[0].value);
+    let request = {
+      url: this.state.delete,
+      type: "POST",
+      contentType: 'application/json;',
+      data: JSON.stringify({
+        "index":index,
+        "items":this.state.items
+      }),
+      success: (response) => {
+        this.setState({
+          resultSet: response,
+          items: response
+        });
+      }
+    }
+    $.ajax(request);
   }
 
   handlePuzzleSubmit(event) {
@@ -102,19 +159,22 @@ class ShoppingListApp extends React.Component {
       <div>
         <div class="row splitter">
           <div class="col-lg-12">
-            <p class="lead">
-              The shopping basket initially has the following structure:
-            </p>
+            <h3>
+              Basket:
+            </h3>
             <ul>
-              {this.state.items.map((item) => {
+              {this.state.resultSet.map((item) => {
                 return <li>{item.name}</li>
               })}
             </ul>
+            <p class="lead">
+              The shopping basket initially has the following structure:
+            </p>
             <pre>
               <code class="ng-binding">
                 [
-                  "Item 1",
-                  "Item 2"
+                  "Apple",
+                  "Banana"
                 ]
               </code>
             </pre>
