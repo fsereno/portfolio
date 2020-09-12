@@ -16,15 +16,11 @@ namespace Utils
             }
             return isInRange;
         }
-        public bool IsInRange(int index, IList<string> collection, out int position)
+
+        public List<Item> GetItems(List<Item> requestItems, List<Item> localItems)
         {
-            var isInRange = false;
-            position = -1;
-            if (index > 0) {
-                position = index - 1;
-                isInRange = position < collection?.Count;
-            }
-            return isInRange;
+            var items = requestItems.Count > 0 ? requestItems : localItems;
+            return items;
         }
     }
 }

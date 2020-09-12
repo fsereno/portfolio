@@ -46,7 +46,7 @@ namespace aws.Controllers
 
             if (request != null)
             {
-                var items = request.Items?.Count > 0 ? request.Items : this._items;
+                var items = this._basketUtil.GetItems(request.Items, this._items);
                 var isInRange = this._basketUtil.IsInRange(request.Index, items, out int position);
                 if (isInRange)
                 {
@@ -66,7 +66,7 @@ namespace aws.Controllers
             var result = new List<Item>();
             if (request != null && !String.IsNullOrEmpty(request.Item?.Name))
             {
-                var items = request.Items?.Count > 0 ? request.Items : this._items;
+                var items = this._basketUtil.GetItems(request.Items, this._items);
                 items.Add(request.Item);
                 result = items;
             }
@@ -84,7 +84,7 @@ namespace aws.Controllers
 
             if (request != null)
             {
-                var items = request.Items?.Count > 0 ? request.Items : this._items;
+                var items = this._basketUtil.GetItems(request.Items, this._items);
                 var isInRange = this._basketUtil.IsInRange(request.Index, items, out int position);
                 if (isInRange) {
                     items[position] = request.Item;
@@ -105,7 +105,7 @@ namespace aws.Controllers
 
             if (request != null)
             {
-                var items = request.Items?.Count > 0 ? request.Items : this._items;
+                var items = this._basketUtil.GetItems(request.Items, this._items);
                 var isInRange = this._basketUtil.IsInRange(request.Index, items, out int position);
                 if (isInRange)
                 {

@@ -48,7 +48,7 @@ namespace Utils.Tests
         }
 
         [Fact]
-        public void Test_IsInRange_Zero_Index_Test()
+        public void Test_IsInRange_Zero_Index()
         {
             var sut = new BasketUtil();
             var position = 0;
@@ -63,7 +63,7 @@ namespace Utils.Tests
         }
 
         [Fact]
-        public void Test_IsInRange_Empty_Collection_Test()
+        public void Test_IsInRange_Empty_Collection()
         {
             var sut = new BasketUtil();
             var position = 0;
@@ -71,6 +71,35 @@ namespace Utils.Tests
             var result = sut.IsInRange(1, collection, out position);
             Assert.False(result);
             Assert.Equal(-1, position);
+        }
+
+        [Fact]
+        public void Test_GetItems_EmptyRequest()
+        {
+            var sut = new BasketUtil();
+            var requestItems = new List<Item>();
+            var localItems = new List<Item>()
+            {
+                new Item() { Name = "Apple" },
+                new Item() { Name = "Banana" }
+            };
+            var result = sut.GetItems(requestItems, localItems);
+            Assert.Equal(2, result.Count);
+        }
+
+        [Fact]
+        public void Test_GetItems_RequestItems()
+        {
+            var sut = new BasketUtil();
+            var requestItems = new List<Item>()
+            {
+                new Item() { Name = "Apple" },
+                new Item() { Name = "Banana" },
+                new Item() { Name = "Pear" }
+            };
+            var localItems = new List<Item>();
+            var result = sut.GetItems(requestItems, localItems);
+            Assert.Equal(3, result.Count);
         }
     }
 }
