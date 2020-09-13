@@ -1,6 +1,6 @@
 # To-Do React Redux
 
-With this application I have extended the simple To-Do list using React to now use Redux to handle the application state.
+With this application I have extended the simple To-Do list using React to now use Redux to handle the application state, implementing native Undo and Redo functionality.
 
 ### Explanation ###
 

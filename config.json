@@ -65,7 +65,7 @@
         {
             "name": "To-Do List (React Redux)",
             "subHeading": "A basic React Redux application",
-            "description": "Experimenting how to use Redux with React, Babel and Webpack.",
+            "description": "Experimenting how to use Redux with React to implement Undo and Redo functionality",
             "folder": "reactRedux",
             "active": true,
             "include": true,
