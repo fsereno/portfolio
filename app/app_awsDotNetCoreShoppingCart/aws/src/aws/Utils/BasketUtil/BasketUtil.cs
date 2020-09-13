@@ -6,7 +6,7 @@ namespace Utils
 {
     public class BasketUtil : IBasketUtil
     {
-        public bool IsInRange(int index, IList<Item> collection, out int position)
+        public bool TryRange(int index, IList<Item> collection, out int position)
         {
             var isInRange = false;
             position = -1;

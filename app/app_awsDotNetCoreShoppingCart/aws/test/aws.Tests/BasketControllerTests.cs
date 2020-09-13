@@ -14,11 +14,11 @@ namespace aws.Tests
 {
     public class BasketControllerTests
     {
-                [Fact]
-        public async Task Test_Get()
+        [Fact]
+        public async Task Test_Get_IndexZero_Post()
         {
             var lambdaFunction = new LambdaEntryPoint();
-            var requestStr = File.ReadAllText("./SampleRequests/BasketController-Get.json");
+            var requestStr = File.ReadAllText("./SampleRequests/BasketController-Get-IndexZero-Post.json");
             var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
             var context = new TestLambdaContext();
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
@@ -84,7 +84,7 @@ namespace aws.Tests
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
 
             Assert.Equal(200, response.StatusCode);
-            Assert.Equal("[]", response.Body);
+            Assert.Equal("[{\"name\":\"Apple\"},{\"name\":\"Banana\"}]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));

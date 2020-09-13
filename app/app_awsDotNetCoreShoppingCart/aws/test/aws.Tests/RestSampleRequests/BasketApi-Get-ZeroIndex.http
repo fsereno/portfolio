@@ -1,0 +1,4 @@
+POST https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket/get HTTP/1.1
+content-type: application/json
+
+{"index": 0, "items":[{"name":"Pear"}, {"name":"Orange"}]}

@@ -9,6 +9,19 @@ const API_SUBMIT_CLASSES_NOT_VALID = "btn btn-dark disabled api-submit"
 const ANSWER  = 15;
 const PUZZLE = "4 x 4 - 1 = ?";
 
+function InputTemplate(props){
+  return (
+    <form onSubmit={props.event} autoComplete="off">
+        <label for="basic-url">{props.label}</label>
+        <div class="input-group mb-3">
+          <input required={props.required ? "required" : ""} type="text" class="form-control" placeholder={props.placeholder} aria-label={props.placeholder} />
+          <div class="input-group-append">
+          <button class={props.isValidBtnClasses} type="submit">{props.button}</button>
+          </div>
+        </div>
+    </form>
+  )
+}
 
 class ShoppingListApp extends React.Component {
   constructor(props) {
@@ -32,9 +45,9 @@ class ShoppingListApp extends React.Component {
     this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
   }
 
-  open(url) {
+  ajax(request) {
     if (this.state.isValid) {
-      window.open(url, '_blank');
+      $.ajax(request);
     }
   }
 
@@ -52,32 +65,24 @@ class ShoppingListApp extends React.Component {
     event.preventDefault();
     let input = event.target.elements[0].value;
     let index = Number(input);
-    let request = input.length > 0
-      ? {
+    let isValid = response => typeof response !== "undefined" && response.length > 0;
+    let request = {
         url: this.state.get,
         type: "POST",
         contentType: 'application/json;',
         data: JSON.stringify({
-          "index": index, 
+          "index": index,
           "items":this.state.items
         }),
         success: (response) => {
-          this.setState({
-            resultSet: response
-          });
+          if (isValid(response)) {
+            this.setState({
+              resultSet: response
+            });
+          }
         }
       }
-      : {
-        url: this.state.get,
-        type: "GET",
-        success: (response) => {
-          this.setState({
-            resultSet: response,
-            items: response
-          });
-        }
-      }
-    $.ajax(request);
+    this.ajax(request);
   }
 
   handleAddSubmit(event) {
@@ -100,7 +105,7 @@ class ShoppingListApp extends React.Component {
         });
       }
     }
-    $.ajax(request);
+    this.ajax(request);
   }
 
   handleUpdateSubmit(event) {
@@ -125,7 +130,7 @@ class ShoppingListApp extends React.Component {
         });
       }
     }
-    $.ajax(request);
+    this.ajax(request);
   }
 
   handleDeleteSubmit(event) {
@@ -146,7 +151,7 @@ class ShoppingListApp extends React.Component {
         });
       }
     }
-    $.ajax(request);
+    this.ajax(request);
   }
 
   handlePuzzleSubmit(event) {
@@ -182,51 +187,45 @@ class ShoppingListApp extends React.Component {
         </div>
        <div class="row splitter">
           <div class="col-lg-4">
-            <form onSubmit={this.handlePuzzleSubmit} autoComplete="off">
-                <label for="basic-url">First answer this question to unlock the API</label>
-                <div class="input-group mb-3">
-                  <input required type="text" class="form-control" placeholder={this.state.puzzle} aria-label={this.state.puzzle} />
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-dark api-submit" type="submit" id="button-addon2">Submit</button>
-                  </div>
-                </div>
-            </form>
+            <InputTemplate
+              event={this.handlePuzzleSubmit}
+              label="First answer this question to unlock the API"
+              placeholder={this.state.puzzle}
+              button="Submit"
+              isValidBtnClasses={this.state.isValidBtnClasses}
+              required={true}
+            />
             <hr/>
-            <form onSubmit={this.handleGetSubmit} autoComplete="off">
-                <p class="lead">Leave the Get field empty to retrieve all items</p>
-                <label for="basic-url">Get items (eg. 1 or 2 to get singular)</label>
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Item position or leave empty" aria-label="Item number (eg. 1, or 2)" />
-                  <div class="input-group-append">
-                    <button class={this.state.isValidBtnClasses} type="submit" id="button-addon2">Get</button>
-                  </div>
-                </div>
-            </form>
-            <form onSubmit={this.handleAddSubmit} autoComplete="off">
-                <label for="basic-url">Add an item</label>
-                <div class="input-group mb-3">
-                  <input required type="text" class="form-control" placeholder="Name of item to add" aria-label="Name of item to add" />
-                  <div class="input-group-append">
-                    <button class={this.state.isValidBtnClasses} type="submit" id="button-addon2">Add</button>
-                  </div>
-                </div>
-            </form>
+            <InputTemplate
+              event={this.handleGetSubmit}
+              label="Get items (eg. 1 or 2 to get singular)"
+              placeholder="Item position or leave empty"
+              button="Get"
+              isValidBtnClasses={this.state.isValidBtnClasses}
+            />
+            <InputTemplate
+              event={this.handleAddSubmit}
+              label="Add an item"
+              placeholder="Name of item to add"
+              button="Add"
+              isValidBtnClasses={this.state.isValidBtnClasses}
+              required={true}
+            />
+            <InputTemplate
+              event={this.handleDeleteSubmit}
+              label="Delete an item"
+              placeholder="Item position to remove (eg. 1 or 2)"
+              button="Delete"
+              isValidBtnClasses={this.state.isValidBtnClasses}
+              required={true}
+            />
             <form onSubmit={this.handleUpdateSubmit} autoComplete="off">
                 <label for="basic-url">Update an item (eg. 1 or 2)</label>
                 <div class="input-group mb-3">
                   <input required type="text" class="form-control" placeholder="Position to update (eg. 1, or 2)" aria-label="Position to update (eg. 1, or 2)" />
                   <input required type="text" class="form-control" placeholder="Update with value" aria-label="Update with value" />
                   <div class="input-group-append">
-                    <button class={this.state.isValidBtnClasses} type="submit" id="button-addon2">Update</button>
-                  </div>
-                </div>
-            </form>
-            <form onSubmit={this.handleDeleteSubmit} autoComplete="off">
-                <label for="basic-url">Delete an item</label>
-                <div class="input-group mb-3">
-                  <input required type="text" class="form-control" placeholder="Item position to remove (eg. 1 or 2)" aria-label="Item position to remove (eg. 1 or 2)" />
-                  <div class="input-group-append">
-                    <button class={this.state.isValidBtnClasses} type="submit" id="button-addon2">Delete</button>
+                    <button class={this.state.isValidBtnClasses} type="submit">Update</button>
                   </div>
                 </div>
             </form>

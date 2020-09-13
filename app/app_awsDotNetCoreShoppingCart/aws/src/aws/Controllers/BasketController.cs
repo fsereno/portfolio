@@ -11,28 +11,17 @@ namespace aws.Controllers
     [Route("api/[controller]")]
     public class BasketController : ControllerBase
     {
-        private List<string> _basket { get; set; }
         private List<Item> _items { get; set; }
         private readonly IBasketUtil _basketUtil;
 
         public BasketController(IBasketUtil basketUtil)
         {
-            this._basket = new List<string>() { "Item 1", "Item 2" };
             this._items = new List<Item>()
             {
                 new Item() { Name = "Apple" },
                 new Item() { Name = "Banana" }
             };
             _basketUtil = basketUtil;
-        }
-
-        // GET api/basket/get
-        [HttpGet("get")]
-        public IList<Item> Get()
-        {
-            this.SetResponseHeaders();
-            Response.Headers.Add("Access-Control-Allow-Methods", "GET");
-            return this._items;
         }
 
         // POST api/basket/get
@@ -47,11 +36,12 @@ namespace aws.Controllers
             if (request != null)
             {
                 var items = this._basketUtil.GetItems(request.Items, this._items);
-                var isInRange = this._basketUtil.IsInRange(request.Index, items, out int position);
+                var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
                 if (isInRange)
                 {
                     result.Add(items[position]);
                 }
+                result = result.Any() ? result : items;
             }
             return result;
         }
@@ -85,7 +75,7 @@ namespace aws.Controllers
             if (request != null)
             {
                 var items = this._basketUtil.GetItems(request.Items, this._items);
-                var isInRange = this._basketUtil.IsInRange(request.Index, items, out int position);
+                var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
                 if (isInRange) {
                     items[position] = request.Item;
                 }
@@ -106,7 +96,7 @@ namespace aws.Controllers
             if (request != null)
             {
                 var items = this._basketUtil.GetItems(request.Items, this._items);
-                var isInRange = this._basketUtil.IsInRange(request.Index, items, out int position);
+                var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
                 if (isInRange)
                 {
                     items.RemoveAt(position);

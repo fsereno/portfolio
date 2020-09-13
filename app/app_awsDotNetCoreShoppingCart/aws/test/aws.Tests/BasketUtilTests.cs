@@ -27,7 +27,7 @@ namespace Utils.Tests
                 new Item() { Name = "Apple" },
                 new Item() { Name = "Banana" }
             };
-            var result = sut.IsInRange(2, collection, out position);
+            var result = sut.TryRange(2, collection, out position);
             Assert.True(result);
             Assert.Equal(1, position);
         }
@@ -42,7 +42,7 @@ namespace Utils.Tests
                 new Item() { Name = "Apple" },
                 new Item() { Name = "Banana" }
             };
-            var result = sut.IsInRange(3, collection, out position);
+            var result = sut.TryRange(3, collection, out position);
             Assert.False(result);
             Assert.Equal(2, position);
         }
@@ -57,7 +57,7 @@ namespace Utils.Tests
                 new Item() { Name = "Apple" },
                 new Item() { Name = "Banana" }
             };
-            var result = sut.IsInRange(0, collection, out position);
+            var result = sut.TryRange(0, collection, out position);
             Assert.False(result);
             Assert.Equal(-1, position);
         }
@@ -68,7 +68,7 @@ namespace Utils.Tests
             var sut = new BasketUtil();
             var position = 0;
             var collection = new List<Item>();
-            var result = sut.IsInRange(1, collection, out position);
+            var result = sut.TryRange(1, collection, out position);
             Assert.False(result);
             Assert.Equal(-1, position);
         }
@@ -88,7 +88,7 @@ namespace Utils.Tests
         }
 
         [Fact]
-        public void Test_GetItems_RequestItems()
+        public void Test_GetItems_EmptyLocal()
         {
             var sut = new BasketUtil();
             var requestItems = new List<Item>()
@@ -98,6 +98,25 @@ namespace Utils.Tests
                 new Item() { Name = "Pear" }
             };
             var localItems = new List<Item>();
+            var result = sut.GetItems(requestItems, localItems);
+            Assert.Equal(3, result.Count);
+        }
+
+        [Fact]
+        public void Test_GetItems_GreaterThan()
+        {
+            var sut = new BasketUtil();
+            var requestItems = new List<Item>()
+            {
+                new Item() { Name = "Apple" },
+                new Item() { Name = "Banana" },
+                new Item() { Name = "Pear" }
+            };
+            var localItems = new List<Item>()
+            {
+                new Item() { Name = "Apple" },
+                new Item() { Name = "Banana" }
+            };
             var result = sut.GetItems(requestItems, localItems);
             Assert.Equal(3, result.Count);
         }
