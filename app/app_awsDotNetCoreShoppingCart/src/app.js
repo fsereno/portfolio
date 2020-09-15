@@ -12,7 +12,7 @@ const PUZZLE = "4 x 4 - 1 = ?";
 function InputTemplate(props){
   return (
     <form onSubmit={props.event} autoComplete="off">
-        <label for="basic-url">{props.label}</label>
+        <label>{props.label}</label>
         <div class="input-group mb-3">
           <input required={props.required ? "required" : ""} type="text" class="form-control" placeholder={props.placeholder} aria-label={props.placeholder} />
           <div class="input-group-append">
@@ -220,7 +220,7 @@ class ShoppingListApp extends React.Component {
               required={true}
             />
             <form onSubmit={this.handleUpdateSubmit} autoComplete="off">
-                <label for="basic-url">Update an item (eg. 1 or 2)</label>
+                <label>Update an item (eg. 1 or 2)</label>
                 <div class="input-group mb-3">
                   <input required type="text" class="form-control" placeholder="Position to update (eg. 1, or 2)" aria-label="Position to update (eg. 1, or 2)" />
                   <input required type="text" class="form-control" placeholder="Update with value" aria-label="Update with value" />
