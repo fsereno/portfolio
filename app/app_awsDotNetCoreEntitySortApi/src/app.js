@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
-const API_SUBMIT_CLASSES_VALID = "btn btn-outline-dark api-submit mb-2"
+const API_SUBMIT_CLASSES_VALID = "btn btn-dark api-submit mb-2"
 const API_SUBMIT_CLASSES_NOT_VALID = "btn btn-dark disabled api-submit mb-2"
 const ANSWER  = 15;
 const PUZZLE = "4 x 4 - 1 = ?";
@@ -23,17 +23,35 @@ class EntitySort extends React.Component {
       counterLimit: 10,
       counter: 1,
       selectedIndex: 0,
-      isValidBtnClasses: API_SUBMIT_CLASSES_VALID
+      puzzle: PUZZLE,
+      isValid: false,
+      isValidBtnClasses: API_SUBMIT_CLASSES_NOT_VALID
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSalaryChange = this.handleSalaryChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete= this.handleDelete.bind(this);
+    this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
   }
 
   formatCurrency(value) {
     return new Intl.NumberFormat('GBP', { style: 'currency', currency: 'GBP' }).format(value);
+  }
+
+  handlePuzzleSubmit(event) {
+    event.preventDefault();
+    this.isValidHandler(event);
+  }
+
+  isValidHandler(event) {
+    let isValid = Number(event.target.elements[0].value) === ANSWER;
+    if(isValid) {
+      this.setState({
+        isValid: true,
+        isValidBtnClasses: API_SUBMIT_CLASSES_VALID
+      })
+    }
   }
 
   handleNameChange(event) {
@@ -55,7 +73,7 @@ class EntitySort extends React.Component {
       this.setState({
         list: this.state.list,
         name: "",
-        salary: 0,
+        salary: "",
         counter: this.state.counter + 1
       });
     }
@@ -91,6 +109,20 @@ class EntitySort extends React.Component {
           </div>
         </div>
         <div class="row">
+          <div class="col-lg-4">
+            <form onSubmit={this.handlePuzzleSubmit} autoComplete="off">
+              <label>First answer this question to unlock the API</label>
+              <div class="input-group mb-3">
+                <input required type="text" class="form-control" placeholder={this.state.puzzle} aria-label={this.state.puzzle} />
+                <div class="input-group-append">
+                <button class={API_SUBMIT_CLASSES_VALID} type="submit">Submit</button>
+                </div>
+              </div>
+            </form>
+            <hr/>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-lg-12">
             <form onSubmit={this.handleSubmit} autoComplete="off">
               <label>Add an Employee</label>
@@ -105,11 +137,14 @@ class EntitySort extends React.Component {
                     <div class="input-group-prepend">
                       <div class="input-group-text">£</div>
                     </div>
-                    <input required type="text" class="form-control" id="salaryInput" placeholder="0.00" value={this.state.salary} onChange={this.handleSalaryChange}/>
+                    <input required type="number" min="0" class="form-control" id="salaryInput" placeholder="0.00" value={this.state.salary} onChange={this.handleSalaryChange}/>
                   </div>
                 </div>
                 <div class="col-auto">
-                  <button type="submit" class={this.state.isValidBtnClasses}>Add Employee</button>
+                  <button type="submit" class={this.state.isValidBtnClasses}>Add</button>
+                </div>
+                <div class="col-auto">
+                  <button type="button" class={this.state.isValidBtnClasses}>Sort by Salary</button>
                 </div>
               </div>
             </form>

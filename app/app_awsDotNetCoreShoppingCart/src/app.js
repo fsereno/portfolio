@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
-const API_SUBMIT_CLASSES_VALID = "btn btn-outline-dark api-submit"
+const API_SUBMIT_CLASSES_VALID = "btn btn-dark api-submit"
 const API_SUBMIT_CLASSES_NOT_VALID = "btn btn-dark disabled api-submit"
 const ANSWER  = 15;
 const PUZZLE = "4 x 4 - 1 = ?";
@@ -192,7 +192,7 @@ class ShoppingListApp extends React.Component {
               label="First answer this question to unlock the API"
               placeholder={this.state.puzzle}
               button="Submit"
-              isValidBtnClasses={this.state.isValidBtnClasses}
+              isValidBtnClasses={API_SUBMIT_CLASSES_VALID}
               required={true}
             />
             <hr/>
