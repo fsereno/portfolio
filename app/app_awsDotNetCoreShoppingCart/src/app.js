@@ -2,12 +2,14 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PuzzleModule from '../../js/puzzleModule';
 
 const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
-const API_SUBMIT_CLASSES_VALID = "btn btn-dark api-submit"
-const API_SUBMIT_CLASSES_NOT_VALID = "btn btn-dark disabled api-submit"
-const ANSWER  = 15;
+const API_SUBMIT_CLASSES_VALID = "btn btn-dark api-submit";
+const API_SUBMIT_CLASSES_NOT_VALID = "btn btn-dark disabled api-submit";
 const PUZZLE = "4 x 4 - 1 = ?";
+
+PuzzleModule.set(15);
 
 function InputTemplate(props){
   return (
@@ -48,16 +50,6 @@ class ShoppingListApp extends React.Component {
   ajax(request) {
     if (this.state.isValid) {
       $.ajax(request);
-    }
-  }
-
-  isValidHandler(event) {
-    let isValid = Number(event.target.elements[0].value) === ANSWER;
-    if(isValid) {
-      this.setState({
-        isValid: true,
-        isValidBtnClasses: API_SUBMIT_CLASSES_VALID
-      })
     }
   }
 
@@ -156,12 +148,33 @@ class ShoppingListApp extends React.Component {
 
   handlePuzzleSubmit(event) {
     event.preventDefault();
-    this.isValidHandler(event);
+    let input = Number(event.target.elements[0].value);
+    let isValid = PuzzleModule.isValid(input);
+    if (isValid) {
+      this.setState({
+        isValid: true,
+        isValidBtnClasses: API_SUBMIT_CLASSES_VALID
+      })
+      PuzzleModule.hide();
+    }
+  }
+
+  componentDidMount(){
+    PuzzleModule.show();
   }
 
   render() {
     return (
       <div>
+        <PuzzleModule.template
+          event={this.handlePuzzleSubmit}
+          label="First answer this question to unlock the API"
+          placeholder={this.state.puzzle}
+          button="Submit"
+          isValidBtnClasses={API_SUBMIT_CLASSES_VALID}
+          required={true}
+          title="Are you a human?"
+        />
         <div class="row splitter">
           <div class="col-lg-12">
             <h3>
@@ -187,15 +200,6 @@ class ShoppingListApp extends React.Component {
         </div>
        <div class="row splitter">
           <div class="col-lg-4">
-            <InputTemplate
-              event={this.handlePuzzleSubmit}
-              label="First answer this question to unlock the API"
-              placeholder={this.state.puzzle}
-              button="Submit"
-              isValidBtnClasses={API_SUBMIT_CLASSES_VALID}
-              required={true}
-            />
-            <hr/>
             <InputTemplate
               event={this.handleGetSubmit}
               label="Get items (eg. 1 or 2 to get singular)"

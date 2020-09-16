@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 import PuzzleModule from '../../js/puzzleModule';
 
 const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
-const API_SUBMIT_CLASSES_VALID = "btn btn-dark api-submit mb-2"
-const API_SUBMIT_CLASSES_NOT_VALID = "btn btn-dark disabled api-submit mb-2"
+const API_SUBMIT_CLASSES_VALID = "btn btn-dark api-submit mb-2";
+const API_SUBMIT_CLASSES_NOT_VALID = "btn btn-dark disabled api-submit mb-2";
 const PUZZLE = "4 x 4 - 1 = ?";
 
 PuzzleModule.set(15);
