@@ -2,12 +2,14 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PuzzleModule from '../../js/puzzleModule';
 
 const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
 const API_SUBMIT_CLASSES_VALID = "btn btn-dark api-submit mb-2"
 const API_SUBMIT_CLASSES_NOT_VALID = "btn btn-dark disabled api-submit mb-2"
-const ANSWER  = 15;
 const PUZZLE = "4 x 4 - 1 = ?";
+
+PuzzleModule.set(15);
 
 class EntitySort extends React.Component {
   constructor(props) {
@@ -41,16 +43,14 @@ class EntitySort extends React.Component {
 
   handlePuzzleSubmit(event) {
     event.preventDefault();
-    this.isValidHandler(event);
-  }
-
-  isValidHandler(event) {
-    let isValid = Number(event.target.elements[0].value) === ANSWER;
-    if(isValid) {
+    let input = Number(event.target.elements[0].value);
+    let isValid = PuzzleModule.isValid(input);
+    if (isValid) {
       this.setState({
         isValid: true,
         isValidBtnClasses: API_SUBMIT_CLASSES_VALID
       })
+      PuzzleModule.hide();
     }
   }
 
@@ -89,9 +89,22 @@ class EntitySort extends React.Component {
     });
   }
 
+  componentDidMount(){
+    PuzzleModule.show();
+  }
+
   render() {
     return (
       <div>
+        <PuzzleModule.template
+          event={this.handlePuzzleSubmit}
+          label="First answer this question to unlock the API"
+          placeholder={this.state.puzzle}
+          button="Submit"
+          isValidBtnClasses={API_SUBMIT_CLASSES_VALID}
+          required={true}
+          title="Are you a human?"
+        />
         <div class="row splitter">
           <div class="col-lg-4">
             <h3>Employees:</h3>
@@ -106,20 +119,6 @@ class EntitySort extends React.Component {
           <div class="col-lg-12">
             <p>No. of Employees: {this.state.counter}</p>
             <p>Employee to add: {this.state.name} {this.formatCurrency(this.state.salary)}</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <form onSubmit={this.handlePuzzleSubmit} autoComplete="off">
-              <label>First answer this question to unlock the API</label>
-              <div class="input-group mb-3">
-                <input required type="text" class="form-control" placeholder={this.state.puzzle} aria-label={this.state.puzzle} />
-                <div class="input-group-append">
-                <button class={API_SUBMIT_CLASSES_VALID} type="submit">Submit</button>
-                </div>
-              </div>
-            </form>
-            <hr/>
           </div>
         </div>
         <div class="row">

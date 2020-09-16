@@ -22,7 +22,9 @@ class Scene extends React.Component {
     };
   }
 
-  getRandomColour = () => `#${Math.floor(Math.random()*16777215).toString(16)}`;
+  getRandomColour() {
+    return `#${Math.floor(Math.random()*16777215).toString(16)}`;
+  }
 
   handleColourChangeClick(i) {
     let cubes = this.state.cubes;
