@@ -7,6 +7,10 @@ namespace Interfaces
 {
     public interface IEntitySortUtil
     {
-        List<Employee> SortLowToHigh(List<Employee> employees);
+        List<Employee> SortSalaryDefault(List<Employee> employees);
+
+        List<Employee> SortSalaryHighToLow(List<Employee> employees);
+
+        List<Employee> SortSalaryLowToHigh(List<Employee> employees);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -17,13 +18,29 @@ namespace Models
             var result = 0;
             if (this.Salary < otherEmployee.Salary)
             {
-                result = -1;
+                result = 1;
 
             } else if (this.Salary > otherEmployee.Salary)
             {
-                result = 1;
+                result = -1;
             }
             return result;
+        }
+
+        public class SortBySalaryLowToHigh : IComparer<Employee>
+        {
+            public int Compare(Employee current, Employee next)
+            {
+                return Decimal.Compare(current.Salary, next.Salary);
+            }
+        }
+
+        public class SortBySalaryHighToLow : IComparer<Employee>
+        {
+            public int Compare(Employee current, Employee next)
+            {
+                return Decimal.Compare(next.Salary, current.Salary);
+            }
         }
     }
 }

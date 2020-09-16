@@ -31,7 +31,7 @@ namespace aws.Controllers
             var employeesToSort = new List<Employee>() {
                 new Employee(){ Name = "Joe Bloggs" }
             };
-            var employees = this._entitySortUtil.SortLowToHigh(employeesToSort);
+            var employees = this._entitySortUtil.SortSalaryLowToHigh(employeesToSort);
             return employees;
         }
 

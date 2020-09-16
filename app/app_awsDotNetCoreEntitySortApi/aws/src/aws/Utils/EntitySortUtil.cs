@@ -7,10 +7,22 @@ namespace Utils
 {
     public class EntitySortUtil : IEntitySortUtil
     {
-        public List<Employee> SortLowToHigh(List<Employee> employees)
+        public List<Employee> SortSalaryDefault(List<Employee> employees)
         {
-            employees.Sort();
-            return employees;
+            employees?.Sort();
+            return employees ?? new List<Employee>();
+        }
+
+        public List<Employee> SortSalaryHighToLow(List<Employee> employees)
+        {
+            employees?.Sort(new Employee.SortBySalaryHighToLow());
+            return employees ?? new List<Employee>();
+        }
+
+        public List<Employee> SortSalaryLowToHigh(List<Employee> employees)
+        {
+            employees?.Sort(new Employee.SortBySalaryLowToHigh());
+            return employees ?? new List<Employee>();
         }
     }
 }
