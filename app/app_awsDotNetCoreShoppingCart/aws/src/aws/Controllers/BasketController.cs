@@ -21,7 +21,7 @@ namespace aws.Controllers
                 new Item() { Name = "Apple" },
                 new Item() { Name = "Banana" }
             };
-            _basketUtil = basketUtil;
+           this._basketUtil = basketUtil;
         }
 
         // POST api/basket/get

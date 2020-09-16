@@ -41,7 +41,7 @@ namespace aws.Tests
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
 
             Assert.Equal(200, response.StatusCode);
-            Assert.Equal("[{\"name\":\"Joe Bloggs\"}]", response.Body);
+            Assert.Equal("[{\"name\":\"Joe Bloggs\",\"salary\":0}]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
         }

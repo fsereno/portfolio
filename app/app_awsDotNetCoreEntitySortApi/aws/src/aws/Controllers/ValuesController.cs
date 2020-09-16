@@ -5,13 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using Models;
+using Interfaces;
 
 namespace aws.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
+        private readonly IEntitySortUtil _entitySortUtil;
+
+        public ValuesController(IEntitySortUtil entitySortUtil)
+        {
+            _entitySortUtil = entitySortUtil;
+        }
+               // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -21,9 +28,11 @@ namespace aws.Controllers
         [HttpPost]
         public IList<Employee> GetEmployees()
         {
-            return new List<Employee>() {
+            var employeesToSort = new List<Employee>() {
                 new Employee(){ Name = "Joe Bloggs" }
             };
+            var employees = this._entitySortUtil.SortLowToHigh(employeesToSort);
+            return employees;
         }
 
         // GET api/values/5
