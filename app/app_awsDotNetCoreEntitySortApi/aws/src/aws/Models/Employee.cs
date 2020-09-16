@@ -2,11 +2,11 @@
 
 namespace Models
 {
-    public class Item
+    public class Employee
     {
-        public Item() {
+        public Employee() {
             this.Name = string.Empty;
         }
-        public string Name { get; set; }
+        public string Name { get ; set; }
     }
 }
