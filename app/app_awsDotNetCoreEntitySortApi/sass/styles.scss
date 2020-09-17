@@ -2,11 +2,10 @@
 @import "../../sass/includes/styles.scss";
 
 body {
-
-    h1 {
-
-        color: $black;
-
+    table#employeeTable {
+        th {
+            height: 3.7rem;
+            line-height: 2.1rem;
+        }
     }
-
 }

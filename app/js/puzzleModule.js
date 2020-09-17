@@ -21,7 +21,7 @@ define(["React"],function(React) {
                             <div class="input-group mb-3">
                                 <input required={props.required ? "required" : ""} type="text" class="form-control" placeholder={props.placeholder} aria-label={props.placeholder} />
                                 <div class="input-group-append">
-                                    <button class={props.isValidBtnClasses} type="submit">{props.button}</button>
+                                    <button class="btn btn-dark" type="submit">{props.button}</button>
                                 </div>
                             </div>
                         </form>

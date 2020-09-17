@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 import PuzzleModule from '../../js/puzzleModule';
 
 const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
-const API_SUBMIT_CLASSES_VALID = "btn btn-dark api-submit";
-const API_SUBMIT_CLASSES_NOT_VALID = "btn btn-dark disabled api-submit";
+const API_SUBMIT_CLASSES = "btn btn-dark api-submit";
+const DISABLED_BTN_CLASS = "disabled";
 const PUZZLE = "4 x 4 - 1 = ?";
 
 PuzzleModule.set(15);
@@ -18,7 +18,7 @@ function InputTemplate(props){
         <div class="input-group mb-3">
           <input required={props.required ? "required" : ""} type="text" class="form-control" placeholder={props.placeholder} aria-label={props.placeholder} />
           <div class="input-group-append">
-          <button class={props.isValidBtnClasses} type="submit">{props.button}</button>
+          <button class={`${API_SUBMIT_CLASSES} ${props.disabledBtnClass}`} type="submit">{props.button}</button>
           </div>
         </div>
     </form>
@@ -36,7 +36,7 @@ class ShoppingListApp extends React.Component {
       delete: `${API_ENDPOINT}/delete`,
       update: `${API_ENDPOINT}/update`,
       answer: '',
-      isValidBtnClasses: API_SUBMIT_CLASSES_NOT_VALID,
+      disabledBtnClass: DISABLED_BTN_CLASS,
       isValid: false,
       puzzle: PUZZLE
     };
@@ -153,7 +153,7 @@ class ShoppingListApp extends React.Component {
     if (isValid) {
       this.setState({
         isValid: true,
-        isValidBtnClasses: API_SUBMIT_CLASSES_VALID
+        disabledBtnClass: ""
       })
       PuzzleModule.hide();
     }
@@ -171,7 +171,6 @@ class ShoppingListApp extends React.Component {
           label="First answer this question to unlock the API"
           placeholder={this.state.puzzle}
           button="Submit"
-          isValidBtnClasses={API_SUBMIT_CLASSES_VALID}
           required={true}
           title="Are you a human?"
         />
@@ -205,14 +204,14 @@ class ShoppingListApp extends React.Component {
               label="Get items (eg. 1 or 2 to get singular)"
               placeholder="Item position or leave empty"
               button="Get"
-              isValidBtnClasses={this.state.isValidBtnClasses}
+              disabledBtnClass={this.state.disabledBtnClass}
             />
             <InputTemplate
               event={this.handleAddSubmit}
               label="Add an item"
               placeholder="Name of item to add"
               button="Add"
-              isValidBtnClasses={this.state.isValidBtnClasses}
+              disabledBtnClass={this.state.disabledBtnClass}
               required={true}
             />
             <InputTemplate
@@ -220,7 +219,7 @@ class ShoppingListApp extends React.Component {
               label="Delete an item"
               placeholder="Item position to remove (eg. 1 or 2)"
               button="Delete"
-              isValidBtnClasses={this.state.isValidBtnClasses}
+              disabledBtnClass={this.state.disabledBtnClass}
               required={true}
             />
             <form onSubmit={this.handleUpdateSubmit} autoComplete="off">
@@ -229,7 +228,7 @@ class ShoppingListApp extends React.Component {
                   <input required type="text" class="form-control" placeholder="Position to update (eg. 1, or 2)" aria-label="Position to update (eg. 1, or 2)" />
                   <input required type="text" class="form-control" placeholder="Update with value" aria-label="Update with value" />
                   <div class="input-group-append">
-                    <button class={this.state.isValidBtnClasses} type="submit">Update</button>
+                    <button class={`${API_SUBMIT_CLASSES} ${this.state.disabledBtnClass}`} type="submit">Update</button>
                   </div>
                 </div>
             </form>

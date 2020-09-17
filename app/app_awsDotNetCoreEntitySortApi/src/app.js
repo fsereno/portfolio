@@ -5,8 +5,7 @@ import ReactDOM from 'react-dom';
 import PuzzleModule from '../../js/puzzleModule';
 
 const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
-const API_SUBMIT_CLASSES_VALID = "btn btn-dark api-submit mb-2";
-const API_SUBMIT_CLASSES_NOT_VALID = "btn btn-dark disabled api-submit mb-2";
+const DISABLED_BTN_CLASS = "disabled";
 const PUZZLE = "4 x 4 - 1 = ?";
 
 PuzzleModule.set(15);
@@ -27,7 +26,7 @@ class EntitySort extends React.Component {
       selectedIndex: 0,
       puzzle: PUZZLE,
       isValid: false,
-      isValidBtnClasses: API_SUBMIT_CLASSES_NOT_VALID
+      disabledBtnClass: DISABLED_BTN_CLASS
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -35,6 +34,8 @@ class EntitySort extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete= this.handleDelete.bind(this);
     this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
+    this.handleSalarySortHigh = this.handleSalarySortHigh.bind(this);
+    this.handleSalarySortLow = this.handleSalarySortLow.bind(this);
   }
 
   formatCurrency(value) {
@@ -48,7 +49,7 @@ class EntitySort extends React.Component {
     if (isValid) {
       this.setState({
         isValid: true,
-        isValidBtnClasses: API_SUBMIT_CLASSES_VALID
+        disabledBtnClass: ""
       })
       PuzzleModule.hide();
     }
@@ -60,6 +61,14 @@ class EntitySort extends React.Component {
 
   handleSalaryChange(event) {
     this.setState({salary: event.target.value});
+  }
+
+  handleSalarySortHigh() {
+
+  }
+
+  handleSalarySortLow() {
+
   }
 
   handleSubmit(event) {
@@ -101,18 +110,36 @@ class EntitySort extends React.Component {
           label="First answer this question to unlock the API"
           placeholder={this.state.puzzle}
           button="Submit"
-          isValidBtnClasses={API_SUBMIT_CLASSES_VALID}
           required={true}
           title="Are you a human?"
         />
         <div class="row splitter">
-          <div class="col-lg-4">
+          <div class="col-lg-12">
             <h3>Employees:</h3>
-            <ul class="list-group">
+            <p class="lead">Add new employees and then sort using the column controls</p>
+            <table class="table" id="employeeTable">
+              <thead class="bg-dark text-white">
+                <tr>
+                  <th>Name</th>
+                  <th>
+                      <span class="mr-2">Salary</span>
+                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark mr-2`} type="button" onClick={this.handleSalarySortHigh}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
+                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark`} type="button" onClick={this.handleSalarySortHigh}><i class="fa fa-fw fa-sort-amount-desc"></i></button></th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
               {this.state.list.map((employee, index) => {
-                return <li class="list-group-item d-flex justify-content-between align-items-center">{employee.name}, {employee.displaySalary} <a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
-              })}
-          </ul>
+                  return (
+                    <tr>
+                        <td>{employee.name}</td>
+                        <td>{employee.displaySalary}</td>
+                        <td><a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
+                      </tr>
+                    )
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="row splitter">
@@ -126,11 +153,11 @@ class EntitySort extends React.Component {
             <form onSubmit={this.handleSubmit} autoComplete="off">
               <label>Add an Employee</label>
               <div class="form-row align-items-center">
-                <div class="col-auto">
+                <div class="col-lg-2">
                   <label class="sr-only" for="nameInput">Name</label>
                   <input required type="text" class="form-control mb-2" id="nameInput" placeholder="John Doe" value={this.state.name} onChange={this.handleNameChange}/>
                 </div>
-                <div class="col-auto">
+                <div class="col-lg-2">
                   <label class="sr-only" for="salaryInput">Salary</label>
                   <div class="input-group mb-2">
                     <div class="input-group-prepend">
@@ -139,11 +166,8 @@ class EntitySort extends React.Component {
                     <input required type="number" min="0" class="form-control" id="salaryInput" placeholder="0.00" value={this.state.salary} onChange={this.handleSalaryChange}/>
                   </div>
                 </div>
-                <div class="col-auto">
-                  <button type="submit" class={this.state.isValidBtnClasses}>Add</button>
-                </div>
-                <div class="col-auto">
-                  <button type="button" class={this.state.isValidBtnClasses}>Sort by Salary</button>
+                <div class="col-lg-2">
+                  <button type="submit" class={`btn btn-dark mb-2 ${this.state.disabledBtnClass} w-100`}>Add</button>
                 </div>
               </div>
             </form>
