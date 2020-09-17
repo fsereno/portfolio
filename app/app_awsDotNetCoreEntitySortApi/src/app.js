@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PuzzleModule from '../../js/puzzleModule';
 
-const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
+const API_ENDPOINT = "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/values";
 const DISABLED_BTN_CLASS = "disabled";
 const PUZZLE = "4 x 4 - 1 = ?";
 
@@ -16,7 +16,7 @@ class EntitySort extends React.Component {
     this.state = {
       name: '',
       salary: '',
-      list: [{
+      employees: [{
         name: "John Doe",
         salary: 10000,
         displaySalary: "£10,000"
@@ -26,7 +26,9 @@ class EntitySort extends React.Component {
       selectedIndex: 0,
       puzzle: PUZZLE,
       isValid: false,
-      disabledBtnClass: DISABLED_BTN_CLASS
+      disabledBtnClass: DISABLED_BTN_CLASS,
+      sortSalaryHigh: `${API_ENDPOINT}/sort/salary/high`,
+      sortSalaryLow: `${API_ENDPOINT}/sort/salary/low`
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -34,8 +36,8 @@ class EntitySort extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete= this.handleDelete.bind(this);
     this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
-    this.handleSalarySortHigh = this.handleSalarySortHigh.bind(this);
-    this.handleSalarySortLow = this.handleSalarySortLow.bind(this);
+    this.handleSortSalaryHigh = this.handleSortSalaryHigh.bind(this);
+    this.handleSortSalaryLow = this.handleSortSalaryLow.bind(this);
   }
 
   formatCurrency(value) {
@@ -63,24 +65,43 @@ class EntitySort extends React.Component {
     this.setState({salary: event.target.value});
   }
 
-  handleSalarySortHigh() {
-
+  handleAjax(request) {
+    if (this.state.isValid) {
+      $.ajax(request);
+    }
   }
 
-  handleSalarySortLow() {
+  handleSortSalaryHigh() {
+    let request = {
+      url: this.state.sortSalaryHigh,
+      type: "POST",
+      contentType: 'application/json;',
+      data: JSON.stringify({
+        "employees":this.state.employees
+      }),
+      success: (response) => {
+        this.setState({
+          employees: response
+        });
+      }
+    }
+    this.handleAjax(request);
+  }
+
+  handleSortSalaryLow() {
 
   }
 
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.name.length > 0 && this.state.salary.length > 0 && this.state.counter < this.state.counterLimit) {
-      this.state.list.push({
+      this.state.employees.push({
           name: this.state.name,
           salary: this.state.salary,
           displaySalary: this.formatCurrency(this.state.salary)
         });
       this.setState({
-        list: this.state.list,
+        employees: this.state.employees,
         name: "",
         salary: "",
         counter: this.state.counter + 1
@@ -91,9 +112,9 @@ class EntitySort extends React.Component {
   handleDelete(event) {
     event.preventDefault();
     let index = Number(event.target.dataset.index);
-    this.state.list.splice(index, 1);
+    this.state.employees.splice(index, 1);
     this.setState({
-      list: this.state.list,
+      employees: this.state.employees,
       counter: this.state.counter - 1
     });
   }
@@ -123,19 +144,20 @@ class EntitySort extends React.Component {
                   <th>Name</th>
                   <th>
                       <span class="mr-2">Salary</span>
-                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark mr-2`} type="button" onClick={this.handleSalarySortHigh}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
-                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark`} type="button" onClick={this.handleSalarySortHigh}><i class="fa fa-fw fa-sort-amount-desc"></i></button></th>
+                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark mr-2`} type="button" onClick={this.handleSortSalaryHigh}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
+                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark`} type="button" onClick={this.handleSortSalaryLow}><i class="fa fa-fw fa-sort-amount-desc"></i></button>
+                  </th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-              {this.state.list.map((employee, index) => {
+              {this.state.employees.map((employee, index) => {
                   return (
                     <tr>
-                        <td>{employee.name}</td>
-                        <td>{employee.displaySalary}</td>
-                        <td><a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
-                      </tr>
+                      <td>{employee.name}</td>
+                      <td>{employee.displaySalary}</td>
+                      <td><a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
+                    </tr>
                     )
                 })}
               </tbody>

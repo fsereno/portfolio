@@ -29,8 +29,6 @@ namespace aws.Controllers
         public IList<Item> Get([FromBody]GetRequest request)
         {
             this.SetResponseHeaders();
-            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
-
             var result = new List<Item>();
 
             if (request != null)
@@ -51,9 +49,8 @@ namespace aws.Controllers
         public IList<Item> Add([FromBody]AddRequest request)
         {
             this.SetResponseHeaders();
-            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
-
             var result = new List<Item>();
+
             if (request != null && !String.IsNullOrEmpty(request.Item?.Name))
             {
                 var items = this._basketUtil.GetItems(request.Items, this._items);
@@ -68,8 +65,6 @@ namespace aws.Controllers
         public IList<Item> Update([FromBody]UpdateRequest request)
         {
             this.SetResponseHeaders();
-            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
-
             var result = new List<Item>();
 
             if (request != null)
@@ -89,8 +84,6 @@ namespace aws.Controllers
         public IList<Item> Delete([FromBody]GetRequest request)
         {
             this.SetResponseHeaders();
-            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
-
             var result = new List<Item>();
 
             if (request != null)
@@ -107,6 +100,7 @@ namespace aws.Controllers
         }
 
         private void SetResponseHeaders() {
+            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
             Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token");
             Response.Headers.Add("Access-Control-Allow-Origin", "*");
         }

@@ -47,7 +47,7 @@ class ShoppingListApp extends React.Component {
     this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
   }
 
-  ajax(request) {
+  handleAjax(request) {
     if (this.state.isValid) {
       $.ajax(request);
     }
@@ -74,7 +74,7 @@ class ShoppingListApp extends React.Component {
           }
         }
       }
-    this.ajax(request);
+    this.handleAjax(request);
   }
 
   handleAddSubmit(event) {
@@ -97,7 +97,7 @@ class ShoppingListApp extends React.Component {
         });
       }
     }
-    this.ajax(request);
+    this.handleAjax(request);
   }
 
   handleUpdateSubmit(event) {
@@ -122,7 +122,7 @@ class ShoppingListApp extends React.Component {
         });
       }
     }
-    this.ajax(request);
+    this.handleAjax(request);
   }
 
   handleDeleteSubmit(event) {
@@ -143,7 +143,7 @@ class ShoppingListApp extends React.Component {
         });
       }
     }
-    this.ajax(request);
+    this.handleAjax(request);
   }
 
   handlePuzzleSubmit(event) {

@@ -27,6 +27,11 @@ namespace aws.Tests
             Assert.Equal(200, response.StatusCode);
             Assert.Equal("[{\"name\":\"Joe Bloggs\",\"salary\":10000},{\"name\":\"John Doe\",\"salary\":5000}]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Methods"));
+            Assert.Equal("Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", response.MultiValueHeaders["Access-Control-Allow-Headers"][0]);
+            Assert.Equal("*", response.MultiValueHeaders["Access-Control-Allow-Origin"][0]);
             Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
         }
 
@@ -43,6 +48,11 @@ namespace aws.Tests
             Assert.Equal(200, response.StatusCode);
             Assert.Equal("[{\"name\":\"Joe Bloggs\",\"salary\":5000},{\"name\":\"John Doe\",\"salary\":10000}]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));
+            Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Methods"));
+            Assert.Equal("Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token", response.MultiValueHeaders["Access-Control-Allow-Headers"][0]);
+            Assert.Equal("*", response.MultiValueHeaders["Access-Control-Allow-Origin"][0]);
             Assert.Equal("application/json; charset=utf-8", response.MultiValueHeaders["Content-Type"][0]);
         }
     }

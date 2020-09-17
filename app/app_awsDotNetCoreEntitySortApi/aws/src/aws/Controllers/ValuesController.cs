@@ -21,6 +21,7 @@ namespace aws.Controllers
         [HttpPost("sort/salary/high")]
         public IList<Employee> SortEmployeesHightToLow([FromBody]GetRequest request)
         {
+            this.SetResponseHeaders();
             var employees = this._entitySortUtil.SortSalaryHighToLow(request?.Employees);
             return employees;
         }
@@ -28,8 +29,15 @@ namespace aws.Controllers
         [HttpPost("sort/salary/low")]
         public IList<Employee> SortEmployeesLowToHigh([FromBody]GetRequest request)
         {
+            this.SetResponseHeaders();
             var employees = this._entitySortUtil.SortSalaryLowToHigh(request?.Employees);
             return employees;
+        }
+
+        private void SetResponseHeaders() {
+            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
+            Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token");
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
         }
     }
 }
