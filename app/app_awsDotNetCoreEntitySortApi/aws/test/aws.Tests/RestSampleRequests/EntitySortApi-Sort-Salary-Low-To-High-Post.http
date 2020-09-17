@@ -1,0 +1,4 @@
+POST https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/values/sort/salary/high HTTP/1.1
+content-type: application/json
+
+{"employees":[{"name": "John Doe", "salary":5000},{"name":"Joe Bloggs","salary":10000}]}
