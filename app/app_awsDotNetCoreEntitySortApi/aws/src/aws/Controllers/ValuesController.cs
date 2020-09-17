@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
 using Models;
 using Interfaces;
 
@@ -18,28 +17,19 @@ namespace aws.Controllers
         {
             _entitySortUtil = entitySortUtil;
         }
-               // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
-        [HttpPost]
-        public IList<Employee> GetEmployees()
+        [HttpPost("sort/salary/high")]
+        public IList<Employee> SortEmployeesHightToLow([FromBody]GetRequest request)
         {
-            var employeesToSort = new List<Employee>() {
-                new Employee(){ Name = "Joe Bloggs" }
-            };
-            var employees = this._entitySortUtil.SortSalaryLowToHigh(employeesToSort);
+            var employees = this._entitySortUtil.SortSalaryHighToLow(request?.Employees);
             return employees;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost("sort/salary/low")]
+        public IList<Employee> SortEmployeesLowToHigh([FromBody]GetRequest request)
         {
-            return "value";
+            var employees = this._entitySortUtil.SortSalaryLowToHigh(request?.Employees);
+            return employees;
         }
     }
 }

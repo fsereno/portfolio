@@ -69,13 +69,13 @@ namespace aws.Tests
             var employeesToSort = new List<Employee>() {
                 new Employee()
                 {
-                    Name = "Joe Bloggs",
-                    Salary = 10000
+                    Name = "John Doe",
+                    Salary = 5000
                 },
                 new Employee()
                 {
-                    Name = "John Doe",
-                    Salary = 5000
+                    Name = "Joe Bloggs",
+                    Salary = 10000
                 }
             };
             var result = sut.SortSalaryLowToHigh(employeesToSort);
