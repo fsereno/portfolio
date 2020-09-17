@@ -28,20 +28,19 @@ namespace Models
             }
             return result;
         }
-
-        public class SortBySalaryLowToHigh : IComparer<Employee>
-        {
-            public int Compare(Employee current, Employee next)
-            {
-                return Decimal.Compare(current.Salary, next.Salary);
-            }
-        }
-
-        public class SortBySalaryHighToLow : IComparer<Employee>
+        public class SortBySalaryDesc : IComparer<Employee>
         {
             public int Compare(Employee current, Employee next)
             {
                 return Decimal.Compare(next.Salary, current.Salary);
+            }
+        }
+
+        public class SortBySalaryAsc : IComparer<Employee>
+        {
+            public int Compare(Employee current, Employee next)
+            {
+                return Decimal.Compare(current.Salary, next.Salary);
             }
         }
     }

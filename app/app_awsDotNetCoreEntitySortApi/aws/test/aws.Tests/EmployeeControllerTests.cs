@@ -12,14 +12,14 @@ using aws;
 
 namespace aws.Tests
 {
-    public class ValuesControllerTests
+    public class EmployeeControllerTests
     {
         [Fact]
-        public async Task Test_Sort_Employees_Salary_High_To_Low_Post()
+        public async Task Test_Sort_Salary_Desc_Post()
         {
             var lambdaFunction = new LambdaEntryPoint();
 
-            var requestStr = File.ReadAllText("./SampleRequests/ValuesController-Test_Sort_Employees_Salary_High_To_Low_Post.json");
+            var requestStr = File.ReadAllText("./SampleRequests/EmployeeController-Test_Sort_Salary_Desc_Post.json");
             var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
             var context = new TestLambdaContext();
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
@@ -36,11 +36,11 @@ namespace aws.Tests
         }
 
         [Fact]
-        public async Task Test_Sort_Employees_Salary_Low_To_High_Post()
+        public async Task Test_Sort_Salary_Asc_Post()
         {
             var lambdaFunction = new LambdaEntryPoint();
 
-            var requestStr = File.ReadAllText("./SampleRequests/ValuesController-Test_Sort_Employees_Salary_Low_To_High_Post.json");
+            var requestStr = File.ReadAllText("./SampleRequests/EmployeeController-Test_Sort_Salary_Asc_Post.json");
             var request = JsonConvert.DeserializeObject<APIGatewayProxyRequest>(requestStr);
             var context = new TestLambdaContext();
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);

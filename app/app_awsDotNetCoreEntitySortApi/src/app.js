@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PuzzleModule from '../../js/puzzleModule';
 
-const API_ENDPOINT = "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/values";
+const API_ENDPOINT = "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees";
 const DISABLED_BTN_CLASS = "disabled";
 const PUZZLE = "4 x 4 - 1 = ?";
 
@@ -27,8 +27,8 @@ class EntitySort extends React.Component {
       puzzle: PUZZLE,
       isValid: false,
       disabledBtnClass: DISABLED_BTN_CLASS,
-      sortSalaryHigh: `${API_ENDPOINT}/sort/salary/high`,
-      sortSalaryLow: `${API_ENDPOINT}/sort/salary/low`
+      sortSalaryAsc: `${API_ENDPOINT}/sort/salary/asc`,
+      sortSalaryDesc: `${API_ENDPOINT}/sort/salary/desc`
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -36,8 +36,8 @@ class EntitySort extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete= this.handleDelete.bind(this);
     this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
-    this.handleSortSalaryHigh = this.handleSortSalaryHigh.bind(this);
-    this.handleSortSalaryLow = this.handleSortSalaryLow.bind(this);
+    this.handleSortSalaryAsc = this.handleSortSalaryAsc.bind(this);
+    this.handleSortSalaryDesc = this.handleSortSalaryDesc.bind(this);
   }
 
   formatCurrency(value) {
@@ -71,9 +71,9 @@ class EntitySort extends React.Component {
     }
   }
 
-  handleSortSalaryHigh() {
+  handleSortSalaryAsc() {
     let request = {
-      url: this.state.sortSalaryHigh,
+      url: this.state.sortSalaryAsc,
       type: "POST",
       contentType: 'application/json;',
       data: JSON.stringify({
@@ -88,8 +88,21 @@ class EntitySort extends React.Component {
     this.handleAjax(request);
   }
 
-  handleSortSalaryLow() {
-
+  handleSortSalaryDesc() {
+    let request = {
+      url: this.state.sortSalaryDesc,
+      type: "POST",
+      contentType: 'application/json;',
+      data: JSON.stringify({
+        "employees":this.state.employees
+      }),
+      success: (response) => {
+        this.setState({
+          employees: response
+        });
+      }
+    }
+    this.handleAjax(request);
   }
 
   handleSubmit(event) {
@@ -144,8 +157,8 @@ class EntitySort extends React.Component {
                   <th>Name</th>
                   <th>
                       <span class="mr-2">Salary</span>
-                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark mr-2`} type="button" onClick={this.handleSortSalaryHigh}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
-                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark`} type="button" onClick={this.handleSortSalaryLow}><i class="fa fa-fw fa-sort-amount-desc"></i></button>
+                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark mr-2`} type="button" onClick={this.handleSortSalaryAsc}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
+                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark`} type="button" onClick={this.handleSortSalaryDesc}><i class="fa fa-fw fa-sort-amount-desc"></i></button>
                   </th>
                   <th>Action</th>
                 </tr>

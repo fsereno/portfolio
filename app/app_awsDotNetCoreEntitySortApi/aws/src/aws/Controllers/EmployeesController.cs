@@ -9,28 +9,28 @@ using Interfaces;
 namespace aws.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : ControllerBase
+    public class EmployeesController : ControllerBase
     {
-        private readonly IEntitySortUtil _entitySortUtil;
+        private readonly IEmployeeSortUtil _employeeSortUtil;
 
-        public ValuesController(IEntitySortUtil entitySortUtil)
+        public EmployeesController(IEmployeeSortUtil employeeSortUtil)
         {
-            _entitySortUtil = entitySortUtil;
+            _employeeSortUtil = employeeSortUtil;
         }
 
-        [HttpPost("sort/salary/high")]
-        public IList<Employee> SortEmployeesHightToLow([FromBody]GetRequest request)
+        [HttpPost("sort/salary/desc")]
+        public IList<Employee> SortBySalaryDesc([FromBody]GetRequest request)
         {
             this.SetResponseHeaders();
-            var employees = this._entitySortUtil.SortSalaryHighToLow(request?.Employees);
+            var employees = this._employeeSortUtil.SortBySalaryDesc(request?.Employees);
             return employees;
         }
 
-        [HttpPost("sort/salary/low")]
-        public IList<Employee> SortEmployeesLowToHigh([FromBody]GetRequest request)
+        [HttpPost("sort/salary/asc")]
+        public IList<Employee> SortBySalaryAsc([FromBody]GetRequest request)
         {
             this.SetResponseHeaders();
-            var employees = this._entitySortUtil.SortSalaryLowToHigh(request?.Employees);
+            var employees = this._employeeSortUtil.SortBySalaryAsc(request?.Employees);
             return employees;
         }
 

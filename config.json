@@ -89,8 +89,8 @@
             "include": true
         },
         {
-            "name": "AWS .NET Core Entity Sort API",
-            "subHeading": "A sorting mechanism, implementing IComparable and IComparer with a React frontend",
+            "name": "AWS .NET Core Entity Sorting API",
+            "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
             "description": "Exploring the abilities of AWS Lambda, using .Net Core along with an AWS RESTful Gateway API.",
             "folder": "awsDotNetCoreEntitySortApi",
             "active": true,
