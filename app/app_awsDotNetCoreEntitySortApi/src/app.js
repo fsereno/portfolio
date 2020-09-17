@@ -97,7 +97,7 @@ class EntitySort extends React.Component {
     if (this.state.name.length > 0 && this.state.salary.length > 0 && this.state.counter < this.state.counterLimit) {
       this.state.employees.push({
           name: this.state.name,
-          salary: this.state.salary,
+          salary: Number(this.state.salary),
           displaySalary: this.formatCurrency(this.state.salary)
         });
       this.setState({

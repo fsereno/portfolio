@@ -24,12 +24,14 @@ namespace aws.Tests
                 new Employee()
                 {
                     Name = "John Doe",
-                    Salary = 5000
+                    Salary = 5000,
+                    DisplaySalary = "£5,000.00"
                 },
                 new Employee()
                 {
                     Name = "Joe Bloggs",
-                    Salary = 10000
+                    Salary = 10000,
+                    DisplaySalary = "£10,000.00"
                 }
             };
             var result = sut.SortSalaryDefault(employeesToSort);
@@ -51,12 +53,14 @@ namespace aws.Tests
                 new Employee()
                 {
                     Name = "John Doe",
-                    Salary = 5000
+                    Salary = 5000,
+                    DisplaySalary = "£5,000.00"
                 },
                 new Employee()
                 {
                     Name = "Joe Bloggs",
-                    Salary = 10000
+                    Salary = 10000,
+                    DisplaySalary = "£10,000.00"
                 }
             };
             var result = sut.SortSalaryHighToLow(employeesToSort);
@@ -70,12 +74,14 @@ namespace aws.Tests
                 new Employee()
                 {
                     Name = "John Doe",
-                    Salary = 5000
+                    Salary = 5000,
+                    DisplaySalary = "£5,000.00"
                 },
                 new Employee()
                 {
                     Name = "Joe Bloggs",
-                    Salary = 10000
+                    Salary = 10000,
+                    DisplaySalary = "£10,000.00"
                 }
             };
             var result = sut.SortSalaryLowToHigh(employeesToSort);

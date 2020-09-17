@@ -25,7 +25,7 @@ namespace aws.Tests
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
 
             Assert.Equal(200, response.StatusCode);
-            Assert.Equal("[{\"name\":\"Joe Bloggs\",\"salary\":10000},{\"name\":\"John Doe\",\"salary\":5000}]", response.Body);
+            Assert.Equal("[{\"name\":\"Joe Bloggs\",\"salary\":10000,\"displaySalary\":\"£10,000.00\"},{\"name\":\"John Doe\",\"salary\":5000,\"displaySalary\":\"£5,000.00\"}]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));
@@ -46,7 +46,7 @@ namespace aws.Tests
             var response = await lambdaFunction.FunctionHandlerAsync(request, context);
 
             Assert.Equal(200, response.StatusCode);
-            Assert.Equal("[{\"name\":\"Joe Bloggs\",\"salary\":5000},{\"name\":\"John Doe\",\"salary\":10000}]", response.Body);
+            Assert.Equal("[{\"name\":\"Joe Bloggs\",\"salary\":5000,\"displaySalary\":\"£5,000.00\"},{\"name\":\"John Doe\",\"salary\":10000,\"displaySalary\":\"£10,000.00\"}]", response.Body);
             Assert.True(response.MultiValueHeaders.ContainsKey("Content-Type"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Headers"));
             Assert.True(response.MultiValueHeaders.ContainsKey("Access-Control-Allow-Origin"));

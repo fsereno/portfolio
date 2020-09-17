@@ -32,5 +32,5 @@
     "httpMethod": "POST",
     "apiId": "t2yh6sjnmk"
   },
-  "body": "{\"employees\":[{\"name\": \"John Doe\", \"salary\":10000},{\"name\":\"Joe Bloggs\",\"salary\":5000}]}"
+  "body": "{\"employees\":[{\"name\": \"John Doe\",\"salary\":10000,\"displaySalary\":\"£10,000.00\"},{\"name\":\"Joe Bloggs\",\"salary\":5000,\"displaySalary\":\"£5,000.00\"}]}"
 }

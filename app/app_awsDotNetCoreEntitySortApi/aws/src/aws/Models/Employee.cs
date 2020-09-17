@@ -13,6 +13,8 @@ namespace Models
 
         public decimal Salary { get; set; }
 
+        public string DisplaySalary { get; set; }
+
         public int CompareTo(Employee otherEmployee)
         {
             var result = 0;
