@@ -8,6 +8,10 @@ const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Pro
 const API_SUBMIT_CLASSES = "btn btn-dark api-submit";
 const DISABLED_BTN_CLASS = "disabled";
 const PUZZLE = "4 x 4 - 1 =";
+const DEFAULT_COLLECTION = [
+  { name: "Apple" },
+  { name: "Banana" }
+]
 
 let _puzzleModule = PuzzleModule(15, "puzzleModal");
 
@@ -29,8 +33,8 @@ class ShoppingListApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
-      resultSet: [],
+      items: DEFAULT_COLLECTION,
+      resultSet: DEFAULT_COLLECTION,
       get: `${API_ENDPOINT}/get`,
       add: `${API_ENDPOINT}/add`,
       delete: `${API_ENDPOINT}/delete`,
@@ -182,16 +186,8 @@ class ShoppingListApp extends React.Component {
               })}
             </ul>
             <p class="lead">
-              The shopping basket initially has the following structure:
+              User the below interface to alter the baskets contents:
             </p>
-            <pre>
-              <code class="ng-binding">
-                [
-                  "Apple",
-                  "Banana"
-                ]
-              </code>
-            </pre>
           </div>
         </div>
        <div class="row splitter">
