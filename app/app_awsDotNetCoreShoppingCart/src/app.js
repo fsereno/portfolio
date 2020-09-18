@@ -2,14 +2,14 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PuzzleModule from '../../js/puzzleModule';
+import { PuzzleModule } from '../../js/puzzleModule.js';
 
 const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
 const API_SUBMIT_CLASSES = "btn btn-dark api-submit";
 const DISABLED_BTN_CLASS = "disabled";
-const PUZZLE = "4 x 4 - 1 = ?";
+const PUZZLE = "4 x 4 - 1 =";
 
-PuzzleModule.set(15, "puzzleModal");
+let _puzzleModule = PuzzleModule(15, "puzzleModal");
 
 function InputTemplate(props){
   return (
@@ -48,7 +48,7 @@ class ShoppingListApp extends React.Component {
   }
 
   handleAjax(request) {
-    if (this.state.isValid) {
+    if (_puzzleModule.getResult()) {
       $.ajax(request);
     }
   }
@@ -148,28 +148,25 @@ class ShoppingListApp extends React.Component {
 
   handlePuzzleSubmit(event) {
     event.preventDefault();
-    let input = Number(event.target.elements[0].value);
-    let isValid = PuzzleModule.isValid(input);
-    if (isValid) {
+    if (_puzzleModule.getResult()) {
       this.setState({
-        isValid: true,
         disabledBtnClass: ""
-      })
-      PuzzleModule.hide();
+      });
+      _puzzleModule.hide();
     }
   }
 
-  componentDidMount(){
-    PuzzleModule.show();
+  componentDidMount() {
+    _puzzleModule.show();
   }
 
   render() {
     return (
       <div>
-        <PuzzleModule.template
+        <_puzzleModule.RenderTemplate
           event={this.handlePuzzleSubmit}
-          label="First answer this question to unlock the API"
-          placeholder={this.state.puzzle}
+          label="First answer this question to unlock the API:"
+          puzzle={PUZZLE}
           button="Submit"
           required={true}
           title="Are you a human?"

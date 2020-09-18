@@ -1,16 +1,37 @@
 "use strict;"
 
-define(["React"],function(React) {
-    let modalId = "";
-    let answer = "";
-    let set = (value, id) => {
-        answer = value;
-        modalId = id;
-    }
-    let isValid = (input) => input === answer;
+import React, { useState } from 'react';
+
+export let PuzzleModule = function(answer, modalId) {
+    const IS_INVALID_CLASS = "is-invalid";
+    let isInvalidClass = "";
+    let isValid = value => (!isNaN(value) ? Number(value) : value) === answer;
+    let _isValid = false;
+    let hasValue = value => typeof value !== "undefined" && value.length > 0;
+    let getResult = () => _isValid;
     let show = () => $(`#${modalId}`).modal("show");
     let hide = () => $(`#${modalId}`).modal("hide");
-    let template = function(props) {
+    let RenderErrorMessage  = function(props) {
+        if (hasValue(props.input) && !isValid(props.input)) {
+            return (
+                <div class="invalid-feedback d-block">Incorrect answer!</div>
+            );
+        } else {
+            return null;
+        }
+    }
+    let RenderTemplate = function(props) {
+
+        const [input, setInput] = useState(0);
+
+        if (isValid(input)) {
+            _isValid = true;
+            isInvalidClass = "";
+        } else if(hasValue(input) && !isValid(input)) {
+            _isValid = false;
+            isInvalidClass = IS_INVALID_CLASS;
+        }
+
         return (
             <div class="modal fade" data-backdrop="static" id={modalId} tabindex="-1" aria-modal="true" role="dialog">
                 <div class="modal-dialog modal-xl">
@@ -20,13 +41,23 @@ define(["React"],function(React) {
                         </div>
                         <div class="modal-body">
                         <form onSubmit={props.event} autoComplete="off">
-                            <label>{props.label}</label>
+                            <p>{props.label}</p>
+                            <label>What is: {props.puzzle} ?</label>
                             <div class="input-group mb-3">
-                                <input required={props.required ? "required" : ""} type="text" class="form-control" placeholder={props.placeholder} aria-label={props.placeholder} />
+                                <input
+                                    onBlur={event => setInput(event.target.value)}
+                                    required={props.required ? "required" : ""}
+                                    type="text"
+                                    class={`form-control ${isInvalidClass}`}
+                                    aria-label={props.puzzle}
+                                />
                                 <div class="input-group-append">
                                     <button class="btn btn-dark" type="submit">{props.button}</button>
                                 </div>
                             </div>
+                            <RenderErrorMessage
+                                input={input}
+                            />
                         </form>
                         </div>
                     </div>
@@ -35,10 +66,9 @@ define(["React"],function(React) {
         )
     }
     return {
-        set: set,
-        isValid: isValid,
-        show:show,
-        hide:hide,
-        template:template
+        show: show,
+        hide: hide,
+        RenderTemplate:RenderTemplate,
+        getResult: getResult
     }
-});
+};

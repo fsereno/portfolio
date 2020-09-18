@@ -2,13 +2,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PuzzleModule from '../../js/puzzleModule';
+import { PuzzleModule } from '../../js/puzzleModule.js';
 
 const API_ENDPOINT = "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees";
 const DISABLED_BTN_CLASS = "disabled";
-const PUZZLE = "4 x 4 - 2 = ?";
+const PUZZLE = "4 x 4 - 2 =";
 
-PuzzleModule.set(14, "puzzleModal");
+let _puzzleModule = PuzzleModule(14, "puzzleModal");
 
 class EntitySort extends React.Component {
   constructor(props) {
@@ -24,8 +24,6 @@ class EntitySort extends React.Component {
       counterLimit: 10,
       counter: 1,
       selectedIndex: 0,
-      puzzle: PUZZLE,
-      isValid: false,
       disabledBtnClass: DISABLED_BTN_CLASS,
       sortSalaryAsc: `${API_ENDPOINT}/sort/salary/asc`,
       sortSalaryDesc: `${API_ENDPOINT}/sort/salary/desc`
@@ -46,14 +44,11 @@ class EntitySort extends React.Component {
 
   handlePuzzleSubmit(event) {
     event.preventDefault();
-    let input = Number(event.target.elements[0].value);
-    let isValid = PuzzleModule.isValid(input);
-    if (isValid) {
+    if (_puzzleModule.getResult()) {
       this.setState({
-        isValid: true,
         disabledBtnClass: ""
-      })
-      PuzzleModule.hide();
+      });
+      _puzzleModule.hide();
     }
   }
 
@@ -66,7 +61,7 @@ class EntitySort extends React.Component {
   }
 
   handleAjax(request) {
-    if (this.state.isValid) {
+    if (_puzzleModule.getResult()) {
       $.ajax(request);
     }
   }
@@ -132,17 +127,17 @@ class EntitySort extends React.Component {
     });
   }
 
-  componentDidMount(){
-    PuzzleModule.show();
+  componentDidMount() {
+    _puzzleModule.show();
   }
 
   render() {
     return (
       <div>
-        <PuzzleModule.template
+        <_puzzleModule.RenderTemplate
           event={this.handlePuzzleSubmit}
-          label="First answer this question to unlock the API"
-          placeholder={this.state.puzzle}
+          label="First answer this question to unlock the API:"
+          puzzle={PUZZLE}
           button="Submit"
           required={true}
           title="Are you a human?"
