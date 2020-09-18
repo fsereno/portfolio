@@ -1,15 +1,18 @@
 "use strict;"
 
 define(["React"],function(React) {
-    const MODAL_ID = "puzzleModal";
+    let modalId = "";
     let answer = "";
-    let set = (value) => answer = value;
+    let set = (value, id) => {
+        answer = value;
+        modalId = id;
+    }
     let isValid = (input) => input === answer;
-    let show = () => $(`#${MODAL_ID}`).modal("show");
-    let hide = () => $(`#${MODAL_ID}`).modal("hide");
+    let show = () => $(`#${modalId}`).modal("show");
+    let hide = () => $(`#${modalId}`).modal("hide");
     let template = function(props) {
         return (
-            <div class="modal fade" data-backdrop="static" id={MODAL_ID} tabindex="-1" aria-modal="true" role="dialog">
+            <div class="modal fade" data-backdrop="static" id={modalId} tabindex="-1" aria-modal="true" role="dialog">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">

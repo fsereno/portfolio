@@ -6,9 +6,9 @@ import PuzzleModule from '../../js/puzzleModule';
 
 const API_ENDPOINT = "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees";
 const DISABLED_BTN_CLASS = "disabled";
-const PUZZLE = "4 x 4 - 1 = ?";
+const PUZZLE = "4 x 4 - 2 = ?";
 
-PuzzleModule.set(15);
+PuzzleModule.set(14, "puzzleModal");
 
 class EntitySort extends React.Component {
   constructor(props) {
@@ -150,7 +150,7 @@ class EntitySort extends React.Component {
         <div class="row splitter">
           <div class="col-lg-12">
             <h3>Employees:</h3>
-            <p class="lead">Add new employees and then sort using the column controls</p>
+            <p class="lead">Add new employees to the table, sort using the column controls</p>
             <table class="table" id="employeeTable">
               <thead class="bg-dark text-white">
                 <tr>
@@ -171,7 +171,7 @@ class EntitySort extends React.Component {
                       <td>{employee.displaySalary}</td>
                       <td><a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
                     </tr>
-                    )
+                  )
                 })}
               </tbody>
             </table>

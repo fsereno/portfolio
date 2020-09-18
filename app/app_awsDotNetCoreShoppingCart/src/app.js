@@ -9,7 +9,7 @@ const API_SUBMIT_CLASSES = "btn btn-dark api-submit";
 const DISABLED_BTN_CLASS = "disabled";
 const PUZZLE = "4 x 4 - 1 = ?";
 
-PuzzleModule.set(15);
+PuzzleModule.set(15, "puzzleModal");
 
 function InputTemplate(props){
   return (
