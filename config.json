@@ -1,6 +1,7 @@
 {
     "prefix": "app_",
     "entry": "home",
+    "index": "index.html",
     "masterTemplateDir": "master",
     "developmentDir": "app",
     "publishDir": "dist",
@@ -17,7 +18,8 @@
             "folder": "home",
             "active": true,
             "include": false,
-            "folderRoot": "/"
+            "folderRoot": "/",
+            "compileJs": false
         },
         {
             "name": "Application master template",

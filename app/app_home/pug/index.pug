@@ -6,24 +6,8 @@ block styles
   // endbuild
 
 block content
-      p.lead Applications
-      if locals.config.applications.length > 0
-          .card-columns
-            each application, index in locals.config.applications
-              if application.active !== false && application.include !== false
-                  .card.shadow.p-3.bg-white.rounded.min-height-160
-                    .card-body
-                          h5.card-title= application.name
-                          p.card-text= application.subHeading
-                          a.btn.btn-dark.mr-2.mb-2(href="../"+locals.config.prefix+application.folder+"/index.html")
-                            | View app
-                            i.fa.fa-eye.ml-2
-                          a.btn.btn-dark.mb-2(href=locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+application.folder, target="_blank")
-                            | View code
-                            i.fa.fa-github-square.ml-2
+      div#result
 block scripts
   // build:js js/app.js
   script(src="js/app.js")
-  // endbuild
-  // build:js js/vendor.js
   // endbuild
