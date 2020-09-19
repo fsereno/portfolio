@@ -31,15 +31,15 @@ class ToDoListForm extends React.Component {
           <div class="form-group row">
             <label for="searchInput" class="col-sm-2 col-form-label col-form-label-lg">Search applications</label>
             <div class="col-sm-10">
-              <input type="text" id="searchInput" onChange={this.handleChange} class="form-control form-control-lg"/>
+              <input type="text" id="searchInput" onChange={this.handleChange} class="bg-white form-control form-control-lg p-3 rounded shadow-sm"/>
             </div>
           </div>
         </form>
-        <div class="card-columns">
+        <div id="applicationsContainer" class="card-columns">
           {this.state.applications.map((application) => {
             if (application.active && application.include) {
               return (
-                <div class="card shadow p-3 bg-white rounded min-height-160">
+                <div class="card shadow-sm p-3 bg-white rounded min-height-160">
                   <div class="card-body">
                     <h5 class="card-title">{application.name}</h5>
                     <p class="card-text">{application.subHeading}</p>
