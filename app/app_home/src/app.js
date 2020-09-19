@@ -8,7 +8,6 @@ class ToDoListForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: '',
       applications: Config.applications,
       applicationsImmutable: Config.applications
     };
@@ -16,7 +15,13 @@ class ToDoListForm extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({searchTerm: event.target.value});
+    let searchTerm = event.target.value;
+    let filteredApplications = this.state.applicationsImmutable.filter((application) => {
+        return application.name.toUpperCase().includes(searchTerm.toUpperCase())
+      });
+    this.setState({
+      applications: filteredApplications
+    });
   }
 
   render() {
