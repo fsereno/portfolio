@@ -50,7 +50,7 @@ describe(application, () => {
         it("Should first add two items to the list, undo the last item and then redo adding the last item.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show: true})
+                return new Nightmare({show:false})
                 .goto(url)
                 .type('#itemInput', 'Item 1')
                 .click('#submit')

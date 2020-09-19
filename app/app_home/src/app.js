@@ -33,7 +33,7 @@ class ToDoListForm extends React.Component {
           <div class="form-group row">
             <label for="searchInput" class="col-sm-2 col-form-label col-form-label-lg">Search applications:</label>
             <div class="col-sm-10">
-              <input type="text" placeholder="Search" id="searchInput" onChange={this.handleChange} class="bg-white form-control form-control-lg p-3 rounded shadow-sm"/>
+              <input type="text" placeholder="Search..." id="searchInput" onChange={this.handleChange} class="bg-white form-control form-control-lg p-3 rounded shadow-sm"/>
             </div>
           </div>
         </form>
