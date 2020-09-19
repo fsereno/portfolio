@@ -15,9 +15,11 @@ class ToDoListForm extends React.Component {
   }
 
   handleChange(event) {
-    let searchTerm = event.target.value;
+    let searchTerm = event.target.value.toUpperCase();
     let filteredApplications = this.state.applicationsImmutable.filter((application) => {
-        return application.name.toUpperCase().includes(searchTerm.toUpperCase())
+        return application.name.toUpperCase().includes(searchTerm)
+        || application.subHeading.toUpperCase().includes(searchTerm)
+        || application.description.toUpperCase().includes(searchTerm)
       });
     this.setState({
       applications: filteredApplications
@@ -29,9 +31,9 @@ class ToDoListForm extends React.Component {
       <div>
         <form>
           <div class="form-group row">
-            <label for="searchInput" class="col-sm-2 col-form-label col-form-label-lg">Search applications</label>
+            <label for="searchInput" class="col-sm-2 col-form-label col-form-label-lg">Search applications:</label>
             <div class="col-sm-10">
-              <input type="text" id="searchInput" onChange={this.handleChange} class="bg-white form-control form-control-lg p-3 rounded shadow-sm"/>
+              <input type="text" placeholder="Search" id="searchInput" onChange={this.handleChange} class="bg-white form-control form-control-lg p-3 rounded shadow-sm"/>
             </div>
           </div>
         </form>
