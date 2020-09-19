@@ -8,20 +8,28 @@ class ToDoListForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      searchTerm: '',
       applications: Config.applications,
+      applicationsImmutable: Config.applications
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({searchTerm: event.target.value});
   }
 
   render() {
     return (
       <div>
-        <p class="lead">Applications</p>
+        <form>
+          <div class="form-group row">
+            <label for="searchInput" class="col-sm-2 col-form-label col-form-label-lg">Search applications</label>
+            <div class="col-sm-10">
+              <input type="text" id="searchInput" onChange={this.handleChange} class="form-control form-control-lg"/>
+            </div>
+          </div>
+        </form>
         <div class="card-columns">
           {this.state.applications.map((application) => {
             if (application.active && application.include) {
