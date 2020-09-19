@@ -93,7 +93,7 @@
         {
             "name": "AWS .NET Core Entity Sorting API",
             "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
-            "description": "Exploring the abilities of AWS Lambda, using .Net Core along with an AWS RESTful Gateway API.",
+            "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "folder": "awsDotNetCoreEntitySortApi",
             "active": true,
             "include": true,
@@ -103,7 +103,7 @@
         {
             "name": "AWS .NET Core Shopping Cart",
             "subHeading": "A serverless application (SAM), using .Net Core and AWS",
-            "description": "Exploring the abilities of AWS Lambda, using .Net Core along with an AWS RESTful Gateway API.",
+            "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "folder": "awsDotNetCoreShoppingCart",
             "active": true,
             "include": true,
