@@ -40,11 +40,12 @@ export let PuzzleModule = function(answer, modalId) {
                             <h5 class="modal-title h4">{props.title}</h5>
                         </div>
                         <div class="modal-body">
-                        <form onSubmit={props.event} autoComplete="off">
+                        <form id={`${modalId}_form`} onSubmit={props.event} autoComplete="off">
                             <p>{props.label}</p>
                             <label>What is: {props.puzzle} ?</label>
                             <div class="input-group mb-3">
                                 <input
+                                    id={`${modalId}_input`}
                                     onBlur={event => setInput(event.target.value)}
                                     required={props.required ? "required" : ""}
                                     type="text"
@@ -52,7 +53,7 @@ export let PuzzleModule = function(answer, modalId) {
                                     aria-label={props.puzzle}
                                 />
                                 <div class="input-group-append">
-                                    <button class="btn btn-dark" type="submit">{props.button}</button>
+                                    <button id={`${modalId}_submit`} class="btn btn-dark" type="submit">{props.button}</button>
                                 </div>
                             </div>
                             <RenderErrorMessage

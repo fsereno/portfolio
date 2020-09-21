@@ -17,12 +17,12 @@ let _puzzleModule = PuzzleModule(15, "puzzleModal");
 
 function InputTemplate(props){
   return (
-    <form onSubmit={props.event} autoComplete="off">
+    <form id={`${props.id}_form`} onSubmit={props.event} autoComplete="off">
         <label>{props.label}</label>
         <div class="input-group mb-3">
           <input required={props.required ? "required" : ""} type="text" class="form-control" placeholder={props.placeholder} aria-label={props.placeholder} />
           <div class="input-group-append">
-          <button class={`${API_SUBMIT_CLASSES} ${props.disabledBtnClass}`} type="submit">{props.button}</button>
+          <button id={`${props.id}_submit`} class={`${API_SUBMIT_CLASSES} ${props.disabledBtnClass}`} type="submit">{props.button}</button>
           </div>
         </div>
     </form>
@@ -180,7 +180,7 @@ class ShoppingListApp extends React.Component {
             <h3>
               Basket:
             </h3>
-            <ul>
+            <ul id="basketItems">
               {this.state.resultSet.map((item) => {
                 return <li>{item.name}</li>
               })}
@@ -193,6 +193,7 @@ class ShoppingListApp extends React.Component {
        <div class="row splitter">
           <div class="col-lg-4">
             <InputTemplate
+              id="get"
               event={this.handleGetSubmit}
               label="Get items (eg. 1 or 2 to get singular)"
               placeholder="Item position or leave empty"
@@ -200,6 +201,7 @@ class ShoppingListApp extends React.Component {
               disabledBtnClass={this.state.disabledBtnClass}
             />
             <InputTemplate
+              id="add"
               event={this.handleAddSubmit}
               label="Add an item"
               placeholder="Name of item to add"
@@ -208,6 +210,7 @@ class ShoppingListApp extends React.Component {
               required={true}
             />
             <InputTemplate
+              id="delete"
               event={this.handleDeleteSubmit}
               label="Delete an item"
               placeholder="Item position to remove (eg. 1 or 2)"
@@ -215,13 +218,13 @@ class ShoppingListApp extends React.Component {
               disabledBtnClass={this.state.disabledBtnClass}
               required={true}
             />
-            <form onSubmit={this.handleUpdateSubmit} autoComplete="off">
+            <form id="update_form" onSubmit={this.handleUpdateSubmit} autoComplete="off">
                 <label>Update an item (eg. 1 or 2)</label>
                 <div class="input-group mb-3">
-                  <input required type="text" class="form-control" placeholder="Position to update (eg. 1, or 2)" aria-label="Position to update (eg. 1, or 2)" />
-                  <input required type="text" class="form-control" placeholder="Update with value" aria-label="Update with value" />
+                  <input id="update_position" required type="text" class="form-control" placeholder="Position to update (eg. 1, or 2)" aria-label="Position to update (eg. 1, or 2)" />
+                  <input id="update_value" required type="text" class="form-control" placeholder="Update with value" aria-label="Update with value" />
                   <div class="input-group-append">
-                    <button class={`${API_SUBMIT_CLASSES} ${this.state.disabledBtnClass}`} type="submit">Update</button>
+                    <button id="update_submit" class={`${API_SUBMIT_CLASSES} ${this.state.disabledBtnClass}`} type="submit">Update</button>
                   </div>
                 </div>
             </form>

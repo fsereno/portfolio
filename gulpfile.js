@@ -16,7 +16,7 @@ Usage...
   > gulp frontendTests  - To start development server, run Nightmare tests in a headless browser
                       and close the server when all tests are done.
 
-  > gulp serviceTests - Run all TypeScript Service unit tests.
+  > gulp test - Run all TypeScript Service unit tests.
 
   > gulp publish    - To publish production resources to dist
 
@@ -266,17 +266,12 @@ gulp.task("connect", (done) => {
   done();
 });
 
-gulp.task("serviceTests", (done) => {
-  serviceTestsTask();
-  done();
-});
-
-gulp.task("frontendTests", (done) => {
+gulp.task("functional", (done) => {
   frontendTestTasks();
   done();
 });
 
-gulp.task("tests", (done) => {
+gulp.task("test", (done) => {
   serviceTestsTask();
   done();
 });
@@ -286,12 +281,12 @@ gulp.task("create", (done) => {
   done();
 });
 
-gulp.task("publish", gulp.series(["serviceTests", "images", "fonts"], (done) => {
+gulp.task("publish", gulp.series(["test", "images", "fonts"], (done) => {
   config.applications.map(publishTasks);
   done();
 }));
 
-gulp.task("build", gulp.series(["serviceTests"], (done) => {
+gulp.task("build", gulp.series(["test"], (done) => {
   config.applications.map(defaultTasks);
   done();
 }));
