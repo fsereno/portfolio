@@ -101,7 +101,17 @@
             "masterTemplateDir": "master_react"
         },
         {
-            "name": "AWS .NET Core Shopping Cart",
+            "name": "AWS .NET Core String Sorting API",
+            "subHeading": "A string sorting algorithm, taking a comma seperated list of alphanumerical values. First sorting numerically, then alphabetically",
+            "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "folder": "awsDotNetCoreStringSortApi",
+            "active": true,
+            "include": true,
+            "compileJs": false,
+            "masterTemplateDir": "master_react"
+        },
+        {
+            "name": "AWS .NET Core Shopping Cart API",
             "subHeading": "A serverless application (SAM), using .Net Core and AWS",
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "folder": "awsDotNetCoreShoppingCart",

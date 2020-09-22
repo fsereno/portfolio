@@ -30,12 +30,14 @@ class ToDoListForm extends React.Component {
     return (
       <div>
         <form>
-          <div class="form-group row">
-            <label for="searchInput" class="col-sm-2 col-form-label col-form-label-lg">Search applications:</label>
-            <div class="col-sm-10">
-              <input type="text" placeholder="Search..." id="searchInput" onChange={this.handleChange} class="bg-white form-control form-control-lg p-3 rounded shadow-sm"/>
-            </div>
+        <div id="searchBar" class="input-group mb-3 rounded shadow-sm">
+          <input type="text" class="form-control" placeholder="Search all available applications..." id="searchInput" onChange={this.handleChange} />
+          <div class="input-group-append">
+            <span class="input-group-text">
+              <i class="fa fa-search"></i>
+            </span>
           </div>
+        </div>
         </form>
         <div id="applicationsContainer" class="card-columns">
           {this.state.applications.map((application) => {

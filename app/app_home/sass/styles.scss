@@ -9,3 +9,12 @@
         }
     }
 }
+
+#searchBar {
+    span.input-group-text {
+        background: $darkGrey;
+        i{
+           color: $white;
+        }
+    }
+}
