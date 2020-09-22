@@ -19,7 +19,7 @@ class EntitySort extends React.Component {
       employees: [{
         name: "John Doe",
         salary: 10000,
-        displaySalary: "£10,000"
+        displaySalary: "£10,000.00"
       }],
       counterLimit: 10,
       counter: 1,
@@ -152,8 +152,8 @@ class EntitySort extends React.Component {
                   <th>Name</th>
                   <th>
                       <span class="mr-2">Salary</span>
-                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark mr-2`} type="button" onClick={this.handleSortSalaryAsc}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
-                      <button class={`${this.state.disabledBtnClass} btn btn-sm btn-dark`} type="button" onClick={this.handleSortSalaryDesc}><i class="fa fa-fw fa-sort-amount-desc"></i></button>
+                      <button id="sortAsc" class={`${this.state.disabledBtnClass} btn btn-sm btn-dark mr-2`} type="button" onClick={this.handleSortSalaryAsc}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
+                      <button id="sortDesc" class={`${this.state.disabledBtnClass} btn btn-sm btn-dark`} type="button" onClick={this.handleSortSalaryDesc}><i class="fa fa-fw fa-sort-amount-desc"></i></button>
                   </th>
                   <th>Action</th>
                 </tr>
@@ -197,7 +197,7 @@ class EntitySort extends React.Component {
                   </div>
                 </div>
                 <div class="col-lg-2">
-                  <button type="submit" class={`btn btn-dark mb-2 ${this.state.disabledBtnClass} w-100`}>Add</button>
+                  <button id="addEmployee_submit" type="submit" class={`btn btn-dark mb-2 ${this.state.disabledBtnClass} w-100`}>Add</button>
                 </div>
               </div>
             </form>
