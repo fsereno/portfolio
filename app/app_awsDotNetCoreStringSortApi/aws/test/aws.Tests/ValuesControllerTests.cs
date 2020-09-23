@@ -19,7 +19,6 @@ namespace aws.Tests
     public class ValuesControllerTests
     {
 
-
         [Fact]
         public async Task TestGet()
         {
