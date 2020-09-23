@@ -28,10 +28,10 @@ namespace Utils
         {
             var characters = commaSeperatedString.Split(',');
             var charactersToSort = new List<string>();
-            var regex = new Regex("[a-zA-Z]");
 
             foreach (var character in characters)
             {
+                var regex = new Regex("[a-zA-Z]");
                 if (regex.IsMatch(character))
                 {
                     charactersToSort.Add(character);
