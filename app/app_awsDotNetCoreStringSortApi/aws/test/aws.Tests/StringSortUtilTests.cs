@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xunit;
 using Amazon.Lambda.Core;
@@ -84,6 +85,14 @@ namespace aws.Tests
             var commaSeperatedString = "1,2,3";
             var result = this._sut.SortAlpha(commaSeperatedString);
             Assert.Equal(string.Empty, result);
+        }
+
+        [Fact]
+        public void Test_Sort_Should_Return_Sorted_String()
+        {
+            var commaSeperatedString = "r,e,h,a,b,4,k,8,3,v,c,4,c,k,8";
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("3,4,4,8,8,a,b,c,c,e,h,k,k,r,v", result);
         }
     }
 }

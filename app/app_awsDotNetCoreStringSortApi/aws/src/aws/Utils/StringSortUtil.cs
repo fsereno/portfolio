@@ -7,6 +7,14 @@ namespace Utils
 {
     public class StringSortUtil : IStringSortUtil
     {
+        public string Sort(string commaSeperatedString)
+        {
+            var sortedNumeric = this.SortNumeric(commaSeperatedString);
+            var sortedAlpha = this.SortAlpha(commaSeperatedString);
+            var result = $"{sortedNumeric},{sortedAlpha}";
+            return result;
+        }
+
         public string SortNumeric(string commaSeperatedString)
         {
             var characters = commaSeperatedString.Split(',');
