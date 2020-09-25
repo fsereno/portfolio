@@ -27,7 +27,7 @@ namespace aws.Tests
         public void Test_SortNumeric_Should_Return_A_Type_Of_String()
         {
             var commaSeperatedString = "1,2,3";
-            var result = this._sut.SortNumeric(commaSeperatedString);
+            var result = this._sut.Sort(commaSeperatedString);
             Assert.IsType<string>(result);
         }
 
@@ -35,7 +35,7 @@ namespace aws.Tests
         public void Test_SortNumeric_Should_Return_The_Same_If_In_The_Correct_Order()
         {
             var commaSeperatedString = "1,2,3";
-            var result = this._sut.SortNumeric(commaSeperatedString);
+            var result = this._sut.Sort(commaSeperatedString);
             Assert.Equal("1,2,3", result);
         }
 
@@ -43,7 +43,7 @@ namespace aws.Tests
         public void Test_SortNumeric_Should_Return_A_Sorted_String()
         {
             var commaSeperatedString = "10,3,1,2";
-            var result = this._sut.SortNumeric(commaSeperatedString);
+            var result = this._sut.Sort(commaSeperatedString);
             Assert.Equal("1,2,3,10", result);
         }
 
@@ -51,15 +51,15 @@ namespace aws.Tests
         public void Test_SortNumeric_Should_Return_An_Empty_String()
         {
             var commaSeperatedString = "A,B,C";
-            var result = this._sut.SortNumeric(commaSeperatedString);
-            Assert.Equal(string.Empty, result);
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("A,B,C", result);
         }
 
         [Fact]
         public void Test_SortAlpha_Should_Return_A_Type_Of_String()
         {
             var commaSeperatedString = "A,B,C";
-            var result = this._sut.SortNumeric(commaSeperatedString);
+            var result = this._sut.Sort(commaSeperatedString);
             Assert.IsType<string>(result);
         }
 
@@ -67,7 +67,7 @@ namespace aws.Tests
         public void Test_SortAlpha_Should_Return_The_Same_If_In_The_Correct_Order()
         {
             var commaSeperatedString = "A,B,C";
-            var result = this._sut.SortAlpha(commaSeperatedString);
+            var result = this._sut.Sort(commaSeperatedString);
             Assert.Equal("A,B,C", result);
         }
 
@@ -75,7 +75,7 @@ namespace aws.Tests
         public void Test_SortAlpha_Should_Return_A_Sorted_String()
         {
             var commaSeperatedString = "C,B,A";
-            var result = this._sut.SortAlpha(commaSeperatedString);
+            var result = this._sut.Sort(commaSeperatedString);
             Assert.Equal("A,B,C", result);
         }
 
@@ -83,8 +83,8 @@ namespace aws.Tests
         public void Test_SortAlpha_Should_Return_An_Empty_String()
         {
             var commaSeperatedString = "1,2,3";
-            var result = this._sut.SortAlpha(commaSeperatedString);
-            Assert.Equal(string.Empty, result);
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("1,2,3", result);
         }
 
         [Fact]
