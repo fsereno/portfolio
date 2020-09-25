@@ -11,6 +11,7 @@ using Amazon.Lambda.APIGatewayEvents;
 using Newtonsoft.Json;
 using aws;
 using Interfaces;
+using Models;
 using Utils;
 
 namespace aws.Tests
@@ -125,6 +126,30 @@ namespace aws.Tests
             var values = new string[]{ "1,2,3", "4,5,6", "7,8,9" };
             var result = this._sut.Join(values);
             Assert.Equal("1,2,3,4,5,6,7,8,9", result);
+        }
+
+        [Fact]
+        public void Test_Split_At_Alpha_No_Numeric()
+        {
+            var value = "a";
+            var result = Regex.Split(value, "[a-zA-Z]");
+            Assert.Equal(string.Empty, result[0]);
+        }
+
+        [Fact]
+        public void Test_Split_At_Alpha_With_Numeric_Last()
+        {
+            var value = "a1";
+            var result = Regex.Split(value, "[a-zA-Z]");
+            Assert.Equal("1", result[1]);
+        }
+
+        [Fact]
+        public void Test_Split_At_Alpha_With_Numeric_First()
+        {
+            var value = "1a";
+            var result = Regex.Split(value, "[a-zA-Z]");
+            Assert.Equal("1", result[0]);
         }
     }
 }

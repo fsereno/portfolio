@@ -2,17 +2,37 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Interfaces;
+using Models;
 
 namespace Utils
 {
     public class StringSortUtil : IStringSortUtil
     {
+        private const string _alphaRegex = "[a-zA-Z]";
+        private const string _integerRegex = "[0-9]";
+
         public string Sort(string commaSeperatedString)
         {
             var sortedNumeric = this.Sort<int>(commaSeperatedString, AddIntegerToCollection);
             var sortedAlpha = this.Sort<string>(commaSeperatedString, AddStringToCollection);
+            var sortedAlphaNumeric = this.Sort<AlphaNumericItem>(commaSeperatedString, AddAlphaNumericItemToCollection);
             var values = new string[]{ sortedNumeric, sortedAlpha };
             var result = this.Join(values);
+            return result;
+        }
+
+        public string Sort<T>(string commaSeperatedString, Action<ValueTuple<string, List<T>>> addMethod)
+        {
+            var characters = commaSeperatedString.Split(',');
+            var charactersToSort = new List<T>();
+
+            foreach (var character in characters)
+            {
+                addMethod(new ValueTuple<string, List<T>>(character, charactersToSort));
+            }
+
+            charactersToSort.Sort();
+            var result = String.Join<T>(',', charactersToSort);
             return result;
         }
 
@@ -38,24 +58,9 @@ namespace Utils
             return result;
         }
 
-        public string Sort<T>(string commaSeperatedString, Action<ValueTuple<string, List<T>>> addMethod)
-        {
-            var characters = commaSeperatedString.Split(',');
-            var charactersToSort = new List<T>();
-
-            foreach (var character in characters)
-            {
-                addMethod(new ValueTuple<string, List<T>>(character, charactersToSort));
-            }
-
-            charactersToSort.Sort();
-            var result = String.Join<T>(',', charactersToSort);
-            return result;
-        }
-
         private void AddStringToCollection((string character, List<string> collection) request)
         {
-            var regex = new Regex("[a-zA-Z]");
+            var regex = new Regex(_alphaRegex);
             if (regex.IsMatch(request.character))
             {
                 request.collection.Add(request.character);
@@ -68,6 +73,22 @@ namespace Utils
              {
                  request.collection.Add(value);
              }
+        }
+
+        //a1
+        public void AddAlphaNumericItemToCollection((string character, List<AlphaNumericItem> collection) request)
+        {
+            var integerArray  = Regex.Split(request.character, _alphaRegex);
+            var alphaArray  = Regex.Split(request.character, _integerRegex);
+            int value = 0;
+            if (integerArray.Length > 1 && int.TryParse(integerArray[1], out value))
+            {
+                var item = new AlphaNumericItem() { Value = alphaArray[0], Index = value };
+                request.collection.Add(item);
+            } else {
+                var item = new AlphaNumericItem() { Value = request.character, Index = value };
+                request.collection.Add(item);
+            }
         }
     }
 }
