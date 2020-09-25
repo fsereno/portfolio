@@ -8,5 +8,7 @@ namespace Interfaces
        string Sort(string commaSeperatedString);
 
        string Sort<T>(string commaSeperatedString, Action<ValueTuple<string, List<T>>> addMethod);
+
+       string Join(string[] values);
    }
 }

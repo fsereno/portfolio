@@ -11,13 +11,29 @@ namespace Utils
         {
             var sortedNumeric = this.Sort<int>(commaSeperatedString, AddIntegerToCollection);
             var sortedAlpha = this.Sort<string>(commaSeperatedString, AddStringToCollection);
-            var result = sortedNumeric;
-            if (!String.IsNullOrEmpty(result) && !String.IsNullOrEmpty(sortedAlpha))
+            var values = new string[]{ sortedNumeric, sortedAlpha };
+            var result = this.Join(values);
+            return result;
+        }
+
+        public string Join(string[] values)
+        {
+            var result = string.Empty;
+
+            if (values?.Length == 0) {
+                return result;
+            }
+
+            foreach (var value in values)
             {
-                result = $"{result},{sortedAlpha}";
-            } else if(!String.IsNullOrEmpty(sortedAlpha))
-            {
-                result = sortedAlpha;
+                if (!String.IsNullOrEmpty(result) && !String.IsNullOrEmpty(value))
+                {
+                    result = $"{result},{value}";
+                }
+                else if(!String.IsNullOrEmpty(value))
+                {
+                    result = value;
+                }
             }
             return result;
         }

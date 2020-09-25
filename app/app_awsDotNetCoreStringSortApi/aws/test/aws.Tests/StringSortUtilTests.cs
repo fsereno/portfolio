@@ -94,5 +94,37 @@ namespace aws.Tests
             var result = this._sut.Sort(commaSeperatedString);
             Assert.Equal("3,4,4,8,8,a,b,c,c,e,h,k,k,r,v", result);
         }
+
+        [Fact]
+        public void Test_Join_Should_Return_Empty_String()
+        {
+            var values = new string[0];
+            var result = this._sut.Join(values);
+            Assert.Equal(string.Empty, result);
+        }
+
+        [Fact]
+        public void Test_Join_Should_Return_String_With_No_Comma_Seperator()
+        {
+            var values = new string[]{ "1,2,3" };
+            var result = this._sut.Join(values);
+            Assert.Equal("1,2,3", result);
+        }
+
+        [Fact]
+        public void Test_Join_Should_Return_String_With_Comma_Seperator()
+        {
+            var values = new string[]{ "1,2,3", "4,5,6" };
+            var result = this._sut.Join(values);
+            Assert.Equal("1,2,3,4,5,6", result);
+        }
+
+        [Fact]
+        public void Test_Join_Should_Return_String_With_Multiple_Comma_Seperators()
+        {
+            var values = new string[]{ "1,2,3", "4,5,6", "7,8,9" };
+            var result = this._sut.Join(values);
+            Assert.Equal("1,2,3,4,5,6,7,8,9", result);
+        }
     }
 }
