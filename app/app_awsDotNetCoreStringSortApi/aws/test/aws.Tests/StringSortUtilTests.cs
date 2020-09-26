@@ -151,5 +151,30 @@ namespace aws.Tests
             var result = Regex.Split(value, "[a-zA-Z]");
             Assert.Equal("1", result[0]);
         }
+
+        [Fact]
+        public void Test_AlphaNumeric_Padded_List()
+        {
+            var alphaNumericList = new List<string>()
+            {
+                "a10",
+                "a2",
+                "a1",
+                "c1",
+                "b",
+                "a",
+                "c11",
+                "1"
+            };
+
+            alphaNumericList.Sort();
+            var ordered = alphaNumericList.OrderBy( x => PadNumbers(x));
+            Assert.Equal("a", alphaNumericList[0]);
+        }
+
+        public static string PadNumbers(string input)
+        {
+            return Regex.Replace(input, "[0-9]+", match => match.Value.PadLeft(10, '0'));
+        }
     }
 }

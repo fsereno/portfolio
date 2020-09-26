@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -20,6 +22,22 @@ namespace Models
                 result = 1;
             }
             return result;
+        }
+
+        public class SortByValue : IComparer<AlphaNumericItem>
+        {
+            public int Compare(AlphaNumericItem next, AlphaNumericItem current)
+            {
+                return String.Compare(next.Value, current.Value);
+            }
+        }
+
+        public class SortByIndex : IComparer<AlphaNumericItem>
+        {
+            public int Compare(AlphaNumericItem next, AlphaNumericItem current)
+            {
+                return Decimal.Compare(next.Index, current.Index);
+            }
         }
     }
 }

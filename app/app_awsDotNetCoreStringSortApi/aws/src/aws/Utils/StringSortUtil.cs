@@ -15,7 +15,6 @@ namespace Utils
         {
             var sortedNumeric = this.Sort<int>(commaSeperatedString, AddIntegerToCollection);
             var sortedAlpha = this.Sort<string>(commaSeperatedString, AddStringToCollection);
-            var sortedAlphaNumeric = this.Sort<AlphaNumericItem>(commaSeperatedString, AddAlphaNumericItemToCollection);
             var values = new string[]{ sortedNumeric, sortedAlpha };
             var result = this.Join(values);
             return result;
@@ -76,7 +75,7 @@ namespace Utils
         }
 
         //a1
-        public void AddAlphaNumericItemToCollection((string character, List<AlphaNumericItem> collection) request)
+        /*public void AddAlphaNumericItemToCollection((string character, List<AlphaNumericItem> collection) request)
         {
             var integerArray  = Regex.Split(request.character, _alphaRegex);
             var alphaArray  = Regex.Split(request.character, _integerRegex);
@@ -89,6 +88,6 @@ namespace Utils
                 var item = new AlphaNumericItem() { Value = request.character, Index = value };
                 request.collection.Add(item);
             }
-        }
+        }*/
     }
 }
