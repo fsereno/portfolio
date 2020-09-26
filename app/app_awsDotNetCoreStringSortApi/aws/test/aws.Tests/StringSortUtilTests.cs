@@ -1,17 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Xunit;
-using Amazon.Lambda.Core;
-using Amazon.Lambda.TestUtilities;
-using Amazon.Lambda.APIGatewayEvents;
-using Newtonsoft.Json;
-using aws;
 using Interfaces;
-using Models;
 using Utils;
 
 namespace aws.Tests
@@ -25,156 +15,35 @@ namespace aws.Tests
         }
 
         [Fact]
-        public void Test_SortNumeric_Should_Return_A_Type_Of_String()
+        public void Test_Sort_Should_Return_A_Sorted_Alpha_String()
         {
-            var commaSeperatedString = "1,2,3";
-            var result = this._sut.Sort(commaSeperatedString);
-            Assert.IsType<string>(result);
-        }
-
-        [Fact]
-        public void Test_SortNumeric_Should_Return_The_Same_If_In_The_Correct_Order()
-        {
-            var commaSeperatedString = "1,2,3";
-            var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("1,2,3", result);
-        }
-
-        [Fact]
-        public void Test_SortNumeric_Should_Return_A_Sorted_String()
-        {
-            var commaSeperatedString = "10,3,1,2";
-            var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("1,2,3,10", result);
-        }
-
-        [Fact]
-        public void Test_SortNumeric_Should_Return_An_Empty_String()
-        {
-            var commaSeperatedString = "A,B,C";
+            var commaSeperatedString = "B,A,C";
             var result = this._sut.Sort(commaSeperatedString);
             Assert.Equal("A,B,C", result);
         }
 
         [Fact]
-        public void Test_SortAlpha_Should_Return_A_Type_Of_String()
+        public void Test_Sort_Should_Return_A_Sorted_Numeric_String()
         {
-            var commaSeperatedString = "A,B,C";
+            var commaSeperatedString = "2,3,1,4,10";
             var result = this._sut.Sort(commaSeperatedString);
-            Assert.IsType<string>(result);
+            Assert.Equal("1,2,3,4,10", result);
         }
 
         [Fact]
-        public void Test_SortAlpha_Should_Return_The_Same_If_In_The_Correct_Order()
+        public void Test_Sort_Should_Return_A_Sorted_AlphaNumeric_String()
         {
-            var commaSeperatedString = "A,B,C";
+            var commaSeperatedString = "a2,c3,1,4,b10";
             var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("A,B,C", result);
+            Assert.Equal("1,4,a2,b10,c3", result);
         }
 
         [Fact]
-        public void Test_SortAlpha_Should_Return_A_Sorted_String()
+        public void Test_Sort_Should_Return_A_Sorted_AlphaNumeric_String_Big_Numbers()
         {
-            var commaSeperatedString = "C,B,A";
+            var commaSeperatedString = "1000099882,c1000099881,1000081882a,a1,1000089881b";
             var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("A,B,C", result);
-        }
-
-        [Fact]
-        public void Test_SortAlpha_Should_Return_An_Empty_String()
-        {
-            var commaSeperatedString = "1,2,3";
-            var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("1,2,3", result);
-        }
-
-        [Fact]
-        public void Test_Sort_Should_Return_Sorted_String()
-        {
-            var commaSeperatedString = "r,e,h,a,b,4,k,8,3,v,c,4,c,k,8";
-            var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("3,4,4,8,8,a,b,c,c,e,h,k,k,r,v", result);
-        }
-
-        [Fact]
-        public void Test_Join_Should_Return_Empty_String()
-        {
-            var values = new string[0];
-            var result = this._sut.Join(values);
-            Assert.Equal(string.Empty, result);
-        }
-
-        [Fact]
-        public void Test_Join_Should_Return_String_With_No_Comma_Seperator()
-        {
-            var values = new string[]{ "1,2,3" };
-            var result = this._sut.Join(values);
-            Assert.Equal("1,2,3", result);
-        }
-
-        [Fact]
-        public void Test_Join_Should_Return_String_With_Comma_Seperator()
-        {
-            var values = new string[]{ "1,2,3", "4,5,6" };
-            var result = this._sut.Join(values);
-            Assert.Equal("1,2,3,4,5,6", result);
-        }
-
-        [Fact]
-        public void Test_Join_Should_Return_String_With_Multiple_Comma_Seperators()
-        {
-            var values = new string[]{ "1,2,3", "4,5,6", "7,8,9" };
-            var result = this._sut.Join(values);
-            Assert.Equal("1,2,3,4,5,6,7,8,9", result);
-        }
-
-        [Fact]
-        public void Test_Split_At_Alpha_No_Numeric()
-        {
-            var value = "a";
-            var result = Regex.Split(value, "[a-zA-Z]");
-            Assert.Equal(string.Empty, result[0]);
-        }
-
-        [Fact]
-        public void Test_Split_At_Alpha_With_Numeric_Last()
-        {
-            var value = "a1";
-            var result = Regex.Split(value, "[a-zA-Z]");
-            Assert.Equal("1", result[1]);
-        }
-
-        [Fact]
-        public void Test_Split_At_Alpha_With_Numeric_First()
-        {
-            var value = "1a";
-            var result = Regex.Split(value, "[a-zA-Z]");
-            Assert.Equal("1", result[0]);
-        }
-
-        [Fact]
-        public void Test_AlphaNumeric_Padded_List()
-        {
-            var alphaNumericList = new List<string>()
-            {
-                "a10",
-                "a2",
-                "a1",
-                "c1",
-                "b",
-                "a",
-                "c11",
-                "1"
-            };
-
-            alphaNumericList.Sort();
-            var ordered = alphaNumericList.OrderBy( x => PadNumbers(x));
-            Assert.Equal("a", alphaNumericList[0]);
-        }
-
-        public static string PadNumbers(string input)
-        {
-            return Regex.Replace(input, "[0-9]+", match => match.Value.PadLeft(10, '0'));
+            Assert.Equal("1000081882a,1000089881b,1000099882,a1,c1000099881", result);
         }
     }
 }

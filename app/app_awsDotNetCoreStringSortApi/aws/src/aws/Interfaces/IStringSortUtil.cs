@@ -7,8 +7,12 @@ namespace Interfaces
    {
        string Sort(string commaSeperatedString);
 
-       string Sort<T>(string commaSeperatedString, Action<ValueTuple<string, List<T>>> addMethod);
+       List<string> Sort(string commaSeperatedString, Action<ValueTuple<string, List<string>>> addMethod, Func<List<string>, List<string>> sortMethod);
 
-       string Join(string[] values);
+       string Join(List<string> sortedCharacters);
+
+       List<string> OrderAlphaNumeric(List<string> charactersToSort);
+
+       void AddStringToCollection((string character, List<string> collection) request);
    }
 }
