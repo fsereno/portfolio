@@ -83,7 +83,7 @@
             "compileJs": false
         },
         {
-            "name": "Find and Replace",
+            "name": "TypeScript Find and Replace",
             "subHeading": "A simple Find and Replace method",
             "description": "Written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all.",
             "folder": "findReplace",
@@ -106,7 +106,7 @@
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "folder": "awsDotNetCoreStringSortApi",
             "active": true,
-            "include": true,
+            "include": false,
             "compileJs": false,
             "masterTemplateDir": "master_react"
         },
@@ -147,7 +147,7 @@
             "compileJs": false
         },
         {
-            "name": "Percentage Calculator",
+            "name": "TypeScript Percentage Calculator",
             "subHeading": "A simple percentage calculator method",
             "description": "Written with TypeScript, Sass and Pug.",
             "folder": "percentageCalculator",
@@ -155,7 +155,7 @@
             "include": true
         },
         {
-            "name": "Un-Scrabbler Word Game",
+            "name": "TypeScript Un-Scrabbler Word Game",
             "subHeading": "A simple Scrabble Word Game, can you beat Unscrabbler?",
             "description": "Written with TypeScript, Sass and Pug.",
             "folder": "unscrabbler",
@@ -163,7 +163,7 @@
             "include": true
         },
         {
-            "name": "Random String Generator",
+            "name": "TypeScript Random String Generator",
             "subHeading": "A simple random generator",
             "description": "Generating a random string of A-B, 0-9 and a given length. Written with TypeScript, Sass and Pug.",
             "folder": "randomGenerator",
@@ -171,7 +171,7 @@
             "include": true
         },
         {
-            "name": "Dictionary Word Finder",
+            "name": "TypeScript Dictionary Word Finder",
             "subHeading": "A simple dictionary word lookup tool",
             "description": "Experimenting with a large index lookup search. Written with TypeScript, Sass and Pug.",
             "folder": "dictionaryFinder",

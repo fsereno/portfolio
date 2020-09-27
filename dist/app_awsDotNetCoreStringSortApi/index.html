@@ -7,13 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
     <title>[COMPANY_NAME]</title>
     <meta name="author" content="Fabio Sereno">
-    <!-- build:css ../css/vendor.css-->
-    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css">
-    <!-- endbuild-->
-    <!-- build:css css/styles.css-->
+    <link rel="stylesheet" href="../css/vendor.css">
     <link rel="stylesheet" href="css/styles.css">
-    <!-- endbuild-->
   </head>
   <body>
     <div class="container-fluid">
@@ -29,7 +24,7 @@
                     <div class="dropdown-divider"></div><a class=" dropdown-item" href="../app_home/index.html">Home<i class="fa fa-home ml-1"></i></a>
                   </div>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="https://github.com/fsereno/portfolio/tree/master/app/app_master" target="_blank">View on Github<i class="fa fa-github-square ml-2"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/fsereno/portfolio/tree/master/app/app_awsDotNetCoreStringSortApi" target="_blank">View on Github<i class="fa fa-github-square ml-2"></i></a></li>
                 <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/fabio-sereno-6a97b986/" target="_blank">Linkedin<i class="fa fa-linkedin ml-2"></i></a></li>
               </ul>
             </div>
@@ -38,42 +33,19 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <h2 class="display-4">Application master template</h2>
+          <h2 class="display-4">AWS .NET Core String Sorting API</h2>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <h5 class="font-italic"></h5>
-          <p class="text-muted">The template application.</p>
+          <h5 class="font-italic">A string sorting algorithm, taking a comma seperated list of alphanumerical values. First sorting numerically, then alphabetically</h5>
+          <p class="text-muted">Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.</p>
           <hr>
         </div>
       </div>
-      <div class="row splitter">
-        <div class="col-lg-12">
-          <h3>Result: <span id="result"></span></h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-3">
-          <form id="inputForm">
-            <div class="form-group">
-              <label for="input">Input:</label>
-              <input class="form-control" id="input" name="input" type="text" placeholder="Input..." required>
-            </div>
-            <button class="btn btn-primary" id="submit" type="submit">Submit</button>
-          </form>
-        </div>
-      </div>
+      <div id="result"></div>
     </div>
-    <!-- build:js ../js/vendor.js-->
-    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
-    <!-- endbuild-->
-    <!-- build:js js/app.js-->
+    <script src="../js/vendor.js"></script>
     <script src="js/app.js"></script>
-    <!-- endbuild-->
-    <!-- build:js js/vendor.js-->
-    <!-- endbuild-->
   </body>
 </html>
