@@ -43,7 +43,7 @@ namespace Utils
         {
             var result = string.Empty;
 
-            if (sortedCharacters?.Count == 0) {
+            if (sortedCharacters == null || sortedCharacters?.Count == 0) {
                 return result;
             }
 

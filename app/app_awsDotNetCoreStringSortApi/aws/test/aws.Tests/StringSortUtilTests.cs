@@ -45,5 +45,36 @@ namespace aws.Tests
             var result = this._sut.Sort(commaSeperatedString);
             Assert.Equal("1000081882a,1000089881b,1000099882,a1,c1000099881", result);
         }
+
+        [Fact]
+        public void Test_Join_Should_Return_String_Of_Single_Item()
+        {
+            var sortedCharacters = new List<string>(){ "A" };
+            var result = this._sut.Join(sortedCharacters);
+            Assert.Equal("A", result);
+        }
+
+        [Fact]
+        public void Test_Join_Should_Return_String_Of_Multiple_Items_Comma_Seperated()
+        {
+            var sortedCharacters = new List<string>(){ "A", "B", "C" };
+            var result = this._sut.Join(sortedCharacters);
+            Assert.Equal("A,B,C", result);
+        }
+
+        [Fact]
+        public void Test_Join_Should_Return_Empty_String_When_Collection_Is_Empty()
+        {
+            var sortedCharacters = new List<string>();
+            var result = this._sut.Join(sortedCharacters);
+            Assert.Equal(string.Empty, result);
+        }
+
+        [Fact]
+        public void Test_Join_Should_Return_Empty_String_When_Collection_Is_Null()
+        {
+            var result = this._sut.Join(null);
+            Assert.Equal(string.Empty, result);
+        }
     }
 }
