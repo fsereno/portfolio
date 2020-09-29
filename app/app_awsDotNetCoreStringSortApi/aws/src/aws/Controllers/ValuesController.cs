@@ -1,44 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Interfaces;
+using Models;
 
 namespace aws.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private IStringSortUtil _stringSortUtil { get; set; }
+        public ValuesController(IStringSortUtil stringSortUtil)
         {
-            return new string[] { "value1", "value2" };
+            this._stringSortUtil = stringSortUtil;
+        }
+        [HttpPost("sort")]
+        public SortResult Sort([FromBody] SortRequest request)
+        {
+            this.SetResponseHeaders();
+            var result = _stringSortUtil.Sort(request.CommaSeperatedString);
+            return new SortResult(){ Result = result };
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+        private void SetResponseHeaders() {
+            Response.Headers.Add("Access-Control-Allow-Methods", "POST");
+            Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token");
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
         }
     }
 }
