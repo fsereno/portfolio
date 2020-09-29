@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Models;
 
 namespace Interfaces
 {
@@ -7,12 +8,12 @@ namespace Interfaces
    {
        string Sort(string commaSeperatedString);
 
-       List<string> Sort(string commaSeperatedString, Action<ValueTuple<string, List<string>>> addMethod, Func<List<string>, List<string>> sortMethod);
+       List<SortItem> Sort(string commaSeperatedString, Action<ValueTuple<string, List<SortItem>>> addMethod, Func<List<SortItem>, List<SortItem>> sortMethod);
 
-       string Join(List<string> sortedCharacters);
+       string Join(List<SortItem> sortedCharacters);
 
-       List<string> OrderAlphaNumeric(List<string> charactersToSort);
+       List<SortItem> OrderBy(List<SortItem> itemsToSort);
 
-       void AddStringToCollection((string character, List<string> collection) request);
+       void AddStringToCollection((string group, List<SortItem> sortItems) request);
    }
 }
