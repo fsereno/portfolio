@@ -50,6 +50,30 @@ namespace aws.Tests
         }
 
         [Fact]
+        public void Test_Sort_Should_Sort_Complex_Names()
+        {
+            var commaSeperatedString = "ToDoList10,ToDoList1,ToDoListB,ToDoListA,ToDoList5";
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("ToDoList1,ToDoList5,ToDoList10,ToDoListA,ToDoListB", result);
+        }
+
+        [Fact]
+        public void Test_Sort_Should_Sort_File_Names_With_Extensions()
+        {
+            var commaSeperatedString = "ToDoList10.txt,ToDoList1.txt,ToDoListB.txt,ToDoListA.txt,ToDoList5.txt";
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("ToDoList1.txt,ToDoList5.txt,ToDoList10.txt,ToDoListA.txt,ToDoListB.txt", result);
+        }
+
+        [Fact]
+        public void Test_Sort_Should_Sort_File_Names_With_Special_Characters()
+        {
+            var commaSeperatedString = "ToDo_List-10.txt,ToDo_List-1.txt,ToDo_List-B.txt,ToDo_List-A.txt,ToDo_List-5.txt";
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("ToDo_List-1.txt,ToDo_List-5.txt,ToDo_List-10.txt,ToDo_List-A.txt,ToDo_List-B.txt", result);
+        }
+
+        [Fact]
         public void Test_Join_Should_Return_String_Of_Single_Item()
         {
             var sortedCharacters = new List<SortItem>(){ new SortItem() { Value = "A"} };

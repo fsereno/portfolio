@@ -9,15 +9,14 @@ namespace Utils
 {
     public class StringSortUtil : IStringSortUtil
     {
-        private const string _regex = "[a-zA-Z0-9]$";
-
         private const string _numericRegex = "[0-9]+";
+        private const string _alphaPadding = "#";
 
         public string Sort(string commaSeperatedString)
         {
             var sortedAlphaNumeric = this.Sort(
                     commaSeperatedString,
-                    AddStringToCollection,
+                    AddSortItemToCollection,
                     OrderBy);
             var result = this.Join(sortedAlphaNumeric);
             return result;
@@ -67,10 +66,10 @@ namespace Utils
             return result;
         }
 
-        public void AddStringToCollection((string group, List<SortItem> sortItems) request)
+        public void AddSortItemToCollection((string group, List<SortItem> sortItems) request)
         {
             var indexMatch = Regex.Match(request.group, _numericRegex);
-            var paddedValue = Regex.Replace(request.group, _numericRegex, "0");
+            var paddedValue = Regex.Replace(request.group, _numericRegex, _alphaPadding);
             request.sortItems.Add(new SortItem()
             {
                 Value = request.group,

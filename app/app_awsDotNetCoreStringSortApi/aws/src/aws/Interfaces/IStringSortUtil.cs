@@ -14,6 +14,6 @@ namespace Interfaces
 
        List<SortItem> OrderBy(List<SortItem> itemsToSort);
 
-       void AddStringToCollection((string group, List<SortItem> sortItems) request);
+       void AddSortItemToCollection((string group, List<SortItem> sortItems) request);
    }
 }
