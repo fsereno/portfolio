@@ -106,7 +106,7 @@
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "folder": "awsDotNetCoreStringSortApi",
             "active": true,
-            "include": false,
+            "include": true,
             "compileJs": false,
             "masterTemplateDir": "master_react"
         },
