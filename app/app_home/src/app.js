@@ -52,7 +52,7 @@ class ToDoListForm extends React.Component {
                         View app<i class="fa fa-eye ml-2"></i>
                     </a>
                     <a class="btn btn-dark mb-2"
-                      href={`${Config.repoRootUrl}/${Config.folderRoot}/${Config.prefix}${application.folder}`}
+                      href={`${Config.repoRootUrl}/${Config.folderRoot}${Config.prefix}${application.folder}`}
                       target="_blank">
                         View code<i class="fa fa-github-square ml-2"></i>
                     </a>

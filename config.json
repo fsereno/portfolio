@@ -185,6 +185,14 @@
             "folder": "koTypeScript",
             "active": true,
             "include": true
+        },
+        {
+            "name": "JS Coding Standards",
+            "subHeading": "A JavaScript Code Style Guide",
+            "description": "By Fabio Sereno",
+            "folder": "jsCodingStandards",
+            "active": true,
+            "include": true
         }
     ]
 }
