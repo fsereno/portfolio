@@ -116,5 +116,7 @@ namespace aws.Tests
             var result = this._sut.Sort(commaSeperatedString);
             Assert.Equal("1,4,10,1A,5A,10A,20A,A,A1,A5,B2,C", result);
         }
+
+        //Should sort 10,1,A1,2 as 1, 1A, 2, 10 ?
     }
 }
