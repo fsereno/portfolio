@@ -117,6 +117,25 @@ namespace aws.Tests
             Assert.Equal("1,4,10,1A,5A,10A,20A,A,A1,A5,B2,C", result);
         }
 
+        [Fact]
+        public void Test_Comparer()
+        {
+            var list = new List<SortItem>() 
+            {
+                new SortItem(){ PaddedValue = "C", Value = "C", Index = 0 },
+                new SortItem(){ PaddedValue = "A", Value = "A", Index = 0 },
+                new SortItem(){ PaddedValue = "", Value = "10", Index = 10 },
+                new SortItem(){ PaddedValue = "", Value = "1A", Index = 1 },
+                new SortItem(){ PaddedValue = "B", Value = "B", Index = 0 },
+                new SortItem(){ PaddedValue = "", Value = "2", Index = 2 },
+                new SortItem(){ PaddedValue = "", Value = "3", Index = 3 },
+                new SortItem(){ PaddedValue = "", Value = "1", Index = 1 },
+                new SortItem(){ PaddedValue = "B", Value = "B1", Index = 1 },
+            };
+
+            list.Sort(new SortItem.SortAlphaNumeric());
+            Assert.Equal(list.FirstOrDefault().Index, 1);
+        }
         //Should sort 10,1,A1,2 as 1, 1A, 2, 10 ?
     }
 }
