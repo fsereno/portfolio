@@ -16,14 +16,6 @@ namespace Models
         {
             public int Compare(SortItem a, SortItem b)
             {
-                /*this.compareTo(that)
-                returns
-                a negative int if this < that
-                0 if this == that
-                a positive int if this > that*/
-
-                // the problem is with 10 and 1A
-                // 10 should be less than 1A, need to go against the grain!
                 var alphaResult = 0;
                 var outcome = 0;
 
@@ -37,8 +29,7 @@ namespace Models
                 {
                     outcome = 1;
                 }
-
-                if (valueAFirstCharIsInt && !valueBFirstCharIsInt) // this may not be needed
+                else if (valueAFirstCharIsInt && !valueBFirstCharIsInt) // this may not be needed
                 {
                     outcome = -1;
                 }
@@ -50,20 +41,19 @@ namespace Models
 
                 var digitChunkA = new string(valueA.Where( x => char.IsDigit(x)).ToArray());
                 var digitChunkB = new string(valueB.Where( x => char.IsDigit(x)).ToArray());
-
-                var integersA = String.IsNullOrEmpty(digitChunkA) ? 0 : int.Parse(digitChunkA);
-                var integersB = String.IsNullOrEmpty(digitChunkB) ? 0 : int.Parse(digitChunkB);
-
                 var alphaChunkA = new string(valueA.Where( x => !char.IsDigit(x)).ToArray());
                 var alphaChunkB = new string(valueB.Where( x => !char.IsDigit(x)).ToArray());
 
+                var integersA = int.TryParse(digitChunkA, out var parsedIntegersA) ? parsedIntegersA : 0;
+                var integersB = int.TryParse(digitChunkB, out var parsedIntegersB) ? parsedIntegersB : 0;
                 var intResult = integersA.CompareTo(integersB);
 
-                if (!string.IsNullOrEmpty(alphaChunkA) && string.IsNullOrEmpty(alphaChunkB))
+                if (string.IsNullOrEmpty(alphaChunkA) || string.IsNullOrEmpty(alphaChunkB))
                 {
                     outcome = intResult;
                 }
-                else if(string.IsNullOrEmpty(alphaChunkA) && !string.IsNullOrEmpty(alphaChunkB)) // this may not be needed
+
+                if (valueA.Substring(0, valueA.IndexOf(digitChunkA)) == valueB.Substring(0, valueB.IndexOf(digitChunkB)))
                 {
                     outcome = intResult;
                 }

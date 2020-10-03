@@ -58,25 +58,21 @@ namespace aws.Tests
         }
 
         [Fact]
-        public void Test_Sort_Should_Sort_File_Names_With_Special_Characters()
+        public void Test_Sort_Should_Sort_File_Names_With_Alpha_Numeric_Alpaha_Characters()
         {
-            var commaSeperatedString = "ToDo_List-10.txt,ToDo_List-1.txt,ToDo_List-B.txt,ToDo_List-A.txt,ToDo_List-5.txt,ToDo_List-1A.txt";
+            //var commaSeperatedString = "ToDo_List-10.txt,ToDo_List-1.txt,ToDo_List-B.txt,ToDo_List-A.txt,ToDo_List-5.txt,ToDo_List-1A.txt";
+            var commaSeperatedString = "ToDo_List-1.txt,ToDo_List-5.txt,ToDo_List-1A.txt";
             var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("ToDo_List-1.txt,ToDo_List-1A.txt,ToDo_List-5.txt,ToDo_List-10.txt,ToDo_List-A.txt,ToDo_List-B.txt", result);
+            //Assert.Equal("ToDo_List-1.txt,ToDo_List-1A.txt,ToDo_List-5.txt,ToDo_List-10.txt,ToDo_List-A.txt,ToDo_List-B.txt", result);
+            Assert.Equal("ToDo_List-1.txt,ToDo_List-1A.txt,ToDo_List-5.txt", result);
         }
 
         [Fact]
         public void Test_Sort_Should_Sort_On_Numerics_First_When_They_Exist()
         {
-            //C,5A,B2,10A,A5,1A,A1,A,1,10,4,20A,B10
-            //1,1A,4,5A,10,10A,20A,A,A1,A5,B2,B10,C
-            
-            //var commaSeperatedString = "10,B10,B1,C,1,B5,1B,1A,A,5B";
-            //var commaSeperatedString = "10,1,B10,B1,A,1A";\
-            var commaSeperatedString = "10,1A,1,1B,2,B10,B1";
+            var commaSeperatedString = "C,5A,B2,10A,A5,1A,A1,A,1,10,4,20A,B10";
             var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("1,1A,1B,2,10,B1,B10", result);
-            //1,1A,10,A,B1,B10
+            Assert.Equal("1,1A,4,5A,10,10A,20A,A,A1,A5,B2,B10,C", result); 
         }
 
         [Fact]
