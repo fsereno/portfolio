@@ -42,14 +42,6 @@ namespace aws.Tests
         }
 
         [Fact]
-        public void Test_Sort_Should_Return_A_Sorted_AlphaNumeric_String_Big_Numbers()
-        {
-            var commaSeperatedString = "1000099882,c1000099881,1000081882a,a1,1000089881b,1000099883";
-            var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("1000099882,1000099883,1000081882a,1000089881b,a1,c1000099881", result);
-        }
-
-        [Fact]
         public void Test_Sort_Should_Sort_Complex_Names()
         {
             var commaSeperatedString = "ToDoList10,ToDoList1,ToDoListB,ToDoListA,ToDoList5";
@@ -81,9 +73,9 @@ namespace aws.Tests
             
             //var commaSeperatedString = "10,B10,B1,C,1,B5,1B,1A,A,5B";
             //var commaSeperatedString = "10,1,B10,B1,A,1A";\
-            var commaSeperatedString = "10,1A";
+            var commaSeperatedString = "10,1A,1,1B,2,B10,B1";
             var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("1A,10", result);
+            Assert.Equal("1,1A,1B,2,10,B1,B10", result);
             //1,1A,10,A,B1,B10
         }
 

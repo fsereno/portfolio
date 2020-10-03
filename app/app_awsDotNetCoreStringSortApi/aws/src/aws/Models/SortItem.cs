@@ -24,34 +24,51 @@ namespace Models
 
                 // the problem is with 10 and 1A
                 // 10 should be less than 1A, need to go against the grain!
+                var alphaResult = 0;
+                var outcome = 0;
 
                 var valueA = a.Value;
-                var valueB = b.Value; 
+                var valueB = b.Value;
+
+                var valueAFirstCharIsInt = char.IsDigit(valueA[0]);
+                var valueBFirstCharIsInt = char.IsDigit(valueB[0]);
+
+                if (!valueAFirstCharIsInt && valueBFirstCharIsInt)
+                {
+                    outcome = 1;
+                }
+
+                if (valueAFirstCharIsInt && !valueBFirstCharIsInt) // this may not be needed
+                {
+                    outcome = -1;
+                }
+
+                if (outcome != 0)
+                {
+                    return outcome;
+                }
 
                 var digitChunkA = new string(valueA.Where( x => char.IsDigit(x)).ToArray());
                 var digitChunkB = new string(valueB.Where( x => char.IsDigit(x)).ToArray());
 
-                var integersA = String.IsNullOrEmpty(digitChunkA) ? int.MaxValue : int.Parse(digitChunkA);
-                var integersB = String.IsNullOrEmpty(digitChunkB) ? int.MaxValue : int.Parse(digitChunkB);
+                var integersA = String.IsNullOrEmpty(digitChunkA) ? 0 : int.Parse(digitChunkA);
+                var integersB = String.IsNullOrEmpty(digitChunkB) ? 0 : int.Parse(digitChunkB);
 
                 var alphaChunkA = new string(valueA.Where( x => !char.IsDigit(x)).ToArray());
                 var alphaChunkB = new string(valueB.Where( x => !char.IsDigit(x)).ToArray());
 
                 var intResult = integersA.CompareTo(integersB);
 
-                var alphaResult = 0;
-                var outcome = 0;
-
                 if (!string.IsNullOrEmpty(alphaChunkA) && string.IsNullOrEmpty(alphaChunkB))
                 {
-                    alphaResult =  1;
+                    outcome = intResult;
                 }
-                else if(string.IsNullOrEmpty(alphaChunkA) && !string.IsNullOrEmpty(alphaChunkB))
+                else if(string.IsNullOrEmpty(alphaChunkA) && !string.IsNullOrEmpty(alphaChunkB)) // this may not be needed
                 {
-                    alphaResult =  -1;
+                    outcome = intResult;
                 }
 
-                if (alphaResult == 0)
+                if (outcome == 0)
                 {
                     alphaResult = alphaChunkA.CompareTo(alphaChunkB);
                 }
@@ -68,7 +85,6 @@ namespace Models
                 {
                     outcome = alphaResult;
                 }
-
                 return outcome;
             }
         }
