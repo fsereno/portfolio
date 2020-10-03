@@ -25,7 +25,7 @@ namespace Utils
         public List<SortItem> Sort(
                 string commaSeperatedString,
                 Action<ValueTuple<string, List<SortItem>>> addMethod,
-                Func<List<SortItem>, List<SortItem>> sortMethod)
+                Action<List<SortItem>> sortMethod)
         {
             var itemsToSort = new List<SortItem>();
             if (String.IsNullOrEmpty(commaSeperatedString))
@@ -40,8 +40,8 @@ namespace Utils
                 addMethod(new ValueTuple<string, List<SortItem>>(group, itemsToSort));
             }
 
-            var result = sortMethod(itemsToSort);
-            return result;
+            sortMethod(itemsToSort);
+            return itemsToSort;
         }
 
         public string Join(List<SortItem> sortedCharacters)
@@ -68,23 +68,14 @@ namespace Utils
 
         public void AddSortItemToCollection((string group, List<SortItem> sortItems) request)
         {
-            var indexMatch = Regex.Match(request.group, _numericRegex);
-            var paddedValue = Regex.Replace(request.group, _numericRegex, _alphaPadding);
-            request.sortItems.Add(new SortItem()
-            {
-                Value = request.group,
-                PaddedValue = paddedValue,
-                Index = int.TryParse(indexMatch.Value, out var index) ? index : 0
-            });
+            request.sortItems.Add(new SortItem(request.group));
         }
 
-        public List<SortItem> OrderBy(List<SortItem> itemsToSort)
+        public void OrderBy(List<SortItem> itemsToSort)
         {
-            if (itemsToSort == null) {
-                return new List<SortItem>();
-            }
-            var result = itemsToSort.OrderBy(x => x.PaddedValue).ThenBy( x => x.Index);
-            return result.ToList();
+            itemsToSort?.Sort(new SortItem.SortAlphaNumeric());
+            //var result = itemsToSort.OrderBy(x => x.PaddedValue).ThenBy( x => x.Index);
+            //return result.ToList();
         }
     }
 }

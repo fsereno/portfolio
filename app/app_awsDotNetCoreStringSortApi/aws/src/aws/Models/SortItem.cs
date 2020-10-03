@@ -1,40 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Models
 {
     public class SortItem
     {
-        public SortItem()
+        public SortItem(string value = "")
         {
-            this.Value = string.Empty;
-            this.PaddedValue = string.Empty;
-            this.Index = 0;
+            this.Value = value;
         }
         public string Value { get; set; }
-        public string PaddedValue { get; set; }
-
-        public int Index { get; set; }
 
         public class SortAlphaNumeric : IComparer<SortItem>
         {
-            public int Compare(SortItem current, SortItem next)
+            public int Compare(SortItem a, SortItem b)
             {
                 /*this.compareTo(that)
                 returns
-
                 a negative int if this < that
                 0 if this == that
                 a positive int if this > that*/
 
-                var result = current.PaddedValue.CompareTo(next.PaddedValue);
+                // the problem is with 10 and 1A
+                // 10 should be less than 1A, need to go against the grain!
 
-                if (result == 0)
+                var valueA = a.Value;
+                var valueB = b.Value; 
+
+                var digitChunkA = new string(valueA.Where( x => char.IsDigit(x)).ToArray());
+                var digitChunkB = new string(valueB.Where( x => char.IsDigit(x)).ToArray());
+
+                var integersA = String.IsNullOrEmpty(digitChunkA) ? int.MaxValue : int.Parse(digitChunkA);
+                var integersB = String.IsNullOrEmpty(digitChunkB) ? int.MaxValue : int.Parse(digitChunkB);
+
+                var alphaChunkA = new string(valueA.Where( x => !char.IsDigit(x)).ToArray());
+                var alphaChunkB = new string(valueB.Where( x => !char.IsDigit(x)).ToArray());
+
+                var intResult = integersA.CompareTo(integersB);
+
+                var alphaResult = 0;
+                var outcome = 0;
+
+                if (!string.IsNullOrEmpty(alphaChunkA) && string.IsNullOrEmpty(alphaChunkB))
                 {
-                    result = current.Index.CompareTo(next.Index);
+                    alphaResult =  1;
+                }
+                else if(string.IsNullOrEmpty(alphaChunkA) && !string.IsNullOrEmpty(alphaChunkB))
+                {
+                    alphaResult =  -1;
                 }
 
-                return result;
+                if (alphaResult == 0)
+                {
+                    alphaResult = alphaChunkA.CompareTo(alphaChunkB);
+                }
+
+                if (alphaResult != 0)
+                {
+                    outcome = alphaResult;
+                }
+                else if (alphaResult == 0 && intResult != 0)
+                {
+                    outcome = intResult;
+                }
+                else if (intResult == 0 && alphaResult != 0)
+                {
+                    outcome = alphaResult;
+                }
+
+                return outcome;
             }
         }
     }

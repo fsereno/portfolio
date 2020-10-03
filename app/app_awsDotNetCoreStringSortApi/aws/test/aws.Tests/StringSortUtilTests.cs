@@ -68,15 +68,37 @@ namespace aws.Tests
         [Fact]
         public void Test_Sort_Should_Sort_File_Names_With_Special_Characters()
         {
-            var commaSeperatedString = "ToDo_List-10.txt,ToDo_List-1.txt,ToDo_List-B.txt,ToDo_List-A.txt,ToDo_List-5.txt";
+            var commaSeperatedString = "ToDo_List-10.txt,ToDo_List-1.txt,ToDo_List-B.txt,ToDo_List-A.txt,ToDo_List-5.txt,ToDo_List-1A.txt";
             var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("ToDo_List-1.txt,ToDo_List-5.txt,ToDo_List-10.txt,ToDo_List-A.txt,ToDo_List-B.txt", result);
+            Assert.Equal("ToDo_List-1.txt,ToDo_List-1A.txt,ToDo_List-5.txt,ToDo_List-10.txt,ToDo_List-A.txt,ToDo_List-B.txt", result);
+        }
+
+        [Fact]
+        public void Test_Sort_Should_Sort_On_Numerics_First_When_They_Exist()
+        {
+            //C,5A,B2,10A,A5,1A,A1,A,1,10,4,20A,B10
+            //1,1A,4,5A,10,10A,20A,A,A1,A5,B2,B10,C
+            
+            //var commaSeperatedString = "10,B10,B1,C,1,B5,1B,1A,A,5B";
+            //var commaSeperatedString = "10,1,B10,B1,A,1A";\
+            var commaSeperatedString = "10,1A";
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("1A,10", result);
+            //1,1A,10,A,B1,B10
+        }
+
+        [Fact]
+        public void Test_Comparer()
+        {
+            var commaSeperatedString = "C,A,10,ToDo_List-11,1A,B,ToDo_List-1,2,Basket-2,3,1,0,B1,0-Version-Documents,ToDo_List-10";
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("0,0-Version-Documents,1,1A,2,3,10,A,B,B1,Basket-2,C,ToDo_List-1,ToDo_List-10,ToDo_List-11", result);
         }
 
         [Fact]
         public void Test_Join_Should_Return_String_Of_Single_Item()
         {
-            var sortedCharacters = new List<SortItem>(){ new SortItem() { Value = "A"} };
+            var sortedCharacters = new List<SortItem>(){ new SortItem("A") };
             var result = this._sut.Join(sortedCharacters);
             Assert.Equal("A", result);
         }
@@ -86,9 +108,9 @@ namespace aws.Tests
         {
             var sortedCharacters = new List<SortItem>()
             {
-                new SortItem() { Value = "A"},
-                new SortItem() { Value = "B"},
-                new SortItem() { Value = "C"}
+                new SortItem("A"),
+                new SortItem("B"),
+                new SortItem("C")
             };
             var result = this._sut.Join(sortedCharacters);
             Assert.Equal("A,B,C", result);
@@ -108,34 +130,5 @@ namespace aws.Tests
             var result = this._sut.Join(null);
             Assert.Equal(string.Empty, result);
         }
-
-        [Fact]
-        public void Test_Item_Sort()
-        {
-            var commaSeperatedString = "C,5A,B2,10A,A5,1A,A1,A,1,10,4,20A";
-            var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("1,4,10,1A,5A,10A,20A,A,A1,A5,B2,C", result);
-        }
-
-        [Fact]
-        public void Test_Comparer()
-        {
-            var list = new List<SortItem>() 
-            {
-                new SortItem(){ PaddedValue = "C", Value = "C", Index = 0 },
-                new SortItem(){ PaddedValue = "A", Value = "A", Index = 0 },
-                new SortItem(){ PaddedValue = "", Value = "10", Index = 10 },
-                new SortItem(){ PaddedValue = "", Value = "1A", Index = 1 },
-                new SortItem(){ PaddedValue = "B", Value = "B", Index = 0 },
-                new SortItem(){ PaddedValue = "", Value = "2", Index = 2 },
-                new SortItem(){ PaddedValue = "", Value = "3", Index = 3 },
-                new SortItem(){ PaddedValue = "", Value = "1", Index = 1 },
-                new SortItem(){ PaddedValue = "B", Value = "B1", Index = 1 },
-            };
-
-            list.Sort(new SortItem.SortAlphaNumeric());
-            Assert.Equal(list.FirstOrDefault().Index, 1);
-        }
-        //Should sort 10,1,A1,2 as 1, 1A, 2, 10 ?
     }
 }
