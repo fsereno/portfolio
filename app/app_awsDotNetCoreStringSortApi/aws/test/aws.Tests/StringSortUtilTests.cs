@@ -61,10 +61,10 @@ namespace aws.Tests
         public void Test_Sort_Should_Sort_File_Names_With_Alpha_Numeric_Alpaha_Characters()
         {
             //var commaSeperatedString = "ToDo_List-10.txt,ToDo_List-1.txt,ToDo_List-B.txt,ToDo_List-A.txt,ToDo_List-5.txt,ToDo_List-1A.txt";
-            var commaSeperatedString = "ToDo_List-1.txt,ToDo_List-5.txt,ToDo_List-1A.txt";
+            var commaSeperatedString = "ToDo_List-A.txt,ToDo_List-1.txt,ToDo_List-5.txt,ToDo_List-1A.txt";
             var result = this._sut.Sort(commaSeperatedString);
             //Assert.Equal("ToDo_List-1.txt,ToDo_List-1A.txt,ToDo_List-5.txt,ToDo_List-10.txt,ToDo_List-A.txt,ToDo_List-B.txt", result);
-            Assert.Equal("ToDo_List-1.txt,ToDo_List-1A.txt,ToDo_List-5.txt", result);
+            Assert.Equal("ToDo_List-1.txt,ToDo_List-1A.txt,ToDo_List-5.txt,ToDo_List-A.txt", result);
         }
 
         [Fact]

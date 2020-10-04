@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Models
 {
@@ -22,7 +23,30 @@ namespace Models
                 var valueA = a.Value;
                 var valueB = b.Value;
 
-                var valueAFirstCharIsInt = char.IsDigit(valueA[0]);
+                /*if (valueA == valueB)
+                {
+                    return 0;
+                }*/
+
+                var numericArrayA = Regex.Split(valueA, "([0-9]+)");
+                var numericArrayB = Regex.Split(valueB, "([0-9]+)");
+
+                for (var i = 0; i < numericArrayA.Length && i < numericArrayB.Length; i++)
+                {
+                    if (numericArrayA[i] != numericArrayB[i])
+                    {
+                        int x, y;
+                        if (!int.TryParse(numericArrayA[i], out x))
+                            return numericArrayA[i].CompareTo(numericArrayB[i]);
+
+                        if (!int.TryParse(numericArrayB[i], out y))
+                            return numericArrayA[i].CompareTo(numericArrayB[i]);
+
+                        return x.CompareTo(y);
+                    }
+                }
+
+                /*var valueAFirstCharIsInt = char.IsDigit(valueA[0]);
                 var valueBFirstCharIsInt = char.IsDigit(valueB[0]);
 
                 if (!valueAFirstCharIsInt && valueBFirstCharIsInt)
@@ -74,7 +98,7 @@ namespace Models
                 else if (intResult == 0 && alphaResult != 0)
                 {
                     outcome = alphaResult;
-                }
+                }*/
                 return outcome;
             }
         }
