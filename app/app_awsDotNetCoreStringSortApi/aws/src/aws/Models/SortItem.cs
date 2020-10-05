@@ -18,7 +18,7 @@ namespace Models
             public int Compare(SortItem a, SortItem b)
             {
                 var outcome = 0;
-    
+
                 if (a.Value == b.Value)
                 {
                     return 0;
@@ -36,18 +36,23 @@ namespace Models
                         if (!int.TryParse(chunkA[i], out x))
                         {
                             outcome = chunkA[i].CompareTo(chunkB[i]);
-                            return outcome;
+                            break;
                         }
 
                         if (!int.TryParse(chunkB[i], out y))
                         {
                             outcome = chunkA[i].CompareTo(chunkB[i]);
-                            return outcome;
+                            break;
                         }
 
                         outcome = x.CompareTo(y);
-                        return outcome;
+                        break;
                     }
+                }
+
+                if (outcome != 0)
+                {
+                    return outcome;
                 }
 
                 if (chunkA.Length > chunkB.Length)
