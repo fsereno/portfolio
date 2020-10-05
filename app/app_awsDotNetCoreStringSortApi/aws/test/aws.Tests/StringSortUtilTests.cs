@@ -60,11 +60,9 @@ namespace aws.Tests
         [Fact]
         public void Test_Sort_Should_Sort_File_Names_With_Alpha_Numeric_Alpaha_Characters()
         {
-            //var commaSeperatedString = "ToDo_List-10.txt,ToDo_List-1.txt,ToDo_List-B.txt,ToDo_List-A.txt,ToDo_List-5.txt,ToDo_List-1A.txt";
-            var commaSeperatedString = "ToDo_List-A.txt,ToDo_List-1.txt,ToDo_List-5.txt,ToDo_List-1A.txt";
+            var commaSeperatedString = "ToDo_List-10.txt,ToDo_List-1.txt,ToDo_List-B.txt,ToDo_List-A.txt,ToDo_List-5.txt,ToDo_List-1A.txt";
             var result = this._sut.Sort(commaSeperatedString);
-            //Assert.Equal("ToDo_List-1.txt,ToDo_List-1A.txt,ToDo_List-5.txt,ToDo_List-10.txt,ToDo_List-A.txt,ToDo_List-B.txt", result);
-            Assert.Equal("ToDo_List-1.txt,ToDo_List-1A.txt,ToDo_List-5.txt,ToDo_List-A.txt", result);
+            Assert.Equal("ToDo_List-1.txt,ToDo_List-1A.txt,ToDo_List-5.txt,ToDo_List-10.txt,ToDo_List-A.txt,ToDo_List-B.txt", result);
         }
 
         [Fact]
@@ -72,7 +70,7 @@ namespace aws.Tests
         {
             var commaSeperatedString = "C,5A,B2,10A,A5,1A,A1,A,1,10,4,20A,B10";
             var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("1,1A,4,5A,10,10A,20A,A,A1,A5,B2,B10,C", result); 
+            Assert.Equal("1,1A,4,5A,10,10A,20A,A,A1,A5,B2,B10,C", result);
         }
 
         [Fact]

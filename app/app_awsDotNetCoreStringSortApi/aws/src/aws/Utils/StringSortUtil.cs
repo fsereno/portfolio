@@ -74,8 +74,6 @@ namespace Utils
         public void OrderBy(List<SortItem> itemsToSort)
         {
             itemsToSort?.Sort(new SortItem.SortAlphaNumeric());
-            //var result = itemsToSort.OrderBy(x => x.PaddedValue).ThenBy( x => x.Index);
-            //return result.ToList();
         }
     }
 }

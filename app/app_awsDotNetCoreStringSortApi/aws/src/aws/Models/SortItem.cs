@@ -17,88 +17,47 @@ namespace Models
         {
             public int Compare(SortItem a, SortItem b)
             {
-                var alphaResult = 0;
                 var outcome = 0;
-
-                var valueA = a.Value;
-                var valueB = b.Value;
-
-                /*if (valueA == valueB)
+    
+                if (a.Value == b.Value)
                 {
                     return 0;
-                }*/
+                }
 
-                var numericArrayA = Regex.Split(valueA, "([0-9]+)");
-                var numericArrayB = Regex.Split(valueB, "([0-9]+)");
+                var chunkA = Regex.Split(a.Value, "([0-9]+)");
+                var chunkB = Regex.Split(b.Value, "([0-9]+)");
 
-                for (var i = 0; i < numericArrayA.Length && i < numericArrayB.Length; i++)
+                for (var i = 0; i < chunkA.Length && i < chunkB.Length; i++)
                 {
-                    if (numericArrayA[i] != numericArrayB[i])
+                    if (chunkA[i] != chunkB[i])
                     {
-                        int x, y;
-                        if (!int.TryParse(numericArrayA[i], out x))
-                            return numericArrayA[i].CompareTo(numericArrayB[i]);
+                        var x = 0;
+                        var y = 0;
+                        if (!int.TryParse(chunkA[i], out x))
+                        {
+                            outcome = chunkA[i].CompareTo(chunkB[i]);
+                            return outcome;
+                        }
 
-                        if (!int.TryParse(numericArrayB[i], out y))
-                            return numericArrayA[i].CompareTo(numericArrayB[i]);
+                        if (!int.TryParse(chunkB[i], out y))
+                        {
+                            outcome = chunkA[i].CompareTo(chunkB[i]);
+                            return outcome;
+                        }
 
-                        return x.CompareTo(y);
+                        outcome = x.CompareTo(y);
+                        return outcome;
                     }
                 }
 
-                /*var valueAFirstCharIsInt = char.IsDigit(valueA[0]);
-                var valueBFirstCharIsInt = char.IsDigit(valueB[0]);
-
-                if (!valueAFirstCharIsInt && valueBFirstCharIsInt)
+                if (chunkA.Length > chunkB.Length)
                 {
                     outcome = 1;
                 }
-                else if (valueAFirstCharIsInt && !valueBFirstCharIsInt) // this may not be needed
+                else if (chunkA.Length < chunkB.Length)
                 {
                     outcome = -1;
                 }
-
-                if (outcome != 0)
-                {
-                    return outcome;
-                }
-
-                var digitChunkA = new string(valueA.Where( x => char.IsDigit(x)).ToArray());
-                var digitChunkB = new string(valueB.Where( x => char.IsDigit(x)).ToArray());
-                var alphaChunkA = new string(valueA.Where( x => !char.IsDigit(x)).ToArray());
-                var alphaChunkB = new string(valueB.Where( x => !char.IsDigit(x)).ToArray());
-
-                var integersA = int.TryParse(digitChunkA, out var parsedIntegersA) ? parsedIntegersA : 0;
-                var integersB = int.TryParse(digitChunkB, out var parsedIntegersB) ? parsedIntegersB : 0;
-                var intResult = integersA.CompareTo(integersB);
-
-                if (string.IsNullOrEmpty(alphaChunkA) || string.IsNullOrEmpty(alphaChunkB))
-                {
-                    outcome = intResult;
-                }
-
-                if (valueA.Substring(0, valueA.IndexOf(digitChunkA)) == valueB.Substring(0, valueB.IndexOf(digitChunkB)))
-                {
-                    outcome = intResult;
-                }
-
-                if (outcome == 0)
-                {
-                    alphaResult = alphaChunkA.CompareTo(alphaChunkB);
-                }
-
-                if (alphaResult != 0)
-                {
-                    outcome = alphaResult;
-                }
-                else if (alphaResult == 0 && intResult != 0)
-                {
-                    outcome = intResult;
-                }
-                else if (intResult == 0 && alphaResult != 0)
-                {
-                    outcome = alphaResult;
-                }*/
                 return outcome;
             }
         }
