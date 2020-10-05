@@ -74,11 +74,19 @@ namespace aws.Tests
         }
 
         [Fact]
-        public void Test_Comparer()
+        public void Test_Sort_Should_Manage_With_Mixed_Formats()
         {
             var commaSeperatedString = "C,A,10,ToDo_List-11,1A,B,ToDo_List-1,2,Basket-2,3,1,0,B1,0-Version-Documents,ToDo_List-10";
             var result = this._sut.Sort(commaSeperatedString);
             Assert.Equal("0,0-Version-Documents,1,1A,2,3,10,A,B,B1,Basket-2,C,ToDo_List-1,ToDo_List-10,ToDo_List-11", result);
+        }
+
+        [Fact]
+        public void Test_Sort_Should_Manage_With_Multi_Numerical_Values()
+        {
+            var commaSeperatedString = "document_1A1.txt,document_1A2.txt,document_A.txt,document_1A.txt";
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("document_1A.txt,document_1A1.txt,document_1A2.txt,document_A.txt", result);
         }
 
         [Fact]

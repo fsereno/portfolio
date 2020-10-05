@@ -13,10 +13,11 @@ namespace Models
         }
         public string Value { get; set; }
 
-        public class SortAlphaNumeric : IComparer<SortItem>
+        public class NaturalSorter : IComparer<SortItem>
         {
             public int Compare(SortItem a, SortItem b)
             {
+                const string _numericRegex = "([0-9]+)";
                 var outcome = 0;
 
                 if (a.Value == b.Value)
@@ -24,35 +25,28 @@ namespace Models
                     return 0;
                 }
 
-                var chunkA = Regex.Split(a.Value, "([0-9]+)");
-                var chunkB = Regex.Split(b.Value, "([0-9]+)");
+                var chunkA = Regex.Split(a.Value, _numericRegex);
+                var chunkB = Regex.Split(b.Value, _numericRegex);
 
                 for (var i = 0; i < chunkA.Length && i < chunkB.Length; i++)
                 {
-                    if (chunkA[i] != chunkB[i])
+                    var itemA = chunkA[i];
+                    var itemB = chunkB[i];
+                    if (itemA != itemB)
                     {
-                        var x = 0;
-                        var y = 0;
-                        if (!int.TryParse(chunkA[i], out x))
-                        {
-                            outcome = chunkA[i].CompareTo(chunkB[i]);
-                            break;
-                        }
+                        var periodSplitA = Regex.Split(itemA, "([.]+)");
+                        var periodSplitB = Regex.Split(itemB, "([.]+)");
 
-                        if (!int.TryParse(chunkB[i], out y))
+                        if (!int.TryParse(itemA, out var integerA))
                         {
-                            outcome = chunkA[i].CompareTo(chunkB[i]);
-                            break;
+                            return itemA.CompareTo(itemB);
                         }
-
-                        outcome = x.CompareTo(y);
-                        break;
+                        if (!int.TryParse(itemB, out var integerB))
+                        {
+                            return itemA.CompareTo(itemB);
+                        }
+                        return integerA.CompareTo(integerB);
                     }
-                }
-
-                if (outcome != 0)
-                {
-                    return outcome;
                 }
 
                 if (chunkA.Length > chunkB.Length)

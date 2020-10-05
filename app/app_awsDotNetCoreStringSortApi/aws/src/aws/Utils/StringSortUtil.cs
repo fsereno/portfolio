@@ -9,9 +9,6 @@ namespace Utils
 {
     public class StringSortUtil : IStringSortUtil
     {
-        private const string _numericRegex = "[0-9]+";
-        private const string _alphaPadding = "#";
-
         public string Sort(string commaSeperatedString)
         {
             var sortedAlphaNumeric = this.Sort(
@@ -73,7 +70,7 @@ namespace Utils
 
         public void OrderBy(List<SortItem> itemsToSort)
         {
-            itemsToSort?.Sort(new SortItem.SortAlphaNumeric());
+            itemsToSort?.Sort(new SortItem.NaturalSorter());
         }
     }
 }
