@@ -28,25 +28,39 @@ namespace Models
                 var chunkA = Regex.Split(a.Value, _numericRegex);
                 var chunkB = Regex.Split(b.Value, _numericRegex);
 
+                var digitChunkA = chunkA.Where( x => int.TryParse(x, out var i)).ToArray();
+                var digitChunkB = chunkB.Where( x => int.TryParse(x, out var i)).ToArray();
+
                 for (var i = 0; i < chunkA.Length && i < chunkB.Length; i++)
                 {
                     var itemA = chunkA[i];
                     var itemB = chunkB[i];
+
                     if (itemA != itemB)
                     {
-                        var periodSplitA = Regex.Split(itemA, "([.]+)");
-                        var periodSplitB = Regex.Split(itemB, "([.]+)");
-
                         if (!int.TryParse(itemA, out var integerA))
                         {
-                            return itemA.CompareTo(itemB);
+                            outcome = itemA.CompareTo(itemB);
+                            break;
                         }
                         if (!int.TryParse(itemB, out var integerB))
                         {
-                            return itemA.CompareTo(itemB);
+                            outcome = itemA.CompareTo(itemB);
+                            break;
                         }
-                        return integerA.CompareTo(integerB);
+                        outcome = integerA.CompareTo(integerB);
+                        break;
                     }
+                }
+
+                if (outcome == 1 && digitChunkA.Length != 0 && digitChunkB.Length != 0)
+                {
+                    outcome = digitChunkA.Length < digitChunkB.Length ? -1 : outcome;
+                }
+
+                if (outcome != 0)
+                {
+                    return outcome;
                 }
 
                 if (chunkA.Length > chunkB.Length)

@@ -84,9 +84,17 @@ namespace aws.Tests
         [Fact]
         public void Test_Sort_Should_Manage_With_Multi_Numerical_Values()
         {
-            var commaSeperatedString = "document_1A1.txt,document_1A2.txt,document_A.txt,document_1A.txt";
+            var commaSeperatedString = "document_1A1.txt,document_1A2.txt,document_1B1.txt,document_A.txt,document_1A.txt";
             var result = this._sut.Sort(commaSeperatedString);
-            Assert.Equal("document_1A.txt,document_1A1.txt,document_1A2.txt,document_A.txt", result);
+            Assert.Equal("document_1A.txt,document_1A1.txt,document_1A2.txt,document_1B1.txt,document_A.txt", result);
+        }
+
+        [Fact]
+        public void Test_Sort_Should_Manage_With_Multi_Alpha_Numeric_Values()
+        {
+            var commaSeperatedString = "document_A2A.txt,document_A1.txt,document_A1B.txt,document_A10A.txt,document_A1A.txt";
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("document_A1.txt,document_A1A.txt,document_A1B.txt,document_A2A.txt,document_A10A.txt", result);
         }
 
         [Fact]
