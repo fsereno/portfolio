@@ -48,7 +48,7 @@ class ToDoListForm extends React.Component {
                     <h5 class="card-title">{application.name}</h5>
                     <p class="card-text">{application.subHeading}</p>
                     <a class="btn btn-dark mr-2 mb-2"
-                      href={`../${Config.prefix}${application.folder}/${Config.index}`}>
+                      href={`${Config.prefix}${application.folder}/${Config.index}`}>
                         View app<i class="fa fa-eye ml-2"></i>
                     </a>
                     <a class="btn btn-dark mb-2"
