@@ -19,7 +19,8 @@
             "active": true,
             "include": false,
             "folderRoot": "/",
-            "compileJs": false
+            "compileJs": false,
+            "compileToRoot": true
         },
         {
             "name": "Application master template",

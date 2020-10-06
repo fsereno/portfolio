@@ -89,7 +89,11 @@ let jsTask = (application) => {
 }
 
 let htmlTask = (application) => {
-  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/pug/*.pug")
+  let directory = application.compileToRoot
+    ? config.developmentDir+"/"
+    : config.developmentDir+"/"+config.prefix+application.folder;
+  
+  return gulp.src(directory+"/pug/*.pug")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "HTML task started...",
     "HTML task complete!",
@@ -103,7 +107,7 @@ let htmlTask = (application) => {
     pretty: true,
     locals:{config: config, application: application}
   }))
-  .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder))
+  .pipe(gulp.dest(directory))
   .pipe(connect.reload());
 };
 
