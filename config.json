@@ -20,7 +20,7 @@
             "include": false,
             "folderRoot": "/",
             "compileJs": false,
-            "compileToRoot": true
+            "useRoot": true
         },
         {
             "name": "Application master template",

@@ -43,5 +43,17 @@ module.exports = {
       return options;
     },
     compileJsIsFalse: (compileJs) => typeof compileJs !== "undefined" && compileJs === false,
-    compileJsIsTrue: (compileJs) => (typeof compileJs === "undefined") || typeof compileJs !== "undefined" &&  compileJs === true
+    compileJsIsTrue: (compileJs) => (typeof compileJs === "undefined") || typeof compileJs !== "undefined" &&  compileJs === true,
+    getApplicationDirectories: (application) => {
+      let applicationDirectory = application.useRoot
+        ? config.developmentDir+"/"
+        : config.developmentDir+"/"+config.prefix+application.folder;
+      let destinationDirectory = application.useRoot
+        ? config.publishDir
+        : config.publishDir+"/"+config.prefix+application.folder;
+      return {
+        applicationDirectory: applicationDirectory,
+        destinationDirectory: destinationDirectory
+      }
+    }
 }

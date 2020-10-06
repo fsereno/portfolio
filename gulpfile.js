@@ -44,27 +44,29 @@ const uglify = require('gulp-uglify');
 let buffer = require('vinyl-buffer');
 
 let cssTask = (application) => {
- return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
- .pipe(logger(gulpHelpers.populateLoggerOptions(
-    "CSS task started...",
-    "CSS task complete!",
-    ".css",
-    false,
-    "../css",
-    "Compiled to: ",
-    " " + logSymbols.success
-  )))
-  .pipe(sass({outputStyle: 'compressed'}).on("error", sass.logError))
-  .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder+"/css"))
-  .pipe(connect.reload());
+  let directories = gulpHelpers.getApplicationDirectories(application);
+  return gulp.src(directories.applicationDirectory+"/sass/styles.scss")
+  .pipe(logger(gulpHelpers.populateLoggerOptions(
+      "CSS task started...",
+      "CSS task complete!",
+      ".css",
+      false,
+      "../css",
+      "Compiled to: ",
+      " " + logSymbols.success
+    )))
+    .pipe(sass({outputStyle: 'compressed'}).on("error", sass.logError))
+    .pipe(gulp.dest(directories.applicationDirectory+"/css"))
+    .pipe(connect.reload());
 }
 
 let jsTask = (application) => {
+  let directories = gulpHelpers.getApplicationDirectories(application);
   if (gulpHelpers.compileJsIsFalse(application.compileJs)) {
     return false;
   }
   return browserify({
-    basedir: config.developmentDir+"/"+config.prefix+application.folder+"/typeScript/",
+    basedir: directories.applicationDirectory+"/typeScript/",
     debug: true,
     entries: "app.ts",
     cache: {},
@@ -75,7 +77,7 @@ let jsTask = (application) => {
   .pipe(source("app.js"))
   .pipe(buffer())
   .pipe(uglify())
-  .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder+"/js"))
+  .pipe(gulp.dest(directories.applicationDirectory+"/js"))
   .pipe(connect.reload())
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "JS task started...",
@@ -89,11 +91,8 @@ let jsTask = (application) => {
 }
 
 let htmlTask = (application) => {
-  let directory = application.compileToRoot
-    ? config.developmentDir+"/"
-    : config.developmentDir+"/"+config.prefix+application.folder;
-  
-  return gulp.src(directory+"/pug/*.pug")
+  let directories = gulpHelpers.getApplicationDirectories(application);
+  return gulp.src(directories.applicationDirectory+"/pug/*.pug")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "HTML task started...",
     "HTML task complete!",
@@ -107,23 +106,24 @@ let htmlTask = (application) => {
     pretty: true,
     locals:{config: config, application: application}
   }))
-  .pipe(gulp.dest(directory))
+  .pipe(gulp.dest(directories.applicationDirectory))
   .pipe(connect.reload());
 };
 
 let userefTask = (application) => {
-  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/*.html")
+  let directories = gulpHelpers.getApplicationDirectories(application);
+  return gulp.src(directories.applicationDirectory+"/*.html")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "Useref task started...",
     "Useref task complete!",
     ".html",
     false,
-    "../../"+config.publishDir+"/"+config.prefix+application.folder+"/",
+    "../../"+directories.destinationDirectory+"/",
     "Compiled to: ",
     " " + logSymbols.success
   )))
   .pipe(useref())
-  .pipe(gulp.dest(config.publishDir+"/"+config.prefix+application.folder));
+  .pipe(gulp.dest(directories.destinationDirectory));
 };
 
 let copyJsTask = (application) => {
