@@ -1,7 +1,8 @@
+- var imagesDirectory = locals.application.useRoot ? "images/" : "../images/";
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   a.navbar-brand(
       href="../"+locals.config.prefix+locals.config.entry+"/index.html")
-    img#navbarImage(src="../images/FSLogo.png").pull-left
+    img#navbarImage(src=imagesDirectory+"FSLogo.png").pull-left
     span#titleHeading.d-flex= locals.config.heading
     span#titleSubHeading.d-flex= locals.config.subHeading
   button.navbar-toggler(

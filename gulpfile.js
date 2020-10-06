@@ -45,7 +45,7 @@ let buffer = require('vinyl-buffer');
 
 let cssTask = (application) => {
   let directories = gulpHelpers.getApplicationDirectories(application);
-  return gulp.src(directories.applicationDirectory+"/sass/styles.scss")
+  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
       "CSS task started...",
       "CSS task complete!",
@@ -66,7 +66,7 @@ let jsTask = (application) => {
     return false;
   }
   return browserify({
-    basedir: directories.applicationDirectory+"/typeScript/",
+    basedir: config.developmentDir+"/"+config.prefix+application.folder+"/typeScript/",
     debug: true,
     entries: "app.ts",
     cache: {},
@@ -92,7 +92,7 @@ let jsTask = (application) => {
 
 let htmlTask = (application) => {
   let directories = gulpHelpers.getApplicationDirectories(application);
-  return gulp.src(directories.applicationDirectory+"/pug/*.pug")
+  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/pug/*.pug")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "HTML task started...",
     "HTML task complete!",
@@ -127,6 +127,7 @@ let userefTask = (application) => {
 };
 
 let copyJsTask = (application) => {
+  let directories = gulpHelpers.getApplicationDirectories(application);
   if (gulpHelpers.compileJsIsTrue(application.compileJs)) {
     return false;
   }
@@ -136,11 +137,11 @@ let copyJsTask = (application) => {
       "Copy JS task complete!",
       ".js",
       false,
-      "../../"+config.publishDir+"/"+config.prefix+application.folder+"/js/",
+      "../../"+directories.destinationDirectory+"/js/",
       "Compiled to: ",
       " " + logSymbols.success
     )))
-    .pipe(gulp.dest(config.publishDir+"/"+config.prefix+application.folder+"/js/"));
+    .pipe(gulp.dest(directories.destinationDirectory+"/js/"));
 }
 
 let createTask = (application) => {
@@ -186,7 +187,7 @@ let startServerTask = () => {
   return new Promise((resolve, reject) => {
     try{
       connect.server({
-        root: ["./"+config.developmentDir+"/"+config.prefix+config.entry, ".", "./"+config.developmentDir],
+        root: ["./", ".", "./"+config.developmentDir],
         livereload: true
       }, () => resolve())
     }
