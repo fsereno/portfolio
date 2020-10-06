@@ -28,8 +28,8 @@ namespace Models
                 var chunkA = Regex.Split(a.Value, _numericRegex);
                 var chunkB = Regex.Split(b.Value, _numericRegex);
 
-                var digitChunkA = chunkA.Where( x => int.TryParse(x, out var i)).ToArray();
-                var digitChunkB = chunkB.Where( x => int.TryParse(x, out var i)).ToArray();
+                var digitChunkA = chunkA.Where( x => int.TryParse(x, out var i));
+                var digitChunkB = chunkB.Where( x => int.TryParse(x, out var i));
 
                 for (var i = 0; i < chunkA.Length && i < chunkB.Length; i++)
                 {
@@ -53,9 +53,9 @@ namespace Models
                     }
                 }
 
-                if (outcome == 1 && digitChunkA.Length != 0 && digitChunkB.Length != 0)
+                if (outcome == 1 && digitChunkA.Any() && digitChunkB.Any())
                 {
-                    outcome = digitChunkA.Length < digitChunkB.Length ? -1 : outcome;
+                    outcome = digitChunkA.Count() < digitChunkB.Count() ? -1 : outcome;
                 }
 
                 if (outcome != 0)

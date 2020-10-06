@@ -101,8 +101,8 @@
             "masterTemplateDir": "master_react"
         },
         {
-            "name": "AWS .NET Core String Sorting API",
-            "subHeading": "A string sorting algorithm, taking a comma seperated list of alphanumerical values. First sorting numerically, then alphabetically",
+            "name": "AWS .NET Core Natural String Sorting API",
+            "subHeading": "A natural string sorting algorithm implemnting IComparer. Taking a comma seperated string of alphanumerical values. Sorting them, first sorting numerically, then alphabetically",
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "folder": "awsDotNetCoreStringSortApi",
             "active": true,
