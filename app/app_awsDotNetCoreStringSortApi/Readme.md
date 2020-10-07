@@ -2,9 +2,9 @@
 
 With this application I have built a natural string sorting algorithm, using .Net Core served via an AWS Serverless Application (SAM). A basic React user interface handles user input and application state.
 
-With this application I have implemented IComparer to handle the sorting logic along with the use of delegates in the client code order to give additional extensibility and the ability to "plug-in" numerous "sorters" at a later date.
+With this application I have implemented IComparer to handle the sorting logic along with the use of delegates in the client code giving additional extensibility and the ability to "plug-in" alternative "sorters" at a later date.
 
-Much research was undertaken and many permutations in order to overcome this simple, yet complex task. Made for a very enjoyable project!
+A lot of research was undertaken for this application, with many permutations in order to overcome this simple, yet complex task. Made for a very enjoyable project!
 
 ### Explanation ###
 
