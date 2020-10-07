@@ -4,7 +4,7 @@
     "index": "index.html",
     "masterTemplateDir": "master",
     "developmentDir": "app",
-    "publishDir": "dist",
+    "publishDir": "docs",
     "folderRoot": "/tree/master/app/",
     "repoRootUrl": "https://github.com/fsereno/portfolio",
     "linkedInUrl": "https://www.linkedin.com/in/fabio-sereno-6a97b986/",
@@ -19,7 +19,8 @@
             "active": true,
             "include": false,
             "folderRoot": "/",
-            "compileJs": false
+            "compileJs": false,
+            "useRoot": true
         },
         {
             "name": "Application master template",
@@ -101,12 +102,12 @@
             "masterTemplateDir": "master_react"
         },
         {
-            "name": "AWS .NET Core String Sorting API",
-            "subHeading": "A string sorting algorithm, taking a comma seperated list of alphanumerical values. First sorting numerically, then alphabetically",
+            "name": "AWS .NET Core Natural String Sorting API",
+            "subHeading": "A natural string sorting algorithm implemnting IComparer, taking a comma seperated string of alphanumerical values.",
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "folder": "awsDotNetCoreStringSortApi",
             "active": true,
-            "include": false,
+            "include": true,
             "compileJs": false,
             "masterTemplateDir": "master_react"
         },
@@ -183,6 +184,14 @@
             "subHeading": "An example of KnockoutJS, enhanced by TypeScript",
             "description": "Written with KnockoutJS, TypeScript, Sass and Pug.",
             "folder": "koTypeScript",
+            "active": true,
+            "include": true
+        },
+        {
+            "name": "JS Coding Standards",
+            "subHeading": "A JavaScript Code Style Guide",
+            "description": "By Fabio Sereno",
+            "folder": "jsCodingStandards",
             "active": true,
             "include": true
         }

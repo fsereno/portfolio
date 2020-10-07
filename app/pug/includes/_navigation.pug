@@ -1,7 +1,8 @@
+- var directory = locals.application.useRoot ? "" : "../";
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   a.navbar-brand(
-      href="../"+locals.config.prefix+locals.config.entry+"/index.html")
-    img#navbarImage(src="../images/FSLogo.png").pull-left
+      href=directory+"index.html")
+    img#navbarImage(src=directory+"images/FSLogo.png").pull-left
     span#titleHeading.d-flex= locals.config.heading
     span#titleSubHeading.d-flex= locals.config.subHeading
   button.navbar-toggler(
@@ -15,7 +16,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   #navbarNavDropdown.collapse.navbar-collapse.flex-row-reverse
     ul.navbar-nav
         li.nav-item
-            a.nav-link(href="../"+locals.config.prefix+locals.config.entry+"/index.html")
+            a.nav-link(href=directory+"index.html")
                 | Home
                 i.fa.fa-home.ml-1
         li.nav-item.dropdown
@@ -32,12 +33,12 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
                         a(class=(locals.application.folder === application.folder
                         ? "active"
                         : "") + " dropdown-item",
-                        href="../"+locals.config.prefix+application.folder+"/index.html")= application.name
+                        href=directory+locals.config.prefix+application.folder+"/index.html")= application.name
                 .dropdown-divider
                 a(class=(locals.config.entry === application.folder
                 ? "active"
                 : "") + " dropdown-item",
-                href="../"+locals.config.prefix+locals.config.entry+"/index.html")
+                href=directory+"index.html")
                     | Home
                     i.fa.fa-home.ml-1
         li.nav-item

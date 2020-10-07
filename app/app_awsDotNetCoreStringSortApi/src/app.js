@@ -2,78 +2,112 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { PuzzleModule } from '../../js/puzzleModule.js';
 
-class ToDoListForm extends React.Component {
+const API_ENDPOINT = "https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values";
+const DISABLED_BTN_CLASS = "disabled";
+const PUZZLE = "4 x 4 - 5 =";
+
+let _puzzleModule = PuzzleModule(11, "puzzleModal");
+
+class StringSort extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      list: [],
-      counterLimit: 10,
-      counter: 0,
-      selectedIndex: 0
+      values: '',
+      result: '',
+      disabledBtnClass: DISABLED_BTN_CLASS,
+      sort: `${API_ENDPOINT}/sort`
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleValuesChange = this.handleValuesChange.bind(this);
+    this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete= this.handleDelete.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  handlePuzzleSubmit(event) {
+    event.preventDefault();
+    if (_puzzleModule.getResult()) {
+      this.setState({
+        disabledBtnClass: ""
+      });
+      _puzzleModule.hide();
+    }
+  }
+
+  handleValuesChange(event) {
+    this.setState({values: event.target.value});
+  }
+
+  handleAjax(request) {
+    if (_puzzleModule.getResult()) {
+      $.ajax(request);
+    }
+  }
+
+  handleSort() {
+    let request = {
+      url: this.state.sort,
+      type: "POST",
+      contentType: 'application/json;',
+      data: JSON.stringify({
+        "CommaSeperatedString":this.state.values
+      }),
+      success: (response) => {
+        this.setState({
+          result: response.result
+        });
+      }
+    }
+    this.handleAjax(request);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.value.length > 0 && this.state.counter < this.state.counterLimit) {
-      this.state.list.push(this.state.value);
-      this.setState({
-        list: this.state.list,
-        value: "",
-        counter: this.state.counter + 1
-      });
+    if (_puzzleModule.getResult() && this.state.values.length > 0) {
+      this.handleSort();
     }
   }
 
-  handleDelete(event) {
-    event.preventDefault();
-    let index = Number(event.target.dataset.index);
-    this.state.list.splice(index, 1);
-    this.setState({
-      list: this.state.list,
-      counter: this.state.counter - 1
-    });
+  componentDidMount() {
+    _puzzleModule.show();
   }
 
   render() {
     return (
       <div>
+        <_puzzleModule.RenderTemplate
+          event={this.handlePuzzleSubmit}
+          label="First answer this question to unlock the API:"
+          puzzle={PUZZLE}
+          button="Submit"
+          required={true}
+          title="Are you a human?"
+        />
         <div class="row splitter">
-          <div class="col-lg-4">
-            <h3>Result:</h3>
-            <ul id="toDoList" class="list-group">
-              {this.state.list.map((item, index) => {
-                return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
-              })}
-          </ul>
+          <div class="col-lg-12">
+          <h3>Sorted values:</h3>
+          <p class="lead">{this.state.result}</p>
           </div>
         </div>
         <div class="row splitter">
           <div class="col-lg-12">
-            <p>Items: {this.state.counter}</p>
-            <p>Item to add: {this.state.value}</p>
+            <p>Values to sort: {this.state.values}</p>
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-3">
+          <div class="col-lg-12">
             <form onSubmit={this.handleSubmit} autoComplete="off">
-              <div class="form-group">
-                  <label for="itemInput">
-                    Input:
-                  </label>
-                  <input class="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
+              <label>Enter comma seperated values to sort</label>
+              <div class="form-row align-items-center">
+                <div class="col-lg-10">
+                  <label class="sr-only" for="valuesInput">To Sort</label>
+                  <input required type="text" class="form-control mb-2" id="valuesInput" placeholder="B,C,A" value={this.state.values} onChange={this.handleValuesChange}/>
+                </div>
+                <div class="col-lg-2">
+                  <button id="sort_submit" type="submit" class={`btn btn-dark mb-2 ${this.state.disabledBtnClass} w-100`}>Sort</button>
+                </div>
               </div>
-              <button id="submit" class="btn btn-dark" type="submit">Add item</button>
             </form>
           </div>
         </div>
@@ -83,6 +117,6 @@ class ToDoListForm extends React.Component {
 }
 
 ReactDOM.render(
-  <ToDoListForm />,
+  <StringSort />,
   document.getElementById('result')
 );

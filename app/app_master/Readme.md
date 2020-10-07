@@ -1,4 +1,4 @@
-# Master application Readme tempalte
+# Master application Readme template
 
 With this application I have built...
 

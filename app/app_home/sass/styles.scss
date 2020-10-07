@@ -11,6 +11,9 @@
 }
 
 #searchBar {
+    span.test-this {
+        display: inline;
+    }
     span.input-group-text {
         background: $darkGrey;
         i{

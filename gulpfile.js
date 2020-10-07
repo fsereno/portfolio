@@ -44,22 +44,24 @@ const uglify = require('gulp-uglify');
 let buffer = require('vinyl-buffer');
 
 let cssTask = (application) => {
- return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
- .pipe(logger(gulpHelpers.populateLoggerOptions(
-    "CSS task started...",
-    "CSS task complete!",
-    ".css",
-    false,
-    "../css",
-    "Compiled to: ",
-    " " + logSymbols.success
-  )))
-  .pipe(sass({outputStyle: 'compressed'}).on("error", sass.logError))
-  .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder+"/css"))
-  .pipe(connect.reload());
+  let directories = gulpHelpers.getApplicationDirectories(application);
+  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
+  .pipe(logger(gulpHelpers.populateLoggerOptions(
+      "CSS task started...",
+      "CSS task complete!",
+      ".css",
+      false,
+      "../css",
+      "Compiled to: ",
+      " " + logSymbols.success
+    )))
+    .pipe(sass({outputStyle: 'compressed'}).on("error", sass.logError))
+    .pipe(gulp.dest(directories.applicationDirectory+"/css"))
+    .pipe(connect.reload());
 }
 
 let jsTask = (application) => {
+  let directories = gulpHelpers.getApplicationDirectories(application);
   if (gulpHelpers.compileJsIsFalse(application.compileJs)) {
     return false;
   }
@@ -75,7 +77,7 @@ let jsTask = (application) => {
   .pipe(source("app.js"))
   .pipe(buffer())
   .pipe(uglify())
-  .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder+"/js"))
+  .pipe(gulp.dest(directories.applicationDirectory+"/js"))
   .pipe(connect.reload())
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "JS task started...",
@@ -89,6 +91,7 @@ let jsTask = (application) => {
 }
 
 let htmlTask = (application) => {
+  let directories = gulpHelpers.getApplicationDirectories(application);
   return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/pug/*.pug")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "HTML task started...",
@@ -103,26 +106,28 @@ let htmlTask = (application) => {
     pretty: true,
     locals:{config: config, application: application}
   }))
-  .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder))
+  .pipe(gulp.dest(directories.applicationDirectory))
   .pipe(connect.reload());
 };
 
 let userefTask = (application) => {
-  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/*.html")
+  let directories = gulpHelpers.getApplicationDirectories(application);
+  return gulp.src(directories.applicationDirectory+"/*.html")
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "Useref task started...",
     "Useref task complete!",
     ".html",
     false,
-    "../../"+config.publishDir+"/"+config.prefix+application.folder+"/",
+    "../../"+directories.destinationDirectory+"/",
     "Compiled to: ",
     " " + logSymbols.success
   )))
   .pipe(useref())
-  .pipe(gulp.dest(config.publishDir+"/"+config.prefix+application.folder));
+  .pipe(gulp.dest(directories.destinationDirectory));
 };
 
 let copyJsTask = (application) => {
+  let directories = gulpHelpers.getApplicationDirectories(application);
   if (gulpHelpers.compileJsIsTrue(application.compileJs)) {
     return false;
   }
@@ -132,11 +137,11 @@ let copyJsTask = (application) => {
       "Copy JS task complete!",
       ".js",
       false,
-      "../../"+config.publishDir+"/"+config.prefix+application.folder+"/js/",
+      "../../"+directories.destinationDirectory+"/js/",
       "Compiled to: ",
       " " + logSymbols.success
     )))
-    .pipe(gulp.dest(config.publishDir+"/"+config.prefix+application.folder+"/js/"));
+    .pipe(gulp.dest(directories.destinationDirectory+"/js/"));
 }
 
 let createTask = (application) => {
@@ -182,7 +187,7 @@ let startServerTask = () => {
   return new Promise((resolve, reject) => {
     try{
       connect.server({
-        root: ["./"+config.developmentDir+"/"+config.prefix+config.entry, ".", "./"+config.developmentDir],
+        root: ["./", ".", "./"+config.developmentDir],
         livereload: true
       }, () => resolve())
     }

@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title Portfolio
+    meta(name="description" content="Portfolio")
+    meta(name='viewport', content='width=device-width, initial-scale=1, minimal-ui')
+    include ../includes/_metaAuthor.pug
+    // build:css css/vendor.css
+    include ../includes/_styleDeps.pug
+    // endbuild
+    block styles
+  body
+    .container-fluid
+      .row.mt-3
+        .col-lg-12
+          include ../includes/_navigation.pug
+      .row
+        .col-lg-12
+          h2.display-4= locals.application.name
+      .row
+        .col-lg-12
+          h5.font-italic= locals.application.subHeading
+          p.text-muted= locals.application.description
+          hr
+      block content
+
+    block footer
+    // build:js js/vendor.js
+    include ../includes/_jsDeps.pug
+    // endbuild
+    block scripts

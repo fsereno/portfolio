@@ -1,0 +1,2788 @@
+extends ../../pug/layouts/main.pug
+
+block styles
+  // build:css css/styles.css
+  link(rel="stylesheet" href="css/styles.css")
+  // endbuild
+
+block content
+  h2 Objective 
+  p
+    | The purpose of these standards is to promote maintainable, readable and scalable JavaScript code.
+  p
+    | Whilst these standards will adhere to the behaviours, limitations and conventions of JavaScript, some of the core
+    | principles mentioned are proven software design principles, which may be applied across the board, such as the
+    | SOLID, YAGNI, KISS and DRY principles.
+  p
+    | In order to understand the reasoning for some of these standards, it is important to first understand the dynamic
+    | nature of JavaScript and some key characteristics, along with the available tools that are native to the
+    | language. With this in mind, this document will attempt to offer clear explanations to justify suggestions.
+  p
+    | This document will also include examples using the latest ES6 JavaScript standards. Apply these with caution.
+    | Ensure browser compatibility and use a transpiler such as 
+    a(href='https://babeljs.io/') Babel
+    |  if you wish to
+    |     use ES6 syntax.
+  p
+    | There is a full repository of all code examples used in this document: 
+    a(href=locals.config.repoRootUrl + "/" + locals.config.folderRoot + locals.config.prefix + "jsCodingStandards/accompanying_code/", target="_blank") Accompanying Code Snippets
+  h2
+    | 1. Being 
+    em Strict 
+    | in JavaScript
+  p
+    | All JavaScript should be written in strict mode. This will highlight possible issues with the script either
+    | during compilation, with a tool such a Babel, or in the developer console in the browser.
+  h4 Problem
+  pre.card.p-4.
+    name = "Adam";
+    console.log(`Hello ${name}`);  
+  p
+    | This will not error, but there is a problem with this code. The name variable is global and it has no protection.
+    | Declarations such as this should not happen for a number of reasons, mainly around scoping and shadowing,
+    | explained later in more detail.
+  h4 Solution
+  pre.card.p-4.
+    "use strict";
+    
+    name = "Adam";
+    console.log(`Hello ${name}`);  
+  p
+    | Now in strict mode, this will error and so it should! Strict mode has highlighted for us that this is bad code
+    | and we should correct it. We should see strict mode as a useful tool when writing quality JavaScript and we
+    | should always use it.
+  h2 2. Naming
+  p Naming can be split into the following categories:
+  ul
+    li
+      p General naming conventions
+    li
+      p Variable names
+    li
+      p Constant names
+    li
+      p Function names
+  h3 2.1 General naming conventions
+  p
+    strong Function
+    |  and 
+    strong variable
+    |  naming should be in 
+    strong camelCase
+    | .
+  p
+    strong Class
+    |  and 
+    strong constructor functions
+    |  should be in 
+    strong PascalCase
+    | .
+  p
+    strong Constants
+    |  should be identified by using 
+    strong CAPITAL_CASE
+    | .
+  h3 2.2 Variable names
+  p
+    | Variable names should be meaningful, searchable and pronounceable. Variable names should reveal intention of use
+    | and avoid disinformation.
+  p
+    | Think about why the variable name exists, we should be able to tell what the variable holds in memory just by
+    | reading it.
+  p
+    | Comments should not be required in order to explain a variable name. The name itself should be meaningful and
+    | sufficient that comments are not required.
+  p
+    | We should not use mental mapping of variable names with the use of abbreviations such as &ldquo;i&rdquo;, or &ldquo;a&rdquo; or &ldquo;dd&rdquo; or
+    | &ldquo;crn&rdquo; etc:
+  h4 Problem
+  pre.card.p-4.
+    var i = 0;  
+  p
+    | What is &ldquo;i&rdquo; in this context ? This is disinformation. In this case a more meaningful variable name would be
+    | preferred: &ldquo;index&rdquo;, &ldquo;counter&rdquo; or &ldquo;position&rdquo;.
+  p
+    | Depending on the scope, Variable names should also not be unnecessarily too descriptive, such as: 
+    em
+      span.inline-comment-marker(data-ref='cbb12e7d-57f8-4548-90cb-b14870099791') indexOfTheItemIamIteratingThroughInMyCollection
+    |     - In a local scope this can also be seen as disinformation by being overly descriptive. We are aware of the
+    |     context in a local scope, so a shorter variable name would be preferred.
+  h4 Solution
+  pre.card.p-4.
+    var index = 0;  
+  p
+    | The problem of abbreviation becomes more relevant in the case of nested 
+    em for 
+    | loops when working with
+    |     multidimensional arrays:
+  h4  Problem
+  pre.card.p-4.
+    var categories = [[0,1],[2,3]];
+    
+    for(var i = 0; i < categories.length; i++) {
+        for(var j = 0; j < categories[i].length; j++) {
+            console.log(categories[i][j]);
+        }
+    }  
+  p
+    | When there are nested 
+    em for 
+    | loops, there will be multiple index variables. Abbreviating them could cause
+    |     ambiguity around what &ldquo;i&rdquo; or &ldquo;j&rdquo; are, you also cannot use &ldquo;i&rdquo; twice in the same block scope, as it already
+    |     exists.
+  h4 Solution
+  pre.card.p-4.
+    var categories = [[0,1],[2,3]];
+    
+    for(let category = 0; category < categories.length; category++) {
+        for(let item = 0; item < categories[category].length; item++) {
+            console.log(categories[category][item]);
+        }
+    }  
+  p
+    | Here using, short but descriptive variable names allows us to clearly read what we are iterating over.
+  p
+    strong However
+    | , 
+    span.inline-comment-marker(data-ref='89243c9d-0fd2-46d2-8e93-bfd80286a9ab')
+      | using
+      | &ldquo;i&rdquo; for the index variable in the context of a single
+      | level
+    em
+      span.inline-comment-marker(data-ref='89243c9d-0fd2-46d2-8e93-bfd80286a9ab')
+        | for
+    span.inline-comment-marker(data-ref='89243c9d-0fd2-46d2-8e93-bfd80286a9ab')
+      | loop is a
+      | common approach and is acceptable :
+  pre.card.p-4.
+    const items = [0, 1, 2, 3];
+    
+    for(let i = 0; i < items.length; i++) {
+        console.log(items[i]);   
+    }  
+  p
+    | Variable names 
+    strong can 
+    | however be longer, but their length should be 
+    strong relative 
+    | to
+    |     the scope they are in.
+  p
+    | A variable name in the outer scope (not necessarily global), might require some additional context or even a
+    | namespace for it to be meaningful enough, making it longer in length. This is the preferred approach, instead of
+    | the need to add comments in order to explain what a variable is doing, the name itself should be enough.
+  h4 Problem
+  pre.card.p-4.
+    //Outer scope
+    let entry = "index.js";
+    let root = "http://www.application.co.uk/";  
+    
+    let getEntryUrl = function() {
+      //Inner scope
+      return `${root}${entry}`
+    }
+    
+    console.log(getEntryUrl())  
+  p
+    | The problem with these variable names is that they do not reflect the scope they are in, they have no context.
+    | Both
+    em  entry 
+    | or 
+    em root
+    |  are being declared in a much wider scope than where they are being used.
+    |     They are being used at the block level, so for us to know where they have come from and what they are being used
+    |     for, we should consider a more descriptive naming convention for them.
+  h4 Solution
+  pre.card.p-4.
+    //Outer scope
+    let globalApplicationConfigurationSettings = {
+        entry: "index.js",
+        root: "http://www.application.co.uk/"  
+    }
+    
+    let getEntryUrl = function() {
+      //Inner scope
+      return `${globalApplicationConfigurationSettings.root}${globalApplicationConfigurationSettings.entry}`
+    }
+    
+    console.log(getEntryUrl())  
+  p
+    | Now our intention is clear with a much more descriptive naming convention. We are still declaring in the outer
+    | scope, but they are being encapsulated by an object literal, which means in order to access these properties we
+    | need to go via the objects namespace. This now gives 
+    em root 
+    | and 
+    em entry 
+    | a clear context and we
+    |     know exactly where they are coming from and what they are going to be used for.
+  p
+    | We should be writing boolean variables as 
+    strong predicates
+    | , such as &ldquo;is&rdquo; or &ldquo;has&rdquo;. This would help
+    |     denote state. For example, either something &ldquo;is&rdquo; or something &ldquo;is not&rdquo;.
+  h4 Problem
+  pre.card.p-4.
+    let empty = true;
+    if(empty) {
+      console.log("It is empty");
+    }  
+  p
+    | We do not know initially from looking at this variable that it returns a boolean, we can only assume it is. For
+    | all we know, 
+    em empty 
+    | could contain an empty string, not a state. This variable also has no context, what
+    |     is empty ? It is ambiguous.
+  h4 Solution 
+  pre.card.p-4.
+    let input = {
+      isEmpty: true
+    }
+    if(input.isEmpty) {
+      console.log("It is empty");
+    }  
+  p
+    | This variable now refers to something that &ldquo;is&rdquo; empty. We have also used an object literal to contain all of the
+    | properties sharing the same context. This also allows for a nice and clear 
+    em if
+    |  statement.
+  h3 2.2.1 Avoiding Magic Numbers and Strings
+  p
+    | We should avoid 
+    strong Magic Numbers and Strings 
+    | where possible. We should always declare arbitrary numbers and strings as
+    |     variables with a clear, meaningful name as per our naming conventions.
+  h4 Problem
+  pre.card.p-4.
+    var password = "Password1";
+    if (password.length > 8 && password.length < 31) {
+      console.log("Password is valid");
+    }  
+  p
+    | Initially from the above code we do not know the meaning of 8 or 31 without reading through the code first. We
+    | should know what they are being used for without need to read through the code.
+  h4 Solution
+  pre.card.p-4.
+    var password = "Password1";
+    const MIN_PASSWORD_LENGTH = 8;
+    const MAX_PASSWORD_LENGTH = 31;
+    if (password.length > MIN_PASSWORD_LENGTH && password.length < MAX_PASSWORD_LENGTH) {
+      console.log("Password is valid");
+    }  
+  p
+    | Now we have assigned these values as constants with meaningful names. We now know exactly what they are being
+    | used for. We can also change them without needing to amend the existing logic directly.
+  h3 2.3 Constant Names
+  p
+    | Constants should be identified as being &ldquo;constant&rdquo;, something that cannot be changed. We can visually do this
+    | with the use of 
+    strong CAPITAL_CASE
+    | . In JavaScript if you see a declaration using 
+    strong CAPITAL_CASE
+    | , it means the value should not be changed.
+  h4 Problem
+  pre.card.p-4.
+    var thresholdOfUsers = 10;
+    var thresholdOfUsers = 30;
+    thresholdOfUsers = 50;  
+  p
+    | Visually there is nothing denoting the above variable should be treated as a constant. This is a problem when
+    | trying to ensure your code is to be used as intended by other developers.
+  h4 Solution
+  pre.card.p-4.
+    var THRESHOLD_OF_USERS = 10;
+    
+    // or, even better:
+    
+    const THRESHOLD_OF_USERS = 10;  
+  p
+    | By using 
+    strong CAPITAL_CASE
+    |  it helps identify the difference between a constant, which should not be
+    |     changed and a variable declared using 
+    strong camelCase
+    |  which may be changed. We can offer additional
+    |     protection by using the 
+    em
+      strong const 
+    | keyword. This is covered in section 5. Declarations in
+    |     more detail.
+  h3 2.4 Function names
+  p
+    | With the same approach, function names should also be meaningful, searchable and pronounceable. Make them a verb,
+    | what is the function actually doing ? what is it returning ? is it an integer, a boolean, a string ?
+  p
+    | JavaScript by nature is a dynamic language, it is not strongly typed, which means it is very easy to return an
+    | unexpected data type, either intentionally or unintentionally. Making variable and function names descriptive is
+    | very important when making code readable and understandable, as this cannot always be denoted from a methods
+    | signature in JavaScript, unlike some statically types languages such as C#, Java etc.
+  h4 Problem
+  pre.card.p-4.
+    function error(input) {
+      return input === 0;
+    };  
+  p
+    | The problem here is the method name does not suggest it is doing anything, or that it is returning anything, when
+    | it is in fact evaluating an input and returning 
+    em
+      strong true
+    |  or
+    em
+      strong  false
+    | .
+  h4 Solution
+  pre.card.p-4.
+    function validateInput(input) {
+      return input === 0;
+    };  
+  p
+    | Breaking this method name into parts. The &ldquo;validate&rdquo; is a verb and implies what this method is doing -
+    | validating. The &ldquo;Input&rdquo; is describing what we are actually acting on, or evaluating.
+  p
+    | Functions or members that exist inside a specific scope or class should not add unnecessary context to their
+    | names:
+  h4 Problem
+  pre.card.p-4.
+    var user = function() {
+        this.getUser = function() { 
+    
+        };
+        this.deleteUser = function() { 
+    
+        };
+    }  
+  p
+    span.inline-comment-marker(data-ref='82a5572d-fb9f-4397-97be-bdbe52578961')
+      | The additional context of
+      | &ldquo;user&rdquo; is not needed here:
+  h4 Solution
+  pre.card.p-4.
+    var user = function () {
+        this.get = function () {
+    
+        };
+        this.delete = function () {
+    
+        };
+    }  
+  h2 3. Constructor Functions, Object Literals and Classes
+  p
+    | We should be using either 
+    strong Constructor functions, object literals
+    |  or the 
+    strong
+      | class 
+    | construct where possible for declaring patterns of variables that could be identified as objects. This
+    |     is typically good in the sense of a more traditional object oriented approach to programming. This can really
+    |     help with code reuse, reducing repetition and also improve reliability and readability.
+  h4 Problem
+  pre.card.p-4.
+    let name = "James"
+    let age = 23;
+    console.log(`${name} ${age}`)
+    
+    name = "Anna"
+    age = 30;
+    console.log(`${name} ${age}`)
+    
+    name = "Tim"
+    age = 18;
+    console.log(`${name} ${age}`)  
+  p
+    | With the example above the same two variables are being declared and reassigned with every instance before being
+    | used, in this case to simply log out to the console, but this could well be call updating a database, for
+    | example. There is a clear repetition of code here and a clear pattern. We should avoid such repetition as this.
+    | If we see this occurring in our code, we should refactor our code.
+  h4 Solution
+  pre.card.p-4.
+    let persons = [];
+    
+    persons.push({
+      name: "James",
+      age: 23
+    });
+    
+    persons.push({
+      name: "Anna",
+      age: 30
+    });
+    
+    persons.push({
+      name: "Tim",
+      age: 18
+    });
+    
+    persons.forEach((person) => console.log(`${person.name} ${person.age}`));  
+  p
+    | We could instead declare each instance of the repetition as an 
+    strong object literal
+    |  representing each
+    |     person and push them into a collection. Each person is now encapsulated by an object. We could have also
+    |     declared each 
+    strong object literal
+    |  directly into the array, either way would have helped create a
+    |     more definitive pattern.
+  p
+    | We could also refactor this further to alternatively use either a 
+    strong constructor function
+    |  or a
+    strong  class
+    | .
+  h4 Solution
+  pre.card.p-4.
+    let persons = [];
+    
+    let Person = function(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    
+    persons.push(new Person("James", 23));
+    persons.push(new Person("Anna", 30));
+    persons.push(new Person("Tim", 18));
+    
+    persons.forEach((person) => console.log(`${person.name} ${person.age}`));  
+  p
+    | Now we have even more reduced code repetition and we do not need to manually type the 
+    strong
+      | object literal 
+    | every time, but this solution would be more performance intensive on a larger scale because we are
+    |     creating an object by calling a function for every instance.
+  h4 Solution
+  pre.card.p-4.
+    let persons = [];
+    
+    class Person {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+    }
+    
+    persons.push(new Person("James", 23));
+    persons.push(new Person("Anna", 30));
+    persons.push(new Person("Tim", 18));
+    
+    persons.forEach((person) => console.log(`${person.name} ${person.age}`));  
+  p
+    | Now using a 
+    strong class
+    |  this reads more like a traditional object oriented approach, but is
+    |     effectively the same as the 
+    strong constructor function
+    |  example.
+  p
+    strong Constructor functions
+    | , 
+    strong object literals
+    |  and 
+    strong
+      | classes 
+    | help
+    strong  
+    | save space, eliminate variable repetition and also have great benefits when it
+    |     comes to inheritance and 
+    strong The SOLID Principles
+    | , covered later in this document.
+  h2 4. Formatting, braces and spaces
+  p
+    | The preferred pattern in JavaScript is to have the opening brace inline with the declaration, preceded with a
+    | space and the closing brace on the following line, unlike some languages such as C#.
+  h4 Problem
+  pre.card.p-4.
+    function myFunction() 
+    {
+    
+    }
+    
+    function myFunction() {  }  
+  h4 Solution
+  pre.card.p-4.
+    function myFunction() {
+    
+    }  
+  p
+    | This applies to all usages of braces, whether that be JSON, object literals, 
+    em if
+    |  statements, function
+    |     declarations, etc.
+  p
+    | All control structures should use braces even though they are not necessary. This makes the intended execution
+    | clear:
+  h4 Problem
+  pre.card.p-4.
+    if (valid === true)
+      doThis();  
+  p
+    | An indentation is all that stands between semantic code and non-semantic code, which would not run as intended
+    | and also cause an error if the indentation was incorrect.
+  h4 Solution
+  pre.card.p-4.
+    if (valid === true) {
+        doSomething();
+    }  
+  p
+    | This is considered safer and clearer to read. Not only do we have the indentation identifying the code to be
+    | executed, we also have the braces offering safety and encapsulation.
+  h2 5. Declarations
+  p
+    | Variable declarations in JavaScript as of this writing can be made using three different keywords,
+    em
+      strong var
+    | , 
+    em
+      strong let
+    |  and 
+    em
+      strong const
+    | .
+  p
+    | Each have different behaviours and we should use them as required. It is not a case of simply using
+    em
+      strong  let
+    |  instead of 
+    em
+      strong var
+    | . There is good reason to use
+    em
+      strong  let
+    |  instead of 
+    em
+      strong var
+    |  as long as the scoping behaviour meets
+    |     your needs.
+  p
+    em
+      strong let
+    |  and 
+    em
+      strong const
+    |  protect against re-declaration, with
+    em
+      strong  let
+    |  allowing re-assignment and 
+    em
+      strong const
+    |  not allowing
+    |     re-assignment. This makes using 
+    em
+      strong let
+    |  and 
+    em
+      strong const
+    |  safer than
+    |     always using 
+    em
+      strong var
+    | , which can be re-declared and re-assigned.
+  p
+    | *Please note, currently 
+    em
+      strong let 
+    | and 
+    em
+      strong const 
+    | require transpilation
+    |     to work in older browsers such as IE11. This process will also catch any attempts to try and re-declare with
+    em
+      strong  let
+    |  and 
+    em
+      strong const 
+    | and re-assignment of
+    em
+      strong
+        |  const.
+  h4 Problem
+  pre.card.p-4.
+    var thresholdOfUsers = 10;
+    var thresholdOfUsers = 30;  
+  p
+    | Drawing on a previous example. Here 
+    em
+      strong var
+    |  is allowing us to re-declare a variable, there
+    |     is nothing stopping this from happening, meaning context and value could be changed at any point during a
+    |     program. Imagine a scenario where two developers are working on the same application, in the same scope but in
+    |     separate scripts and they both declare variables with identical names in the global scope. This is a problem.
+  h4 Solution
+  pre.card.p-4.
+    const THRESHOLD_OF_USERS = 10;  
+  p
+    | The keyword 
+    em
+      strong const
+    |  protects against re-declaration and re-assignment.
+  p
+    | If the intention is to not re-declare, but to re-assign, we can use 
+    em
+      strong let
+    | . This means we
+    |     cannot re-declare the same exact variable, but we can change its value.
+  h4 Problem
+  pre.card.p-4.
+    var THRESHOLD_OF_USERS = 10;
+    var numberOfUsers = 11;
+    var isThresholdMet = false;
+    
+    var THRESHOLD_OF_USERS = 11; // Within the same global scope, there is nothing stopping this from happening.
+    
+    if (numberOfUsers > THRESHOLD_OF_USERS) {
+      isThresholdMet = true;
+      numberOfUsers--;
+    }  
+  p
+    | Here the re-declaration of 
+    code THRESHOLD_OF_USERS
+    |  means that our
+    em  if
+    |  statement will fail to
+    |     catch the scenario.
+  h4 Solution
+  pre.card.p-4.
+    const THRESHOLD_OF_USERS = 10;
+    let numberOfUsers = 11;
+    let isThresholdMet = false;
+    
+    if (numberOfUsers > THRESHOLD_OF_USERS) {
+      isThresholdMet = true;
+      numberOfUsers--;
+    }  
+  p
+    span.inline-comment-marker(data-ref='f737a2da-3109-4758-ac8e-2c708fbb06c6')
+      | Here we make use of
+    em
+      strong
+        span.inline-comment-marker(data-ref='f737a2da-3109-4758-ac8e-2c708fbb06c6') const
+    span.inline-comment-marker(data-ref='f737a2da-3109-4758-ac8e-2c708fbb06c6')
+      | for a value that will not
+      | change, and we can re-assign values where we have used
+    em
+      strong
+        span.inline-comment-marker(data-ref='f737a2da-3109-4758-ac8e-2c708fbb06c6') let
+    span.inline-comment-marker(data-ref='f737a2da-3109-4758-ac8e-2c708fbb06c6')
+      | . The above code will not
+      | exceed the threshold and demonstrates a scenario where you may want to intentionally re-assign.
+  p
+    | We should not be delimiting variable declarations with a comma. This can make code tricky to read and hard to
+    | debug.
+  h4 Problem
+  pre.card.p-4.
+    let make = "Ford",
+        color = "Blue",
+        isHybrid = false;  
+  p
+    | We now cannot debug these declarations per line, it is also easy to miss read these declarations as global
+    | declarations without the use of 
+    em
+      strong var
+    | , 
+    em
+      strong let 
+    | or
+    em
+      strong const
+    | , when they are in fact, block level declarations in a local scope. This also
+    |     makes it hard to make use of the various different keywords 
+    em
+      strong var
+    | , 
+    em
+      strong
+        | let 
+    | and 
+    em
+      strong const
+    |  as necessary, they do not all behave in the same way.
+  h4 Solution
+  pre.card.p-4.
+    let make = "Ford";
+    let color = "Blue";
+    let isHybrid = false;  
+  p
+    | We could now debug each of these declarations per line if needed, also it is very clear each line is being
+    | declared with the keyword - 
+    em
+      strong let
+    | .
+  p
+    | When declaring a complex string, we should be using template literals instead of using the
+    em
+      strong +
+    |  operator to concatenate multiple strings together. This will make for much clearer
+    |     string declarations and are easier to read and code.
+  h4 Problem
+  pre.card.p-4.
+    let name = "Anna";
+    let age = 40;
+    let description = name + " is " + age + " years old.";
+    console.log(description);  
+  p
+    | We have to open and close each string and concatenate them together using the 
+    em
+      strong +
+    |     operator. This is a very manual way to code, especially at length, when considering full sentences for feedback
+    |     in a UI, for example.
+  h4 Solution
+  pre.card.p-4.
+    let name = "Anna";
+    let age = 40;
+    let description = `${name} is ${age} years old.`;
+    console.log(description);  
+  p
+    | This now reads much clearer and is easier to code. We do not need to open and close each string, we use a single
+    | template literal and populate it with the declared variables above. We should use template literals where
+    | possible.
+  h2 6. Scoping
+  p
+    | Understanding scoping in JavaScript is incredibly important. There are two main scopes to consider:
+  ul
+    li
+      p The Global Scope
+    li
+      p The Local Scope (Block level scope)
+  p
+    | In the instance of the web the 
+    strong Global Scope
+    |  is the Window object. So if you are to declare a
+    |     variable at 
+    strong Global Scope
+    |  it will belong to the Window object. We should avoid setting Global
+    |     variables at all costs. The reason for this is because in JavaScript it is very easy to re-declare a variable of
+    |     the same name in the 
+    strong Global Scope
+    | , changing the context of the variable entirely. You may also
+    |     alter a global declaration from any 
+    strong Local Scope
+    | . This is known as variable shadowing, we must
+    |     protect our code against this scenario and we can do this by avoiding global declarations.
+  p
+    | The 
+    strong Local Scope
+    |  is a more manageable scope and gives us protection against variable shadowing.
+    |     Declarations within a 
+    strong Local Scope
+    |  cannot be altered from outside of that scope, in effect they
+    |     become &ldquo;private&rdquo;.
+  p
+    | This is similar to Access Modifiers in C#, but we achieve it in a different way with JavaScript:
+  h4 Problem
+  pre.card.p-4.
+    function myFunction() {
+        console.log("myFunction in Global Scope 1");
+    }
+    myFunction();
+    
+    function myFunction() {
+        console.log("myFunction in Global Scope 2");
+    }
+    myFunction();  
+  p
+    | The above code will output &ldquo;
+    code myFunction in Global Scope 2
+    | &rdquo; twice, because the method is declared
+    |     twice within the same 
+    strong Global Scope
+    | . This results in &ldquo;shadowing&rdquo;. Imagine if these declarations
+    |     existed in separate scripts, but are loaded onto the same 
+    strong Global Scope
+    | . They would clash, and
+    |     the last declaration of the method would override the first.
+  h4 Solution
+  pre.card.p-4.
+    (function() {
+      function myFunction() {
+        console.log("Local Scope");
+      }
+      myFunction();
+    })();
+    
+    function myFunction() {
+      console.log("Global Scope");
+    }
+    myFunction();  
+  p
+    | This would ensure we have two separate declarations of the method myFunction, resulting in both methods being run
+    | individually. The output in this case is &ldquo;
+    code Local Scope
+    | &rdquo; &ldquo;
+    code Global Scope
+    | &rdquo;.
+  h2 7. Closures
+  p
+    | A 
+    em
+      strong Closure 
+    | is the encasing of a function together with references to its outer state,
+    |     created at the point of definition. A closure gives you access to an outer functions scope and state (the
+    |     Lexical environment) from the inner function.
+  p
+    em
+      | &ldquo;A closure is the combination of a function and the lexical environment within which that function was
+      | declared. This environment consists of any local variables that were in-scope at the time the closure was
+      | created&rdquo;
+    a(href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures')
+      em https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+  p
+    | You should use 
+    em
+      strong Closures 
+    | to emulate private variables where necessary. In a scenario
+    |     where you want to protect a state a function will run against, we should use 
+    em
+      strong Closures
+    | .
+  p
+    em
+      strong Closures 
+    | are also key for managing the global namespace, and again we should consider
+    |     them where possible.
+  h4 Problem
+  tbody
+    tr
+      td.wysiwyg-macro-body
+        pre.card.p-4.
+          var increment = function(prop) {
+              return !isNaN(prop) ? prop + 1 : 0;
+          }
+          
+          var increment = function(prop) {
+              return !isNaN(prop) ? prop + 2 : 0;
+          }
+          
+          // Imagine the above methods are declared in seperate scripts, but in the same global scope.
+          // The context of the add method has changed. We may not be aware of the new definition.
+          
+          // Now when we use the method, we are using the latter definition. 
+          // Not our intention.
+          
+          increment(0); // This will return 2        
+  p
+    | This will return 2, as we have been able to change the definition of the method. This highlights the need for
+    em
+      strong Closures 
+    | and why they are necessary to help us manage the global namespace.
+  h4 Solution
+  pre.card.p-4.
+    const methodFactory = function() {
+        return function(prop) {
+            return !isNaN(prop) ? prop + 1 : 0;
+        }
+    }
+    
+    let increment = methodFactory();
+    
+    increment(0); // This will return 1  
+  p
+    | This will return 1 as intended. We cannot, in anyway change the definition of the nested &ldquo;private&rdquo; method. We
+    | also use the 
+    em
+      strong const
+    |  keyword to protect our namespace definition.
+  h3 7.1 The Module Pattern
+  p
+    | A common type of closure is the 
+    em
+      strong Module Pattern
+    | . This offers encapsulation, a closed
+    |     scope, cohesion and the ability to expose only the methods we wish to via an interface, we do this in the form
+    |     of an object literal. Methods which are not exposed remain private.
+  h4 Problem
+  pre.card.p-4.
+    var module = {
+    
+        privateMethod: function() {
+    
+        },
+    
+        publicMethod: function() {
+    
+        }
+    
+    };  
+  p
+    | The above would offer a namespace, but expose all methods. We also could not capture state, as it is not a
+    | closure.
+  h4 Solution
+  pre.card.p-4.
+    const module = (function() {
+    
+        const privateMethod = function() {
+    
+        }
+    
+        const publicMethod = function() {
+    
+        }
+    
+        return {
+            publicMethod: publicMethod
+        }
+    
+    })();  
+  p
+    | The same code written using the 
+    em
+      strong Module Pattern
+    | . The anonymous function encapsulates the
+    |     scope of the module and returns an object literal, exposing only the methods we would like to expose.
+  h3 7.2 What is an AMD Module ?
+  p
+    | An 
+    strong AMD
+    |  module extends the standard 
+    em
+      strong Module Pattern
+    | , and is wrapped
+    |     using the 
+    em
+      strong define() 
+    | function in conjunction with a loader such as
+    strong  Require.js
+    | , 
+    strong Browserify
+    em
+      strong  
+    | or 
+    strong Webpack
+    | ,
+    |     among others,
+    em
+      strong  
+    | in order to load the module and any dependencies. 
+    a(href='https://requirejs.org/docs/whyamd.html') https://requirejs.org/docs/whyamd.html
+  h4 Example
+  pre.card.p-4.
+    //Calling define with a dependency array and a factory function
+    define(['dep1', 'dep2'], function (dep1, dep2) {
+    
+        const base = 0;
+    
+        const myMethod = function(prop) {
+            return base + prop;
+        }
+    
+        return {
+            myMethod: myMethod
+        };
+    });  
+  p
+    | We can now load this module via a module loader, meaning we can utilise dependency injection, allowing us to
+    | manage our dependencies more economically, instead of loading them all at once.
+  h2
+    | 8. What is 
+    em this
+    |  in JavaScript ?
+  p
+    | In JavaScript when we need to refer to the current context we will use the 
+    em
+      strong
+        | this
+    | keyword. It is common in a number of programming languages to use
+    em
+      strong  this 
+    |  for when you would like to refer to a property or method within the current
+    |     context. Not so straightforward in JavaScript however, because the context is always changing depending on where
+    |     and how the code has been executed.
+  p
+    | The key thing to remember with 
+    em
+      strong  this  
+    | and JavaScript is that it is 
+    strong
+      | relative to
+      | the current scope
+    | , whether that be 
+    strong Local Scope
+    |  or 
+    strong Global Scope
+    | .
+    |     Because there are multiple scopes in JavaScript, it is important we understand which
+    em
+      strong  this 
+    |  we are referring to.
+  p
+    | For example in terms of the web browser environment, using 
+    em
+      strong  this 
+    |  in the 
+    strong
+      | Global
+      | Scope
+    |  will refer to the Window object. But if we are to use 
+    em
+      strong  this 
+    |  from
+    |     within an event callback method, 
+    em
+      strong  this 
+    |  will refer to the context of the event and not
+    |     beyond.
+  h3
+    | 8.1 Arrow functions and Lexical 
+    em this
+  p
+    strong Arrow functions
+    | , Introduced with ES6, allow us to write shorter and cleaner code. But beyond
+    |     their abbreviated syntax, the real power of arrow functions lies in their handling of
+    em
+      strong  this 
+    | .
+  p
+    | &ldquo;Before arrow functions, every new function defined its own 
+    code this
+    |  value based on how the function was
+    |     called&rdquo; 
+    a(href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions')
+      | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+  p
+    | It is possible to have access to the defining context from within a 
+    strong Local Scope
+    | , the defining
+    |     context being that which defined the method and not the context of the method itself. This is known as
+    strong  Lexical
+    em
+      strong  this 
+    | , and can be achieved with the use of 
+    strong
+      | arrow
+      | functions
+    | .
+  p
+    | Arrow functions allow access to the defining context, because there is no binding of 
+    em
+      strong
+        | this 
+    | in 
+    strong arrow functions
+    | , unlike regular functions, which bind
+    em
+      strong  this 
+    |  to the context that called the function, whether that be Window, Document, Event
+    |     etc.
+  p See the below example taken from the Mozilla JavaScript reference:
+  p
+    a(href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions')
+      | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+  h4 Problem
+  pre.card.p-4.
+    function Person() {
+        var that = this;
+        that.age = 0;
+    
+        setInterval(function growUp() {
+            // The callback refers to the `that` variable of which
+            // the value is the expected object.
+            that.age++;
+        }, 1000);
+    }
+    
+    var person = new Person();  
+  p
+    | In order to get hold of 
+    em
+      strong  this 
+    |  in the defining scope from the calling scope, we need to
+    |     first declare 
+    em
+      strong  this 
+    |  as a local variable within the defining scope. We can later then
+    |     refer to 
+    em
+      strong  this  
+    | as 
+    em
+      strong that
+    |  and be confident we know which
+    em
+      strong  this  
+    | we are referring to. But this means mapping 
+    em
+      strong  this  
+    | to a
+    |     new variable before the context changes. Imagine if you had many nested scopes, each with their own
+    em
+      strong  this 
+    | .
+  h4 Solution
+  pre.card.p-4.
+    function Person() {
+        this.age = 0;
+    
+        setInterval(() => {
+            this.age++; // |this| properly refers to the Person object
+        }, 1000);
+    }
+    
+    var person = new Person();  
+  p
+    | Now that we are using an arrow function we are able to use plain old 
+    em
+      strong  this 
+    |  in order to
+    |     refer to the defining scope. This is because the arrow function has no 
+    em
+      strong  this 
+    |  bound to
+    |     it.
+  p
+    | It is very important to only use arrow functions if you intend the use of 
+    em
+      strong  this 
+    |  to be
+    |     handled in this way. Using arrow functions may not always result in the intended outcome, it might be that the
+    |     handling of 
+    em
+      strong  this  
+    | in a more traditional method is better for your needs. Use arrow
+    |     functions with caution, they are great but they have their purpose and are not always necessary, despite their
+    |     nice syntax. We should use arrow methods when we require access to the defining scope.
+  h2 9. Equality
+  p
+    | Equality is very important due to the dynamic nature of JavaScript. We need to be confident when making
+    | comparisons that a value is what we expect it to be.
+  p
+    | When comparing a value against another using only a 
+    strong Reference Equality Operator (==/!=)
+    | ,
+    |     JavaScript will attempt to match the types of two values.
+    strong  
+    | But in doing this the value itself
+    |     can change, meaning you are no longer comparing the original values. The values are coerced into something they
+    |     are not.
+  p
+    | In other words, 0 is equal to &ldquo;&ldquo; in JavaScript when comparing an integer to a string and only using a
+    strong Reference Equality Operator (==/!=) 
+    | because the empty string gets converted into a number, that
+    |     number being a 0 by best match according to JavaScript. But a zero is not equal to an empty string!
+  p
+    | For this reason, 
+    strong we should always
+    |  be using the 
+    strong Identity Equality Operator
+    strong (===/!==)
+    |  when comparing values in JavaScript. When using the 
+    strong
+      | Identity Equality
+      | Operator
+    |  there is no type conversion and both values must be of the same type in order to be
+    |     considered &ldquo;equal&rdquo;, so we can be confident they are indeed the same.
+  h4 Problem
+  pre.card.p-4.
+    "" == 0; // this equals true.  
+  p
+    | This returns 
+    em true, 
+    | which is a real problem when trying to compare types. Imagine if we were to now
+    |     perform a sum on a variable that is in fact equal to &ldquo;&rdquo; because we assume it to be a number after the above
+    |     equation returns true ? We would get a NaN error!
+  h4 Solution
+  pre.card.p-4.
+    "" === 0; // this equals false, and so it should!  
+  p
+    | Now using the 
+    strong Identity Equality Operator
+    |  we are able to not only be confident that these values
+    |     do not match, but also their types are not the same either, so this will now return false. An equation such as 0
+    |     === 0 would return true, this is what we are checking for.
+  h4 Problem
+  pre.card.p-4.
+    "" != 0; // this would return false, meaning these are equal when they are not.  
+  p
+    | We can clearly see these values are not equal but the 
+    strong Reference Equality Operator
+    |  is distorting
+    |     our perception of what is true or false.
+  h4 Solution
+  pre.card.p-4.
+    "" !== 0; // this would return true, as it should because they are not equal.  
+  p
+    | We can now be confident that these values do not match by using the 
+    strong Identity Equality Operator
+    | .
+  h3 9.1 Type Checking - Checking numbers with isNaN();
+  p
+    | JavaScript has a great tool for checking if a value is a number - 
+    em
+      strong isNaN()
+    | . We should
+    |     always use 
+    em
+      strong isNaN() 
+    | where possible before attempting number equations. This will
+    |     prevent us from getting 
+    em
+      strong NaN
+    strong  
+    | errors when dealing with numbers.
+  p
+    | This is useful for when we are not checking for a particular numerical value but specifically the type and do not
+    | want to perform a 
+    strong typeof 
+    | check, which we could do in order to check a value is a &ldquo;number&rdquo; but
+    |     we would need to check this specifically ( 
+    em === &ldquo;number&rdquo;
+    | ), 
+    em
+      strong isNaN();
+    |  handles
+    |     the type checking for us in an easy to use function.
+  h4 Problem
+  pre.card.p-4.
+    let valueA = "abc";
+    let valueB = 1;
+    let result = 0;
+    
+    // First problem
+    result = valueA + valueB;
+    console.log(result);
+    
+    // Second problem
+    result = valueA * valueB;
+    console.log(result);  
+  p
+    | There are a couple of things you will notice here. 
+    strong The first
+    strong problem
+    |  being that
+    |     instead of attempting a sum of two values, which was our intention, we have performed a string concatenation
+    |     instead. JavaScript has coerced 
+    em
+      strong valueB 
+    | into being a string. 
+    strong
+      | The second
+      | problem
+    |  is when we attempt to perform a more advanced equation, in this case with multiplication.
+    |     This causes a 
+    em
+      strong NaN
+    strong  
+    | error. This is because the types do not match and,
+    |     we could have prevented this from occurring:
+  h4 Solution
+  pre.card.p-4.
+    let valueA = "abc";
+    let valueB = 1;
+    let result = 0;
+    if(!isNaN(valueA) && !isNaN(valueB)) {
+      result = valueA * valueB;
+    }
+    console.log(result);
+    
+    valueA = 2;
+    valueB = 2;
+    if(!isNaN(valueA) && !isNaN(valueB)) {
+      result = valueA * valueB;
+    }
+    console.log(result);  
+  p
+    | Notice how 
+    em
+      strong result 
+    | is still just 0 for the first output. This is because we will only
+    |     attempt to multiply these two values if they are both numbers.
+  p
+    | With our second pass, we have re-assigned 
+    em
+      strong valueA
+    |  and 
+    em
+      strong valueB
+    |     to indeed be numbers. Now running the same code, 
+    em
+      strong result 
+    | returns 4 because 
+    em
+      strong isNaN()
+    strong ;
+    |  returned false.
+  p
+    | There is one important thing to always remember with 
+    strong isNaN(); 
+    | It is checking if a
+    em
+      strong NaN
+    strong  
+    | error is returned from type checking a value. So in the above
+    |     snippet we are checking that a 
+    em
+      strong NaN
+    strong  
+    | error has 
+    strong
+      u NOT
+    |  occurred by using the 
+    em
+      strong !
+    | operator (exclamation mark) to check the result is
+    |     false. Keep this in mind when using 
+    em
+      strong isNaN();
+  h3
+    | 9.2 Type Checking - Checking for specific types with 
+    em
+      strong typeof
+  p
+    | Another very important tool when it comes to checking for types is the 
+    em
+      strong typeof
+    strong
+    | keyword. JavaScript is not strongly typed, we need to manually check for types if we want to be sure.
+  p
+    | We should be using 
+    em
+      strong typeof
+    |  even if we are sure of a type, incase the context has been
+    |     altered for example, or a value is 
+    em
+      strong undefined
+    | . This way our code will only run if the
+    |     value is of the correct type. This offers protection against incorrect use.
+  p
+    em
+      strong typeof
+    |  is best used in conjunction with an 
+    em
+      strong if
+    |  statement and
+    |     an 
+    strong Identity Equality Operator
+    | .
+  p
+    em
+      strong typeof 
+    | will return a string representation of the type, so when testing for a type, it
+    |     is important to know the string definition for each type:
+  p &ldquo;undefined&rdquo;
+  p &ldquo;object&rdquo;
+  p &ldquo;boolean&rdquo;
+  p &ldquo;bigint&rdquo;
+  p &ldquo;string&rdquo;
+  p &ldquo;symbol&rdquo;
+  p &ldquo;function&rdquo;
+  h4 Problem
+  pre.card.p-4.
+    let callback = true;
+    
+    let get = (callback) => {
+    
+        if (callback) {
+            callback();
+        }
+    }
+    
+    get(callback);    
+  p
+    | This will give an error &ldquo;
+    em
+      strong callback is not a function
+    | &rdquo;. This is because we loosely
+    |     checked the callback parameter and assumed that whatever is being passed in is always going to be a function and
+    |     something that we can run. But in this case, it is not a function, so we have a problem. What we need to do, is
+    |     check specifically if the parameter is a function before attempting to handle it as a function.
+  h4 Solution
+  pre.card.p-4.
+    let callback = true;
+    
+    let get = (callback) => {
+    
+        if (typeof callback === "function") {
+            callback();
+        }
+    }
+    
+    get(callback);  
+  p
+    | This will now not error, as we are checking what type the callback parameter is first. If we were to pass in a
+    | callback function, then the function would run. This is also known as a 
+    strong higher order function
+    |     or 
+    strong delegate function
+    | .
+  h4 Example
+  pre.card.p-4.
+    let callback = () => console.log("This is our callback");
+    
+    let get = (callback) => {
+    
+        if (typeof callback === "function") {
+            callback();
+        }
+    }
+    
+    get(callback);  
+  p
+    | This will now run and we will also see an output in our developer console &ldquo;
+    em This is our callback
+    | &rdquo;.
+  h2
+    | 10. What is 
+    em undefined
+    |  ? How to reliably test for it ?
+  p
+    em
+      strong Undefined
+    |  is a primitive type in JavaScript, along with Boolean, Number, String,
+    |     Symbol, Null etc.
+  p
+    | We can think of 
+    em
+      strong undefined
+    |  as the default return type in JavaScript for an object or
+    |     variable that has not yet been initialised. If something is not defined, it is therefore undefined.
+  p
+    | It is common, when viewing an 
+    em
+      strong undefined
+    |  JavaScript error in the console to see one of
+    |     the following:
+  pre.card.p-4.
+    TypeError: 'undefined' is not a function
+    TypeError: Cannot read property '<prop-name>' of undefined  
+  p
+    | Whilst it is best practice to always initialise a variable or object first with a default value of the correct
+    | type, sometimes this is out of our control. This is when we need to defend against
+    em
+      strong  undefined
+    | .
+  p
+    | We can reliably test for 
+    em
+      strong undefined
+    |  by using 
+    em
+      strong typeof
+    | .
+  h4 Problem
+  pre.card.p-4.
+    let myVariable;
+    console.log(myVariable);  
+  p
+    | This variable is not initialised with any value. So when we try and use it, we see that it is
+    em
+      strong  undefined
+    | .
+  h4 Solution
+  pre.card.p-4.
+    let myVariable;
+    if (typeof myVariable !== "undefined") {
+        console.log(myVariable);
+    }  
+  p
+    | By using 
+    em
+      strong typeof
+    |  we can check to see if a variable returns the string representation of
+    |     the primitive type -
+    em
+      strong  undefined. 
+    | By doing this check, the code will not run if the
+    |     variable is 
+    em
+      strong undefined
+    | . If our variable is initialised however, then the above code
+    |     would run without error.
+  h4 Example
+  pre.card.p-4.
+    let myVariable = 0;
+    if (typeof myVariable !== "undefined") {
+        console.log(myVariable);
+    }  
+  p
+    | In this example we see how initialising with a default value allows the above check to pass and the code to run.
+  h3
+    | 10.1 Handling 
+    em undefined
+  p
+    | It is important to always protect against the occurrence of 
+    em
+      strong undefined
+    |  in our code, such
+    |     an error can cause the entire script to freeze. We can do this by making sure we always initialise our
+    |     definitions before using them.
+  p
+    | This can be done both in a method signature and within our closures/methods at the point of definition.
+  h4 Problem
+  pre.card.p-4.
+    let price;
+    price.toFixed(2);  
+  p
+    | You will notice when running this code we get an error: 
+    em
+      strong
+        | TypeError: Cannot read property &apos;toFixed&apos; of
+        | undefined
+    | . This is because, although we have defined our variable, we have not initialised
+    |     it with any value.
+  h4 Solution
+  pre.card.p-4.
+    let price = 0;
+    price.toFixed(2);  
+  p
+    | By assigning the variable with an initial value it is no longer 
+    em
+      strong undefined
+    |  and when we
+    |     want to act on it, we can, without getting an error.
+  p
+    | This can be more common in a method signature, with the assumption that something being passed in is safe to use
+    | straight away, when it is not:
+  h4 Problem
+  pre.card.p-4.
+    let myMethod = (price) => {
+      return price.toFixed(2);
+    }
+    myMethod();  
+  p
+    | This will also error with the same response as the first problem 
+    em
+      strong
+        | TypeError: Cannot read property
+        | &apos;toFixed&apos; of undefined
+    | .
+  h4 Solution
+  pre.card.p-4.
+    let myMethod = (price = 0) => {
+      return price.toFixed(2);
+    }
+    myMethod();  
+  p
+    | Now with a default value assigned in the method signature, the above method will not error.
+  p
+    | It is however safer to combine both a default value with an undefined 
+    em
+      strong typeof
+    |  check in
+    |     the same method. This will give maximum protection against an undefined value.
+  h4 Example
+  pre.card.p-4.
+    let myMethod = (price = 0) => {
+      if (typeof price !== "undefined") {
+        price = price.toFixed(2);
+      }
+      return price;
+    }
+    myMethod();  
+  h2 11. Performance
+  p
+    | Accessing the DOM is something very common in JavaScript, due to the position it tends to sit within the stack.
+    | For the most part, accessing the DOM for a single element is no big deal. But if working on a large application,
+    | with the DOM populated with many HTML elements, it is very important to understand what is happening every time
+    | you get or update an element.
+  h4 Problem
+  pre.card.p-4.
+    document.querySelector("#elementId").innerText = "Some text";
+    
+    document.getElementById("elementId").setAttribute("class", "someClass");  
+  p
+    | The above will perform a search of the whole DOM as the HTML is parsed in order to find the elements that are
+    | being requested. For a single use, it can be argued storing the element before using it is of little benefit,
+    | but for multiple updates it is important to store the element first.
+  p
+    | We would not want to be calling any of the above methods thousands of times during an iteration for example. We
+    | would want to be using caching in order to store and access elements in memory, instead of physically accessing
+    | the DOM every time.
+  p
+    | To give this some context, such frameworks as React and Vue.js build up a &ldquo;virtual DOM&rdquo; cached in memory, which
+    | is always kept in sync with the physical DOM on screen by a process called &ldquo;Reconciliation&rdquo;, this helps a great
+    | deal to improve performance and is good evidence that caching DOM access is good practice and good for
+    | performance. See the React documentation for more detail on the &ldquo;Virtual DOM&rdquo; - 
+    a(href='https://reactjs.org/docs/faq-internals.html') https://reactjs.org/docs/faq-internals.html
+  h4 Solution
+  pre.card.p-4.
+    let element = document.getElementById("elementId");
+    element.innerText = "Some text";
+    element.setAttribute("class", "someClass");  
+  p
+    | Now we only access the physical element once, store it and then update it. Notice updating the stored element
+    | will also update the physical DOM due to the stored element being of 
+    strong reference type
+    | . This is
+    |     because JavaScript, like other programming languages, also has 
+    strong reference
+    |  types and
+    strong  value
+    |  types.
+  h3
+    | 11.1 Iteration and performance. Which to use ? (
+    em for, while, forEach, map, filter, reduce
+    | )
+  p
+    | There are various ways we can loop in JavaScript, depending on what it is you want to do. Some methods are
+    | quicker than others and much more performant, again depending on the size of the iteration.
+  h4 Big O Notation
+  p
+    strong Big O
+    |  is a great way to assess how expensive your program is. This may help decide which
+    |     iteration method might fit best to maximise on performance. A great explanation of 
+    strong Big O
+    |  in
+    |     relation to JavaScript can be found here - 
+    a(href='https://medium.com/karuna-sehgal/a-simplified-explanation-of-the-big-o-notation-82523585e835')
+      | https://medium.com/karuna-sehgal/a-simplified-explanation-of-the-big-o-notation-82523585e835
+  h4
+    em map(), filter(), reduce(), forEach()
+  p
+    | These looping method are all on the Array prototype, which means we can only use them directly on an array. They
+    | all require a 
+    em
+      strong higher order function
+    | , as they all take a single method as a parameter.
+  p
+    | The method passed is performed on every iteration, so be aware of this when using such array methods. Such
+    | methods are slow to run when considering a large number of iterations and are not particularly performant. They
+    | are good to use on small arrays and can really help reduce code, but we should not be using them for all
+    | scenarios, especially not because they read nicely.
+  h4
+    em for
+    |  and 
+    em while
+  p
+    | These are the more traditional looping methods, and most common in programming languages. They are far more
+    | adaptive than the &ldquo;ready made&rdquo; Array looping methods in JavaScript and can be far more performant with a large
+    | number of iterations.
+  p
+    em
+      strong for
+    |  looping is great for when you know your limit and 
+    em
+      strong while
+    |     looping is best used when we want a loop to run until a given condition.
+  p We should be using the correct looping techniques for each given scenario.
+  p
+    | The code below demonstrates how certain looping techniques are not as good as others when it comes to
+    | performance:
+  h4 Examples
+  pre.card.p-4.
+    // Lets setup an example to loop against
+    let array = [];
+    let i = 0;
+    
+    while(i < 2000000){
+        array.push(Math.random(5));
+        i++;
+    }
+    
+    let calc = (a) => a * 1000;
+    let getTime = () => new Date().getTime();
+    let timeDifference = (start, end) => end - start;
+    
+    // Now lets run the below looping methods to see which is more performant.
+    let mapExample = () => {
+        let start = getTime();
+        array.map((item) => item = calc(item));
+        let end = getTime();
+        console.log(`Map example took: ${timeDifference(start,end)}`);
+    }
+    
+    let forEachExample = () => {
+        let start = getTime();
+        array.forEach((item) => item = calc(item));
+        let end = getTime();
+        console.log(`ForEach example took: ${timeDifference(start,end)}`);
+    }
+    
+    let forwardsForExample = () => {
+        let start = getTime();
+        for(let i = 0; i < array.length; i++){
+            array[i] = calc(array[i]);
+        }
+        let end = getTime();
+        console.log(`Forward for loop example took: ${timeDifference(start,end)}`);
+    }
+    
+    let forwardsForCachingExample = () => {
+        let start = getTime();
+        let length = array.length;
+        let i;
+        for(i = 0; i < length; i++){
+            array[i] = calc(array[i]);
+        }
+        let end = getTime();
+        console.log(`Forward for loop, w/ cached length example took: ${timeDifference(start,end)}`);
+    }
+    
+    let backwardsForExample = () => {
+        let start = getTime();
+        for(let i = array.length; i--;){
+            array[i] = calc(array[i]);
+        }
+        let end = getTime();
+        console.log(`Backward for loop example took: ${timeDifference(start,end)}`);
+    }
+    
+    let backwardsForCachingExample = () => {
+        let start = getTime();
+        let length = array.length;
+        let i = length;
+        for(i; i--;){
+            array[i] = calc(array[i]);
+        }
+        let end = getTime();
+        console.log(`Backward for loop example took: ${timeDifference(start,end)}`);
+    }
+    
+    let whileExample = () => {
+        let start = getTime();
+        let i = 0;
+        let length = array.length;
+        while(i < length) {
+            array[i] = calc(array[i]);
+            i++;
+        }
+        let end = getTime();
+        console.log(`While loop example took: ${timeDifference(start,end)}`);
+    }
+    
+    mapExample();
+    forEachExample();
+    forwardsForExample();
+    forwardsForCachingExample();
+    backwardsForExample();
+    backwardsForCachingExample();
+    whileExample();  
+  p
+    | We can clearly see from the resulting outputs after running this code which looping methods are more performant
+    | and which are better at handling a larger number of iterations.
+  p You will see something like:
+  pre.card.p-4.
+    Map example took: 507
+    ForEach example took: 137
+    Forward for loop example took: 5
+    Forward for loop, w/ cached length example took: 5
+    Backward for loop example took: 7
+    Backward for loop example took: 5
+    While loop example took: 4  
+  p
+    | With the Array methods Array.
+    em
+      strong map()
+    |  and Array.
+    em
+      strong forEach()
+    |  being
+    |     the slowest, especially Array.
+    em
+      strong map()
+    | . Array.
+    em
+      strong reduce()
+    |  and
+    |     Array.
+    em
+      strong filter()
+    |  have different uses to what we are doing here, but both are equally as
+    |     slow as Array.
+    em
+      strong map() 
+    | depending on the method being passed and what 
+    em it
+    |  is doing
+    |     of course.
+  p
+    | The various iterations of 
+    em
+      strong for 
+    | looping are much alike, but there are small performance
+    |     gains to be made with these techniques. Notice we store both the index variable and the length of the array
+    |     before iteration. We should be storing both in memory and not declaring them for every iteration.
+  p
+    | Both 
+    em
+      strong for
+    |  and 
+    em
+      strong while
+    |  come out on top when compared to other
+    |     looping techniques.
+  h2 12. How can we apply the SOLID principles to JavaScript ?
+  p
+    strong The S.O.L.I.D Principles
+    |  are a set of principles that traditionally apply to classic object
+    |     oriented programming languages. Whilst JavaScript is not solely an object oriented language and is very dynamic
+    |     in nature, consisting of multiple paradigms, we can apply the 
+    strong SOLID principles
+    |  for the most
+    |     part.
+  p
+    | Arguably there are a number of ways the 
+    strong SOLID principles
+    |  can be interpreted in JavaScript,
+    |     especially when it comes to inheritance, but we will focus on solutions already looked at in this document. We
+    |     have already been following the 
+    strong SOLID principles
+    |  to some degree.
+  h3 12.1 S - Single Responsibility Principle
+  p
+    strong The Single Responsibility Principle
+    |  aims to have a single concern for any given piece of code.
+    |     We should not couple logic and responsibilities together, we should separate out the logic and responsibilities.
+    |     Smaller, manageable methods will allow for single responsibility, which in turn will allow for effective unit
+    |     testing.
+  h4 Problem
+  pre.card.p-4.
+    const doMath = (firstNumber = 0, secondNumber = 0, operator = "+") => {
+        let result = 0;
+        if(operator === "+") {
+            result = firstNumber + secondNumber;
+        } else if (operator === "-") {
+            result = firstNumber - secondNumber;
+        } else if (operator === "x") {
+            result = firstNumber * secondNumber;
+        }
+        return result;
+    }
+    
+    let result = doMath(1, 2, "+");
+    console.log(result);
+    
+    result = doMath(2, 1, "-");
+    console.log(result);
+    
+    result = doMath(1, 2, "x");
+    console.log(result);  
+  p
+    | This example breaks a number of the 
+    strong SOLID principles
+    | . It is not following single responsibility
+    |     because a single method is being used for many concerns. This method would only grow and become unmanageable
+    |     with the more logic we give it.
+  p We can address this by having a dedicated method for each task:
+  h4 Solution
+  pre.card.p-4.
+    const add = (firstNumber = 0, secondNumber = 0) => firstNumber + secondNumber;
+    
+    const subtract = (firstNumber = 0, secondNumber = 0) => firstNumber - secondNumber;
+    
+    const multiply = (firstNumber = 0, secondNumber = 0) => firstNumber * secondNumber;
+    
+    let result = add(1, 2);
+    console.log(result);
+    
+    result = subtract(2, 1);
+    console.log(result);
+    
+    result = multiply(1, 2);
+    console.log(result);  
+  p
+    | Instead of having a single method that has many responsibilities we can have individual methods, each with a
+    | single responsibility. There is no logic involved to decide which method to use and we can be clear which method
+    | we would like to use in each case. Now we could unit test each method individually, for example, making this
+    | much more manageable.
+  h3 12.2 O - Open Closed Principle
+  p
+    strong The Open Closed Principle
+    |  - Open for extension, closed for modification. We need to write our
+    |     code in such a way that we can extend it, without needing to change existing code.
+  p
+    | We will go back to the bad example used for 
+    strong The Single Responsibility Principle
+    | .
+  h4 Problem
+  pre.card.p-4.
+    const doMath = (firstNumber = 0, secondNumber = 0, operator = "+") => {
+        let result = 0;
+        if(operator === "+") {
+            result = firstNumber + secondNumber;
+        } else if (operator === "-") {
+            result = firstNumber - secondNumber;
+        } else if (operator === "x") {
+            result = firstNumber * secondNumber;
+        } else if (operator === "/") {
+            result = firstNumber / secondNumber;
+        }
+        return result;
+    }
+    
+    let result = doMath(1, 2, "+");
+    console.log(result);
+    
+    result = doMath(2, 1, "-");
+    console.log(result);
+    
+    result = doMath(1, 2, "x");
+    console.log(result);
+    
+    result = doMath(6, 2, "/");
+    console.log(result);  
+  p
+    | As it stands, we could not extend the functionality of our method without changing the existing code. This would
+    | mean all logic surrounding this method would need to be retested, even if we only changed a single character or
+    | line or added a new 
+    em
+      strong if 
+    | clause. We can improve our refactor for the 
+    strong
+      | Single
+      | Responsibility Principle
+    |  even further to now cater for 
+    strong The Open Closed Principle
+    | .
+  h4 Solution
+  pre.card.p-4.
+    let math = (function() {
+        
+        const add = (firstNumber = 0, secondNumber = 0) => firstNumber + secondNumber;
+    
+        const subtract = (firstNumber = 0, secondNumber = 0) => firstNumber - secondNumber;
+    
+        const multiply = (firstNumber = 0, secondNumber = 0) => firstNumber * secondNumber;
+    
+        return {
+            add: add,
+            subtract: subtract,
+            multiply: multiply
+        }
+    })();
+    
+    math.divide = (firstNumber = 0, secondNumber = 0) => firstNumber / secondNumber;
+    
+    let result = math.add(1, 2);
+    console.log(result);
+    
+    result = math.subtract(2, 1);
+    console.log(result);
+    
+    result = math.multiply(1, 2);
+    console.log(result);
+    
+    result = math.divide(6, 2);
+    console.log(result);  
+  p
+    | It is now possible to extend this solution. Using the 
+    strong module pattern
+    | , we can now add additional
+    |     methods at will, without changing any original code in the module. But we should keep in mind that adding
+    |     methods this way will always expose them via the modules interface.
+  p
+    | We can achieve similar with 
+    strong prototypal inheritance
+    | , but with the added benefit of being able to
+    |     pass the same behaviour to 
+    strong any
+    |  derived object:
+  h4 Solution
+  pre.card.p-4.
+    const MathFactory = function() {
+        
+        this.add = (firstNumber = 0, secondNumber = 0) => firstNumber + secondNumber;
+    
+        this.subtract = (firstNumber = 0, secondNumber = 0) => firstNumber - secondNumber;
+    
+        this.multiply = (firstNumber = 0, secondNumber = 0) => firstNumber * secondNumber;
+      }
+    
+    let mathUtil = new MathFactory();
+    
+    MathFactory.prototype.divide = (firstNumber = 0, secondNumber = 0) => firstNumber / secondNumber;
+    
+    let result = mathUtil.add(1, 2);
+    console.log(result);
+    
+    result = mathUtil.subtract(2, 1);
+    console.log(result);
+    
+    result = mathUtil.multiply(1, 2);
+    console.log(result);
+    
+    result = mathUtil.divide(6, 2);
+    console.log(result);  
+  p
+    | Notice that we have instantiated the MathFactory and then modified the base, which has used prototypal
+    | inheritance to modify all derived instances. This would not break the 
+    strong The Open Closed Principle
+    |     and also not break the 
+    strong Liskov Substitution Principle
+    | , if there were multiple instances of the
+    |     MathFactory, they would all still be interchangeable.
+  p A solution now using ES6 Classes:
+  h4 Solution
+  pre.card.p-4.
+    class MathFactory {
+        
+        add = (firstNumber = 0, secondNumber = 0) => firstNumber + secondNumber;
+    
+        subtract = (firstNumber = 0, secondNumber = 0) => firstNumber - secondNumber;
+    
+        multiply = (firstNumber = 0, secondNumber = 0) => firstNumber * secondNumber;
+    }
+    
+    let mathUtil = new MathFactory();
+    
+    MathFactory.prototype.divide = (firstNumber = 0, secondNumber = 0) => firstNumber / secondNumber;
+    
+    let result = mathUtil.add(1, 2);
+    console.log(result);
+    
+    result = mathUtil.subtract(2, 1);
+    console.log(result);
+    
+    result = mathUtil.multiply(1, 2);
+    console.log(result);
+    
+    result = mathUtil.divide(6, 2);
+    console.log(result);  
+  h3 12.3 L - Liskov Substitution Principle
+  p
+    strong The Liskov Substitution Principle 
+    | states that any derived object should be substitutable for the
+    |     base it was derived from without breaking the application.
+  p
+    | Whilst this may not seem very relevant to a simple JavaScript application, not requiring instances and
+    | inheritance, we should still understand it.
+  p
+    | We could apply this way of thinking to any object composition, to allow for swappable implementation, even with
+    | the 
+    strong module pattern
+    |  and its object literal interface.
+  p
+    | As an example of this in JavaScript we can look to the previous. We could have added a new method without using
+    | prototypal inheritance by adding it directly to the instance. The problem with this is that the instances would
+    | now differ from the base, and therefore would not be interchangeable. This would break the 
+    strong
+      | Liskov
+      | Substitution Principle
+    | .
+  p Let&apos;s try and use another example to demonstrate the problem further.
+  h4 Problem
+  pre.card.p-4.
+    class Dog {
+        walk() {
+            console.log("The Dog is walking.");
+        }
+        sleep() {
+            console.log("The Dog is sleeping.");
+        }
+        bark() {
+            console.log("The Dog is barking.");
+        }
+    }
+    
+    class Cat extends Dog {
+        walk() {
+            console.log("The Cat is walking.");
+        }
+        sleep() {
+            console.log("The Cat is sleeping.");
+        }
+        bark() {
+            throw new Error("Cats do not bark");
+        }
+        meow(){
+            console.log("The Cat is meowing.");
+        }
+    }
+    
+    let dog = new Dog();
+    let cat = new Cat();
+    let animals = [dog, cat];
+    
+    animals.forEach((animal) => {
+        animal.bark();
+    });  
+  p
+    | This will cause an error: 
+    code Error: Cats do not bark
+    |  This has happened because, while both Dog and Cat
+    |     have a lot in common (eat, sleep, walk, etc), they do not make the same noises. So in an attempt to make the Dog
+    |     &ldquo;fit&rdquo; into the Cat type, we have amended Cat, we have been lazy and tried to extend Dog. But in doing this it
+    |     means the subclass cannot be substituted for the superclass (base) in the existing application. It is also
+    |     confusing to read, as Cats do not bark, neither do all animals walk.
+  h4 Solution
+  pre.card.p-4.
+    class Animal {
+        move() {
+            console.log("The Animal is moving.");
+        }
+        sleep() {
+            console.log("The Animal is sleeping.");
+        }
+        communicate() {
+            console.log("The Animal is communicating.");
+        }
+    }
+    
+    class Dog extends Animal {
+        move() {
+            console.log("The Dog is walking.");
+        }
+        sleep() {
+            console.log("The Dog is sleeping.");
+        }
+        communicate() {
+            console.log("The Dog is barking.")
+        }
+    }
+    
+    class Cat extends Animal {
+        move() {
+            console.log("The Cat is walking.");
+        }
+        sleep() {
+            console.log("The Cat is sleeping.");
+        }
+        communicate() {
+            console.log("The Cat is meowing.")
+        }
+    }
+    
+    let dog = new Dog();
+    let cat = new Cat();
+    let animals = [dog, cat];
+    
+    animals.forEach((animal) => {
+        animal.communicate();
+    });  
+  p
+    | Now we have a higher class to inherit from - Animal, which is more generic and has attributes in common with both
+    | Cat and Dog. We could swap either of the Dog or Cat for the base of Animal and our code would still execute
+    | without error. It is important to think ahead like this when designing any object oriented application, creating
+    | the correct hierarchy early on will ensure there is room for extension, not only ensuring we abide by the
+    strong  Liskov Substitution Principle
+    | , but also the 
+    strong Open Closed Principle
+    |  and the
+    strong  Single Responsibility Principle
+    |  too.
+  h3 12.4 I - Interface Segregation Principle
+  p
+    strong The Interface Segregation Principle 
+    | aims to separate methods into cohesive groups of methods,
+    |     with each method being related to a specific task. We should not be grouping methods together that have very
+    |     little relevance to each other. For example, if there is a generic, large module or class, with many unrelated
+    |     methods, that is being injected all over our application, we should not keep adding to that same module for the
+    |     sake of convenience. We should instead create a new module or class, who&rsquo;s 
+    strong
+      u only
+    |  concern
+    |     is of a specific task or related tasks.
+  h4 Problem
+  pre.card.p-4.
+    let mathFactory = (function() {
+        const add = (firstNumber = 0, secondNumber = 0) => firstNumber + secondNumber;
+    
+        const subtract = (firstNumber = 0, secondNumber = 0) => firstNumber - secondNumber;
+    
+        const multiply = (firstNumber = 0, secondNumber = 0) => firstNumber * secondNumber;
+    
+        // lets add a new method because an existing method does not already do what we want
+        const greetingMessage = (name) => console.log(`Hello ${name}`);
+    
+        return {
+            add: add,
+            subtract: subtract,
+            multiply: multiply,
+            greetingMessage: greetingMessage
+    
+        }
+    })();
+    
+    mathFactory.greetingMessage("James");  
+  p
+    | Here we would have broken a number of the 
+    strong SOLID principles
+    | , one of which is the
+    strong  Interface Segregation Principle
+    | . We have appended a method, who&rsquo;s concern has no relation to
+    |     the other methods in the module. This module&rsquo;s concern is to work with numbers, not print greeting messages. If
+    |     this module is already being consumed by our calling code, it might be quicker and easier to just add a method
+    |     to the existing module, but this would be breaking the 
+    strong Interface Segregation Principle
+    | .
+  h4 Solution
+  pre.card.p-4.
+    let mathFactory = (function() {
+        const add = (firstNumber = 0, secondNumber = 0) => firstNumber + secondNumber;
+    
+        const subtract = (firstNumber = 0, secondNumber = 0) => firstNumber - secondNumber;
+    
+        const multiply = (firstNumber = 0, secondNumber = 0) => firstNumber * secondNumber;
+    
+        return {
+            add: add,
+            subtract: subtract,
+            multiply: multiply,
+        }
+    })();
+    
+    // Make a new module
+    let greetingFactory = (function() {
+    
+        const greet = (name) => console.log(`Hello ${name}`);
+    
+        return {
+            greet: greet
+        }
+    })();
+    
+    greetingFactory.greet("James");  
+  p
+    | Now we have a dedicated module that will only include methods that relate to greeting messages. This provides
+    | good cohesion and divides concerns. This will help keep modules small and manageable. We could then inject this
+    | new module into the application only where it is needed.
+  p We can also express the same issue as a class:
+  h4 Problem
+  pre.card.p-4.
+    class MathFactory {
+        add = (firstNumber = 0, secondNumber = 0) => firstNumber + secondNumber;
+    
+        subtract = (firstNumber = 0, secondNumber = 0) => firstNumber - secondNumber;
+    
+        multiply = (firstNumber = 0, secondNumber = 0) => firstNumber * secondNumber;
+    
+        greetingMessage = (name) => console.log(`Hello ${name}`);
+    }
+    
+    let mathUtil = new MathFactory();
+    
+    mathUtil.greetingMessage("James");  
+  h4 Solution
+  pre.card.p-4.
+    class MathFactory {
+        add = (firstNumber = 0, secondNumber = 0) => firstNumber + secondNumber;
+    
+        subtract = (firstNumber = 0, secondNumber = 0) => firstNumber - secondNumber;
+    
+        multiply = (firstNumber = 0, secondNumber = 0) => firstNumber * secondNumber;
+    }
+    
+    class GreetingFactory {
+        greet = (name) => console.log(`Hello ${name}`);
+    }
+    
+    let greetingUtil = new GreetingFactory();
+    greetingUtil.greet("James");  
+  h3 12.5 D - Dependency Inversion Principle
+  p
+    strong The Dependency Inversion Principle
+    |  aims to move dependency up the chain of command. The idea is
+    |     to loosely couple our methods, modules and classes with their dependencies.
+  p
+    | An obvious example of this is with server requests and nested callbacks, common in an AJAX request.
+  p
+    | One way of achieving 
+    strong dependency inversion
+    |  in JavaScript is by thinking of our functions as
+    strong  higher order functions
+    |  and 
+    strong lower order functions
+    | . We can invert dependency by
+    |     replacing 
+    strong lower order functions
+    |  with 
+    strong higher order functions
+    | .
+  p
+    | Another way of inverting dependency is to program more sequentially, instead of nesting code. Nested code can
+    | lead to dependencies being buried, this is what we need to look out for when identifying 
+    strong
+      | lower order
+      | functions
+    | . If we use 
+    strong promises
+    | , for example, we can &ldquo;wait&rdquo; for a task to complete
+    |     before moving on, or while performing some other task, removing the need to nest code. Making asynchronous code
+    |     appear synchronous. It is important to understand JavaScript can handle multiple threads, we should take
+    |     advantage of this.
+  p
+    | &ldquo;
+    em A promise is an object that may produce a single value some time in the future
+    | &rdquo; - See here for a great
+    |     read on promises in JavaScript - 
+    a(href='https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261')
+      | https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261
+  h4 Problem
+  pre.card.p-4.
+    let userDataFactory = (function() {
+        const get = () => {
+            // this object would typically come from an API call
+            let data =  {
+                name: "Anna",
+                colour: "Blue"
+            }
+            printFavouriteColour(data);
+        }
+        const printFavouriteColour = (data) => console.log(`Hello ${data.name}, your favourite colour is ${data.colour}`);
+        return {
+            get: get
+        }
+    })();
+    
+    userDataFactory.get();  
+  p
+    | With this example we are breaking the 
+    strong Dependency Inversion Principle
+    | . We have dedicated methods
+    |     to both 
+    em
+      strong get
+    |  and 
+    strong printFavouriteColour
+    | , but the
+    em
+      strong  get
+    |  method is always dependent on the 
+    em
+      strong printFavouriteColour
+    |     method, this is essentially the callback method. We would need an entirely new 
+    em
+      strong get
+    |     method, duplicating code, in order to do some other task once we have the data.
+  p
+    | Instead we could move the depending code up the chain and pass it down as a 
+    strong
+      | higher order
+      | function
+    | . We could then always call the 
+    em
+      strong get 
+    | method
+    em  
+    | just to get
+    |     the data and not assume we always want to print out the favourite colour of the user.
+  p
+    | Because JavaScript is asynchronous by nature, it may be common to see nested callbacks. Similar to the above, in
+    | order to try and handle timing issues, we could even nest a couple of callbacks. This can get very unmanageable,
+    | very quickly and is referred to as &ldquo;Callback hell&rdquo; and &ldquo;dependency hell&rdquo;.
+  p
+    | For example, if we needed to make another call to the server to get more data, but we needed to first wait for
+    | our user data to arrive before making the second call. How could we handle that without nesting methods ?
+  p
+    | A possible solution is using
+    strong  
+    em
+      strong async await 
+    | (a promise)
+    strong
+    | as a means of allowing our code to get the data first before doing anything with it. We can then
+    |     program sequentially, instead of nesting callbacks or dependencies.
+  h4 Solution
+  pre.card.p-4.
+    let userDataFactory = (function() {
+        const get = async () => {
+            // this object would typically come from an API call
+            let data =  {
+                name: "Anna",
+                colour: "Blue"
+            }
+            return data;
+        }
+        const printFavouriteColour = (data) => console.log(`Hello ${data.name}, your favourite colour is ${data.colour}`);
+        const printName = (data) => console.log(`Hello ${data.name}`);
+        return {
+            get: get,
+            printFavouriteColour: printFavouriteColour,
+            printName: printName
+        }
+    })();
+    
+    (async() => {
+        let user = await userDataFactory.get();
+        userDataFactory.printName(user);
+        userDataFactory.printFavouriteColour(user);
+    })();  
+  p
+    | Now the same 
+    em get
+    |  method can be used again and again. There is no tightly coupled dependency in our code,
+    |     we can determine what we would like to do once we have the data, we could even make another call to a different
+    |     service and wait for both calls to complete, while doing some other task asynchronously. This now makes the
+    em
+      strong  get
+    |  method very flexible and reusable. It has a single responsibility and is not
+    |     tightly coupled to a behaviour or dependency.
+  p
+    | A word on 
+    em
+      strong async await 
+    | and 
+    em
+      strong promises
+    |  - please consider browser
+    |     compatibility before using this syntax and 
+    strong promises
+    |  in general.
+  p
+    | Now another solution using 
+    strong higher order functions
+    |  to pass down the logic to use once we have the
+    |     data
+    strong :
+  h4 Solution
+  pre.card.p-4.
+    let userDataFactory = (function() {
+        const get = (callback) => {
+            // this object would typically come from an API call
+            let data =  {
+                name: "Anna",
+                colour: "Blue"
+            }
+            if(typeof callback === "function") {
+                callback(data);
+            }
+        }
+        const printFavouriteColour = (data) => console.log(`Hello ${data.name}, your favourite colour is ${data.colour}`);
+        const printName = (data) => console.log(`Hello ${data.name}`);
+        return {
+            get: get,
+            printFavouriteColour: printFavouriteColour,
+            printName: printName
+        }
+    })();
+    
+    userDataFactory.get(userDataFactory.printFavouriteColour);
+    userDataFactory.get(userDataFactory.printName);  
+  p
+    | With this example we are now passing down the chain a method that has come from a 
+    strong higher order
+    | .
+    |     Think of this as being similar to a 
+    strong delegate method
+    | . The method we are passing down will
+    |     determine what we do once we have the data. There is no assumption being made other than we want to do something
+    |     once we have the data. Both solutions given are interpretations of dependency inversion, they move the control
+    |     up the chain to a higher level.
+  h2 13. How can we apply the DRY principle to JavaScript ?
+  p
+    strong The DRY Principle
+    |  stands for &ldquo;
+    em Don&apos;t&apos; Repeat Yourself
+    | &rdquo; and refers to code reuse and code
+    |     repetition. Where we see patterns of code forming, we should either be refactoring the code to remove the
+    |     repetition or design the code to maximise on code reuse from the beginning.
+  h4 Problem
+  pre.card.p-4.
+    let make = "Audi";
+    let colour = "Red";
+    let isHybrid = false;
+    let isHybridText = isHybrid ? "is a hybrid" : "is not a hybrid";
+    let description = `This car is an ${make} and it is ${colour}. This car ${isHybridText}`;
+    console.log(description);
+    
+    make = "Ford";
+    colour = "Blue";
+    isHybrid = true;
+    isHybridText = isHybrid ? "is a hybrid" : "is not a hybrid";
+    description = `This car is an ${make} and it is ${colour}. This car ${isHybridText}`;
+    console.log(description);
+    
+    make = "Honda";
+    colour = "Black";
+    isHybrid = true;
+    isHybridText = isHybrid ? "is a hybrid" : "is not a hybrid";
+    description = `This car is an ${make} and it is ${colour}. This car ${isHybridText}`;
+    console.log(description);
+    
+    make = "Lamborghini";
+    colour = "Black";
+    isHybrid = false;
+    isHybridText = isHybrid ? "is a hybrid" : "is not a hybrid";
+    description = `This car is an ${make} and it is ${colour}. This car ${isHybridText}`;
+    console.log(description);
+    
+    make = "Porsche";
+    colour = "Yellow";
+    isHybrid = false;
+    isHybridText = isHybrid ? "is a hybrid" : "is not a hybrid";
+    description = `This car is an ${make} and it is ${colour}. This car ${isHybridText}`;
+    console.log(description);
+    
+    make = "Dodge";
+    colour = "Green";
+    isHybrid = true;
+    isHybridText = isHybrid ? "is a hybrid" : "is not a hybrid";
+    description = `This car is an ${make} and it is ${colour}. This car ${isHybridText}`;
+    console.log(description);  
+  p
+    | Here we clearly have a repetition of code. Each block of code is doing exactly the same thing. The only
+    | difference with each block are the properties. The logic is identical and the result of each block is of the
+    | same type - a string. The code would grow 6 lines with every car we add. This is not 
+    strong DRY
+    | !
+  h4 Solution
+  pre.card.p-4.
+    class Car {
+        constructor(make, colour, isHybrid) {
+            this.make = make;
+            this.colour = colour;
+            this.isHybrid = isHybrid;
+            this.isHybridText = isHybrid ? "is a hybrid" : "is not a hybrid";
+        }
+        describe = () => `This car is an ${this.make} and it is ${this.colour}. This car ${this.isHybridText}`;
+    }
+    
+    let describeCars = (cars = []) => {
+        cars.forEach((car) => {
+            console.log(car.describe());
+        });
+    }
+    
+    let cars = [
+        new Car("Audi", "Red", false),
+        new Car("Ford", "Blue", true),
+        new Car("Honda", "Black", true),
+        new Car("Lamborghini", "Black", false),
+        new Car("Porsche", "Yellow", false),
+        new Car("Dodge", "Green", true),
+    ];
+    
+    describeCars(cars);  
+  p
+    | Now using a reusable class and a some iteration, we are able to reuse the same code again and again. Our code
+    | will now only grow with a single line for every car we add. This is now 
+    strong DRY
+    | , we should always
+    |     be thinking of 
+    strong DRY
+    | .
+  h2 14. How can we apply the KISS principle to JavaScript ?
+  p
+    strong The KISS Principle
+    |  stands for &ldquo;
+    em Keep it simple, stupid
+    | &rdquo; and relates to overly complex
+    |     code. The smaller and simpler our methods are, the more manageable our code will be. Complex code is prone to
+    |     bugs, so by keeping it simple we remove the likelihood of bugs and we make our code much more friendly to work
+    |     with and read.
+  h4 Problem
+  pre.card.p-4.
+    let convertIntToDay = (dayNumber = 0) => {
+        let result = "";
+        if(dayNumber === 0) {
+            result = "Monday";
+        } else if(dayNumber === 1) {
+            result = "Tuesday";
+        } else if(dayNumber === 2) {
+            result = "Wednesday";
+        } else if(dayNumber === 3) {
+            result = "Thursday";
+        } else if(dayNumber === 4) {
+            result = "Friday";
+        } else if(dayNumber === 5) {
+            result = "Saturday";
+        } else if(dayNumber === 6) {
+            result = "Sunday";
+        }
+        return result;
+    }
+    
+    let day = convertIntToDay(2);
+    console.log(day);  
+  p
+    | This example uses multiple 
+    em
+      strong if
+    |  statements to handle what is essentially just an index
+    |     lookup. There is far more logic here than there needs to be. This is the kind of code that is in breach of the
+    strong  KISS
+    |  principle.
+  p
+    | We could use a switch to make this read a bit easier, but simpler still, we could use the index directly to find
+    | the matched day. Arrays in JavaScript are zero indexed, so if our case begins with a zero we could get the same
+    | result by using the passed in number as an index position for the array.
+  h4 Solution
+  pre.card.p-4.
+    let convertIntToDay = (dayNumber = 0) => {
+        let days = [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+        ]
+        if(days.length < dayNumber) {
+            throw new Error("Must be in range of days");
+        }
+        return days[dayNumber];
+    }
+    
+    let day = convertIntToDay(2);
+    console.log(day);  
+  p
+    | Removing all the unnecessary logic reveals a much cleaner solution, easier to understand and read. We are relying
+    | instead on the index of the array in order to find the matched day. This is a clear example of the
+    strong  KISS
+    strong  principle
+    |  and what to look out for when considering existing code or
+    |     designing new code.
+  h2 15. How can we apply the YAGNI principle to JavaScript ?
+  p
+    strong The YAGNI principle
+    |  stands for &ldquo;
+    em You ain&rsquo;t gonna need it
+    | &rdquo; and aims to remove unnecessary
+    |     code and features. We should not be adding complexity just because it might come in handy in the future. Yes we
+    |     should always consider future proofing our code, but be careful, we should not add extra weight where it is not
+    |     needed. For example, adding additional properties that are not being used - &ldquo;
+    em you ain&rsquo;t gonna need it
+    | &rdquo;.
+  h4 Problem
+  pre.card.p-4.
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+        name = "";
+        age = 0;
+        sex = "";
+        occupation = "";
+    }
+    
+    let person = new Person("James");
+    
+    console.log(person.name);  
+  p
+    | In this example we see there are more properties than we need, they are not being used in the constructor and
+    | they are not being accessed elsewhere. They appear to be there &ldquo;just in case&rdquo;. We do not need them.
+  h4 Solution
+  pre.card.p-4.
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+    }
+    
+    let person = new Person("James");
+    
+    console.log(person.name);  
+  p
+    | Now having removed the unnecessary properties we have a much cleaner solution, comprising only of the properties
+    | we need. This is following the 
+    strong YAGNI
+    |  principle and we should be using this principle where
+    |     possible.
+  p
+    | Only implement what we need for the immediate requirement and not what we think we might need in the future. This
+    | allows for faster development and simpler, lighter code.
+    |
+  hr  
+  h2 References
+  ul
+    li
+      p
+        a(href='https://google.github.io/styleguide/jsguide.html') https://google.github.io/styleguide/jsguide.html
+    li
+      p
+        a(href='https://developer.mozilla.org/en-US/docs/MDN/Contribute/Guidelines/Code_guidelines/JavaScript')
+          | https://developer.mozilla.org/en-US/docs/MDN/Contribute/Guidelines/Code_guidelines/JavaScript
+    li
+      p
+        a(href='https://www.w3.org/wiki/JavaScript_best_practices') https://www.w3.org/wiki/JavaScript_best_practices
+    li
+      p
+        a(href='https://www.w3schools.com/js/default.asp') https://www.w3schools.com/js/default.asp
+    li
+      p
+        a(href='https://www.w3schools.com/js/js_conventions.asp') https://www.w3schools.com/js/js_conventions.asp
+    li
+      p
+        a(href='https://www.w3schools.com/js/js_best_practices.asp')
+          u https://www.w3schools.com/js/js_best_practices.asp
+    li
+      p
+        a(href='https://www.w3schools.com/js/js_mistakes.asp') https://www.w3schools.com/js/js_mistakes.asp
+    li
+      p
+        a(href='https://www.w3schools.com/js/js_performance.asp') https://www.w3schools.com/js/js_performance.asp
+    li
+      p
+        a(href='https://www.w3schools.com/js/js_let.asp') https://www.w3schools.com/js/js_let.asp
+    li
+      p
+        a(href='https://www.w3schools.com/js/js_const.asp') https://www.w3schools.com/js/js_const.asp
+    li
+      p
+        a(href='https://dorey.github.io/JavaScript-Equality-Table/') https://dorey.github.io/JavaScript-Equality-Table/
+    li
+      p
+        a(href='https://www.w3schools.com/js/js_arrow_function.asp') https://www.w3schools.com/js/js_arrow_function.asp
+    li
+      p
+        a(href='https://www.freecodecamp.org/news/when-and-why-you-should-use-es6-arrow-functions-and-when-you-shouldnt-3d851d7f0b26/')
+          | https://www.freecodecamp.org/news/when-and-why-you-should-use-es6-arrow-functions-and-when-you-shouldnt-3d851d7f0b26/
+    li
+      p
+        a(href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions')
+          | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+    li
+      p
+        a(href='https://www.smashingmagazine.com/2016/07/how-to-use-arguments-and-parameters-in-ecmascript-6/')
+          | https://www.smashingmagazine.com/2016/07/how-to-use-arguments-and-parameters-in-ecmascript-6/
+    li
+      p
+        a(href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures') https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+    li
+      p
+        a(href='https://guide.freecodecamp.org/javascript/closures/') https://guide.freecodecamp.org/javascript/closures/
+    li
+      p
+        a(href='https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36')
+          | https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36
+    li
+      p
+        a(href='https://medium.com/backticks-tildes/understanding-hoisting-and-scoping-in-javascript-39ea7b41e31')
+          | https://medium.com/backticks-tildes/understanding-hoisting-and-scoping-in-javascript-39ea7b41e31
+    li
+      p
+        a(href='https://medium.com/javascript-scene/master-the-javascript-interview-what-s-the-difference-between-class-prototypal-inheritance-e4cd0a7562e9')
+          | https://medium.com/javascript-scene/master-the-javascript-interview-what-s-the-difference-between-class-prototypal-inheritance-e4cd0a7562e9
+    li
+      p
+        a(href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof')
+          | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof
+    li
+      p
+        a(href='http://www.c-point.com/javascript_tutorial/jsgrpComparison.htm') http://www.c-point.com/javascript_tutorial/jsgrpComparison.htm
+    li
+      p
+        a(href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined')
+          | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined
+    li
+      p
+        a(href='https://levelup.gitconnected.com/sneak-peak-of-map-filter-and-reduce-in-javascript-79d38181a48')
+          | https://levelup.gitconnected.com/sneak-peak-of-map-filter-and-reduce-in-javascript-79d38181a48
+    li
+      p
+        a(href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes') https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+    li
+      p
+        a(href='https://medium.com/karuna-sehgal/a-simplified-explanation-of-the-big-o-notation-82523585e835')
+          | https://medium.com/karuna-sehgal/a-simplified-explanation-of-the-big-o-notation-82523585e835
+    li
+      p
+        a(href='https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261')
+          | https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261
+    li
+      p
+        a(href='https://medium.com/ltunes/what-is-clean-code-naming-conventions-part-1-426d383eb85d')
+          | https://medium.com/ltunes/what-is-clean-code-naming-conventions-part-1-426d383eb85d
+    li
+      p
+        a(href='http://bensmith.io/20-tips-for-better-naming') http://bensmith.io/20-tips-for-better-naming
+    li
+      p
+        a(href='https://reactjs.org/docs/faq-internals.html') https://reactjs.org/docs/faq-internals.html
+    li
+      p
+        a(href='https://alligator.io/js/class-composition/') https://alligator.io/js/class-composition/
+    li
+      p
+        a(href='https://babeljs.io/') https://babeljs.io/
+    li
+      p
+        a(href='https://requirejs.org/docs/whyamd.html') https://requirejs.org/docs/whyamd.html
+    li
+      p
+        a(href='http://browserify.org/') http://browserify.org/
+    li
+      p
+        a(href='https://webpack.js.org/') https://webpack.js.org/
+
+block scripts
+  // build:js js/app.js
+  script(src="js/app.js")
+  // endbuild
+  // build:js js/vendor.js
+  // endbuild

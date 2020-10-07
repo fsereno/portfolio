@@ -3,43 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Interfaces;
+using Models;
 
 namespace Utils
 {
     public class StringSortUtil : IStringSortUtil
     {
-        private const string _regex = "[a-zA-Z0-9]$";
-
-        private const string _replaceRegex = "[0-9]+";
-
         public string Sort(string commaSeperatedString)
         {
             var sortedAlphaNumeric = this.Sort(
                     commaSeperatedString,
-                    AddStringToCollection,
-                    OrderAlphaNumeric);
+                    AddSortItemToCollection,
+                    OrderBy);
             var result = this.Join(sortedAlphaNumeric);
             return result;
         }
 
-        public List<string> Sort(
+        public List<SortItem> Sort(
                 string commaSeperatedString,
-                Action<ValueTuple<string, List<string>>> addMethod,
-                Func<List<string>, List<string>> sortMethod)
+                Action<ValueTuple<string, List<SortItem>>> addMethod,
+                Action<List<SortItem>> sortMethod)
         {
-            var characters = commaSeperatedString.Split(',');
-            var charactersToSort = new List<string>();
-
-            foreach (var character in characters)
+            var itemsToSort = new List<SortItem>();
+            if (String.IsNullOrEmpty(commaSeperatedString))
             {
-                addMethod(new ValueTuple<string, List<string>>(character, charactersToSort));
+                return itemsToSort;
             }
 
-            var result = sortMethod(charactersToSort);
-            return result;
+            var characterGroups = commaSeperatedString.Split(',');
+
+            foreach (var group in characterGroups)
+            {
+                addMethod(new ValueTuple<string, List<SortItem>>(group, itemsToSort));
+            }
+
+            sortMethod(itemsToSort);
+            return itemsToSort;
         }
 
-        public string Join(List<string> sortedCharacters)
+        public string Join(List<SortItem> sortedCharacters)
         {
             var result = string.Empty;
 
@@ -47,38 +49,28 @@ namespace Utils
                 return result;
             }
 
-            foreach (var character in sortedCharacters)
+            foreach (var item in sortedCharacters)
             {
-                if (!String.IsNullOrEmpty(result) && !String.IsNullOrEmpty(character))
+                if (!String.IsNullOrEmpty(result))
                 {
-                    result = $"{result},{character}";
+                    result = $"{result},{item.Value}";
                 }
-                else if(!String.IsNullOrEmpty(character))
+                else
                 {
-                    result = character;
+                    result = $"{item.Value}";
                 }
             }
             return result;
         }
 
-        public void AddStringToCollection((string character, List<string> collection) request)
+        public void AddSortItemToCollection((string group, List<SortItem> sortItems) request)
         {
-            var regex = new Regex(_regex);
-            if (regex.IsMatch(request.character))
-            {
-                request.collection.Add(request.character);
-            }
+            request.sortItems.Add(new SortItem(request.group));
         }
 
-        public List<string> OrderAlphaNumeric(List<string> charactersToSort)
+        public void OrderBy(List<SortItem> itemsToSort)
         {
-            var result = charactersToSort.OrderBy( x => PadLeft(x)).ToList();
-            return result;
-        }
-
-        private string PadLeft(string input)
-        {
-            return Regex.Replace(input, _replaceRegex, match => match.Value.PadLeft(10, '0'));
+            itemsToSort?.Sort(new SortItem.NaturalSorter());
         }
     }
 }

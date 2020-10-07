@@ -4,10 +4,11 @@ html(lang="en")
     meta(charset="utf-8")
     title Portfolio
     meta(name="description" content="Portfolio")
-    meta(name='viewport', content='width=device-width, initial-scale=1, minimal-ui')    
-    title [COMPANY_NAME]
+    meta(name='viewport', content='width=device-width, initial-scale=1, minimal-ui')
     include ../includes/_metaAuthor.pug
+    // build:css ../css/vendor.css
     include ../includes/_styleDeps.pug
+    // endbuild
     block styles
   body
     .container-fluid
@@ -25,5 +26,7 @@ html(lang="en")
       block content
 
     block footer
+    // build:js ../js/vendor.js
     include ../includes/_jsDeps.pug
+    // endbuild
     block scripts
