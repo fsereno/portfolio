@@ -11,10 +11,8 @@ html(lang="en")
     // endbuild
     block styles
   body
+    include ../includes/_navigation.pug
     .container-fluid
-      .row.mt-3
-        .col-lg-12
-          include ../includes/_navigation.pug
       .row
         .col-lg-12
           h2.display-4= locals.application.name
