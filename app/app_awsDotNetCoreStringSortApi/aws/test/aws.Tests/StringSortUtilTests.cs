@@ -18,6 +18,29 @@ namespace aws.Tests
         }
 
         [Fact]
+        public void Test_Sort_Should_Not_Error_On_Empty_String()
+        {
+            var commaSeperatedString = string.Empty;
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal(string.Empty, result);
+        }
+
+        [Fact]
+        public void Test_Sort_Should_Not_Error_With_Null_Value()
+        {
+            var result = this._sut.Sort(null);
+            Assert.Equal(string.Empty, result);
+        }
+
+        [Fact]
+        public void Test_Sort_Should_Return_Same_String_If_In_Order()
+        {
+            var commaSeperatedString = "A,B,C";
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("A,B,C", result);
+        }
+
+        [Fact]
         public void Test_Sort_Should_Return_A_Sorted_Alpha_String()
         {
             var commaSeperatedString = "B,A,C";
