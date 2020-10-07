@@ -1,8 +1,7 @@
-// build:css ../css/vendor.css
+- var directory = locals.application.useRoot ? "../" : "../../";
 link(
     rel="stylesheet"
-    href="../../node_modules/bootstrap/dist/css/bootstrap.min.css")
+    href=directory+"node_modules/bootstrap/dist/css/bootstrap.min.css")
 link(
     rel="stylesheet"
-    href="../../node_modules/font-awesome/css/font-awesome.min.css")
-// endbuild
+    href=directory+"node_modules/font-awesome/css/font-awesome.min.css")

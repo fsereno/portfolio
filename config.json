@@ -103,7 +103,7 @@
         },
         {
             "name": "AWS .NET Core Natural String Sorting API",
-            "subHeading": "A natural string sorting algorithm implemnting IComparer. Taking a comma seperated string of alphanumerical values. Sorting them, first sorting numerically, then alphabetically",
+            "subHeading": "A natural string sorting algorithm implemnting IComparer, taking a comma seperated string of alphanumerical values.",
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "folder": "awsDotNetCoreStringSortApi",
             "active": true,

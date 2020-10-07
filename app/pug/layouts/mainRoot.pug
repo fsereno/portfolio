@@ -6,7 +6,9 @@ html(lang="en")
     meta(name="description" content="Portfolio")
     meta(name='viewport', content='width=device-width, initial-scale=1, minimal-ui')
     include ../includes/_metaAuthor.pug
-    include ../includes/_styleDepsRoot.pug
+    // build:css css/vendor.css
+    include ../includes/_styleDeps.pug
+    // endbuild
     block styles
   body
     .container-fluid
@@ -24,5 +26,7 @@ html(lang="en")
       block content
 
     block footer
-    include ../includes/_jsDepsRoot.pug
+    // build:js js/vendor.js
+    include ../includes/_jsDeps.pug
+    // endbuild
     block scripts
