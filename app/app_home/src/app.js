@@ -4,9 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { SpinnerModule } from '../../js/spinnerModule.js'
 
-let _spinnerModule = SpinnerModule();
+let _spinnerModule = SpinnerModule("contentContainer");
 
-class ToDoListForm extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,7 +68,7 @@ class ToDoListForm extends React.Component {
 
   renderContent() {
     return (
-      <div>
+      <div id="contentContainer">
         <form>
           <div id="searchBar" class="input-group mb-3 rounded shadow-sm">
             <input type="text" class="form-control" placeholder="Search all available applications..." id="searchInput" onChange={this.handleChange} />
@@ -118,6 +118,6 @@ class ToDoListForm extends React.Component {
 }
 
 ReactDOM.render(
-  <ToDoListForm />,
+  <Home />,
   document.getElementById('result')
 );
