@@ -38,7 +38,7 @@ class Home extends React.Component {
 
   getConfigHandler() {
     let request = {
-      url: "../../config.json",
+      url: "./config.json",
       type: "GET",
       contentType: 'application/json;',
       success: (response) => {
