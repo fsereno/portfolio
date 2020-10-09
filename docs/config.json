@@ -1,0 +1,199 @@
+{
+    "prefix": "app_",
+    "entry": "home",
+    "index": "index.html",
+    "masterTemplateDir": "master",
+    "developmentDir": "app",
+    "publishDir": "docs",
+    "folderRoot": "/tree/master/app/",
+    "repoRootUrl": "https://github.com/fsereno/portfolio",
+    "linkedInUrl": "https://www.linkedin.com/in/fabio-sereno-6a97b986/",
+    "heading": "Fabio Sereno",
+    "subHeading": "Software developer",
+    "applications": [
+        {
+            "name": "Portfolio",
+            "subHeading": "By Fabio Sereno",
+            "description": "Highly Experienced Full Stack Web Developer of 10+ years (6+ in the FinTech sector). Highly self-motivated, enthusiastic, professional and a team player. Possesses strong analytical and problem solving skills, code proficiency, and an ability to follow through with projects from initiation to completion with innovation and creativity.",
+            "folder": "home",
+            "active": true,
+            "include": false,
+            "folderRoot": "/",
+            "compileJs": false,
+            "useRoot": true
+        },
+        {
+            "name": "Application master template",
+            "subHeading": "",
+            "description": "The template application.",
+            "folder": "master",
+            "active": true,
+            "include": false
+        },
+        {
+            "name": "MIT Licence",
+            "subHeading": "MIT Licence for this repository.",
+            "description": "",
+            "folder": "licence",
+            "active": true,
+            "include": false
+        },
+        {
+            "name": "To-Do List (Basic)",
+            "subHeading": "A basic list builder",
+            "description": "Experimenting with Babel, TypeScript and Require JS.",
+            "folder": "babelTs",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "To-Do List (React)",
+            "subHeading": "A basic list builder using React",
+            "description": "Experimenting with React, Babel and Webpack.",
+            "folder": "toDoReact",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "To-Do List (React Redux)",
+            "subHeading": "A basic React Redux application",
+            "description": "Experimenting how to use Redux with React to implement Undo and Redo functionality",
+            "folder": "reactRedux",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "To-Do List (Vue)",
+            "subHeading": "A basic list builder using Vue",
+            "description": "Experimenting with Vue, Babel and Webpack.",
+            "folder": "toDoVue",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "Tic-Tac-Toe (React)",
+            "subHeading": "A Tic-Tac-Toe game built using React JS",
+            "description": "Experimenting more complex aspects of React, Babel and Webpack.",
+            "folder": "ticTacToeReact",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "TypeScript Find and Replace",
+            "subHeading": "A simple Find and Replace method",
+            "description": "Written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all.",
+            "folder": "findReplace",
+            "active": true,
+            "include": true
+        },
+        {
+            "name": "AWS .NET Core Entity Sorting API",
+            "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
+            "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "folder": "awsDotNetCoreEntitySortApi",
+            "active": true,
+            "include": true,
+            "compileJs": false,
+            "masterTemplateDir": "master_react"
+        },
+        {
+            "name": "AWS .NET Core Natural String Sorting API",
+            "subHeading": "A natural string sorting algorithm implemnting IComparer, taking a comma seperated string of alphanumerical values.",
+            "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "folder": "awsDotNetCoreStringSortApi",
+            "active": true,
+            "include": true,
+            "compileJs": false,
+            "masterTemplateDir": "master_react"
+        },
+        {
+            "name": "AWS .NET Core Shopping Cart API",
+            "subHeading": "A serverless application (SAM), using .Net Core and AWS",
+            "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "folder": "awsDotNetCoreShoppingCart",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "Three JS Scene (Basic)",
+            "subHeading": "A basic THREE JS scene",
+            "description": "An interactive Three JS scene, using Babel and Webpack.",
+            "folder": "threeJSScene",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "AFrame React (Basic)",
+            "subHeading": "An AFrame Hello World application with React JS",
+            "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
+            "folder": "aframe",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "AFrame React (Complex)",
+            "subHeading": "A more complex AFrame application with React JS",
+            "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
+            "folder": "aframeComplex",
+            "active": true,
+            "include": true,
+            "compileJs": false
+        },
+        {
+            "name": "TypeScript Percentage Calculator",
+            "subHeading": "A simple percentage calculator method",
+            "description": "Written with TypeScript, Sass and Pug.",
+            "folder": "percentageCalculator",
+            "active": true,
+            "include": true
+        },
+        {
+            "name": "TypeScript Un-Scrabbler Word Game",
+            "subHeading": "A simple Scrabble Word Game, can you beat Unscrabbler?",
+            "description": "Written with TypeScript, Sass and Pug.",
+            "folder": "unscrabbler",
+            "active": true,
+            "include": true
+        },
+        {
+            "name": "TypeScript Random String Generator",
+            "subHeading": "A simple random generator",
+            "description": "Generating a random string of A-B, 0-9 and a given length. Written with TypeScript, Sass and Pug.",
+            "folder": "randomGenerator",
+            "active": true,
+            "include": true
+        },
+        {
+            "name": "TypeScript Dictionary Word Finder",
+            "subHeading": "A simple dictionary word lookup tool",
+            "description": "Experimenting with a large index lookup search. Written with TypeScript, Sass and Pug.",
+            "folder": "dictionaryFinder",
+            "active": true,
+            "include": true
+        },
+        {
+            "name": "Knockout + TypeScript",
+            "subHeading": "An example of KnockoutJS, enhanced by TypeScript",
+            "description": "Written with KnockoutJS, TypeScript, Sass and Pug.",
+            "folder": "koTypeScript",
+            "active": true,
+            "include": true
+        },
+        {
+            "name": "JS Coding Standards",
+            "subHeading": "A JavaScript Code Style Guide",
+            "description": "By Fabio Sereno",
+            "folder": "jsCodingStandards",
+            "active": true,
+            "include": true
+        }
+    ]
+}
