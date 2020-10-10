@@ -1,4 +1,4 @@
-var config = require("./app/config.json");
+var config = require("./config.json");
 
 module.exports = {
     constructor: () => { return config },
