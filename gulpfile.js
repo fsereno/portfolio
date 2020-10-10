@@ -238,6 +238,11 @@ let imagesCopyTask = () => {
   .pipe(gulp.dest(config.publishDir+"/images"));
 }
 
+let faviconCopyTask = () => {
+  return gulp.src('app/*.ico')
+    .pipe(gulp.dest(config.publishDir));
+}
+
 let serviceTestsTask = () => {
   return gulp.src(config.developmentDir+"/tests/services/*.test.ts")
     .pipe(mocha({
@@ -255,6 +260,11 @@ gulp.task("fonts", (done) => {
   fontsCopyTask();
   done();
 });
+
+gulp.task('favicon', function(done){
+  faviconCopyTask();
+  done();
+})
 
 gulp.task("watch", (done) => {
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, defaultTasksCallBack);
@@ -286,7 +296,7 @@ gulp.task("create", (done) => {
   done();
 });
 
-gulp.task("publish", gulp.series(["test", "images", "fonts"], (done) => {
+gulp.task("publish", gulp.series(["test", "images", "fonts", "favicon"], (done) => {
   config.applications.map(publishTasks);
   done();
 }));
