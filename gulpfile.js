@@ -37,7 +37,7 @@ const connect = require("gulp-connect");
 const logger = require("gulp-logger");
 const logSymbols = require("log-symbols");
 const directoryExists = require("directory-exists");
-const config = require("./app/config.json");
+const config = require("./config.json");
 const gulpHelpers = require("./gulpHelpers");
 const flatmap = require("gulp-flatmap");
 const uglify = require('gulp-uglify');
@@ -238,11 +238,6 @@ let imagesCopyTask = () => {
   .pipe(gulp.dest(config.publishDir+"/images"));
 }
 
-let configCopyTask = () => {
-  return gulp.src(config.developmentDir+"/config.json")
-  .pipe(gulp.dest(config.publishDir));
-}
-
 let serviceTestsTask = () => {
   return gulp.src(config.developmentDir+"/tests/services/*.test.ts")
     .pipe(mocha({
@@ -258,11 +253,6 @@ gulp.task("images", (done) => {
 
 gulp.task("fonts", (done) => {
   fontsCopyTask();
-  done();
-});
-
-gulp.task("config", (done) => {
-  configCopyTask();
   done();
 });
 
@@ -296,7 +286,7 @@ gulp.task("create", (done) => {
   done();
 });
 
-gulp.task("publish", gulp.series(["test", "images", "fonts", "config"], (done) => {
+gulp.task("publish", gulp.series(["test", "images", "fonts"], (done) => {
   config.applications.map(publishTasks);
   done();
 }));
