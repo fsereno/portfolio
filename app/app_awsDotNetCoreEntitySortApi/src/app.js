@@ -134,7 +134,7 @@ class EntitySort extends React.Component {
   render() {
     return (
       <div>
-        <_puzzleModule.RenderTemplate
+        <_puzzleModule.Render
           event={this.handlePuzzleSubmit}
           label="First answer this question to unlock the API:"
           puzzle={PUZZLE}

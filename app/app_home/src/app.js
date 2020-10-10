@@ -6,7 +6,7 @@ import Config from  '../../../config.json';
 import { SpinnerModule } from '../../js/spinnerModule.js'
 
 const FAUX_LOADING_TIME = 1000;
-let _spinnerModule = SpinnerModule("contentContainer");
+let _spinnerModule = SpinnerModule({ contentId : "contentContainer" });
 
 class HomeApp extends React.Component {
   constructor(props) {
