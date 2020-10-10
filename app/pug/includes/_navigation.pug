@@ -2,9 +2,9 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   a.navbar-brand(
       href=directory+"index.html")
-    img#navbarImage(src=directory+"images/FSLogo.png").pull-left
+    img#navbarImage(src=directory+"images/FSLogo.png", alt="Fabio Sereno logo image").pull-left
     span#titleHeading.d-flex= locals.config.author
-    span#titleSubHeading.d-flex= locals.config.subHeading
+    span#titleSubHeading.d-flex= locals.config.role
   button.navbar-toggler(
       type='button'
       data-toggle='collapse'

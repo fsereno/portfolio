@@ -9,7 +9,7 @@
     "repoRootUrl": "https://github.com/fsereno/portfolio",
     "linkedInUrl": "https://www.linkedin.com/in/fabio-sereno-6a97b986/",
     "author": "Fabio Sereno",
-    "subHeading": "Software developer",
+    "role": "Software developer",
     "applications": [
         {
             "name": "Portfolio",
