@@ -13,7 +13,7 @@ export let SpinnerModule = function(props = {}) {
     let showContent = () => $(`#${_contentId}`).show();
     let Render = function() {
         return(
-            <div id="spinner" class="spinner-container overlay" style={ { display: _hideByDefault ? "none" : "block" }}>
+            <div id="spinner" class="spinner-container overlay" style={ { display: _hideByDefault ? "none" : "flex" }}>
                 <div class="item loading">
                     <div class="spinner">
                         <div class="circle circle-1">

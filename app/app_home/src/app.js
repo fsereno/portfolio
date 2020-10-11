@@ -21,13 +21,21 @@ class HomeApp extends React.Component {
     this.renderContent = this.renderContent.bind(this);
   }
 
-  handleSearchChange(event) {
-    let searchTerm = event.target.value.toUpperCase();
-    let filteredApplications = this.state.applicationsImmutable.filter((application) => {
-        return application.name.toUpperCase().includes(searchTerm)
+  filterApplications(applications, searchTerm) {
+    let filteredApplications = applications.filter((application) => {
+        return application.active && application.include ? 
+        application.name.toUpperCase().includes(searchTerm)
         || application.subHeading.toUpperCase().includes(searchTerm)
         || application.description.toUpperCase().includes(searchTerm)
+        || application.searchTerms.toUpperCase().includes(searchTerm)
+        : [];
       });
+    return filteredApplications;
+  }
+
+  handleSearchChange(event) {
+    let searchTerm = event.target.value.toUpperCase();
+    let filteredApplications = this.filterApplications(this.state.applicationsImmutable, searchTerm);
     this.setState({
       applications: filteredApplications
     });
