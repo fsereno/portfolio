@@ -3,10 +3,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Config from  '../../../config.json';
-import { SpinnerModule } from '../../js/spinnerModule.js'
+import { SpinnerModule } from '../../js/spinnerModule.js';
+import { StringSearchModule } from '../../js/StringSearchModule.mjs';
 
 const FAUX_LOADING_TIME = 1000;
 let _spinnerModule = SpinnerModule({ contentId : "contentContainer" });
+let _stringSearchModule = StringSearchModule();
 
 class HomeApp extends React.Component {
   constructor(props) {
@@ -23,12 +25,24 @@ class HomeApp extends React.Component {
 
   filterApplications(applications, searchTerm) {
     let filteredApplications = applications.filter((application) => {
-        return application.active && application.include ? 
+      let criterions = [
+        application.name,
+        application.subHeading,
+        application.description,
+        application.searchTerms
+      ]
+      let result = application.active && application.include
+        ? _stringSearchModule.searchCriterions(criterions, searchTerm)
+        : false
+      return result;
+      
+      
+      /*return application.active && application.include ? 
         application.name.toUpperCase().includes(searchTerm)
         || application.subHeading.toUpperCase().includes(searchTerm)
         || application.description.toUpperCase().includes(searchTerm)
         || application.searchTerms.toUpperCase().includes(searchTerm)
-        : [];
+        : [];*/
       });
     return filteredApplications;
   }
