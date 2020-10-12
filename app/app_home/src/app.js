@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Config from  '../../../config.json';
 import { SpinnerModule } from '../../js/spinnerModule.js';
-import { StringSearchModule } from '../../js/StringSearchModule.mjs';
+import { StringSearchModule } from '../../js/stringSearchModule.js';
 
 const FAUX_LOADING_TIME = 1000;
 let _spinnerModule = SpinnerModule({ contentId : "contentContainer" });
@@ -16,9 +16,11 @@ class HomeApp extends React.Component {
     this.state = {
       applications: [],
       applicationsImmutable: [],
-      hasApplications: false
+      hasApplications: false,
+      searchTerm: ""
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleQuickFilter = this.handleQuickFilter.bind(this);
     this.renderHandler = this.renderHandler.bind(this);
     this.renderContent = this.renderContent.bind(this);
   }
@@ -35,24 +37,28 @@ class HomeApp extends React.Component {
         ? _stringSearchModule.searchCriterions(criterions, searchTerm)
         : false
       return result;
-      
-      
-      /*return application.active && application.include ? 
-        application.name.toUpperCase().includes(searchTerm)
-        || application.subHeading.toUpperCase().includes(searchTerm)
-        || application.description.toUpperCase().includes(searchTerm)
-        || application.searchTerms.toUpperCase().includes(searchTerm)
-        : [];*/
-      });
+    });
     return filteredApplications;
   }
 
-  handleSearchChange(event) {
-    let searchTerm = event.target.value.toUpperCase();
+  handleSearch(searchTerm){
     let filteredApplications = this.filterApplications(this.state.applicationsImmutable, searchTerm);
     this.setState({
       applications: filteredApplications
     });
+  }
+
+  handleSearchChange(event) {
+    let searchTerm = event.target.value;
+    this.handleSearch(searchTerm);
+  }
+
+  handleQuickFilter(event) { 
+    let searchTerm = event.target.value;
+    this.handleSearch(searchTerm);
+    this.setState({
+      searchTerm: searchTerm
+    })
   }
 
   getConfigHandler() {
@@ -81,12 +87,17 @@ class HomeApp extends React.Component {
       <div id="contentContainer">
         <form>
           <div id="searchBar" class="input-group mb-3 rounded shadow-sm">
-            <input type="text" class="form-control" placeholder="Search all available applications..." id="searchInput" onChange={this.handleSearchChange} />
+            <input type="text" class="form-control" placeholder="Search all available applications..." id="searchInput" onChange={this.handleSearchChange} value={this.state.searchTerm}/>
             <div class="input-group-append">
               <span class="input-group-text">
                 <i class="fa fa-search"></i>
               </span>
             </div>
+          </div>
+          <div class="btn-group mb-3 d-flex justify-content-center">
+            <button type="button" class="btn btn-outline-dark" value="React" onClick={this.handleQuickFilter}>React</button>
+            <button type="button" class="btn btn-outline-dark" value="TypeScript" onClick={this.handleQuickFilter}>TypeScript</button>
+            <button type="button" class="btn btn-outline-dark" value=".Net Core" onClick={this.handleQuickFilter}>.Net Core</button>
           </div>
         </form>
         <div id="applicationsContainer" class="card-columns">

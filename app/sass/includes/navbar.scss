@@ -14,21 +14,16 @@
 }
 
 .navbar {
-
-    margin: 0 0 20px 0;
     padding: 0 0.3em;
-
     .dropdown-item {
         padding: 1rem 1.5rem;
         &.active, &:active {
             background-color: $darkGrey;
         }
     }
-
     .nav-link {
         padding-left: 1rem;
     }
-
     a.navbar-brand {
         margin-right:0;
         img {
