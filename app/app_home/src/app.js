@@ -4,11 +4,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Config from  '../../../config.json';
 import { SpinnerModule } from '../../js/spinnerModule.js';
-import { StringSearchModule } from '../../js/stringSearchModule.js';
+import { StringSearchModule } from '../../typeScript/Modules/stringSearchModule/app.js';
 
 const FAUX_LOADING_TIME = 1000;
 let _spinnerModule = SpinnerModule({ contentId : "contentContainer" });
-let _stringSearchModule = StringSearchModule();
+let _stringSearchModule = new StringSearchModule();
 
 class HomeApp extends React.Component {
   constructor(props) {

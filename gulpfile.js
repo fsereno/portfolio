@@ -60,7 +60,7 @@ let cssTask = (application) => {
     .pipe(connect.reload());
 }
 
-let jsTask = (application) => {
+let applicationTypeScriptTask = (application) => {
   let directories = gulpHelpers.getApplicationDirectories(application);
   if (gulpHelpers.compileJsIsFalse(application.compileJs)) {
     return false;
@@ -78,6 +78,32 @@ let jsTask = (application) => {
   .pipe(buffer())
   .pipe(uglify())
   .pipe(gulp.dest(directories.applicationDirectory+"/js"))
+  .pipe(connect.reload())
+  .pipe(logger(gulpHelpers.populateLoggerOptions(
+    "Application TypeScript task started...",
+    "Application TypeScript task complete!",
+    ".js",
+    false,
+    "../js",
+    "Compiled to: ",
+    " " + logSymbols.success
+  )));
+}
+
+let servicesTypeScriptTask = () => {
+  return browserify({
+    basedir: config.developmentDir+"/typeScript/Services",
+    debug: true,
+    entries: ["StringService.ts"],
+    cache: {},
+    packageCache: {}
+  })
+  .plugin(tsify)
+  .bundle()
+  .pipe(source("app.js"))
+  .pipe(buffer())
+  .pipe(uglify())
+  .pipe(gulp.dest(config.developmentDir+"/js/test"))
   .pipe(connect.reload())
   .pipe(logger(gulpHelpers.populateLoggerOptions(
     "JS task started...",
@@ -166,7 +192,7 @@ let createTask = (application) => {
 
 let defaultTasks = (application) => {
   gulpHelpers.runThis(application, cssTask);
-  gulpHelpers.runThis(application, jsTask);
+  gulpHelpers.runThis(application, applicationTypeScriptTask);
   gulpHelpers.runThis(application, htmlTask);
 }
 
@@ -243,8 +269,8 @@ let faviconCopyTask = () => {
     .pipe(gulp.dest(config.publishDir));
 }
 
-let serviceTestsTask = () => {
-  return gulp.src(config.developmentDir+"/tests/services/*.test.ts")
+let testsTask = (directory) => {
+  return gulp.src(`${config.developmentDir}/tests/${directory}/*.test.ts`)
     .pipe(mocha({
         reporter: "spec",
         require: ["ts-node/register"]
@@ -268,7 +294,7 @@ gulp.task('favicon', function(done){
 
 gulp.task("watch", (done) => {
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, defaultTasksCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", jsTask, defaultTasksCallBack);
+  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", applicationTypeScriptTask, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null, defaultTasksCallBack);
   gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null, defaultTasksCallBack);
@@ -287,7 +313,8 @@ gulp.task("functional", (done) => {
 });
 
 gulp.task("test", (done) => {
-  serviceTestsTask();
+  testsTask("services");
+  testsTask("modules");
   done();
 });
 

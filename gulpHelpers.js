@@ -2,7 +2,7 @@ var config = require("./config.json");
 
 module.exports = {
     constructor: () => { return config },
-    runThis: (application, method) => {
+    runThis: (application = {}, method) => {
       method(application);
     },
     setupWatcherOnChangeEvent: (watcher, dir, method, defaultTasksCallBack) => {
