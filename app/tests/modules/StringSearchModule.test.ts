@@ -14,5 +14,11 @@ describe("StringSearchModule", () => {
             let result = sut.searchCriterions(criterions, "React")
             expect(result).to.equal(true);
         });
+        it("Should return false when search term are empty", () => {
+            let sut = new StringSearchModule();
+            let criterions = [];
+            let result = sut.searchCriterions(criterions, "React")
+            expect(result).to.equal(false);
+        });
     });
 });

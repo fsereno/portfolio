@@ -20,7 +20,7 @@ class HomeApp extends React.Component {
       searchTerm: ""
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
-    this.handleQuickFilter = this.handleQuickFilter.bind(this);
+    //this.handleQuickFilter = this.handleQuickFilter.bind(this);
     this.renderHandler = this.renderHandler.bind(this);
     this.renderContent = this.renderContent.bind(this);
   }
@@ -53,13 +53,10 @@ class HomeApp extends React.Component {
     this.handleSearch(searchTerm);
   }
 
-  handleQuickFilter(event) { 
+  /*handleQuickFilter(event) { 
     let searchTerm = event.target.value;
     this.handleSearch(searchTerm);
-    this.setState({
-      searchTerm: searchTerm
-    })
-  }
+  }*/
 
   getConfigHandler() {
     setTimeout(() => {
@@ -86,25 +83,28 @@ class HomeApp extends React.Component {
     return (
       <div id="contentContainer">
         <form>
-          <div id="searchBar" class="input-group mb-3 rounded shadow-sm">
-            <input type="text" class="form-control" placeholder="Search all available applications..." id="searchInput" onChange={this.handleSearchChange} value={this.state.searchTerm}/>
+          <div id="searchBar" class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search all available applications..." id="searchInput" onChange={this.handleSearchChange}/>
             <div class="input-group-append">
               <span class="input-group-text">
                 <i class="fa fa-search"></i>
               </span>
             </div>
           </div>
-          <div class="btn-group mb-3 d-flex justify-content-center">
-            <button type="button" class="btn btn-outline-dark" value="React" onClick={this.handleQuickFilter}>React</button>
-            <button type="button" class="btn btn-outline-dark" value="TypeScript" onClick={this.handleQuickFilter}>TypeScript</button>
-            <button type="button" class="btn btn-outline-dark" value=".Net Core" onClick={this.handleQuickFilter}>.Net Core</button>
+          <div class="mb-3">
+            <label class="d-flex flex-row justify-content-center">Quick search</label>
+            <div class="btn-group d-flex flex-row justify-content-center">
+              <button type="button" class="btn btn-outline-dark" value="React" onClick={this.handleSearchChange}>React</button>
+              <button type="button" class="btn btn-outline-dark" value="TypeScript" onClick={this.handleSearchChange}>TypeScript</button>
+              <button type="button" class="btn btn-outline-dark" value=".Net Core" onClick={this.handleSearchChange}>.Net Core</button>
+            </div>
           </div>
         </form>
         <div id="applicationsContainer" class="card-columns">
           {this.state.applications.map((application) => {
             if (application.active && application.include) {
               return (
-                <div class="card shadow-sm p-3 bg-white rounded min-height-160">
+                <div class="card p-3 bg-white min-height-160">
                   <div class="card-body">
                     <h5 class="card-title">{application.name}</h5>
                     <p class="card-text">{application.subHeading}</p>
