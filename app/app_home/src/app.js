@@ -20,7 +20,7 @@ class HomeApp extends React.Component {
       searchTerm: ""
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
-    //this.handleQuickFilter = this.handleQuickFilter.bind(this);
+    this.handleQuickFilter = this.handleQuickFilter.bind(this);
     this.renderHandler = this.renderHandler.bind(this);
     this.renderContent = this.renderContent.bind(this);
   }
@@ -53,10 +53,12 @@ class HomeApp extends React.Component {
     this.handleSearch(searchTerm);
   }
 
-  /*handleQuickFilter(event) {
+  handleQuickFilter(event) {
     let searchTerm = event.target.value;
+    let element = document.getElementById("searchInput");
+    element.value = searchTerm;
     this.handleSearch(searchTerm);
-  }*/
+  }
 
   getConfigHandler() {
     setTimeout(() => {
@@ -100,9 +102,9 @@ class HomeApp extends React.Component {
             <div class="pb-3">
               <label class="d-flex flex-row justify-content-center">Quick search</label>
               <div class="btn-group d-flex flex-row justify-content-center">
-                <button type="button" class="btn btn-outline-dark" value="React" onClick={this.handleSearchChange}>React</button>
-                <button type="button" class="btn btn-outline-dark" value="TypeScript" onClick={this.handleSearchChange}>TypeScript</button>
-                <button type="button" class="btn btn-outline-dark" value=".Net Core" onClick={this.handleSearchChange}>.Net Core</button>
+                <button type="button" class="btn btn-outline-dark" value="React" onClick={this.handleQuickFilter}>React</button>
+                <button type="button" class="btn btn-outline-dark" value="TypeScript" onClick={this.handleQuickFilter}>TypeScript</button>
+                <button type="button" class="btn btn-outline-dark" value=".Net Core" onClick={this.handleQuickFilter}>.Net Core</button>
               </div>
             </div>
           </div>
