@@ -1,0 +1,5 @@
+@import "./colours.scss";
+
+@mixin borderMixin {
+    border: 1px solid $darkGrey;
+}

@@ -8,7 +8,11 @@ var StringSearchModule = /** @class */ (function () {
         if (criterions === void 0) { criterions = []; }
         if (searchTerm === void 0) { searchTerm = ""; }
         var searchResult = criterions.length > 0 ? criterions.filter(function (criterion) {
-            return criterion.toUpperCase().indexOf(searchTerm.toUpperCase()) !== -1;
+            var searchTerms = searchTerm.split(" ").filter(function (x) { return x; });
+            var searchTermSearch = searchTerms.filter(function (term) {
+                return criterion.toUpperCase().indexOf(term.toUpperCase()) !== -1;
+            });
+            return searchTermSearch.length > 0;
         }) : [];
         var result = searchResult.length > 0;
         return result;

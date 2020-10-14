@@ -7,6 +7,7 @@ import { SpinnerModule } from '../../js/spinnerModule.js';
 import { StringSearchModule } from '../../typeScript/Modules/stringSearchModule/app.js';
 
 const FAUX_LOADING_TIME = 1000;
+const SEARCH_INPUT_ID = "searchInput";
 let _spinnerModule = SpinnerModule({ contentId : "contentContainer" });
 let _stringSearchModule = new StringSearchModule();
 
@@ -21,8 +22,11 @@ class HomeApp extends React.Component {
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleQuickFilter = this.handleQuickFilter.bind(this);
+    this.handleClearSearch = this.handleClearSearch.bind(this);
     this.renderHandler = this.renderHandler.bind(this);
     this.renderContent = this.renderContent.bind(this);
+    this.renderCancelBtn = this.renderCancelBtn.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   filterApplications(applications, searchTerm) {
@@ -41,11 +45,14 @@ class HomeApp extends React.Component {
     return filteredApplications;
   }
 
-  handleSearch(searchTerm){
-    let filteredApplications = this.filterApplications(this.state.applicationsImmutable, searchTerm);
-    this.setState({
-      applications: filteredApplications
-    });
+  handleSearch(searchTerm) {
+    if (searchTerm.length > 0) {
+      let filteredApplications = this.filterApplications(this.state.applicationsImmutable, searchTerm);
+      this.setState({
+        applications: filteredApplications,
+        searchTerm: searchTerm
+      });
+    }
   }
 
   handleSearchChange(event) {
@@ -55,9 +62,27 @@ class HomeApp extends React.Component {
 
   handleQuickFilter(event) {
     let searchTerm = event.target.value;
-    let element = document.getElementById("searchInput");
-    element.value = searchTerm;
-    this.handleSearch(searchTerm);
+    let element = document.getElementById(SEARCH_INPUT_ID);
+    let existingValue = element.value;
+    if (existingValue.indexOf(searchTerm) === -1) {
+      let combinedSearch = `${element.value} ${searchTerm}`;
+      element.value = combinedSearch
+      this.handleSearch(combinedSearch);
+    }
+  }
+
+  handleClearSearch() {
+    let element = document.getElementById(SEARCH_INPUT_ID);
+    let applications = this.state.applicationsImmutable;
+    element.value = "";
+    this.setState({
+      applications: applications,
+      searchTerm: ""
+    })
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
   }
 
   getConfigHandler() {
@@ -81,10 +106,23 @@ class HomeApp extends React.Component {
     )
   }
 
+  renderCancelBtn() {
+    if (this.state.searchTerm.length > 0) {
+      return(
+        <div class="input-group-append" id="cancelBtn">
+          <button id="cancelBtn" class="btn" type="button" onClick={this.handleClearSearch}>
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      )
+    }
+    return null;
+  }
+
   renderContent() {
     return (
       <div id="contentContainer">
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div id="searchBar" class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">
@@ -92,6 +130,7 @@ class HomeApp extends React.Component {
               </span>
             </div>
             <input type="text" class="form-control" placeholder="Search applications..." id="searchInput" onChange={this.handleSearchChange}/>
+            <this.renderCancelBtn/>
             <div class="input-group-append">
               <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
                 <i class="fa fa-filter"></i>
