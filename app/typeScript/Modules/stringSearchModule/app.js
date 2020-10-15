@@ -3,6 +3,17 @@ exports.__esModule = true;
 exports.StringSearchModule = void 0;
 var StringSearchModule = /** @class */ (function () {
     function StringSearchModule() {
+        this.searchDoesNotExist = function (existingValue, searchTerm) {
+            if (existingValue === void 0) { existingValue = ""; }
+            if (searchTerm === void 0) { searchTerm = ""; }
+            return (existingValue || "").indexOf(searchTerm) === -1;
+        };
+        this.combineSearchTerms = function (existingValue, searchTerm) {
+            if (existingValue === void 0) { existingValue = ""; }
+            if (searchTerm === void 0) { searchTerm = ""; }
+            var result = existingValue + " " + searchTerm;
+            return result.trim();
+        };
     }
     StringSearchModule.prototype.searchCriterions = function (criterions, searchTerm) {
         if (criterions === void 0) { criterions = []; }

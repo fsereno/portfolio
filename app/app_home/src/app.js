@@ -18,7 +18,7 @@ class HomeApp extends React.Component {
       applications: [],
       applicationsImmutable: [],
       hasApplications: false,
-      searchTerm: ""
+      showClear: false
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleQuickFilter = this.handleQuickFilter.bind(this);
@@ -50,7 +50,12 @@ class HomeApp extends React.Component {
       let filteredApplications = this.filterApplications(this.state.applicationsImmutable, searchTerm);
       this.setState({
         applications: filteredApplications,
-        searchTerm: searchTerm
+        showClear: true
+      });
+    } else {
+      this.setState({
+        applications:this.state.applicationsImmutable,
+        showClear: false
       });
     }
   }
@@ -64,8 +69,8 @@ class HomeApp extends React.Component {
     let searchTerm = event.target.value;
     let element = document.getElementById(SEARCH_INPUT_ID);
     let existingValue = element.value;
-    if (existingValue.indexOf(searchTerm) === -1) {
-      let combinedSearch = `${element.value} ${searchTerm}`;
+    if (_stringSearchModule.searchDoesNotExist(existingValue, searchTerm)) {
+      let combinedSearch = _stringSearchModule.combineSearchTerms(existingValue, searchTerm);
       element.value = combinedSearch
       this.handleSearch(combinedSearch);
     }
@@ -73,11 +78,10 @@ class HomeApp extends React.Component {
 
   handleClearSearch() {
     let element = document.getElementById(SEARCH_INPUT_ID);
-    let applications = this.state.applicationsImmutable;
     element.value = "";
     this.setState({
-      applications: applications,
-      searchTerm: ""
+      applications: this.state.applicationsImmutable,
+      showClear: false
     })
   }
 
@@ -106,8 +110,8 @@ class HomeApp extends React.Component {
     )
   }
 
-  renderCancelBtn() {
-    if (this.state.searchTerm.length > 0) {
+  renderClearBtn() {
+    if (this.state.showClear) {
       return(
         <div class="input-group-append" id="cancelBtn">
           <button id="cancelBtn" class="btn" type="button" onClick={this.handleClearSearch}>
@@ -130,7 +134,7 @@ class HomeApp extends React.Component {
               </span>
             </div>
             <input type="text" class="form-control" placeholder="Search applications..." id="searchInput" onChange={this.handleSearchChange}/>
-            <this.renderCancelBtn/>
+            <this.renderClearBtn/>
             <div class="input-group-append">
               <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
                 <i class="fa fa-filter"></i>
