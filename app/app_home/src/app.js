@@ -114,7 +114,7 @@ class HomeApp extends React.Component {
     if (this.state.showClear) {
       return(
         <div class="input-group-append" id="cancelBtn">
-          <button id="cancelBtn" class="btn" type="button" onClick={this.handleClearSearch}>
+          <button class="btn" type="button" onClick={this.handleClearSearch}>
             <i class="fa fa-times"></i>
           </button>
         </div>

@@ -78,4 +78,24 @@ describe(application, () => {
             return test(url).should.eventually.equal(true)
         });
     });
+    describe("Clear Button", () => {
+        it("Should clear search input when clicked", function() {
+            this.timeout(0);
+            let test = async (url) => {
+                return new Nightmare({show:true})
+                .goto(url)
+                .wait(1500)
+                .type('#searchInput', 'TypeScript')
+                .click("#cancelBtn button")
+                .end()
+                .evaluate(() => {
+                    let hasApplications = jQuery("#applicationsContainer").children().length > 0;
+                    let hasNoSearchValue = jQuery("#searchInput").val() === "";
+                    return hasApplications && hasNoSearchValue;
+                })
+                .end();
+            }
+            return test(url).should.eventually.equal(true)
+        });
+    })
 });
