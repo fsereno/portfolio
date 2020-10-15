@@ -11,7 +11,7 @@ export class StringSearchModule {
         let result = searchResult.length > 0;
         return result;
     }
-    searchDoesNotExist = (existingValue: string = "", searchTerm: string = "") => (existingValue || "").indexOf(searchTerm) === -1;
+    searchDoesNotExist = (existingValue: string = "", searchTerm: string = "") => (existingValue || "").toUpperCase().indexOf((searchTerm || "").toUpperCase()) === -1;
     combineSearchTerms = (existingValue: string = "", searchTerm: string = "") => {
        let result = `${existingValue} ${searchTerm}`;
        return result.trim();

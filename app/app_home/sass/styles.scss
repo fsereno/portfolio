@@ -25,6 +25,12 @@
       color: $white;
     }
   }
+  #openFilterBtn {
+    border-left: 1px solid #fff;
+    &:focus {
+      box-shadow: none;
+    }
+  }
   #cancelBtn {
     button {
       border-top: 1px solid $darkGrey;

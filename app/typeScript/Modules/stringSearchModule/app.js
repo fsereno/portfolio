@@ -6,7 +6,7 @@ var StringSearchModule = /** @class */ (function () {
         this.searchDoesNotExist = function (existingValue, searchTerm) {
             if (existingValue === void 0) { existingValue = ""; }
             if (searchTerm === void 0) { searchTerm = ""; }
-            return (existingValue || "").indexOf(searchTerm) === -1;
+            return (existingValue || "").toUpperCase().indexOf((searchTerm || "").toUpperCase()) === -1;
         };
         this.combineSearchTerms = function (existingValue, searchTerm) {
             if (existingValue === void 0) { existingValue = ""; }

@@ -55,6 +55,10 @@ describe("StringSearchModule", () => {
             let result = sut.searchDoesNotExist("Vue", "React");
             expect(result).to.equal(true);
         });
+        it("Should return false and ignore case difference", () => {
+            let result = sut.searchDoesNotExist("typescript", "TypeScript");
+            expect(result).to.equal(false);
+        });
     })
     describe("combineSearchTerms", () => {
         it("Should return an empty string if params are empty", () => {
