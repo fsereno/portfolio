@@ -25,7 +25,7 @@ class HomeApp extends React.Component {
     this.handleClearSearch = this.handleClearSearch.bind(this);
     this.renderHandler = this.renderHandler.bind(this);
     this.renderContent = this.renderContent.bind(this);
-    this.renderCancelBtn = this.renderCancelBtn.bind(this);
+    this.renderClearBtn = this.renderClearBtn.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -136,7 +136,7 @@ class HomeApp extends React.Component {
             <input type="text" class="form-control" placeholder="Search applications..." id="searchInput" onChange={this.handleSearchChange}/>
             <this.renderClearBtn/>
             <div class="input-group-append">
-              <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
+              <button id="openFilterBtn" class="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
                 <i class="fa fa-filter"></i>
               </button>
             </div>

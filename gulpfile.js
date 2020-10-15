@@ -307,7 +307,7 @@ gulp.task("connect", (done) => {
   done();
 });
 
-gulp.task("functional", (done) => {
+gulp.task("test-func", (done) => {
   frontendTestTasks();
   done();
 });
