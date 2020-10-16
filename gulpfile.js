@@ -41,6 +41,7 @@ const config = require("./config.json");
 const gulpHelpers = require("./gulpHelpers");
 const flatmap = require("gulp-flatmap");
 const uglify = require('gulp-uglify');
+const run = require('gulp-run-command').default;
 let buffer = require('vinyl-buffer');
 
 let cssTask = (application) => {
@@ -317,6 +318,8 @@ gulp.task("test", (done) => {
   testsTask("modules");
   done();
 });
+
+gulp.task('webpack', run("npx webpack"));
 
 gulp.task("create", (done) => {
   config.applications.map(createTasks);
