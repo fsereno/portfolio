@@ -82,7 +82,7 @@ describe(application, () => {
         it("Should clear search input when clicked", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare({show:false})
                 .goto(url)
                 .wait(1500)
                 .type('#searchInput', 'TypeScript')

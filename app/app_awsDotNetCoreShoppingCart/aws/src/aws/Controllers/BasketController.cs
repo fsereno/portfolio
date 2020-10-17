@@ -24,7 +24,6 @@ namespace aws.Controllers
            this._basketUtil = basketUtil;
         }
 
-        // POST api/basket/get
         [HttpPost("get")]
         public IList<Item> Get([FromBody]GetRequest request)
         {
@@ -33,18 +32,24 @@ namespace aws.Controllers
 
             if (request != null)
             {
-                var items = this._basketUtil.GetItems(request.Items, this._items);
-                var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
-                if (isInRange)
+                try
                 {
-                    result.Add(items[position]);
+                    var items = this._basketUtil.GetItems(request.Items, this._items);
+                    var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
+                    if (isInRange)
+                    {
+                        result.Add(items[position]);
+                    }
+                    result = result.Any() ? result : items;
                 }
-                result = result.Any() ? result : items;
+                catch (Exception exception)
+                {
+                    throw new Exception($"Unable to retrieve items: {exception.Message}");
+                }
             }
             return result;
         }
 
-        // POST api/basket/add
         [HttpPost("add")]
         public IList<Item> Add([FromBody]AddRequest request)
         {
@@ -53,14 +58,20 @@ namespace aws.Controllers
 
             if (request != null && !String.IsNullOrEmpty(request.Item?.Name))
             {
-                var items = this._basketUtil.GetItems(request.Items, this._items);
-                items.Add(request.Item);
-                result = items;
+                try
+                {
+                    var items = this._basketUtil.GetItems(request.Items, this._items);
+                    items.Add(request.Item);
+                    result = items;
+                }
+                catch (Exception exception)
+                {
+                    throw new Exception($"Unable to add item: {exception.Message}");
+                }
             }
             return result;
         }
 
-        // POST api/basket/update
         [HttpPost("update")]
         public IList<Item> Update([FromBody]UpdateRequest request)
         {
@@ -69,12 +80,19 @@ namespace aws.Controllers
 
             if (request != null)
             {
-                var items = this._basketUtil.GetItems(request.Items, this._items);
-                var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
-                if (isInRange) {
-                    items[position] = request.Item;
+                try
+                {
+                    var items = this._basketUtil.GetItems(request.Items, this._items);
+                    var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
+                    if (isInRange) {
+                        items[position] = request.Item;
+                    }
+                    result = items;
                 }
-                result = items;
+                catch (Exception exception)
+                {
+                    throw new Exception($"Unable to update item: {exception.Message}");
+                }
             }
             return result;
         }
@@ -88,13 +106,20 @@ namespace aws.Controllers
 
             if (request != null)
             {
-                var items = this._basketUtil.GetItems(request.Items, this._items);
-                var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
-                if (isInRange)
+                try
                 {
-                    items.RemoveAt(position);
+                    var items = this._basketUtil.GetItems(request.Items, this._items);
+                    var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
+                    if (isInRange)
+                    {
+                        items.RemoveAt(position);
+                    }
+                    result = items;
                 }
-                result = items;
+                catch(Exception exception)
+                {
+                    throw new Exception($"Unable to delete item: {exception.Message}");
+                }
             }
             return result;
         }
