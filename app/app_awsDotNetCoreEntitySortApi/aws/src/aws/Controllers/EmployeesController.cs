@@ -22,7 +22,16 @@ namespace aws.Controllers
         public IList<Employee> SortBySalaryDesc([FromBody]GetRequest request)
         {
             this.SetResponseHeaders();
-            var employees = this._employeeSortUtil.SortBySalaryDesc(request?.Employees);
+            var employees = request?.Employees ?? new List<Employee>();
+
+            try
+            {
+                employees = this._employeeSortUtil.SortBySalaryDesc(request?.Employees);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception($"Unable to sort descending: {exception.Message}");
+            }
             return employees;
         }
 
@@ -30,7 +39,16 @@ namespace aws.Controllers
         public IList<Employee> SortBySalaryAsc([FromBody]GetRequest request)
         {
             this.SetResponseHeaders();
-            var employees = this._employeeSortUtil.SortBySalaryAsc(request?.Employees);
+            var employees = request?.Employees ?? new List<Employee>();
+
+            try
+            {
+                employees = this._employeeSortUtil.SortBySalaryAsc(request?.Employees);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception($"Unable to sort ascending: {exception.Message}");
+            }
             return employees;
         }
 
