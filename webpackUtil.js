@@ -4,7 +4,7 @@ module.exports = {
     collectWebPackConfigs: (config) => {
       let webpackConfigs = [];
       config.applications.forEach(application => {
-        if (!application.useWebpack) {
+        if (application.useWebpack) {
           let directory = module.exports.getDirectory(config, application);
           let webpackConfig;
           try {

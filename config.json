@@ -19,7 +19,7 @@
             "active": true,
             "include": false,
             "folderRoot": "/",
-            "useWebpack": false,
+            "useWebpack": true,
             "useRoot": true
         },
         {
@@ -46,7 +46,7 @@
             "folder": "babelTs",
             "active": true,
             "include": true,
-            "useWebpack": false
+            "useWebpack": true
         },
         {
             "name": "To-Do List (React)",
@@ -56,7 +56,7 @@
             "folder": "toDoReact",
             "active": true,
             "include": true,
-            "useWebpack": false
+            "useWebpack": true
         },
         {
             "name": "To-Do List (React Redux)",
@@ -66,7 +66,7 @@
             "folder": "reactRedux",
             "active": true,
             "include": true,
-            "useWebpack": false
+            "useWebpack": true
         },
         {
             "name": "To-Do List (Vue)",
@@ -76,7 +76,7 @@
             "folder": "toDoVue",
             "active": true,
             "include": true,
-            "useWebpack": false
+            "useWebpack": true
         },
         {
             "name": "Tic-Tac-Toe (React)",
@@ -86,7 +86,7 @@
             "folder": "ticTacToeReact",
             "active": true,
             "include": true,
-            "useWebpack": false
+            "useWebpack": true
         },
         {
             "name": "TypeScript Find and Replace",
@@ -105,7 +105,7 @@
             "folder": "awsDotNetCoreEntitySortApi",
             "active": true,
             "include": true,
-            "useWebpack": false,
+            "useWebpack": true,
             "masterTemplateDir": "master_react"
         },
         {
@@ -116,7 +116,7 @@
             "folder": "awsDotNetCoreStringSortApi",
             "active": true,
             "include": true,
-            "useWebpack": false,
+            "useWebpack": true,
             "masterTemplateDir": "master_react"
         },
         {
@@ -127,7 +127,7 @@
             "folder": "awsDotNetCoreShoppingCart",
             "active": true,
             "include": true,
-            "useWebpack": false
+            "useWebpack": true
         },
         {
             "name": "Three JS Scene (Basic)",
@@ -137,7 +137,7 @@
             "folder": "threeJSScene",
             "active": true,
             "include": true,
-            "useWebpack": false
+            "useWebpack": true
         },
         {
             "name": "AFrame React (Basic)",
@@ -147,7 +147,7 @@
             "folder": "aframe",
             "active": true,
             "include": true,
-            "useWebpack": false
+            "useWebpack": true
         },
         {
             "name": "AFrame React (Complex)",
@@ -157,7 +157,7 @@
             "folder": "aframeComplex",
             "active": true,
             "include": true,
-            "useWebpack": false
+            "useWebpack": true
         },
         {
             "name": "TypeScript Percentage Calculator",

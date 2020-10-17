@@ -63,7 +63,7 @@ let cssTask = (application) => {
 
 let applicationTypeScriptTask = (application) => {
   let directories = gulpUtil.getApplicationDirectories(application);
-  if (gulpUtil.useWebpackIsFalse(application.useWebpack)) {
+  if (gulpUtil.useWebpackIsTrue(application.useWebpack)) {
     return false;
   }
   return browserify({
@@ -155,7 +155,7 @@ let userefTask = (application) => {
 
 let copyJsTask = (application) => {
   let directories = gulpUtil.getApplicationDirectories(application);
-  if (gulpUtil.useWebpackIsTrue(application.useWebpack)) {
+  if (gulpUtil.useWebpackIsFalse(application.useWebpack)) {
     return false;
   }
   return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/js/**/*.js")
