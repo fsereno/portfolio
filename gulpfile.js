@@ -63,7 +63,7 @@ let cssTask = (application) => {
 
 let applicationTypeScriptTask = (application) => {
   let directories = gulpUtil.getApplicationDirectories(application);
-  if (gulpUtil.compileJsIsFalse(application.compileJs)) {
+  if (gulpUtil.useWebpackIsFalse(application.useWebpack)) {
     return false;
   }
   return browserify({
@@ -155,7 +155,7 @@ let userefTask = (application) => {
 
 let copyJsTask = (application) => {
   let directories = gulpUtil.getApplicationDirectories(application);
-  if (gulpUtil.compileJsIsTrue(application.compileJs)) {
+  if (gulpUtil.useWebpackIsTrue(application.useWebpack)) {
     return false;
   }
   return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/js/**/*.js")
@@ -331,7 +331,7 @@ gulp.task("publish", gulp.series(["test", "images", "fonts", "favicon"], (done) 
   done();
 }));
 
-gulp.task("build", gulp.series(["test"], (done) => {
+gulp.task("build", gulp.series(["test", "webpack"], (done) => {
   config.applications.map(defaultTasks);
   done();
 }));
