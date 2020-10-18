@@ -17,7 +17,7 @@ const DEFAULT_COLLECTION = [
 
 let _puzzleModule = PuzzleModule(15, "puzzleModal");
 let _spinnerModule = SpinnerModule( { hideByDefault : true } );
-let _errorModule = ErrorModule("errorModule")
+let _errorModule = ErrorModule("errorModule");
 
 function InputTemplate(props){
   return (

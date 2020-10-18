@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { PuzzleModule } from '../../js/puzzleModule.js';
 import { SpinnerModule } from '../../js/spinnerModule.js'
+import { ErrorModule } from '../../js/errorModule.js';
 
 const API_ENDPOINT = "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees";
 const DISABLED_BTN_CLASS = "disabled";
@@ -11,6 +12,7 @@ const PUZZLE = "4 x 4 - 2 =";
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
 let _spinnerModule = SpinnerModule( { hideByDefault : true } );
+let _errorModule = ErrorModule("errorModule");
 
 class EntitySort extends React.Component {
   constructor(props) {
@@ -64,7 +66,11 @@ class EntitySort extends React.Component {
 
   handleAjax(request) {
     if (_puzzleModule.getResult()) {
-      $.ajax(request);
+      $.ajax(request)
+      .fail(() => {
+        _errorModule.show();
+        _spinnerModule.hide();
+      });
     }
   }
 
@@ -139,6 +145,7 @@ class EntitySort extends React.Component {
     _spinnerModule.hide();
     return (
       <div>
+        <_errorModule.Render/>
         <_spinnerModule.Render/>
         <_puzzleModule.Render
           event={this.handlePuzzleSubmit}
