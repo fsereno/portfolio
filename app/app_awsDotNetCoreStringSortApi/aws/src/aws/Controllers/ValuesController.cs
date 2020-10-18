@@ -8,7 +8,7 @@ namespace aws.Controllers
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
-        private readonly IStringSortUtil _stringSortUtil;
+        private IStringSortUtil _stringSortUtil { get; set; }
         public ValuesController(IStringSortUtil stringSortUtil)
         {
             this._stringSortUtil = stringSortUtil;
@@ -17,15 +17,7 @@ namespace aws.Controllers
         public SortResult Sort([FromBody] SortRequest request)
         {
             this.SetResponseHeaders();
-            var result = request?.CommaSeperatedString ?? string.Empty;
-            try
-            {
-                result = this._stringSortUtil.Sort(request.CommaSeperatedString);
-            }
-            catch(Exception exception)
-            {
-                throw new Exception($"Unable to sort request: {exception.Message}");
-            }
+            var result = _stringSortUtil.Sort(request.CommaSeperatedString);
             return new SortResult(){ Result = result };
         }
 
