@@ -49,6 +49,14 @@ namespace aws.Tests
         }
 
         [Fact]
+        public void Test_Sort_Should_Return_A_Sorted_String_Ignoring_Spaces()
+        {
+            var commaSeperatedString = "B , A,C, 1 ";
+            var result = this._sut.Sort(commaSeperatedString);
+            Assert.Equal("1,A,B,C", result);
+        }
+
+        [Fact]
         public void Test_Sort_Should_Return_A_Sorted_Numeric_String()
         {
             var commaSeperatedString = "2,3,1,4,10";

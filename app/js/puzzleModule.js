@@ -20,7 +20,7 @@ export let PuzzleModule = function(answer, modalId) {
             return null;
         }
     }
-    let RenderTemplate = function(props) {
+    let Render = function(props) {
 
         const [input, setInput] = useState(0);
 
@@ -67,9 +67,9 @@ export let PuzzleModule = function(answer, modalId) {
         )
     }
     return {
-        show: show,
-        hide: hide,
-        RenderTemplate:RenderTemplate,
-        getResult: getResult
+        show : show,
+        hide : hide,
+        Render : Render,
+        getResult : getResult
     }
 };

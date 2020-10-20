@@ -2,7 +2,7 @@ var config = require("./config.json");
 
 module.exports = {
     constructor: () => { return config },
-    runThis: (application, method) => {
+    runThis: (application = {}, method) => {
       method(application);
     },
     setupWatcherOnChangeEvent: (watcher, dir, method, defaultTasksCallBack) => {
@@ -42,8 +42,8 @@ module.exports = {
       }
       return options;
     },
-    compileJsIsFalse: (compileJs) => typeof compileJs !== "undefined" && compileJs === false,
-    compileJsIsTrue: (compileJs) => (typeof compileJs === "undefined") || typeof compileJs !== "undefined" &&  compileJs === true,
+    useWebpackIsFalse: useWebpack => typeof useWebpack !== "undefined" && useWebpack === false,
+    useWebpackIsTrue: useWebpack => (typeof useWebpack === "undefined") || typeof useWebpack !== "undefined" && useWebpack,
     getApplicationDirectories: (application) => {
       let applicationDirectory = application.useRoot
         ? config.developmentDir+"/"

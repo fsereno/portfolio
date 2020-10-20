@@ -3,12 +3,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { PuzzleModule } from '../../js/puzzleModule.js';
+import { SpinnerModule } from '../../js/spinnerModule.js'
+import { ErrorModule } from '../../js/errorModule.js';
 
 const API_ENDPOINT = "https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values";
 const DISABLED_BTN_CLASS = "disabled";
 const PUZZLE = "4 x 4 - 5 =";
 
 let _puzzleModule = PuzzleModule(11, "puzzleModal");
+let _spinnerModule = SpinnerModule( { hideByDefault : true } );
+let _errorModule = ErrorModule("errorModule");
 
 class StringSort extends React.Component {
   constructor(props) {
@@ -41,11 +45,16 @@ class StringSort extends React.Component {
 
   handleAjax(request) {
     if (_puzzleModule.getResult()) {
-      $.ajax(request);
+      $.ajax(request)
+      .fail(() => {
+        _errorModule.show();
+        _spinnerModule.hide();
+      });
     }
   }
 
   handleSort() {
+    _spinnerModule.show();
     let request = {
       url: this.state.sort,
       type: "POST",
@@ -74,9 +83,12 @@ class StringSort extends React.Component {
   }
 
   render() {
+    _spinnerModule.hide();
     return (
       <div>
-        <_puzzleModule.RenderTemplate
+        <_errorModule.Render/>
+        <_spinnerModule.Render/>
+        <_puzzleModule.Render
           event={this.handlePuzzleSubmit}
           label="First answer this question to unlock the API:"
           puzzle={PUZZLE}

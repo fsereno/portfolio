@@ -118,7 +118,7 @@ $ gulp test
 #### Run the Gulp Frontend Functional tests (headless browser) task
 
 ```shell
-$ gulp functional
+$ gulp test-func
 ```
 ##### This will:
 - Start the development server

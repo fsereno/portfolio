@@ -32,9 +32,9 @@ namespace Utils
 
             var characterGroups = commaSeperatedString.Split(',');
 
-            foreach (var group in characterGroups)
+            foreach (var characterGroup in characterGroups)
             {
-                addMethod(new ValueTuple<string, List<SortItem>>(group, itemsToSort));
+                addMethod(new ValueTuple<string, List<SortItem>>(characterGroup.Trim(), itemsToSort));
             }
 
             sortMethod(itemsToSort);

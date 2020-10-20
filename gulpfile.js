@@ -38,15 +38,16 @@ const logger = require("gulp-logger");
 const logSymbols = require("log-symbols");
 const directoryExists = require("directory-exists");
 const config = require("./config.json");
-const gulpHelpers = require("./gulpHelpers");
+const gulpUtil = require("./gulpUtil");
 const flatmap = require("gulp-flatmap");
 const uglify = require('gulp-uglify');
+const run = require('gulp-run-command').default;
 let buffer = require('vinyl-buffer');
 
 let cssTask = (application) => {
-  let directories = gulpHelpers.getApplicationDirectories(application);
+  let directories = gulpUtil.getApplicationDirectories(application);
   return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
-  .pipe(logger(gulpHelpers.populateLoggerOptions(
+  .pipe(logger(gulpUtil.populateLoggerOptions(
       "CSS task started...",
       "CSS task complete!",
       ".css",
@@ -60,9 +61,9 @@ let cssTask = (application) => {
     .pipe(connect.reload());
 }
 
-let jsTask = (application) => {
-  let directories = gulpHelpers.getApplicationDirectories(application);
-  if (gulpHelpers.compileJsIsFalse(application.compileJs)) {
+let applicationTypeScriptTask = (application) => {
+  let directories = gulpUtil.getApplicationDirectories(application);
+  if (gulpUtil.useWebpackIsTrue(application.useWebpack)) {
     return false;
   }
   return browserify({
@@ -79,7 +80,33 @@ let jsTask = (application) => {
   .pipe(uglify())
   .pipe(gulp.dest(directories.applicationDirectory+"/js"))
   .pipe(connect.reload())
-  .pipe(logger(gulpHelpers.populateLoggerOptions(
+  .pipe(logger(gulpUtil.populateLoggerOptions(
+    "Application TypeScript task started...",
+    "Application TypeScript task complete!",
+    ".js",
+    false,
+    "../js",
+    "Compiled to: ",
+    " " + logSymbols.success
+  )));
+}
+
+let servicesTypeScriptTask = () => {
+  return browserify({
+    basedir: config.developmentDir+"/typeScript/Services",
+    debug: true,
+    entries: ["StringService.ts"],
+    cache: {},
+    packageCache: {}
+  })
+  .plugin(tsify)
+  .bundle()
+  .pipe(source("app.js"))
+  .pipe(buffer())
+  .pipe(uglify())
+  .pipe(gulp.dest(config.developmentDir+"/js/test"))
+  .pipe(connect.reload())
+  .pipe(logger(gulpUtil.populateLoggerOptions(
     "JS task started...",
     "JS task complete!",
     ".js",
@@ -91,9 +118,9 @@ let jsTask = (application) => {
 }
 
 let htmlTask = (application) => {
-  let directories = gulpHelpers.getApplicationDirectories(application);
+  let directories = gulpUtil.getApplicationDirectories(application);
   return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/pug/*.pug")
-  .pipe(logger(gulpHelpers.populateLoggerOptions(
+  .pipe(logger(gulpUtil.populateLoggerOptions(
     "HTML task started...",
     "HTML task complete!",
     ".html",
@@ -111,9 +138,9 @@ let htmlTask = (application) => {
 };
 
 let userefTask = (application) => {
-  let directories = gulpHelpers.getApplicationDirectories(application);
+  let directories = gulpUtil.getApplicationDirectories(application);
   return gulp.src(directories.applicationDirectory+"/*.html")
-  .pipe(logger(gulpHelpers.populateLoggerOptions(
+  .pipe(logger(gulpUtil.populateLoggerOptions(
     "Useref task started...",
     "Useref task complete!",
     ".html",
@@ -127,12 +154,12 @@ let userefTask = (application) => {
 };
 
 let copyJsTask = (application) => {
-  let directories = gulpHelpers.getApplicationDirectories(application);
-  if (gulpHelpers.compileJsIsTrue(application.compileJs)) {
+  let directories = gulpUtil.getApplicationDirectories(application);
+  if (gulpUtil.useWebpackIsFalse(application.useWebpack)) {
     return false;
   }
   return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/js/**/*.js")
-    .pipe(logger(gulpHelpers.populateLoggerOptions(
+    .pipe(logger(gulpUtil.populateLoggerOptions(
       "Copy JS task started...",
       "Copy JS task complete!",
       ".js",
@@ -150,7 +177,7 @@ let createTask = (application) => {
       let templateDirectory = typeof application.masterTemplateDir !== "undefined" && application.masterTemplateDir.length > 0 ? application.masterTemplateDir : config.masterTemplateDir;
       if(result === false) {
         gulp.src(`${config.developmentDir}/${config.prefix}${templateDirectory}/**/*`)
-        .pipe(logger(gulpHelpers.populateLoggerOptions(
+        .pipe(logger(gulpUtil.populateLoggerOptions(
             "Create task started...",
             "Crete task complete!",
             null,
@@ -165,18 +192,18 @@ let createTask = (application) => {
 }
 
 let defaultTasks = (application) => {
-  gulpHelpers.runThis(application, cssTask);
-  gulpHelpers.runThis(application, jsTask);
-  gulpHelpers.runThis(application, htmlTask);
+  gulpUtil.runThis(application, cssTask);
+  gulpUtil.runThis(application, applicationTypeScriptTask);
+  gulpUtil.runThis(application, htmlTask);
 }
 
 let publishTasks = (application) => {
-  gulpHelpers.runThis(application, userefTask);
-  gulpHelpers.runThis(application, copyJsTask);
+  gulpUtil.runThis(application, userefTask);
+  gulpUtil.runThis(application, copyJsTask);
 }
 
 let createTasks = (application) => {
-  gulpHelpers.runThis(application, createTask);
+  gulpUtil.runThis(application, createTask);
 }
 
 let defaultTasksCallBack = () => {
@@ -238,8 +265,13 @@ let imagesCopyTask = () => {
   .pipe(gulp.dest(config.publishDir+"/images"));
 }
 
-let serviceTestsTask = () => {
-  return gulp.src(config.developmentDir+"/tests/services/*.test.ts")
+let faviconCopyTask = () => {
+  return gulp.src('app/*.ico')
+    .pipe(gulp.dest(config.publishDir));
+}
+
+let testsTask = (directory) => {
+  return gulp.src(`${config.developmentDir}/tests/${directory}/*.test.ts`)
     .pipe(mocha({
         reporter: "spec",
         require: ["ts-node/register"]
@@ -256,13 +288,18 @@ gulp.task("fonts", (done) => {
   done();
 });
 
+gulp.task('favicon', function(done){
+  faviconCopyTask();
+  done();
+})
+
 gulp.task("watch", (done) => {
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, defaultTasksCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", jsTask, defaultTasksCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask, defaultTasksCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null, defaultTasksCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null, defaultTasksCallBack);
-  gulpHelpers.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null, defaultTasksCallBack);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, defaultTasksCallBack);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", applicationTypeScriptTask, defaultTasksCallBack);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask, defaultTasksCallBack);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null, defaultTasksCallBack);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null, defaultTasksCallBack);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null, defaultTasksCallBack);
   done();
 });
 
@@ -271,27 +308,30 @@ gulp.task("connect", (done) => {
   done();
 });
 
-gulp.task("functional", (done) => {
+gulp.task("test-func", (done) => {
   frontendTestTasks();
   done();
 });
 
 gulp.task("test", (done) => {
-  serviceTestsTask();
+  testsTask("services");
+  testsTask("modules");
   done();
 });
+
+gulp.task('webpack', run("npx webpack"));
 
 gulp.task("create", (done) => {
   config.applications.map(createTasks);
   done();
 });
 
-gulp.task("publish", gulp.series(["test", "images", "fonts"], (done) => {
+gulp.task("publish", gulp.series(["test", "images", "fonts", "favicon"], (done) => {
   config.applications.map(publishTasks);
   done();
 }));
 
-gulp.task("build", gulp.series(["test"], (done) => {
+gulp.task("build", gulp.series(["test", "webpack"], (done) => {
   config.applications.map(defaultTasks);
   done();
 }));

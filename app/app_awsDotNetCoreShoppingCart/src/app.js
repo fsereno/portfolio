@@ -3,6 +3,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { PuzzleModule } from '../../js/puzzleModule.js';
+import { SpinnerModule } from '../../js/spinnerModule.js'
+import { ErrorModule } from '../../js/errorModule.js';
 
 const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
 const API_SUBMIT_CLASSES = "btn btn-dark api-submit";
@@ -14,6 +16,8 @@ const DEFAULT_COLLECTION = [
 ]
 
 let _puzzleModule = PuzzleModule(15, "puzzleModal");
+let _spinnerModule = SpinnerModule( { hideByDefault : true } );
+let _errorModule = ErrorModule("errorModule");
 
 function InputTemplate(props){
   return (
@@ -53,12 +57,17 @@ class ShoppingListApp extends React.Component {
 
   handleAjax(request) {
     if (_puzzleModule.getResult()) {
-      $.ajax(request);
+      $.ajax(request)
+      .fail(() => {
+        _errorModule.show();
+        _spinnerModule.hide();
+      });
     }
   }
 
   handleGetSubmit(event) {
     event.preventDefault();
+    _spinnerModule.show();
     let input = event.target.elements[0].value;
     let index = Number(input);
     let isValid = response => typeof response !== "undefined" && response.length > 0;
@@ -83,6 +92,7 @@ class ShoppingListApp extends React.Component {
 
   handleAddSubmit(event) {
     event.preventDefault();
+    _spinnerModule.show();
     let input = event.target.elements[0].value;
     let request = {
       url: this.state.add,
@@ -106,6 +116,7 @@ class ShoppingListApp extends React.Component {
 
   handleUpdateSubmit(event) {
     event.preventDefault();
+    _spinnerModule.show();
     let index = Number(event.target.elements[0].value);
     let value = event.target.elements[1].value;
     let request = {
@@ -131,6 +142,7 @@ class ShoppingListApp extends React.Component {
 
   handleDeleteSubmit(event) {
     event.preventDefault();
+    _spinnerModule.show();
     let index = Number(event.target.elements[0].value);
     let request = {
       url: this.state.delete,
@@ -165,9 +177,12 @@ class ShoppingListApp extends React.Component {
   }
 
   render() {
+    _spinnerModule.hide();
     return (
       <div>
-        <_puzzleModule.RenderTemplate
+        <_errorModule.Render/>
+        <_spinnerModule.Render/>
+        <_puzzleModule.Render
           event={this.handlePuzzleSubmit}
           label="First answer this question to unlock the API:"
           puzzle={PUZZLE}

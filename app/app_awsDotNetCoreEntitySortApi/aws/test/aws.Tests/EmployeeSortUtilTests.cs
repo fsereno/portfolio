@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 using Amazon.Lambda.Core;
@@ -62,6 +63,32 @@ namespace aws.Tests
         {
             var result = this._sut.SortBySalaryAsc(this._employees);
             Assert.Equal("John Doe", result[0].Name);
+        }
+
+        [Fact]
+        public async void Test_Async()
+        {
+            var array = new int[5];
+            var result = 5;
+
+            foreach (var item in array)
+            {
+                await Task.Run(() => Process(result));
+            }
+
+            Assert.True(true);
+        }
+        
+        /*private void Process(int result) //56.92
+        {
+            Console.WriteLine("Working...");
+            Thread.Sleep(10000);
+        }*/
+
+        private async void Process(int result) // 7.20
+        {
+            Console.WriteLine("Working...");
+            await Task.Run(() => Thread.Sleep(10000));
         }
     }
 }

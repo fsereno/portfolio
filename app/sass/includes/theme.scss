@@ -1,0 +1,23 @@
+@import "./colours.scss";
+@import "./mixins.scss";
+
+.form-control {
+    @include borderMixin;
+}
+
+.input-group-text {
+    @include borderMixin;
+}
+
+.card {
+    @include borderMixin;
+}
+
+.list-group-item {
+    @include borderMixin;
+}
+
+.input-group-text {
+    background: $darkGrey;
+    color: $white;
+}

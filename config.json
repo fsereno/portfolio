@@ -8,8 +8,8 @@
     "folderRoot": "/tree/master/app/",
     "repoRootUrl": "https://github.com/fsereno/portfolio",
     "linkedInUrl": "https://www.linkedin.com/in/fabio-sereno-6a97b986/",
-    "heading": "Fabio Sereno",
-    "subHeading": "Software developer",
+    "author": "Fabio Sereno",
+    "role": "Software developer",
     "applications": [
         {
             "name": "Portfolio",
@@ -19,7 +19,7 @@
             "active": true,
             "include": false,
             "folderRoot": "/",
-            "compileJs": false,
+            "useWebpack": true,
             "useRoot": true
         },
         {
@@ -42,51 +42,57 @@
             "name": "To-Do List (Basic)",
             "subHeading": "A basic list builder",
             "description": "Experimenting with Babel, TypeScript and Require JS.",
+            "searchTerms": "JavaScript,TypeScript,Babel,Require JS,JQuery,PUG,HTML,CSS,SASS",
             "folder": "babelTs",
             "active": true,
             "include": true,
-            "compileJs": false
+            "useWebpack": true
         },
         {
             "name": "To-Do List (React)",
             "subHeading": "A basic list builder using React",
             "description": "Experimenting with React, Babel and Webpack.",
+            "searchTerms": "JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "toDoReact",
             "active": true,
             "include": true,
-            "compileJs": false
+            "useWebpack": true
         },
         {
             "name": "To-Do List (React Redux)",
             "subHeading": "A basic React Redux application",
             "description": "Experimenting how to use Redux with React to implement Undo and Redo functionality",
+            "searchTerms": "JavaScript,React,Redux,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "reactRedux",
             "active": true,
             "include": true,
-            "compileJs": false
+            "useWebpack": true
         },
         {
             "name": "To-Do List (Vue)",
             "subHeading": "A basic list builder using Vue",
             "description": "Experimenting with Vue, Babel and Webpack.",
+            "searchTerms": "JavaScript,Vue,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "toDoVue",
             "active": true,
             "include": true,
-            "compileJs": false
+            "useWebpack": true
         },
         {
             "name": "Tic-Tac-Toe (React)",
             "subHeading": "A Tic-Tac-Toe game built using React JS",
             "description": "Experimenting more complex aspects of React, Babel and Webpack.",
+            "searchTerms": "JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "ticTacToeReact",
             "active": true,
             "include": true,
-            "compileJs": false
+            "useWebpack": true
         },
         {
             "name": "TypeScript Find and Replace",
             "subHeading": "A simple Find and Replace method",
             "description": "Written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all.",
+            "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "findReplace",
             "active": true,
             "include": true
@@ -95,62 +101,69 @@
             "name": "AWS .NET Core Entity Sorting API",
             "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "searchTerms": "C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreEntitySortApi",
             "active": true,
             "include": true,
-            "compileJs": false,
+            "useWebpack": true,
             "masterTemplateDir": "master_react"
         },
         {
             "name": "AWS .NET Core Natural String Sorting API",
             "subHeading": "A natural string sorting algorithm implemnting IComparer, taking a comma seperated string of alphanumerical values.",
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "searchTerms": "C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreStringSortApi",
             "active": true,
             "include": true,
-            "compileJs": false,
+            "useWebpack": true,
             "masterTemplateDir": "master_react"
         },
         {
             "name": "AWS .NET Core Shopping Cart API",
             "subHeading": "A serverless application (SAM), using .Net Core and AWS",
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "searchTerms": "C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreShoppingCart",
             "active": true,
             "include": true,
-            "compileJs": false
+            "useWebpack": true
         },
         {
             "name": "Three JS Scene (Basic)",
             "subHeading": "A basic THREE JS scene",
             "description": "An interactive Three JS scene, using Babel and Webpack.",
+            "searchTerms": "JavaScript,Three JS,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "threeJSScene",
             "active": true,
             "include": true,
-            "compileJs": false
+            "useWebpack": true
         },
         {
             "name": "AFrame React (Basic)",
             "subHeading": "An AFrame Hello World application with React JS",
             "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
+            "searchTerms": "JavaScript,AFrame,Babel,WebPack,PUG,HTML,CSS,SASS,VR,Virtual Reality",
             "folder": "aframe",
             "active": true,
             "include": true,
-            "compileJs": false
+            "useWebpack": true
         },
         {
             "name": "AFrame React (Complex)",
             "subHeading": "A more complex AFrame application with React JS",
             "description": "Experimenting how to use AFrame with React, Babel and Webpack.",
+            "searchTerms": "JavaScript,AFrame,Babel,WebPack,PUG,HTML,CSS,SASS,VR,Virtual Reality",
             "folder": "aframeComplex",
             "active": true,
             "include": true,
-            "compileJs": false
+            "useWebpack": true
         },
         {
             "name": "TypeScript Percentage Calculator",
             "subHeading": "A simple percentage calculator method",
             "description": "Written with TypeScript, Sass and Pug.",
+            "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "percentageCalculator",
             "active": true,
             "include": true
@@ -159,6 +172,7 @@
             "name": "TypeScript Un-Scrabbler Word Game",
             "subHeading": "A simple Scrabble Word Game, can you beat Unscrabbler?",
             "description": "Written with TypeScript, Sass and Pug.",
+            "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "unscrabbler",
             "active": true,
             "include": true
@@ -167,6 +181,7 @@
             "name": "TypeScript Random String Generator",
             "subHeading": "A simple random generator",
             "description": "Generating a random string of A-B, 0-9 and a given length. Written with TypeScript, Sass and Pug.",
+            "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "randomGenerator",
             "active": true,
             "include": true
@@ -175,6 +190,7 @@
             "name": "TypeScript Dictionary Word Finder",
             "subHeading": "A simple dictionary word lookup tool",
             "description": "Experimenting with a large index lookup search. Written with TypeScript, Sass and Pug.",
+            "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "dictionaryFinder",
             "active": true,
             "include": true
@@ -183,6 +199,7 @@
             "name": "Knockout + TypeScript",
             "subHeading": "An example of KnockoutJS, enhanced by TypeScript",
             "description": "Written with KnockoutJS, TypeScript, Sass and Pug.",
+            "searchTerms": "JavaScript,TypeScript,Knockout,PUG,HTML,CSS,SASS",
             "folder": "koTypeScript",
             "active": true,
             "include": true
@@ -191,6 +208,7 @@
             "name": "JS Coding Standards",
             "subHeading": "A JavaScript Code Style Guide",
             "description": "By Fabio Sereno",
+            "searchTerms": "JavaScript,Solid Principles,YAGNI,DRY,KISS",
             "folder": "jsCodingStandards",
             "active": true,
             "include": true

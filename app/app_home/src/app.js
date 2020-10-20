@@ -3,10 +3,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Config from  '../../../config.json';
-import { SpinnerModule } from '../../js/spinnerModule.js'
+import { SpinnerModule } from '../../js/spinnerModule.js';
+import { StringSearchModule } from '../../typeScript/Modules/stringSearchModule/app.js';
 
 const FAUX_LOADING_TIME = 1000;
-let _spinnerModule = SpinnerModule("contentContainer");
+const SEARCH_INPUT_ID = "searchInput";
+let _spinnerModule = SpinnerModule({ contentId : "contentContainer" });
+let _stringSearchModule = new StringSearchModule();
 
 class HomeApp extends React.Component {
   constructor(props) {
@@ -14,23 +17,76 @@ class HomeApp extends React.Component {
     this.state = {
       applications: [],
       applicationsImmutable: [],
-      hasApplications: false
+      hasApplications: false,
+      showClear: false
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleQuickFilter = this.handleQuickFilter.bind(this);
+    this.handleClearSearch = this.handleClearSearch.bind(this);
     this.renderHandler = this.renderHandler.bind(this);
     this.renderContent = this.renderContent.bind(this);
+    this.renderClearBtn = this.renderClearBtn.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  filterApplications(applications, searchTerm) {
+    let filteredApplications = applications.filter((application) => {
+      let criterions = [
+        application.name,
+        application.subHeading,
+        application.description,
+        application.searchTerms
+      ]
+      let result = application.active && application.include
+        ? _stringSearchModule.searchCriterions(criterions, searchTerm)
+        : false
+      return result;
+    });
+    return filteredApplications;
+  }
+
+  handleSearch(searchTerm) {
+    if (searchTerm.length > 0) {
+      let filteredApplications = this.filterApplications(this.state.applicationsImmutable, searchTerm);
+      this.setState({
+        applications: filteredApplications,
+        showClear: true
+      });
+    } else {
+      this.setState({
+        applications:this.state.applicationsImmutable,
+        showClear: false
+      });
+    }
   }
 
   handleSearchChange(event) {
-    let searchTerm = event.target.value.toUpperCase();
-    let filteredApplications = this.state.applicationsImmutable.filter((application) => {
-        return application.name.toUpperCase().includes(searchTerm)
-        || application.subHeading.toUpperCase().includes(searchTerm)
-        || application.description.toUpperCase().includes(searchTerm)
-      });
+    let searchTerm = event.target.value;
+    this.handleSearch(searchTerm);
+  }
+
+  handleQuickFilter(event) {
+    let searchTerm = event.target.value;
+    let element = document.getElementById(SEARCH_INPUT_ID);
+    let existingValue = element.value;
+    if (_stringSearchModule.searchDoesNotExist(existingValue, searchTerm)) {
+      let combinedSearch = _stringSearchModule.combineSearchTerms(existingValue, searchTerm);
+      element.value = combinedSearch
+      this.handleSearch(combinedSearch);
+    }
+  }
+
+  handleClearSearch() {
+    let element = document.getElementById(SEARCH_INPUT_ID);
+    element.value = "";
     this.setState({
-      applications: filteredApplications
-    });
+      applications: this.state.applicationsImmutable,
+      showClear: false
+    })
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
   }
 
   getConfigHandler() {
@@ -54,42 +110,71 @@ class HomeApp extends React.Component {
     )
   }
 
+  renderClearBtn() {
+    if (this.state.showClear) {
+      return(
+        <div class="input-group-append" id="cancelBtn">
+          <button class="btn" type="button" onClick={this.handleClearSearch}>
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      )
+    }
+    return null;
+  }
+
   renderContent() {
     return (
       <div id="contentContainer">
-        <form>
-          <div id="searchBar" class="input-group mb-3 rounded shadow-sm">
-            <input type="text" class="form-control" placeholder="Search all available applications..." id="searchInput" onChange={this.handleSearchChange} />
-            <div class="input-group-append">
+        <form onSubmit={this.handleSubmit}>
+          <div id="searchBar" class="input-group mb-3">
+            <div class="input-group-prepend">
               <span class="input-group-text">
                 <i class="fa fa-search"></i>
               </span>
             </div>
+            <input type="text" class="form-control" placeholder="Search applications..." id="searchInput" onChange={this.handleSearchChange}/>
+            <this.renderClearBtn/>
+            <div class="input-group-append">
+              <button id="openFilterBtn" class="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
+                <i class="fa fa-filter"></i>
+              </button>
+            </div>
+          </div>
+          <div class="collapse" id="filterContainer">
+            <div class="pb-3">
+              <label class="d-flex flex-row justify-content-center">Quick search</label>
+              <div class="btn-group d-flex flex-row justify-content-center">
+                <button type="button" class="btn btn-outline-dark" value="React" onClick={this.handleQuickFilter}>React</button>
+                <button type="button" class="btn btn-outline-dark" value="TypeScript" onClick={this.handleQuickFilter}>TypeScript</button>
+                <button type="button" class="btn btn-outline-dark" value=".Net Core" onClick={this.handleQuickFilter}>.Net Core</button>
+              </div>
+            </div>
           </div>
         </form>
-        <div id="applicationsContainer" class="card-columns">
-          {this.state.applications.map((application) => {
-            if (application.active && application.include) {
-              return (
-                <div class="card shadow-sm p-3 bg-white rounded min-height-160">
-                  <div class="card-body">
-                    <h5 class="card-title">{application.name}</h5>
-                    <p class="card-text">{application.subHeading}</p>
-                    <a class="btn btn-dark mr-2 mb-2"
-                      href={`${Config.prefix}${application.folder}/${Config.index}`}>
-                        View app<i class="fa fa-eye ml-2"></i>
-                    </a>
-                    <a class="btn btn-dark mb-2"
-                      href={`${Config.repoRootUrl}/${Config.folderRoot}${Config.prefix}${application.folder}`}
-                      target="_blank">
-                        View code<i class="fa fa-github-square ml-2"></i>
-                    </a>
+          <div id="applicationsContainer" class="card-columns">
+            {this.state.applications.map((application) => {
+              if (application.active && application.include) {
+                return (
+                  <div class="card p-3 bg-white min-height-160">
+                    <div class="card-body">
+                      <h5 class="card-title">{application.name}</h5>
+                      <p class="card-text">{application.subHeading}</p>
+                      <a class="btn btn-dark mr-2 mb-2"
+                        href={`${Config.prefix}${application.folder}/${Config.index}`}>
+                          View app<i class="fa fa-eye ml-2"></i>
+                      </a>
+                      <a class="btn btn-dark mb-2"
+                        href={`${Config.repoRootUrl}/${Config.folderRoot}${Config.prefix}${application.folder}`}
+                        target="_blank">
+                          View code<i class="fa fa-github-square ml-2"></i>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              )
-            }
-          })}
-        </div>
+                )
+              }
+            })}
+          </div>
       </div>
     )
   }
