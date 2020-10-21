@@ -11,18 +11,14 @@ namespace Utils
     {
         public string Sort(string commaSeperatedString)
         {
-            var sortedAlphaNumeric = this.Sort(
-                    commaSeperatedString,
-                    AddSortItemToCollection,
-                    OrderBy);
-            var result = this.Join(sortedAlphaNumeric);
+            var itemsToSort = this.GetSortItems(commaSeperatedString);
+            this.Sort(itemsToSort);
+
+            var result = this.Join(itemsToSort);
             return result;
         }
 
-        public List<SortItem> Sort(
-                string commaSeperatedString,
-                Action<ValueTuple<string, List<SortItem>>> addMethod,
-                Action<List<SortItem>> sortMethod)
+        public List<SortItem> GetSortItems(string commaSeperatedString)
         {
             var itemsToSort = new List<SortItem>();
             if (String.IsNullOrEmpty(commaSeperatedString))
@@ -34,10 +30,9 @@ namespace Utils
 
             foreach (var characterGroup in characterGroups)
             {
-                addMethod(new ValueTuple<string, List<SortItem>>(characterGroup.Trim(), itemsToSort));
+               itemsToSort.Add( new SortItem() { Value = characterGroup.Trim() });
             }
 
-            sortMethod(itemsToSort);
             return itemsToSort;
         }
 
@@ -63,12 +58,7 @@ namespace Utils
             return result;
         }
 
-        public void AddSortItemToCollection((string group, List<SortItem> sortItems) request)
-        {
-            request.sortItems.Add(new SortItem(request.group));
-        }
-
-        public void OrderBy(List<SortItem> itemsToSort)
+        private void Sort(List<SortItem> itemsToSort)
         {
             itemsToSort?.Sort(new SortItem.NaturalSorter());
         }

@@ -8,12 +8,8 @@ namespace Interfaces
    {
        string Sort(string commaSeperatedString);
 
-       List<SortItem> Sort(string commaSeperatedString, Action<ValueTuple<string, List<SortItem>>> addMethod, Action<List<SortItem>> sortMethod);
+       List<SortItem> GetSortItems(string commaSeperatedString);
 
        string Join(List<SortItem> sortedCharacters);
-
-       void OrderBy(List<SortItem> itemsToSort);
-
-       void AddSortItemToCollection((string group, List<SortItem> sortItems) request);
    }
 }
