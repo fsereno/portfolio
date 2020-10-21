@@ -24,7 +24,6 @@ namespace aws.Controllers
            this._basketUtil = basketUtil;
         }
 
-        // POST api/basket/get
         [HttpPost("get")]
         public IList<Item> Get([FromBody]GetRequest request)
         {
@@ -44,7 +43,6 @@ namespace aws.Controllers
             return result;
         }
 
-        // POST api/basket/add
         [HttpPost("add")]
         public IList<Item> Add([FromBody]AddRequest request)
         {
@@ -60,7 +58,6 @@ namespace aws.Controllers
             return result;
         }
 
-        // POST api/basket/update
         [HttpPost("update")]
         public IList<Item> Update([FromBody]UpdateRequest request)
         {
@@ -79,7 +76,6 @@ namespace aws.Controllers
             return result;
         }
 
-        // DELETE api/basket/delete
         [HttpPost("delete")]
         public IList<Item> Delete([FromBody]GetRequest request)
         {

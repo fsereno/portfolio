@@ -17,7 +17,7 @@ namespace aws.Controllers
         public SortResult Sort([FromBody] SortRequest request)
         {
             this.SetResponseHeaders();
-            var result = _stringSortUtil.Sort(request.CommaSeperatedString);
+            var result = this._stringSortUtil.Sort(request.CommaSeperatedString);
             return new SortResult(){ Result = result };
         }
 
