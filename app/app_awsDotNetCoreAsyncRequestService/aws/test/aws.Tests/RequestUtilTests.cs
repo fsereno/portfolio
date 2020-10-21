@@ -23,26 +23,17 @@ namespace aws.Tests
         }
 
         [Fact]
-        public void Test_Processes_Async()
+        public async Task Test_DoProcessesAsync()
         {
-            var log = new StringBuilder();
-            var a = Task.Run(() => this._sut.DoProcessA(log));
-            var b = Task.Run(() => this._sut.DoProcessB(log));
-            var c = Task.Run(() => this._sut.DoProcessC(log));
-            Task.WaitAll(new Task[]{ a, b, c });
-
-            Assert.Equal("Test", log.ToString());
+            var result = await this._sut.DoProcessesAsync();
+            Assert.Equal("Test", result);
         }
-
+ 
         [Fact]
-        public void Test_Processes()
+        public void Test_DoProcesses()
         {
-            var log = new StringBuilder();
-            this._sut.DoProcessA(log);
-            this._sut.DoProcessB(log);
-            this._sut.DoProcessC(log);
-
-            Assert.Equal("Test", log.ToString());
+            var result = this._sut.DoProcesses();
+            Assert.Equal("Test", result);
         }
     }
 }

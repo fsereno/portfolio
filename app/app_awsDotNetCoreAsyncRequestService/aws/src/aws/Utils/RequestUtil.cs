@@ -7,6 +7,26 @@ namespace Utils
 {
     public class RequestUtil
     {
+        public async Task<string> DoProcessesAsync()
+        {
+            var log = new StringBuilder();
+            var a = Task.Run(() => this.DoProcessA(log));
+            var b = Task.Run(() => this.DoProcessB(log));
+            var c = Task.Run(() => this.DoProcessC(log));
+            Task.WaitAll(new Task[]{ a, b, c });
+            return log.ToString();
+        }
+
+        public string DoProcesses()
+        {
+            var log = new StringBuilder();
+            this.DoProcessA(log);
+            this.DoProcessB(log);
+            this.DoProcessC(log);
+            return log.ToString();
+        }
+
+
         public void DoProcessA(StringBuilder log)
         {
             log.Append($"Start A on thread: {Thread.CurrentThread.ManagedThreadId}");
