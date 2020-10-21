@@ -5,14 +5,8 @@ using System.Threading.Tasks;
 
 namespace Utils
 {
-    public class RequestService
+    public class RequestUtil
     {
-        public async Task<string> TestMethod()
-        {
-            var result = await Task.Run(() => string.Empty);
-            return result;
-        }
-
         public void DoProcessA(StringBuilder log)
         {
             log.Append($"Start A on thread: {Thread.CurrentThread.ManagedThreadId}");
