@@ -121,13 +121,24 @@
         },
         {
             "name": "AWS .NET Core Shopping Cart API",
-            "subHeading": "A serverless application (SAM), using .Net Core and AWS",
+            "subHeading": "A basic shopping cart application, with data processing handled by a Serverless .Net Core RESTful API. React handles the UI.",
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "searchTerms": "C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreShoppingCart",
             "active": true,
             "include": true,
             "useWebpack": true
+        },
+        {
+            "name": "AWS .NET Core Asynchronous Request Service",
+            "subHeading": "Exploring multithreading with in a Serverless .Net Core application.",
+            "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "searchTerms": "C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
+            "folder": "awsDotNetCoreAsyncRequestService",
+            "active": true,
+            "include": true,
+            "useWebpack": true,
+            "masterTemplateDir": "master_react"
         },
         {
             "name": "Three JS Scene (Basic)",
