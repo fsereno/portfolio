@@ -25,14 +25,16 @@ namespace aws.Tests
         [Fact]
         public async Task Test_DoProcessesAsync()
         {
-            var result = await this._sut.DoProcessesAsync();
+            var log = await this._sut.DoProcessesAsync();
+            var result = this._sut.Join(log);
             Assert.Equal("Test", result);
         }
  
         [Fact]
         public void Test_DoProcesses()
         {
-            var result = this._sut.DoProcesses();
+            var log = this._sut.DoProcesses();
+            var result = this._sut.Join(log);
             Assert.Equal("Test", result);
         }
     }
