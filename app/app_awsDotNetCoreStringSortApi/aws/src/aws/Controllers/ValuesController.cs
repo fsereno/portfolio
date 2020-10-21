@@ -8,7 +8,7 @@ namespace aws.Controllers
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
-        private IStringSortUtil _stringSortUtil { get; set; }
+        private readonly IStringSortUtil _stringSortUtil;
         public ValuesController(IStringSortUtil stringSortUtil)
         {
             this._stringSortUtil = stringSortUtil;
