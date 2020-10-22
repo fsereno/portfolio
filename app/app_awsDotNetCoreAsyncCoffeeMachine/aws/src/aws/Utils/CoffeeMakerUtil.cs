@@ -33,23 +33,38 @@ namespace Utils
         {
             this.log = new List<string>();
 
-            this.Start("boiling the kettle", 3000);
-            this.Start("getting coffee from cupboard");
-            this.Start("packing coffee into cafetiere");
-            this.Start("getting cup from cupboard");
-            this.Start("getting milk from fridge");
-            this.Start("pouring milk into cup");
-            this.Start("putting cup in microwave");
-            this.Start("microwaving cup", 1000);
-            this.Start("pouring boiling water into cafetiere");
-            this.Start("brewing the coffee", 1000);
-            this.Start("getting cup from microwave");
-            this.Start("plunging cafetiere");
-            this.Start("pouring coffee into cup");
-            this.Start("stiring coffee");
-            this.Start("drinking");
+            var boilingWaterTask = this.StartAsync("boiling the kettle", 3000);
+            this.Do("get coffee from cupboard");
+            this.Do("pack coffee into cafetiere");
+            this.Do("get cup from cupboard");
+            this.Do("get milk from fridge");
+            this.Do("pour milk into cup");
+            this.Do("put cup in microwave");
+            this.Do("microwaving cup");
+            var waterBoild = await boilingWaterTask;
+            this.Do("pour boiling water into cafetiere");
+            this.Do("brew the coffee");
+            this.Do("get cup from microwave");
+            this.Do("plunge cafetiere");
+            this.Do("pour coffee into cup");
+            this.Do("stir coffee");
+            this.Do("drink coffee");
 
             return this.log;
+        }
+
+        public async Task<bool> StartAsync(string instruction, int seconds = 500)
+        {
+            this.log.Add($"Start {instruction} on thread: {Thread.CurrentThread.ManagedThreadId}");
+            await Task.Delay(seconds);
+            this.log.Add($"Finished {instruction} on thread: {Thread.CurrentThread.ManagedThreadId}");
+            return true;
+        }
+
+        public bool Do(string instruction)
+        {
+            this.log.Add($"{instruction} on thread: {Thread.CurrentThread.ManagedThreadId}");
+            return true;
         }
 
         public void Start(string instruction, int seconds = 500)
