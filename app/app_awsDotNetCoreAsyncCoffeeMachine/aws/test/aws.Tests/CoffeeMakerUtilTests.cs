@@ -17,27 +17,37 @@ namespace aws.Tests
         }
 
         [Fact]
-        public async Task Test_RunAsync_Has_Correct_Numer_Of_Steps()
+        public void Test_Run_Has_Correct_Numer_Of_Steps()
         {
-            var log = await this._sut.Run();
-            var result = log.Count == 29;
+            var log = this._sut.Run();
+            var result = log.Count == 17;
             Assert.True(result);
         }
 
         [Fact]
-        public async Task Test_DoProcessesAsync()
+        public void Test_Run_All_Steps_On_Same_Thread()
         {
-            var log = await this._sut.DoProcessesAsync();
-            var result = this._sut.Join(log);
-            Assert.Equal("Test", result);
+            var log = this._sut.Run();
+            var threads = log.Select(x => x.Thread);
+            var result = threads.Distinct().Count() == 1;
+            Assert.True(result);
         }
- 
+
         [Fact]
-        public void Test_DoProcesses()
+        public async Task Test_RunAsync_Has_Correct_Numer_Of_Steps()
         {
-            var log = this._sut.DoProcesses();
-            var result = this._sut.Join(log);
-            Assert.Equal("Test", result);
+            var log = await this._sut.RunAsync();
+            var result = log.Count == 17;
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async Task Test_RunAsync_Has_Different_Threads()
+        {
+            var log = await this._sut.RunAsync();
+            var threads = log.Select(x => x.Thread);
+            var result = threads.Distinct().Count() > 1;
+            Assert.True(result);
         }
     }
 }

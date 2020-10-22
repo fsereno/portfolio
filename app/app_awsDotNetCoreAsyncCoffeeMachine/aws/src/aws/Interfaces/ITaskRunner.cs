@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Models;
 
 /* processes to making coffee
 1. Put the kettle on (async)
@@ -24,15 +25,10 @@ namespace Interfaces
 {
     public interface ITaskRunner
     {
+        List<Instruction> Run();
+        Task<List<Instruction>> RunAsync();
+        void Do(string instruction);
         void Start(string instruction, int seconds);
-        /*void Get(string instruction, int seconds);
-        void Leave(string instruction, int seconds);
-        void TurnOn(string instruction, int seconds);
-        void Pour(string instruction, int seconds);
-        void Prepare(string instruction, int seconds);
-        void Push(string instruction, int seconds);
-        void Put(string instruction, int seconds);*/
-        Task<List<string>> Run();
-        //void Stir(string instruction, int seconds);
+        Task<bool> StartAsync(string instruction, int seconds);
     }
 }

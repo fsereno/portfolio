@@ -4,12 +4,12 @@ namespace Models
 {
     public class Instruction
     {
-        public Instruction(string detail = "", int seconds = 500)
+        public Instruction(string detail, int thread)
         {
             this.Detail = detail;
-            this.Seconds = seconds;
+            this.Thread = thread;
         }
         public string Detail { get; set; }
-        public int Seconds { get; set; }
+        public int Thread { get; set; }
     }
 }
