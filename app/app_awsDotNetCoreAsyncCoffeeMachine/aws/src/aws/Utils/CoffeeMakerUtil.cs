@@ -40,10 +40,11 @@ namespace Utils
             this.Do("get milk from fridge");
             this.Do("pour milk into cup");
             this.Do("put cup in microwave");
-            this.Do("microwaving cup");
+            var microwavingCupTask = this.StartAsync("microwaving cup", 2000);
             var waterBoild = await boilingWaterTask;
             this.Do("pour boiling water into cafetiere");
             this.Do("brew the coffee");
+            var cupMicrowaved = await microwavingCupTask;
             this.Do("get cup from microwave");
             this.Do("plunge cafetiere");
             this.Do("pour coffee into cup");
@@ -55,16 +56,16 @@ namespace Utils
 
         public async Task<bool> StartAsync(string instruction, int seconds = 500)
         {
-            this.log.Add($"Start {instruction} on thread: {Thread.CurrentThread.ManagedThreadId}");
+            this.log.Add($"Start {instruction.ToLower()} on thread: {Thread.CurrentThread.ManagedThreadId}");
             await Task.Delay(seconds);
             this.log.Add($"Finished {instruction} on thread: {Thread.CurrentThread.ManagedThreadId}");
             return true;
         }
 
-        public bool Do(string instruction)
+        public void Do(string instruction)
         {
-            this.log.Add($"{instruction} on thread: {Thread.CurrentThread.ManagedThreadId}");
-            return true;
+            var detail = char.ToUpper(instruction[0])+instruction.Substring(1);
+            this.log.Add($"{detail} on thread: {Thread.CurrentThread.ManagedThreadId}");
         }
 
         public void Start(string instruction, int seconds = 500)
