@@ -1,25 +1,27 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Xunit;
-using Amazon.Lambda.Core;
-using Amazon.Lambda.TestUtilities;
-using Amazon.Lambda.APIGatewayEvents;
-using Newtonsoft.Json;
 using aws;
 using Utils;
+using Xunit;
 
 namespace aws.Tests
 {
-    public class RequestUtilTests
+    public class CoffeeMakerUtilTests
     {
-        private readonly RequestUtil _sut;
-        public RequestUtilTests()
+        private readonly CoffeeMakerUtil _sut;
+        public CoffeeMakerUtilTests()
         {
-            this._sut = new RequestUtil();
+            this._sut = new CoffeeMakerUtil();
+        }
+
+        [Fact]
+        public async Task Test_RunAsync_Has_Correct_Numer_Of_Steps()
+        {
+            var log = await this._sut.Run();
+            var result = log.Count == 29;
+            Assert.True(result);
         }
 
         [Fact]

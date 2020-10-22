@@ -130,11 +130,11 @@
             "useWebpack": true
         },
         {
-            "name": "AWS .NET Core Asynchronous Request Service",
-            "subHeading": "Exploring multithreading with in a Serverless .Net Core application.",
+            "name": "AWS .NET Core Asynchronous Coffee Maker",
+            "subHeading": "Demonstraiting knowledge of asynchrony with use of multithreading. Run taks either synchronously or asynchronously.",
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
-            "searchTerms": "C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
-            "folder": "awsDotNetCoreAsyncRequestService",
+            "searchTerms": "C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
+            "folder": "awsDotNetCoreAsyncCoffeeMachine",
             "active": true,
             "include": true,
             "useWebpack": true,
