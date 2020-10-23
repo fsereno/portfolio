@@ -25,8 +25,8 @@ namespace Interfaces
 {
     public interface ITaskRunner
     {
-        List<Instruction> Run();
-        Task<List<Instruction>> RunAsync();
+        Log Run();
+        Task<Log> RunAsync();
         void Do(string instruction);
         void Start(string instruction, int seconds);
         Task<bool> StartAsync(string instruction, int seconds);

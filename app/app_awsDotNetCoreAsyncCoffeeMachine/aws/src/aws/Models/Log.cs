@@ -35,14 +35,13 @@ namespace Models
 
         public LogEnum GetEnumerator()
         {
-            return new LogEnum(_log);
+            return new LogEnumerator(_log);
         }
 
-        public class LogEnum : IEnumerator
+        public class LogEnumerator : IEnumerator
         {
             private int _position = -1;
             private List<Instruction> _log;
-
             public LogEnum(List<Instruction> log)
             {
                 _log = log;

@@ -10,11 +10,11 @@ namespace Utils
 {
     public class CoffeeMakerUtil : ITaskRunner
     {
-        private List<Instruction> log { get; set; }
+        private Log log { get; set; }
 
-        public List<Instruction> Run()
+        public Log Run()
         {
-            this.log = new List<Instruction>();
+            this.log = new Log();
 
             this.Start("boiling the kettle", 3000);
             this.Do("get coffee from cupboard");
@@ -35,9 +35,9 @@ namespace Utils
             return this.log;
         }
 
-        public async Task<List<Instruction>> RunAsync()
+        public async Task<Log> RunAsync()
         {
-            this.log = new List<Instruction>(); // instead of returning a flat log, how about a log and hide the list using enumerators ?
+            this.log = new Log(); // instead of returning a flat log, how about a log and hide the list using enumerators ?
 
             var boilingWaterTask = this.StartAsync("boiling the kettle", 3000);
             this.Do("get coffee from cupboard");
