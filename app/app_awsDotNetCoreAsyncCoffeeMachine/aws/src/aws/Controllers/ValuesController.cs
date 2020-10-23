@@ -3,42 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Interfaces;
+using Models;
 
 namespace aws.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private ITaskRunner _coffeeMakerUtil;
+        public ValuesController(ITaskRunner coffeeMakerUtil)
         {
-            return new string[] { "value1", "value2" };
+            _coffeeMakerUtil = coffeeMakerUtil;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("RunAsync")]
+        public async Task<List<LogItem>> RunAsync()
         {
-            return "value";
+            Log log = await _coffeeMakerUtil.RunAsync();
+
+            /*try
+            {
+                log = await _coffeeMakerUtil.RunAsync();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Unable to run process: " + exception.Message);
+            }*/
+            return log?.Get();
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpGet("Run")]
+        public List<LogItem> Run()
         {
-        }
+            Log log;
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            try
+            {
+                log = _coffeeMakerUtil.Run();
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Unable to run process: " + exception.Message);
+            }
+            return log?.Get();
         }
     }
 }
