@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using aws;
 using Utils;
+using Models;
 using Xunit;
 
 namespace aws.Tests
