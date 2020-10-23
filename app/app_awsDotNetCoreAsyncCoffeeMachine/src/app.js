@@ -2,79 +2,53 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { PuzzleModule } from '../../js/puzzleModule.js';
 
-class ToDoListForm extends React.Component {
+const PUZZLE = "4 x 4 - 2 =";
+const DISABLED_BTN_CLASS = "disabled";
+
+let _puzzleModule = PuzzleModule(14, "puzzleModal");
+
+class CoffeeMakerApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
       list: [],
-      counterLimit: 10,
-      counter: 0,
-      selectedIndex: 0
+      disabledBtnClass: DISABLED_BTN_CLASS,
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete= this.handleDelete.bind(this);
+    this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
+  handlePuzzleSubmit(event) {
     event.preventDefault();
-    if (this.state.value.length > 0 && this.state.counter < this.state.counterLimit) {
-      this.state.list.push(this.state.value);
+    if (_puzzleModule.getResult()) {
       this.setState({
-        list: this.state.list,
-        value: "",
-        counter: this.state.counter + 1
+        disabledBtnClass: ""
       });
+      _puzzleModule.hide();
     }
   }
 
-  handleDelete(event) {
-    event.preventDefault();
-    let index = Number(event.target.dataset.index);
-    this.state.list.splice(index, 1);
-    this.setState({
-      list: this.state.list,
-      counter: this.state.counter - 1
-    });
+  componentDidMount() {
+    _puzzleModule.show();
   }
 
   render() {
     return (
       <div>
-        <div class="row splitter">
-          <div class="col-lg-4">
-            <h3>Result:</h3>
-            <ul id="toDoList" class="list-group">
-              {this.state.list.map((item, index) => {
-                return <li class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
-              })}
-          </ul>
-          </div>
-        </div>
-        <div class="row splitter">
-          <div class="col-lg-12">
-            <p>Items: {this.state.counter}</p>
-            <p>Item to add: {this.state.value}</p>
-          </div>
-        </div>
+        <_puzzleModule.Render
+          event={this.handlePuzzleSubmit}
+          label="First answer this question to unlock the API:"
+          puzzle={PUZZLE}
+          button="Submit"
+          required={true}
+          title="Are you a human?"
+        />        
         <div class="row">
-          <div class="col-lg-3">
-            <form onSubmit={this.handleSubmit} autoComplete="off">
-              <div class="form-group">
-                  <label for="itemInput">
-                    Input:
-                  </label>
-                  <input class="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
-              </div>
-              <button id="submit" class="btn btn-dark" type="submit">Add item</button>
-            </form>
+          <div class="col-lg-6">
+            <button type="button" class={`${this.state.disabledBtnClass} btn btn-dark btn-lg mr-2`}>Run Synchronously</button>
+            <button type="button" class={`${this.state.disabledBtnClass} btn btn-dark btn-lg mr-2`}>Run Asynchronously</button>
           </div>
         </div>
       </div>
@@ -83,6 +57,6 @@ class ToDoListForm extends React.Component {
 }
 
 ReactDOM.render(
-  <ToDoListForm />,
+  <CoffeeMakerApp />,
   document.getElementById('result')
 );

@@ -20,16 +20,16 @@ namespace aws.Controllers
         [HttpGet("RunAsync")]
         public async Task<List<LogItem>> RunAsync()
         {
-            Log log = await _coffeeMakerUtil.RunAsync();
+            Log log;
 
-            /*try
+            try
             {
                 log = await _coffeeMakerUtil.RunAsync();
             }
             catch (Exception exception)
             {
                 throw new Exception("Unable to run process: " + exception.Message);
-            }*/
+            }
             return log?.Get();
         }
 
