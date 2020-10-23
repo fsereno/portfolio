@@ -14,15 +14,15 @@ namespace aws.Tests
         private readonly Log _sut;
         public LogTests()
         {
-            this._sut = new Log();
+            _sut = new Log();
         }
 
         [Fact]
         public void Test_Log()
         {
-            _sut.Add(new Instruction("Instruct 1", 10));
-            _sut.Add(new Instruction("Instruct 2", 20));
-            _sut.Add(new Instruction("Instruct 3", 30));
+            _sut.Add(new LogItem("Instruct 1", 10));
+            _sut.Add(new LogItem("Instruct 2", 20));
+            _sut.Add(new LogItem("Instruct 3", 30));
 
             var result = new List<string>();
 

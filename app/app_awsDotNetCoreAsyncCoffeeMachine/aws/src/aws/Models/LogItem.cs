@@ -2,9 +2,9 @@
 
 namespace Models
 {
-    public class Instruction
+    public class LogItem
     {
-        public Instruction(string detail, int thread)
+        public LogItem(string detail, int thread)
         {
             this.Detail = detail;
             this.Thread = thread;

@@ -10,11 +10,11 @@ namespace Utils
 {
     public class CoffeeMakerUtil : ITaskRunner
     {
-        private Log log { get; set; }
+        private Log _log;
 
         public Log Run()
         {
-            this.log = new Log();
+            _log = new Log();
 
             this.Start("boiling the kettle", 3000);
             this.Do("get coffee from cupboard");
@@ -32,12 +32,12 @@ namespace Utils
             this.Do("stir coffee");
             this.Do("drink coffee");
 
-            return this.log;
+            return _log;
         }
 
         public async Task<Log> RunAsync()
         {
-            this.log = new Log(); // instead of returning a flat log, how about a log and hide the list using enumerators ?
+            _log = new Log(); // instead of returning a flat log, how about a log and hide the list using enumerators ?
 
             var boilingWaterTask = this.StartAsync("boiling the kettle", 3000);
             this.Do("get coffee from cupboard");
@@ -57,28 +57,28 @@ namespace Utils
             this.Do("stir coffee");
             this.Do("drink coffee");
 
-            return this.log;
+            return _log;
         }
 
-        public async Task<bool> StartAsync(string instruction, int seconds = 500)
+        public async Task<bool> StartAsync(string instruction, int seconds)
         {
-            this.log.Add(new Instruction($"Start {instruction.ToLower()}", Thread.CurrentThread.ManagedThreadId));
+            _log.Add(new LogItem($"Start {instruction.ToLower()}", Thread.CurrentThread.ManagedThreadId));
             await Task.Delay(seconds);
-            this.log.Add(new Instruction($"Finished {instruction.ToLower()}", Thread.CurrentThread.ManagedThreadId));
+            _log.Add(new LogItem($"Finished {instruction.ToLower()}", Thread.CurrentThread.ManagedThreadId));
             return true;
         }
 
-        public void Start(string instruction, int seconds = 500)
+        public void Start(string instruction, int seconds)
         {
-            this.log.Add(new Instruction($"Start {instruction.ToLower()}", Thread.CurrentThread.ManagedThreadId));
+            _log.Add(new LogItem($"Start {instruction.ToLower()}", Thread.CurrentThread.ManagedThreadId));
             Thread.Sleep(seconds);
-            this.log.Add(new Instruction($"Finished {instruction.ToLower()}", Thread.CurrentThread.ManagedThreadId));
+            _log.Add(new LogItem($"Finished {instruction.ToLower()}", Thread.CurrentThread.ManagedThreadId));
         }
 
         public void Do(string instruction)
         {
             var detail = char.ToUpper(instruction[0])+instruction.Substring(1);
-            this.log.Add(new Instruction(detail, Thread.CurrentThread.ManagedThreadId));
+            _log.Add(new LogItem(detail, Thread.CurrentThread.ManagedThreadId));
         }
     }
 }

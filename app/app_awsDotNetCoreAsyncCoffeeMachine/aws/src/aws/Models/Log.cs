@@ -6,16 +6,16 @@ namespace Models
 {
     public class Log : IEnumerable
     {
-        private List<Instruction> _log;
+        private List<LogItem> _log;
 
         public Log()
         {
-            this._log = new List<Instruction>();
+            _log = new List<LogItem>();
         }
 
-        public List<Instruction> Get()
+        public List<LogItem> Get()
         {
-            var log = new List<Instruction>();
+            var log = new List<LogItem>();
             foreach(var item in _log)
             {
                 log.Add(item);
@@ -23,9 +23,14 @@ namespace Models
             return log;
         }
 
-        public void Add(Instruction instruction)
+        public int Count()
         {
-           this._log.Add(instruction);
+            return _log.Count;
+        }
+
+        public void Add(LogItem logItem)
+        {
+           _log.Add(logItem);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -33,7 +38,7 @@ namespace Models
             return (IEnumerator) GetEnumerator();
         }
 
-        public LogEnum GetEnumerator()
+        public LogEnumerator GetEnumerator()
         {
             return new LogEnumerator(_log);
         }
@@ -41,8 +46,8 @@ namespace Models
         public class LogEnumerator : IEnumerator
         {
             private int _position = -1;
-            private List<Instruction> _log;
-            public LogEnum(List<Instruction> log)
+            private List<LogItem> _log;
+            public LogEnumerator(List<LogItem> log)
             {
                 _log = log;
             }
@@ -66,7 +71,7 @@ namespace Models
                 }
             }
 
-            public Instruction Current
+            public LogItem Current
             {
                 get
                 {
