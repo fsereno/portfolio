@@ -22,8 +22,8 @@ html(lang="en")
           p.text-muted= locals.application.description
           hr
       block content
-
-    block footer
+      block footer
+    include ../includes/_footer.pug
     // build:js ../js/vendor.js
     include ../includes/_jsDeps.pug
     // endbuild
