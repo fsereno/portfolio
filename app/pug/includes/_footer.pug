@@ -1,40 +1,17 @@
 - var directory = locals.application.useRoot ? "" : "../";
-footer#footer.pt-4.pb-4.bg-dark.mt-5
-  .container.text-center.text-md-left
-    .row.text-center.text-md-left.mt-3.pb-3
-      .col-md-6.col-xl-3.mx-auto
-        img#footerLogo(src=directory+"images/FSLogo.png", alt="Fabio Sereno logo image")
-      hr.w-100.clearfix.d-md-none
-      .col-md-6.col-xl-3.mx-auto.mt-3
-        h3.mb-4 Products
-        p
-          a(href='#!') MDBootstrap
-        p
-          a(href='#!') MDWordPress
-        p
-          a(href='#!') BrandFlow
-        p
-          a(href='#!') Bootstrap Angular
-      hr.w-100.clearfix.d-md-none
-      .col-md-6.col-xl-3.mx-auto.mt-3
-        h3.mb-4 Useful links
-        p
-          a(href='#!') Your Account
-        p
-          a(href='#!') Become an Affiliate
-        p
-          a(href='#!') Shipping Rates
-        p
-          a(href='#!') Help
-      hr.w-100.clearfix.d-md-none
-      .col-md-6.col-xl-3.mx-auto.mt-3
-        h3.mb-4 Contact
-        p
-          i.fa.fa-home.mr-3
-          |  New York, NY 10012, US
-        p
-          i.fa.fa-envelope.mr-3
-          |  info@gmail.com
-        p
-          i.fa.fa-phone.mr-3
-          |  + 01 234 567 88
+footer#footer.bg-dark.mt-5
+  .container.pt-4
+    h5.text-center.mb-4 Connect
+    ul.list-unstyled.list-inline.text-center
+      li.list-inline-item
+        a.btn-floating.btn-fb.mx-1(href=locals.config.gitHubUrl target="_blank")
+          i.fa.fa-github.fa-2x
+      li.list-inline-item
+        a.btn-floating.btn-tw.mx-1(href=locals.config.linkedInUrl target="_blank")
+          i.fa.fa-linkedin.fa-2x
+  hr.mt-5
+  .footer-copyright.text-center.pb-3
+    | Copyright &copy; 2020. 
+    =locals.config.author
+    |.
+    | All rights reserved.
