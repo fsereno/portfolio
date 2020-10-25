@@ -65,11 +65,11 @@ class ToDoListForm extends React.Component {
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-3">
+          <div class="col-lg-4">
             <form onSubmit={this.handleSubmit} autoComplete="off">
               <div class="form-group">
                   <label for="itemInput">
-                    Input:
+                    Input
                   </label>
                   <input class="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
               </div>

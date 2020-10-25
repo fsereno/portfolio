@@ -11,10 +11,10 @@ block content
           h3 Result: 
             span#result Find a word in this sentence and replace it with a different word. Try finding - "a".
       .row
-        .col-lg-3
+        .col-lg-4
           form#findReplaceForm
             .form-group
-              label(for="findInput") Find this:
+              label(for="findInput") Find this
               input#findInput.form-control(
                 name="findInput", 
                 type="text", 
@@ -23,7 +23,7 @@ block content
                 data-rule-nonNumeric="true",
                 data-msg-nonNumeric="Only alphabatic characters allowed.")
             .form-group
-              label(for="replaceInput") Replace with:
+              label(for="replaceInput") Replace with
               input#replaceInput.form-control(
                 name="replaceInput", 
                 type="text", 

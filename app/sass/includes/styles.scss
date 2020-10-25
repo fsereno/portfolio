@@ -23,3 +23,28 @@ span#result, .result {
 .min-height-160 {
     min-height: 160px;
 }
+
+input.form-control {
+    padding:24px;
+}
+
+select.form-control {
+    height:50px;
+}
+
+button.btn {
+    padding: 12px;
+    min-width: 100px;
+}
+
+table {
+    select.form-control {
+        height: calc(2.25rem + 2px);
+    }
+    button.btn {
+        padding: .375rem .75rem;
+    }
+    button.btn {
+        min-width: auto;
+    }
+}

@@ -106,17 +106,17 @@ class ToDoListForm extends React.Component {
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-3">
+          <div class="col-lg-4">
             <form onSubmit={this.handleSubmit} autoComplete="off">
               <div class="form-group">
                   <label for="itemInput">
-                    Input:
+                    Input
                   </label>
                   <input class="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
               </div>
-              <button id="submit" class="btn btn-dark mr-1" type="submit">Add item</button>
-              <button id="undo" class="btn btn-danger mr-1" type="button" onClick={this.handleUndo}>Undo</button>
-              <button id="redo" class="btn btn-dark mr-1" type="button" onClick={this.handleRedo}>Redo</button>
+              <button id="submit" class="btn btn-dark mr-2" type="submit">Add item</button>
+              <button id="undo" class="btn btn-danger mr-2" type="button" onClick={this.handleUndo}>Undo</button>
+              <button id="redo" class="btn btn-dark mr-2" type="button" onClick={this.handleRedo}>Redo</button>
             </form>
           </div>
         </div>
