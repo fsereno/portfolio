@@ -132,7 +132,7 @@
         },
         {
             "name": "AWS .NET Core Asynchronous Coffee Maker",
-            "subHeading": "Demonstraiting knowledge of asynchrony and multithreading. Run taks either synchronously or asynchronously.",
+            "subHeading": "Demonstraiting knowledge of asynchrony and multithreading.",
             "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "searchTerms": "C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreAsyncCoffeeMachine",

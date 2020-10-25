@@ -102,7 +102,7 @@ class CoffeeMakerApp extends React.Component {
           required={true}
           title="Are you a human?"
         />
-        <div class="row mb-2">
+        <div class="row mb-3">
           <div class="col-lg-6">
             <button type="button" class={`${this.state.disabledBtnClass} btn btn-dark mr-2`} onClick={this.handleRun}>Run Synchronously</button>
             <button type="button" class={`${this.state.disabledBtnClass} btn btn-dark mr-2`} onClick={this.handleRunAsync}>Run Asynchronously</button>
@@ -111,20 +111,21 @@ class CoffeeMakerApp extends React.Component {
         <div class="row">
           <div class="col-lg-6">
             <p class="text-muted">
-              (Processing is delayed for demonstration purposes only)
+              (Processing is delayed for this demonstration)
             </p>
           <this.renderProcessHeading/>
             <ul class="list-group">
               {this.state.log.map((item, index) => {
                 return (
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <li class="list-group-item d-flex align-items-center">
+                      <span class="badge badge-primary badge-pill mr-3 bg-dark">{index+1}</span>
                       {item.detail}
                   </li>
                 );
               })}
             </ul>
           </div>
-        </div>        
+        </div>
       </div>
     );
   }

@@ -14,7 +14,7 @@ export let PuzzleModule = function(answer, modalId) {
     let RenderErrorMessage  = function(props) {
         if (hasValue(props.input) && !isValid(props.input)) {
             return (
-                <div class="invalid-feedback d-block">Incorrect answer!</div>
+                <div class="invalid-feedback d-block">Incorrect answer! Please try again.</div>
             );
         } else {
             return null;

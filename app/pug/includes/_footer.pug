@@ -1,7 +1,6 @@
 - var directory = locals.application.useRoot ? "" : "../";
 footer#footer.bg-dark.mt-5
   .container.pt-4
-    h5.text-center.mb-4 Connect
     ul.list-unstyled.list-inline.text-center
       li.list-inline-item
         a.btn-floating.btn-fb.mx-1(href=locals.config.gitHubUrl target="_blank")
@@ -9,7 +8,7 @@ footer#footer.bg-dark.mt-5
       li.list-inline-item
         a.btn-floating.btn-tw.mx-1(href=locals.config.linkedInUrl target="_blank")
           i.fa.fa-linkedin.fa-2x
-  hr.mt-5
+  hr
   .footer-copyright.text-center.pb-3
     | Copyright &copy; 2020. 
     =locals.config.author
