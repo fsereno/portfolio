@@ -7,7 +7,6 @@ import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
 
 const API_ENDPOINT = "https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values";
-const DISABLED_BTN_CLASS = "disabled";
 const PUZZLE = "4 x 4 - 5 =";
 
 let _puzzleModule = PuzzleModule(11, "puzzleModal");
@@ -20,23 +19,10 @@ class StringSort extends React.Component {
     this.state = {
       values: '',
       result: '',
-      disabledBtnClass: DISABLED_BTN_CLASS,
       sort: `${API_ENDPOINT}/sort`
     };
-
     this.handleValuesChange = this.handleValuesChange.bind(this);
-    this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handlePuzzleSubmit(event) {
-    event.preventDefault();
-    if (_puzzleModule.getResult()) {
-      this.setState({
-        disabledBtnClass: ""
-      });
-      _puzzleModule.hide();
-    }
   }
 
   handleValuesChange(event) {
@@ -45,16 +31,18 @@ class StringSort extends React.Component {
 
   handleAjax(request) {
     if (_puzzleModule.getResult()) {
+      _spinnerModule.show();
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
         _spinnerModule.hide();
       });
+    } else {
+      _puzzleModule.show();
     }
   }
 
   handleSort() {
-    _spinnerModule.show();
     let request = {
       url: this.state.sort,
       type: "POST",
@@ -89,12 +77,7 @@ class StringSort extends React.Component {
         <_errorModule.Render/>
         <_spinnerModule.Render/>
         <_puzzleModule.Render
-          event={this.handlePuzzleSubmit}
-          label="First answer this question to unlock the API:"
           puzzle={PUZZLE}
-          button="Submit"
-          required={true}
-          title="Are you a human?"
         />
         <div class="row splitter">
           <div class="col-lg-12">
@@ -117,7 +100,7 @@ class StringSort extends React.Component {
                   <input required type="text" class="form-control mb-2" id="valuesInput" placeholder="B,C,A" value={this.state.values} onChange={this.handleValuesChange}/>
                 </div>
                 <div class="col-lg-2">
-                  <button id="sort_submit" type="submit" class={`btn btn-dark mb-2 ${this.state.disabledBtnClass} w-100`}>Sort</button>
+                  <button id="sort_submit" type="submit" class="btn btn-dark mb-2 w-100">Sort</button>
                 </div>
               </div>
             </form>

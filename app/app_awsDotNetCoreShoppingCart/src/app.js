@@ -7,8 +7,6 @@ import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
 
 const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
-const API_SUBMIT_CLASSES = "btn btn-dark api-submit";
-const DISABLED_BTN_CLASS = "disabled";
 const PUZZLE = "4 x 4 - 1 =";
 const DEFAULT_COLLECTION = [
   { name: "Apple" },
@@ -26,7 +24,7 @@ function InputTemplate(props){
         <div class="input-group mb-3">
           <input required={props.required ? "required" : ""} type="text" class="form-control" placeholder={props.placeholder} aria-label={props.placeholder} />
           <div class="input-group-append">
-          <button id={`${props.id}_submit`} class={`${API_SUBMIT_CLASSES} ${props.disabledBtnClass}`} type="submit">{props.button}</button>
+          <button id={`${props.id}_submit`} class="btn btn-dark api-submit" type="submit">{props.button}</button>
           </div>
         </div>
     </form>
@@ -44,7 +42,6 @@ class ShoppingListApp extends React.Component {
       delete: `${API_ENDPOINT}/delete`,
       update: `${API_ENDPOINT}/update`,
       answer: '',
-      disabledBtnClass: DISABLED_BTN_CLASS,
       isValid: false,
       puzzle: PUZZLE
     };
@@ -52,22 +49,23 @@ class ShoppingListApp extends React.Component {
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
     this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this);
     this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
-    this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
   }
 
   handleAjax(request) {
     if (_puzzleModule.getResult()) {
+      _spinnerModule.show();
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
         _spinnerModule.hide();
       });
+    } else {
+      _puzzleModule.show();
     }
   }
 
   handleGetSubmit(event) {
     event.preventDefault();
-    _spinnerModule.show();
     let input = event.target.elements[0].value;
     let index = Number(input);
     let isValid = response => typeof response !== "undefined" && response.length > 0;
@@ -92,7 +90,6 @@ class ShoppingListApp extends React.Component {
 
   handleAddSubmit(event) {
     event.preventDefault();
-    _spinnerModule.show();
     let input = event.target.elements[0].value;
     let request = {
       url: this.state.add,
@@ -116,7 +113,6 @@ class ShoppingListApp extends React.Component {
 
   handleUpdateSubmit(event) {
     event.preventDefault();
-    _spinnerModule.show();
     let index = Number(event.target.elements[0].value);
     let value = event.target.elements[1].value;
     let request = {
@@ -142,7 +138,6 @@ class ShoppingListApp extends React.Component {
 
   handleDeleteSubmit(event) {
     event.preventDefault();
-    _spinnerModule.show();
     let index = Number(event.target.elements[0].value);
     let request = {
       url: this.state.delete,
@@ -162,16 +157,6 @@ class ShoppingListApp extends React.Component {
     this.handleAjax(request);
   }
 
-  handlePuzzleSubmit(event) {
-    event.preventDefault();
-    if (_puzzleModule.getResult()) {
-      this.setState({
-        disabledBtnClass: ""
-      });
-      _puzzleModule.hide();
-    }
-  }
-
   componentDidMount() {
     _puzzleModule.show();
   }
@@ -183,12 +168,7 @@ class ShoppingListApp extends React.Component {
         <_errorModule.Render/>
         <_spinnerModule.Render/>
         <_puzzleModule.Render
-          event={this.handlePuzzleSubmit}
-          label="First answer this question to unlock the API:"
           puzzle={PUZZLE}
-          button="Submit"
-          required={true}
-          title="Are you a human?"
         />
         <div class="row splitter">
           <div class="col-lg-12">
@@ -239,7 +219,7 @@ class ShoppingListApp extends React.Component {
                   <input id="update_position" required type="text" class="form-control" placeholder="Position to update (eg. 1, or 2)" aria-label="Position to update (eg. 1, or 2)" />
                   <input id="update_value" required type="text" class="form-control" placeholder="Update with value" aria-label="Update with value" />
                   <div class="input-group-append">
-                    <button id="update_submit" class={`${API_SUBMIT_CLASSES} ${this.state.disabledBtnClass}`} type="submit">Update</button>
+                    <button id="update_submit" class="btn btn-dark api-submit" type="submit">Update</button>
                   </div>
                 </div>
             </form>
