@@ -34,3 +34,20 @@
     }
   }
 }
+
+#mainContainer {
+  //min-height: 100vh;
+  #introContainer {
+    color: $white;
+    min-height: 100vh;
+    img {
+        width: 15rem;
+    }
+    .sub-heading {
+        font-size: 2rem;
+    }
+    #introBtn {
+        width:13rem;
+    }
+  }
+}

@@ -6,9 +6,13 @@ import Config from  '../../../config.json';
 import { SpinnerModule } from '../../js/spinnerModule.js';
 import { StringSearchModule } from '../../typeScript/Modules/stringSearchModule/app.js';
 
-const FAUX_LOADING_TIME = 1000;
+const FAUX_LOADING_TIME = 500;
 const SEARCH_INPUT_ID = "searchInput";
-let _spinnerModule = SpinnerModule({ contentId : "contentContainer" });
+const APP_CONTAINER_ID = "appContainer";
+const MAIN_CONTAINER_ID = "mainContainer";
+const CONTENT_CONTAINER_ID = "contentContainer";
+const INTRO_CONTAINER_ID = "introContainer";
+let _spinnerModule = SpinnerModule({ contentId : APP_CONTAINER_ID });
 let _stringSearchModule = new StringSearchModule();
 
 class HomeApp extends React.Component {
@@ -23,10 +27,11 @@ class HomeApp extends React.Component {
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleQuickFilter = this.handleQuickFilter.bind(this);
     this.handleClearSearch = this.handleClearSearch.bind(this);
-    this.renderHandler = this.renderHandler.bind(this);
+    this.handleRender = this.handleRender.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleScrollBtnClick = this.handleScrollBtnClick.bind(this);
     this.renderContent = this.renderContent.bind(this);
     this.renderClearBtn = this.renderClearBtn.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   filterApplications(applications, searchTerm) {
@@ -85,11 +90,22 @@ class HomeApp extends React.Component {
     })
   }
 
+  handleScrollBtnClick(event) {
+    let $container = $(`#${CONTENT_CONTAINER_ID}`);
+    let $introContainer = $(`#${INTRO_CONTAINER_ID}`);
+    event.preventDefault();
+    $('html, body').stop().animate({
+      scrollTop: $container.offset().top - 50
+    }, 1000, "swing", () => {
+      $introContainer.remove();
+    });
+  }
+
   handleSubmit(event){
     event.preventDefault();
   }
 
-  getConfigHandler() {
+  delayAppRender() {
     setTimeout(() => {
       this.setState({
         applications: Config.applications,
@@ -99,14 +115,22 @@ class HomeApp extends React.Component {
     }, FAUX_LOADING_TIME)
   }
 
-  renderHandler() {
+  removeDarkClass() {
+    $(`#${MAIN_CONTAINER_ID}`).removeClass("bg-dark")
+  }
+
+  handleRender() {
     if (this.state.hasApplications) {
+      this.removeDarkClass();
       return(
         <this.renderContent/>
       )
     }
     return(
-      <_spinnerModule.Render/>
+      <div>
+        <_spinnerModule.Render/>
+        <div class="bg-dark py-5 mt-5" id="introContainer"></div>
+      </div>
     )
   }
 
@@ -125,33 +149,60 @@ class HomeApp extends React.Component {
 
   renderContent() {
     return (
-      <div id="contentContainer">
-        <form onSubmit={this.handleSubmit}>
-          <div id="searchBar" class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="fa fa-search"></i>
-              </span>
-            </div>
-            <input type="text" class="form-control" placeholder="Search applications..." id="searchInput" onChange={this.handleSearchChange}/>
-            <this.renderClearBtn/>
-            <div class="input-group-append">
-              <button id="openFilterBtn" class="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
-                <i class="fa fa-filter"></i>
-              </button>
+      <div id="appContainer">
+        <div class="bg-dark py-5 mt-5" id="introContainer">
+          <div class="text-center element">
+            <img alt="Logo" src="images/FSLogo.png"/>
+          </div>
+          <div class="text-center element">
+            <h1 class="display-4 mb-0">Fabio Sereno</h1>
+          </div>
+          <div class="text-center element">
+            <h4 class="display-4 sub-heading lead">Software developer</h4>
+          </div>
+          <div class="text-center element mt-5">
+            <button type="button" class="btn btn-white btn-lg" onClick={this.handleScrollBtnClick}>View Portfolio</button>
+          </div>
+        </div>
+        <div class="container-fluid pt-4 mt-5" id="contentContainer">
+          <div class="row">
+            <div class="col-lg-12">
+              <h2 class="display-4">Portfolio</h2>
             </div>
           </div>
-          <div class="collapse" id="filterContainer">
-            <div class="pb-3">
-              <label class="d-flex flex-row justify-content-center">Quick search</label>
-              <div class="btn-group d-flex flex-row justify-content-center">
-                <button type="button" class="btn btn-outline-dark" value="React" onClick={this.handleQuickFilter}>React</button>
-                <button type="button" class="btn btn-outline-dark" value="TypeScript" onClick={this.handleQuickFilter}>TypeScript</button>
-                <button type="button" class="btn btn-outline-dark" value=".Net Core" onClick={this.handleQuickFilter}>.Net Core</button>
+          <div class="row">
+            <div class="col-lg-12">
+              <h5>By Fabio Sereno</h5>
+              <p class="text-muted">Highly Experienced Full Stack Web Developer of 10+ years (6+ in the FinTech sector). Highly self-motivated, enthusiastic, professional and a team player. Possesses strong analytical and problem solving skills, code proficiency, and an ability to follow through with projects from initiation to completion with innovation and creativity.</p>
+              <hr/>
+            </div>
+          </div>
+          <form onSubmit={this.handleSubmit}>
+            <div id="searchBar" class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Search applications..." id="searchInput" onChange={this.handleSearchChange}/>
+              <this.renderClearBtn/>
+              <div class="input-group-append">
+                <button id="openFilterBtn" class="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
+                  <i class="fa fa-filter"></i>
+                </button>
               </div>
             </div>
-          </div>
-        </form>
+            <div class="collapse" id="filterContainer">
+              <div class="pb-3">
+                <label class="d-flex flex-row justify-content-center">Quick search</label>
+                <div class="btn-group d-flex flex-row justify-content-center">
+                  <button type="button" class="btn btn-outline-dark" value="React" onClick={this.handleQuickFilter}>React</button>
+                  <button type="button" class="btn btn-outline-dark" value="TypeScript" onClick={this.handleQuickFilter}>TypeScript</button>
+                  <button type="button" class="btn btn-outline-dark" value=".Net Core" onClick={this.handleQuickFilter}>.Net Core</button>
+                </div>
+              </div>
+            </div>
+          </form>
           <div id="applicationsContainer" class="card-columns">
             {this.state.applications.map((application) => {
               if (application.active && application.include) {
@@ -175,17 +226,18 @@ class HomeApp extends React.Component {
               }
             })}
           </div>
+        </div>
       </div>
     )
   }
 
   componentDidMount() {
-    this.getConfigHandler();
+    this.delayAppRender();
   }
 
   render() {
     return (
-      this.renderHandler()
+      this.handleRender()
     );
   }
 }
