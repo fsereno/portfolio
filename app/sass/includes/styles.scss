@@ -4,6 +4,8 @@
 @import "./loader.scss";
 @import "./theme.scss";
 @import "./footer.scss";
+@import "./main.scss";
+@import "./mainRoot.scss";
 
 .error {
     color: $red;
@@ -51,8 +53,4 @@ table {
     button.btn {
         min-width: auto;
     }
-}
-
-#mainContainer {
-    min-height: 100vh;
 }

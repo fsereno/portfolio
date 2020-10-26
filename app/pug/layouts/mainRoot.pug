@@ -12,7 +12,16 @@ html(lang="en")
     block styles
   body
     include ../includes/_navigation.pug
-    #mainContainer.container-fluid.pt-2
+    #introContainer.bg-dark.py-5.mt-5
+      .text-center.element
+        img(alt='Logo' src='images/FSLogo.png')
+      .text-center.element
+        h1.display-4.mb-0=locals.config.author
+      .text-center.element
+        h4.display-4.sub-heading.lead=locals.config.role
+      .text-center.element.mt-5
+        button#introBtn.btn.btn-white.btn-lg View Portfolio
+    #mainContainer.container-fluid.pt-4
       .row
         .col-lg-12
           h2.display-4= locals.application.name
