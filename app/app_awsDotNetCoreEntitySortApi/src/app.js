@@ -148,8 +148,8 @@ class EntitySort extends React.Component {
                   <th>Name</th>
                   <th>
                       <span class="mr-2">Salary</span>
-                      <button id="sortAsc" class="btn btn-sm btn-dark mr-2" type="button" onClick={this.handleSortSalaryAsc}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
-                      <button id="sortDesc" class="btn btn-sm btn-dark" type="button" onClick={this.handleSortSalaryDesc}><i class="fa fa-fw fa-sort-amount-desc"></i></button>
+                      <button id="sortAsc" class="btn btn-sm btn-dark mr-1 px-0" type="button" onClick={this.handleSortSalaryAsc}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
+                      <button id="sortDesc" class="btn btn-sm btn-dark px-0" type="button" onClick={this.handleSortSalaryDesc}><i class="fa fa-fw fa-sort-amount-desc"></i></button>
                   </th>
                   <th>Action</th>
                 </tr>

@@ -61,7 +61,7 @@ class StringSort extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (_puzzleModule.getResult() && this.state.values.length > 0) {
+    if (this.state.values.length > 0) {
       this.handleSort();
     }
   }

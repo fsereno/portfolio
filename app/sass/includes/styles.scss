@@ -37,6 +37,10 @@ button.btn {
     min-width: 100px;
 }
 
+.input-group-append button.btn {
+    min-width: auto;
+}
+
 table {
     select.form-control {
         height: calc(2.25rem + 2px);
