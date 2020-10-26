@@ -12,7 +12,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: $white;
+  background-color: $darkGrey;
   opacity: 0.5;
   z-index: 2;
   cursor: pointer;
@@ -37,7 +37,7 @@
         .circle-inner {
           transform: rotate(45deg);
           border-radius: 50%;
-          border: ($size/8) solid black;
+          border: ($size/8) solid $blue;
           border-right: ($size/8) solid transparent;
           border-bottom: ($size/8) solid transparent;
           width: 100%;

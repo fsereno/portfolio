@@ -22,7 +22,8 @@ class HomeApp extends React.Component {
       applications: [],
       applicationsImmutable: [],
       hasApplications: false,
-      showClear: false
+      showClear: false,
+      showIntro: true
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleQuickFilter = this.handleQuickFilter.bind(this);
@@ -32,6 +33,8 @@ class HomeApp extends React.Component {
     this.handleScrollBtnClick = this.handleScrollBtnClick.bind(this);
     this.renderContent = this.renderContent.bind(this);
     this.renderClearBtn = this.renderClearBtn.bind(this);
+    this.renderIntroContainer = this.renderIntroContainer.bind(this);
+    this.renderContenContainer = this.renderContenContainer.bind(this);
   }
 
   filterApplications(applications, searchTerm) {
@@ -129,7 +132,6 @@ class HomeApp extends React.Component {
     return(
       <div>
         <_spinnerModule.Render/>
-        <div class="bg-dark py-5 mt-5" id="introContainer"></div>
       </div>
     )
   }
@@ -147,23 +149,28 @@ class HomeApp extends React.Component {
     return null;
   }
 
-  renderContent() {
+  renderIntroContainer() {
+    return (
+      <div class="bg-dark py-5 mt-5" id="introContainer">
+        <div class="text-center element">
+          <img alt="Logo" src="images/FSLogo.png"/>
+        </div>
+        <div class="text-center element">
+          <h1 class="display-4 mb-0">Fabio Sereno</h1>
+        </div>
+        <div class="text-center element">
+          <h4 class="display-4 sub-heading lead">Software developer</h4>
+        </div>
+        <div class="text-center element mt-5">
+          <button type="button" class="btn btn-white btn-lg" onClick={this.handleScrollBtnClick}>View Portfolio</button>
+        </div>
+      </div>
+    );
+  }
+
+  renderContenContainer() {
     return (
       <div id="appContainer">
-        <div class="bg-dark py-5 mt-5" id="introContainer">
-          <div class="text-center element">
-            <img alt="Logo" src="images/FSLogo.png"/>
-          </div>
-          <div class="text-center element">
-            <h1 class="display-4 mb-0">Fabio Sereno</h1>
-          </div>
-          <div class="text-center element">
-            <h4 class="display-4 sub-heading lead">Software developer</h4>
-          </div>
-          <div class="text-center element mt-5">
-            <button type="button" class="btn btn-white btn-lg" onClick={this.handleScrollBtnClick}>View Portfolio</button>
-          </div>
-        </div>
         <div class="container-fluid pt-4 mt-5" id="contentContainer">
           <div class="row">
             <div class="col-lg-12">
@@ -204,31 +211,40 @@ class HomeApp extends React.Component {
             </div>
           </form>
           <div id="applicationsContainer" class="card-columns">
-            {this.state.applications.map((application) => {
-              if (application.active && application.include) {
-                return (
-                  <div class="card p-3 bg-white min-height-160">
-                    <div class="card-body">
-                      <h5 class="card-title">{application.name}</h5>
-                      <p class="card-text">{application.subHeading}</p>
-                      <a class="btn btn-dark mr-2 mb-2"
-                        href={`${Config.prefix}${application.folder}/${Config.index}`}>
-                          View app<i class="fa fa-eye ml-2"></i>
-                      </a>
-                      <a class="btn btn-dark mb-2"
-                        href={`${Config.repoRootUrl}/${Config.folderRoot}${Config.prefix}${application.folder}`}
-                        target="_blank">
-                          View code<i class="fa fa-github-square ml-2"></i>
-                      </a>
+              {this.state.applications.map((application) => {
+                if (application.active && application.include) {
+                  return (
+                    <div class="card p-3 bg-white min-height-160">
+                      <div class="card-body">
+                        <h5 class="card-title">{application.name}</h5>
+                        <p class="card-text">{application.subHeading}</p>
+                        <a class="btn btn-dark mr-2 mb-2"
+                          href={`${Config.prefix}${application.folder}/${Config.index}`}>
+                            View app<i class="fa fa-eye ml-2"></i>
+                        </a>
+                        <a class="btn btn-dark mb-2"
+                          href={`${Config.repoRootUrl}/${Config.folderRoot}${Config.prefix}${application.folder}`}
+                          target="_blank">
+                            View code<i class="fa fa-github-square ml-2"></i>
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                )
-              }
-            })}
+                  );
+                }
+              })}
           </div>
         </div>
       </div>
-    )
+    );
+  }
+
+  renderContent() {
+    return(
+      <div>
+        <this.renderIntroContainer/>
+        <this.renderContenContainer/>
+      </div>
+    );
   }
 
   componentDidMount() {
