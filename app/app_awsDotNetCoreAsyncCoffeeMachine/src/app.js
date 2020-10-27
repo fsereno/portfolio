@@ -76,7 +76,7 @@ class CoffeeMakerApp extends React.Component {
   }
 
   render() {
-    _spinnerModule.hide();
+   _spinnerModule.hide();
     return (
       <div>
         <_errorModule.Render/>

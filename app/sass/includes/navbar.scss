@@ -50,8 +50,15 @@
 }
 
 @media screen and (max-width: 991px) {
-    .navbar .navbar-nav .nav-link {
-        padding-bottom: 2rem;
-        padding-top: 1.5rem;
+    .navbar {
+        &.fixed-top {
+            .dropdown-menu {
+                max-height: 50vh;
+            }
+        }
+        .navbar-nav .nav-link {
+            padding-bottom: 2rem;
+            padding-top: 1.5rem;
+        }
     }
 }

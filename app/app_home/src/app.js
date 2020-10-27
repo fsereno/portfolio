@@ -156,7 +156,7 @@ class HomeApp extends React.Component {
           <img alt="Logo" src="images/FSLogo.png"/>
         </div>
         <div class="text-center element">
-          <h1 class="display-4 mb-0">Fabio Sereno</h1>
+          <h1 class="display-4 mb-0">Fabio Sereno Test</h1>
         </div>
         <div class="text-center element">
           <h4 class="display-4 sub-heading lead">Software developer</h4>
