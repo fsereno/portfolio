@@ -12,7 +12,7 @@ const APP_CONTAINER_ID = "appContainer";
 const MAIN_CONTAINER_ID = "mainContainer";
 const CONTENT_CONTAINER_ID = "contentContainer";
 const INTRO_CONTAINER_ID = "introContainer";
-let _spinnerModule = SpinnerModule({ contentId : APP_CONTAINER_ID });
+let _spinnerModule = SpinnerModule();
 let _stringSearchModule = new StringSearchModule();
 
 class HomeApp extends React.Component {
@@ -23,15 +23,14 @@ class HomeApp extends React.Component {
       applicationsImmutable: [],
       hasApplications: false,
       showClear: false,
-      showIntro: true
+      showIntro: false,
+      showSpinner: true
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleQuickFilter = this.handleQuickFilter.bind(this);
     this.handleClearSearch = this.handleClearSearch.bind(this);
-    this.handleRender = this.handleRender.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleScrollBtnClick = this.handleScrollBtnClick.bind(this);
-    this.renderContent = this.renderContent.bind(this);
     this.renderClearBtn = this.renderClearBtn.bind(this);
     this.renderIntroContainer = this.renderIntroContainer.bind(this);
     this.renderContenContainer = this.renderContenContainer.bind(this);
@@ -110,30 +109,19 @@ class HomeApp extends React.Component {
 
   delayAppRender() {
     setTimeout(() => {
+      this.removeDarkClass();
       this.setState({
         applications: Config.applications,
         applicationsImmutable: Config.applications,
-        hasApplications: true
+        hasApplications: true,
+        showIntro: true,
+        showSpinner: false
       });
-    }, FAUX_LOADING_TIME)
+    }, FAUX_LOADING_TIME);
   }
 
   removeDarkClass() {
     $(`#${MAIN_CONTAINER_ID}`).removeClass("bg-dark")
-  }
-
-  handleRender() {
-    if (this.state.hasApplications) {
-      this.removeDarkClass();
-      return(
-        <this.renderContent/>
-      )
-    }
-    return(
-      <div>
-        <_spinnerModule.Render/>
-      </div>
-    )
   }
 
   renderClearBtn() {
@@ -149,20 +137,24 @@ class HomeApp extends React.Component {
     return null;
   }
 
-  renderIntroContainer() {
+  renderIntroContainer(props) {
+    let fade = "fade";
+    fade = props.fadeIn ? `${fade} in` : fade;
     return (
       <div class="bg-dark py-5 mt-5" id="introContainer">
-        <div class="text-center element">
-          <img alt="Logo" src="images/FSLogo.png"/>
-        </div>
-        <div class="text-center element">
-          <h1 class="display-4 mb-0">Fabio Sereno Test 2</h1>
-        </div>
-        <div class="text-center element">
-          <h4 class="display-4 sub-heading lead">Software developer</h4>
-        </div>
-        <div class="text-center element mt-5">
-          <button type="button" class="btn btn-white btn-lg" onClick={this.handleScrollBtnClick}>View Portfolio</button>
+        <div class={fade}>
+          <div class="text-center element">
+            <img alt="Logo" src="images/FSLogo.png"/>
+          </div>
+          <div class="text-center element">
+            <h1 class="display-4 mb-0">Fabio Sereno Test 2</h1>
+          </div>
+          <div class="text-center element">
+            <h4 class="display-4 sub-heading lead">Software developer</h4>
+          </div>
+          <div class="text-center element mt-5">
+            <button type="button" class="btn btn-white btn-lg" onClick={this.handleScrollBtnClick}>View Portfolio</button>
+          </div>
         </div>
       </div>
     );
@@ -238,22 +230,21 @@ class HomeApp extends React.Component {
     );
   }
 
-  renderContent() {
-    return(
-      <div>
-        <this.renderIntroContainer/>
-        <this.renderContenContainer/>
-      </div>
-    );
-  }
-
   componentDidMount() {
     this.delayAppRender();
   }
 
   render() {
     return (
-      this.handleRender()
+      <div>
+        <_spinnerModule.Render
+          showSpinner={this.state.showSpinner}
+        />
+        <this.renderIntroContainer
+          fadeIn={this.state.showIntro}
+        />
+        <this.renderContenContainer/>
+      </div>
     );
   }
 }

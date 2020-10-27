@@ -1,23 +1,18 @@
 "use strict;"
 
-import React, { useState } from 'react';
+import React from 'react';
 
-const SPINNER_ID = "#spinner";
-const LOADER_ID = "#loader";
-
-export let SpinnerModule = function(props = {}) {
-    let _contentId = props.contentId || "";
-    let _hideByDefault = props.hideByDefault || false;
-    let hide = () => $(`${SPINNER_ID},${LOADER_ID}`).hide();
-    let show = () => $(`${SPINNER_ID},${LOADER_ID}`).show();
-    let hideContent = () => $(`#${_contentId}`).hide();
-    let showContent = () => $(`#${_contentId}`).show();
-    let Render = function() {
+export let SpinnerModule = function() {
+    let Render = function(props) {
+        let showSpinner = props.showSpinner || false;
+        let hideClass = !showSpinner ? "d-none" : "";
+        let fadeClass = "fade";
+        fadeClass = showSpinner ? `${fadeClass} in` : fadeClass;
         return(
             <div>
-                <div id="spinner" class="spinner-container overlay" style={ { display: _hideByDefault ? "none" : "flex" }}>
+                <div id="spinner" class={`${hideClass} spinner-container overlay`}>
                 </div>
-                <div id="loader" class="item loading" style={ { display: _hideByDefault ? "none" : "block" }}>
+                <div id="loader" class={`${fadeClass} item loading`}>
                     <div class="spinner">
                         <div class="circle circle-1">
                             <div class="circle-inner"></div>
@@ -31,10 +26,6 @@ export let SpinnerModule = function(props = {}) {
         )
     }
     return {
-        Render : Render,
-        hide : hide,
-        show : show,
-        hideContent : hideContent,
-        showContent : showContent
+        Render : Render
     }
 };
