@@ -10,7 +10,7 @@ const API_ENDPOINT = "https://ro5qqsplje.execute-api.eu-west-2.amazonaws.com/Pro
 const PUZZLE = "4 x 4 - 2 =";
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
-let _spinnerModule = SpinnerModule( { hideByDefault : true } );
+let _spinnerModule = SpinnerModule();
 let _errorModule = ErrorModule("errorModule");
 
 class CoffeeMakerApp extends React.Component {
@@ -20,7 +20,8 @@ class CoffeeMakerApp extends React.Component {
       log: [],
       run: `${API_ENDPOINT}/run`,
       runAsync: `${API_ENDPOINT}/runasync`,
-      processHeading: ""
+      processHeading: "",
+      showSpinner: false
     };
     this.handleRun = this.handleRun.bind(this);
     this.handleRunAsync = this.handleRunAsync.bind(this);
@@ -44,7 +45,8 @@ class CoffeeMakerApp extends React.Component {
       success: (response) => {
         this.setState({
           log: response,
-          processHeading: "Log of tasks carried out"
+          processHeading: "Log of tasks carried out",
+          showSpinner: false
         });
       }
     }
@@ -53,11 +55,17 @@ class CoffeeMakerApp extends React.Component {
 
   handleAjax(request) {
     if (_puzzleModule.getResult()) {
-      _spinnerModule.show();
+      //_spinnerModule.show();
+      this.setState({
+        showSpinner: true
+      });
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
-        _spinnerModule.hide();
+        //_spinnerModule.hide();
+        this.setState({
+          showSpinner: false
+        });
       });
     } else {
         _puzzleModule.show();
@@ -76,11 +84,12 @@ class CoffeeMakerApp extends React.Component {
   }
 
   render() {
-   _spinnerModule.hide();
     return (
       <div>
         <_errorModule.Render/>
-        <_spinnerModule.Render/>
+        <_spinnerModule.Render
+          showSpinner={this.state.showSpinner}
+        />
         <_puzzleModule.Render
           puzzle={PUZZLE}
         />

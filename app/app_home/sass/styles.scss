@@ -51,18 +51,3 @@
     }
   }
 }
-
-.fade {
-  -webkit-transition: opacity .5s ease-in;
-  -moz-transition: opacity .5s ease-in;
-  -o-transition: opacity .5s ease-in;
-  transition: opacity .5s ease-in;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.fade.in {
-  opacity: 1;
-  visibility: visible;
-  //transition: opacity .5s ease-in;
-}

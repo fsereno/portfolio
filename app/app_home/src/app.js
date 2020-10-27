@@ -138,7 +138,7 @@ class HomeApp extends React.Component {
   }
 
   renderIntroContainer(props) {
-    let fade = "fade";
+    let fade = "fade-element";
     fade = props.fadeIn ? `${fade} in` : fade;
     return (
       <div class="bg-dark py-5 mt-5" id="introContainer">
