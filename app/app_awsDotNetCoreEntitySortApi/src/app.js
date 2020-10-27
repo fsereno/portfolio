@@ -10,7 +10,6 @@ const API_ENDPOINT = "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Pro
 const PUZZLE = "4 x 4 - 2 =";
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
-let _spinnerModule = SpinnerModule();
 let _errorModule = ErrorModule("errorModule");
 
 class EntitySort extends React.Component {
@@ -140,7 +139,7 @@ class EntitySort extends React.Component {
     return (
       <div>
         <_errorModule.Render/>
-        <_spinnerModule.Render
+        <SpinnerModule
           show={this.state.showSpinner}
         />
         <_puzzleModule.Render
