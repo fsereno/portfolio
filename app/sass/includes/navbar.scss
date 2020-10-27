@@ -24,6 +24,9 @@
     
     .nav-link {
         padding-left: 1rem;
+        &.dropdown-toggle::after {
+            margin-left: .5rem;
+        }
     }
     a.navbar-brand {
         margin-right:0;
@@ -39,14 +42,7 @@
     }
     #navbarImage {
         margin: 0 .25rem 0 0;
-    }
-    &.navbar-dark {
-        .navbar-nav {
-            .nav-link {
-                color: $white;
-            }
-        }
-    }
+    }    
 }
 
 @media screen and (max-width: 991px) {

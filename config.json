@@ -15,13 +15,14 @@
         {
             "name": "Portfolio",
             "subHeading": "By Fabio Sereno",
-            "description": "Highly Experienced Full Stack Web Developer of 10+ years (6+ in the FinTech sector). Highly self-motivated, enthusiastic, professional and a team player. Possesses strong analytical and problem solving skills, code proficiency, and an ability to follow through with projects from initiation to completion with innovation and creativity.",
+            "description": "Highly experienced, highly self-motivated, enthusiastic, professional Full Stack Web Developer.",
             "folder": "home",
             "active": true,
             "include": false,
             "folderRoot": "/",
             "useWebpack": true,
-            "useRoot": true
+            "useRoot": true,
+            "isLandingPage": true
         },
         {
             "name": "Application master template",
@@ -82,7 +83,7 @@
         {
             "name": "Tic-Tac-Toe (React)",
             "subHeading": "A Tic-Tac-Toe game built using React JS",
-            "description": "Experimenting more complex aspects of React, Babel and Webpack.",
+            "description": "Experimenting with more complex aspects of React, Babel and Webpack.",
             "searchTerms": "JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "ticTacToeReact",
             "active": true,

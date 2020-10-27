@@ -11,7 +11,7 @@ const SEARCH_INPUT_ID = "searchInput";
 const MAIN_CONTAINER_ID = "mainContainer";
 const CONTENT_CONTAINER_ID = "contentContainer";
 const INTRO_CONTAINER_ID = "introContainer";
-let _spinnerModule = SpinnerModule();
+const APPLICATION = Config.applications.filter(x => x.isLandingPage)[0];
 let _stringSearchModule = new StringSearchModule();
 
 class HomeApp extends React.Component {
@@ -146,10 +146,10 @@ class HomeApp extends React.Component {
             <img alt="Logo" src="images/FSLogo.png"/>
           </div>
           <div class="text-center element">
-            <h1 class="display-4 mb-0">Fabio Sereno Test 2</h1>
+            <h1 class="display-4 mb-0">{Config.author}</h1>
           </div>
           <div class="text-center element">
-            <h4 class="display-4 sub-heading lead">Software developer</h4>
+          <h4 class="display-4 sub-heading lead">{Config.role}</h4>
           </div>
           <div class="text-center element mt-5">
             <button type="button" class="btn btn-white btn-lg" onClick={this.handleScrollBtnClick}>View Portfolio</button>
@@ -165,13 +165,13 @@ class HomeApp extends React.Component {
         <div class="container-fluid pt-4 mt-5" id="contentContainer">
           <div class="row">
             <div class="col-lg-12">
-              <h2 class="display-4">Portfolio</h2>
+              <h2 class="display-4">{APPLICATION.name}</h2>
             </div>
           </div>
           <div class="row">
             <div class="col-lg-12">
-              <h5>By Fabio Sereno</h5>
-              <p class="text-muted">Highly Experienced Full Stack Web Developer of 10+ years (6+ in the FinTech sector). Highly self-motivated, enthusiastic, professional and a team player. Possesses strong analytical and problem solving skills, code proficiency, and an ability to follow through with projects from initiation to completion with innovation and creativity.</p>
+              <h5>{APPLICATION.subHeading}</h5>
+              <p class="text-muted">{APPLICATION.description}</p>
               <hr/>
             </div>
           </div>
@@ -236,7 +236,7 @@ class HomeApp extends React.Component {
   render() {
     return (
       <div>
-        <_spinnerModule.Render
+        <SpinnerModule
           show={this.state.showSpinner}
         />
         <this.renderIntroContainer

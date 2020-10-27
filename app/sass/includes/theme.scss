@@ -33,3 +33,13 @@
 .sub-heading {
     color: $lightGrey;
 }
+
+.navbar {
+    &.navbar-dark {
+        .navbar-nav {
+            .nav-link {
+                color: $white;
+            }
+        }
+    }
+}

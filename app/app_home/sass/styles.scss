@@ -1,42 +1,40 @@
 @import "../../sass/includes/colours.scss";
 @import "../../sass/includes/styles.scss";
 
-#searchBar {
-  .form-control {
-    border-right:none;
-    &:focus {
-      border: 1px solid $darkGrey;
+#result {
+  #searchBar {
+    .form-control {
       border-right:none;
-      box-shadow: none;
+      &:focus {
+        border: 1px solid $darkGrey;
+        border-right:none;
+        box-shadow: none;
+      }
     }
-  }
-  span.input-group-text {
-    background: $darkGrey;
-    i {
-      color: $white;
+    span.input-group-text {
+      background: $darkGrey;
+      i {
+        color: $white;
+      }
     }
-  }
-  #openFilterBtn {
-    border-left: 1px solid #fff;
-    &:focus {
-      box-shadow: none;
-    }
-  }
-  #cancelBtn {
-    button {
-      border-top: 1px solid $darkGrey;
-      border-bottom: 1px solid $darkGrey;
-      border-right: 1px solid #fff;
-      background:transparent;
+    #openFilterBtn {
+      border-left: 1px solid #fff;
       &:focus {
         box-shadow: none;
       }
     }
+    #cancelBtn {
+      button {
+        border-top: 1px solid $darkGrey;
+        border-bottom: 1px solid $darkGrey;
+        border-right: 1px solid #fff;
+        background:transparent;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
   }
-}
-
-#mainContainer {
-  //min-height: 100vh;
   #introContainer {
     color: $white;
     min-height: 100vh;
