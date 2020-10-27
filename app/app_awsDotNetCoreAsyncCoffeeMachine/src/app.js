@@ -55,14 +55,12 @@ class CoffeeMakerApp extends React.Component {
 
   handleAjax(request) {
     if (_puzzleModule.getResult()) {
-      //_spinnerModule.show();
       this.setState({
         showSpinner: true
       });
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
-        //_spinnerModule.hide();
         this.setState({
           showSpinner: false
         });
@@ -88,7 +86,7 @@ class CoffeeMakerApp extends React.Component {
       <div>
         <_errorModule.Render/>
         <_spinnerModule.Render
-          showSpinner={this.state.showSpinner}
+          show={this.state.showSpinner}
         />
         <_puzzleModule.Render
           puzzle={PUZZLE}

@@ -10,7 +10,7 @@ const API_ENDPOINT = "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Pro
 const PUZZLE = "4 x 4 - 2 =";
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
-let _spinnerModule = SpinnerModule( { hideByDefault : true } );
+let _spinnerModule = SpinnerModule();
 let _errorModule = ErrorModule("errorModule");
 
 class EntitySort extends React.Component {
@@ -28,7 +28,8 @@ class EntitySort extends React.Component {
       counter: 1,
       selectedIndex: 0,
       sortSalaryAsc: `${API_ENDPOINT}/sort/salary/asc`,
-      sortSalaryDesc: `${API_ENDPOINT}/sort/salary/desc`
+      sortSalaryDesc: `${API_ENDPOINT}/sort/salary/desc`,
+      showSpinner: false
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -53,11 +54,15 @@ class EntitySort extends React.Component {
 
   handleAjax(request) {
     if (_puzzleModule.getResult()) {
-      _spinnerModule.show();
+      this.setState({
+        showSpinner: true
+      });
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
-        _spinnerModule.hide();
+        this.setState({
+          showSpinner: false
+        });
       });
     } else {
       _puzzleModule.show();
@@ -74,7 +79,8 @@ class EntitySort extends React.Component {
       }),
       success: (response) => {
         this.setState({
-          employees: response
+          employees: response,
+          showSpinner: false
         });
       }
     }
@@ -91,7 +97,8 @@ class EntitySort extends React.Component {
       }),
       success: (response) => {
         this.setState({
-          employees: response
+          employees: response,
+          showSpinner: false
         });
       }
     }
@@ -130,11 +137,12 @@ class EntitySort extends React.Component {
   }
 
   render() {
-    _spinnerModule.hide();
     return (
       <div>
         <_errorModule.Render/>
-        <_spinnerModule.Render/>
+        <_spinnerModule.Render
+          show={this.state.showSpinner}
+        />
         <_puzzleModule.Render
           puzzle={PUZZLE}
         />

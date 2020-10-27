@@ -4,10 +4,8 @@ import React from 'react';
 
 export let SpinnerModule = function() {
     let Render = function(props) {
-        let showSpinner = props.showSpinner || false;
+        let showSpinner = props.show || false;
         let hideClass = !showSpinner ? "d-none" : "";
-        let fadeClass = "fade-element";
-        fadeClass = showSpinner ? `${fadeClass} in` : fadeClass;
         return(
             <div>
                 <div id="spinner" class={`${hideClass} spinner-container overlay`}>

@@ -8,7 +8,6 @@ import { StringSearchModule } from '../../typeScript/Modules/stringSearchModule/
 
 const FAUX_LOADING_TIME = 500;
 const SEARCH_INPUT_ID = "searchInput";
-const APP_CONTAINER_ID = "appContainer";
 const MAIN_CONTAINER_ID = "mainContainer";
 const CONTENT_CONTAINER_ID = "contentContainer";
 const INTRO_CONTAINER_ID = "introContainer";
@@ -238,7 +237,7 @@ class HomeApp extends React.Component {
     return (
       <div>
         <_spinnerModule.Render
-          showSpinner={this.state.showSpinner}
+          show={this.state.showSpinner}
         />
         <this.renderIntroContainer
           fadeIn={this.state.showIntro}

@@ -43,7 +43,8 @@ class ShoppingListApp extends React.Component {
       update: `${API_ENDPOINT}/update`,
       answer: '',
       isValid: false,
-      puzzle: PUZZLE
+      puzzle: PUZZLE,
+      showSpinner: false
     };
     this.handleGetSubmit = this.handleGetSubmit.bind(this);
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
@@ -53,11 +54,15 @@ class ShoppingListApp extends React.Component {
 
   handleAjax(request) {
     if (_puzzleModule.getResult()) {
-      _spinnerModule.show();
+      this.setState({
+        showSpinner: true
+      });
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
-        _spinnerModule.hide();
+        this.setState({
+          showSpinner: false
+        });
       });
     } else {
       _puzzleModule.show();
@@ -80,7 +85,8 @@ class ShoppingListApp extends React.Component {
         success: (response) => {
           if (isValid(response)) {
             this.setState({
-              resultSet: response
+              resultSet: response,
+              showSpinner: false
             });
           }
         }
@@ -104,7 +110,8 @@ class ShoppingListApp extends React.Component {
       success: (response) => {
         this.setState({
           resultSet: response,
-          items: response
+          items: response,
+          showSpinner: false
         });
       }
     }
@@ -129,7 +136,8 @@ class ShoppingListApp extends React.Component {
       success: (response) => {
         this.setState({
           resultSet: response,
-          items: response
+          items: response,
+          showSpinner: false
         });
       }
     }
@@ -150,7 +158,8 @@ class ShoppingListApp extends React.Component {
       success: (response) => {
         this.setState({
           resultSet: response,
-          items: response
+          items: response,
+          showSpinner: false
         });
       }
     }
@@ -162,11 +171,13 @@ class ShoppingListApp extends React.Component {
   }
 
   render() {
-    _spinnerModule.hide();
+    //_spinnerModule.hide();
     return (
       <div>
         <_errorModule.Render/>
-        <_spinnerModule.Render/>
+        <_spinnerModule.Render
+          show={this.state.showSpinner}
+        />
         <_puzzleModule.Render
           puzzle={PUZZLE}
         />
