@@ -20,9 +20,12 @@
 
 #loader {
   position: fixed;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -45%);
+  -webkit-transform: translate(-50%, -45%);
+  -moz-transform:    translate(-50%, -45%);
   z-index: 3;
-  top: 45vh;
-  left: 46vw;
 }
 
 .loading {
