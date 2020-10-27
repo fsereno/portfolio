@@ -14,7 +14,7 @@ const DEFAULT_COLLECTION = [
 ]
 
 let _puzzleModule = PuzzleModule(15, "puzzleModal");
-let _spinnerModule = SpinnerModule( { hideByDefault : true } );
+let _spinnerModule = SpinnerModule();
 let _errorModule = ErrorModule("errorModule");
 
 function InputTemplate(props){
@@ -171,7 +171,6 @@ class ShoppingListApp extends React.Component {
   }
 
   render() {
-    //_spinnerModule.hide();
     return (
       <div>
         <_errorModule.Render/>
