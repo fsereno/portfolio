@@ -23,6 +23,7 @@ class HomeApp extends React.Component {
       hasApplications: false,
       showClear: false,
       showIntro: false,
+      hideIntroContainer: false,
       showSpinner: true
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
@@ -92,13 +93,17 @@ class HomeApp extends React.Component {
   }
 
   handleScrollBtnClick(event) {
-    let $container = $(`#${CONTENT_CONTAINER_ID}`);
+    let $container = $(`#appContainer`);
     let $introContainer = $(`#${INTRO_CONTAINER_ID}`);
     event.preventDefault();
     $('html, body').stop().animate({
       scrollTop: $container.offset().top - 50
     }, 1000, "swing", () => {
       $introContainer.remove();
+      this.setState({
+        showIntro: false,
+        //hideIntroContainer: true
+      })
     });
   }
 
@@ -139,8 +144,9 @@ class HomeApp extends React.Component {
   renderIntroContainer(props) {
     let fade = "fade-element";
     fade = props.fadeIn ? `${fade} in` : fade;
+    let hideClass = props.hide ? "d-none" : "";
     return (
-      <div class="bg-dark py-5 mt-5" id="introContainer">
+      <div class={`bg-dark py-5 mt-5 ${hideClass}`} id="introContainer">
         <div class={fade}>
           <div class="text-center element">
             <img alt="Logo" src="images/FSLogo.png"/>
@@ -241,6 +247,7 @@ class HomeApp extends React.Component {
         />
         <this.renderIntroContainer
           fadeIn={this.state.showIntro}
+          hide={this.state.hideIntroContainer}
         />
         <this.renderContenContainer/>
       </div>
