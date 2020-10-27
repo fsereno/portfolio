@@ -93,17 +93,17 @@ class HomeApp extends React.Component {
   }
 
   handleScrollBtnClick(event) {
-    let $container = $(`#appContainer`);
+    let $container = $(`#${CONTENT_CONTAINER_ID}`);
     let $introContainer = $(`#${INTRO_CONTAINER_ID}`);
     event.preventDefault();
-    $('html, body').stop().animate({
+    //window.scrollTo({top:0, left:0, behavior: "smooth"})
+    $('html').animate({
       scrollTop: $container.offset().top - 50
     }, 1000, "swing", () => {
       $introContainer.remove();
-      this.setState({
-        showIntro: false,
-        //hideIntroContainer: true
-      })
+      /*this.setState({
+        hideIntroContainer: true
+      })*/
     });
   }
 
@@ -167,69 +167,67 @@ class HomeApp extends React.Component {
 
   renderContenContainer() {
     return (
-      <div id="appContainer">
-        <div class="container-fluid pt-4 mt-5" id="contentContainer">
-          <div class="row">
-            <div class="col-lg-12">
-              <h2 class="display-4">{APPLICATION.name}</h2>
+      <div class="container-fluid pt-4 mt-5" id="contentContainer">
+        <div class="row">
+          <div class="col-lg-12">
+            <h2 class="display-4">{APPLICATION.name}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <h5>{APPLICATION.subHeading}</h5>
+            <p class="text-muted">{APPLICATION.description}</p>
+            <hr/>
+          </div>
+        </div>
+        <form onSubmit={this.handleSubmit}>
+          <div id="searchBar" class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="fa fa-search"></i>
+              </span>
+            </div>
+            <input type="text" class="form-control" placeholder="Search applications..." id="searchInput" onChange={this.handleSearchChange}/>
+            <this.renderClearBtn/>
+            <div class="input-group-append">
+              <button id="openFilterBtn" class="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
+                <i class="fa fa-filter"></i>
+              </button>
             </div>
           </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <h5>{APPLICATION.subHeading}</h5>
-              <p class="text-muted">{APPLICATION.description}</p>
-              <hr/>
+          <div class="collapse" id="filterContainer">
+            <div class="pb-3">
+              <label class="d-flex flex-row justify-content-center">Quick search</label>
+              <div class="btn-group d-flex flex-row justify-content-center">
+                <button type="button" class="btn btn-outline-dark" value="React" onClick={this.handleQuickFilter}>React</button>
+                <button type="button" class="btn btn-outline-dark" value="TypeScript" onClick={this.handleQuickFilter}>TypeScript</button>
+                <button type="button" class="btn btn-outline-dark" value=".Net Core" onClick={this.handleQuickFilter}>.Net Core</button>
+              </div>
             </div>
           </div>
-          <form onSubmit={this.handleSubmit}>
-            <div id="searchBar" class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-search"></i>
-                </span>
-              </div>
-              <input type="text" class="form-control" placeholder="Search applications..." id="searchInput" onChange={this.handleSearchChange}/>
-              <this.renderClearBtn/>
-              <div class="input-group-append">
-                <button id="openFilterBtn" class="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
-                  <i class="fa fa-filter"></i>
-                </button>
-              </div>
-            </div>
-            <div class="collapse" id="filterContainer">
-              <div class="pb-3">
-                <label class="d-flex flex-row justify-content-center">Quick search</label>
-                <div class="btn-group d-flex flex-row justify-content-center">
-                  <button type="button" class="btn btn-outline-dark" value="React" onClick={this.handleQuickFilter}>React</button>
-                  <button type="button" class="btn btn-outline-dark" value="TypeScript" onClick={this.handleQuickFilter}>TypeScript</button>
-                  <button type="button" class="btn btn-outline-dark" value=".Net Core" onClick={this.handleQuickFilter}>.Net Core</button>
-                </div>
-              </div>
-            </div>
-          </form>
-          <div id="applicationsContainer" class="card-columns">
-              {this.state.applications.map((application) => {
-                if (application.active && application.include) {
-                  return (
-                    <div class="card p-3 bg-white min-height-160">
-                      <div class="card-body">
-                        <h5 class="card-title">{application.name}</h5>
-                        <p class="card-text">{application.subHeading}</p>
-                        <a class="btn btn-dark mr-2 mb-2"
-                          href={`${Config.prefix}${application.folder}/${Config.index}`}>
-                            View app<i class="fa fa-eye ml-2"></i>
-                        </a>
-                        <a class="btn btn-dark mb-2"
-                          href={`${Config.repoRootUrl}/${Config.folderRoot}${Config.prefix}${application.folder}`}
-                          target="_blank">
-                            View code<i class="fa fa-github-square ml-2"></i>
-                        </a>
-                      </div>
+        </form>
+        <div id="applicationsContainer" class="card-columns">
+            {this.state.applications.map((application) => {
+              if (application.active && application.include) {
+                return (
+                  <div class="card p-3 bg-white min-height-160">
+                    <div class="card-body">
+                      <h5 class="card-title">{application.name}</h5>
+                      <p class="card-text">{application.subHeading}</p>
+                      <a class="btn btn-dark mr-2 mb-2"
+                        href={`${Config.prefix}${application.folder}/${Config.index}`}>
+                          View app<i class="fa fa-eye ml-2"></i>
+                      </a>
+                      <a class="btn btn-dark mb-2"
+                        href={`${Config.repoRootUrl}/${Config.folderRoot}${Config.prefix}${application.folder}`}
+                        target="_blank">
+                          View code<i class="fa fa-github-square ml-2"></i>
+                      </a>
                     </div>
-                  );
-                }
-              })}
-          </div>
+                  </div>
+                );
+              }
+            })}
         </div>
       </div>
     );
@@ -240,6 +238,7 @@ class HomeApp extends React.Component {
   }
 
   render() {
+    //window.scrollTo({top:0, left:0, behavior: "smooth"})
     return (
       <div>
         <SpinnerModule
