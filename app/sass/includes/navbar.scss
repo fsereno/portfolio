@@ -7,12 +7,21 @@
 
 .navbar {
     padding: 0 0.3em;
-    .dropdown-item {
-        padding: 1rem 1.5rem;
-        &.active, &:active {
-            background-color: $darkGrey;
+    &.fixed-top {
+        .dropdown-menu {
+            max-height: 90vh;
+            overflow-y: scroll;
         }
     }
+    .dropdown-menu {
+        .dropdown-item {
+            padding: 1rem 1.5rem;
+            &.active, &:active {
+                background-color: $darkGrey;
+            }
+        }
+    }
+    
     .nav-link {
         padding-left: 1rem;
     }
