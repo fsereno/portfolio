@@ -4,8 +4,6 @@ With this application I have built a complex type sorting interface, using .Net 
 
 Whilst this functionality could be achieved with JavaScript alone, I wanted to demonstrate knowledge of two key .Net Core interfaces: ICompareable and IComparer.
 
-The AWS Gateway API is called when attempting to sort the Employee table via the sort icons located in the column headers. This in turn calls an AWS Lambda function, which implements both ICompareable for default sorting and IComparer for multi directional sorting.
-
 -ICompareable (https://docs.microsoft.com/en-us/dotnet/api/system.icomparable?view=netcore-3.1)
 
 -IComparer (https://docs.microsoft.com/en-us/dotnet/api/system.collections.icomparer?view=netcore-3.1)
