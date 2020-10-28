@@ -6,6 +6,10 @@ Whilst this functionality could be achieved with JavaScript alone, I wanted to d
 
 The AWS Gateway API is called when attempting to sort the Employee table via the sort icons located in the column headers. This in turn calls an AWS Lambda function, which implements both ICompareable for default sorting and IComparer for multi directional sorting.
 
+-ICompareable (https://docs.microsoft.com/en-us/dotnet/api/system.icomparable?view=netcore-3.1)
+
+-IComparer (https://docs.microsoft.com/en-us/dotnet/api/system.collections.icomparer?view=netcore-3.1)
+
 ### Explanation ###
 
 This project shows how to run an ASP.NET Core Web API project as an AWS Lambda exposed through Amazon API Gateway. The NuGet package [Amazon.Lambda.AspNetCoreServer](https://www.nuget.org/packages/Amazon.Lambda.AspNetCoreServer) contains a Lambda function that is used to translate requests from API Gateway into the ASP.NET Core framework and then the responses from ASP.NET Core back to API Gateway.

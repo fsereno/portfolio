@@ -63,7 +63,7 @@
         {
             "name": "To-Do List (React Redux)",
             "subHeading": "A basic React Redux application",
-            "description": "Experimenting how to use Redux with React to implement Undo and Redo functionality",
+            "description": "Exploring the use of Redux with React to manage application state, implementing Undo and Redo functionality.",
             "searchTerms": "JavaScript,React,Redux,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "reactRedux",
             "active": true,
@@ -102,7 +102,7 @@
         {
             "name": "AWS .NET Core Entity Sorting API",
             "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
-            "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "description": "Exploring AWS Lambda serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "searchTerms": "C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreEntitySortApi",
             "active": true,
@@ -113,7 +113,7 @@
         {
             "name": "AWS .NET Core Natural String Sorting API",
             "subHeading": "A natural string sorting algorithm implemnting IComparer, taking a comma seperated string of alphanumerical values.",
-            "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "description": "Exploring AWS Lambda serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "searchTerms": "C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreStringSortApi",
             "active": true,
@@ -124,7 +124,7 @@
         {
             "name": "AWS .NET Core Shopping Cart API",
             "subHeading": "A basic shopping cart application, with data processing handled by a Serverless .Net Core RESTful API. React handles the UI.",
-            "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "description": "Exploring AWS Lambda serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "searchTerms": "C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreShoppingCart",
             "active": true,
@@ -134,7 +134,7 @@
         {
             "name": "AWS .NET Core Asynchronous Coffee Maker API",
             "subHeading": "Demonstraiting knowledge of asynchrony and multithreading.",
-            "description": "Exploring the abilities of AWS Lambda and serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
+            "description": "Exploring AWS Lambda serverless applications (SAM), using .Net Core along with an AWS RESTful Gateway API.",
             "searchTerms": "C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreAsyncCoffeeMachine",
             "active": true,

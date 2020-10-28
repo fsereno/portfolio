@@ -10,7 +10,6 @@ const FAUX_LOADING_TIME = 500;
 const SEARCH_INPUT_ID = "searchInput";
 const MAIN_CONTAINER_ID = "mainContainer";
 const CONTENT_CONTAINER_ID = "contentContainer";
-const INTRO_CONTAINER_ID = "introContainer";
 const APPLICATION = Config.applications.filter(x => x.isLandingPage)[0];
 let _stringSearchModule = new StringSearchModule();
 

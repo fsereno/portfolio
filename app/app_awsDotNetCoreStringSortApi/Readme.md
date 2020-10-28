@@ -6,6 +6,8 @@ With this application I have implemented IComparer to handle the sorting logic, 
 
 A lot of research was undertaken for this application, with many permutations in order to overcome this simple, yet complex task. Made for a very enjoyable project!
 
+-IComparer (https://docs.microsoft.com/en-us/dotnet/api/system.collections.icomparer?view=netcore-3.1)
+
 ### Explanation ###
 
 This project shows how to run an ASP.NET Core Web API project as an AWS Lambda exposed through Amazon API Gateway. The NuGet package [Amazon.Lambda.AspNetCoreServer](https://www.nuget.org/packages/Amazon.Lambda.AspNetCoreServer) contains a Lambda function that is used to translate requests from API Gateway into the ASP.NET Core framework and then the responses from ASP.NET Core back to API Gateway.
