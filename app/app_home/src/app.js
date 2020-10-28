@@ -92,14 +92,9 @@ class HomeApp extends React.Component {
   }
 
   handleScrollBtnClick(event) {
-    let $container = $(`#${CONTENT_CONTAINER_ID}`);
-    let $introContainer = $(`#${INTRO_CONTAINER_ID}`);
     event.preventDefault();
-    $('html').animate({
-      scrollTop: $container.offset().top - 50
-    }, 1000, "swing", () => {
-      $introContainer.remove();
-    });
+    let container = document.getElementById(CONTENT_CONTAINER_ID);
+    window.scrollTo({top: container.offsetTop - 50,left: 0, behavior: "smooth"});
   }
 
   handleSubmit(event){
@@ -120,7 +115,8 @@ class HomeApp extends React.Component {
   }
 
   removeDarkClass() {
-    $(`#${MAIN_CONTAINER_ID}`).removeClass("bg-dark")
+    let mainContainer = document.getElementById(MAIN_CONTAINER_ID);
+    mainContainer.classList.remove("bg-dark");
   }
 
   renderClearBtn() {
@@ -160,8 +156,9 @@ class HomeApp extends React.Component {
   }
 
   renderContenContainer() {
+    let hideClass = !this.state.hasApplications ? "d-none" : "";
     return (
-      <div class="container-fluid pt-4 mt-5" id="contentContainer">
+      <div class={`${hideClass} container-fluid pt-4 mt-5`} id="contentContainer">
         <div class="row">
           <div class="col-lg-12">
             <h2 class="display-4">{APPLICATION.name}</h2>
@@ -232,6 +229,7 @@ class HomeApp extends React.Component {
   }
 
   render() {
+    window.scrollTo({top:0, left: 0, behavior: "smooth"})
     return (
       <div>
         <SpinnerModule
