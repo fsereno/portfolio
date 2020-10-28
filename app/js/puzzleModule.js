@@ -43,9 +43,11 @@ export let PuzzleModule = function(answer, modalId) {
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">{props.title || "Are you a human?"}</h5>
+                            <h5 class="display-4 modal-title">{props.title || "Are you a human?"}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
+                                <span class="lr">
+                                    <span class="rl"></span>
+                                </span>
                             </button>
                         </div>
                         <div class="modal-body">
