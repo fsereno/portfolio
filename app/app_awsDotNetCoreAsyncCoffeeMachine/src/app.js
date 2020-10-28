@@ -92,8 +92,8 @@ class CoffeeMakerApp extends React.Component {
         />
         <div class="row mb-3">
           <div class="col-lg-6">
-            <button type="button" class="btn btn-dark mr-2" onClick={this.handleRun}>Run Synchronously</button>
-            <button type="button" class="btn btn-dark mr-2" onClick={this.handleRunAsync}>Run Asynchronously</button>
+            <button type="button" class="btn btn-dark mr-2" onClick={this.handleRun}>Run Synch</button>
+            <button type="button" class="btn btn-dark mr-2" onClick={this.handleRunAsync}>Run Async</button>
           </div>
         </div>
         <div class="row">
