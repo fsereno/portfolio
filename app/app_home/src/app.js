@@ -234,7 +234,6 @@ class HomeApp extends React.Component {
   }
 
   render() {
-    window.scrollTo({top:0, left: 0, behavior: "smooth"})
     return (
       <div>
         <SpinnerModule
