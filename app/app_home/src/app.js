@@ -140,7 +140,7 @@ class HomeApp extends React.Component {
   renderIntroContainer(props) {
     let fadeClass = this.getElementFadeClass(props.fadeIn);
     return (
-      <div class="bg-dark py-5 mt-5" id="introContainer">
+      <div class="bg-dark" id="introContainer">
         <div class={fadeClass}>
           <div class="text-center element">
             <img alt="Logo" src="images/FSLogo.png"/>
