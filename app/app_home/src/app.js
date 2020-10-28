@@ -23,7 +23,6 @@ class HomeApp extends React.Component {
       hasApplications: false,
       showClear: false,
       showIntro: false,
-      hideIntroContainer: false,
       showSpinner: true
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
@@ -96,14 +95,10 @@ class HomeApp extends React.Component {
     let $container = $(`#${CONTENT_CONTAINER_ID}`);
     let $introContainer = $(`#${INTRO_CONTAINER_ID}`);
     event.preventDefault();
-    //window.scrollTo({top:0, left:0, behavior: "smooth"})
     $('html').animate({
       scrollTop: $container.offset().top - 50
     }, 1000, "swing", () => {
       $introContainer.remove();
-      /*this.setState({
-        hideIntroContainer: true
-      })*/
     });
   }
 
@@ -142,12 +137,11 @@ class HomeApp extends React.Component {
   }
 
   renderIntroContainer(props) {
-    let fade = "fade-element";
-    fade = props.fadeIn ? `${fade} in` : fade;
-    let hideClass = props.hide ? "d-none" : "";
+    let fadeClass = "fade-element";
+    fadeClass = props.fadeIn ? `${fadeClass} in` : fadeClass;
     return (
-      <div class={`bg-dark py-5 mt-5 ${hideClass}`} id="introContainer">
-        <div class={fade}>
+      <div class="bg-dark py-5 mt-5" id="introContainer">
+        <div class={fadeClass}>
           <div class="text-center element">
             <img alt="Logo" src="images/FSLogo.png"/>
           </div>
@@ -238,7 +232,6 @@ class HomeApp extends React.Component {
   }
 
   render() {
-    //window.scrollTo({top:0, left:0, behavior: "smooth"})
     return (
       <div>
         <SpinnerModule
@@ -246,7 +239,6 @@ class HomeApp extends React.Component {
         />
         <this.renderIntroContainer
           fadeIn={this.state.showIntro}
-          hide={this.state.hideIntroContainer}
         />
         <this.renderContenContainer/>
       </div>
