@@ -132,9 +132,14 @@ class HomeApp extends React.Component {
     return null;
   }
 
-  renderIntroContainer(props) {
+  getElementFadeClass (condition = false) {
     let fadeClass = "fade-element";
-    fadeClass = props.fadeIn ? `${fadeClass} in` : fadeClass;
+    fadeClass = condition ? `${fadeClass} in` : fadeClass;
+    return fadeClass;
+  }
+
+  renderIntroContainer(props) {
+    let fadeClass = this.getElementFadeClass(props.fadeIn);
     return (
       <div class="bg-dark py-5 mt-5" id="introContainer">
         <div class={fadeClass}>
@@ -156,9 +161,9 @@ class HomeApp extends React.Component {
   }
 
   renderContenContainer() {
-    let hideClass = !this.state.hasApplications ? "d-none" : "";
+    let fadeClass = this.getElementFadeClass(this.state.hasApplications);
     return (
-      <div class={`${hideClass} container-fluid pt-4 mt-5`} id="contentContainer">
+      <div class={`${fadeClass} container-fluid pt-4 mt-5`} id="contentContainer">
         <div class="row">
           <div class="col-lg-12">
             <h2 class="display-4">{APPLICATION.name}</h2>
