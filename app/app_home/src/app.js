@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshLambertMaterial, MeshBasicMaterial, PCFSoftShadowMap, Mesh, PointLight } from 'three';
 import Config from  '../../../config.json';
 import { SpinnerModule } from '../../js/spinnerModule.js';
 import { StringSearchModule } from '../../typeScript/Modules/stringSearchModule/app.js';
@@ -12,6 +13,70 @@ const MAIN_CONTAINER_ID = "mainContainer";
 const CONTENT_CONTAINER_ID = "contentContainer";
 const APPLICATION = Config.applications.filter(x => x.isLandingPage)[0];
 let _stringSearchModule = new StringSearchModule();
+
+const ThreeModule = function(containerId) {
+
+  let _containerId = containerId;
+  let _scene = new Scene();
+  let _camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+  let _renderer = new WebGLRenderer({antialias: true, alpha: true});
+  let _cubeGeometry = new BoxGeometry(2.6, 2.6, 2.6);
+  let _cubeMaterial = new MeshBasicMaterial({
+    color: 0x828f97,
+    wireframe: true,
+  });
+  let _cube = new Mesh( _cubeGeometry, _cubeMaterial );
+
+  let setCameraPosition = () => {
+    _camera.position.x = 1;
+    _camera.position.y = 1.1;
+    _camera.position.z = 5;
+  }
+
+  let setRenderer = () => {
+    let container = document.getElementById(_containerId);
+    _renderer.setSize( window.innerWidth, window.innerHeight );
+    container.appendChild( _renderer.domElement );
+  }
+
+  let setResizeEventHandler = () => {
+    window.addEventListener("resize", () => {
+      _renderer.setSize(window.innerWidth, window.innerHeight);
+      _camera.aspect = window.innerWidth / window.innerHeight;
+      _camera.updateProjectionMatrix();
+    });
+  }
+
+  let addCube = () => {
+    _cube.position.x = 1;
+    _cube.position.y = 1
+    _cube.position.z = 1
+    _scene.add(_cube);
+  }
+
+  let setAnimationLoop = () => {
+    _renderer.setAnimationLoop( function() {
+      let time = 0.025;
+      _cube.rotation.x += time * 0.5;
+      _cube.rotation.y += time * 0.5;
+      _renderer.render( _scene, _camera );
+    });
+  }
+
+  let init = () => {
+    setCameraPosition();
+    setRenderer();
+    setResizeEventHandler();
+    addCube();
+    setAnimationLoop();
+  }
+
+  return {
+    init: init
+  }
+};
+
+let _threeJSModule = ThreeModule("introContainer");
 
 class HomeApp extends React.Component {
   constructor(props) {
@@ -141,7 +206,7 @@ class HomeApp extends React.Component {
     let fadeClass = this.getElementFadeClass(props.fadeIn);
     return (
       <div class="bg-dark" id="introContainer">
-        <div class={fadeClass}>
+        <div id="introContent" class={fadeClass}>
           <div class="text-center element">
             <img alt="Logo" src="images/FSLogo.png"/>
           </div>
@@ -230,6 +295,7 @@ class HomeApp extends React.Component {
 
   componentDidMount() {
     this.delayAppRender();
+    _threeJSModule.init();
   }
 
   render() {
