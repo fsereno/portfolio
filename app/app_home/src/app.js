@@ -110,34 +110,28 @@ const ThreeModule = function(containerId) {
     _camera = new PerspectiveCamera( 75, _container.offsetWidth / _container.offsetWidth, 0.1, 1000 );
     _renderer = new WebGLRenderer({antialias: true, alpha: true});
     _meshGeometry = new BoxGeometry(3, 3, 3);
-    /*_loader = new TextureLoader();
+    _loader = new TextureLoader();
+
     _loader.load("images/FSLogo.png", (texture) => {
       _texture = texture;
       _texture.anisotropy = _renderer.capabilities.getMaxAnisotropy();
       _meshMaterial = new MeshLambertMaterial({ map: _texture });
       _mesh = new Mesh( _meshGeometry, _meshMaterial );
-    }, undefined, (error) => { alert(error) });*/
-    
-    _texture = new TextureLoader().load("images/FSLogo.png");
-    _texture.anisotropy = _renderer.capabilities.getMaxAnisotropy();
-    _meshMaterial = new MeshLambertMaterial({ map: _texture });
-    _mesh = new Mesh( _meshGeometry, _meshMaterial );
-    
 
-    setCameraPosition();
-    setRenderer();
-    setResizeEventHandler();
-    addCube();
-    addLight(0xFFFFFF, 2);
-    addLight(0xFFFFFF, 1, 1000, 0, 0, 25);
-    setAnimationLoop();
+      setCameraPosition();
+      setRenderer();
+      setResizeEventHandler();
+      addCube();
+      addLight(0xFFFFFF, 2);
+      addLight(0xFFFFFF, 1, 1000, 0, 0, 25);
+      setAnimationLoop();
+    });
   }
 
   return {
     init: init,
     isWebGLAvailable: isWebGLAvailable,
     isWebGL2Available: isWebGL2Available,
-
   }
 };
 
