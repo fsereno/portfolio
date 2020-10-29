@@ -8,26 +8,26 @@ block styles
 block content
       .row.splitter
         .col-lg-12
-          h3 Result: 
+          h3 Result:
             span#result 0
       .row
-        .col-lg-3
+        .col-lg-4
           form#percentageCalculatorForm
             .form-group
-              label(for="percentageInput") What is the following percentage:
+              label(for="percentageInput") What is the following percentage
               input#percentageInput.form-control(
-                name="percentageInput", 
-                type="number", 
-                placeholder="10", 
+                name="percentageInput",
+                type="number",
+                placeholder="10",
                 required)
             .form-group
-              label(for="percentageOfInput") Of this number:
+              label(for="percentageOfInput") Of this number
               input#percentageOfInput.form-control(
-                name="percentageOfInput", 
-                type="number", 
-                placeholder="100", 
+                name="percentageOfInput",
+                type="number",
+                placeholder="100",
                 required)
-             
+
             button#submit.btn.btn-dark(type="submit") Submit
 block scripts
   // build:js js/app.js

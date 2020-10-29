@@ -16,15 +16,15 @@ block content
                   a(href="#", class="badge badge-danger delete", v-on:click="deleteItem", :data-index="index") Delete
       .row.splitter
         .col-lg-12
-          p Items: 
+          p Items:
             span {{ counter}}
-          p Item to add: 
+          p Item to add:
             span {{ name }}
       .row
-        .col-lg-3
+        .col-lg-4
           form#inputForm(autoComplete="off")
             .form-group
-              label(for="input") Input:
+              label(for="input") Input
               input#itemInput.form-control(
                 name="itemInput",
                 type="text",

@@ -7,11 +7,9 @@ import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
 
 const API_ENDPOINT = "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees";
-const DISABLED_BTN_CLASS = "disabled";
 const PUZZLE = "4 x 4 - 2 =";
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
-let _spinnerModule = SpinnerModule( { hideByDefault : true } );
 let _errorModule = ErrorModule("errorModule");
 
 class EntitySort extends React.Component {
@@ -28,32 +26,21 @@ class EntitySort extends React.Component {
       counterLimit: 10,
       counter: 1,
       selectedIndex: 0,
-      disabledBtnClass: DISABLED_BTN_CLASS,
       sortSalaryAsc: `${API_ENDPOINT}/sort/salary/asc`,
-      sortSalaryDesc: `${API_ENDPOINT}/sort/salary/desc`
+      sortSalaryDesc: `${API_ENDPOINT}/sort/salary/desc`,
+      showSpinner: false
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSalaryChange = this.handleSalaryChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete= this.handleDelete.bind(this);
-    this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
     this.handleSortSalaryAsc = this.handleSortSalaryAsc.bind(this);
     this.handleSortSalaryDesc = this.handleSortSalaryDesc.bind(this);
   }
 
   formatCurrency(value) {
     return new Intl.NumberFormat('GBP', { style: 'currency', currency: 'GBP' }).format(value);
-  }
-
-  handlePuzzleSubmit(event) {
-    event.preventDefault();
-    if (_puzzleModule.getResult()) {
-      this.setState({
-        disabledBtnClass: ""
-      });
-      _puzzleModule.hide();
-    }
   }
 
   handleNameChange(event) {
@@ -66,16 +53,22 @@ class EntitySort extends React.Component {
 
   handleAjax(request) {
     if (_puzzleModule.getResult()) {
+      this.setState({
+        showSpinner: true
+      });
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
-        _spinnerModule.hide();
+        this.setState({
+          showSpinner: false
+        });
       });
+    } else {
+      _puzzleModule.show();
     }
   }
 
   handleSortSalaryAsc() {
-    _spinnerModule.show();
     let request = {
       url: this.state.sortSalaryAsc,
       type: "POST",
@@ -85,7 +78,8 @@ class EntitySort extends React.Component {
       }),
       success: (response) => {
         this.setState({
-          employees: response
+          employees: response,
+          showSpinner: false
         });
       }
     }
@@ -93,7 +87,6 @@ class EntitySort extends React.Component {
   }
 
   handleSortSalaryDesc() {
-    _spinnerModule.show();
     let request = {
       url: this.state.sortSalaryDesc,
       type: "POST",
@@ -103,7 +96,8 @@ class EntitySort extends React.Component {
       }),
       success: (response) => {
         this.setState({
-          employees: response
+          employees: response,
+          showSpinner: false
         });
       }
     }
@@ -142,18 +136,14 @@ class EntitySort extends React.Component {
   }
 
   render() {
-    _spinnerModule.hide();
     return (
       <div>
         <_errorModule.Render/>
-        <_spinnerModule.Render/>
+        <SpinnerModule
+          show={this.state.showSpinner}
+        />
         <_puzzleModule.Render
-          event={this.handlePuzzleSubmit}
-          label="First answer this question to unlock the API:"
           puzzle={PUZZLE}
-          button="Submit"
-          required={true}
-          title="Are you a human?"
         />
         <div class="row splitter">
           <div class="col-lg-12">
@@ -165,8 +155,8 @@ class EntitySort extends React.Component {
                   <th>Name</th>
                   <th>
                       <span class="mr-2">Salary</span>
-                      <button id="sortAsc" class={`${this.state.disabledBtnClass} btn btn-sm btn-dark mr-2`} type="button" onClick={this.handleSortSalaryAsc}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
-                      <button id="sortDesc" class={`${this.state.disabledBtnClass} btn btn-sm btn-dark`} type="button" onClick={this.handleSortSalaryDesc}><i class="fa fa-fw fa-sort-amount-desc"></i></button>
+                      <button id="sortAsc" class="btn btn-sm btn-dark mr-1 px-0" type="button" onClick={this.handleSortSalaryAsc}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
+                      <button id="sortDesc" class="btn btn-sm btn-dark px-0" type="button" onClick={this.handleSortSalaryDesc}><i class="fa fa-fw fa-sort-amount-desc"></i></button>
                   </th>
                   <th>Action</th>
                 </tr>
@@ -210,7 +200,7 @@ class EntitySort extends React.Component {
                   </div>
                 </div>
                 <div class="col-lg-2">
-                  <button id="addEmployee_submit" type="submit" class={`btn btn-dark mb-2 ${this.state.disabledBtnClass} w-100`}>Add</button>
+                  <button id="addEmployee_submit" type="submit" class="btn btn-dark mb-2 w-100">Add</button>
                 </div>
               </div>
             </form>

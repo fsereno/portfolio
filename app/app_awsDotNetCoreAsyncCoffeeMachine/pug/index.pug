@@ -1,0 +1,21 @@
+extends ../../pug/layouts/main.pug
+
+block styles
+  // build:css css/styles.css
+  link(rel="stylesheet" href="css/styles.css")
+  // endbuild
+
+block content
+  div.d-flex
+    p.lead 
+      | Think about how a cup of coffee is made.
+      | Typically tasks are carried out while the kettle is boiling.
+      | Why wait for a process to complete, when it could be run as a background task ?
+      | Run the process of making a cup of coffee both synchronously and asynchronously.
+      | Notice the difference in the order of tasks ?
+  div#result.mt-2
+
+block scripts
+  // build:js js/app.js
+  script(src="js/app.js")
+  // endbuild

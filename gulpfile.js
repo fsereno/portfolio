@@ -91,32 +91,6 @@ let applicationTypeScriptTask = (application) => {
   )));
 }
 
-let servicesTypeScriptTask = () => {
-  return browserify({
-    basedir: config.developmentDir+"/typeScript/Services",
-    debug: true,
-    entries: ["StringService.ts"],
-    cache: {},
-    packageCache: {}
-  })
-  .plugin(tsify)
-  .bundle()
-  .pipe(source("app.js"))
-  .pipe(buffer())
-  .pipe(uglify())
-  .pipe(gulp.dest(config.developmentDir+"/js/test"))
-  .pipe(connect.reload())
-  .pipe(logger(gulpUtil.populateLoggerOptions(
-    "JS task started...",
-    "JS task complete!",
-    ".js",
-    false,
-    "../js",
-    "Compiled to: ",
-    " " + logSymbols.success
-  )));
-}
-
 let htmlTask = (application) => {
   let directories = gulpUtil.getApplicationDirectories(application);
   return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/pug/*.pug")

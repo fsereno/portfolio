@@ -1,0 +1,34 @@
+@import "./colours.scss";
+
+.modal {
+    .modal-header {
+        border:none;
+
+        .display-4 {
+            font-size: 2rem;
+        }
+        .close {
+            width: 55px;
+            height: 75px;
+            cursor: pointer;
+            &:focus {
+                outline:none;
+            }
+            .lr {
+                height: 50px;
+                width: 1px;
+                transform: rotate(45deg);
+                display: block;
+                background: $darkGrey;
+
+                .rl {
+                    height: 50px;
+                    width: 1px;
+                    transform: rotate(90deg);
+                    display: block;
+                    background: $darkGrey
+                }
+            }
+        }
+    }
+}

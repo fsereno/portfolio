@@ -21,3 +21,25 @@
     background: $darkGrey;
     color: $white;
 }
+
+#footer {
+    color:$white;
+
+    a {
+        color:$white;
+    }
+}
+
+.sub-heading {
+    color: $lightGrey;
+}
+
+.navbar {
+    &.navbar-dark {
+        .navbar-nav {
+            .nav-link {
+                color: $white;
+            }
+        }
+    }
+}

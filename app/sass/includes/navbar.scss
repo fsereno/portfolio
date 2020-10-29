@@ -7,14 +7,26 @@
 
 .navbar {
     padding: 0 0.3em;
-    .dropdown-item {
-        padding: 1rem 1.5rem;
-        &.active, &:active {
-            background-color: $darkGrey;
+    &.fixed-top {
+        .dropdown-menu {
+            max-height: 90vh;
+            overflow-y: scroll;
         }
     }
+    .dropdown-menu {
+        .dropdown-item {
+            padding: 1rem 1.5rem;
+            &.active, &:active {
+                background-color: $darkGrey;
+            }
+        }
+    }
+    
     .nav-link {
         padding-left: 1rem;
+        &.dropdown-toggle::after {
+            margin-left: .5rem;
+        }
     }
     a.navbar-brand {
         margin-right:0;
@@ -23,27 +35,26 @@
         }
     }
     #titleHeading {
-        line-height: 25px;
+        font-size: 1.5rem;
     }
     #titleSubHeading {
-        line-height: 25px;
-        color: $lightGrey;
+        line-height: 20px;
     }
     #navbarImage {
         margin: 0 .25rem 0 0;
-    }
-    &.navbar-dark {
-        .navbar-nav {
-            .nav-link {
-                color: $white;
-            }
-        }
-    }
+    }    
 }
 
 @media screen and (max-width: 991px) {
-    .navbar .navbar-nav .nav-link {
-        padding-bottom: 2rem;
-        padding-top: 1.5rem;
+    .navbar {
+        &.fixed-top {
+            .dropdown-menu {
+                max-height: 50vh;
+            }
+        }
+        .navbar-nav .nav-link {
+            padding-bottom: 2rem;
+            padding-top: 1.5rem;
+        }
     }
 }

@@ -11,7 +11,12 @@ export let ErrorModule = function(modalId) {
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title h4">{props.title || "We have a problem!"}</h5>
+                            <h5 class="display-4 modal-title">{props.title || "We have a problem!"}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span class="lr">
+                                    <span class="rl"></span>
+                                </span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             <div class="invalid-feedback d-block">

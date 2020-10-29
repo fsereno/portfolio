@@ -20,11 +20,12 @@ const helper = function() {
   }
 
   let setRenderer = () => {
+    let container = document.getElementById("mainContainer");
     renderer.setClearColor("#e5e5e5");
     renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    document.body.appendChild( renderer.domElement );
+    container.appendChild( renderer.domElement );
   }
 
   let setResizeEventHandler = () => {

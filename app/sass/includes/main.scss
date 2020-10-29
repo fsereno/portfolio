@@ -1,0 +1,64 @@
+.error {
+    color: $red;
+}
+
+span#result, .result {
+    font-weight: 100;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    line-height: 1em;
+}
+
+.row.splitter {
+    margin-bottom: .75rem;
+}
+
+.min-height-160 {
+    min-height: 160px;
+}
+
+input.form-control {
+    padding:24px;
+}
+
+select.form-control {
+    height:50px;
+}
+
+button.btn {
+    padding: 12px;
+    min-width: 100px;
+}
+
+.input-group-append button.btn {
+    min-width: auto;
+}
+
+table {
+    select.form-control {
+        height: calc(2.25rem + 2px);
+    }
+    button.btn {
+        padding: .375rem .75rem;
+    }
+    button.btn {
+        min-width: auto;
+    }
+}
+
+#mainContainer {
+    min-height: 100vh;
+}
+
+.fade-element {
+    -webkit-transition: opacity .5s ease-in;
+    -moz-transition: opacity .5s ease-in;
+    -o-transition: opacity .5s ease-in;
+    transition: opacity .5s ease-in;
+    opacity: 0;
+    visibility: hidden;
+}
+.fade-element.in {
+    opacity: 1;
+    visibility: visible;
+}

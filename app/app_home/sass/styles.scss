@@ -1,45 +1,57 @@
 @import "../../sass/includes/colours.scss";
 @import "../../sass/includes/styles.scss";
 
-#applicationsContainer.card-columns {
-  .card {
-    transition: 0.4s;
-    &:hover {
-      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1) !important;
-    }
-  }
-}
-
-#searchBar {
-  .form-control {
-    border-right:none;
-    &:focus {
-      border: 1px solid $darkGrey;
+#result {
+  #searchBar {
+    .form-control {
       border-right:none;
-      box-shadow: none;
+      &:focus {
+        border: 1px solid $darkGrey;
+        border-right:none;
+        box-shadow: none;
+      }
     }
-  }
-  span.input-group-text {
-    background: $darkGrey;
-    i {
-      color: $white;
+    span.input-group-text {
+      background: $darkGrey;
+      i {
+        color: $white;
+      }
     }
-  }
-  #openFilterBtn {
-    border-left: 1px solid #fff;
-    &:focus {
-      box-shadow: none;
-    }
-  }
-  #cancelBtn {
-    button {
-      border-top: 1px solid $darkGrey;
-      border-bottom: 1px solid $darkGrey;
-      border-right: 1px solid #fff;
-      background:transparent;
+    #openFilterBtn {
+      border-left: 1px solid #fff;
       &:focus {
         box-shadow: none;
       }
     }
+    #cancelBtn {
+      button {
+        border-top: 1px solid $darkGrey;
+        border-bottom: 1px solid $darkGrey;
+        border-right: 1px solid #fff;
+        background:transparent;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+  #introContainer {
+    color: $white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+        width: 15rem;
+    }
+    .sub-heading {
+        font-size: 2rem;
+    }
+    #introBtn {
+        width:13rem;
+    }
+  }
+  #contentContainer {
+    min-height: 100vh;
   }
 }

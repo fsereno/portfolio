@@ -1,37 +1,24 @@
 "use strict;"
 
-import React, { useState } from 'react';
+import React from 'react';
 
-const SPINNER_ID = "#spinner";
-
-export let SpinnerModule = function(props = {}) {
-    let _contentId = props.contentId || "";
-    let _hideByDefault = props.hideByDefault || false;
-    let hide = () => $(SPINNER_ID).hide();
-    let show = () => $(SPINNER_ID).show();
-    let hideContent = () => $(`#${_contentId}`).hide();
-    let showContent = () => $(`#${_contentId}`).show();
-    let Render = function() {
-        return(
-            <div id="spinner" class="spinner-container overlay" style={ { display: _hideByDefault ? "none" : "flex" }}>
-                <div class="item loading">
-                    <div class="spinner">
-                        <div class="circle circle-1">
-                            <div class="circle-inner"></div>
-                        </div>
-                        <div class="circle circle-2">
-                            <div class="circle-inner"></div>
-                        </div>
+export let SpinnerModule = function(props) {
+    let showSpinner = props.show || false;
+    let hideClass = !showSpinner ? "d-none" : "";
+    return(
+        <div>
+            <div id="spinner" class={`${hideClass} spinner-container overlay`}>
+            </div>
+            <div id="loader" class={`${hideClass} item loading`}>
+                <div class="spinner">
+                    <div class="circle circle-1">
+                        <div class="circle-inner"></div>
+                    </div>
+                    <div class="circle circle-2">
+                        <div class="circle-inner"></div>
                     </div>
                 </div>
             </div>
-        )
-    }
-    return {
-        Render : Render,
-        hide : hide,
-        show : show,
-        hideContent : hideContent,
-        showContent : showContent
-    }
+        </div>
+    );
 };

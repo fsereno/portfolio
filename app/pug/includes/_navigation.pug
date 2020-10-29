@@ -1,10 +1,10 @@
 - var directory = locals.application.useRoot ? "" : "../";
-nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
   a.navbar-brand(
       href=directory+"index.html")
     img#navbarImage(src=directory+"images/FSLogo.png", alt="Fabio Sereno logo image").pull-left
-    span#titleHeading.d-flex= locals.config.author
-    span#titleSubHeading.d-flex= locals.config.role
+    h2.display-4.m-0.p-0#titleHeading.d-flex= locals.config.author
+    p.lead.m-0.p-0#titleSubHeading.sub-heading.d-flex= locals.config.role
   button.navbar-toggler(
       type='button'
       data-toggle='collapse'
@@ -18,7 +18,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         li.nav-item
             a.nav-link(href=directory+"index.html")
                 | Home
-                i.fa.fa-home.ml-1
+                i.fa.fa-home.ml-2
         li.nav-item.dropdown
             a#navbarDropdownMenuLink.nav-link.dropdown-toggle(
                 href='#'
@@ -40,14 +40,14 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
                 : "") + " dropdown-item",
                 href=directory+"index.html")
                     | Home
-                    i.fa.fa-home.ml-1
+                    i.fa.fa-home.ml-2
         li.nav-item
             a.nav-link(href=(locals.application.folderRoot !== undefined
                 ? locals.config.repoRootUrl+locals.application.folderRoot
                 : locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder),
                 target="_blank")
                 | View on Github
-                i.fa.fa-github-square.ml-2
+                i.fa.fa-github.ml-2
         li.nav-item
             a.nav-link(href=locals.config.linkedInUrl, target="_blank")
                 | Linkedin

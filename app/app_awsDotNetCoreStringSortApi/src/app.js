@@ -7,11 +7,9 @@ import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
 
 const API_ENDPOINT = "https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values";
-const DISABLED_BTN_CLASS = "disabled";
 const PUZZLE = "4 x 4 - 5 =";
 
 let _puzzleModule = PuzzleModule(11, "puzzleModal");
-let _spinnerModule = SpinnerModule( { hideByDefault : true } );
 let _errorModule = ErrorModule("errorModule");
 
 class StringSort extends React.Component {
@@ -20,23 +18,11 @@ class StringSort extends React.Component {
     this.state = {
       values: '',
       result: '',
-      disabledBtnClass: DISABLED_BTN_CLASS,
-      sort: `${API_ENDPOINT}/sort`
+      sort: `${API_ENDPOINT}/sort`,
+      showSpinner: false
     };
-
     this.handleValuesChange = this.handleValuesChange.bind(this);
-    this.handlePuzzleSubmit = this.handlePuzzleSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handlePuzzleSubmit(event) {
-    event.preventDefault();
-    if (_puzzleModule.getResult()) {
-      this.setState({
-        disabledBtnClass: ""
-      });
-      _puzzleModule.hide();
-    }
   }
 
   handleValuesChange(event) {
@@ -45,16 +31,22 @@ class StringSort extends React.Component {
 
   handleAjax(request) {
     if (_puzzleModule.getResult()) {
+      this.setState({
+        showSpinner: true
+      });
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
-        _spinnerModule.hide();
+        this.setState({
+          showSpinner: false
+        });
       });
+    } else {
+      _puzzleModule.show();
     }
   }
 
   handleSort() {
-    _spinnerModule.show();
     let request = {
       url: this.state.sort,
       type: "POST",
@@ -64,7 +56,8 @@ class StringSort extends React.Component {
       }),
       success: (response) => {
         this.setState({
-          result: response.result
+          result: response.result,
+          showSpinner: false
         });
       }
     }
@@ -73,7 +66,7 @@ class StringSort extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (_puzzleModule.getResult() && this.state.values.length > 0) {
+    if (this.state.values.length > 0) {
       this.handleSort();
     }
   }
@@ -83,18 +76,14 @@ class StringSort extends React.Component {
   }
 
   render() {
-    _spinnerModule.hide();
     return (
       <div>
         <_errorModule.Render/>
-        <_spinnerModule.Render/>
+        <SpinnerModule
+          show={this.state.showSpinner}
+        />
         <_puzzleModule.Render
-          event={this.handlePuzzleSubmit}
-          label="First answer this question to unlock the API:"
           puzzle={PUZZLE}
-          button="Submit"
-          required={true}
-          title="Are you a human?"
         />
         <div class="row splitter">
           <div class="col-lg-12">
@@ -117,7 +106,7 @@ class StringSort extends React.Component {
                   <input required type="text" class="form-control mb-2" id="valuesInput" placeholder="B,C,A" value={this.state.values} onChange={this.handleValuesChange}/>
                 </div>
                 <div class="col-lg-2">
-                  <button id="sort_submit" type="submit" class={`btn btn-dark mb-2 ${this.state.disabledBtnClass} w-100`}>Sort</button>
+                  <button id="sort_submit" type="submit" class="btn btn-dark mb-2 w-100">Sort</button>
                 </div>
               </div>
             </form>

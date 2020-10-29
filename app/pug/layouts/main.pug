@@ -12,18 +12,18 @@ html(lang="en")
     block styles
   body
     include ../includes/_navigation.pug
-    .container-fluid.pt-2
+    #mainContainer.container-fluid.pt-4.mt-5
       .row
         .col-lg-12
           h2.display-4= locals.application.name
       .row
         .col-lg-12
-          h5.font-italic= locals.application.subHeading
+          h5=locals.application.subHeading
           p.text-muted= locals.application.description
           hr
       block content
-
-    block footer
+      block footer
+    include ../includes/_footer.pug
     // build:js ../js/vendor.js
     include ../includes/_jsDeps.pug
     // endbuild

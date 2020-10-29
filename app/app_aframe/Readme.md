@@ -10,7 +10,7 @@ The interest in this application is to explore quick and deployable, WebXR proto
 
 This application is intended for use in any modern WebXR enabled web browser or headset.
 
-This is one in a series of applications experimenting with WebXR. Currently only supporting 3 degrees of freedom and not controller input.
+This is one in a series of applications experimenting with WebXR. Currently only supporting 3 degrees of freedom and no controller input.
 
 ### Project commands ###
 

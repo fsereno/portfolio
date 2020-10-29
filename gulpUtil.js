@@ -46,7 +46,7 @@ module.exports = {
     useWebpackIsTrue: useWebpack => (typeof useWebpack === "undefined") || typeof useWebpack !== "undefined" && useWebpack,
     getApplicationDirectories: (application) => {
       let applicationDirectory = application.useRoot
-        ? config.developmentDir+"/"
+        ? config.developmentDir
         : config.developmentDir+"/"+config.prefix+application.folder;
       let destinationDirectory = application.useRoot
         ? config.publishDir

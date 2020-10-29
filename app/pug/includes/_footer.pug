@@ -1,0 +1,16 @@
+- var directory = locals.application.useRoot ? "" : "../";
+footer#footer.bg-dark.mt-5
+  .container.pt-4
+    ul.list-unstyled.list-inline.text-center
+      li.list-inline-item
+        a.btn-floating.btn-fb.mx-1(href=locals.config.gitHubUrl target="_blank")
+          i.fa.fa-github.fa-2x
+      li.list-inline-item
+        a.btn-floating.btn-tw.mx-1(href=locals.config.linkedInUrl target="_blank")
+          i.fa.fa-linkedin.fa-2x
+  hr
+  .footer-copyright.text-center.pb-3
+    | Copyright &copy; 2020. 
+    =locals.config.author
+    |.
+    | All rights reserved.

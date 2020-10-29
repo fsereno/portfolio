@@ -6,9 +6,11 @@ import Config from  '../../../config.json';
 import { SpinnerModule } from '../../js/spinnerModule.js';
 import { StringSearchModule } from '../../typeScript/Modules/stringSearchModule/app.js';
 
-const FAUX_LOADING_TIME = 1000;
+const FAUX_LOADING_TIME = 500;
 const SEARCH_INPUT_ID = "searchInput";
-let _spinnerModule = SpinnerModule({ contentId : "contentContainer" });
+const MAIN_CONTAINER_ID = "mainContainer";
+const CONTENT_CONTAINER_ID = "contentContainer";
+const APPLICATION = Config.applications.filter(x => x.isLandingPage)[0];
 let _stringSearchModule = new StringSearchModule();
 
 class HomeApp extends React.Component {
@@ -18,15 +20,18 @@ class HomeApp extends React.Component {
       applications: [],
       applicationsImmutable: [],
       hasApplications: false,
-      showClear: false
+      showClear: false,
+      showIntro: false,
+      showSpinner: true
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleQuickFilter = this.handleQuickFilter.bind(this);
     this.handleClearSearch = this.handleClearSearch.bind(this);
-    this.renderHandler = this.renderHandler.bind(this);
-    this.renderContent = this.renderContent.bind(this);
-    this.renderClearBtn = this.renderClearBtn.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleScrollBtnClick = this.handleScrollBtnClick.bind(this);
+    this.renderClearBtn = this.renderClearBtn.bind(this);
+    this.renderIntroContainer = this.renderIntroContainer.bind(this);
+    this.renderContenContainer = this.renderContenContainer.bind(this);
   }
 
   filterApplications(applications, searchTerm) {
@@ -85,29 +90,32 @@ class HomeApp extends React.Component {
     })
   }
 
+  handleScrollBtnClick(event) {
+    event.preventDefault();
+    let container = document.getElementById(CONTENT_CONTAINER_ID);
+    window.scrollTo({top: container.offsetTop - 50,left: 0, behavior: "smooth"});
+  }
+
   handleSubmit(event){
     event.preventDefault();
   }
 
-  getConfigHandler() {
+  delayAppRender() {
     setTimeout(() => {
+      this.removeDarkClass();
       this.setState({
         applications: Config.applications,
         applicationsImmutable: Config.applications,
-        hasApplications: true
+        hasApplications: true,
+        showIntro: true,
+        showSpinner: false
       });
-    }, FAUX_LOADING_TIME)
+    }, FAUX_LOADING_TIME);
   }
 
-  renderHandler() {
-    if (this.state.hasApplications) {
-      return(
-        <this.renderContent/>
-      )
-    }
-    return(
-      <_spinnerModule.Render/>
-    )
+  removeDarkClass() {
+    let mainContainer = document.getElementById(MAIN_CONTAINER_ID);
+    mainContainer.classList.remove("bg-dark");
   }
 
   renderClearBtn() {
@@ -123,9 +131,50 @@ class HomeApp extends React.Component {
     return null;
   }
 
-  renderContent() {
+  getElementFadeClass (condition = false) {
+    let fadeClass = "fade-element";
+    fadeClass = condition ? `${fadeClass} in` : fadeClass;
+    return fadeClass;
+  }
+
+  renderIntroContainer(props) {
+    let fadeClass = this.getElementFadeClass(props.fadeIn);
     return (
-      <div id="contentContainer">
+      <div class="bg-dark" id="introContainer">
+        <div class={fadeClass}>
+          <div class="text-center element">
+            <img alt="Logo" src="images/FSLogo.png"/>
+          </div>
+          <div class="text-center element">
+            <h1 class="display-4 mb-0">{Config.author}</h1>
+          </div>
+          <div class="text-center element">
+          <h4 class="display-4 sub-heading lead">{Config.role}</h4>
+          </div>
+          <div class="text-center element mt-5">
+            <button type="button" class="btn btn-white btn-lg" onClick={this.handleScrollBtnClick}>View Portfolio</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderContenContainer() {
+    let fadeClass = this.getElementFadeClass(this.state.hasApplications);
+    return (
+      <div class={`${fadeClass} container-fluid pt-4 mt-5`} id="contentContainer">
+        <div class="row">
+          <div class="col-lg-12">
+            <h2 class="display-4">{APPLICATION.name}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <h5>{APPLICATION.subHeading}</h5>
+            <p class="text-muted">{APPLICATION.description}</p>
+            <hr/>
+          </div>
+        </div>
         <form onSubmit={this.handleSubmit}>
           <div id="searchBar" class="input-group mb-3">
             <div class="input-group-prepend">
@@ -152,7 +201,7 @@ class HomeApp extends React.Component {
             </div>
           </div>
         </form>
-          <div id="applicationsContainer" class="card-columns">
+        <div id="applicationsContainer" class="card-columns">
             {this.state.applications.map((application) => {
               if (application.active && application.include) {
                 return (
@@ -171,21 +220,29 @@ class HomeApp extends React.Component {
                       </a>
                     </div>
                   </div>
-                )
+                );
               }
             })}
-          </div>
+        </div>
       </div>
-    )
+    );
   }
 
   componentDidMount() {
-    this.getConfigHandler();
+    this.delayAppRender();
   }
 
   render() {
     return (
-      this.renderHandler()
+      <div>
+        <SpinnerModule
+          show={this.state.showSpinner}
+        />
+        <this.renderIntroContainer
+          fadeIn={this.state.showIntro}
+        />
+        <this.renderContenContainer/>
+      </div>
     );
   }
 }
