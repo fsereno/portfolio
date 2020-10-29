@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshLambertMaterial, MeshBasicMaterial, PCFSoftShadowMap, Mesh, PointLight } from 'three';
+import { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshBasicMaterial, MeshMatcapMaterial, MeshLambertMaterial, PointLight, Mesh, PCFSoftShadowMap, TextureLoader } from 'three';
 import Config from  '../../../config.json';
 import { SpinnerModule } from '../../js/spinnerModule.js';
 import { StringSearchModule } from '../../typeScript/Modules/stringSearchModule/app.js';
@@ -16,16 +16,16 @@ let _stringSearchModule = new StringSearchModule();
 
 const ThreeModule = function(containerId) {
 
-  let _containerId = containerId;
-  let _scene = new Scene();
-  let _camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-  let _renderer = new WebGLRenderer({antialias: true, alpha: true});
-  let _cubeGeometry = new BoxGeometry(2.6, 2.6, 2.6);
-  let _cubeMaterial = new MeshBasicMaterial({
-    color: 0x828f97,
-    wireframe: true,
-  });
-  let _cube = new Mesh( _cubeGeometry, _cubeMaterial );
+  let _containerId;
+  let _container;
+  let _scene;
+  let _camera;
+  let _renderer;
+  let _meshGeometry;
+  let _texture;
+  let _meshMaterial;
+  let _mesh;
+  let _loader;
 
   let setCameraPosition = () => {
     _camera.position.x = 1;
@@ -35,48 +35,114 @@ const ThreeModule = function(containerId) {
 
   let setRenderer = () => {
     let container = document.getElementById(_containerId);
-    _renderer.setSize( window.innerWidth, window.innerHeight );
+    _renderer.setSize( container.offsetWidth, container.offsetHeight );
+    _renderer.shadowMap.enabled = true;
+    _renderer.shadowMap.type = PCFSoftShadowMap;
     container.appendChild( _renderer.domElement );
   }
 
   let setResizeEventHandler = () => {
     window.addEventListener("resize", () => {
-      _renderer.setSize(window.innerWidth, window.innerHeight);
-      _camera.aspect = window.innerWidth / window.innerHeight;
+      let container = document.getElementById(_containerId);
+      _renderer.setSize(container.offsetWidth, container.offsetHeight);
+      _camera.aspect = container.offsetWidth / container.offsetHeight;
       _camera.updateProjectionMatrix();
     });
   }
 
   let addCube = () => {
-    _cube.position.x = 1;
-    _cube.position.y = 1
-    _cube.position.z = 1
-    _scene.add(_cube);
+    _mesh.position.x = 1;
+    _mesh.position.y = 1
+    _mesh.position.z = 1
+    _scene.add(_mesh);
+  }
+
+  let addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
+    var light = new PointLight(color, intensity, distance);
+    light.position.set(x, y, z);
+    _scene.add( light );
   }
 
   let setAnimationLoop = () => {
     _renderer.setAnimationLoop( function() {
       let time = 0.025;
-      _cube.rotation.x += time * 0.5;
-      _cube.rotation.y += time * 0.5;
+      _mesh.rotation.x += time * 0.5;
+      _mesh.rotation.y += time * 0.5;
       _renderer.render( _scene, _camera );
     });
   }
 
+  let isWebGLAvailable = () => {
+
+    try {
+
+		  var canvas = document.createElement( 'canvas' );
+			return !! ( window.WebGLRenderingContext && ( canvas.getContext( 'webgl' ) || canvas.getContext( 'experimental-webgl' ) ) );
+
+		} catch ( e ) {
+
+			return false;
+
+		}
+
+  }
+
+  let isWebGL2Available = () => {
+
+		try {
+
+			var canvas = document.createElement( 'canvas' );
+			return !! ( window.WebGL2RenderingContext && canvas.getContext( 'webgl2' ) );
+
+		} catch ( e ) {
+
+			return false;
+
+		}
+
+  }
+
   let init = () => {
+
+    _containerId = containerId;
+    _container = document.getElementById(_containerId);
+    _scene = new Scene();
+    _camera = new PerspectiveCamera( 75, _container.offsetWidth / _container.offsetWidth, 0.1, 1000 );
+    _renderer = new WebGLRenderer({antialias: true, alpha: true});
+    _meshGeometry = new BoxGeometry(3, 3, 3);
+    /*_loader = new TextureLoader();
+    _loader.load("images/FSLogo.png", (texture) => {
+      _texture = texture;
+      _texture.anisotropy = _renderer.capabilities.getMaxAnisotropy();
+      _meshMaterial = new MeshLambertMaterial({ map: _texture });
+      _mesh = new Mesh( _meshGeometry, _meshMaterial );
+    }, undefined, (error) => { alert(error) });*/
+    
+    _texture = new TextureLoader().load("images/FSLogo.png");
+    _texture.anisotropy = _renderer.capabilities.getMaxAnisotropy();
+    _meshMaterial = new MeshLambertMaterial({ map: _texture });
+    _mesh = new Mesh( _meshGeometry, _meshMaterial );
+    
+
     setCameraPosition();
     setRenderer();
     setResizeEventHandler();
     addCube();
+    addLight(0xFFFFFF, 2);
+    addLight(0xFFFFFF, 1, 1000, 0, 0, 25);
     setAnimationLoop();
   }
 
   return {
-    init: init
+    init: init,
+    isWebGLAvailable: isWebGLAvailable,
+    isWebGL2Available: isWebGL2Available,
+
   }
 };
 
-let _threeJSModule = ThreeModule("introContainer");
+let _threeJSModule = ThreeModule("canvasContainer");
+const IS_BROWSER_VALID = _threeJSModule.isWebGL2Available() || _threeJSModule.isWebGLAvailable();
 
 class HomeApp extends React.Component {
   constructor(props) {
@@ -87,7 +153,8 @@ class HomeApp extends React.Component {
       hasApplications: false,
       showClear: false,
       showIntro: false,
-      showSpinner: true
+      showSpinner: true,
+      isBrowserValid: true
     };
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleQuickFilter = this.handleQuickFilter.bind(this);
@@ -183,6 +250,12 @@ class HomeApp extends React.Component {
     mainContainer.classList.remove("bg-dark");
   }
 
+  getElementFadeClass (condition = false) {
+    let fadeClass = "fade-element";
+    fadeClass = condition ? `${fadeClass} in` : fadeClass;
+    return fadeClass;
+  }
+
   renderClearBtn() {
     if (this.state.showClear) {
       return(
@@ -196,10 +269,11 @@ class HomeApp extends React.Component {
     return null;
   }
 
-  getElementFadeClass (condition = false) {
-    let fadeClass = "fade-element";
-    fadeClass = condition ? `${fadeClass} in` : fadeClass;
-    return fadeClass;
+  renderIntroMedia(props) {
+    if (props.isBrowserValid) {
+      return <div id="canvasContainer"></div>
+    }
+    return <img src="images/FSLogo.png" alt="Logo" />
   }
 
   renderIntroContainer(props) {
@@ -208,7 +282,7 @@ class HomeApp extends React.Component {
       <div class="bg-dark" id="introContainer">
         <div id="introContent" class={fadeClass}>
           <div class="text-center element">
-            <img alt="Logo" src="images/FSLogo.png"/>
+            <this.renderIntroMedia isBrowserValid={IS_BROWSER_VALID}/>
           </div>
           <div class="text-center element">
             <h1 class="display-4 mb-0">{Config.author}</h1>
@@ -295,7 +369,9 @@ class HomeApp extends React.Component {
 
   componentDidMount() {
     this.delayAppRender();
-    _threeJSModule.init();
+    if (IS_BROWSER_VALID) {
+      _threeJSModule.init();
+    }
   }
 
   render() {

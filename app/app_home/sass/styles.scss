@@ -42,8 +42,12 @@
     align-items: center;
     justify-content: center;
     #introContent {
-      position: absolute;
-      top: 25vh;
+      #canvasContainer {
+        width: 20rem;
+        height: 20rem;
+        /*width: 590px;
+        height: 300px;*/
+      }
       img {
         width: 15rem;
       }
