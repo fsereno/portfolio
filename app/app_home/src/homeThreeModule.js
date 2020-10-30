@@ -2,7 +2,7 @@
 
 export const HomeThreeModule = (async () => {
 
-    const { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshLambertMaterial, MeshBasicMaterial, PointLight, Mesh, PCFSoftShadowMap, TextureLoader } = await import("three");
+    const THREE = await import("three");
 
     let _containerId;
     let _container;
@@ -24,8 +24,6 @@ export const HomeThreeModule = (async () => {
     let setRenderer = () => {
         let container = document.getElementById(_containerId);
         _renderer.setSize(container.offsetWidth, container.offsetHeight);
-        //_renderer.shadowMap.enabled = true;
-        //_renderer.shadowMap.type = PCFSoftShadowMap;
         container.appendChild(_renderer.domElement);
     }
 
@@ -45,12 +43,6 @@ export const HomeThreeModule = (async () => {
         _scene.add(_mesh);
     }
 
-    let addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
-        var light = new PointLight(color, intensity, distance);
-        light.position.set(x, y, z);
-        _scene.add(light);
-    }
-
     let setAnimationLoop = () => {
         _renderer.setAnimationLoop(function () {
             let time = 0.025;
@@ -64,37 +56,17 @@ export const HomeThreeModule = (async () => {
 
         _containerId = "canvasContainer";
         _container = document.getElementById(_containerId);
-        _scene = new Scene();
-        _camera = new PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 0.1, 1000);
-        _renderer = new WebGLRenderer({ antialias: true, alpha: true });
-        _meshGeometry = new BoxGeometry(3, 3, 3);
-        _meshMaterial = new MeshBasicMaterial({ wireframe: true });
-        _mesh = new Mesh(_meshGeometry, _meshMaterial);
-        
-        
-        //_loader = new TextureLoader();
-
-        /*_loader.load("images/FSLogo.png", (texture) => {
-            //_texture = texture;
-            //_texture.anisotropy = _renderer.capabilities.getMaxAnisotropy();
-            _meshMaterial = new MeshLambertMaterial({ map: _texture });
-            _mesh = new Mesh(_meshGeometry, _meshMaterial);
-
-            setCameraPosition();
-            setRenderer();
-            setResizeEventHandler();
-            addCube();
-            addLight(0xFFFFFF, 2);
-            addLight(0xFFFFFF, 1, 1000, 0, 0, 25);
-            setAnimationLoop();
-        });*/
+        _scene = new THREE.Scene();
+        _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 0.1, 1000);
+        _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        _meshGeometry = new THREE.BoxGeometry(3, 3, 3);
+        _meshMaterial = new THREE.MeshBasicMaterial({ wireframe: true });
+        _mesh = new THREE.Mesh(_meshGeometry, _meshMaterial);
 
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
         addCube();
-        //addLight(0xFFFFFF, 2);
-        //addLight(0xFFFFFF, 1, 1000, 0, 0, 25);
         setAnimationLoop();
     }
 
