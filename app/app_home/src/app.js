@@ -143,29 +143,32 @@ class HomeApp extends React.Component {
     return null;
   }
 
-  renderIntroMedia(props) {
+  /*renderIntroMedia(props) {
     if (props.isBrowserValid) {
       return <div id="canvasContainer"></div>
     }
-    return <img src="images/FSLogo.png" alt="Logo" />
-  }
+    return null;
+  }*/
 
   renderIntroContainer(props) {
     let fadeClass = this.getElementFadeClass(props.fadeIn);
     return (
       <div className="bg-dark" id="introContainer">
         <div id="introContent" className={fadeClass}>
-          <div className="text-center element">
-            <this.renderIntroMedia isBrowserValid={IS_BROWSER_VALID}/>
-          </div>
-          <div className="text-center element">
-            <h1 className="display-4 mb-0">{Config.author}</h1>
-          </div>
-          <div className="text-center element">
-          <h4 className="display-4 sub-heading lead">{Config.role}</h4>
-          </div>
-          <div className="text-center element mt-5">
-            <button type="button" className="btn btn-white btn-lg" onClick={this.handleScrollBtnClick}>View Portfolio</button>
+          <div id="canvasContainer"></div>
+          <div id="introContentInner">
+            <div className="text-center element">
+              <img src="images/FSLogo.png" alt="Logo" />
+            </div>
+            <div className="text-center element">
+              <h1 className="display-4 mb-0">{Config.author}</h1>
+            </div>
+            <div className="text-center element">
+              <h4 className="display-4 sub-heading lead">{Config.role}</h4>
+            </div>
+            <div className="text-center element mt-5">
+              <button type="button" className="btn btn-white btn-lg" onClick={this.handleScrollBtnClick}>View Portfolio</button>
+            </div>
           </div>
         </div>
       </div>

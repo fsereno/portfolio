@@ -2,7 +2,7 @@
 
 export const HomeThreeModule = (async () => {
 
-    const { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshLambertMaterial, PointLight, Mesh, PCFSoftShadowMap, TextureLoader } = await import("three");
+    const { Scene, PerspectiveCamera, WebGLRenderer, BoxGeometry, MeshLambertMaterial, MeshBasicMaterial, PointLight, Mesh, PCFSoftShadowMap, TextureLoader } = await import("three");
 
     let _containerId;
     let _container;
@@ -24,8 +24,8 @@ export const HomeThreeModule = (async () => {
     let setRenderer = () => {
         let container = document.getElementById(_containerId);
         _renderer.setSize(container.offsetWidth, container.offsetHeight);
-        _renderer.shadowMap.enabled = true;
-        _renderer.shadowMap.type = PCFSoftShadowMap;
+        //_renderer.shadowMap.enabled = true;
+        //_renderer.shadowMap.type = PCFSoftShadowMap;
         container.appendChild(_renderer.domElement);
     }
 
@@ -54,8 +54,8 @@ export const HomeThreeModule = (async () => {
     let setAnimationLoop = () => {
         _renderer.setAnimationLoop(function () {
             let time = 0.025;
-            //_mesh.rotation.x += time * 0.5;
-            //_mesh.rotation.y += time * 0.5;
+            _mesh.rotation.x += time * 0.5;
+            _mesh.rotation.y += time * 0.5;
             _renderer.render(_scene, _camera);
         });
     }
@@ -65,14 +65,18 @@ export const HomeThreeModule = (async () => {
         _containerId = "canvasContainer";
         _container = document.getElementById(_containerId);
         _scene = new Scene();
-        _camera = new PerspectiveCamera(75, _container.offsetWidth / _container.offsetWidth, 0.1, 1000);
+        _camera = new PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 0.1, 1000);
         _renderer = new WebGLRenderer({ antialias: true, alpha: true });
         _meshGeometry = new BoxGeometry(3, 3, 3);
-        _loader = new TextureLoader();
+        _meshMaterial = new MeshBasicMaterial({ wireframe: true });
+        _mesh = new Mesh(_meshGeometry, _meshMaterial);
+        
+        
+        //_loader = new TextureLoader();
 
-        _loader.load("images/FSLogo.png", (texture) => {
-            _texture = texture;
-            _texture.anisotropy = _renderer.capabilities.getMaxAnisotropy();
+        /*_loader.load("images/FSLogo.png", (texture) => {
+            //_texture = texture;
+            //_texture.anisotropy = _renderer.capabilities.getMaxAnisotropy();
             _meshMaterial = new MeshLambertMaterial({ map: _texture });
             _mesh = new Mesh(_meshGeometry, _meshMaterial);
 
@@ -83,7 +87,15 @@ export const HomeThreeModule = (async () => {
             addLight(0xFFFFFF, 2);
             addLight(0xFFFFFF, 1, 1000, 0, 0, 25);
             setAnimationLoop();
-        });
+        });*/
+
+        setCameraPosition();
+        setRenderer();
+        setResizeEventHandler();
+        addCube();
+        //addLight(0xFFFFFF, 2);
+        //addLight(0xFFFFFF, 1, 1000, 0, 0, 25);
+        setAnimationLoop();
     }
 
     return {
