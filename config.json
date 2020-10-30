@@ -48,7 +48,7 @@
             "folder": "babelTs",
             "active": true,
             "include": true,
-            "useWebpack": true
+            "useRequire": true
         },
         {
             "name": "To-Do List (React)",
