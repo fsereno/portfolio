@@ -14,7 +14,7 @@ export let PuzzleModule = function(answer, modalId) {
     let RenderErrorMessage  = function(props) {
         if (hasValue(props.input) && !isValid(props.input)) {
             return (
-                <div class="invalid-feedback d-block">Incorrect answer! Please try again.</div>
+                <div className="invalid-feedback d-block">Incorrect answer! Please try again.</div>
             );
         } else {
             return null;
@@ -39,32 +39,32 @@ export let PuzzleModule = function(answer, modalId) {
         }
 
         return (
-            <div class="modal fade" data-backdrop="static" id={modalId} tabindex="-1" aria-modal="true" role="dialog">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="display-4 modal-title">{props.title || "Are you a human?"}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span class="lr">
-                                    <span class="rl"></span>
+            <div className="modal fade" data-backdrop="static" id={modalId} tabindex="-1" aria-modal="true" role="dialog">
+                <div className="modal-dialog modal-xl">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="display-4 modal-title">{props.title || "Are you a human?"}</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span className="lr">
+                                    <span className="rl"></span>
                                 </span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                         <form id={`${modalId}_form`} onSubmit={props.event || handlePuzzleSubmit} autoComplete="off">
                             <p>{props.label || "First answer this question to unlock the API:"}</p>
                             <label>What is: {props.puzzle} ?</label>
-                            <div class="input-group mb-3">
+                            <div className="input-group mb-3">
                                 <input
                                     id={`${modalId}_input`}
                                     onBlur={event => setInput(event.target.value)}
                                     required={(props.required || true) ? "required" : ""}
                                     type="text"
-                                    class={`form-control ${isInvalidClass}`}
+                                    className={`form-control ${isInvalidClass}`}
                                     aria-label={props.puzzle}
                                 />
-                                <div class="input-group-append">
-                                    <button id={`${modalId}_submit`} class="btn btn-dark" type="submit">{props.button || "Submit"}</button>
+                                <div className="input-group-append">
+                                    <button id={`${modalId}_submit`} className="btn btn-dark" type="submit">{props.button || "Submit"}</button>
                                 </div>
                             </div>
                             <RenderErrorMessage
