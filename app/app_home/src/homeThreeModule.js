@@ -35,9 +35,7 @@ export const HomeThreeModule = (async () => {
     }
 
     let createMesh = (x, y, z) => {
-        let geometry = Math.random() + 2;
-        let meshGeometry = new THREE.BoxGeometry(1, 1, 1);
-        let mesh = new THREE.Mesh( meshGeometry, _meshMaterial );
+        let mesh = new THREE.Mesh( _meshGeometry, _meshMaterial );
         mesh.position.x = x || (Math.random() - 0.5) * 10;
         mesh.position.y = y || (Math.random() - 0.5) * 10;
         mesh.position.z = z || (Math.random() - 0.5) * 10;
@@ -90,14 +88,14 @@ export const HomeThreeModule = (async () => {
         _scene = new THREE.Scene();
         _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 0.1, 1000);
         _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        //_meshGeometry = new THREE.BoxGeometry(1, 1, 1);
+        _meshGeometry = new THREE.BoxGeometry(1, 1, 1);
         _meshMaterial = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x000000});
         //_mesh = new THREE.Mesh(_meshGeometry, _meshMaterial);
 
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
-        addMeshes(3);
+        addMeshes(5);
         setAnimationLoop();
 
     }
