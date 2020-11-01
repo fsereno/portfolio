@@ -12,6 +12,9 @@ export const HomeThreeModule = (async () => {
     let _meshGeometry;
     let _meshMaterial;
     let _meshGroup;
+    let _particularGroup;
+    let _sceneGroup;
+
     let _raycaster;
     let _normal;
     let _relativeVelocity;
@@ -42,6 +45,25 @@ export const HomeThreeModule = (async () => {
 
     let getRandom = (num = 1) => {
         return - Math.random() * num + Math.random() * num;
+    }
+
+    function generateParticle(num, amp = 2) {
+        var gmaterial = new THREE.MeshBasicMaterial({color:0xFFFFFF});
+        var gparticular = new THREE.CircleGeometry(0.2,5);
+      
+        for (var i = 1; i < num; i++) {
+          var pscale = 0.001+Math.abs(getRandom(0.03));
+          var particular = new THREE.Mesh(gparticular, gmaterial);
+          particular.position.set(getRandom(amp),getRandom(amp),getRandom(amp));
+          particular.rotation.set(getRandom(),getRandom(),getRandom());
+          particular.scale.set(pscale,pscale,pscale);
+          particular.speedValue = getRandom(1);
+      
+          _particularGroup.add(particular);
+        }
+
+        _sceneGroup.add(_particularGroup);
+        _scene.add(_sceneGroup);
     }
 
     let createMesh = () => {
@@ -79,6 +101,16 @@ export const HomeThreeModule = (async () => {
         _renderer.setAnimationLoop(function () {
             let time = performance.now() * 0.0003;
 
+            for (var i = 0, l = _particularGroup.children.length; i<l; i++) {
+                var newObject = _particularGroup.children[i];
+                newObject.rotation.x += newObject.speedValue/10;
+                newObject.rotation.y += newObject.speedValue/10;
+                newObject.rotation.z += newObject.speedValue/10;
+                //---
+                //newObject.position.y = Math.sin(time) * 3;
+            };
+            
+            
             for (var i = 0, l = _meshGroup.children.length; i<l; i++) {
                 var mesh = _meshGroup.children[i];
 
@@ -126,9 +158,13 @@ export const HomeThreeModule = (async () => {
         _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
         _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         _meshGeometry = new THREE.BoxGeometry(1, 1, 1);
-        _meshMaterial = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x000000});
+        _meshMaterial = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x828f97});
         _meshGroup = new THREE.Object3D();
         _meshGroup.scale.set(5,5,2)
+        _particularGroup = new THREE.Object3D();
+        _sceneGroup = new THREE.Object3D();
+
+
         _raycaster = new THREE.Raycaster();
         _normal = new THREE.Vector3();
         _relativeVelocity = new THREE.Vector3();
@@ -137,7 +173,8 @@ export const HomeThreeModule = (async () => {
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
-        addMeshes(10);
+        addMeshes(1);
+        generateParticle(200, 2);
         //addLight();
         setAnimationLoop();
     }
