@@ -3,6 +3,7 @@
 export const HomeThreeModule = (async () => {
 
     const THREE = await import("three");
+    const CANNON = await import("cannon");
 
     let _containerId;
     let _container;
@@ -16,10 +17,33 @@ export const HomeThreeModule = (async () => {
     let _sceneGroup;
     let _raycaster;
 
+    var world, mass, body, shape,
+         camera, scene, renderer, geometry, material, mesh;
+
+    const _timeStep = 1.0/60.0;
+    const _damping = 0.5;
+
+    let initCannon = () => {
+        world = new CANNON.World();
+        world.gravity.set(0, -5, 0);
+        world.broadphase = new CANNON.NaiveBroadphase();
+        world.solver.iterations = 10;
+
+        let groundShape = new CANNON.Plane();
+        let groundMaterial = new CANNON.Material();
+        let groundBody = new CANNON.Body({ mass: 0, material: groundMaterial });
+        groundBody.quaternion.setFromAxisAngle( new CANNON.Vec3(1, 0, 0), - Math.PI/2);
+
+        groundBody.addShape(groundShape)
+
+        world.add(groundBody)
+
+    }
+
     let setCameraPosition = () => {
         _camera.position.x = 0;
-        _camera.position.y = 1.1;
-        _camera.position.z = 5;
+        _camera.position.y = 6;
+        _camera.position.z = 10;
     }
 
     let setRenderer = () => {
@@ -66,31 +90,53 @@ export const HomeThreeModule = (async () => {
     }
 
     let createMesh = () => {
+
+        const x = Math.random()*0.3 + 1;
         let mesh = new THREE.Mesh( _meshGeometry, _meshMaterial );
-        let scale = getRandom(0.3);
+        mesh.position.set(x, 5, 0)
 
-        mesh.positionX = getRandom();
-        mesh.positionY = getRandom();
-        mesh.positionZ = getRandom();
-        mesh.scale.set(scale,scale,scale);
-        mesh.rotation.x = getRandom(180 * Math.PI / 180);
-        mesh.rotation.y = getRandom(180 * Math.PI / 180);
-        mesh.rotation.z = getRandom(180 * Math.PI / 180);
-        mesh.position.set(mesh.positionX, mesh.positionY, mesh.positionZ);
+        let shape = new CANNON.Box( new CANNON.Vec3(0.5, 0.5, 0.5));
+        const material = new CANNON.Material();
+        const body = new CANNON.Body( { mass: 5, material: material});
+        body.addShape(shape);
 
-        return mesh;
+        body.position.set(x, 5, 0);
+        body.linearDamping = _damping;
+
+        return { mesh: mesh, body: body };
     }
 
     let addMeshes = (numberOfMeshes = 1) => {
         for (let i = 0; i < numberOfMeshes; i++) {
-            let mesh = createMesh();
-            _meshGroup.add(mesh);
+            let object = createMesh();
+            world.addBody(object.body);
+            _meshGroup.add(object.mesh);
         }
         _scene.add(_meshGroup);
     }
 
+
+    function updatePhysics() {
+
+        world.step(_timeStep);
+
+        let bodies = world.bodies.filter(x => x.mass > 0);
+        let meshes = _meshGroup.children;
+
+        for (let i = 0, j = 0; i < meshes.length, j < bodies.length; i++, j++) {
+            let mesh = meshes[i];
+            let body = bodies[i];
+
+            mesh.position.copy(body.position);
+            mesh.quaternion.copy(body.quaternion);
+        }
+    }
+
     let setAnimationLoop = () => {
         _renderer.setAnimationLoop(function () {
+
+            updatePhysics();
+
             let time = performance.now() * 0.0003;
 
             for (let i = 0, l = _particularGroup.children.length; i<l; i++) {
@@ -102,7 +148,7 @@ export const HomeThreeModule = (async () => {
                 particle.position.z = Math.sin(time * particle.positionY) * particle.positionX;
             };
 
-            for (let i = 0, l = _meshGroup.children.length; i<l; i++) {
+            /*for (let i = 0, l = _meshGroup.children.length; i<l; i++) {
                 let mesh = _meshGroup.children[i];
 
                 mesh.rotation.x += 0.008;
@@ -112,7 +158,7 @@ export const HomeThreeModule = (async () => {
                 mesh.position.x = Math.sin(time * mesh.positionZ) * mesh.positionY;
                 mesh.position.y = Math.cos(time * mesh.positionX) * mesh.positionZ;
                 mesh.position.z = Math.sin(time * mesh.positionY) * mesh.positionX;
-            }
+            }*/
 
             _renderer.render(_scene, _camera);
         });
@@ -128,17 +174,18 @@ export const HomeThreeModule = (async () => {
         _meshGeometry = new THREE.BoxGeometry(1, 1, 1);
         _meshMaterial = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x74828b});
         _meshGroup = new THREE.Object3D();
-        _meshGroup.scale.set(2,2,2);
         _particularGroup = new THREE.Object3D();
         _particularGroup.scale.set(7,7,1);
         _sceneGroup = new THREE.Object3D();
         _raycaster = new THREE.Raycaster();
 
+        initCannon();
+
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
-        //addMeshes(3);
-        generateParticle(1000, 1);
+        addMeshes(50);
+        //generateParticle(1000, 1);
         setAnimationLoop();
     }
 
