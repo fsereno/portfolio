@@ -17,7 +17,7 @@ export const HomeThreeModule = (async () => {
 
     let initPhysics = () => {
         _world = new CANNON.World();
-        _world.gravity.set(0, -5, 0);
+        _world.gravity.set(0, -6, 0);
         _world.broadphase = new CANNON.NaiveBroadphase();
         _world.solver.iterations = 10;
 
@@ -32,7 +32,7 @@ export const HomeThreeModule = (async () => {
 
     let setCameraPosition = () => {
         _camera.position.x = 0;
-        _camera.position.y = 5;
+        _camera.position.y = 3;
         _camera.position.z = 10;
     }
 
@@ -53,8 +53,8 @@ export const HomeThreeModule = (async () => {
 
     let createObject = () => {
         const x = Math.random()*0.3 + 1;
-        const y = 10;
-        const z = 0//Math.random()*0.2;
+        const y = Math.random()*0.5 + 1;
+        const z = Math.random()*0.2 + 1;
         
         let meshGeometry = new THREE.BoxGeometry(1, 1, 1);
         let meshMaterial = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x74828b});
