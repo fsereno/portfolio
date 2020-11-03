@@ -80,6 +80,9 @@ export const HomeThreeModule = (async () => {
         var light = new THREE.PointLight(color, intensity, distance);
         light.position.set(x, y, z);
         _scene.add( light );
+
+        //const alight = new THREE.AmbientLight( 0x404040 ); // soft white light
+        //_scene.add( alight );
       }
 
     let addObjects = (numberOfObjects = 1) => {
@@ -136,9 +139,9 @@ export const HomeThreeModule = (async () => {
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
-        addObjects(100);
-        addLight();
-        addLight(0xFFFFFF, 1, 1000, 0, 90, 0);
+        addObjects(50);
+        addLight(0xFFFFFF, 2);
+        addLight(0xFFFFFF, 1, 1000, 0, 15, 2);
         setAnimationLoop();
     }
 
