@@ -57,14 +57,15 @@ export const HomeThreeModule = (async () => {
         const x = Math.random()*0.3 + 1;
         const y = Math.random()*1.0 + 1;
         const z = Math.random()*0.2 + 1;
-        
-        let meshGeometry = new THREE.BoxGeometry(1, 1, 1);
+
+        const scale = Math.random() + 0.6;
+
+        let meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
         let meshMaterial = new THREE.MeshLambertMaterial({color: 0x343a40});
         let mesh = new THREE.Mesh( meshGeometry, meshMaterial );
-        mesh.castShadow = true;
         mesh.position.set(x, y, z)
-
-        let shape = new CANNON.Box( new CANNON.Vec3(0.5, 0.5, 0.5));
+       
+        let shape = new CANNON.Box( new CANNON.Vec3(scale/2, scale/2, scale/2));
         const bodyMaterial = new CANNON.Material();
         const body = new CANNON.Body( { mass: 5, material: bodyMaterial});
         body.addShape(shape);
@@ -112,6 +113,15 @@ export const HomeThreeModule = (async () => {
         });
     }
 
+    let addGround = () =>  {
+        const ground = new THREE.Mesh(
+            new THREE.PlaneBufferGeometry( 50, 10, 1, 1 ),
+            new THREE.MeshPhongMaterial( { color: 0x2e3338, shininess: 150 } )
+        );
+        ground.rotation.x = - Math.PI / 2;
+        _scene.add( ground );
+    }
+
     let init = () => {
 
         _containerId = "canvasContainer";
@@ -121,21 +131,14 @@ export const HomeThreeModule = (async () => {
         _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         _meshGroup = new THREE.Object3D();
 
-        const ground = new THREE.Mesh(
-            new THREE.PlaneBufferGeometry( 50, 10, 1, 1 ),
-            new THREE.MeshPhongMaterial( { color: 0x343a40, shininess: 150 } )
-        );
-
-        ground.rotation.x = - Math.PI / 2;
-        ground.receiveShadow = true;
-        _scene.add( ground );
-
+        addGround();
         initPhysics();
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
-        addObjects(50);
-        addLight(0xFFFFFF, 1, 500, 0, 90, 25);
+        addObjects(100);
+        addLight();
+        addLight(0xFFFFFF, 1, 1000, 0, 90, 0);
         setAnimationLoop();
     }
 
