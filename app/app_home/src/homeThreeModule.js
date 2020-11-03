@@ -12,7 +12,6 @@ export const HomeThreeModule = (async () => {
     let _scene;
     let _camera;
     let _renderer;
-    let _meshGroup;
     let _world;
 
     let initPhysics = () => {
@@ -64,7 +63,8 @@ export const HomeThreeModule = (async () => {
         let meshMaterial = new THREE.MeshLambertMaterial({color: 0x343a40});
         let mesh = new THREE.Mesh( meshGeometry, meshMaterial );
         mesh.position.set(x, y, z)
-       
+        mesh.updatePhysics = true;
+
         let shape = new CANNON.Box( new CANNON.Vec3(scale/2, scale/2, scale/2));
         const bodyMaterial = new CANNON.Material();
         const body = new CANNON.Body( { mass: 5, material: bodyMaterial});
@@ -72,6 +72,7 @@ export const HomeThreeModule = (async () => {
 
         body.position.set(x, y, z);
         body.linearDamping = DAMPING;
+        body.updatePhysics = true;
 
         return { mesh: mesh, body: body };
     }
@@ -80,25 +81,21 @@ export const HomeThreeModule = (async () => {
         var light = new THREE.PointLight(color, intensity, distance);
         light.position.set(x, y, z);
         _scene.add( light );
-
-        //const alight = new THREE.AmbientLight( 0x404040 ); // soft white light
-        //_scene.add( alight );
       }
 
     let addObjects = (numberOfObjects = 1) => {
         for (let i = 0; i < numberOfObjects; i++) {
             let object = createObject();
             _world.addBody(object.body);
-            _meshGroup.add(object.mesh);
+            _scene.add(object.mesh);
         }
-        _scene.add(_meshGroup);
     }
 
     let updatePhysics = () => {
         _world.step(TIMESTEP);
 
-        let bodies = _world.bodies.filter(x => x.mass > 0);
-        let meshes = _meshGroup.children;
+        let bodies = _world.bodies.filter(x => x.updatePhysics);
+        let meshes = _scene.children.filter(x => x.updatePhysics);
 
         for (let i = 0, j = 0; i < meshes.length, j < bodies.length; i++, j++) {
             let mesh = meshes[i];
@@ -132,7 +129,6 @@ export const HomeThreeModule = (async () => {
         _scene = new THREE.Scene();
         _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
         _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        _meshGroup = new THREE.Object3D();
 
         addGround();
         initPhysics();

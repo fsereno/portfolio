@@ -44,17 +44,3 @@
         margin: 0 .25rem 0 0;
     }    
 }
-
-@media screen and (max-width: 991px) {
-    .navbar {
-        &.fixed-top {
-            .dropdown-menu {
-                max-height: 50vh;
-            }
-        }
-        .navbar-nav .nav-link {
-            padding-bottom: 2rem;
-            padding-top: 1.5rem;
-        }
-    }
-}

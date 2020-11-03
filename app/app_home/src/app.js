@@ -157,17 +157,15 @@ class HomeApp extends React.Component {
         <div id="introContent" className={fadeClass}>
           <div id="canvasContainer"></div>
           <div id="introContentInner">
-            <div className="text-center element">
-              <img src="images/FSLogo.png" alt="Logo" />
+            <div id="introImage" className="text-center element">
+              <img className="img-fluid" src="images/FSLogo.png" alt="Logo" />
             </div>
-            <div className="text-center element">
+            <div id="introHeadings" className="text-center element">
               <h1 className="display-4 mb-0">{Config.author}</h1>
-            </div>
-            <div className="text-center element">
               <h4 className="display-4 sub-heading lead">{Config.role}</h4>
             </div>
-            <div className="text-center element mt-5">
-              <button type="button" className="btn btn-white btn-lg" onClick={this.handleScrollBtnClick}>View Portfolio</button>
+            <div id="btnContainer" className="text-center element pt-2">
+              <button type="button" className="btn btn-white" onClick={this.handleScrollBtnClick}>View Portfolio</button>
             </div>
           </div>
         </div>

@@ -48,14 +48,22 @@
       }
       #introContentInner {
         position: absolute;
-        img {
-          width: 15rem;
+        top: 20%;
+        height: 100%;
+        #introImage {
+          img {
+            height: 25vh;
+          }
         }
-        .sub-heading {
+        #introHeadings {
+          h4.sub-heading {
             font-size: 2rem;
+          }
         }
-        #introBtn {
-            width:13rem;
+        #btnContainer {
+          position: absolute;
+          width: 100%;
+          top: 55vh; 
         }
       }
     }
