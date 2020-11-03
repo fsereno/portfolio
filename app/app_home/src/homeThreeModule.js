@@ -32,13 +32,15 @@ export const HomeThreeModule = (async () => {
 
     let setCameraPosition = () => {
         _camera.position.x = 0;
-        _camera.position.y = 3;
+        _camera.position.y = 4;
         _camera.position.z = 10;
     }
 
     let setRenderer = () => {
         let container = document.getElementById(_containerId);
         _renderer.setSize(container.offsetWidth, container.offsetHeight);
+        _renderer.shadowMap.enabled = true;
+        _renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         container.appendChild(_renderer.domElement);
     }
 
@@ -53,11 +55,11 @@ export const HomeThreeModule = (async () => {
 
     let createObject = () => {
         const x = Math.random()*0.3 + 1;
-        const y = Math.random()*0.5 + 1;
+        const y = Math.random()*1.0 + 1;
         const z = Math.random()*0.2 + 1;
         
         let meshGeometry = new THREE.BoxGeometry(1, 1, 1);
-        let meshMaterial = new THREE.MeshBasicMaterial({ wireframe: true, color: 0x74828b});
+        let meshMaterial = new THREE.MeshLambertMaterial({color: 0x343a40});
         let mesh = new THREE.Mesh( meshGeometry, meshMaterial );
         mesh.position.set(x, y, z)
 
@@ -71,6 +73,12 @@ export const HomeThreeModule = (async () => {
 
         return { mesh: mesh, body: body };
     }
+
+    let addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
+        var light = new THREE.PointLight(color, intensity, distance);
+        light.position.set(x, y, z);
+        _scene.add( light );
+      }
 
     let addObjects = (numberOfObjects = 1) => {
         for (let i = 0; i < numberOfObjects; i++) {
@@ -117,6 +125,7 @@ export const HomeThreeModule = (async () => {
         setRenderer();
         setResizeEventHandler();
         addObjects(50);
+        addLight(0xFFFFFF, 1, 500, 0, 90, 25);
         setAnimationLoop();
     }
 
