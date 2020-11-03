@@ -61,6 +61,7 @@ export const HomeThreeModule = (async () => {
         let meshGeometry = new THREE.BoxGeometry(1, 1, 1);
         let meshMaterial = new THREE.MeshLambertMaterial({color: 0x343a40});
         let mesh = new THREE.Mesh( meshGeometry, meshMaterial );
+        mesh.castShadow = true;
         mesh.position.set(x, y, z)
 
         let shape = new CANNON.Box( new CANNON.Vec3(0.5, 0.5, 0.5));
@@ -119,6 +120,15 @@ export const HomeThreeModule = (async () => {
         _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
         _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         _meshGroup = new THREE.Object3D();
+
+        const ground = new THREE.Mesh(
+            new THREE.PlaneBufferGeometry( 50, 10, 1, 1 ),
+            new THREE.MeshPhongMaterial( { color: 0x343a40, shininess: 150 } )
+        );
+
+        ground.rotation.x = - Math.PI / 2;
+        ground.receiveShadow = true;
+        _scene.add( ground );
 
         initPhysics();
         setCameraPosition();
