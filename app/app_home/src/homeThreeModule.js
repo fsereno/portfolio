@@ -57,7 +57,7 @@ export const HomeThreeModule = (async () => {
         const y = Math.random()*1.0 + 1;
         const z = Math.random()*0.2 + 1;
 
-        const scale = Math.random() + 0.6;
+        const scale = Math.random() + 0.4;
 
         let meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
         let meshMaterial = new THREE.MeshLambertMaterial({color: 0x343a40});
@@ -79,9 +79,9 @@ export const HomeThreeModule = (async () => {
 
     let addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
         var light = new THREE.PointLight(color, intensity, distance);
-        light.position.set(x, y, z);
+        light.position.set(10, 10, 10 );
         _scene.add( light );
-      }
+    }
 
     let addObjects = (numberOfObjects = 1) => {
         for (let i = 0; i < numberOfObjects; i++) {
@@ -136,7 +136,7 @@ export const HomeThreeModule = (async () => {
         setRenderer();
         setResizeEventHandler();
         addObjects(50);
-        addLight(0xFFFFFF, 2);
+        addLight(0xFFFFFF, 1);
         addLight(0xFFFFFF, 1, 1000, 0, 15, 2);
         setAnimationLoop();
     }
