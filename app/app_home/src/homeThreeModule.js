@@ -56,8 +56,7 @@ export const HomeThreeModule = (async () => {
         const x = Math.random()*0.3 + 1;
         const y = Math.random()*1.0 + 1;
         const z = Math.random()*0.2 + 1;
-
-        const scale = Math.random() + 0.4;
+        const scale = Math.random() + 1;
 
         let meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
         let meshMaterial = new THREE.MeshLambertMaterial({color: 0x343a40});
@@ -65,6 +64,7 @@ export const HomeThreeModule = (async () => {
         mesh.position.set(x, y, z)
         mesh.updatePhysics = true;
         mesh.castShadow = true;
+        mesh.receiveShadow = true;
 
         let shape = new CANNON.Box( new CANNON.Vec3(scale/2, scale/2, scale/2));
         const bodyMaterial = new CANNON.Material();
@@ -145,7 +145,7 @@ export const HomeThreeModule = (async () => {
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
-        addObjects(50);
+        addObjects(15);
         addLight(0xFFFFFF, 2, 1000, 10, 20, 10);
         setAnimationLoop();
     }
