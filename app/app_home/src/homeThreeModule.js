@@ -145,7 +145,7 @@ export const HomeThreeModule = (async () => {
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
-        addObjects(15);
+        addObjects(20);
         addLight(0xFFFFFF, 2, 1000, 10, 20, 10);
         setAnimationLoop();
     }
