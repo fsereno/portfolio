@@ -143,13 +143,6 @@ class HomeApp extends React.Component {
     return null;
   }
 
-  /*renderIntroMedia(props) {
-    if (props.isBrowserValid) {
-      return <div id="canvasContainer"></div>
-    }
-    return null;
-  }*/
-
   renderIntroContainer(props) {
     let fadeClass = this.getElementFadeClass(props.fadeIn);
     return (

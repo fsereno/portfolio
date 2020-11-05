@@ -83,10 +83,11 @@ export const HomeThreeModule = (async () => {
         light.position.set(x,y,z);
         light.castShadow = true;
         light.frustumCulled
-        light.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 50, 1, 10, 2500 ) );
+        light.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 100, 1, 10, 2500 ) );
+
         light.shadow.bias = 0.0001;
-        light.shadow.mapSize.width = 2048;
-        light.shadow.mapSize.height = 1024;
+        light.shadow.mapSize.width = 2560;
+        light.shadow.mapSize.height = 2560;
         _scene.add( light );
     }
 
@@ -122,7 +123,7 @@ export const HomeThreeModule = (async () => {
 
     let addGround = () =>  {
         const ground = new THREE.Mesh(
-            new THREE.PlaneBufferGeometry( 50, 10, 1, 1 ),
+            new THREE.PlaneBufferGeometry( 50, 50, 1, 1 ),
             new THREE.MeshPhongMaterial( { color: 0x2e3338, shininess: 150 } )
         );
         ground.rotation.x = - Math.PI / 2;
