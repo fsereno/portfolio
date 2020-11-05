@@ -6,6 +6,7 @@ export const HomeThreeModule = (async () => {
     const CANNON = await import("cannon");
     const DAMPING = 0.9;
     const TIMESTEP = 1.0/60.0;
+    const XROTATION = -Math.PI / 2;
 
     let _containerId;
     let _container;
@@ -26,7 +27,6 @@ export const HomeThreeModule = (async () => {
         _container = document.getElementById(_containerId);
         _scene = new THREE.Scene();
         _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
-        _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     }
 
     let setCameraPosition = () => {
@@ -37,6 +37,7 @@ export const HomeThreeModule = (async () => {
 
     let setRenderer = () => {
         let container = document.getElementById(_containerId);
+        _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         _renderer.setSize(container.offsetWidth, container.offsetHeight);
         _renderer.shadowMap.enabled = true;
         _renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -81,14 +82,16 @@ export const HomeThreeModule = (async () => {
     let addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
         var light = new THREE.SpotLight(color, intensity, distance);
         light.position.set(x,y,z);
-        light.castShadow = true;
-        light.frustumCulled
+        //light.castShadow = true;
         light.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 100, 1, 10, 2500 ) );
-
         light.shadow.bias = 0.0001;
         light.shadow.mapSize.width = 2560;
         light.shadow.mapSize.height = 2560;
         _scene.add( light );
+
+        var secondLight = new THREE.DirectionalLight(0xFFFFFF, 1, 1000)
+        secondLight.position.set(5, 5, 5)
+        //_scene.add(secondLight);
     }
 
     let addObjects = (numberOfObjects = 1) => {
@@ -126,14 +129,14 @@ export const HomeThreeModule = (async () => {
             new THREE.PlaneBufferGeometry( 50, 50, 1, 1 ),
             new THREE.MeshPhongMaterial( { color: 0x2e3338, shininess: 150 } )
         );
-        ground.rotation.x = - Math.PI / 2;
+        ground.rotation.x = XROTATION;
         ground.receiveShadow = true;
         _scene.add( ground );
 
         let groundShape = new CANNON.Plane();
         let groundMaterial = new CANNON.Material();
         let groundBody = new CANNON.Body({ mass: 0, material: groundMaterial });
-        groundBody.quaternion.setFromAxisAngle( new CANNON.Vec3(1, 0, 0), - Math.PI/2);
+        groundBody.quaternion.setFromAxisAngle( new CANNON.Vec3(1, 0, 0), XROTATION);
         groundBody.addShape(groundShape)
 
         _world.add(groundBody)
