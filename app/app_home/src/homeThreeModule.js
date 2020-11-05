@@ -14,6 +14,10 @@ export const HomeThreeModule = (async () => {
     let _camera;
     let _renderer;
     let _world;
+    let _raycaster;
+    let _mouse;
+    let _mousePositionX = 0;
+    let _mousePositionY = 0;
 
     let initPhysics = () => {
         _world = new CANNON.World();
@@ -27,6 +31,8 @@ export const HomeThreeModule = (async () => {
         _container = document.getElementById(_containerId);
         _scene = new THREE.Scene();
         _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
+        _mouse = new THREE.Vector3();
+        _raycaster = new THREE.Raycaster();
     }
 
     let setCameraPosition = () => {
@@ -53,7 +59,7 @@ export const HomeThreeModule = (async () => {
         });
     }
 
-    let createObject = () => {
+    let createObject = (index) => {
         const x = Math.random()*0.3 + 1;
         const y = Math.random()*1.0 + 1;
         const z = Math.random()*0.2 + 1;
@@ -82,21 +88,17 @@ export const HomeThreeModule = (async () => {
     let addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
         var light = new THREE.SpotLight(color, intensity, distance);
         light.position.set(x,y,z);
-        //light.castShadow = true;
+        light.castShadow = true;
         light.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 100, 1, 10, 2500 ) );
         light.shadow.bias = 0.0001;
         light.shadow.mapSize.width = 2560;
         light.shadow.mapSize.height = 2560;
         _scene.add( light );
-
-        var secondLight = new THREE.DirectionalLight(0xFFFFFF, 1, 1000)
-        secondLight.position.set(5, 5, 5)
-        //_scene.add(secondLight);
     }
 
     let addObjects = (numberOfObjects = 1) => {
         for (let i = 0; i < numberOfObjects; i++) {
-            let object = createObject();
+            let object = createObject(i);
             _world.addBody(object.body);
             _scene.add(object.mesh);
         }
@@ -142,6 +144,56 @@ export const HomeThreeModule = (async () => {
         _world.add(groundBody)
     }
 
+    let mouseMove = (event) => {
+        event.preventDefault();
+
+        _mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        _mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+        _mouse.z = 0.5;
+
+        _raycaster.setFromCamera(_mouse, _camera);
+
+        let intersects = _raycaster.intersectObjects(_scene.children, true);
+
+        if (intersects.length > 0) {
+
+            let object = intersects[0].object;
+
+            if (object.updatePhysics) {
+
+                let matchingBody = _world.bodies.filter( x =>
+                        x.position.x === object.position.x
+                        && x.position.y === object.position.y
+                        && x.position.z === object.position.z);
+
+                if (matchingBody.length > 0) {
+
+                    let body = matchingBody[0];
+                    let x = 0;
+                    let y = 0;
+
+                    if (_mousePositionX < _mouse.x) {
+                        x = 3;
+                    } else {
+                        x = -3;
+                    }
+
+                    if (_mousePositionY < _mouse.y) {
+                        y = 3;
+                    } else {
+                        y = -3;
+                    }
+
+                    body.angularVelocity.set(x, y, 0);
+                }
+            }
+        }
+    }
+
+    let setMouseMoved = () => {
+        window.addEventListener("mousemove", mouseMove)
+    }
+
     let init = () => {
         initScene();
         initPhysics();
@@ -151,6 +203,7 @@ export const HomeThreeModule = (async () => {
         setResizeEventHandler();
         addObjects(20);
         addLight(0xFFFFFF, 2, 1000, 10, 20, 10);
+        setMouseMoved();
         setAnimationLoop();
     }
 
