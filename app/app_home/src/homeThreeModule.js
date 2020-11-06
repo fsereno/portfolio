@@ -7,7 +7,7 @@ export const HomeThreeModule = (async () => {
     const DAMPING = 0.9;
     const TIMESTEP = 1.0/60.0;
     const XROTATION = -Math.PI / 2;
-    const ANGULAR_VELOCITY = 3;
+    const ANGULAR_VELOCITY = 2;
     const OBJECT_LIMIT = 20;
 
     let _containerId;
@@ -83,6 +83,7 @@ export const HomeThreeModule = (async () => {
         body.position.set(x, y, z);
         body.linearDamping = DAMPING;
         body.updatePhysics = true;
+        body.angularVelocity.set(2, 1, 2);
 
         return { mesh: mesh, body: body };
     }
