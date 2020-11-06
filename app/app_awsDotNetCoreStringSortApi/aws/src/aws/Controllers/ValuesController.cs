@@ -11,13 +11,13 @@ namespace aws.Controllers
         private readonly IStringSortUtil _stringSortUtil;
         public ValuesController(IStringSortUtil stringSortUtil)
         {
-            this._stringSortUtil = stringSortUtil;
+            _stringSortUtil = stringSortUtil;
         }
         [HttpPost("sort")]
         public SortResult Sort([FromBody] SortRequest request)
         {
-            this.SetResponseHeaders();
-            var result = this._stringSortUtil.Sort(request.CommaSeperatedString);
+            SetResponseHeaders();
+            var result = _stringSortUtil.Sort(request.CommaSeperatedString);
             return new SortResult(){ Result = result };
         }
 

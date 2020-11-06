@@ -16,24 +16,24 @@ namespace aws.Controllers
 
         public BasketController(IBasketUtil basketUtil)
         {
-            this._items = new List<Item>()
+            _items = new List<Item>()
             {
                 new Item() { Name = "Apple" },
                 new Item() { Name = "Banana" }
             };
-           this._basketUtil = basketUtil;
+           _basketUtil = basketUtil;
         }
 
         [HttpPost("get")]
         public IList<Item> Get([FromBody]GetRequest request)
         {
-            this.SetResponseHeaders();
+            SetResponseHeaders();
             var result = new List<Item>();
 
             if (request != null)
             {
-                var items = this._basketUtil.GetItems(request.Items, this._items);
-                var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
+                var items = _basketUtil.GetItems(request.Items, _items);
+                var isInRange = _basketUtil.TryRange(request.Index, items, out int position);
                 if (isInRange)
                 {
                     result.Add(items[position]);
@@ -46,12 +46,12 @@ namespace aws.Controllers
         [HttpPost("add")]
         public IList<Item> Add([FromBody]AddRequest request)
         {
-            this.SetResponseHeaders();
+            SetResponseHeaders();
             var result = new List<Item>();
 
             if (request != null && !String.IsNullOrEmpty(request.Item?.Name))
             {
-                var items = this._basketUtil.GetItems(request.Items, this._items);
+                var items = _basketUtil.GetItems(request.Items, _items);
                 items.Add(request.Item);
                 result = items;
             }
@@ -61,13 +61,13 @@ namespace aws.Controllers
         [HttpPost("update")]
         public IList<Item> Update([FromBody]UpdateRequest request)
         {
-            this.SetResponseHeaders();
+            SetResponseHeaders();
             var result = new List<Item>();
 
             if (request != null)
             {
-                var items = this._basketUtil.GetItems(request.Items, this._items);
-                var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
+                var items = _basketUtil.GetItems(request.Items, _items);
+                var isInRange = _basketUtil.TryRange(request.Index, items, out int position);
                 if (isInRange) {
                     items[position] = request.Item;
                 }
@@ -79,13 +79,13 @@ namespace aws.Controllers
         [HttpPost("delete")]
         public IList<Item> Delete([FromBody]GetRequest request)
         {
-            this.SetResponseHeaders();
+            SetResponseHeaders();
             var result = new List<Item>();
 
             if (request != null)
             {
-                var items = this._basketUtil.GetItems(request.Items, this._items);
-                var isInRange = this._basketUtil.TryRange(request.Index, items, out int position);
+                var items = _basketUtil.GetItems(request.Items, _items);
+                var isInRange = _basketUtil.TryRange(request.Index, items, out int position);
                 if (isInRange)
                 {
                     items.RemoveAt(position);

@@ -21,16 +21,16 @@ namespace aws.Controllers
         [HttpPost("sort/salary/desc")]
         public IList<Employee> SortBySalaryDesc([FromBody]GetRequest request)
         {
-            this.SetResponseHeaders();
-            var employees = this._employeeSortUtil.SortBySalaryDesc(request?.Employees);
+            SetResponseHeaders();
+            var employees = _employeeSortUtil.SortBySalaryDesc(request?.Employees);
             return employees;
         }
 
         [HttpPost("sort/salary/asc")]
         public IList<Employee> SortBySalaryAsc([FromBody]GetRequest request)
         {
-            this.SetResponseHeaders();
-            var employees = this._employeeSortUtil.SortBySalaryAsc(request?.Employees);
+            SetResponseHeaders();
+            var employees = _employeeSortUtil.SortBySalaryAsc(request?.Employees);
             return employees;
         }
 

@@ -6,7 +6,7 @@ With this application I have built a simple 'Hello World' AFrame application, co
 
 I have used Webpack to bundle JS dependancies and Babel to transpile to the correct ES version.
 
-The interest in this application is to explore quick and deployable, WebXR prototyping using AFrame, with the aim of allowing user input via React in a follow up application.
+The interest in this application is to explore WebXR prototyping using AFrame, with the aim of allowing user input via React in a follow up application.
 
 This application is intended for use in any modern WebXR enabled web browser or headset.
 
