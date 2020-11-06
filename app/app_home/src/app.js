@@ -135,7 +135,9 @@ class HomeApp extends React.Component {
       return(
         <div className="input-group-append" id="cancelBtn">
           <button className="btn" type="button" onClick={this.handleClearSearch}>
-            <i className="fa fa-times"></i>
+              <span className="lr">
+                  <span className="rl"></span>
+              </span>
           </button>
         </div>
       )
@@ -155,10 +157,10 @@ class HomeApp extends React.Component {
             </div>
             <div id="introHeadings" className="text-center element">
               <h1 className="display-4 mb-0">{Config.author}</h1>
-              <h4 className="display-4 sub-heading lead">{Config.role}</h4>
+              <h4 className="display-4 sub-heading lead text-white">{Config.role}</h4>
             </div>
             <div id="btnContainer" className="text-center element pt-2">
-              <button type="button" className="btn btn-white" onClick={this.handleScrollBtnClick}>View Portfolio</button>
+              <button type="button" className="btn btn-outline-light" onClick={this.handleScrollBtnClick}>View Portfolio</button>
             </div>
           </div>
         </div>

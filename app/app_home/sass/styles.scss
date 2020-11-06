@@ -29,8 +29,25 @@
         border-bottom: 1px solid $darkGrey;
         border-right: 1px solid #fff;
         background:transparent;
+        height: 50px;
+        padding: 0 1.5rem;
         &:focus {
           box-shadow: none;
+        }
+        .lr {
+          height: 30px;
+          width: 1px;
+          transform: rotate(45deg);
+          display: block;
+          background: $darkGrey;
+        
+          .rl {
+              height: 30px;
+              width: 1px;
+              transform: rotate(90deg);
+              display: block;
+              background: $darkGrey
+          }
         }
       }
     }
