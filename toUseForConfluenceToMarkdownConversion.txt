@@ -1,0 +1,12 @@
+Use this process to extract the majority of coding standards before leaving
+
+1) In Confluence > Advanced Details > View Source
+2) Copy the <body></body> tag and all contents
+3) Use Turndown to convert HTML to Markdown and remove all rubbish
+4) Use Dillinger to read/parse Markdown and edit
+
+Github Turn Down
+https://github.com/domchristie/turndown
+
+Mark down reader
+https://dillinger.io/

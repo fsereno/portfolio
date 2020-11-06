@@ -7,26 +7,26 @@ export let ErrorModule = function(modalId) {
     let hide = () => $(`#${modalId}`).modal("hide");
     let Render = function(props) {
         return (
-            <div class="modal fade" data-backdrop="static" id={modalId} tabindex="-1" aria-modal="true" role="dialog">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="display-4 modal-title">{props.title || "We have a problem!"}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span class="lr">
-                                    <span class="rl"></span>
+            <div className="modal fade" data-backdrop="static" id={modalId} tabindex="-1" aria-modal="true" role="dialog">
+                <div className="modal-dialog modal-xl">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="display-4 modal-title">{props.title || "We have a problem!"}</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span className="lr">
+                                    <span className="rl"></span>
                                 </span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <div class="invalid-feedback d-block">
-                                <p class="lead">
+                        <div className="modal-body">
+                            <div className="invalid-feedback d-block">
+                                <p className="lead">
                                     {props.body || "An error has occurred. Please try again."}
                                 </p>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-dark" data-dismiss="modal">Close</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary btn-dark" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

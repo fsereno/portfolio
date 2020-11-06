@@ -1,5 +1,5 @@
 "use strict;"
-//https://www.youtube.com/watch?v=6oFvqLfRnsU
+
 import * as THREE from 'three';
 import {TimelineMax, TweenMax, CSSPlugin, ScrollToPlugin, Draggable, Elastic, Expo} from "gsap/all";
 

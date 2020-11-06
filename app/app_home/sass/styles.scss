@@ -29,26 +29,60 @@
         border-bottom: 1px solid $darkGrey;
         border-right: 1px solid #fff;
         background:transparent;
+        height: 50px;
+        padding: 0 1.5rem;
         &:focus {
           box-shadow: none;
+        }
+        .lr {
+          height: 30px;
+          width: 1px;
+          transform: rotate(45deg);
+          display: block;
+          background: $darkGrey;
+        
+          .rl {
+              height: 30px;
+              width: 1px;
+              transform: rotate(90deg);
+              display: block;
+              background: $darkGrey
+          }
         }
       }
     }
   }
   #introContainer {
     color: $white;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    img {
-        width: 15rem;
-    }
-    .sub-heading {
-        font-size: 2rem;
-    }
-    #introBtn {
-        width:13rem;
+    #introContent {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      #canvasContainer {
+        width: 100vw;
+        height: 100vh;
+      }
+      #introContentInner {
+        position: absolute;
+        top: 20%;
+        height: 100%;
+        #introImage {
+          img {
+            height: 25vh;
+          }
+        }
+        #introHeadings {
+          h4.sub-heading {
+            font-size: 2rem;
+          }
+        }
+        #btnContainer {
+          position: absolute;
+          width: 100%;
+          top: 55vh; 
+        }
+      }
     }
   }
   #contentContainer {

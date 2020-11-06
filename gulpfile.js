@@ -129,20 +129,20 @@ let userefTask = (application) => {
 
 let copyJsTask = (application) => {
   let directories = gulpUtil.getApplicationDirectories(application);
-  if (gulpUtil.useWebpackIsFalse(application.useWebpack)) {
-    return false;
+  if (application.useRequire) {
+    return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/js/**/*.js")
+      .pipe(logger(gulpUtil.populateLoggerOptions(
+        "Copy JS task started...",
+        "Copy JS task complete!",
+        ".js",
+        false,
+        "../../"+directories.destinationDirectory+"/js/",
+        "Compiled to: ",
+        " " + logSymbols.success
+      )))
+      .pipe(gulp.dest(directories.destinationDirectory+"/js/"));
   }
-  return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/js/**/*.js")
-    .pipe(logger(gulpUtil.populateLoggerOptions(
-      "Copy JS task started...",
-      "Copy JS task complete!",
-      ".js",
-      false,
-      "../../"+directories.destinationDirectory+"/js/",
-      "Compiled to: ",
-      " " + logSymbols.success
-    )))
-    .pipe(gulp.dest(directories.destinationDirectory+"/js/"));
+  return false;
 }
 
 let createTask = (application) => {
@@ -173,7 +173,7 @@ let defaultTasks = (application) => {
 
 let publishTasks = (application) => {
   gulpUtil.runThis(application, userefTask);
-  gulpUtil.runThis(application, copyJsTask);
+  gulpUtil.runThis(application, copyJsTask); // is this needed ? YES IT IS USED FOR THE ONLY REQUIRE JS EXAMPLE KEEP, BUT FLAG IT CORRECTLY!
 }
 
 let createTasks = (application) => {
@@ -268,12 +268,12 @@ gulp.task('favicon', function(done){
 })
 
 gulp.task("watch", (done) => {
-  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask, defaultTasksCallBack);
-  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", applicationTypeScriptTask, defaultTasksCallBack);
-  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask, defaultTasksCallBack);
-  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null, defaultTasksCallBack);
-  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null, defaultTasksCallBack);
-  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null, defaultTasksCallBack);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", applicationTypeScriptTask);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null);
+  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null);
   done();
 });
 
@@ -295,12 +295,14 @@ gulp.task("test", (done) => {
 
 gulp.task('webpack', run("npx webpack"));
 
+gulp.task('webpack-prod', run("npx webpack --env.production"));
+
 gulp.task("create", (done) => {
   config.applications.map(createTasks);
   done();
 });
 
-gulp.task("publish", gulp.series(["test", "images", "fonts", "favicon"], (done) => {
+gulp.task("publish", gulp.series(["test", "images", "fonts", "favicon", "webpack-prod"], (done) => {
   config.applications.map(publishTasks);
   done();
 }));

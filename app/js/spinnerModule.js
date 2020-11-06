@@ -7,15 +7,15 @@ export let SpinnerModule = function(props) {
     let hideClass = !showSpinner ? "d-none" : "";
     return(
         <div>
-            <div id="spinner" class={`${hideClass} spinner-container overlay`}>
+            <div id="spinner" className={`${hideClass} spinner-container overlay`}>
             </div>
-            <div id="loader" class={`${hideClass} item loading`}>
-                <div class="spinner">
-                    <div class="circle circle-1">
-                        <div class="circle-inner"></div>
+            <div id="loader" className={`${hideClass} item loading`}>
+                <div className="spinner">
+                    <div className="circle circle-1">
+                        <div className="circle-inner"></div>
                     </div>
-                    <div class="circle circle-2">
-                        <div class="circle-inner"></div>
+                    <div className="circle circle-2">
+                        <div className="circle-inner"></div>
                     </div>
                 </div>
             </div>
