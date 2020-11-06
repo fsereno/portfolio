@@ -7,6 +7,8 @@ export const HomeThreeModule = (async () => {
     const DAMPING = 0.9;
     const TIMESTEP = 1.0/60.0;
     const XROTATION = -Math.PI / 2;
+    const ANGULAR_VELOCITY = 3;
+    const OBJECT_LIMIT = 20;
 
     let _containerId;
     let _container;
@@ -16,12 +18,12 @@ export const HomeThreeModule = (async () => {
     let _world;
     let _raycaster;
     let _mouse;
-    let _mousePositionX = 0;
-    let _mousePositionY = 0;
+    let _mouseXPositions = [];
+    let _mouseYPositions = [];
 
     let initPhysics = () => {
         _world = new CANNON.World();
-        _world.gravity.set(0, -6, 0);
+        _world.gravity.set(0, -10, 0);
         _world.broadphase = new CANNON.NaiveBroadphase();
         _world.solver.iterations = 10;
     }
@@ -59,14 +61,14 @@ export const HomeThreeModule = (async () => {
         });
     }
 
-    let createObject = (index) => {
-        const x = Math.random()*0.3 + 1;
-        const y = Math.random()*1.0 + 1;
-        const z = Math.random()*0.2 + 1;
-        const scale = Math.random() + 1;
+    let createObject = () => {
+        const x = Math.random() * 0.3 + 1;
+        const y = 15;
+        const z = 0;
+        const scale = Math.random() - Math.random() * 0.5 + 1;
 
         let meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
-        let meshMaterial = new THREE.MeshLambertMaterial({color: 0x343a40});
+        let meshMaterial = new THREE.MeshLambertMaterial({color: 0x5c6670});
         let mesh = new THREE.Mesh( meshGeometry, meshMaterial );
         mesh.position.set(x, y, z)
         mesh.updatePhysics = true;
@@ -96,9 +98,9 @@ export const HomeThreeModule = (async () => {
         _scene.add( light );
     }
 
-    let addObjects = (numberOfObjects = 1) => {
-        for (let i = 0; i < numberOfObjects; i++) {
-            let object = createObject(i);
+    let addObjects = () => {
+        if (_world.bodies.length <=  OBJECT_LIMIT) {
+            let object = createObject();
             _world.addBody(object.body);
             _scene.add(object.mesh);
         }
@@ -172,18 +174,26 @@ export const HomeThreeModule = (async () => {
                     let x = 0;
                     let y = 0;
 
-                    if (_mousePositionX < _mouse.x) {
-                        x = 3;
-                    } else {
-                        x = -3;
+                    _mouseXPositions.push(_mouse.x);
+                    _mouseYPositions.push(_mouse.y);
+
+                    if (_mouseXPositions.length === 2) {
+                        if (_mouseXPositions[1] > _mouseXPositions[0]) {
+                            x = ANGULAR_VELOCITY;
+                        } else if (_mouseXPositions[1] < _mouseXPositions[0]) {
+                            x = -ANGULAR_VELOCITY;
+                        }
+                        _mouseXPositions = [];
                     }
 
-                    if (_mousePositionY < _mouse.y) {
-                        y = 3;
-                    } else {
-                        y = -3;
+                    if (_mouseYPositions.length === 2) {
+                        if (_mouseYPositions[1] > _mouseYPositions[0]) {
+                            y = ANGULAR_VELOCITY;
+                        } else if (_mouseYPositions[1] < _mouseYPositions[0]) {
+                            y = -ANGULAR_VELOCITY;
+                        }
+                        _mouseYPositions = [];
                     }
-
                     body.angularVelocity.set(x, y, 0);
                 }
             }
@@ -201,7 +211,7 @@ export const HomeThreeModule = (async () => {
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
-        addObjects(20);
+        setInterval(addObjects, 1000);
         addLight(0xFFFFFF, 2, 1000, 10, 20, 10);
         setMouseMoved();
         setAnimationLoop();
