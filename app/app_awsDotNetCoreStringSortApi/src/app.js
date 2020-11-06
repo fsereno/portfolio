@@ -85,28 +85,28 @@ class StringSort extends React.Component {
         <_puzzleModule.Render
           puzzle={PUZZLE}
         />
-        <div class="row splitter">
-          <div class="col-lg-12">
+        <div className="row splitter">
+          <div className="col-lg-12">
           <h3>Sorted values:</h3>
-          <p class="lead">{this.state.result}</p>
+          <p className="lead">{this.state.result}</p>
           </div>
         </div>
-        <div class="row splitter">
-          <div class="col-lg-12">
+        <div className="row splitter">
+          <div className="col-lg-12">
             <p>Values to sort: {this.state.values}</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-12">
+        <div className="row">
+          <div className="col-lg-12">
             <form onSubmit={this.handleSubmit} autoComplete="off">
               <label>Enter comma seperated values to sort</label>
-              <div class="form-row align-items-center">
-                <div class="col-lg-10">
-                  <label class="sr-only" for="valuesInput">To Sort</label>
-                  <input required type="text" class="form-control mb-2" id="valuesInput" placeholder="B,C,A" value={this.state.values} onChange={this.handleValuesChange}/>
+              <div className="form-row align-items-center">
+                <div className="col-lg-10">
+                  <label className="sr-only" for="valuesInput">To Sort</label>
+                  <input required type="text" className="form-control mb-2" id="valuesInput" placeholder="B,C,A" value={this.state.values} onChange={this.handleValuesChange}/>
                 </div>
-                <div class="col-lg-2">
-                  <button id="sort_submit" type="submit" class="btn btn-dark mb-2 w-100">Sort</button>
+                <div className="col-lg-2">
+                  <button id="sort_submit" type="submit" className="btn btn-dark mb-2 w-100">Sort</button>
                 </div>
               </div>
             </form>

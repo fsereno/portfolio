@@ -20,10 +20,10 @@ function InputTemplate(props){
   return (
     <form id={`${props.id}_form`} onSubmit={props.event} autoComplete="off">
         <label>{props.label}</label>
-        <div class="input-group mb-3">
-          <input required={props.required ? "required" : ""} type="text" class="form-control" placeholder={props.placeholder} aria-label={props.placeholder} />
-          <div class="input-group-append">
-          <button id={`${props.id}_submit`} class="btn btn-dark api-submit" type="submit">{props.button}</button>
+        <div className="input-group mb-3">
+          <input required={props.required ? "required" : ""} type="text" className="form-control" placeholder={props.placeholder} aria-label={props.placeholder} />
+          <div className="input-group-append">
+          <button id={`${props.id}_submit`} className="btn btn-dark api-submit" type="submit">{props.button}</button>
           </div>
         </div>
     </form>
@@ -179,8 +179,8 @@ class ShoppingListApp extends React.Component {
         <_puzzleModule.Render
           puzzle={PUZZLE}
         />
-        <div class="row splitter">
-          <div class="col-lg-12">
+        <div className="row splitter">
+          <div className="col-lg-12">
             <h3>
               Basket:
             </h3>
@@ -189,13 +189,13 @@ class ShoppingListApp extends React.Component {
                 return <li>{item.name}</li>
               })}
             </ul>
-            <p class="lead">
+            <p className="lead">
               User the below interface to alter the baskets contents:
             </p>
           </div>
         </div>
-       <div class="row splitter">
-          <div class="col-lg-4">
+       <div className="row splitter">
+          <div className="col-lg-4">
             <InputTemplate
               id="get"
               event={this.handleGetSubmit}
@@ -224,11 +224,11 @@ class ShoppingListApp extends React.Component {
             />
             <form id="update_form" onSubmit={this.handleUpdateSubmit} autoComplete="off">
                 <label>Update an item (eg. 1 or 2)</label>
-                <div class="input-group mb-3">
-                  <input id="update_position" required type="text" class="form-control" placeholder="Position to update (eg. 1, or 2)" aria-label="Position to update (eg. 1, or 2)" />
-                  <input id="update_value" required type="text" class="form-control" placeholder="Update with value" aria-label="Update with value" />
-                  <div class="input-group-append">
-                    <button id="update_submit" class="btn btn-dark api-submit" type="submit">Update</button>
+                <div className="input-group mb-3">
+                  <input id="update_position" required type="text" className="form-control" placeholder="Position to update (eg. 1, or 2)" aria-label="Position to update (eg. 1, or 2)" />
+                  <input id="update_value" required type="text" className="form-control" placeholder="Update with value" aria-label="Update with value" />
+                  <div className="input-group-append">
+                    <button id="update_submit" className="btn btn-dark api-submit" type="submit">Update</button>
                   </div>
                 </div>
             </form>
