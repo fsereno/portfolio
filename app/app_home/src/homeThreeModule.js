@@ -146,7 +146,7 @@ export const HomeThreeModule = (async () => {
         _world.add(groundBody)
     }
 
-    let mouseMove = (event) => {
+    let objectsReact = (event) => {
         event.preventDefault();
 
         _mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
@@ -201,7 +201,7 @@ export const HomeThreeModule = (async () => {
     }
 
     let setMouseMoved = () => {
-        window.addEventListener("mousemove", mouseMove)
+        window.addEventListener("mousemove", objectsReact);
     }
 
     let init = () => {
