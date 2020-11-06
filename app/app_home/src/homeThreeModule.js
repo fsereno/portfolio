@@ -83,9 +83,17 @@ export const HomeThreeModule = (async () => {
         body.position.set(x, y, z);
         body.linearDamping = DAMPING;
         body.updatePhysics = true;
-        body.angularVelocity.set(2, 1, 2);
+        body.angularVelocity.set(1, 0.5, 1);
 
         return { mesh: mesh, body: body };
+    }
+
+    let addObjects = () => {
+        if (_world.bodies.length <=  OBJECT_LIMIT) {
+            let object = createObject();
+            _world.addBody(object.body);
+            _scene.add(object.mesh);
+        }
     }
 
     let addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
@@ -97,14 +105,6 @@ export const HomeThreeModule = (async () => {
         light.shadow.mapSize.width = 2560;
         light.shadow.mapSize.height = 2560;
         _scene.add( light );
-    }
-
-    let addObjects = () => {
-        if (_world.bodies.length <=  OBJECT_LIMIT) {
-            let object = createObject();
-            _world.addBody(object.body);
-            _scene.add(object.mesh);
-        }
     }
 
     let updatePhysics = () => {
