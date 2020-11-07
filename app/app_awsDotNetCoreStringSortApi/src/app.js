@@ -88,7 +88,7 @@ class StringSort extends React.Component {
         <div className="row splitter">
           <div className="col-lg-12">
           <h3>Sorted values:</h3>
-          <p className="lead">{this.state.result}</p>
+          <p id="resultOutput" className="lead">{this.state.result}</p>
           </div>
         </div>
         <div className="row splitter">
