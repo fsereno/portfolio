@@ -98,11 +98,6 @@ class HomeApp extends React.Component {
     })
   }
 
-  removeNavBarTransBgClass() {
-    let navbar = document.getElementById(NAV_ID);
-    navbar.classList.remove("bg-transparent");
-  }
-
   addNavBarTransBgClass() {
     let intro = document.getElementById(INTRO_CONTAINER_ID);
     let bounding = intro.getBoundingClientRect();
@@ -120,7 +115,6 @@ class HomeApp extends React.Component {
     event.preventDefault();
     let container = document.getElementById(CONTENT_CONTAINER_ID);
     window.scrollTo({top: container.offsetTop - 50,left: 0, behavior: "smooth"});
-    this.removeNavBarTransBgClass();
   }
 
   handleSubmit(event){
@@ -260,7 +254,6 @@ class HomeApp extends React.Component {
 
   componentDidMount() {
     this.delayAppRender();
-    this.addNavBarTransBgClass();
     if (IS_BROWSER_VALID) {
       HomeThreeModule.then((homeThreeModule) => homeThreeModule.init());
     }
