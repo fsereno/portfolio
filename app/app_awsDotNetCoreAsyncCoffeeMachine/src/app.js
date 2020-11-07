@@ -92,8 +92,8 @@ class CoffeeMakerApp extends React.Component {
         />
         <div className="row mb-3">
           <div className="col-lg-6">
-            <button type="button" className="btn btn-dark mr-2" onClick={this.handleRun}>Run Sync</button>
-            <button type="button" className="btn btn-dark mr-2" onClick={this.handleRunAsync}>Run Async</button>
+            <button id="runSync" type="button" className="btn btn-dark mr-2" onClick={this.handleRun}>Run Sync</button>
+            <button id="runAsync" type="button" className="btn btn-dark mr-2" onClick={this.handleRunAsync}>Run Async</button>
           </div>
         </div>
         <div className="row">
@@ -102,7 +102,7 @@ class CoffeeMakerApp extends React.Component {
               (Processing is delayed for this demonstration)
             </p>
           <this.renderProcessHeading/>
-            <ul className="list-group">
+            <ul id="resultOutput" className="list-group">
               {this.state.log.map((item, index) => {
                 return (
                   <li className="list-group-item d-flex align-items-center">
