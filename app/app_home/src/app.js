@@ -14,7 +14,6 @@ const FAUX_LOADING_TIME = 500;
 const SEARCH_INPUT_ID = "searchInput";
 const MAIN_CONTAINER_ID = "mainContainer";
 const NAV_ID = "navBar";
-const INTRO_CONTAINER_ID = "introContainer";
 const CONTENT_CONTAINER_ID = "contentContainer";
 const APPLICATION = Config.applications.filter(x => x.isLandingPage)[0];
 const IS_BROWSER_VALID = WebGLCheckerModule.isWebGL2Available() || WebGLCheckerModule.isWebGLAvailable();
@@ -98,17 +97,20 @@ class HomeApp extends React.Component {
     })
   }
 
-  addNavBarTransBgClass() {
-    let intro = document.getElementById(INTRO_CONTAINER_ID);
-    let bounding = intro.getBoundingClientRect();
-
-    if (  bounding.top >= 0 &&
-          bounding.left >= 0 &&
-          bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
-          bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)) {
-      let navbar = document.getElementById(NAV_ID);
-      navbar.classList.add("bg-transparent");
+  manageNavBarTransBgClass() {
+    const minScrollY = 0;
+    const transBgClass = "bg-transparent";
+    let navbar = document.getElementById(NAV_ID);
+    if ( window.scrollY === minScrollY ) {
+      navbar.classList.add(transBgClass);
+    } else {
+      navbar.classList.remove(transBgClass);
     }
+  }
+
+  navbarTransScrollEventListener() {
+    this.manageNavBarTransBgClass();
+    window.addEventListener("scroll", this.manageNavBarTransBgClass);
   }
 
   handleScrollBtnClick(event) {
@@ -254,6 +256,7 @@ class HomeApp extends React.Component {
 
   componentDidMount() {
     this.delayAppRender();
+    this.navbarTransScrollEventListener();
     if (IS_BROWSER_VALID) {
       HomeThreeModule.then((homeThreeModule) => homeThreeModule.init());
     }
