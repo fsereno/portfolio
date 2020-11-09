@@ -21,7 +21,6 @@ steps:
 - script: |
     npm install
     gulp tests --gulpfile gulpfile.js
-    dotnet test app/app_dotnetCore --configuration $(buildConfiguration)
     dotnet test app/app_awsDotNetCoreShoppingCart/aws/test/aws.Tests --configuration $(buildConfiguration)
     dotnet test app/app_awsDotNetCoreAsyncCoffeeMachine/aws/test/aws.Tests --configuration $(buildConfiguration)
     dotnet test app/app_awsDotNetCoreEntitySortApi/aws/test/aws.Tests --configuration $(buildConfiguration)
