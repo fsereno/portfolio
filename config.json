@@ -105,8 +105,8 @@
             "description": "Exploring Azure Functions serverless applications (SAM), using .NET Core.",
             "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "AzureDotNetCoreBasicApi",
-            "active": true,
-            "include": true,
+            "active": false,
+            "include": false,
             "useWebpack": true,
             "masterTemplateDir": "master_react"
         },
