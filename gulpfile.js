@@ -180,10 +180,6 @@ let createTasks = (application) => {
   gulpUtil.runThis(application, createTask);
 }
 
-let defaultTasksCallBack = () => {
-  config.applications.map(defaultTasks);
-}
-
 let startServerTask = () => {
   return new Promise((resolve, reject) => {
     try{

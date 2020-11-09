@@ -13,6 +13,7 @@ import { HomeThreeModule } from "./homeThreeModule.js";
 const FAUX_LOADING_TIME = 500;
 const SEARCH_INPUT_ID = "searchInput";
 const MAIN_CONTAINER_ID = "mainContainer";
+const NAV_ID = "navBar";
 const CONTENT_CONTAINER_ID = "contentContainer";
 const APPLICATION = Config.applications.filter(x => x.isLandingPage)[0];
 const IS_BROWSER_VALID = WebGLCheckerModule.isWebGL2Available() || WebGLCheckerModule.isWebGLAvailable();
@@ -94,6 +95,22 @@ class HomeApp extends React.Component {
       applications: this.state.applicationsImmutable,
       showClear: false
     })
+  }
+
+  manageNavBarTransBgClass() {
+    const minScrollY = 0;
+    const transBgClass = "bg-transparent";
+    let navbar = document.getElementById(NAV_ID);
+    if ( window.scrollY === minScrollY ) {
+      navbar.classList.add(transBgClass);
+    } else {
+      navbar.classList.remove(transBgClass);
+    }
+  }
+
+  navbarTransScrollEventListener() {
+    this.manageNavBarTransBgClass();
+    window.addEventListener("scroll", this.manageNavBarTransBgClass);
   }
 
   handleScrollBtnClick(event) {
@@ -239,6 +256,7 @@ class HomeApp extends React.Component {
 
   componentDidMount() {
     this.delayAppRender();
+    this.navbarTransScrollEventListener();
     if (IS_BROWSER_VALID) {
       HomeThreeModule.then((homeThreeModule) => homeThreeModule.init());
     }

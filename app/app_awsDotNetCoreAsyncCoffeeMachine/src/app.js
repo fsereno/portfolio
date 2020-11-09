@@ -71,7 +71,7 @@ class CoffeeMakerApp extends React.Component {
 
   renderProcessHeading() {
     if (this.state.log.length > 0) {
-      return <h3 class="mb-4">Log of tasks carried out</h3>
+      return <h3 className="mb-4">Log of tasks carried out</h3>
     }
     return null;
   }
@@ -90,23 +90,23 @@ class CoffeeMakerApp extends React.Component {
         <_puzzleModule.Render
           puzzle={PUZZLE}
         />
-        <div class="row mb-3">
-          <div class="col-lg-6">
-            <button type="button" class="btn btn-dark mr-2" onClick={this.handleRun}>Run Sync</button>
-            <button type="button" class="btn btn-dark mr-2" onClick={this.handleRunAsync}>Run Async</button>
+        <div className="row mb-3">
+          <div className="col-lg-6">
+            <button id="runSync" type="button" className="btn btn-dark mr-2" onClick={this.handleRun}>Run Sync</button>
+            <button id="runAsync" type="button" className="btn btn-dark mr-2" onClick={this.handleRunAsync}>Run Async</button>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-6">
-            <p class="text-muted">
+        <div className="row">
+          <div className="col-lg-6">
+            <p className="text-muted">
               (Processing is delayed for this demonstration)
             </p>
           <this.renderProcessHeading/>
-            <ul class="list-group">
+            <ul id="resultOutput" className="list-group">
               {this.state.log.map((item, index) => {
                 return (
-                  <li class="list-group-item d-flex align-items-center">
-                      <span class="badge badge-primary badge-pill mr-3 bg-dark">{index+1}</span>
+                  <li className="list-group-item d-flex align-items-center">
+                      <span className="badge badge-primary badge-pill mr-3 bg-dark">{index+1}</span>
                       {item.detail}
                   </li>
                 );

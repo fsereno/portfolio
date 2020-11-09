@@ -89,34 +89,34 @@ class ToDoListForm extends React.Component {
   render() {
     return (
       <div>
-        <div class="row splitter">
-          <div class="col-lg-4">
+        <div className="row splitter">
+          <div className="col-lg-4">
             <h3>Result:</h3>
-            <ul id="toDoList" class="list-group">
+            <ul id="toDoList" className="list-group">
               {store.getState().present.map((item, index) => {
-                  return <li key={index} class="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
+                  return <li key={index} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
                 })}
           </ul>
           </div>
         </div>
-        <div class="row splitter">
-          <div class="col-lg-12">
+        <div className="row splitter">
+          <div className="col-lg-12">
             <p>Items: {this.state.counter}</p>
             <p>Item to add: {this.state.value}</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-4">
+        <div className="row">
+          <div className="col-lg-4">
             <form onSubmit={this.handleSubmit} autoComplete="off">
-              <div class="form-group">
+              <div className="form-group">
                   <label for="itemInput">
                     Input
                   </label>
-                  <input class="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
+                  <input className="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
               </div>
-              <button id="submit" class="btn btn-dark mr-2" type="submit">Add item</button>
-              <button id="undo" class="btn btn-danger mr-2" type="button" onClick={this.handleUndo}>Undo</button>
-              <button id="redo" class="btn btn-dark mr-2" type="button" onClick={this.handleRedo}>Redo</button>
+              <button id="submit" className="btn btn-dark mr-2" type="submit">Add item</button>
+              <button id="undo" className="btn btn-danger mr-2" type="button" onClick={this.handleUndo}>Undo</button>
+              <button id="redo" className="btn btn-dark mr-2" type="button" onClick={this.handleRedo}>Redo</button>
             </form>
           </div>
         </div>

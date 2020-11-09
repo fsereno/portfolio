@@ -145,7 +145,7 @@ $ gulp create
 > install dotnet packages
 
 ```shell
-$ cd app/app_dotnetCore
+$ cd app/app_{directory containing the .NET Core application}
 $ dotnet restore
 ```
 ---

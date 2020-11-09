@@ -145,18 +145,18 @@ class EntitySort extends React.Component {
         <_puzzleModule.Render
           puzzle={PUZZLE}
         />
-        <div class="row splitter">
-          <div class="col-lg-12">
+        <div className="row splitter">
+          <div className="col-lg-12">
             <h3>Employees:</h3>
-            <p class="lead">Add new employees to the table, sort using the column controls</p>
-            <table class="table" id="employeeTable">
-              <thead class="bg-dark text-white">
+            <p className="lead">Add new employees to the table, sort using the column controls</p>
+            <table className="table" id="employeeTable">
+              <thead className="bg-dark text-white">
                 <tr>
                   <th>Name</th>
                   <th>
-                      <span class="mr-2">Salary</span>
-                      <button id="sortAsc" class="btn btn-sm btn-dark mr-1 px-0" type="button" onClick={this.handleSortSalaryAsc}><i class="fa fa-fw fa-sort-amount-asc"></i></button>
-                      <button id="sortDesc" class="btn btn-sm btn-dark px-0" type="button" onClick={this.handleSortSalaryDesc}><i class="fa fa-fw fa-sort-amount-desc"></i></button>
+                      <span className="mr-2">Salary</span>
+                      <button id="sortAsc" className="btn btn-sm btn-dark mr-1 px-0" type="button" onClick={this.handleSortSalaryAsc}><i className="fa fa-fw fa-sort-amount-asc"></i></button>
+                      <button id="sortDesc" className="btn btn-sm btn-dark px-0" type="button" onClick={this.handleSortSalaryDesc}><i className="fa fa-fw fa-sort-amount-desc"></i></button>
                   </th>
                   <th>Action</th>
                 </tr>
@@ -167,7 +167,7 @@ class EntitySort extends React.Component {
                     <tr>
                       <td>{employee.name}</td>
                       <td>{employee.displaySalary}</td>
-                      <td><a href="#" class="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
+                      <td><a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
                     </tr>
                   )
                 })}
@@ -175,32 +175,32 @@ class EntitySort extends React.Component {
             </table>
           </div>
         </div>
-        <div class="row splitter">
-          <div class="col-lg-12">
+        <div className="row splitter">
+          <div className="col-lg-12">
             <p>No. of Employees: {this.state.counter}</p>
             <p>Employee to add: {this.state.name} {this.formatCurrency(this.state.salary)}</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-12">
+        <div className="row">
+          <div className="col-lg-12">
             <form onSubmit={this.handleSubmit} autoComplete="off">
               <label>Add an Employee</label>
-              <div class="form-row align-items-center">
-                <div class="col-lg-2">
-                  <label class="sr-only" for="nameInput">Name</label>
-                  <input required type="text" class="form-control mb-2" id="nameInput" placeholder="John Doe" value={this.state.name} onChange={this.handleNameChange}/>
+              <div className="form-row align-items-center">
+                <div className="col-lg-2">
+                  <label className="sr-only" for="nameInput">Name</label>
+                  <input required type="text" className="form-control mb-2" id="nameInput" placeholder="John Doe" value={this.state.name} onChange={this.handleNameChange}/>
                 </div>
-                <div class="col-lg-2">
-                  <label class="sr-only" for="salaryInput">Salary</label>
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">£</div>
+                <div className="col-lg-2">
+                  <label className="sr-only" for="salaryInput">Salary</label>
+                  <div className="input-group mb-2">
+                    <div className="input-group-prepend">
+                      <div className="input-group-text">£</div>
                     </div>
-                    <input required type="number" min="0" class="form-control" id="salaryInput" placeholder="0.00" value={this.state.salary} onChange={this.handleSalaryChange}/>
+                    <input required type="number" min="0" className="form-control" id="salaryInput" placeholder="0.00" value={this.state.salary} onChange={this.handleSalaryChange}/>
                   </div>
                 </div>
-                <div class="col-lg-2">
-                  <button id="addEmployee_submit" type="submit" class="btn btn-dark mb-2 w-100">Add</button>
+                <div className="col-lg-2">
+                  <button id="addEmployee_submit" type="submit" className="btn btn-dark mb-2 w-100">Add</button>
                 </div>
               </div>
             </form>

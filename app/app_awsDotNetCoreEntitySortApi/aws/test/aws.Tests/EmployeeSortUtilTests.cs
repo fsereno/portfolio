@@ -21,8 +21,8 @@ namespace aws.Tests
         private List<Employee> _employees { get; set; }
         public EmployeeSortUtilTests()
         {
-            this._sut = new EmployeeSortUtil();
-            this._employees = new List<Employee>() {
+            _sut = new EmployeeSortUtil();
+            _employees = new List<Employee>() {
                 new Employee()
                 {
                     Name = "John Doe",
@@ -41,26 +41,26 @@ namespace aws.Tests
         [Fact]
         public void Test_Sort_Salary_Default()
         {
-            var result = this._sut.SortBySalaryDefault(this._employees);
+            var result = _sut.SortBySalaryDefault(_employees);
             Assert.Equal("Joe Bloggs", result[0].Name);
         }
 
         [Fact]
         public void Test_Sort_Salary_Default_Null()
         {
-            var result = this._sut.SortBySalaryDefault(null);
+            var result = _sut.SortBySalaryDefault(null);
             Assert.Empty(result);
         }
         [Fact]
         public void Test_Sort_Salary_Desc()
         {
-            var result = this._sut.SortBySalaryDesc(this._employees);
+            var result = _sut.SortBySalaryDesc(_employees);
             Assert.Equal("Joe Bloggs", result[0].Name);
         }
         [Fact]
         public void Test_Sort_Salary_Asc()
         {
-            var result = this._sut.SortBySalaryAsc(this._employees);
+            var result = _sut.SortBySalaryAsc(_employees);
             Assert.Equal("John Doe", result[0].Name);
         }
     }

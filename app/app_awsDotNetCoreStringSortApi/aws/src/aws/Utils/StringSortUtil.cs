@@ -11,10 +11,10 @@ namespace Utils
     {
         public string Sort(string commaSeperatedString)
         {
-            var itemsToSort = this.GetSortItems(commaSeperatedString);
-            this.Sort(itemsToSort);
+            var itemsToSort = GetSortItems(commaSeperatedString);
+            Sort(itemsToSort);
 
-            var result = this.Join(itemsToSort);
+            var result = Join(itemsToSort);
             return result;
         }
 
