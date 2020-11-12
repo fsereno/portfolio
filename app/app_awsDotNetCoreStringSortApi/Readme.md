@@ -6,6 +6,8 @@ With this application I have implemented IComparer to handle the sorting logic, 
 
 A lot of research was undertaken for this application, with many permutations in order to overcome this simple, yet complex task. Made for a very enjoyable project!
 
+-AWS Lambda Function Repository (https://github.com/fsereno/app_awsDotNetCoreStringSortApi)
+
 -IComparer (https://docs.microsoft.com/en-us/dotnet/api/system.collections.icomparer?view=netcore-3.1)
 
 ### Explanation ###
@@ -23,16 +25,4 @@ Run the application from within the route directory, using the master Gulp file 
 ```
     cd ../../
     gulp
-```
-
-Execute unit tests
-```
-    cd "aws/test/aws.Tests"
-    dotnet test
-```
-
-Publish application
-```
-    cd "aws/src/aws"
-    dotnet publish -c release
 ```
