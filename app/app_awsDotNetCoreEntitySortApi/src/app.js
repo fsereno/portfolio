@@ -25,7 +25,6 @@ class EntitySort extends React.Component {
       }],
       counterLimit: 10,
       counter: 1,
-      selectedIndex: 0,
       sortSalaryAsc: `${API_ENDPOINT}/sort/salary/asc`,
       sortSalaryDesc: `${API_ENDPOINT}/sort/salary/desc`,
       showSpinner: false
@@ -164,7 +163,7 @@ class EntitySort extends React.Component {
               <tbody>
               {this.state.employees.map((employee, index) => {
                   return (
-                    <tr>
+                    <tr key={index}>
                       <td>{employee.name}</td>
                       <td>{employee.displaySalary}</td>
                       <td><a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
