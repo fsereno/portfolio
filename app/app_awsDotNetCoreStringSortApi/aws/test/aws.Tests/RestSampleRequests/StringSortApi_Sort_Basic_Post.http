@@ -1,4 +1,0 @@
-POST https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values/sort HTTP/1.1
-content-type: application/json
-
-{"CommaSeperatedString":"B,C,A"}
