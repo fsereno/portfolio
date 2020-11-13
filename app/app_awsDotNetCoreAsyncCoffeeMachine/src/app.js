@@ -5,9 +5,12 @@ import ReactDOM from 'react-dom';
 import { PuzzleModule } from '../../js/puzzleModule.js';
 import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
+import { ConfigUtilModule } from "../../js/configUtilModule";
 
-const API_ENDPOINT = "https://ro5qqsplje.execute-api.eu-west-2.amazonaws.com/Prod/api/values";
 const PUZZLE = "4 x 4 - 2 =";
+const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreAsyncCoffeeMachine");
+const RUN_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.run}`;
+const RUN_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.runAsync}`;
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
 let _errorModule = ErrorModule("errorModule");
@@ -17,8 +20,6 @@ class CoffeeMakerApp extends React.Component {
     super(props);
     this.state = {
       log: [],
-      run: `${API_ENDPOINT}/run`,
-      runAsync: `${API_ENDPOINT}/runasync`,
       processHeading: "",
       showSpinner: false
     };
@@ -30,11 +31,11 @@ class CoffeeMakerApp extends React.Component {
   }
 
   handleRun() {
-    this.handleRequest(this.state.run);
+    this.handleRequest(RUN_ENDPOINT);
   }
 
   handleRunAsync() {
-    this.handleRequest(this.state.runAsync);
+    this.handleRequest(RUN_ASYNC_ENDPOINT);
   }
 
   handleRequest(endpoint) {

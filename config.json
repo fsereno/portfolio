@@ -123,7 +123,11 @@
             "active": true,
             "include": true,
             "useWebpack": true,
-            "masterTemplateDir": "master_react"
+            "masterTemplateDir": "master_react",
+            "endpoints" : {
+                "api": "",
+                "endpoint": ""
+            }
         },
         {
             "name": "AWS .NET Core Natural String Sorting API",
@@ -134,7 +138,11 @@
             "active": true,
             "include": true,
             "useWebpack": true,
-            "masterTemplateDir": "master_react"
+            "masterTemplateDir": "master_react",
+            "endpoints" : {
+                "api": "",
+                "endpoint": ""
+            }
         },
         {
             "name": "AWS .NET Core Shopping Cart API",
@@ -144,7 +152,11 @@
             "folder": "awsDotNetCoreShoppingCart",
             "active": true,
             "include": true,
-            "useWebpack": true
+            "useWebpack": true,
+            "endpoints" : {
+                "api": "",
+                "endpoint": ""
+            }
         },
         {
             "name": "AWS .NET Core Asynchronous Coffee Maker API",
@@ -155,7 +167,12 @@
             "active": true,
             "include": true,
             "useWebpack": true,
-            "masterTemplateDir": "master_react"
+            "masterTemplateDir": "master_react",
+            "endpoints" : {
+                "api": "https://ro5qqsplje.execute-api.eu-west-2.amazonaws.com/Prod/api/values",
+                "run": "run",
+                "runAsync": "runasync"
+            }
         },
         {
             "name": "Three JS Scene (Basic)",
