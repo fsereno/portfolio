@@ -12,7 +12,7 @@ import { ConfigUtilModule } from "../../js/configUtilModule";
 
 const FAUX_LOADING_TIME = 500;
 const NAVBAR_DROPDOWN_BTN_ID ="navbarNavDropdownBtn";
-const NAVBAR_TRANS_CLASS = "scroll-down";
+const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
 const SEARCH_INPUT_ID = "searchInput";
 const MAIN_CONTAINER_ID = "mainContainer";
 const NAV_ID = "navBar";
@@ -39,7 +39,7 @@ class HomeApp extends React.Component {
     this.handleClearSearch = this.handleClearSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleScrollBtnClick = this.handleScrollBtnClick.bind(this);
-    this.handleNavBarScrollTransBgClass = this.handleNavBarScrollTransBgClass.bind(this);
+    this.handleNavBarScrollClass = this.handleNavBarScrollClass.bind(this);
     this.renderClearBtn = this.renderClearBtn.bind(this);
     this.renderIntroContainer = this.renderIntroContainer.bind(this);
     this.renderContenContainer = this.renderContenContainer.bind(this);
@@ -101,12 +101,12 @@ class HomeApp extends React.Component {
     })
   }
 
-  addNavBarTransBgClass(condition = true) {
+  addNavBarScrollDownClass(condition = true) {
     let navbar = document.getElementById(NAV_ID);
     if ( condition ) {
-      navbar.classList.remove(NAVBAR_TRANS_CLASS);
+      navbar.classList.remove(NAVBAR_SCROLL_DOWN_CLASS);
     } else {
-      navbar.classList.add(NAVBAR_TRANS_CLASS);
+      navbar.classList.add(NAVBAR_SCROLL_DOWN_CLASS);
     }
   }
 
@@ -114,13 +114,13 @@ class HomeApp extends React.Component {
     return window.scrollY === 0;
   }
 
-  handleNavBarScrollTransBgClass() {
-    this.addNavBarTransBgClass(this.isScrollYAtZero());
+  handleNavBarScrollClass() {
+    this.addNavBarScrollDownClass(this.isScrollYAtZero());
   }
 
   addNavbarTransScrollEventListener() {
-    this.addNavBarTransBgClass();
-    window.addEventListener("scroll", this.handleNavBarScrollTransBgClass);
+    this.addNavBarScrollDownClass();
+    window.addEventListener("scroll", this.handleNavBarScrollClass);
   }
 
   handleScrollBtnClick(event) {

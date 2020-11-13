@@ -41,5 +41,12 @@
                 color: $white;
             }
         }
+        .navbar-toggler {
+            border-color: $white;
+            .navbar-toggler-icon {
+                color: $white;
+                background: none;
+            }
+        }
     }
 }
