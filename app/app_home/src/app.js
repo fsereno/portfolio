@@ -11,6 +11,8 @@ import { HomeThreeModule } from "./homeThreeModule.js";
 import { ConfigUtilModule } from "../../js/configUtilModule";
 
 const FAUX_LOADING_TIME = 500;
+const NAVBAR_DROPDOWN_BTN_ID ="navbarNavDropdownBtn";
+const NAVBAR_TRANS_CLASS = "scroll-down";
 const SEARCH_INPUT_ID = "searchInput";
 const MAIN_CONTAINER_ID = "mainContainer";
 const NAV_ID = "navBar";
@@ -37,6 +39,7 @@ class HomeApp extends React.Component {
     this.handleClearSearch = this.handleClearSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleScrollBtnClick = this.handleScrollBtnClick.bind(this);
+    this.handleNavBarScrollTransBgClass = this.handleNavBarScrollTransBgClass.bind(this);
     this.renderClearBtn = this.renderClearBtn.bind(this);
     this.renderIntroContainer = this.renderIntroContainer.bind(this);
     this.renderContenContainer = this.renderContenContainer.bind(this);
@@ -98,20 +101,26 @@ class HomeApp extends React.Component {
     })
   }
 
-  manageNavBarTransBgClass() {
-    const minScrollY = 0;
-    const transBgClass = "bg-transparent";
+  addNavBarTransBgClass(condition = true) {
     let navbar = document.getElementById(NAV_ID);
-    if ( window.scrollY === minScrollY ) {
-      navbar.classList.add(transBgClass);
+    if ( condition ) {
+      navbar.classList.remove(NAVBAR_TRANS_CLASS);
     } else {
-      navbar.classList.remove(transBgClass);
+      navbar.classList.add(NAVBAR_TRANS_CLASS);
     }
   }
 
-  navbarTransScrollEventListener() {
-    this.manageNavBarTransBgClass();
-    window.addEventListener("scroll", this.manageNavBarTransBgClass);
+  isScrollYAtZero() {
+    return window.scrollY === 0;
+  }
+
+  handleNavBarScrollTransBgClass() {
+    this.addNavBarTransBgClass(this.isScrollYAtZero());
+  }
+
+  addNavbarTransScrollEventListener() {
+    this.addNavBarTransBgClass();
+    window.addEventListener("scroll", this.handleNavBarScrollTransBgClass);
   }
 
   handleScrollBtnClick(event) {
@@ -257,7 +266,7 @@ class HomeApp extends React.Component {
 
   componentDidMount() {
     this.delayAppRender();
-    this.navbarTransScrollEventListener();
+    this.addNavbarTransScrollEventListener();
     if (IS_BROWSER_VALID) {
       HomeThreeModule.then((homeThreeModule) => homeThreeModule.init());
     }

@@ -1,6 +1,17 @@
 @import "../../sass/includes/colours.scss";
 @import "../../sass/includes/styles.scss";
 
+#navBar {
+  top: -60px;
+  -webkit-transition: top .4s linear;
+  -moz-transition: top .4s linear;
+  -o-transition: top .4s linear;
+  transition: top .4s linear;
+  &.scroll-down {
+      top: 0px;
+  }
+}
+
 #result {
   #searchBar {
     .form-control {

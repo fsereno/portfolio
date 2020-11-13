@@ -19,11 +19,9 @@ export let ErrorModule = function(modalId) {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <div className="invalid-feedback d-block">
-                                <p className="lead">
-                                    {props.body || "An error has occurred. Please try again."}
-                                </p>
-                            </div>
+                            <p className="lead text-danger px-2">
+                                {props.body || "An error has occurred. Please try again."}
+                            </p>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary btn-dark" data-dismiss="modal">Close</button>

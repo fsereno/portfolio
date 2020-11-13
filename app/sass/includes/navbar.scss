@@ -5,6 +5,19 @@
     }
 }
 
+.fade-element {
+    -webkit-transition: opacity .5s ease-in;
+    -moz-transition: opacity .5s ease-in;
+    -o-transition: opacity .5s ease-in;
+    transition: opacity .5s ease-in;
+    opacity: 0;
+    visibility: hidden;
+}
+.fade-element.in {
+    opacity: 1;
+    visibility: visible;
+}
+
 .navbar {
     padding: 0 0.3em;
     &.fixed-top {
@@ -14,8 +27,10 @@
         }
     }
     .dropdown-menu {
+        min-width: 320px;
         .dropdown-item {
             padding: 1rem 1.5rem;
+            white-space: pre-wrap;
             &.active, &:active {
                 background-color: $darkGrey;
             }
