@@ -108,7 +108,11 @@
             "active": true,
             "include": true,
             "useWebpack": true,
-            "masterTemplateDir": "master_react"
+            "masterTemplateDir": "master_react",
+            "endpoints" : {
+                "api": "https://app-azure-dotnetcore-unique-data-entry-api.azurewebsites.net/api",
+                "canItemBeAddedAsync": "canItemBeAddedAsync"
+            }
         },
         {
             "name": "AWS .NET Core Entity Sorting API",

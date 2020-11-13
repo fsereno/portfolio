@@ -5,12 +5,15 @@ import ReactDOM from 'react-dom';
 import { PuzzleModule } from '../../js/puzzleModule.js';
 import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
+import { ConfigUtilModule } from "../../js/configUtilModule";
 
-const API_ENDPOINT = "https://appazuredotnetcoreuniquedataentryapi.azurewebsites.net/api";
 const PUZZLE = "4 x 4 - 2 =";
+const APP_CONFIG = ConfigUtilModule.get("AzureDotNetCoreUniqueDataEntryApi");
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
 let _errorModule = ErrorModule("errorModule");
+
+
 
 class UniqueDataEntryApp extends React.Component {
   constructor(props) {
@@ -28,7 +31,7 @@ class UniqueDataEntryApp extends React.Component {
       }],
       counterLimit: 10,
       counter: 1,
-      addEndPoint: `${API_ENDPOINT}/UniqueDataEntryHttpTriggerCSharp`,
+      addEndPoint: `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.canItemBeAddedAsync}`,
       showSpinner: false
     };
 
