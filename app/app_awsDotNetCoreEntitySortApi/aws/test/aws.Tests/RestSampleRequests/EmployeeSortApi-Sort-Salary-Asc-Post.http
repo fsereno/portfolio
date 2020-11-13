@@ -1,4 +1,0 @@
-POST https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees/sort/salary/asc HTTP/1.1
-content-type: application/json
-
-{"employees":[{"name": "John Doe", "salary":10000, "displaySalary":"£10,000.00"},{"name":"Joe Bloggs","salary":5000,"displaySalary":"£5,000.00"}]}
