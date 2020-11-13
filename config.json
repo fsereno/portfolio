@@ -125,8 +125,9 @@
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "api": "",
-                "endpoint": ""
+                "api": "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees",
+                "sortSalaryAsc": "sort/salary/asc",
+                "sortSalaryDesc": "sort/salary/desc"
             }
         },
         {

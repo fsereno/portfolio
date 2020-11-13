@@ -5,9 +5,12 @@ import ReactDOM from 'react-dom';
 import { PuzzleModule } from '../../js/puzzleModule.js';
 import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
+import { ConfigUtilModule } from "../../js/configUtilModule";
 
-const API_ENDPOINT = "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees";
 const PUZZLE = "4 x 4 - 2 =";
+const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreEntitySortApi");
+const SORT_SALARY_ASC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryAsc}`;
+const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryDesc}`;
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
 let _errorModule = ErrorModule("errorModule");
@@ -25,8 +28,6 @@ class EntitySort extends React.Component {
       }],
       counterLimit: 10,
       counter: 1,
-      sortSalaryAsc: `${API_ENDPOINT}/sort/salary/asc`,
-      sortSalaryDesc: `${API_ENDPOINT}/sort/salary/desc`,
       showSpinner: false
     };
 
@@ -69,7 +70,7 @@ class EntitySort extends React.Component {
 
   handleSortSalaryAsc() {
     let request = {
-      url: this.state.sortSalaryAsc,
+      url: SORT_SALARY_ASC_ENDPOINT,
       type: "POST",
       contentType: 'application/json;',
       data: JSON.stringify({
@@ -87,7 +88,7 @@ class EntitySort extends React.Component {
 
   handleSortSalaryDesc() {
     let request = {
-      url: this.state.sortSalaryDesc,
+      url: SORT_SALARY_DESC_ENDPOINT,
       type: "POST",
       contentType: 'application/json;',
       data: JSON.stringify({
