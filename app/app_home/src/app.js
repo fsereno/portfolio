@@ -4,19 +4,20 @@ import "regenerator-runtime/runtime";
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Config from  '../../../config.json';
 import { SpinnerModule } from '../../js/spinnerModule.js';
 import { StringSearchModule } from '../../typeScript/Modules/stringSearchModule/app.js';
 import { WebGLCheckerModule } from "../../js/webGLCheckerModule.js";
 import { HomeThreeModule } from "./homeThreeModule.js";
+import { ConfigUtilModule } from "../../js/configUtilModule";
 
 const FAUX_LOADING_TIME = 500;
 const SEARCH_INPUT_ID = "searchInput";
 const MAIN_CONTAINER_ID = "mainContainer";
 const NAV_ID = "navBar";
 const CONTENT_CONTAINER_ID = "contentContainer";
-const APPLICATION = Config.applications.filter(x => x.isLandingPage)[0];
 const IS_BROWSER_VALID = WebGLCheckerModule.isWebGL2Available() || WebGLCheckerModule.isWebGLAvailable();
+const CONFIG = ConfigUtilModule.get();
+const APP_CONFIG = ConfigUtilModule.get("home");
 const _stringSearchModule = new StringSearchModule();
 
 class HomeApp extends React.Component {
@@ -127,8 +128,8 @@ class HomeApp extends React.Component {
     setTimeout(() => {
       this.removeDarkClass();
       this.setState({
-        applications: Config.applications,
-        applicationsImmutable: Config.applications,
+        applications: CONFIG.applications,
+        applicationsImmutable: CONFIG.applications,
         hasApplications: true,
         showIntro: true,
         showSpinner: false
@@ -173,8 +174,8 @@ class HomeApp extends React.Component {
               <img className="img-fluid" src="images/FSLogo.png" alt="Logo" />
             </div>
             <div id="introHeadings" className="text-center element">
-              <h1 className="display-4 mb-0">{Config.author}</h1>
-              <h4 className="display-4 sub-heading lead text-white">{Config.role}</h4>
+              <h1 className="display-4 mb-0">{CONFIG.author}</h1>
+              <h4 className="display-4 sub-heading lead text-white">{CONFIG.role}</h4>
             </div>
             <div id="btnContainer" className="text-center element pt-2">
               <button type="button" className="btn btn-outline-light" onClick={this.handleScrollBtnClick}>View Portfolio</button>
@@ -191,13 +192,13 @@ class HomeApp extends React.Component {
       <div className={`${fadeClass} container-fluid pt-4 mt-5`} id="contentContainer">
         <div className="row">
           <div className="col-lg-12">
-            <h2 className="display-4">{APPLICATION.name}</h2>
+            <h2 className="display-4">{APP_CONFIG.name}</h2>
           </div>
         </div>
         <div className="row">
           <div className="col-lg-12">
-            <h5>{APPLICATION.subHeading}</h5>
-            <p className="text-muted">{APPLICATION.description}</p>
+            <h5>{APP_CONFIG.subHeading}</h5>
+            <p className="text-muted">{APP_CONFIG.description}</p>
             <hr/>
           </div>
         </div>
@@ -236,11 +237,11 @@ class HomeApp extends React.Component {
                       <h5 className="card-title">{application.name}</h5>
                       <p className="card-text">{application.subHeading}</p>
                       <a className="btn btn-dark mr-2 mb-2"
-                        href={`${Config.prefix}${application.folder}/${Config.index}`}>
+                        href={`${CONFIG.prefix}${application.folder}/${CONFIG.index}`}>
                           View app<i className="fa fa-eye ml-2"></i>
                       </a>
                       <a className="btn btn-dark mb-2"
-                        href={`${Config.repoRootUrl}/${Config.folderRoot}${Config.prefix}${application.folder}`}
+                        href={`${CONFIG.repoRootUrl}/${CONFIG.folderRoot}${CONFIG.prefix}${application.folder}`}
                         target="_blank">
                           View code<i className="fa fa-github-square ml-2"></i>
                       </a>
