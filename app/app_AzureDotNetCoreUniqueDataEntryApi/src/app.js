@@ -13,6 +13,7 @@ const CAN_IT_BE_ADDED_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
 let _errorModule = ErrorModule("errorModule");
+let _duplicateEntryErrorModule = ErrorModule("duplicateEntryErrorModule");
 
 class UniqueDataEntryApp extends React.Component {
   constructor(props) {
@@ -111,7 +112,7 @@ class UniqueDataEntryApp extends React.Component {
             showSpinner: false
           });
         } else {
-          _errorModule.show();
+          _duplicateEntryErrorModule.show();
           this.setState({
             showSpinner: false
           })
@@ -139,6 +140,10 @@ class UniqueDataEntryApp extends React.Component {
     return (
       <div>
         <_errorModule.Render/>
+        <_duplicateEntryErrorModule.Render
+          title="Duplicate entry detected!"
+          body="You cannot add a duplicate item."
+        />
         <SpinnerModule
           show={this.state.showSpinner}
         />
