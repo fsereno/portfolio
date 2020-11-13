@@ -3,10 +3,10 @@
 
 #navBar {
   top: -60px;
-  -webkit-transition: top .4s linear;
-  -moz-transition: top .4s linear;
-  -o-transition: top .4s linear;
-  transition: top .4s linear;
+  -webkit-transition: top .4s ease-in-out;
+  -moz-transition: top .4s ease-in-out;
+  -o-transition: top .4s ease-in-out;
+  transition: top .4s ease-in-out;
   &.scroll-down {
       top: 0px;
   }
