@@ -4,6 +4,8 @@ This application demonstrates knowledge of multithreading with use of the async,
 
 Each step is entered into a Log, which is updated by reference during the process. I have also implemented IEnumerable and IEnumorator to demonstrate the iterator pattern. Keeping the Log structure hidden and allowing indirect, readonly iteration of the Log collection.
 
+-AWS Lambda Function Repository (https://github.com/fsereno/app_awsDotNetCoreAsyncCoffeeMachine)
+
 - IEnumerable (https://docs.microsoft.com/en-us/dotnet/api/system.collections.ienumerable?view=netcore-3.1)
 
 - IEnumorator (https://docs.microsoft.com/en-us/dotnet/api/system.collections.ienumerator?view=netcore-3.1)
