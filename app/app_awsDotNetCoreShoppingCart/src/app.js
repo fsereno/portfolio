@@ -5,16 +5,22 @@ import ReactDOM from 'react-dom';
 import { PuzzleModule } from '../../js/puzzleModule.js';
 import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
+import { ConfigUtilModule } from "../../js/configUtilModule";
 
-const API_ENDPOINT = "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket";
+const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreShoppingCart");
+const GET_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.get}`;
+const ADD_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.add}`;
+const DELETE_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.delete}`;
+const UPDATE_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.update}`;
+
 const PUZZLE = "4 x 4 - 1 =";
 const DEFAULT_COLLECTION = [
   { name: "Apple" },
   { name: "Banana" }
 ]
 
-let _puzzleModule = PuzzleModule(15, "puzzleModal");
-let _errorModule = ErrorModule("errorModule");
+const _puzzleModule = PuzzleModule(15, "puzzleModal");
+const _errorModule = ErrorModule("errorModule");
 
 function InputTemplate(props){
   return (
@@ -36,10 +42,6 @@ class ShoppingListApp extends React.Component {
     this.state = {
       items: DEFAULT_COLLECTION,
       resultSet: DEFAULT_COLLECTION,
-      get: `${API_ENDPOINT}/get`,
-      add: `${API_ENDPOINT}/add`,
-      delete: `${API_ENDPOINT}/delete`,
-      update: `${API_ENDPOINT}/update`,
       answer: '',
       isValid: false,
       puzzle: PUZZLE,
@@ -74,7 +76,7 @@ class ShoppingListApp extends React.Component {
     let index = Number(input);
     let isValid = response => typeof response !== "undefined" && response.length > 0;
     let request = {
-        url: this.state.get,
+        url: GET_ENDPOINT,
         type: "POST",
         contentType: 'application/json;',
         data: JSON.stringify({
@@ -97,7 +99,7 @@ class ShoppingListApp extends React.Component {
     event.preventDefault();
     let input = event.target.elements[0].value;
     let request = {
-      url: this.state.add,
+      url: ADD_ENDPOINT,
       type: "POST",
       contentType: 'application/json;',
       data: JSON.stringify({
@@ -122,7 +124,7 @@ class ShoppingListApp extends React.Component {
     let index = Number(event.target.elements[0].value);
     let value = event.target.elements[1].value;
     let request = {
-      url: this.state.update,
+      url: UPDATE_ENDPOINT,
       type: "POST",
       contentType: 'application/json;',
       data: JSON.stringify({
@@ -147,7 +149,7 @@ class ShoppingListApp extends React.Component {
     event.preventDefault();
     let index = Number(event.target.elements[0].value);
     let request = {
-      url: this.state.delete,
+      url: DELETE_ENDPOINT,
       type: "POST",
       contentType: 'application/json;',
       data: JSON.stringify({

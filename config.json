@@ -155,8 +155,11 @@
             "include": true,
             "useWebpack": true,
             "endpoints" : {
-                "api": "",
-                "endpoint": ""
+                "api": "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket",
+                "get": "get",
+                "add": "add",
+                "delete": "delete",
+                "update": "update"
             }
         },
         {
