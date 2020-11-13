@@ -9,11 +9,10 @@ import { ConfigUtilModule } from "../../js/configUtilModule";
 
 const PUZZLE = "4 x 4 - 2 =";
 const APP_CONFIG = ConfigUtilModule.get("AzureDotNetCoreUniqueDataEntryApi");
+const CAN_IT_BE_ADDED_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.canItemBeAddedAsync}`;
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
 let _errorModule = ErrorModule("errorModule");
-
-
 
 class UniqueDataEntryApp extends React.Component {
   constructor(props) {
@@ -31,7 +30,6 @@ class UniqueDataEntryApp extends React.Component {
       }],
       counterLimit: 10,
       counter: 1,
-      addEndPoint: `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.canItemBeAddedAsync}`,
       showSpinner: false
     };
 
@@ -89,7 +87,7 @@ class UniqueDataEntryApp extends React.Component {
     }
 
     let request = {
-      url: this.state.addEndPoint,
+      url: CAN_IT_BE_ADDED_ASYNC_ENDPOINT,
       data: JSON.stringify(data),
       type: "POST",
       success: (response) => {
