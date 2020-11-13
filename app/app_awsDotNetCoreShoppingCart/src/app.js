@@ -19,8 +19,8 @@ const DEFAULT_COLLECTION = [
   { name: "Banana" }
 ]
 
-const _puzzleModule = PuzzleModule(15, "puzzleModal");
-const _errorModule = ErrorModule("errorModule");
+let _puzzleModule = PuzzleModule(15, "puzzleModal");
+let _errorModule = ErrorModule("errorModule");
 
 function InputTemplate(props){
   return (
