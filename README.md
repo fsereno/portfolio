@@ -10,8 +10,11 @@ The purpose of this repository is to demonstrate skills in various technologies,
 
 This project is both built and managed with Azure DevOps for continuous integration and deployment (CI/CD).
 
-- NodeJS (https://nodejs.org/en/)
+- Azure Functions (https://azure.microsoft.com/en-gb/services/functions/)
+- AWS Lambda (https://aws.amazon.com/lambda/)
+- Nodejs (https://nodejs.org/en/)
 - Gulp (https://gulpjs.com)
+- WebPack (https://webpack.js.org/)
 - Pug (https://pugjs.org/api/getting-started.html)
 - TypeScript (https://www.typescriptlang.org)
 - Sass (https://sass-lang.com/)
@@ -20,7 +23,7 @@ This project is both built and managed with Azure DevOps for continuous integrat
 - Nightmare (https://github.com/segmentio/nightmare)
 - Knockout (https://knockoutjs.com/)
 - A-Frame (https://aframe.io/)
-- Dotnet Core (https://dotnet.github.io/)
+- Dotnet Core (https://dotnet.microsoft.com)
 - NUnit (https://nunit.org/)
 - ML Dotnet (https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet)
 - ThreeJS (https://threejs.org/)
@@ -42,7 +45,7 @@ This project is both built and managed with Azure DevOps for continuous integrat
 - Nodejs v ^12.14.0 (https://nodejs.org/en/)
 - Npm (https://www.npmjs.com/)
 - Gulp CLI (https://gulpjs.com/)
-- .NetCore (https://www.microsoft.com/net/learn/dotnet/hello-world-tutorial)
+- .NetCore (https://dotnet.microsoft.com)
 ---
 
 ## Installation
@@ -136,30 +139,6 @@ $ gulp create
 - Then run this command to build applications based on the config.json file.
 - New applications are built based on the app_master template application.
 - If all applications already exist, nothing will be overwritten.
----
-
-## Setup for .NetCore Driven Applications
-
-- open your prefered command line:
-
-> install dotnet packages
-
-```shell
-$ cd app/app_{directory containing the .NET Core application}
-$ dotnet restore
-```
----
-
-### Tasks
-
-#### Go into /Services.Tests and run the unit tests
-
-```shell
-$ dotnet test
-```
-##### This will:
-- Build the solution.
-- Run the NUnit unit tests.
 ---
 
 ## License
