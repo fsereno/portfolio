@@ -5,9 +5,11 @@ import ReactDOM from 'react-dom';
 import { PuzzleModule } from '../../js/puzzleModule.js';
 import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
+import { ConfigUtilModule } from "../../js/configUtilModule";
 
-const API_ENDPOINT = "https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values";
 const PUZZLE = "4 x 4 - 5 =";
+const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreStringSortApi");
+const SORT_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sort}`;
 
 let _puzzleModule = PuzzleModule(11, "puzzleModal");
 let _errorModule = ErrorModule("errorModule");
@@ -18,7 +20,6 @@ class StringSort extends React.Component {
     this.state = {
       values: '',
       result: '',
-      sort: `${API_ENDPOINT}/sort`,
       showSpinner: false
     };
     this.handleValuesChange = this.handleValuesChange.bind(this);
@@ -48,7 +49,7 @@ class StringSort extends React.Component {
 
   handleSort() {
     let request = {
-      url: this.state.sort,
+      url: SORT_ENDPOINT,
       type: "POST",
       contentType: 'application/json;',
       data: JSON.stringify({

@@ -140,8 +140,8 @@
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "api": "",
-                "endpoint": ""
+                "api": "https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values",
+                "sort": "sort"
             }
         },
         {
