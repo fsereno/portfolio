@@ -24,6 +24,4 @@ steps:
     dotnet test app/app_awsDotNetCoreShoppingCart/aws/test/aws.Tests --configuration $(buildConfiguration)
     dotnet test app/app_awsDotNetCoreAsyncCoffeeMachine/aws/test/aws.Tests --configuration $(buildConfiguration)
     dotnet test app/app_awsDotNetCoreEntitySortApi/aws/test/aws.Tests --configuration $(buildConfiguration)
-    dotnet test app/app_awsDotNetCoreStringSortApi/aws/test/aws.Tests --configuration $(buildConfiguration)
-
   displayName: 'npm install, gulp tasks, dotnet project build and tests.'
