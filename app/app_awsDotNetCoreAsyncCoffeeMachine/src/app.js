@@ -106,7 +106,7 @@ class CoffeeMakerApp extends React.Component {
             <ul id="resultOutput" className="list-group">
               {this.state.log.map((item, index) => {
                 return (
-                  <li className="list-group-item d-flex align-items-center">
+                  <li key={`${index}-item`} className="list-group-item d-flex align-items-center">
                       <span className="badge badge-primary badge-pill mr-3 bg-dark">{index+1}</span>
                       {item.detail}
                   </li>

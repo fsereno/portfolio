@@ -154,36 +154,37 @@ class UniqueDataEntryApp extends React.Component {
           <div className="col-lg-12">
             <h3>Items:</h3>
             <p className="lead">Add new items to the table. Only unique entries are allowed.</p>
-            <table className="table" id="employeeTable">
-              <thead className="bg-dark text-white">
-                <tr>
-                  <th>First Name</th>
-                  <th>Second Name</th>
-                  <th>Contact</th>
-                  <th>PostCode</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-              {this.state.items.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{item.firstName}</td>
-                      <td>{item.secondName}</td>
-                      <td>{item.contact}</td>
-                      <td>{item.postCode}</td>
-                      <td><a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table className="table" id="itemTable">
+                <thead className="bg-dark text-white">
+                  <tr>
+                    <th>First Name</th>
+                    <th>Second Name</th>
+                    <th>Contact</th>
+                    <th>PostCode</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {this.state.items.map((item, index) => {
+                    return (
+                      <tr key={`${index}-${item.postCode}`}>
+                        <td>{item.firstName}</td>
+                        <td>{item.secondName}</td>
+                        <td>{item.contact}</td>
+                        <td>{item.postCode}</td>
+                        <td><a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         <div className="row splitter">
           <div className="col-lg-12">
             <p>No. of Items: {this.state.counter}</p>
-            <p>Item to add: {this.state.firstName} {this.state.secondName} {this.state.contact} {this.state.postCode}</p>
           </div>
         </div>
         <div className="row">

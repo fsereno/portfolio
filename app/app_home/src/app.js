@@ -241,7 +241,7 @@ class HomeApp extends React.Component {
             {this.state.applications.map((application, index) => {
               if (application.active && application.include) {
                 return (
-                  <div key={index} className="card p-3 bg-white min-height-160">
+                  <div key={`${index}-${application.name}`} className="card p-3 bg-white min-height-160">
                     <div className="card-body">
                       <h5 className="card-title">{application.name}</h5>
                       <p className="card-text">{application.subHeading}</p>

@@ -100,7 +100,7 @@
             "include": true
         },
         {
-            "name": "Azure Functions .NET Core, Unique Data Entry Api",
+            "name": "Azure Functions, .NET Core, Unique Data Entry Api",
             "subHeading": "A unique data entry form, using IEqualityComparer to manage illegal duplicate data entries.",
             "description": "Exploring Azure Functions serverless compute, using .NET Core.",
             "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
