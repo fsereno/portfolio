@@ -94,7 +94,7 @@ class ToDoListForm extends React.Component {
             <h3>Result:</h3>
             <ul id="toDoList" className="list-group">
               {store.getState().present.map((item, index) => {
-                  return <li key={index} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
+                  return <li key={`${index}-${item}`} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
                 })}
           </ul>
           </div>
