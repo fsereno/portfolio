@@ -77,7 +77,7 @@ describe(application, () => {
         it("Should run the process synchronously.", function(){
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
                 .type('#puzzleModal_input', '14')
