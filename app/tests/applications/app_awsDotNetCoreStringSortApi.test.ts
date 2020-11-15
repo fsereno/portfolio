@@ -55,7 +55,7 @@ describe(application, () => {
         it("Should enter a string of 'C,B,A,10,1' and sort to '1,10,A,B,C'.", function(){
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
                 .type('#puzzleModal_input', '11')

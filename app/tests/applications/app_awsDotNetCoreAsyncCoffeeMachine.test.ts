@@ -62,7 +62,7 @@ describe(application, () => {
                 .click('#puzzleModal_submit')
                 .wait(2000)
                 .click('#runSync')
-                .wait(7000)
+                .wait(9000)
                 .end()
                 .evaluate(() => {
                     let resultOutput = jQuery("#resultOutput").children();
