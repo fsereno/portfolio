@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- NOV-6
+- dev
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -20,10 +20,5 @@ steps:
 
 - script: |
     npm install
-    gulp tests --gulpfile gulpfile.js
-    dotnet test app/app_awsDotNetCoreShoppingCart/aws/test/aws.Tests --configuration $(buildConfiguration)
-    dotnet test app/app_awsDotNetCoreAsyncCoffeeMachine/aws/test/aws.Tests --configuration $(buildConfiguration)
-    dotnet test app/app_awsDotNetCoreEntitySortApi/aws/test/aws.Tests --configuration $(buildConfiguration)
-    dotnet test app/app_awsDotNetCoreStringSortApi/aws/test/aws.Tests --configuration $(buildConfiguration)
-
+    gulp build --gulpfile gulpfile.js
   displayName: 'npm install, gulp tasks, dotnet project build and tests.'
