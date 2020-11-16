@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { KeyGeneratorModule } from '../../typeScript/Modules/KeyGeneratorModule/app.js';
+import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
 
 let _keyGeneratorModule = new KeyGeneratorModule();
 

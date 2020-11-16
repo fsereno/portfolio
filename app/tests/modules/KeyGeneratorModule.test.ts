@@ -3,7 +3,7 @@ import { KeyGeneratorModule } from "../../typeScript/Modules/keyGeneratorModule/
 
 let sut:KeyGeneratorModule = null;
 
-describe("StringSearchModule", () => {
+describe("KeyGeneratorModule", () => {
     beforeEach( () => sut = new KeyGeneratorModule());
     describe("generate", () => {
         it("Should return same string, with no spaces.", () => {

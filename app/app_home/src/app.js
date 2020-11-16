@@ -11,7 +11,6 @@ import { HomeThreeModule } from "./homeThreeModule.js";
 import { ConfigUtilModule } from "../../js/configUtilModule";
 
 const FAUX_LOADING_TIME = 500;
-const NAVBAR_DROPDOWN_BTN_ID ="navbarNavDropdownBtn";
 const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
 const SEARCH_INPUT_ID = "searchInput";
 const MAIN_CONTAINER_ID = "mainContainer";
