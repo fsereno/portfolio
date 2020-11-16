@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { KeyGeneratorModule } from '../../typeScript/Modules/KeyGeneratorModule/app.js';
 import { PuzzleModule } from '../../js/puzzleModule.js';
 import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
@@ -14,6 +15,7 @@ const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endp
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
 let _errorModule = ErrorModule("errorModule");
+let _keyGeneratorModule = new KeyGeneratorModule();
 
 class EntitySort extends React.Component {
   constructor(props) {
@@ -149,7 +151,7 @@ class EntitySort extends React.Component {
           <div className="col-lg-12">
             <h3>Employees:</h3>
             <p className="lead">Add new employees to the table, sort using the column controls</p>
-            <div class="table-responsive">
+            <div className="table-responsive">
               <table className="table" id="employeeTable">
                 <thead className="bg-dark text-white">
                   <tr>
@@ -164,8 +166,9 @@ class EntitySort extends React.Component {
                 </thead>
                 <tbody>
                 {this.state.employees.map((employee, index) => {
+                    let key = _keyGeneratorModule.generate(`${employee.name} ${employee.salary}`);
                     return (
-                      <tr key={`${index}-${employee.name}`}>
+                      <tr key={key}>
                         <td>{employee.name}</td>
                         <td>{employee.displaySalary}</td>
                         <td><a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
@@ -189,11 +192,11 @@ class EntitySort extends React.Component {
               <label>Add an Employee</label>
               <div className="form-row align-items-center">
                 <div className="col-lg-2">
-                  <label className="sr-only" for="nameInput">Name</label>
+                  <label className="sr-only" htmlFor="nameInput">Name</label>
                   <input required type="text" className="form-control mb-2" id="nameInput" placeholder="John Doe" value={this.state.name} onChange={this.handleNameChange}/>
                 </div>
                 <div className="col-lg-2">
-                  <label className="sr-only" for="salaryInput">Salary</label>
+                  <label className="sr-only" htmlFor="salaryInput">Salary</label>
                   <div className="input-group mb-2">
                     <div className="input-group-prepend">
                       <div className="input-group-text">£</div>
