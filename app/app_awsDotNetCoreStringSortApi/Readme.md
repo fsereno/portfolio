@@ -8,9 +8,9 @@ Whilst this functionality could be achieved with JavaScript alone, I wanted to d
 
 A lot of research was undertaken for this application, with many permutations in order to overcome this simple, yet complex task. Made for a very enjoyable project!
 
--AWS Lambda Repository (https://github.com/fsereno/app_awsDotNetCoreStringSortApi)
+- AWS Lambda Repository (https://github.com/fsereno/app_awsDotNetCoreStringSortApi)
 
--IComparer (https://docs.microsoft.com/en-us/dotnet/api/system.collections.icomparer?view=netcore-3.1)
+- IComparer (https://docs.microsoft.com/en-us/dotnet/api/system.collections.icomparer?view=netcore-3.1)
 
 ### Explanation ###
 
