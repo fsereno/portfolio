@@ -29,9 +29,9 @@ class ToDoListForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.value.length > 0 && this.state.counter < this.state.counterLimit) {
-      this.state.list.push(this.state.value);
+      let items = this.state.list.concat(this.state.value);
       this.setState({
-        list: this.state.list,
+        list: items,
         value: "",
         counter: this.state.counter + 1
       });
@@ -72,7 +72,7 @@ class ToDoListForm extends React.Component {
           <div className="col-lg-4">
             <form onSubmit={this.handleSubmit} autoComplete="off">
               <div className="form-group">
-                  <label for="itemInput">
+                  <label htmlFor="itemInput">
                     Input
                   </label>
                   <input className="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
