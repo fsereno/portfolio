@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { KeyGeneratorModule } from '../../typeScript/Modules/KeyGeneratorModule/app.js';
 import { PuzzleModule } from '../../js/puzzleModule.js';
 import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
@@ -14,6 +15,7 @@ const CAN_IT_BE_ADDED_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
 let _errorModule = ErrorModule("errorModule");
 let _duplicateEntryErrorModule = ErrorModule("duplicateEntryErrorModule");
+let _keyGeneratorModule = new KeyGeneratorModule();
 
 class UniqueDataEntryApp extends React.Component {
   constructor(props) {
@@ -154,7 +156,7 @@ class UniqueDataEntryApp extends React.Component {
           <div className="col-lg-12">
             <h3>Items:</h3>
             <p className="lead">Add new items to the table. Only unique entries are allowed.</p>
-            <div class="table-responsive">
+            <div className="table-responsive">
               <table className="table" id="itemTable">
                 <thead className="bg-dark text-white">
                   <tr>
@@ -167,8 +169,9 @@ class UniqueDataEntryApp extends React.Component {
                 </thead>
                 <tbody>
                 {this.state.items.map((item, index) => {
+                    let key = _keyGeneratorModule.generate(`${item.secondName} ${item.contact} ${item.postCode}`);
                     return (
-                      <tr key={`${index}-${item.postCode}`}>
+                      <tr key={key}>
                         <td>{item.firstName}</td>
                         <td>{item.secondName}</td>
                         <td>{item.contact}</td>

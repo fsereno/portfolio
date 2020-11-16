@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { KeyGeneratorModule } from '../../typeScript/Modules/KeyGeneratorModule/app.js';
 import { configureStore, createAction, createReducer } from '@reduxjs/toolkit';
 import undoable, { ActionCreators } from 'redux-undo';
 
@@ -22,6 +23,8 @@ const undoableTodoReducer = undoable(todoReducer);
 const store = configureStore({
   reducer: undoableTodoReducer
 });
+
+let _keyGeneratorModule = new KeyGeneratorModule();
 
 class ToDoListForm extends React.Component {
   constructor(props) {
@@ -94,7 +97,9 @@ class ToDoListForm extends React.Component {
             <h3>Result:</h3>
             <ul id="toDoList" className="list-group">
               {store.getState().present.map((item, index) => {
-                  return <li key={`${index}-${item}`} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
+                  let key = _keyGeneratorModule.generate(item);
+                  console.log(key);
+                  return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
                 })}
           </ul>
           </div>
@@ -109,7 +114,7 @@ class ToDoListForm extends React.Component {
           <div className="col-lg-4">
             <form onSubmit={this.handleSubmit} autoComplete="off">
               <div className="form-group">
-                  <label for="itemInput">
+                  <label htmlFor="itemInput">
                     Input
                   </label>
                   <input className="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
