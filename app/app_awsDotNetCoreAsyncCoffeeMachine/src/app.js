@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { KeyGeneratorModule } from '../../typeScript/Modules/KeyGeneratorModule/app.js';
 import { PuzzleModule } from '../../js/puzzleModule.js';
 import { SpinnerModule } from '../../js/spinnerModule.js'
 import { ErrorModule } from '../../js/errorModule.js';
@@ -14,6 +15,7 @@ const RUN_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.r
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
 let _errorModule = ErrorModule("errorModule");
+let _keyGeneratorModule = new KeyGeneratorModule();
 
 class CoffeeMakerApp extends React.Component {
   constructor(props) {
@@ -105,8 +107,10 @@ class CoffeeMakerApp extends React.Component {
           <this.renderProcessHeading/>
             <ul id="resultOutput" className="list-group">
               {this.state.log.map((item, index) => {
+                let key = _keyGeneratorModule.generate(item.detail);
+                console.log(key);
                 return (
-                  <li key={`${index}-item`} className="list-group-item d-flex align-items-center">
+                  <li key={key} className="list-group-item d-flex align-items-center">
                       <span className="badge badge-primary badge-pill mr-3 bg-dark">{index+1}</span>
                       {item.detail}
                   </li>

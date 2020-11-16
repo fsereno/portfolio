@@ -7,7 +7,7 @@ export let ErrorModule = function(modalId) {
     let hide = () => $(`#${modalId}`).modal("hide");
     let Render = function(props) {
         return (
-            <div className="modal fade" data-backdrop="static" id={modalId} tabindex="-1" aria-modal="true" role="dialog">
+            <div className="modal fade" data-backdrop="static" id={modalId} tabIndex="-1" aria-modal="true" role="dialog">
                 <div className="modal-dialog modal-xl">
                     <div className="modal-content">
                         <div className="modal-header">
