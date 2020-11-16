@@ -11,7 +11,7 @@ describe("StringSearchModule", () => {
                 "TypeScript",
                 "JavaScript",
                 "React",
-                ".Net Core"
+                ".NET Core"
             ];
             let result = sut.searchCriterions(criterions, "React")
             expect(result).to.equal(true);
@@ -21,7 +21,7 @@ describe("StringSearchModule", () => {
                 "TypeScript",
                 "JavaScript",
                 "React",
-                ".Net Core"
+                ".NET Core"
             ];
             let result = sut.searchCriterions(criterions, "Basic TypeScript")
             expect(result).to.equal(true);
@@ -31,7 +31,7 @@ describe("StringSearchModule", () => {
                 "TypeScript",
                 "JavaScript",
                 "React",
-                ".Net Core"
+                ".NET Core"
             ];
             let result = sut.searchCriterions(criterions, "typescript")
             expect(result).to.equal(true);
@@ -66,8 +66,8 @@ describe("StringSearchModule", () => {
             expect(result).to.equal("");
         });
         it("Should return both existing and current search terms", () => {
-            let result = sut.combineSearchTerms("React", ".Net Core");
-            expect(result).to.equal("React .Net Core");
+            let result = sut.combineSearchTerms("React", ".NET Core");
+            expect(result).to.equal("React .NET Core");
         });
         it("Should return only existing if current search term is empty", () => {
             let result = sut.combineSearchTerms("React");

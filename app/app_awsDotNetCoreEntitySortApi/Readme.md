@@ -1,10 +1,10 @@
 # ASP.NET Core Entity Sorting API. A Serverless Application with React Interface
 
-With this application I have built a complex type sorting interface, using .Net Core served via an AWS Serverless Application (SAM). A basic React user interface handles user input and application state.
+With this application I have built a complex type sorting interface, using .NET Core served via an AWS Serverless Application (SAM). A basic React user interface handles user input and application state.
 
-Whilst this functionality could be achieved with JavaScript alone, I wanted to demonstrate knowledge of two key .Net Core interfaces: ICompareable and IComparer.
+Whilst this functionality could be achieved with JavaScript alone, I wanted to demonstrate knowledge of two key .NET Core interfaces: ICompareable and IComparer.
 
--AWS Lambda Function Repository (https://github.com/fsereno/app_awsDotNetCoreEntitySortApi)
+-AWS Lambda Repository (https://github.com/fsereno/app_awsDotNetCoreEntitySortApi)
 
 -ICompareable (https://docs.microsoft.com/en-us/dotnet/api/system.icomparable?view=netcore-3.1)
 

@@ -2,9 +2,11 @@
 
 With this application I have built a simple shopping basket, each item consisting only of a primitive string value.
 
-The basket can be modified using the individual request inputs. The user interface and application state are React driven with data modification being processed via .Net Core running on AWS Lambda.
+The basket can be modified using the individual request inputs. The user interface and application state are React driven with data modification being processed via .NET Core running on AWS Lambda.
 
--AWS Lambda Function Repository (https://github.com/fsereno/app_awsDotNetCoreShoppingCart)
+Whilst this functionality could be achieved with JavaScript alone, I wanted to explore AWS Lambda and .NET Core. So the decision was made to go serverless compute for data modifications.
+
+-AWS Lambda Repository (https://github.com/fsereno/app_awsDotNetCoreShoppingCart)
 
 ### Explanation ###
 

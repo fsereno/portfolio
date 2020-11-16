@@ -232,7 +232,7 @@ class HomeApp extends React.Component {
               <div className="btn-group d-flex flex-row justify-content-center">
                 <button type="button" className="btn btn-outline-dark" value="React" onClick={this.handleQuickFilter}>React</button>
                 <button type="button" className="btn btn-outline-dark" value="TypeScript" onClick={this.handleQuickFilter}>TypeScript</button>
-                <button type="button" className="btn btn-outline-dark" value=".Net Core" onClick={this.handleQuickFilter}>.Net Core</button>
+                <button type="button" className="btn btn-outline-dark" value=".NET Core" onClick={this.handleQuickFilter}>.NET Core</button>
               </div>
             </div>
           </div>
