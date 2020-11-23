@@ -53,6 +53,23 @@ class UniqueDataEntryApp extends React.Component {
   }
 
   handleContactChange(event) {
+
+    let contact = event.target.value;
+    let regex = /[0-9]/;
+    let result = "";
+
+    for (let i = 0; i < contact.length; i++) {
+
+      let test = regex.test(contact[i]);
+
+      if (test) {
+        result += contact[i];
+      }
+
+    }
+
+    console.log(result);
+
     this.setState({contact: event.target.value});
   }
 
