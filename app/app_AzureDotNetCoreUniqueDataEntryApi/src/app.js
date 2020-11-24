@@ -81,6 +81,11 @@ class UniqueDataEntryApp extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
+    let formData = new FormData(event.target); /// GET THE VALUES LIKE THIS, NO NEED FOR ON CHANGE EVENTS PER ONE
+
+    console.log(formData.get("secondNameInput"));
+
     let data = {
       items: this.state.items,
       item: {
@@ -199,19 +204,19 @@ class UniqueDataEntryApp extends React.Component {
               <div className="form-row align-items-center">
                 <div className="col-lg-2">
                   <label className="sr-only" htmlFor="firstNameInput">First Name</label>
-                  <input required type="text" className="form-control mb-2" id="firstNameInput" placeholder="First name" value={this.state.firstName} onChange={this.handleFirstNameChange}/>
+                  <input required type="text" className="form-control mb-2" id="firstNameInput" name="firstNameInput" placeholder="First name" value={this.state.firstName} onChange={this.handleFirstNameChange}/>
                 </div>
                 <div className="col-lg-2">
                   <label className="sr-only" htmlFor="secondNameInput">Second Name</label>
-                  <input required type="text" className="form-control mb-2" id="secondNameInput" placeholder="Second name" value={this.state.secondName} onChange={this.handleSecondNameChange}/>
+                  <input required type="text" className="form-control mb-2" id="secondNameInput"  name="secondNameInput" placeholder="Second name" value={this.state.secondName} onChange={this.handleSecondNameChange}/>
                 </div>
                 <div className="col-lg-2">
                   <label className="sr-only" htmlFor="contactInput">Contact</label>
-                  <input required type="text" className="form-control mb-2" id="contactInput" placeholder="Contact number" value={this.state.contact} onChange={this.handleContactChange}/>
+                  <input required type="text" className="form-control mb-2" id="contactInput" name="contactInput" placeholder="Contact number" value={this.state.contact} onChange={this.handleContactChange}/>
                 </div>
                 <div className="col-lg-2">
                   <label className="sr-only" htmlFor="postCodeInput">PostCode</label>
-                  <input required type="text" className="form-control mb-2" id="postCodeInput" placeholder="Postcode" value={this.state.postCode} onChange={this.handlePostCodeChange}/>
+                  <input required type="text" className="form-control mb-2" id="postCodeInput" name="postCodeInput" placeholder="Postcode" value={this.state.postCode} onChange={this.handlePostCodeChange}/>
                 </div>
                 <div className="col-lg-2">
                   <button id="addItem_submit" type="submit" className="btn btn-dark mb-2 w-100">Add</button>
