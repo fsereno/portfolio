@@ -1,8 +1,7 @@
-export class ContactFilterModule {
+export class CharFilterModule {
 
-    filterNonNumerics(value: string) : string {
+    filter(value: string, regex: RegExp) : string {
 
-        let regex = /[0-9]/;
         let result = "";
 
         for (let i = 0; i < value.length; i++) {
