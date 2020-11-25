@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
 import { CharFilterModule } from '../../typeScript/Modules/charFilterModule/app.js';
-import { PuzzleModule } from '../../js/modules/react/puzzleModule.js';
+import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from '../../js/modules/configUtilModule';
@@ -17,7 +17,7 @@ const SECOND_NAME_INPUT = "secondNameInput";
 const CONTACT_INPUT = "contactInput";
 const POSTCODE_INPUT = "postCodeInput";
 
-let _puzzleModule = PuzzleModule(14, "puzzleModal");
+let _puzzleModule = PuzzleModalModule(14, "puzzleModal");
 let _errorModule = new ErrorModalModule("errorModule");
 let _duplicateEntryErrorModule = new ErrorModalModule("duplicateEntryErrorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
@@ -42,7 +42,7 @@ class UniqueDataEntryApp extends React.Component {
   }
 
   handleAjax(request) {
-    if (_puzzleModule.getResult()) {
+    if (_puzzleModule.isSolved()) {
       this.setState({
         showSpinner: true
       });
@@ -133,7 +133,7 @@ class UniqueDataEntryApp extends React.Component {
         <SpinnerModule
           show={this.state.showSpinner}
         />
-        <_puzzleModule.Render
+        <_puzzleModule.render
           puzzle={PUZZLE}
         />
         <div className="row splitter">

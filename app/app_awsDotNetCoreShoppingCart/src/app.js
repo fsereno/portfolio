@@ -2,9 +2,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PuzzleModule } from '../../js/modules/react/puzzleModule.js';
+import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
-import { ErrorModule } from '../../js/modules/react/errorModule.js';
+import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreShoppingCart");
@@ -19,8 +19,8 @@ const DEFAULT_COLLECTION = [
   { name: "Banana" }
 ]
 
-let _puzzleModule = PuzzleModule(15, "puzzleModal");
-let _errorModule = ErrorModule("errorModule");
+let _puzzleModule = PuzzleModalModule(15, "puzzleModal");
+let _errorModule = new ErrorModalModule("errorModule");
 
 function InputTemplate(props){
   return (
@@ -54,7 +54,7 @@ class ShoppingListApp extends React.Component {
   }
 
   handleAjax(request) {
-    if (_puzzleModule.getResult()) {
+    if (_puzzleModule.isSolved()) {
       this.setState({
         showSpinner: true
       });
@@ -174,11 +174,11 @@ class ShoppingListApp extends React.Component {
   render() {
     return (
       <div>
-        <_errorModule.Render/>
+        <_errorModule.render/>
         <SpinnerModule
           show={this.state.showSpinner}
         />
-        <_puzzleModule.Render
+        <_puzzleModule.render
           puzzle={PUZZLE}
         />
         <div className="row splitter">

@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 
-export let PuzzleModule = function(answer, modalId) {
+export let PuzzleModalModule = function(answer, modalId) {
     const IS_INVALID_CLASS = "is-invalid";
     let isInvalidClass = "";
-    let isValid = value => (!isNaN(value) ? Number(value) : value) === answer;
     let _isValid = false;
+    let isValid = value => (!isNaN(value) ? Number(value) : value) === answer;
     let hasValue = value => typeof value !== "undefined" && value.length > 0;
-    let getResult = () => _isValid;
+    let isSolved = () => _isValid;
     let show = () => $(`#${modalId}`).modal("show");
     let hide = () => $(`#${modalId}`).modal("hide");
     let RenderErrorMessage  = function(props) {
@@ -20,13 +20,13 @@ export let PuzzleModule = function(answer, modalId) {
             return null;
         }
     }
-    let handlePuzzleSubmit = () => {
+    let handlePuzzleSubmit = (event) => {
         event.preventDefault();
-        if (getResult()) {
+        if (isSolved()) {
             hide();
         }
     }
-    let Render = function(props) {
+    let render = function(props) {
 
         const [input, setInput] = useState(0);
 
@@ -80,7 +80,7 @@ export let PuzzleModule = function(answer, modalId) {
     return {
         show : show,
         hide : hide,
-        Render : Render,
-        getResult : getResult
+        render : render,
+        isSolved : isSolved
     }
 };

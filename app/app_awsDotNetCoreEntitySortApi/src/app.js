@@ -3,9 +3,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
-import { PuzzleModule } from '../../js/modules/react/puzzleModule.js';
+import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
-import { ErrorModule } from '../../js/modules/react/errorModule.js';
+import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 
 const PUZZLE = "4 x 4 - 2 =";
@@ -13,8 +13,8 @@ const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreEntitySortApi");
 const SORT_SALARY_ASC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryAsc}`;
 const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryDesc}`;
 
-let _puzzleModule = PuzzleModule(14, "puzzleModal");
-let _errorModule = ErrorModule("errorModule");
+let _puzzleModule = PuzzleModalModule(14, "puzzleModal");
+let _errorModule = new ErrorModalModule("errorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
 
 class EntitySort extends React.Component {
@@ -54,7 +54,7 @@ class EntitySort extends React.Component {
   }
 
   handleAjax(request) {
-    if (_puzzleModule.getResult()) {
+    if (_puzzleModule.isSolved()) {
       this.setState({
         showSpinner: true
       });
@@ -140,11 +140,11 @@ class EntitySort extends React.Component {
   render() {
     return (
       <div>
-        <_errorModule.Render/>
+        <_errorModule.render/>
         <SpinnerModule
           show={this.state.showSpinner}
         />
-        <_puzzleModule.Render
+        <_puzzleModule.render
           puzzle={PUZZLE}
         />
         <div className="row splitter">

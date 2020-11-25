@@ -2,17 +2,17 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PuzzleModule } from '../../js/modules/react/puzzleModule.js';
+import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
-import { ErrorModule } from '../../js/modules/react/errorModule.js';
+import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 
 const PUZZLE = "4 x 4 - 5 =";
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreStringSortApi");
 const SORT_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sort}`;
 
-let _puzzleModule = PuzzleModule(11, "puzzleModal");
-let _errorModule = ErrorModule("errorModule");
+let _puzzleModule = PuzzleModalModule(11, "puzzleModal");
+let _errorModule = new ErrorModalModule("errorModule");
 
 class StringSort extends React.Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class StringSort extends React.Component {
   }
 
   handleAjax(request) {
-    if (_puzzleModule.getResult()) {
+    if (_puzzleModule.isSolved()) {
       this.setState({
         showSpinner: true
       });
@@ -79,11 +79,11 @@ class StringSort extends React.Component {
   render() {
     return (
       <div>
-        <_errorModule.Render/>
+        <_errorModule.render/>
         <SpinnerModule
           show={this.state.showSpinner}
         />
-        <_puzzleModule.Render
+        <_puzzleModule.render
           puzzle={PUZZLE}
         />
         <div className="row splitter">
