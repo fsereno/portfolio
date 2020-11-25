@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
 import { CharFilterModule } from '../../typeScript/Modules/charFilterModule/app.js';
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
+import { PuzzleModalModule2 } from '../../js/modules/react/puzzleModalModule2.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from '../../js/modules/configUtilModule';
@@ -18,6 +19,7 @@ const CONTACT_INPUT = "contactInput";
 const POSTCODE_INPUT = "postCodeInput";
 
 let _puzzleModule = PuzzleModalModule(14, "puzzleModal");
+let _puzzleModule2 = PuzzleModalModule2();
 let _errorModule = new ErrorModalModule("errorModule");
 let _duplicateEntryErrorModule = new ErrorModalModule("duplicateEntryErrorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
@@ -35,10 +37,14 @@ class UniqueDataEntryApp extends React.Component {
       }],
       counterLimit: 10,
       counter: 1,
-      showSpinner: false
+      showSpinner: false,
+      showPuzzle: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete= this.handleDelete.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+
+    this.handleClose = this.handleClose.bind(this);
+    this.handleShow = this.handleShow.bind(this);
   }
 
   handleAjax(request) {
@@ -118,14 +124,31 @@ class UniqueDataEntryApp extends React.Component {
     });
   }
 
+  handleClose() {
+    this.setState({
+      showPuzzle: false
+    })
+  }
+
+  handleShow() {
+    this.setState({
+      showPuzzle: true
+    })
+  }
+
   componentDidMount() {
-    _puzzleModule.show();
+    //_puzzleModule.show();
   }
 
   render() {
     return (
       <div>
-        <_errorModule.render/>
+        <_puzzleModule2.render
+          show={this.state.showPuzzle}
+          handleClose={this.handleClose}
+          handleShow={this.handleShow}
+        />
+        <_errorModule.render />
         <_duplicateEntryErrorModule.render
           title="Duplicate entry detected!"
           body="You cannot add a duplicate item."
