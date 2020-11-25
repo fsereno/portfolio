@@ -12,6 +12,10 @@ import { ConfigUtilModule } from "../../js/configUtilModule";
 const PUZZLE = "4 x 4 - 2 =";
 const APP_CONFIG = ConfigUtilModule.get("AzureDotNetCoreUniqueDataEntryApi");
 const CAN_IT_BE_ADDED_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.canItemBeAddedAsync}`;
+const FIRST_NAME_INPUT = "firstNameInput";
+const SECOND_NAME_INPUT = "secondNameInput";
+const CONTACT_INPUT = "contactInput";
+const POSTCODE_INPUT = "postCodeInput";
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
 let _errorModule = ErrorModule("errorModule");
@@ -23,10 +27,6 @@ class UniqueDataEntryApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      secondName: '',
-      contact: '',
-      postCode: '',
       items: [{
         firstName: "John",
         secondName: "Doe",
@@ -37,29 +37,8 @@ class UniqueDataEntryApp extends React.Component {
       counter: 1,
       showSpinner: false
     };
-
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-    this.handleSecondNameChange = this.handleSecondNameChange.bind(this);
-    this.handleContactChange = this.handleContactChange.bind(this);
-    this.handlePostCodeChange = this.handlePostCodeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete= this.handleDelete.bind(this);
-  }
-
-  handleFirstNameChange(event) {
-    this.setState({firstName: event.target.value});
-  }
-
-  handleSecondNameChange(event) {
-    this.setState({secondName: event.target.value});
-  }
-
-  handleContactChange(event) {
-    this.setState({contact: event.target.value});
-  }
-
-  handlePostCodeChange(event) {
-    this.setState({postCode: event.target.value});
   }
 
   handleAjax(request) {
@@ -68,12 +47,12 @@ class UniqueDataEntryApp extends React.Component {
         showSpinner: true
       });
       $.ajax(request)
-      .fail(() => {
-        _errorModule.show();
-        this.setState({
-          showSpinner: false
+        .fail(() => {
+          _errorModule.show();
+          this.setState({
+            showSpinner: false
+          });
         });
-      });
     } else {
       _puzzleModule.show();
     }
@@ -82,17 +61,19 @@ class UniqueDataEntryApp extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    let formData = new FormData(event.target); /// GET THE VALUES LIKE THIS, NO NEED FOR ON CHANGE EVENTS PER ONE
-
-    console.log(formData.get("secondNameInput"));
+    let formData = new FormData(event.target);
+    let firstName = formData.get(FIRST_NAME_INPUT)
+    let secondName = formData.get(SECOND_NAME_INPUT)
+    let contact = formData.get(CONTACT_INPUT)
+    let postCode = formData.get(POSTCODE_INPUT)
 
     let data = {
       items: this.state.items,
       item: {
-        firstName: this.state.firstName,
-        secondName: this.state.secondName,
-        contact: _charFilterModule.filter(this.state.contact, /[0-9]/),
-        postCode: _charFilterModule.filter(this.state.postCode, /\w/),
+        firstName: firstName,
+        secondName: secondName,
+        contact: _charFilterModule.filter(contact, /[0-9]/),
+        postCode: _charFilterModule.filter(postCode, /\w/),
       }
     }
 
@@ -102,9 +83,9 @@ class UniqueDataEntryApp extends React.Component {
       type: "POST",
       success: (response) => {
         if (response === true) {
-          let array = [...this.state.items];
+          let items = [...this.state.items];
 
-          array.push({
+          items.push({
             firstName: data.item.firstName,
             secondName: data.item.secondName,
             contact: data.item.contact,
@@ -112,11 +93,7 @@ class UniqueDataEntryApp extends React.Component {
           });
 
           this.setState({
-            items: array,
-            firstName: "",
-            secondName: "",
-            contact: "",
-            postCode: "",
+            items: items,
             counter: this.state.counter + 1,
             showSpinner: false
           });
@@ -203,20 +180,20 @@ class UniqueDataEntryApp extends React.Component {
               <label>Add an Item</label>
               <div className="form-row align-items-center">
                 <div className="col-lg-2">
-                  <label className="sr-only" htmlFor="firstNameInput">First Name</label>
-                  <input required type="text" className="form-control mb-2" id="firstNameInput" name="firstNameInput" placeholder="First name" value={this.state.firstName} onChange={this.handleFirstNameChange}/>
+                  <label className="sr-only" htmlFor={FIRST_NAME_INPUT}>First Name</label>
+                  <input required type="text" className="form-control mb-2" id={FIRST_NAME_INPUT} name={FIRST_NAME_INPUT} placeholder="First name" />
                 </div>
                 <div className="col-lg-2">
-                  <label className="sr-only" htmlFor="secondNameInput">Second Name</label>
-                  <input required type="text" className="form-control mb-2" id="secondNameInput"  name="secondNameInput" placeholder="Second name" value={this.state.secondName} onChange={this.handleSecondNameChange}/>
+                  <label className="sr-only" htmlFor={SECOND_NAME_INPUT}>Second Name</label>
+                  <input required type="text" className="form-control mb-2" id={SECOND_NAME_INPUT}  name={SECOND_NAME_INPUT} placeholder="Second name" />
                 </div>
                 <div className="col-lg-2">
-                  <label className="sr-only" htmlFor="contactInput">Contact</label>
-                  <input required type="text" className="form-control mb-2" id="contactInput" name="contactInput" placeholder="Contact number" value={this.state.contact} onChange={this.handleContactChange}/>
+                  <label className="sr-only" htmlFor={CONTACT_INPUT}>Contact</label>
+                  <input required type="text" className="form-control mb-2" id={CONTACT_INPUT} name={CONTACT_INPUT} placeholder="Contact number" />
                 </div>
                 <div className="col-lg-2">
-                  <label className="sr-only" htmlFor="postCodeInput">PostCode</label>
-                  <input required type="text" className="form-control mb-2" id="postCodeInput" name="postCodeInput" placeholder="Postcode" value={this.state.postCode} onChange={this.handlePostCodeChange}/>
+                  <label className="sr-only" htmlFor={POSTCODE_INPUT}>PostCode</label>
+                  <input required type="text" className="form-control mb-2" id={POSTCODE_INPUT} name={POSTCODE_INPUT} placeholder="Postcode" />
                 </div>
                 <div className="col-lg-2">
                   <button id="addItem_submit" type="submit" className="btn btn-dark mb-2 w-100">Add</button>
