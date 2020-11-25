@@ -40,7 +40,7 @@ export let PuzzleModalModule = function(answer, modalId) {
 
         return (
             <div className="modal fade" data-backdrop="static" id={modalId} tabIndex="-1" aria-modal="true" role="dialog">
-                <div className="modal-dialog modal-xl">
+                <div className="modal-dialog modal-md">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="display-4 modal-title">{props.title || "Are you a human?"}</h5>

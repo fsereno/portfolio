@@ -229,9 +229,9 @@ class HomeApp extends React.Component {
             <div className="pb-3">
               <label className="d-flex flex-row justify-content-center">Quick search</label>
               <div className="btn-group d-flex flex-row justify-content-center">
-                <button type="button" className="btn btn-outline-dark" value="React" onClick={this.handleQuickFilter}>React</button>
-                <button type="button" className="btn btn-outline-dark" value="TypeScript" onClick={this.handleQuickFilter}>TypeScript</button>
-                <button type="button" className="btn btn-outline-dark" value=".NET Core" onClick={this.handleQuickFilter}>.NET Core</button>
+                <button type="button" className="btn btn-outline-dark flex-grow-0" value="React" onClick={this.handleQuickFilter}>React</button>
+                <button type="button" className="btn btn-outline-dark flex-grow-0" value="TypeScript" onClick={this.handleQuickFilter}>TypeScript</button>
+                <button type="button" className="btn btn-outline-dark flex-grow-0" value=".NET Core" onClick={this.handleQuickFilter}>.NET Core</button>
               </div>
             </div>
           </div>
