@@ -6,7 +6,7 @@ import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/
 import { CharFilterModule } from '../../typeScript/Modules/charFilterModule/app.js';
 import { PuzzleModule } from '../../js/modules/react/puzzleModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
-import { ErrorModule } from '../../js/modules/react/errorModule.js';
+import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from '../../js/modules/configUtilModule';
 
 const PUZZLE = "4 x 4 - 2 =";
@@ -18,8 +18,8 @@ const CONTACT_INPUT = "contactInput";
 const POSTCODE_INPUT = "postCodeInput";
 
 let _puzzleModule = PuzzleModule(14, "puzzleModal");
-let _errorModule = ErrorModule("errorModule");
-let _duplicateEntryErrorModule = ErrorModule("duplicateEntryErrorModule");
+let _errorModule = new ErrorModalModule("errorModule");
+let _duplicateEntryErrorModule = new ErrorModalModule("duplicateEntryErrorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
 let _charFilterModule = new CharFilterModule();
 
@@ -125,8 +125,8 @@ class UniqueDataEntryApp extends React.Component {
   render() {
     return (
       <div>
-        <_errorModule.Render/>
-        <_duplicateEntryErrorModule.Render
+        <_errorModule.render/>
+        <_duplicateEntryErrorModule.render
           title="Duplicate entry detected!"
           body="You cannot add a duplicate item."
         />
