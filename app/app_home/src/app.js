@@ -4,11 +4,11 @@ import "regenerator-runtime/runtime";
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { SpinnerModule } from '../../js/spinnerModule.js';
+import { SpinnerModule } from '../../js/modules/react/spinnerModule.js';
 import { StringSearchModule } from '../../typeScript/Modules/stringSearchModule/app.js';
-import { WebGLCheckerModule } from "../../js/webGLCheckerModule.js";
+import { WebGLCheckerModule } from "../../js/modules/webGLCheckerModule.js";
 import { HomeThreeModule } from "./homeThreeModule.js";
-import { ConfigUtilModule } from "../../js/configUtilModule";
+import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 
 const FAUX_LOADING_TIME = 500;
 const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";

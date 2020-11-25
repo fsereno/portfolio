@@ -1,4 +1,4 @@
-import Config from  '../../config.json';
+import Config from  '../../../config.json';
 
 export const ConfigUtilModule = (() => {
 

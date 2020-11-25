@@ -3,10 +3,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
-import { PuzzleModule } from '../../js/puzzleModule.js';
-import { SpinnerModule } from '../../js/spinnerModule.js'
-import { ErrorModule } from '../../js/errorModule.js';
-import { ConfigUtilModule } from "../../js/configUtilModule";
+import { PuzzleModule } from '../../js/modules/react/puzzleModule.js';
+import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
+import { ErrorModule } from '../../js/modules/react/errorModule.js';
+import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 
 const PUZZLE = "4 x 4 - 2 =";
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreAsyncCoffeeMachine");
