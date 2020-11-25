@@ -5,7 +5,7 @@ $medium: 991px;
     .navbar {
         &.fixed-top {
             .dropdown-menu {
-                max-height: 50vh;
+                max-height: 50vh !important;
             }
         }
         .navbar-nav .nav-link {

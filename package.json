@@ -82,7 +82,7 @@
     "aframe-animation-component": "^5.1.2",
     "aframe-cursor-teleport-component": "0.0.3",
     "aframe-teleport-controls": "^0.3.1",
-    "bootstrap": "^4.1.3",
+    "bootstrap": "^4.5.3",
     "cannon": "^0.6.2",
     "core-js": "^3.6.0",
     "font-awesome": "^4.7.0",
