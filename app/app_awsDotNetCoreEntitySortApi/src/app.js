@@ -8,12 +8,12 @@ import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 
-const PUZZLE = "4 x 4 - 2 =";
+const PUZZLE = "7 x 7 + 1 =";
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreEntitySortApi");
 const SORT_SALARY_ASC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryAsc}`;
 const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryDesc}`;
 
-let _puzzleModule = PuzzleModalModule(14, "puzzleModal");
+let _puzzleModalModule = PuzzleModalModule(15);
 let _errorModule = new ErrorModalModule("errorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
 
@@ -30,7 +30,8 @@ class EntitySort extends React.Component {
       }],
       counterLimit: 10,
       counter: 1,
-      showSpinner: false
+      showSpinner: false,
+      showPuzzleModal: true
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -39,6 +40,8 @@ class EntitySort extends React.Component {
     this.handleDelete= this.handleDelete.bind(this);
     this.handleSortSalaryAsc = this.handleSortSalaryAsc.bind(this);
     this.handleSortSalaryDesc = this.handleSortSalaryDesc.bind(this);
+    this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
+    this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
   }
 
   formatCurrency(value) {
@@ -54,10 +57,11 @@ class EntitySort extends React.Component {
   }
 
   handleAjax(request) {
-    if (_puzzleModule.isSolved()) {
+    if (_puzzleModalModule.isSolved()) {
       this.setState({
         showSpinner: true
       });
+      this.handlePuzzleModalClose();
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
@@ -66,7 +70,7 @@ class EntitySort extends React.Component {
         });
       });
     } else {
-      _puzzleModule.show();
+      this.handlePuzzleModalShow();
     }
   }
 
@@ -133,8 +137,16 @@ class EntitySort extends React.Component {
     });
   }
 
-  componentDidMount() {
-    _puzzleModule.show();
+  handlePuzzleModalClose() {
+    this.setState({
+      showPuzzleModal: false
+    })
+  }
+
+  handlePuzzleModalShow() {
+    this.setState({
+      showPuzzleModal: true
+    })
   }
 
   render() {
@@ -144,8 +156,11 @@ class EntitySort extends React.Component {
         <SpinnerModule
           show={this.state.showSpinner}
         />
-        <_puzzleModule.render
+        <_puzzleModalModule.render
           puzzle={PUZZLE}
+          show={this.state.showPuzzleModal}
+          handleClose={this.handlePuzzleModalClose}
+          handleShow={this.handlePuzzleModalShow}
         />
         <div className="row splitter">
           <div className="col-lg-12">
