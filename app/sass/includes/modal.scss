@@ -7,9 +7,10 @@
         .display-4 {
             font-size: 2rem;
         }
-        .close {
+        button.close {
             width: 55px;
             height: 75px;
+            position: relative;
             cursor: pointer;
             &:focus {
                 outline:none;
@@ -20,6 +21,9 @@
                 transform: rotate(45deg);
                 display: block;
                 background: $darkGrey;
+                position: absolute;
+                top: 1rem;
+                left: 4rem;
 
                 .rl {
                     height: 50px;

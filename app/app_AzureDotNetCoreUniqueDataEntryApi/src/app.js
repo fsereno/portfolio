@@ -18,8 +18,7 @@ const SECOND_NAME_INPUT = "secondNameInput";
 const CONTACT_INPUT = "contactInput";
 const POSTCODE_INPUT = "postCodeInput";
 
-let _puzzleModule = PuzzleModalModule(14, "puzzleModal");
-let _puzzleModule2 = PuzzleModalModule2();
+let _puzzleModalModule = PuzzleModalModule2(14);
 let _errorModule = new ErrorModalModule("errorModule");
 let _duplicateEntryErrorModule = new ErrorModalModule("duplicateEntryErrorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
@@ -38,20 +37,21 @@ class UniqueDataEntryApp extends React.Component {
       counterLimit: 10,
       counter: 1,
       showSpinner: false,
-      showPuzzle: true
+      showPuzzleModal: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
 
-    this.handleClose = this.handleClose.bind(this);
-    this.handleShow = this.handleShow.bind(this);
+    this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
+    this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
   }
 
   handleAjax(request) {
-    if (_puzzleModule.isSolved()) {
+    if (_puzzleModalModule.isSolved()) {
       this.setState({
         showSpinner: true
       });
+      this.handlePuzzleModalClose();
       $.ajax(request)
         .fail(() => {
           _errorModule.show();
@@ -60,7 +60,7 @@ class UniqueDataEntryApp extends React.Component {
           });
         });
     } else {
-      _puzzleModule.show();
+      this.handlePuzzleModalShow();
     }
   }
 
@@ -124,29 +124,26 @@ class UniqueDataEntryApp extends React.Component {
     });
   }
 
-  handleClose() {
+  handlePuzzleModalClose() {
     this.setState({
-      showPuzzle: false
+      showPuzzleModal: false
     })
   }
 
-  handleShow() {
+  handlePuzzleModalShow() {
     this.setState({
-      showPuzzle: true
+      showPuzzleModal: true
     })
-  }
-
-  componentDidMount() {
-    //_puzzleModule.show();
   }
 
   render() {
     return (
       <div>
-        <_puzzleModule2.render
-          show={this.state.showPuzzle}
-          handleClose={this.handleClose}
-          handleShow={this.handleShow}
+        <_puzzleModalModule.render
+          puzzle={PUZZLE}
+          show={this.state.showPuzzleModal}
+          handleClose={this.handlePuzzleModalClose}
+          handleShow={this.handlePuzzleModalShow}
         />
         <_errorModule.render />
         <_duplicateEntryErrorModule.render
@@ -155,9 +152,6 @@ class UniqueDataEntryApp extends React.Component {
         />
         <SpinnerModule
           show={this.state.showSpinner}
-        />
-        <_puzzleModule.render
-          puzzle={PUZZLE}
         />
         <div className="row splitter">
           <div className="col-lg-12">
