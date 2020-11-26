@@ -8,12 +8,12 @@ import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 
-const PUZZLE = "4 x 4 - 2 =";
+const PUZZLE = "3 + 1 + 1 =";
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreAsyncCoffeeMachine");
 const RUN_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.run}`;
 const RUN_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.runAsync}`;
 
-let _puzzleModule = PuzzleModalModule(14, "puzzleModal");
+let _puzzleModalModule = PuzzleModalModule(5);
 let _errorModule = new ErrorModalModule("errorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
 
@@ -23,13 +23,16 @@ class CoffeeMakerApp extends React.Component {
     this.state = {
       log: [],
       processHeading: "",
-      showSpinner: false
+      showSpinner: false,
+      showPuzzleModal: true
     };
     this.handleRun = this.handleRun.bind(this);
     this.handleRunAsync = this.handleRunAsync.bind(this);
     this.handleAjax = this.handleAjax.bind(this);
     this.handleRequest = this.handleRequest.bind(this);
     this.renderProcessHeading = this.renderProcessHeading.bind(this);
+    this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
+    this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
   }
 
   handleRun() {
@@ -56,10 +59,11 @@ class CoffeeMakerApp extends React.Component {
   }
 
   handleAjax(request) {
-    if (_puzzleModule.isSolved()) {
+    if (_puzzleModalModule.isSolved()) {
       this.setState({
         showSpinner: true
       });
+      this.handlePuzzleModalClose();
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
@@ -68,7 +72,7 @@ class CoffeeMakerApp extends React.Component {
         });
       });
     } else {
-        _puzzleModule.show();
+      this.handlePuzzleModalShow();
     }
   }
 
@@ -79,8 +83,16 @@ class CoffeeMakerApp extends React.Component {
     return null;
   }
 
-  componentDidMount() {
-    _puzzleModule.show();
+  handlePuzzleModalClose() {
+    this.setState({
+      showPuzzleModal: false
+    })
+  }
+
+  handlePuzzleModalShow() {
+    this.setState({
+      showPuzzleModal: true
+    })
   }
 
   render() {
@@ -90,8 +102,11 @@ class CoffeeMakerApp extends React.Component {
         <SpinnerModule
           show={this.state.showSpinner}
         />
-        <_puzzleModule.render
+        <_puzzleModalModule.render
           puzzle={PUZZLE}
+          show={this.state.showPuzzleModal}
+          handleClose={this.handlePuzzleModalClose}
+          handleShow={this.handlePuzzleModalShow}
         />
         <div className="row mb-3">
           <div className="col-lg-6">

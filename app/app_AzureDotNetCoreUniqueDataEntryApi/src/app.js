@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
 import { CharFilterModule } from '../../typeScript/Modules/charFilterModule/app.js';
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
-import { PuzzleModalModule2 } from '../../js/modules/react/puzzleModalModule2.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from '../../js/modules/configUtilModule';
@@ -18,7 +17,7 @@ const SECOND_NAME_INPUT = "secondNameInput";
 const CONTACT_INPUT = "contactInput";
 const POSTCODE_INPUT = "postCodeInput";
 
-let _puzzleModalModule = PuzzleModalModule2(14);
+let _puzzleModalModule = PuzzleModalModule(14);
 let _errorModule = new ErrorModalModule("errorModule");
 let _duplicateEntryErrorModule = new ErrorModalModule("duplicateEntryErrorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
@@ -41,7 +40,6 @@ class UniqueDataEntryApp extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
   }

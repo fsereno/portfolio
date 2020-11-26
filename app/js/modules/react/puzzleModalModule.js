@@ -1,86 +1,81 @@
 "use strict;"
 
 import React, { useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
-export let PuzzleModalModule = function(answer, modalId) {
-    const IS_INVALID_CLASS = "is-invalid";
-    let isInvalidClass = "";
-    let _isValid = false;
-    let isValid = value => (!isNaN(value) ? Number(value) : value) === answer;
-    let hasValue = value => typeof value !== "undefined" && value.length > 0;
-    let isSolved = () => _isValid;
-    let show = () => $(`#${modalId}`).modal("show");
-    let hide = () => $(`#${modalId}`).modal("hide");
-    let RenderErrorMessage  = function(props) {
-        if (hasValue(props.input) && !isValid(props.input)) {
-            return (
-                <div className="invalid-feedback d-block">Incorrect answer! Please try again.</div>
-            );
-        } else {
-            return null;
-        }
+export let PuzzleModalModule = function(answer) {
+  const SHOW_CLASS = "d-block";
+  const DEFAULT_VALUE = " ";
+  let _isSolved = false;
+  let _hasError = false;
+  const showClass = () => _hasError ? SHOW_CLASS : "";
+  const isSolved = () => _isSolved;
+  const isValid = value => !isNaN(answer) ? Number(value) === answer : value === answer;
+  const hasValue = value => value !== DEFAULT_VALUE;
+  const validateInput = (input) => {
+    if (hasValue(input) && isValid(input)) {
+      _hasError = false;
+      _isSolved = true;
+    } else if(hasValue(input) && !isValid(input)) {
+      _hasError = true;
+      _isSolved = false;
+    } else {
+      _hasError = false;
+      _isSolved = false;
     }
-    let handlePuzzleSubmit = (event) => {
-        event.preventDefault();
-        if (isSolved()) {
-            hide();
-        }
-    }
-    let render = function(props) {
+  }
 
-        const [input, setInput] = useState(0);
+  function Puzzle(props) {
 
-        if (isValid(input)) {
-            _isValid = true;
-            isInvalidClass = "";
-        } else if(hasValue(input) && !isValid(input)) {
-            _isValid = false;
-            isInvalidClass = IS_INVALID_CLASS;
-        }
+    const [input, setInput] = useState(DEFAULT_VALUE);
+    const handleSubimt = () => _isSolved ? props.handleClose() : setInput("");
 
-        return (
-            <div className="modal fade" data-backdrop="static" id={modalId} tabIndex="-1" aria-modal="true" role="dialog">
-                <div className="modal-dialog modal-md">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="display-4 modal-title">{props.title || "Are you a human?"}</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span className="lr">
-                                    <span className="rl"></span>
-                                </span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                        <form id={`${modalId}_form`} onSubmit={props.event || handlePuzzleSubmit} autoComplete="off">
-                            <p>{props.label || "First answer this question to unlock the API:"}</p>
-                            <label>What is: {props.puzzle} ?</label>
-                            <div className="input-group mb-3">
-                                <input
-                                    id={`${modalId}_input`}
-                                    onBlur={event => setInput(event.target.value)}
-                                    required={(props.required || true) ? "required" : ""}
-                                    type="text"
-                                    className={`form-control ${isInvalidClass}`}
-                                    aria-label={props.puzzle}
-                                />
-                                <div className="input-group-append">
-                                    <button id={`${modalId}_submit`} className="btn btn-dark" type="submit">{props.button || "Submit"}</button>
-                                </div>
-                            </div>
-                            <RenderErrorMessage
-                                input={input}
-                            />
-                        </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-    return {
-        show : show,
-        hide : hide,
-        render : render,
-        isSolved : isSolved
-    }
-};
+    validateInput(input);
+
+    return (
+      <>
+        <Modal id={props.id || "puzzleModal"} show={props.show} onShow={() => setInput(DEFAULT_VALUE)} onHide={props.handleClose}>
+          <Modal.Header>
+            <Modal.Title className="display-4">{props.title || "Are you a human?"}</Modal.Title>
+            <Button variant="link" className="close" onClick={props.handleClose}>
+              <span className="lr">
+                  <span className="rl"></span>
+              </span>
+            </Button>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group>
+                <Form.Label>{`${props.label || "Whats is:"} ${props.puzzle}`}</Form.Label>
+                <Form.Control isInvalid={_hasError} isValid={_isSolved} type="text" placeholder="Answer..." onBlur={event => setInput(event.target.value)} />
+                <Form.Text className={`invalid-feedback ${showClass()}`}>
+                  {props.error || "Incorrect answer! Please try again."}
+                </Form.Text>
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={props.handleClose}>
+              Close
+            </Button>
+            <Button variant="dark" onClick={props.handleSubimt || handleSubimt}>
+              Submit
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+
+  let render = function(props) {
+      return (
+          <Puzzle {...props} />
+      )
+  }
+  return {
+    render: render,
+    isSolved: isSolved
+  }
+}
