@@ -202,7 +202,7 @@ class ShoppingListApp extends React.Component {
             </h3>
             <ul id="basketItems">
               {this.state.resultSet.map((item) => {
-                return <li>{item.name}</li>
+                return <li key={item.name}>{item.name}</li>
               })}
             </ul>
             <p className="lead">
