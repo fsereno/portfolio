@@ -18,12 +18,12 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '15')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '15')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    return jQuery("#puzzleModal").is(":hidden");
+                    return jQuery("#puzzleModal:visible").length === 0;
                 })
                 .end();
             }
@@ -37,13 +37,13 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '10')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '11')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let isVisible = jQuery("#puzzleModal").is(":visible");
-                    let hasError = jQuery("#puzzleModal_form .invalid-feedback").text().length > 0;
+                    let isVisible = jQuery("#puzzleModal:visible").length > 0;
+                    let hasError = jQuery("#puzzleModal .invalid-feedback:visible").length > 0
                     return isVisible && hasError;
                 })
                 .end();
@@ -58,8 +58,8 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '15')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '15')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .click('#get_form button#get_submit')
                 .wait(3000)
@@ -79,8 +79,8 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '15')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '15')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .type('#get_form input', '2')
                 .click('#get_form button#get_submit')
@@ -103,8 +103,8 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '15')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '15')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .type('#add_form input', 'Bread')
                 .click('#add_form button#add_submit')
@@ -127,8 +127,8 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '15')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '15')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .type('#delete_form input', '2')
                 .click('#delete_form button#delete_submit')
@@ -151,8 +151,8 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '15')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '15')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .type('#update_form input#update_position', '2')
                 .type('#update_form input#update_value', 'Wine')
