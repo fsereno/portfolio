@@ -63,7 +63,7 @@
         {
             "name": "To-Do List (React Redux)",
             "subHeading": "A basic React Redux application",
-            "description": "Exploring the use of Redux with React to manage application state, implementing Undo and Redo functionality.",
+            "description": "Using Redux with React to manage application state, implementing Undo and Redo functionality.",
             "searchTerms": "JavaScript,React,Redux,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "reactRedux",
             "active": true,
@@ -102,7 +102,7 @@
         {
             "name": "Azure Functions, .NET Core, Unique Data Entry Api",
             "subHeading": "A unique data entry form, using IEqualityComparer to manage illegal duplicate data entries.",
-            "description": "Exploring Azure Functions serverless compute, using .NET Core.",
+            "description": "Using Azure Functions serverless compute and .NET Core.",
             "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "AzureDotNetCoreUniqueDataEntryApi",
             "active": true,
@@ -117,7 +117,7 @@
         {
             "name": "AWS .NET Core Entity Sorting API",
             "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
-            "description": "Exploring AWS Lambda serverless applications (SAM), using .NET Core along with an AWS RESTful Gateway API.",
+            "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreEntitySortApi",
             "active": true,
@@ -133,7 +133,7 @@
         {
             "name": "AWS .NET Core Natural String Sorting API",
             "subHeading": "A natural string sorting algorithm implemnting IComparer, taking a comma seperated string of alphanumerical values.",
-            "description": "Exploring AWS Lambda serverless applications (SAM), using .NET Core along with an AWS RESTful Gateway API.",
+            "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreStringSortApi",
             "active": true,
@@ -148,7 +148,7 @@
         {
             "name": "AWS .NET Core Shopping Cart API",
             "subHeading": "A basic shopping cart application, with data processing handled by a Serverless .NET Core RESTful API. React handles the UI.",
-            "description": "Exploring AWS Lambda serverless applications (SAM), using .NET Core along with an AWS RESTful Gateway API.",
+            "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreShoppingCart",
             "active": true,
@@ -165,7 +165,7 @@
         {
             "name": "AWS .NET Core Asynchronous Coffee Maker API",
             "subHeading": "Demonstraiting knowledge of asynchrony and multithreading.",
-            "description": "Exploring AWS Lambda serverless applications (SAM), using .NET Core along with an AWS RESTful Gateway API.",
+            "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreAsyncCoffeeMachine",
             "active": true,
