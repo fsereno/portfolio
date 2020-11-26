@@ -19,7 +19,7 @@ const DEFAULT_COLLECTION = [
   { name: "Banana" }
 ]
 
-let _puzzleModule = PuzzleModalModule(15, "puzzleModal");
+let _puzzleModalModule = PuzzleModalModule(15);
 let _errorModule = new ErrorModalModule("errorModule");
 
 function InputTemplate(props){
@@ -44,20 +44,23 @@ class ShoppingListApp extends React.Component {
       resultSet: DEFAULT_COLLECTION,
       answer: '',
       isValid: false,
-      puzzle: PUZZLE,
-      showSpinner: false
+      showSpinner: false,
+      showPuzzleModal: true
     };
     this.handleGetSubmit = this.handleGetSubmit.bind(this);
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
     this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this);
     this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
+    this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
+    this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
   }
 
   handleAjax(request) {
-    if (_puzzleModule.isSolved()) {
+    if (_puzzleModalModule.isSolved()) {
       this.setState({
         showSpinner: true
       });
+      this.handlePuzzleModalClose();
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
@@ -66,7 +69,7 @@ class ShoppingListApp extends React.Component {
         });
       });
     } else {
-      _puzzleModule.show();
+      this.handlePuzzleModalShow();
     }
   }
 
@@ -167,8 +170,16 @@ class ShoppingListApp extends React.Component {
     this.handleAjax(request);
   }
 
-  componentDidMount() {
-    _puzzleModule.show();
+  handlePuzzleModalClose() {
+    this.setState({
+      showPuzzleModal: false
+    })
+  }
+
+  handlePuzzleModalShow() {
+    this.setState({
+      showPuzzleModal: true
+    })
   }
 
   render() {
@@ -178,8 +189,11 @@ class ShoppingListApp extends React.Component {
         <SpinnerModule
           show={this.state.showSpinner}
         />
-        <_puzzleModule.render
+        <_puzzleModalModule.render
           puzzle={PUZZLE}
+          show={this.state.showPuzzleModal}
+          handleClose={this.handlePuzzleModalClose}
+          handleShow={this.handlePuzzleModalShow}
         />
         <div className="row splitter">
           <div className="col-lg-12">
@@ -192,7 +206,7 @@ class ShoppingListApp extends React.Component {
               })}
             </ul>
             <p className="lead">
-              User the below interface to alter the baskets contents:
+              Use the below interface to alter the baskets contents:
             </p>
           </div>
         </div>
