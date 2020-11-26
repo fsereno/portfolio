@@ -118,7 +118,7 @@ class StringSort extends React.Component {
               <label>Enter comma seperated values to sort</label>
               <div className="form-row align-items-center">
                 <div className="col-lg-10">
-                  <label className="sr-only" for="valuesInput">To Sort</label>
+                  <label className="sr-only" htmlFor="valuesInput">To Sort</label>
                   <input required type="text" className="form-control mb-2" id="valuesInput" placeholder="B,C,A" value={this.state.values} onChange={this.handleValuesChange}/>
                 </div>
                 <div className="col-lg-2">

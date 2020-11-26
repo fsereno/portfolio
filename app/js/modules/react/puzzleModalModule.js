@@ -60,7 +60,7 @@ export let PuzzleModalModule = function(answer) {
             <Button variant="secondary" onClick={props.handleClose}>
               Close
             </Button>
-            <Button variant="dark" onClick={props.handleSubimt || handleSubimt}>
+            <Button id="submitPuzzle" variant="dark" onClick={props.handleSubimt || handleSubimt}>
               Submit
             </Button>
           </Modal.Footer>

@@ -15,15 +15,15 @@ describe(application, () => {
         it("Should accept the answer and close the modal when correct.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:false})
+                return new Nightmare({show:true})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '11')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '11')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    return jQuery("#puzzleModal").is(":hidden");
+                    return jQuery("#puzzleModal:visible").length === 0;
                 })
                 .end();
             }
@@ -34,16 +34,16 @@ describe(application, () => {
         it("Should reject the answer and not close the modal when incorrect.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:false})
+                return new Nightmare({show:true})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '10')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '10')
+                .click('#puzzleModal #submitPuzzle')
                 .wait(2000)
                 .end()
                 .evaluate(() => {
                     let isVisible = jQuery("#puzzleModal").is(":visible");
-                    let hasError = jQuery("#puzzleModal_form .invalid-feedback").text().length > 0;
+                    let hasError = jQuery("#puzzleModal .invalid-feedback:visible").length > 0
                     return isVisible && hasError;
                 })
                 .end();
@@ -58,8 +58,8 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '11')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '11')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .type('#valuesInput', 'C,B,A,10,1')
                 .click('#sort_submit')
