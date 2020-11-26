@@ -42,7 +42,7 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let isVisible = jQuery("#puzzleModal").is(":visible");
+                    let isVisible = jQuery("#puzzleModal:visible").length > 0;
                     let hasError = jQuery("#puzzleModal .invalid-feedback:visible").length > 0
                     return isVisible && hasError;
                 })

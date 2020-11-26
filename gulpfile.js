@@ -196,7 +196,7 @@ let startServerTask = () => {
 
 let frontendTestTask = () => {
   return new Promise((resolve, reject) => {
-      gulp.src(config.developmentDir+"/tests/functional/app_awsDotNetCoreStringSortApi.test.ts")
+      gulp.src(config.developmentDir+"/tests/functional/app_awsDotNetCoreEntitySortApi.test.ts")
         .pipe(flatmap((stream) => {
           return stream
             .pipe(mocha({
