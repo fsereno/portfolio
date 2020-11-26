@@ -18,12 +18,12 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '14')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '5')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    return jQuery("#puzzleModal").is(":hidden");
+                    return jQuery("#puzzleModal:visible").length === 0;
                 })
                 .end();
             }
@@ -37,13 +37,13 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '10')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '11')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let isVisible = jQuery("#puzzleModal").is(":visible");
-                    let hasError = jQuery("#puzzleModal_form .invalid-feedback").text().length > 0;
+                    let isVisible = jQuery("#puzzleModal:visible").length > 0;
+                    let hasError = jQuery("#puzzleModal .invalid-feedback:visible").length > 0
                     return isVisible && hasError;
                 })
                 .end();
@@ -58,8 +58,8 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '14')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '5')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .click('#runSync')
                 .wait(9000)
@@ -80,8 +80,8 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
-                .type('#puzzleModal_input', '14')
-                .click('#puzzleModal_submit')
+                .type('#puzzleModal input[type=text]', '5')
+                .click('#submitPuzzle')
                 .wait(2000)
                 .click('#runAsync')
                 .wait(7000)
