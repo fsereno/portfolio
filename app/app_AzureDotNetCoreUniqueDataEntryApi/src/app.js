@@ -2,6 +2,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
 import { CharFilterModule } from '../../typeScript/Modules/charFilterModule/app.js';
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
@@ -191,6 +194,32 @@ class UniqueDataEntryApp extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-12">
+            <Form>
+              <Form.Label>
+                Add an Item
+              </Form.Label>
+              <Form.Row>
+                <Form.Group as={Col} controlId={FIRST_NAME_INPUT}>
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control placeholder="First name"/>
+                </Form.Group>
+                <Form.Group as={Col} controlId={SECOND_NAME_INPUT}>
+                  <Form.Label>Second Name</Form.Label>
+                  <Form.Control placeholder="Second name"/>
+                </Form.Group>
+                <Form.Group as={Col} controlId={CONTACT_INPUT}>
+                  <Form.Label>Contact number</Form.Label>
+                  <Form.Control placeholder="Contact number"/>
+                </Form.Group>
+                <Form.Group as={Col} controlId={POSTCODE_INPUT}>
+                  <Form.Label>Postcode</Form.Label>
+                  <Form.Control placeholder="Postcode"/>
+                </Form.Group>
+              </Form.Row>
+            </Form>
+
+
+
             <form onSubmit={this.handleSubmit} autoComplete="off">
               <label>Add an Item</label>
               <div className="form-row align-items-center">

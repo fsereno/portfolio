@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 export let PuzzleModalModule = function(answer) {
   const SHOW_CLASS = "d-block";
@@ -30,7 +32,16 @@ export let PuzzleModalModule = function(answer) {
   function Puzzle(props) {
 
     const [input, setInput] = useState(DEFAULT_VALUE);
-    const handleSubimt = () => _isSolved ? props.handleClose() : setInput("");
+    const handleSubimt = (event) => {
+      event.preventDefault();
+      console.log("submitted")
+
+      if (_isSolved) {
+        props.handleClose();
+      } else {
+        setInput("");
+      }
+    }
 
     validateInput(input);
 
@@ -46,32 +57,95 @@ export let PuzzleModalModule = function(answer) {
             </Button>
           </Modal.Header>
           <Modal.Body>
-            <Form>
+            <Form noValidate onSubmit={props.handleSubimt || handleSubimt}>
               <Form.Group>
-                <Form.Label>{`${props.label || "Whats is:"} ${props.puzzle}`}</Form.Label>
-                <Form.Control isInvalid={_hasError} isValid={_isSolved} type="text" placeholder="Answer..." onBlur={event => setInput(event.target.value)} />
+                <Form.Label>{`${props.label || "Whats is:"} ${props.puzzle} ?`}</Form.Label>
+                <Form.Control required isInvalid={_hasError} isValid={_isSolved} type="text" placeholder="Answer..." onBlur={event => setInput(event.target.value)} />
                 <Form.Text className={`invalid-feedback ${showClass()}`}>
                   {props.error || "Incorrect answer! Please try again."}
                 </Form.Text>
               </Form.Group>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={props.handleClose}>
+                  Close
+                </Button>
+                <Button type="submit" id="submitPuzzle" variant="dark">
+                  Submit
+                </Button>
+              </Modal.Footer>
             </Form>
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={props.handleClose}>
-              Close
-            </Button>
-            <Button id="submitPuzzle" variant="dark" onClick={props.handleSubimt || handleSubimt}>
-              Submit
-            </Button>
-          </Modal.Footer>
         </Modal>
+      </>
+    );
+  }
+
+
+  function Puzzle2(props) {
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+
+      if (form.checkValidity() === false) {
+        _isSolved = false;
+        event.stopPropagation();
+      } else {
+        _isSolved = true;
+        props.handleClose();
+      }
+
+      setValidated(true);
+
+    };
+
+    return (
+      <>
+        <Modal id={props.id || "puzzleModal"} show={props.show} onShow={() => setInput(DEFAULT_VALUE)} onHide={props.handleClose}>
+          <Modal.Header>
+            <Modal.Title className="display-4">{props.title || "Are you a human?"}</Modal.Title>
+            <Button variant="link" className="close" onClick={props.handleClose}>
+              <span className="lr">
+                  <span className="rl"></span>
+              </span>
+            </Button>
+          </Modal.Header>
+          <Modal.Body>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Form.Row>
+                <Form.Group as={Col} controlId="validationPuzzleAnswer">
+                  <Form.Label>{`${props.label || "Whats is:"} ${props.puzzle} ?`}</Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                      type="text"
+                      placeholder="Answer..."
+                      aria-describedby="inputGroupPrepend"
+                      pattern={answer}
+                      required
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {props.error || "Incorrect answer! Please try again."}
+                    </Form.Control.Feedback>
+                  </InputGroup>
+                </Form.Group>
+              </Form.Row>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={props.handleClose}>
+                  Close
+                </Button>
+                <Button variant="dark" type="submit">Submit</Button>
+              </Modal.Footer>
+            </Form>
+            </Modal.Body>
+          </Modal>
       </>
     );
   }
 
   let render = function(props) {
       return (
-          <Puzzle {...props} />
+          <Puzzle2 {...props} />
       )
   }
   return {
