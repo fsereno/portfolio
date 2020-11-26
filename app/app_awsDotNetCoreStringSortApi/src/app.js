@@ -11,7 +11,7 @@ const PUZZLE = "4 x 4 - 5 =";
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreStringSortApi");
 const SORT_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sort}`;
 
-let _puzzleModule = PuzzleModalModule(11, "puzzleModal");
+let _puzzleModalModule = PuzzleModalModule(11);
 let _errorModule = new ErrorModalModule("errorModule");
 
 class StringSort extends React.Component {
@@ -20,10 +20,13 @@ class StringSort extends React.Component {
     this.state = {
       values: '',
       result: '',
-      showSpinner: false
+      showSpinner: false,
+      showPuzzleModal: true
     };
     this.handleValuesChange = this.handleValuesChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
+    this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
   }
 
   handleValuesChange(event) {
@@ -31,10 +34,11 @@ class StringSort extends React.Component {
   }
 
   handleAjax(request) {
-    if (_puzzleModule.isSolved()) {
+    if (_puzzleModalModule.isSolved()) {
       this.setState({
         showSpinner: true
       });
+      this.handlePuzzleModalClose();
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
@@ -43,7 +47,7 @@ class StringSort extends React.Component {
         });
       });
     } else {
-      _puzzleModule.show();
+      this.handlePuzzleModalShow();
     }
   }
 
@@ -72,8 +76,16 @@ class StringSort extends React.Component {
     }
   }
 
-  componentDidMount() {
-    _puzzleModule.show();
+  handlePuzzleModalClose() {
+    this.setState({
+      showPuzzleModal: false
+    })
+  }
+
+  handlePuzzleModalShow() {
+    this.setState({
+      showPuzzleModal: true
+    })
   }
 
   render() {
@@ -83,8 +95,11 @@ class StringSort extends React.Component {
         <SpinnerModule
           show={this.state.showSpinner}
         />
-        <_puzzleModule.render
+        <_puzzleModalModule.render
           puzzle={PUZZLE}
+          show={this.state.showPuzzleModal}
+          handleClose={this.handlePuzzleModalClose}
+          handleShow={this.handlePuzzleModalShow}
         />
         <div className="row splitter">
           <div className="col-lg-12">
