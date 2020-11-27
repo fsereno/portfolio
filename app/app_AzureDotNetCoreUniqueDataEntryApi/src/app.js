@@ -2,15 +2,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
 import { CharFilterModule } from '../../typeScript/Modules/charFilterModule/app.js';
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from '../../js/modules/configUtilModule';
+import { FormModule } from './formModule';
 
 const PUZZLE = "4 x 4 - 2 =";
 const APP_CONFIG = ConfigUtilModule.get("AzureDotNetCoreUniqueDataEntryApi");
@@ -20,6 +18,7 @@ const SECOND_NAME_INPUT = "secondNameInput";
 const CONTACT_INPUT = "contactInput";
 const POSTCODE_INPUT = "postCodeInput";
 
+let _formModule = FormModule();
 let _puzzleModalModule = PuzzleModalModule(14);
 let _errorModule = new ErrorModalModule("errorModule");
 let _duplicateEntryErrorModule = new ErrorModalModule("duplicateEntryErrorModule");
@@ -194,56 +193,7 @@ class UniqueDataEntryApp extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-12">
-            <Form>
-              <Form.Label>
-                Add an Item
-              </Form.Label>
-              <Form.Row>
-                <Form.Group as={Col} controlId={FIRST_NAME_INPUT}>
-                  <Form.Label>First Name</Form.Label>
-                  <Form.Control placeholder="First name"/>
-                </Form.Group>
-                <Form.Group as={Col} controlId={SECOND_NAME_INPUT}>
-                  <Form.Label>Second Name</Form.Label>
-                  <Form.Control placeholder="Second name"/>
-                </Form.Group>
-                <Form.Group as={Col} controlId={CONTACT_INPUT}>
-                  <Form.Label>Contact number</Form.Label>
-                  <Form.Control placeholder="Contact number"/>
-                </Form.Group>
-                <Form.Group as={Col} controlId={POSTCODE_INPUT}>
-                  <Form.Label>Postcode</Form.Label>
-                  <Form.Control placeholder="Postcode"/>
-                </Form.Group>
-              </Form.Row>
-            </Form>
-
-
-
-            <form onSubmit={this.handleSubmit} autoComplete="off">
-              <label>Add an Item</label>
-              <div className="form-row align-items-center">
-                <div className="col-lg-2">
-                  <label className="sr-only" htmlFor={FIRST_NAME_INPUT}>First Name</label>
-                  <input required type="text" className="form-control mb-2" id={FIRST_NAME_INPUT} name={FIRST_NAME_INPUT} placeholder="First name" />
-                </div>
-                <div className="col-lg-2">
-                  <label className="sr-only" htmlFor={SECOND_NAME_INPUT}>Second Name</label>
-                  <input required type="text" className="form-control mb-2" id={SECOND_NAME_INPUT}  name={SECOND_NAME_INPUT} placeholder="Second name" />
-                </div>
-                <div className="col-lg-2">
-                  <label className="sr-only" htmlFor={CONTACT_INPUT}>Contact</label>
-                  <input required type="text" className="form-control mb-2" id={CONTACT_INPUT} name={CONTACT_INPUT} placeholder="Contact number" />
-                </div>
-                <div className="col-lg-2">
-                  <label className="sr-only" htmlFor={POSTCODE_INPUT}>PostCode</label>
-                  <input required type="text" className="form-control mb-2" id={POSTCODE_INPUT} name={POSTCODE_INPUT} placeholder="Postcode" />
-                </div>
-                <div className="col-lg-2">
-                  <button id="addItem_submit" type="submit" className="btn btn-dark mb-2 w-100">Add</button>
-                </div>
-              </div>
-            </form>
+            <_formModule.render handleSubmit={this.handleSubmit}/>
           </div>
         </div>
       </div>
