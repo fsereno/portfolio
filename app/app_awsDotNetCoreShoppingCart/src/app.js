@@ -58,9 +58,9 @@ class ShoppingListApp extends React.Component {
   handleAjax(request) {
     if (_puzzleModalModule.isSolved()) {
       this.setState({
-        showSpinner: true
+        showSpinner: true,
+        showPuzzleModal: false
       });
-      this.handlePuzzleModalClose();
       $.ajax(request)
       .fail(() => {
         _errorModule.show();
