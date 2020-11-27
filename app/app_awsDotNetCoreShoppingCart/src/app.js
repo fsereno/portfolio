@@ -20,7 +20,7 @@ const DEFAULT_COLLECTION = [
 ]
 
 let _puzzleModalModule = PuzzleModalModule(15);
-let _errorModule = new ErrorModalModule("errorModule");
+let _errorModalModule = new ErrorModalModule("errorModule");
 
 function InputTemplate(props){
   return (
@@ -45,7 +45,8 @@ class ShoppingListApp extends React.Component {
       answer: '',
       isValid: false,
       showSpinner: false,
-      showPuzzleModal: true
+      showPuzzleModal: true,
+      showErrorModal: false,
     };
     this.handleGetSubmit = this.handleGetSubmit.bind(this);
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
@@ -53,9 +54,13 @@ class ShoppingListApp extends React.Component {
     this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
+    this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
   }
 
   handleAjax(request) {
+
+    request.url = request.url+"TEST"
+
     if (_puzzleModalModule.isSolved()) {
       this.setState({
         showSpinner: true,
@@ -63,9 +68,9 @@ class ShoppingListApp extends React.Component {
       });
       $.ajax(request)
       .fail(() => {
-        _errorModule.show();
         this.setState({
-          showSpinner: false
+          showSpinner: false,
+          showErrorModal: true
         });
       });
     } else {
@@ -182,10 +187,19 @@ class ShoppingListApp extends React.Component {
     })
   }
 
+  handleErrorModalClose() {
+    this.setState({
+      showErrorModal: false
+    })
+  }
+
   render() {
     return (
       <div>
-        <_errorModule.render/>
+        <_errorModalModule.render
+          show={this.state.showErrorModal}
+          handleClose={this.handleErrorModalClose}
+        />
         <SpinnerModule
           show={this.state.showSpinner}
         />
