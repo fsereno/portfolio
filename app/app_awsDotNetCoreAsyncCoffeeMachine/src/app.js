@@ -14,7 +14,7 @@ const RUN_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.run}`;
 const RUN_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.runAsync}`;
 
 let _puzzleModalModule = PuzzleModalModule(5);
-let _errorModule = new ErrorModalModule("errorModule");
+let _errorModalModule = new ErrorModalModule("errorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
 
 class CoffeeMakerApp extends React.Component {
@@ -106,7 +106,7 @@ class CoffeeMakerApp extends React.Component {
   render() {
     return (
       <div>
-        <_errorModule.render
+        <_errorModalModule.render
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
