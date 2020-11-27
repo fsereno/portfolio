@@ -58,9 +58,6 @@ class ShoppingListApp extends React.Component {
   }
 
   handleAjax(request) {
-
-    request.url = request.url+"TEST"
-
     if (_puzzleModalModule.isSolved()) {
       this.setState({
         showSpinner: true,

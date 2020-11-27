@@ -12,7 +12,7 @@ const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreStringSortApi");
 const SORT_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sort}`;
 
 let _puzzleModalModule = PuzzleModalModule(11);
-let _errorModule = new ErrorModalModule("errorModule");
+let _errorModalModule = new ErrorModalModule("errorModule");
 
 class StringSort extends React.Component {
   constructor(props) {
@@ -21,12 +21,14 @@ class StringSort extends React.Component {
       values: '',
       result: '',
       showSpinner: false,
-      showPuzzleModal: true
+      showPuzzleModal: true,
+      showErrorModal: false,
     };
     this.handleValuesChange = this.handleValuesChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
+    this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
   }
 
   handleValuesChange(event) {
@@ -41,9 +43,9 @@ class StringSort extends React.Component {
       });
       $.ajax(request)
       .fail(() => {
-        _errorModule.show();
         this.setState({
-          showSpinner: false
+          showSpinner: false,
+          showErrorModal: true
         });
       });
     } else {
@@ -88,10 +90,19 @@ class StringSort extends React.Component {
     })
   }
 
+  handleErrorModalClose() {
+    this.setState({
+      showErrorModal: false
+    })
+  }
+
   render() {
     return (
       <div>
-        <_errorModule.render/>
+        <_errorModalModule.render
+          show={this.state.showErrorModal}
+          handleClose={this.handleErrorModalClose}
+        />
         <SpinnerModule
           show={this.state.showSpinner}
         />
