@@ -38,24 +38,28 @@ class UniqueDataEntryApp extends React.Component {
       counterLimit: 10,
       counter: 1,
       showSpinner: false,
-      showPuzzleModal: true
+      showPuzzleModal: true,
+      showErrorModal: false,
+      showDuplicateErrorModal: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
+    this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
+    this.handleDuplicateErrorModalClose = this.handleDuplicateErrorModalClose.bind(this);
   }
 
   handleAjax(request) {
     if (_puzzleModalModule.isSolved()) {
       this.setState({
-        showSpinner: true
+        showSpinner: true,
+        showPuzzleModal: false //TODO:  do this in the other apps
       });
-      this.handlePuzzleModalClose();
       $.ajax(request)
         .fail(() => {
-          _errorModule.show();
           this.setState({
+            showErrorModal: true,
             showSpinner: false
           });
         });
@@ -84,7 +88,7 @@ class UniqueDataEntryApp extends React.Component {
     }
 
     let request = {
-      url: CAN_IT_BE_ADDED_ASYNC_ENDPOINT,
+      url: CAN_IT_BE_ADDED_ASYNC_ENDPOINT+"TEST",
       data: JSON.stringify(data),
       type: "POST",
       success: (response) => {
@@ -104,9 +108,9 @@ class UniqueDataEntryApp extends React.Component {
             showSpinner: false
           });
         } else {
-          _duplicateEntryErrorModule.show();
           this.setState({
-            showSpinner: false
+            showSpinner: false,
+            showDuplicateErrorModal: true
           })
         }
       }
@@ -122,6 +126,18 @@ class UniqueDataEntryApp extends React.Component {
       items: this.state.items,
       counter: this.state.counter - 1
     });
+  }
+
+  handleErrorModalClose() {
+    this.setState({
+      showErrorModal: false
+    })
+  }
+
+  handleDuplicateErrorModalClose() {
+    this.setState({
+      showDuplicateErrorModal: false
+    })
   }
 
   handlePuzzleModalClose() {
@@ -145,10 +161,15 @@ class UniqueDataEntryApp extends React.Component {
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
         />
-        <_errorModule.render />
+        <_errorModule.render 
+          show={this.state.showErrorModal}
+          handleClose={this.handleErrorModalClose}
+        />
         <_duplicateEntryErrorModule.render
+          show={this.state.showDuplicateErrorModal}
           title="Duplicate entry detected!"
           body="You cannot add a duplicate item."
+          handleClose={this.handleDuplicateErrorModalClose}
         />
         <SpinnerModule
           show={this.state.showSpinner}
