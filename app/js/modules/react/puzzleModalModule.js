@@ -17,9 +17,7 @@ export let PuzzleModalModule = function(answer) {
   function Puzzle(props) {
     const [validated, setValidated] = useState(false);
 
-    const handleShow = () => {
-      setValidated(false);
-    }
+    const handleShow = () => setValidated(false);
 
     const handleSubmit = (event) => {
       event.preventDefault();
