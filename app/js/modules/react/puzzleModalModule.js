@@ -84,25 +84,31 @@ export let PuzzleModalModule = function(answer) {
   function Puzzle2(props) {
     const [validated, setValidated] = useState(false);
 
+    const handleShow = () => {
+      setValidated(false);
+    }
+
     const handleSubmit = (event) => {
       event.preventDefault();
       const form = event.currentTarget;
+      const formData = new FormData(form);
+      const answerValue = formData.get("answerInput");
+      const isAnswerValid = isValid(answerValue);
 
       if (form.checkValidity() === false) {
         _isSolved = false;
         event.stopPropagation();
-      } else {
-        _isSolved = true;
+      } else if (isAnswerValid) {
+        _isSolved = isAnswerValid;
         props.handleClose();
       }
 
       setValidated(true);
-
     };
 
     return (
       <>
-        <Modal id={props.id || "puzzleModal"} show={props.show} onShow={() => setInput(DEFAULT_VALUE)} onHide={props.handleClose}>
+        <Modal id={props.id || "puzzleModal"} show={props.show} nHide={props.handleClose} onShow={handleShow}>
           <Modal.Header>
             <Modal.Title className="display-4">{props.title || "Are you a human?"}</Modal.Title>
             <Button variant="link" className="close" onClick={props.handleClose}>
@@ -114,10 +120,11 @@ export let PuzzleModalModule = function(answer) {
           <Modal.Body>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
               <Form.Row>
-                <Form.Group as={Col} controlId="validationPuzzleAnswer">
+                <Form.Group as={Col} controlId="answerInput">
                   <Form.Label>{`${props.label || "Whats is:"} ${props.puzzle} ?`}</Form.Label>
                   <InputGroup>
                     <Form.Control
+                      name="answerInput"
                       type="text"
                       placeholder="Answer..."
                       aria-describedby="inputGroupPrepend"
