@@ -9,8 +9,6 @@ export class ErrorModalModule {
         this.modalId = modalId;
         this.render = this.render.bind(this);
     }
-    //show() { $(`#${this.modalId}`).modal("show") }
-    //hide() { $(`#${this.modalId}`).modal("hide") }
     render(props) {
         return (
             <Modal id={this.modalId} show={props.show} onHide={props.handleClose}>

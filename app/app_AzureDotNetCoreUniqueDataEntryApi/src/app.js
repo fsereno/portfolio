@@ -88,7 +88,7 @@ class UniqueDataEntryApp extends React.Component {
     }
 
     let request = {
-      url: CAN_IT_BE_ADDED_ASYNC_ENDPOINT+"TEST",
+      url: CAN_IT_BE_ADDED_ASYNC_ENDPOINT,
       data: JSON.stringify(data),
       type: "POST",
       success: (response) => {
