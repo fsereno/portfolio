@@ -24,7 +24,8 @@ class CoffeeMakerApp extends React.Component {
       log: [],
       processHeading: "",
       showSpinner: false,
-      showPuzzleModal: true
+      showPuzzleModal: true,
+      showErrorModal: false,
     };
     this.handleRun = this.handleRun.bind(this);
     this.handleRunAsync = this.handleRunAsync.bind(this);
@@ -33,6 +34,7 @@ class CoffeeMakerApp extends React.Component {
     this.renderProcessHeading = this.renderProcessHeading.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
+    this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
   }
 
   handleRun() {
@@ -66,9 +68,9 @@ class CoffeeMakerApp extends React.Component {
       });
       $.ajax(request)
       .fail(() => {
-        _errorModule.show();
         this.setState({
-          showSpinner: false
+          showSpinner: false,
+          showErrorModal: true
         });
       });
     } else {
@@ -95,10 +97,19 @@ class CoffeeMakerApp extends React.Component {
     })
   }
 
+  handleErrorModalClose() {
+    this.setState({
+      showErrorModal: false
+    })
+  }
+
   render() {
     return (
       <div>
-        <_errorModule.render/>
+        <_errorModule.render
+          show={this.state.showErrorModal}
+          handleClose={this.handleErrorModalClose}
+        />
         <SpinnerModule
           show={this.state.showSpinner}
         />
