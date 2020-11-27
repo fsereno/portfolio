@@ -14,7 +14,7 @@ const SORT_SALARY_ASC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpo
 const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryDesc}`;
 
 let _puzzleModalModule = PuzzleModalModule(15);
-let _errorModule = new ErrorModalModule("errorModule");
+let _errorModalModule = new ErrorModalModule("errorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
 
 class EntitySort extends React.Component {
@@ -31,7 +31,8 @@ class EntitySort extends React.Component {
       counterLimit: 10,
       counter: 1,
       showSpinner: false,
-      showPuzzleModal: true
+      showPuzzleModal: true,
+      showErrorModal: false,
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -42,6 +43,7 @@ class EntitySort extends React.Component {
     this.handleSortSalaryDesc = this.handleSortSalaryDesc.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
+    this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
   }
 
   formatCurrency(value) {
@@ -64,9 +66,9 @@ class EntitySort extends React.Component {
       });
       $.ajax(request)
       .fail(() => {
-        _errorModule.show();
         this.setState({
-          showSpinner: false
+          showSpinner: false,
+          showErrorModal: true
         });
       });
     } else {
@@ -149,10 +151,19 @@ class EntitySort extends React.Component {
     })
   }
 
+  handleErrorModalClose() {
+    this.setState({
+      showErrorModal: false
+    })
+  }
+
   render() {
     return (
       <div>
-        <_errorModule.render/>
+        <_errorModalModule.render
+          show={this.state.showErrorModal}
+          handleClose={this.handleErrorModalClose}
+        />
         <SpinnerModule
           show={this.state.showSpinner}
         />
