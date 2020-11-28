@@ -7,6 +7,7 @@ import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
+import { FormModule } from "./formModule";
 
 const PUZZLE = "7 x 7 + 1 =";
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreEntitySortApi");
@@ -16,6 +17,7 @@ const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endp
 let _puzzleModalModule = PuzzleModalModule(15);
 let _errorModalModule = new ErrorModalModule("errorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
+let _formModule = FormModule();
 
 class EntitySort extends React.Component {
   constructor(props) {
@@ -122,8 +124,6 @@ class EntitySort extends React.Component {
         });
       this.setState({
         employees: this.state.employees,
-        name: "",
-        salary: "",
         counter: this.state.counter + 1
       });
     }
@@ -214,27 +214,13 @@ class EntitySort extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-12">
-            <form onSubmit={this.handleSubmit} autoComplete="off">
-              <label>Add an Employee</label>
-              <div className="form-row align-items-center">
-                <div className="col-lg-2">
-                  <label className="sr-only" htmlFor="nameInput">Name</label>
-                  <input required type="text" className="form-control mb-2" id="nameInput" placeholder="John Doe" value={this.state.name} onChange={this.handleNameChange}/>
-                </div>
-                <div className="col-lg-2">
-                  <label className="sr-only" htmlFor="salaryInput">Salary</label>
-                  <div className="input-group mb-2">
-                    <div className="input-group-prepend">
-                      <div className="input-group-text">£</div>
-                    </div>
-                    <input required type="number" min="0" className="form-control" id="salaryInput" placeholder="0.00" value={this.state.salary} onChange={this.handleSalaryChange}/>
-                  </div>
-                </div>
-                <div className="col-lg-2">
-                  <button id="addEmployee_submit" type="submit" className="btn btn-dark mb-2 w-100">Add</button>
-                </div>
-              </div>
-            </form>
+            <_formModule.render
+              handleSubmit={this.handleSubmit}
+              handleNameChange={this.handleNameChange}
+              handleSalaryChange={this.handleSalaryChange}
+              name={this.state.name}
+              salary={this.state.salary}
+            />
           </div>
         </div>
       </div>
