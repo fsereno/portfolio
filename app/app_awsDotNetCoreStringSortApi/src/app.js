@@ -6,6 +6,7 @@ import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
+import { FormModule } from "./formModule";
 
 const PUZZLE = "4 x 4 - 5 =";
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreStringSortApi");
@@ -13,6 +14,7 @@ const SORT_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sort}`
 
 let _puzzleModalModule = PuzzleModalModule(11);
 let _errorModalModule = new ErrorModalModule("errorModule");
+let _formModule = FormModule();
 
 class StringSort extends React.Component {
   constructor(props) {
@@ -125,18 +127,11 @@ class StringSort extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-12">
-            <form onSubmit={this.handleSubmit} autoComplete="off">
-              <label>Enter comma seperated values to sort</label>
-              <div className="form-row align-items-center">
-                <div className="col-lg-10">
-                  <label className="sr-only" htmlFor="valuesInput">To Sort</label>
-                  <input required type="text" className="form-control mb-2" id="valuesInput" placeholder="B,C,A" value={this.state.values} onChange={this.handleValuesChange}/>
-                </div>
-                <div className="col-lg-2">
-                  <button id="sort_submit" type="submit" className="btn btn-dark mb-2 w-100">Sort</button>
-                </div>
-              </div>
-            </form>
+            <_formModule.render
+              value={this.state.values}
+              onChange={this.handleValuesChange}
+              handleSubmit={this.handleSubmit}
+            />
           </div>
         </div>
       </div>
