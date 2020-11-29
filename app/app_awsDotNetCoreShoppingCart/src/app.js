@@ -1,7 +1,13 @@
 "use strict;"
 
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import InputGroup from 'react-bootstrap/InputGroup';
+
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
@@ -23,16 +29,55 @@ let _puzzleModalModule = PuzzleModalModule(15);
 let _errorModalModule = new ErrorModalModule("errorModule");
 
 function InputTemplate(props){
+
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+
+    if (form.checkValidity() === false) {
+
+      event.stopPropagation();
+
+    } else {
+
+      props.handleSubmit(event);
+
+    }
+
+    setValidated(true);
+  };
+
   return (
-    <form id={`${props.id}_form`} onSubmit={props.event} autoComplete="off">
-        <label>{props.label}</label>
-        <div className="input-group mb-3">
-          <input required={props.required ? "required" : ""} type="text" className="form-control" placeholder={props.placeholder} aria-label={props.placeholder} />
-          <div className="input-group-append">
-          <button id={`${props.id}_submit`} className="btn btn-dark api-submit" type="submit">{props.button}</button>
-          </div>
-        </div>
-    </form>
+    <>
+      <Row className="splitter">
+        <Col md={12}>
+          <Form id={`${props.id}_form`} noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form.Row>
+              <Form.Label htmlFor="nameInput" srOnly>
+                {props.label}
+              </Form.Label>
+              <InputGroup>
+                <Form.Control
+                  id={props.id}
+                  name={props.id}
+                  type="text"
+                  placeholder={props.placeholder}
+                  required
+                />
+                <InputGroup.Append>
+                  <Button id={`${props.id}_submit`} variant="dark api-submit" type="submit">{props.button}</Button>
+                </InputGroup.Append>
+                <Form.Control.Feedback type="invalid">
+                  Please enter a value.
+                </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Row>
+          </Form>
+        </Col>
+      </Row>
+    </>
   )
 }
 
@@ -225,7 +270,7 @@ class ShoppingListApp extends React.Component {
           <div className="col-lg-4">
             <InputTemplate
               id="get"
-              event={this.handleGetSubmit}
+              handleSubmit={this.handleGetSubmit}
               label="Get items (eg. 1 or 2 to get singular)"
               placeholder="Item position or leave empty"
               button="Get"
@@ -233,7 +278,7 @@ class ShoppingListApp extends React.Component {
             />
             <InputTemplate
               id="add"
-              event={this.handleAddSubmit}
+              handleSubmit={this.handleAddSubmit}
               label="Add an item"
               placeholder="Name of item to add"
               button="Add"
@@ -242,7 +287,7 @@ class ShoppingListApp extends React.Component {
             />
             <InputTemplate
               id="delete"
-              event={this.handleDeleteSubmit}
+              handleSubmit={this.handleDeleteSubmit}
               label="Delete an item"
               placeholder="Item position to remove (eg. 1 or 2)"
               button="Delete"
