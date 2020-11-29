@@ -28,7 +28,7 @@ const DEFAULT_COLLECTION = [
 let _puzzleModalModule = PuzzleModalModule(15);
 let _errorModalModule = new ErrorModalModule("errorModule");
 
-function InputTemplate(props){
+function FormTemplate(props){
 
   const [validated, setValidated] = useState(false);
 
@@ -55,22 +55,25 @@ function InputTemplate(props){
         <Col md={12}>
           <Form id={`${props.id}_form`} noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Row>
-              <Form.Label htmlFor="nameInput" srOnly>
+              <Form.Label htmlFor={props.id}>
                 {props.label}
               </Form.Label>
               <InputGroup>
-                <Form.Control
-                  id={props.id}
-                  name={props.id}
-                  type="text"
-                  placeholder={props.placeholder}
-                  required
-                />
+                {props.children.map(item => {
+                  return (<Form.Control
+                    key={item.id}
+                    id={item.id}
+                    name={item.id}
+                    type={item.type || "text"}
+                    placeholder={item.placeholder}
+                    required={item.required ? "required" : ""}
+                  />)
+                })}
                 <InputGroup.Append>
                   <Button id={`${props.id}_submit`} variant="dark api-submit" type="submit">{props.button}</Button>
                 </InputGroup.Append>
                 <Form.Control.Feedback type="invalid">
-                  Please enter a value.
+                  {props.error || "Please enter a valid value."}
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Row>
@@ -268,42 +271,56 @@ class ShoppingListApp extends React.Component {
         </div>
        <div className="row splitter">
           <div className="col-lg-4">
-            <InputTemplate
-              id="get"
+            <FormTemplate
               handleSubmit={this.handleGetSubmit}
-              label="Get items (eg. 1 or 2 to get singular)"
-              placeholder="Item position or leave empty"
               button="Get"
-              disabledBtnClass={this.state.disabledBtnClass}
+              id="get"
+              label="Get items (eg. 1 or 2 to get singular)"
+              children={[
+                { "id": "get",
+                  "placeholder": "Item position or leave empty",
+                  "type": "number"
+                }]}
             />
-            <InputTemplate
-              id="add"
+            <FormTemplate
               handleSubmit={this.handleAddSubmit}
-              label="Add an item"
-              placeholder="Name of item to add"
               button="Add"
-              disabledBtnClass={this.state.disabledBtnClass}
-              required={true}
+              id="add"
+              label="Add an item"
+              children={[
+                { "id": "add",
+                  "placeholder": "Name of item to add",
+                  "required": true
+                }]}
             />
-            <InputTemplate
-              id="delete"
+            <FormTemplate
               handleSubmit={this.handleDeleteSubmit}
-              label="Delete an item"
-              placeholder="Item position to remove (eg. 1 or 2)"
               button="Delete"
-              disabledBtnClass={this.state.disabledBtnClass}
-              required={true}
+              id="delete"
+              label="Delete an item"
+              children={[
+                { "id": "delete",
+                  "placeholder": "Item position to remove (eg. 1 or 2)",
+                  "required": true
+                }]}
             />
-            <form id="update_form" onSubmit={this.handleUpdateSubmit} autoComplete="off">
-                <label>Update an item (eg. 1 or 2)</label>
-                <div className="input-group mb-3">
-                  <input id="update_position" required type="text" className="form-control" placeholder="Position to update (eg. 1, or 2)" aria-label="Position to update (eg. 1, or 2)" />
-                  <input id="update_value" required type="text" className="form-control" placeholder="Update with value" aria-label="Update with value" />
-                  <div className="input-group-append">
-                    <button id="update_submit" className="btn btn-dark api-submit" type="submit">Update</button>
-                  </div>
-                </div>
-            </form>
+
+            <FormTemplate
+              handleSubmit={this.handleUpdateSubmit}
+              button="Update"
+              id="update"
+              label="Update an item (eg. 1 or 2)"
+              children={[
+                { "id": "update_position",
+                  "placeholder": "Position...",
+                  "required": true,
+                  "type": "number"
+                },
+                { "id": "update_value",
+                  "placeholder": "Value...",
+                  "required": true
+                }]}
+            />
           </div>
         </div>
       </div>
