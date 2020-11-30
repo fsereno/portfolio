@@ -35,7 +35,6 @@ describe(application, () => {
                 .type('#itemInput', 'Item 1')
                 .click('#submit')
                 .wait(2000)
-                .type('#itemInput', '')
                 .type('#itemInput', 'Item 1')
                 .click('#submit')
                 .wait(2000)

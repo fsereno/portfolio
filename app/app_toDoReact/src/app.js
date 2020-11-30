@@ -30,10 +30,11 @@ class ToDoListForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.value.length > 0 && this.state.counter < this.state.counterLimit) {
+    if (this.state.counter < this.state.counterLimit) {
       let items = this.state.list.concat(this.state.value);
       this.setState({
         list: items,
+        value: "",
         counter: this.state.counter + 1
       });
     }

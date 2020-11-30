@@ -5,11 +5,12 @@ import ReactDOM from 'react-dom';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
 import { configureStore, createAction, createReducer } from '@reduxjs/toolkit';
 import undoable, { ActionCreators } from 'redux-undo';
+import { FormModule } from './formModule';
 
-const addToDo = createAction("ADD_TODO");
-const removeToDo = createAction("REMOVE_TODO")
+const _addToDo = createAction("ADD_TODO");
+const _removeToDo = createAction("REMOVE_TODO")
 
-const todoReducer = createReducer([], {
+const _todoReducer = createReducer([], {
   ADD_TODO: (state, action) => {
     state.push(action.payload);
   },
@@ -18,13 +19,14 @@ const todoReducer = createReducer([], {
   }
 });
 
-const undoableTodoReducer = undoable(todoReducer);
+const _undoableTodoReducer = undoable(_todoReducer);
 
-const store = configureStore({
-  reducer: undoableTodoReducer
+const _store = configureStore({
+  reducer: _undoableTodoReducer
 });
 
 let _keyGeneratorModule = new KeyGeneratorModule();
+let _formModule = FormModule();
 
 class ToDoListForm extends React.Component {
   constructor(props) {
@@ -48,16 +50,16 @@ class ToDoListForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.value.length > 0 && this.state.counter < this.state.counterLimit) {
+    if (this.state.counter < this.state.counterLimit) {
 
-      let action = addToDo();
-      action = addToDo(this.state.value);
+      let action = _addToDo();
+      action = _addToDo(this.state.value);
 
-      store.dispatch( action );
+      _store.dispatch( action );
 
       this.setState({
         value: "",
-        counter: store.getState().present.length
+        counter: _store.getState().present.length
       });
     }
   }
@@ -66,26 +68,26 @@ class ToDoListForm extends React.Component {
     event.preventDefault();
     let index = Number(event.target.dataset.index);
 
-    let action = removeToDo();
-    action = removeToDo(index);
+    let action = _removeToDo();
+    action = _removeToDo(index);
 
-    store.dispatch(action);
+    _store.dispatch(action);
     this.setState({
-      counter: store.getState().present.length
+      counter: _store.getState().present.length
     });
   }
 
   handleUndo() {
-    store.dispatch(ActionCreators.undo());
+    _store.dispatch(ActionCreators.undo());
     this.setState({
-      counter: store.getState().present.length
+      counter: _store.getState().present.length
     });
   }
 
   handleRedo() {
-    store.dispatch(ActionCreators.redo());
+    _store.dispatch(ActionCreators.redo());
     this.setState({
-      counter: store.getState().present.length
+      counter: _store.getState().present.length
     });
   }
 
@@ -96,9 +98,8 @@ class ToDoListForm extends React.Component {
           <div className="col-lg-4">
             <h3>Result:</h3>
             <ul id="toDoList" className="list-group">
-              {store.getState().present.map((item, index) => {
+              {_store.getState().present.map((item, index) => {
                   let key = _keyGeneratorModule.generate(item);
-                  console.log(key);
                   return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
                 })}
           </ul>
@@ -111,18 +112,15 @@ class ToDoListForm extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-4">
-            <form onSubmit={this.handleSubmit} autoComplete="off">
-              <div className="form-group">
-                  <label htmlFor="itemInput">
-                    Input
-                  </label>
-                  <input className="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
-              </div>
-              <button id="submit" className="btn btn-dark mr-2" type="submit">Add item</button>
-              <button id="undo" className="btn btn-danger mr-2" type="button" onClick={this.handleUndo}>Undo</button>
-              <button id="redo" className="btn btn-dark mr-2" type="button" onClick={this.handleRedo}>Redo</button>
-            </form>
+          <div className="col-lg-6">
+            <_formModule.render
+              value={this.state.value}
+              onChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              items={_store.getState().present}
+              handleUndo={this.handleUndo}
+              handleRedo={this.handleRedo}
+            />
           </div>
         </div>
       </div>

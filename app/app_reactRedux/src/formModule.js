@@ -17,7 +17,7 @@ export let FormModule = function() {
       const data = new FormData(form);
       const input = data.get("itemInput");
 
-      let isNotUnique = props.items.filter(x => x === input).length > 0;
+      let isNotUnique = props.items.filter(x => x === input).length > 0; // module ?
 
       if (form.checkValidity() === false || isNotUnique) {
 
@@ -52,6 +52,12 @@ export let FormModule = function() {
               />
               <InputGroup.Append>
                 <Button id="submit" variant="dark" type="submit">Add item</Button>
+              </InputGroup.Append>
+              <InputGroup.Append>
+                <Button id="undo" variant="danger" type="button" onClick={props.handleUndo}>Undo</Button>
+              </InputGroup.Append>
+              <InputGroup.Append>
+                <Button id="redo" variant="dark" type="button" onClick={props.handleRedo}>Redo</Button>
               </InputGroup.Append>
               <Form.Control.Feedback type="invalid">
                 Please enter a value.
