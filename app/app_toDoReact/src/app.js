@@ -3,8 +3,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
+import { FormModule } from './formModule';
 
 let _keyGeneratorModule = new KeyGeneratorModule();
+let _formModule = FormModule();
 
 class ToDoListForm extends React.Component {
   constructor(props) {
@@ -32,7 +34,6 @@ class ToDoListForm extends React.Component {
       let items = this.state.list.concat(this.state.value);
       this.setState({
         list: items,
-        value: "",
         counter: this.state.counter + 1
       });
     }
@@ -69,16 +70,13 @@ class ToDoListForm extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-4">
-            <form onSubmit={this.handleSubmit} autoComplete="off">
-              <div className="form-group">
-                  <label htmlFor="itemInput">
-                    Input
-                  </label>
-                  <input className="form-control" id="itemInput" name="itemInput" type="text" placeholder="Add to list..." required value={this.state.value} onChange={this.handleChange} />
-              </div>
-              <button id="submit" className="btn btn-dark" type="submit">Add item</button>
-            </form>
+          <div className="col-lg-6">
+            <_formModule.render
+              value={this.state.value}
+              onChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
+              items={this.state.list}
+            />
           </div>
         </div>
       </div>

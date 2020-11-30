@@ -27,6 +27,26 @@ describe(application, () => {
             }
             return  test(url).should.eventually.equal(true)
         });
+        it("Should not add a duplicate item.", function() {
+            this.timeout(0);
+            let test = async (url) => {
+                return new Nightmare({show:true})
+                .goto(url)
+                .type('#itemInput', 'Item 1')
+                .click('#submit')
+                .wait(2000)
+                .type('#itemInput', '')
+                .type('#itemInput', 'Item 1')
+                .click('#submit')
+                .wait(2000)
+                .end()
+                .evaluate(() => {
+                    return jQuery("#toDoList").children().length === 1;
+                })
+                .end();
+            }
+            return  test(url).should.eventually.equal(true)
+        });
     });
     describe("Delete Item", () => {
         it("Should first add an item to the list and then delete it.", function() {
