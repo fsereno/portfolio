@@ -123,6 +123,8 @@ class EntitySort extends React.Component {
           displaySalary: this.formatCurrency(this.state.salary)
         });
       this.setState({
+        name: "",
+        salary: "",
         employees: this.state.employees,
         counter: this.state.counter + 1
       });
