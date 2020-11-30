@@ -16,15 +16,16 @@ export let FormModule = function() {
 
       if (form.checkValidity() === false) {
 
+        setValidated(true);
         event.stopPropagation();
 
       } else {
 
+        setValidated(false);
         props.handleSubmit(event);
 
       }
 
-      setValidated(true);
     };
 
     return (

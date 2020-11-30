@@ -65,6 +65,7 @@ class StringSort extends React.Component {
       }),
       success: (response) => {
         this.setState({
+          values: "",
           result: response.result,
           showSpinner: false
         });
