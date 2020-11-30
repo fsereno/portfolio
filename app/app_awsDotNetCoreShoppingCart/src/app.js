@@ -1,24 +1,18 @@
 "use strict;"
 
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import InputGroup from 'react-bootstrap/InputGroup';
-
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
-import { ConfigUtilModule } from "../../js/modules/configUtilModule";
+import { ConfigUtilModule } from '../../js/modules/configUtilModule';
+import { FormModule } from './formModule';
 
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreShoppingCart");
 const GET_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.get}`;
 const ADD_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.add}`;
 const DELETE_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.delete}`;
 const UPDATE_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.update}`;
-
 const PUZZLE = "4 x 4 - 1 =";
 const DEFAULT_COLLECTION = [
   { name: "Apple" },
@@ -27,62 +21,7 @@ const DEFAULT_COLLECTION = [
 
 let _puzzleModalModule = PuzzleModalModule(15);
 let _errorModalModule = new ErrorModalModule("errorModule");
-
-function FormTemplate(props){
-
-  const [validated, setValidated] = useState(false);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-
-    if (form.checkValidity() === false) {
-
-      event.stopPropagation();
-
-    } else {
-
-      props.handleSubmit(event);
-
-    }
-
-    setValidated(true);
-  };
-
-  return (
-    <>
-      <Row className="splitter">
-        <Col md={12}>
-          <Form id={`${props.id}_form`} noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Row>
-              <Form.Label htmlFor={props.id}>
-                {props.label}
-              </Form.Label>
-              <InputGroup>
-                {props.children.map(item => {
-                  return (<Form.Control
-                    key={item.id}
-                    id={item.id}
-                    name={item.id}
-                    type={item.type || "text"}
-                    placeholder={item.placeholder}
-                    required={item.required ? "required" : ""}
-                  />)
-                })}
-                <InputGroup.Append>
-                  <Button id={`${props.id}_submit`} variant="dark api-submit" type="submit">{props.button}</Button>
-                </InputGroup.Append>
-                <Form.Control.Feedback type="invalid">
-                  {props.error || "Please enter a valid value."}
-                </Form.Control.Feedback>
-              </InputGroup>
-            </Form.Row>
-          </Form>
-        </Col>
-      </Row>
-    </>
-  )
-}
+let _formModule = FormModule();
 
 class ShoppingListApp extends React.Component {
   constructor(props) {
@@ -90,7 +29,6 @@ class ShoppingListApp extends React.Component {
     this.state = {
       items: DEFAULT_COLLECTION,
       resultSet: DEFAULT_COLLECTION,
-      answer: '',
       isValid: false,
       showSpinner: false,
       showPuzzleModal: true,
@@ -271,7 +209,7 @@ class ShoppingListApp extends React.Component {
         </div>
        <div className="row splitter">
           <div className="col-lg-4">
-            <FormTemplate
+            <_formModule.render
               handleSubmit={this.handleGetSubmit}
               button="Get"
               id="get"
@@ -282,7 +220,7 @@ class ShoppingListApp extends React.Component {
                   "type": "number"
                 }]}
             />
-            <FormTemplate
+            <_formModule.render
               handleSubmit={this.handleAddSubmit}
               button="Add"
               id="add"
@@ -293,7 +231,7 @@ class ShoppingListApp extends React.Component {
                   "required": true
                 }]}
             />
-            <FormTemplate
+            <_formModule.render
               handleSubmit={this.handleDeleteSubmit}
               button="Delete"
               id="delete"
@@ -301,11 +239,11 @@ class ShoppingListApp extends React.Component {
               children={[
                 { "id": "delete",
                   "placeholder": "Item position to remove (eg. 1 or 2)",
-                  "required": true
+                  "required": true,
+                  "type": "number"
                 }]}
             />
-
-            <FormTemplate
+            <_formModule.render
               handleSubmit={this.handleUpdateSubmit}
               button="Update"
               id="update"
