@@ -38,7 +38,7 @@ export let FormModule = function() {
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Row>
             <Form.Label>
-              Input
+              Item to add
             </Form.Label>
             <InputGroup>
               <Form.Control
