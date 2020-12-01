@@ -30,7 +30,7 @@ describe(application, () => {
         it("Should not add a duplicate item.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare({show:false})
                 .goto(url)
                 .type('#itemInput', 'Item 1')
                 .click('#submit')

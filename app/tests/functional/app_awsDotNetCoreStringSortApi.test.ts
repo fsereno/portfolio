@@ -15,7 +15,7 @@ describe(application, () => {
         it("Should accept the answer and close the modal when correct.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
                 .type('#puzzleModal input[type=text]', '11')
@@ -34,7 +34,7 @@ describe(application, () => {
         it("Should reject the answer and not close the modal when incorrect.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
                 .type('#puzzleModal input[type=text]', '10')
