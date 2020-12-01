@@ -37,7 +37,7 @@ export let FormModule = function() {
             </Form.Label>
           </Form.Row>
           <Form.Row>
-            <Form.Group as={Col} controlId="valuesInput">
+            <Form.Group as={Col} md="3" controlId="valuesInput">
               <Form.Control
                 name="valuesInput"
                 type="text"
@@ -50,7 +50,7 @@ export let FormModule = function() {
                 Please enter a value.
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col}> 
+            <Form.Group as={Col} md="3">
               <Button id="sort_submit" variant="dark" type="submit">Sort</Button>
             </Form.Group>
           </Form.Row>

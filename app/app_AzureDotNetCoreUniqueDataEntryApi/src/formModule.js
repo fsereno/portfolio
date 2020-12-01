@@ -16,22 +16,23 @@ export let FormModule = function() {
 
       if (form.checkValidity() === false) {
 
-        event.stopPropagation();
+        setValidated(true);
 
       } else {
 
+        setValidated(false);
         props.handleSubmit(event);
+        form.reset();
 
       }
 
-      setValidated(true);
     };
 
     return (
       <>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Row>
-            <Form.Group as={Col} controlId="firstNameInput">
+            <Form.Group as={Col} md="2" controlId="firstNameInput">
               <Form.Control
                 name="firstNameInput"
                 type="text"
@@ -42,7 +43,7 @@ export let FormModule = function() {
                 Please enter a value.
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} controlId="secondNameInput">
+            <Form.Group as={Col} md="2" controlId="secondNameInput">
               <Form.Control
                 name="secondNameInput"
                 type="text"
@@ -53,7 +54,7 @@ export let FormModule = function() {
                 Please enter a value.
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} controlId="contactInput">
+            <Form.Group as={Col} md="2" controlId="contactInput">
               <Form.Control
                 name="contactInput"
                 type="text"
@@ -64,7 +65,7 @@ export let FormModule = function() {
                 Please enter a value.
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} controlId="postCodeInput">
+            <Form.Group as={Col} md="2" controlId="postCodeInput">
               <Form.Control
                 name="postCodeInput"
                 type="text"
@@ -75,7 +76,7 @@ export let FormModule = function() {
                 Please enter a value.
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col}> 
+            <Form.Group as={Col} md="3"> 
               <Button variant="dark" type="submit">Add item</Button>
             </Form.Group>
           </Form.Row>
