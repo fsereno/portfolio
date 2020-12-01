@@ -31,11 +31,6 @@ export let FormModule = function() {
       <>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Row>
-            <Form.Label>
-              Add an item
-            </Form.Label>
-          </Form.Row>
-          <Form.Row>
             <Form.Group as={Col} controlId="firstNameInput">
               <Form.Control
                 name="firstNameInput"
