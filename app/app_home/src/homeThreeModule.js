@@ -63,13 +63,15 @@ export const HomeThreeModule = (async () => {
         });
     }
 
-    let createParticle = () => {
-
+    let animateParticles = () => {
+        _particleGroup.rotation.x += 0.01/50;
+        _particleGroup.rotation.y += 0.01/50;
+        _particleGroup.rotation.z += 0.01/100;
     }
 
     let createParticles = () => {
 
-        let verticies = []
+        let verticies = [];
         const particles = 15000;
 
         for (let i = 0; i < particles; i++) {
@@ -153,6 +155,7 @@ export const HomeThreeModule = (async () => {
 
     let setAnimationLoop = () => {
         _renderer.setAnimationLoop(function () {
+            animateParticles();
             updatePhysics();
             _renderer.render(_scene, _camera);
         });
@@ -209,8 +212,10 @@ export const HomeThreeModule = (async () => {
 
                     if (_mouseXPositions.length === 2) {
                         if (_mouseXPositions[1] > _mouseXPositions[0]) {
+                            
                             x = ANGULAR_VELOCITY;
                         } else if (_mouseXPositions[1] < _mouseXPositions[0]) {
+                            
                             x = -ANGULAR_VELOCITY;
                         }
                         _mouseXPositions = [];
