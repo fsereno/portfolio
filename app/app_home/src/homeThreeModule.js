@@ -18,6 +18,7 @@ export const HomeThreeModule = (async () => {
     let _world;
     let _raycaster;
     let _mouse;
+    let _particleGroup;
     let _mouseXPositions = [];
     let _mouseYPositions = [];
 
@@ -35,6 +36,7 @@ export const HomeThreeModule = (async () => {
         _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
         _mouse = new THREE.Vector3();
         _raycaster = new THREE.Raycaster();
+        _particleGroup = new THREE.Object3D();
     }
 
     let setCameraPosition = () => {
@@ -59,6 +61,33 @@ export const HomeThreeModule = (async () => {
             _camera.aspect = container.offsetWidth / container.offsetHeight;
             _camera.updateProjectionMatrix();
         });
+    }
+
+    let createParticle = () => {
+
+    }
+
+    let createParticles = () => {
+
+        let verticies = []
+        const particles = 15000;
+
+        for (let i = 0; i < particles; i++) {
+            const x = THREE.MathUtils.randFloatSpread( 2000 );
+            const y = THREE.MathUtils.randFloatSpread( 2000 );
+            const z = THREE.MathUtils.randFloatSpread( 3000 );
+
+            verticies.push( x, y, z);
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute( "position", new THREE.Float32BufferAttribute( verticies, 3));
+
+        const material = new THREE.PointsMaterial( { color: 0xffffff } );
+        const points = new THREE.Points( geometry, material);
+
+        _particleGroup.add(points);
+        _scene.add(_particleGroup);
     }
 
     let createObject = () => {
@@ -213,6 +242,7 @@ export const HomeThreeModule = (async () => {
         setRenderer();
         setResizeEventHandler();
         setInterval(addObjects, 1000);
+        createParticles();
         addLight(0xFFFFFF, 2, 1000, 10, 20, 10);
         setMouseMoved();
         setAnimationLoop();
