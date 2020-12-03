@@ -72,20 +72,21 @@ export const HomeThreeModule = (async () => {
     let createParticles = () => {
 
         let verticies = [];
-        const particles = 15000;
+        const particles = 10000;
+
+        const sprite = new THREE.TextureLoader().load( 'images/disc.png' );
 
         for (let i = 0; i < particles; i++) {
             const x = THREE.MathUtils.randFloatSpread( 2000 );
             const y = THREE.MathUtils.randFloatSpread( 2000 );
-            const z = THREE.MathUtils.randFloatSpread( 3000 );
-
+            const z = THREE.MathUtils.randFloatSpread( 2000 );
             verticies.push( x, y, z);
         }
 
         const geometry = new THREE.BufferGeometry();
         geometry.setAttribute( "position", new THREE.Float32BufferAttribute( verticies, 3));
 
-        const material = new THREE.PointsMaterial( { color: 0xffffff } );
+        const material = new THREE.PointsMaterial( { size: 5, sizeAttenuation: true, map: sprite, alphaTest: 0.5, transparent: true } );
         const points = new THREE.Points( geometry, material);
 
         _particleGroup.add(points);
@@ -155,7 +156,7 @@ export const HomeThreeModule = (async () => {
 
     let setAnimationLoop = () => {
         _renderer.setAnimationLoop(function () {
-            animateParticles();
+            //animateParticles();
             updatePhysics();
             _renderer.render(_scene, _camera);
         });
