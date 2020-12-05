@@ -74,8 +74,6 @@ export const HomeThreeModule = (async () => {
         let verticies = [];
         const particles = 10000;
 
-        const sprite = new THREE.TextureLoader().load( 'images/disc.png' );
-
         for (let i = 0; i < particles; i++) {
             const x = THREE.MathUtils.randFloatSpread( 2000 );
             const y = THREE.MathUtils.randFloatSpread( 2000 );
@@ -83,14 +81,16 @@ export const HomeThreeModule = (async () => {
             verticies.push( x, y, z);
         }
 
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute( "position", new THREE.Float32BufferAttribute( verticies, 3));
+        const sprite = new THREE.TextureLoader().load( 'images/disc.png', (texture) => {
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute( "position", new THREE.Float32BufferAttribute( verticies, 3));
 
-        const material = new THREE.PointsMaterial( { size: 5, sizeAttenuation: true, map: sprite, alphaTest: 0.5, transparent: true } );
-        const points = new THREE.Points( geometry, material);
+            const material = new THREE.PointsMaterial( { size: 3, sizeAttenuation: true, map: texture, alphaTest: 0.5, transparent: true } );
+            const points = new THREE.Points( geometry, material);
 
-        _particleGroup.add(points);
-        _scene.add(_particleGroup);
+            _particleGroup.add(points);
+            _scene.add(_particleGroup);
+        } );
     }
 
     let createObject = () => {
@@ -99,15 +99,15 @@ export const HomeThreeModule = (async () => {
         const z = 0;
         const scale = Math.random() - Math.random() * 0.5 + 1;
 
-        let meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
-        let meshMaterial = new THREE.MeshLambertMaterial({color: 0x5c6670});
+        const meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
+        const meshMaterial = new THREE.MeshLambertMaterial({color: 0x5c6670});
         let mesh = new THREE.Mesh( meshGeometry, meshMaterial );
         mesh.position.set(x, y, z)
         mesh.updatePhysics = true;
         mesh.castShadow = true;
         mesh.receiveShadow = true;
 
-        let shape = new CANNON.Box( new CANNON.Vec3(scale/2, scale/2, scale/2));
+        const shape = new CANNON.Box( new CANNON.Vec3(scale/2, scale/2, scale/2));
         const bodyMaterial = new CANNON.Material();
         const body = new CANNON.Body( { mass: 5, material: bodyMaterial});
         body.addShape(shape);
