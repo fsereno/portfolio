@@ -18,7 +18,6 @@ export const HomeThreeModule = (async () => {
     let _world;
     let _raycaster;
     let _mouse;
-    let _particleGroup;
     let _mouseXPositions = [];
     let _mouseYPositions = [];
 
@@ -36,7 +35,6 @@ export const HomeThreeModule = (async () => {
         _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
         _mouse = new THREE.Vector3();
         _raycaster = new THREE.Raycaster();
-        _particleGroup = new THREE.Object3D();
     }
 
     let setCameraPosition = () => {
@@ -64,33 +62,43 @@ export const HomeThreeModule = (async () => {
     }
 
     let animateParticles = () => {
-        _particleGroup.rotation.x += 0.01/50;
-        _particleGroup.rotation.y += 0.01/50;
-        _particleGroup.rotation.z += 0.01/100;
+
+        const time = Date.now() * 0.000001;
+
+        for ( let i = 0; i < _scene.children.length; i ++ ) {
+
+            const object = _scene.children[ i ];
+
+            if ( object instanceof THREE.Points ) {
+                object.rotation.y = time * ( i < 4 ? i + 1 : - ( i + 1 ) );
+            }
+        }
     }
 
-    let createParticles = () => {
+    let createParticles = (particlesToCreate = 10000, particleGroups = 5) => {
 
         let verticies = [];
-        const particles = 10000;
 
-        for (let i = 0; i < particles; i++) {
+        for ( let i = 0; i < particlesToCreate; i++ ) {
             const x = THREE.MathUtils.randFloatSpread( 2000 );
             const y = THREE.MathUtils.randFloatSpread( 2000 );
-            const z = THREE.MathUtils.randFloatSpread( 2000 );
+            const z = THREE.MathUtils.randFloatSpread( 3000 );
             verticies.push( x, y, z);
         }
 
-        const sprite = new THREE.TextureLoader().load( 'images/disc.png', (texture) => {
-            const geometry = new THREE.BufferGeometry();
-            geometry.setAttribute( "position", new THREE.Float32BufferAttribute( verticies, 3));
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute( "position", new THREE.Float32BufferAttribute( verticies, 3));
 
-            const material = new THREE.PointsMaterial( { size: 3, sizeAttenuation: true, map: texture, alphaTest: 0.5, transparent: true } );
-            const points = new THREE.Points( geometry, material);
+        const material = new THREE.PointsMaterial( { size: 0.5 } );
 
-            _particleGroup.add(points);
-            _scene.add(_particleGroup);
-        } );
+        for ( let i = 0; i < particleGroups; i++ ) {
+
+            const particles = new THREE.Points( geometry, material);
+            particles.rotation.x = Math.random() * 6;
+            particles.rotation.y = Math.random() * 6;
+            particles.rotation.z = Math.random() * 6;
+            _scene.add(particles);
+        }
     }
 
     let createObject = () => {
@@ -98,9 +106,9 @@ export const HomeThreeModule = (async () => {
         const y = 15;
         const z = 0;
         const scale = Math.random() - Math.random() * 0.5 + 1;
-
         const meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
         const meshMaterial = new THREE.MeshLambertMaterial({color: 0x5c6670});
+
         let mesh = new THREE.Mesh( meshGeometry, meshMaterial );
         mesh.position.set(x, y, z)
         mesh.updatePhysics = true;
@@ -111,7 +119,6 @@ export const HomeThreeModule = (async () => {
         const bodyMaterial = new CANNON.Material();
         const body = new CANNON.Body( { mass: 5, material: bodyMaterial});
         body.addShape(shape);
-
         body.position.set(x, y, z);
         body.linearDamping = DAMPING;
         body.updatePhysics = true;
@@ -129,7 +136,7 @@ export const HomeThreeModule = (async () => {
     }
 
     let addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
-        var light = new THREE.SpotLight(color, intensity, distance);
+        let light = new THREE.SpotLight(color, intensity, distance);
         light.position.set(x,y,z);
         light.castShadow = true;
         light.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 100, 1, 10, 2500 ) );
@@ -145,18 +152,20 @@ export const HomeThreeModule = (async () => {
         let bodies = _world.bodies.filter(x => x.updatePhysics);
         let meshes = _scene.children.filter(x => x.updatePhysics);
 
-        for (let i = 0, j = 0; i < meshes.length, j < bodies.length; i++, j++) {
-            let mesh = meshes[i];
-            let body = bodies[i];
+        if ( bodies.length === meshes.length) {
+            for ( let i = 0; i < meshes.length; i++) {
+                let mesh = meshes[i];
+                let body = bodies[i];
 
-            mesh.position.copy(body.position);
-            mesh.quaternion.copy(body.quaternion);
+                mesh.position.copy(body.position);
+                mesh.quaternion.copy(body.quaternion);
+            }
         }
     }
 
     let setAnimationLoop = () => {
         _renderer.setAnimationLoop(function () {
-            //animateParticles();
+            animateParticles();
             updatePhysics();
             _renderer.render(_scene, _camera);
         });
@@ -213,10 +222,10 @@ export const HomeThreeModule = (async () => {
 
                     if (_mouseXPositions.length === 2) {
                         if (_mouseXPositions[1] > _mouseXPositions[0]) {
-                            
+
                             x = ANGULAR_VELOCITY;
                         } else if (_mouseXPositions[1] < _mouseXPositions[0]) {
-                            
+
                             x = -ANGULAR_VELOCITY;
                         }
                         _mouseXPositions = [];
@@ -248,7 +257,7 @@ export const HomeThreeModule = (async () => {
         setRenderer();
         setResizeEventHandler();
         setInterval(addObjects, 1000);
-        createParticles();
+        createParticles(20000, 10);
         addLight(0xFFFFFF, 2, 1000, 10, 20, 10);
         setMouseMoved();
         setAnimationLoop();
