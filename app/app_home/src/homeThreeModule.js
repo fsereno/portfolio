@@ -21,14 +21,14 @@ export const HomeThreeModule = (async () => {
     let _mouseXPositions = [];
     let _mouseYPositions = [];
 
-    let initPhysics = () => {
+    const initPhysics = () => {
         _world = new CANNON.World();
         _world.gravity.set(0, -10, 0);
         _world.broadphase = new CANNON.NaiveBroadphase();
         _world.solver.iterations = 10;
     }
 
-    let initScene = () => {
+    const initScene = () => {
         _containerId = "canvasContainer";
         _container = document.getElementById(_containerId);
         _scene = new THREE.Scene();
@@ -37,13 +37,13 @@ export const HomeThreeModule = (async () => {
         _raycaster = new THREE.Raycaster();
     }
 
-    let setCameraPosition = () => {
+    const setCameraPosition = () => {
         _camera.position.x = 0;
         _camera.position.y = 4;
         _camera.position.z = 10;
     }
 
-    let setRenderer = () => {
+    const setRenderer = () => {
         let container = document.getElementById(_containerId);
         _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         _renderer.setSize(container.offsetWidth, container.offsetHeight);
@@ -52,7 +52,7 @@ export const HomeThreeModule = (async () => {
         container.appendChild(_renderer.domElement);
     }
 
-    let setResizeEventHandler = () => {
+    const setResizeEventHandler = () => {
         window.addEventListener("resize", () => {
             let container = document.getElementById(_containerId);
             _renderer.setSize(container.offsetWidth, container.offsetHeight);
@@ -61,7 +61,7 @@ export const HomeThreeModule = (async () => {
         });
     }
 
-    let animateParticles = () => {
+    const animateParticles = () => {
 
         const time = Date.now() * 0.000001;
 
@@ -75,7 +75,7 @@ export const HomeThreeModule = (async () => {
         }
     }
 
-    let createParticles = (particlesToCreate = 10000, particleGroups = 5) => {
+    const createParticles = (particlesToCreate = 10000, particleGroups = 5) => {
 
         let verticies = [];
 
@@ -101,7 +101,7 @@ export const HomeThreeModule = (async () => {
         }
     }
 
-    let createObject = () => {
+    const createCube = () => {
         const x = Math.random() * 0.3 + 1;
         const y = 15;
         const z = 0;
@@ -127,15 +127,15 @@ export const HomeThreeModule = (async () => {
         return { mesh: mesh, body: body };
     }
 
-    let addObjects = () => {
+    const createCubes = () => {
         if (_world.bodies.length <=  OBJECT_LIMIT) {
-            let object = createObject();
+            let object = createCube();
             _world.addBody(object.body);
             _scene.add(object.mesh);
         }
     }
 
-    let addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
+    const addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
         let light = new THREE.SpotLight(color, intensity, distance);
         light.position.set(x,y,z);
         light.castShadow = true;
@@ -146,7 +146,7 @@ export const HomeThreeModule = (async () => {
         _scene.add( light );
     }
 
-    let updatePhysics = () => {
+    const updatePhysics = () => {
         _world.step(TIMESTEP);
 
         let bodies = _world.bodies.filter(x => x.updatePhysics);
@@ -163,7 +163,7 @@ export const HomeThreeModule = (async () => {
         }
     }
 
-    let setAnimationLoop = () => {
+    const setAnimationLoop = () => {
         _renderer.setAnimationLoop(function () {
             animateParticles();
             updatePhysics();
@@ -171,13 +171,13 @@ export const HomeThreeModule = (async () => {
         });
     }
 
-    let addGround = () =>  {
-        const ground = new THREE.Mesh(
-            new THREE.PlaneBufferGeometry( 50, 50, 1, 1 ),
-            new THREE.MeshPhongMaterial( { color: 0x2e3338, shininess: 150 } )
-        );
+    const addGround = () =>  {
+        const planeGeometry = new THREE.PlaneBufferGeometry( 50, 50, 1, 1 );
+        const planeMaterial = new THREE.MeshPhongMaterial( { color: 0x2e3338, shininess: 150 } );
+        const ground = new THREE.Mesh( planeGeometry, planeMaterial );
         ground.rotation.x = XROTATION;
         ground.receiveShadow = true;
+
         _scene.add( ground );
 
         let groundShape = new CANNON.Plane();
@@ -189,7 +189,7 @@ export const HomeThreeModule = (async () => {
         _world.add(groundBody)
     }
 
-    let objectsReact = (event) => {
+    const objectsReact = (event) => {
         event.preventDefault();
 
         _mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
@@ -245,18 +245,18 @@ export const HomeThreeModule = (async () => {
         }
     }
 
-    let setMouseMoved = () => {
+    const setMouseMoved = () => {
         window.addEventListener("mousemove", objectsReact);
     }
 
-    let init = () => {
+    const init = () => {
         initScene();
         initPhysics();
         addGround();
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
-        setInterval(addObjects, 1000);
+        setInterval(createCubes, 1000);
         createParticles(20000, 10);
         addLight(0xFFFFFF, 2, 1000, 10, 20, 10);
         setMouseMoved();
