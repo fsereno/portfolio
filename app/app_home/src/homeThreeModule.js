@@ -20,6 +20,7 @@ export const HomeThreeModule = (async () => {
     let _mouse;
     let _mouseXPositions = [];
     let _mouseYPositions = [];
+    let _fragmentGroup;
 
     const initPhysics = () => {
         _world = new CANNON.World();
@@ -35,6 +36,7 @@ export const HomeThreeModule = (async () => {
         _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
         _mouse = new THREE.Vector3();
         _raycaster = new THREE.Raycaster();
+        _fragmentGroup = new THREE.Object3D();
     }
 
     const setCameraPosition = () => {
@@ -75,11 +77,11 @@ export const HomeThreeModule = (async () => {
         }
     }
 
-    const createParticles = (particlesToCreate = 10000, particleGroups = 5) => {
+    const createParticles = (numberOfParticles = 10000, numberOfparticleGroups = 5) => {
 
         let verticies = [];
 
-        for ( let i = 0; i < particlesToCreate; i++ ) {
+        for ( let i = 0; i < numberOfParticles; i++ ) {
             const x = THREE.MathUtils.randFloatSpread( 2000 );
             const y = THREE.MathUtils.randFloatSpread( 2000 );
             const z = THREE.MathUtils.randFloatSpread( 3000 );
@@ -91,7 +93,7 @@ export const HomeThreeModule = (async () => {
 
         const material = new THREE.PointsMaterial( { size: 0.5 } );
 
-        for ( let i = 0; i < particleGroups; i++ ) {
+        for ( let i = 0; i < numberOfparticleGroups; i++ ) {
 
             const particles = new THREE.Points( geometry, material);
             particles.rotation.x = Math.random() * 6;
@@ -101,13 +103,43 @@ export const HomeThreeModule = (async () => {
         }
     }
 
+    const createFragments = (numberOfFragments) => {
+        let geometry = new THREE.CircleGeometry(5, 10);
+        let material = new THREE.MeshPhysicalMaterial({color:0xFFFFFF, side:THREE.DoubleSide});
+
+        for ( let i = 0; i < numberOfFragments; i++ ) {
+
+            let scale = THREE.MathUtils.randFloat(0.01, 0.02)
+            let fragment = new THREE.Mesh(geometry, material);
+
+            fragment.position.set( THREE.MathUtils.randFloat(-300, 200), THREE.MathUtils.randFloat(5, 50), THREE.MathUtils.randFloat(5, 50));
+            fragment.rotation.set( THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05));
+            fragment.scale.set(scale, scale, scale);
+            fragment.speedValue = THREE.MathUtils.randFloat(-0.25, 0.70)
+            _fragmentGroup.add(fragment);
+        }
+        _scene.add(_fragmentGroup)
+    }
+
+    const animateFragments = () => {
+
+        for( let i = 0; i < _fragmentGroup.children.length; i++ ) {
+            let fragment = _fragmentGroup.children[i];
+            fragment.rotation.x += fragment.speedValue/10;
+            fragment.rotation.y += fragment.speedValue/10;
+            fragment.rotation.z += fragment.speedValue/10;
+        };
+
+        _fragmentGroup.rotation.y += 0.004;
+    }
+
     const createCube = () => {
         const x = Math.random() * 0.3 + 1;
         const y = 15;
         const z = 0;
         const scale = Math.random() - Math.random() * 0.5 + 1;
         const meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
-        const meshMaterial = new THREE.MeshLambertMaterial({color: 0x5c6670});
+        const meshMaterial = new THREE.MeshLambertMaterial({ color: 0x5c6670 });
 
         let mesh = new THREE.Mesh( meshGeometry, meshMaterial );
         mesh.position.set(x, y, z)
@@ -167,6 +199,7 @@ export const HomeThreeModule = (async () => {
         _renderer.setAnimationLoop(function () {
             animateParticles();
             updatePhysics();
+            animateFragments();
             _renderer.render(_scene, _camera);
         });
     }
@@ -258,6 +291,7 @@ export const HomeThreeModule = (async () => {
         setResizeEventHandler();
         setInterval(createCubes, 1000);
         createParticles(20000, 10);
+        createFragments(100);
         addLight(0xFFFFFF, 2, 1000, 10, 20, 10);
         setMouseMoved();
         setAnimationLoop();
