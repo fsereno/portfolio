@@ -204,7 +204,7 @@ export const HomeThreeModule = (async () => {
         });
     }
 
-    const addGround = () =>  {
+    const createPlane = () =>  {
         const planeGeometry = new THREE.PlaneBufferGeometry( 50, 50, 1, 1 );
         const planeMaterial = new THREE.MeshPhongMaterial( { color: 0x2e3338, shininess: 150 } );
         const ground = new THREE.Mesh( planeGeometry, planeMaterial );
@@ -285,13 +285,13 @@ export const HomeThreeModule = (async () => {
     const init = () => {
         initScene();
         initPhysics();
-        addGround();
+        createPlane();
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
         setInterval(createCubes, 1000);
         createParticles(20000, 10);
-        createFragments(100);
+        createFragments(25);
         addLight(0xFFFFFF, 2, 1000, 10, 20, 10);
         setMouseMoved();
         setAnimationLoop();
