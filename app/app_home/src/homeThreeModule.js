@@ -154,13 +154,14 @@ export const HomeThreeModule = (async () => {
         body.position.set(x, y, z);
         body.linearDamping = DAMPING;
         body.updatePhysics = true;
+        body.isCube = true;
         body.angularVelocity.set(1, 0.5, 1);
 
         return { mesh: mesh, body: body };
     }
 
     const createCubes = () => {
-        if (_world.bodies.length <=  OBJECT_LIMIT) {
+        if (_world.bodies.filter(x => x.isCube).length <=  OBJECT_LIMIT) {
             let object = createCube();
             _world.addBody(object.body);
             _scene.add(object.mesh);
