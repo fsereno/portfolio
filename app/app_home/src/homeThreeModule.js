@@ -185,6 +185,10 @@ export const HomeThreeModule = (async () => {
         let bodies = _world.bodies.filter(x => x.updatePhysics);
         let meshes = _scene.children.filter(x => x.updatePhysics);
 
+        console.log(bodies.length)
+        console.log(meshes.length)
+
+
         if ( bodies.length === meshes.length) {
             for ( let i = 0; i < meshes.length; i++) {
                 let mesh = meshes[i];
