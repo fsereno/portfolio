@@ -7,7 +7,6 @@ export const HomeThreeModule = (async () => {
     const DAMPING = 0.9;
     const TIMESTEP = 1.0/60.0;
     const XROTATION = -Math.PI / 2;
-    const ANGULAR_VELOCITY = 2;
     const OBJECT_LIMIT = 20;
 
     let _containerId;
@@ -18,8 +17,6 @@ export const HomeThreeModule = (async () => {
     let _world;
     let _raycaster;
     let _mouse;
-    let _mouseXPositions = [];
-    let _mouseYPositions = [];
     let _fragmentGroup;
 
     const initPhysics = () => {
@@ -185,10 +182,6 @@ export const HomeThreeModule = (async () => {
         let bodies = _world.bodies.filter(x => x.updatePhysics);
         let meshes = _scene.children.filter(x => x.updatePhysics);
 
-        console.log(bodies.length)
-        console.log(meshes.length)
-
-
         if ( bodies.length === meshes.length) {
             for ( let i = 0; i < meshes.length; i++) {
                 let mesh = meshes[i];
@@ -252,31 +245,9 @@ export const HomeThreeModule = (async () => {
                 if (matchingBody.length > 0) {
 
                     let body = matchingBody[0];
-                    let x = 0;
-                    let y = 0;
+                    let x = _mouse.x * 10;
+                    let y = _mouse.y * 10;
 
-                    _mouseXPositions.push(_mouse.x);
-                    _mouseYPositions.push(_mouse.y);
-
-                    if (_mouseXPositions.length === 2) {
-                        if (_mouseXPositions[1] > _mouseXPositions[0]) {
-
-                            x = ANGULAR_VELOCITY;
-                        } else if (_mouseXPositions[1] < _mouseXPositions[0]) {
-
-                            x = -ANGULAR_VELOCITY;
-                        }
-                        _mouseXPositions = [];
-                    }
-
-                    if (_mouseYPositions.length === 2) {
-                        if (_mouseYPositions[1] > _mouseYPositions[0]) {
-                            y = ANGULAR_VELOCITY;
-                        } else if (_mouseYPositions[1] < _mouseYPositions[0]) {
-                            y = -ANGULAR_VELOCITY;
-                        }
-                        _mouseYPositions = [];
-                    }
                     body.angularVelocity.set(x, y, 0);
                 }
             }
