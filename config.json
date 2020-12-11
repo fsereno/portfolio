@@ -100,7 +100,7 @@
             "include": true
         },
         {
-            "name": "Azure Functions, .NET Core, Unique Data Entry Api",
+            "name": "Azure Functions .NET Core Unique Data Entry Api",
             "subHeading": "A unique data entry form, using IEqualityComparer to manage illegal duplicate data entries.",
             "description": "Using Azure Functions serverless compute and .NET Core.",
             "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
@@ -112,6 +112,20 @@
             "endpoints" : {
                 "api": "https://app-azure-dotnetcore-unique-data-entry-api.azurewebsites.net/api",
                 "canItemBeAddedAsync": "canItemBeAddedAsync"
+            }
+        },
+        {
+            "name": "Azure Functions .NET Core Data Structures Api",
+            "subHeading": "Demonstrating knowledge of various .NET data structures and how to manipulate their data.",
+            "description": "Using Azure Functions serverless compute and .NET Core.",
+            "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
+            "folder": "AzureDotNetCoreDataStructuresApi",
+            "active": true,
+            "include": true,
+            "useWebpack": true,
+            "masterTemplateDir": "master_react",
+            "endpoints" : {
+                "api": ""
             }
         },
         {
