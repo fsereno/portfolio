@@ -51,7 +51,10 @@ export let FormModule = function() {
                 value={props.value}
               />
               <InputGroup.Append>
-                <Button id="submit" variant="dark" type="submit">Add item</Button>
+                <Button id="submit" variant="dark" type="submit">Add</Button>
+              </InputGroup.Append>
+              <InputGroup.Append>
+                <Button id="remove" variant="danger" type="button" onClick={props.handleDelete}>Remove</Button>
               </InputGroup.Append>
               <Form.Control.Feedback type="invalid">
                 Please enter a value.

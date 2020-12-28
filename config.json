@@ -119,7 +119,7 @@
             "subHeading": "Demonstrating knowledge of various .NET data structures and how to manipulate their data.",
             "description": "Using Azure Functions serverless compute and .NET Core.",
             "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
-            "folder": "AzureDotNetCoreDataStructuresApi",
+            "folder": "azureDotNetCoreDataStructuresApi",
             "active": true,
             "include": true,
             "useWebpack": true,

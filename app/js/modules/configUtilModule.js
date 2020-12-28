@@ -7,7 +7,7 @@ export const ConfigUtilModule = (() => {
         var config = Config;
 
         if (applicationFolder) {
-            let application = Config.applications.filter(x => x.folder === applicationFolder);
+            let application = Config.applications.filter(x => x.folder.toLowerCase() === applicationFolder.toLowerCase());
             config = application.length > 0 ? application[0] : config;
         }
 
