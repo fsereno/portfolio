@@ -126,10 +126,10 @@
             "masterTemplateDir": "master_react",
             "endpoints" : {
                 "api": "https://app-azure-dotnetcore-data-structures-api.azurewebsites.net/api",
-                "addQueueItem": "addQueueItem",
-                "removeQueueItem": "removeQueueItem",
-                "addStackItem": "addStackItem",
-                "removeStackItem": "removeStackItem"
+                "addQueueItem": "addQueueItemAsync",
+                "removeQueueItem": "removeQueueItemAsync",
+                "addStackItem": "addStackItemAsync",
+                "removeStackItem": "removeStackItemAsync"
             }
         },
         {

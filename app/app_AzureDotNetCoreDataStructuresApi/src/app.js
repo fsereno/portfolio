@@ -11,14 +11,15 @@ import { FormModule } from './formModule';
 
 const PUZZLE = "3 x 2 - 1 =";
 const APP_CONFIG = ConfigUtilModule.get("azureDotNetCoreDataStructuresApi");
-const ADD_QUEUE_ITEM = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.addQueueItem}`;
+const ADD_QUEUE_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.addQueueItem}`;
+const REMOVE_QUEUE_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.removeQueueItem}`;
 
 let _puzzleModalModule = PuzzleModalModule(5);
 let _errorModalModule = new ErrorModalModule("errorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
 let _formModule = FormModule();
 
-class ToDoListForm extends React.Component {
+class DataStructuresApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,7 +69,7 @@ class ToDoListForm extends React.Component {
       item: this.state.value
     }
     let request = {
-      url: ADD_QUEUE_ITEM,
+      url: ADD_QUEUE_ITEM_ENDPOINT,
       data: JSON.stringify(data),
       type: "POST",
       success: (response) => {
@@ -90,9 +91,28 @@ class ToDoListForm extends React.Component {
 
   handleDelete(event) {
     event.preventDefault();
-    this.setState({
-      queue: this.state.queue
-    });
+    let data = {
+      collection: this.state.queue
+    }
+    let request = {
+      url: REMOVE_QUEUE_ITEM_ENDPOINT,
+      data: JSON.stringify(data),
+      type: "POST",
+      success: (response) => {
+        if (response) {
+          this.setState({
+            queue: JSON.parse(response),
+            showSpinner: false
+          });
+        } else {
+          this.setState({
+            showSpinner: false,
+            showErrorModal: true
+          })
+        }
+      }
+    }
+    this.handleAjax(request);
   }
 
   handleErrorModalClose() {
@@ -129,30 +149,37 @@ class ToDoListForm extends React.Component {
         <SpinnerModule
           show={this.state.showSpinner}
         />
-        <div className="row splitter">
-          <div className="col-lg-4">
-            <h3>Result:</h3>
-            <ul id="toDoList" className="list-group">
-              {this.state.queue.map((item, index) => {
-                let key = _keyGeneratorModule.generate(item);
-                return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item}</li>
-              })}
-          </ul>
-          </div>
-        </div>
-        <div className="row splitter">
-          <div className="col-lg-12">
-            <p>Item to add: {this.state.value}</p>
-          </div>
-        </div>
         <div className="row">
           <div className="col-lg-4">
-            <_formModule.render
-              value={this.state.value}
-              onChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              items={this.state.queue}
-            />
+            <div className="row splitter">
+              <div className="col">
+                <h3>Queue (FIFO)</h3>
+                <ul id="toDoList" className="list-group">
+                  {this.state.queue.map((item, index) => {
+                    let key = _keyGeneratorModule.generate(item);
+                    return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item}</li>
+                  })}
+                </ul>
+              </div>
+            </div>
+            <div className="row splitter">
+              <div className="col">
+                <_formModule.render
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  handleSubmit={this.handleSubmit}
+                  handleDelete={this.handleDelete}
+                  items={this.state.queue}
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div className="row splitter">
+              <div className="col">
+                <h3>Stack (LIFO)</h3>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -161,6 +188,6 @@ class ToDoListForm extends React.Component {
 }
 
 ReactDOM.render(
-  <ToDoListForm />,
+  <DataStructuresApp />,
   document.getElementById('result')
 );
