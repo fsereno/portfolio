@@ -4,7 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
@@ -15,10 +14,11 @@ const PUZZLE = "3 x 2 - 1 =";
 const APP_CONFIG = ConfigUtilModule.get("azureDotNetCoreDataStructuresApi");
 const ADD_QUEUE_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.addQueueItem}`;
 const REMOVE_QUEUE_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.removeQueueItem}`;
+const ADD_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.addStackItem}`;
+const REMOVE_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.removeStackItem}`;
 
 let _puzzleModalModule = PuzzleModalModule(5);
 let _errorModalModule = new ErrorModalModule("errorModule");
-let _keyGeneratorModule = new KeyGeneratorModule();
 let _formModule = FormModule();
 
 class DataStructuresApp extends React.Component {
@@ -34,7 +34,8 @@ class DataStructuresApp extends React.Component {
 
     this.handleQueueAdd = this.handleQueueAdd.bind(this);
     this.handleQueueRemove= this.handleQueueRemove.bind(this);
-
+    this.handleStackAdd = this.handleStackAdd.bind(this);
+    this.handleStackRemove = this.handleStackRemove.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
@@ -85,6 +86,33 @@ class DataStructuresApp extends React.Component {
     this.handleAjax(request);
   }
 
+  handleStackAdd(event, item) {
+    event.preventDefault();
+    let data = {
+      collection: this.state.stack,
+      item: item
+    }
+    let request = {
+      url: ADD_STACK_ITEM_ENDPOINT,
+      data: JSON.stringify(data),
+      type: "POST",
+      success: (response) => {
+        if (response) {
+          this.setState({
+            stack: JSON.parse(response),
+            showSpinner: false
+          });
+        } else {
+          this.setState({
+            showSpinner: false,
+            showErrorModal: true
+          })
+        }
+      }
+    }
+    this.handleAjax(request);
+  }
+
   handleQueueRemove(event) {
     event.preventDefault();
     let data = {
@@ -98,6 +126,32 @@ class DataStructuresApp extends React.Component {
         if (response) {
           this.setState({
             queue: JSON.parse(response),
+            showSpinner: false
+          });
+        } else {
+          this.setState({
+            showSpinner: false,
+            showErrorModal: true
+          })
+        }
+      }
+    }
+    this.handleAjax(request);
+  }
+
+  handleStackRemove(event) {
+    event.preventDefault();
+    let data = {
+      collection: this.state.stack
+    }
+    let request = {
+      url: REMOVE_STACK_ITEM_ENDPOINT,
+      data: JSON.stringify(data),
+      type: "POST",
+      success: (response) => {
+        if (response) {
+          this.setState({
+            stack: JSON.parse(response),
             showSpinner: false
           });
         } else {
@@ -167,11 +221,10 @@ class DataStructuresApp extends React.Component {
                   title="Stack (LIFO)"
                   listId="stackList"
                   id="stackInput"
-                  handleAdd={this.handleQueueAdd}
-                  handleRemove={this.handleQueueRemove}
-                  items={this.state.queue}
+                  handleAdd={this.handleStackAdd}
+                  handleRemove={this.handleStackRemove}
+                  items={this.state.stack}
                 />
-                <h3></h3>
               </Col>
             </Row>
           </Col>
