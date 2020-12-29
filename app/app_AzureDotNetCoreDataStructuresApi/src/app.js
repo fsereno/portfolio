@@ -2,6 +2,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
@@ -23,7 +25,6 @@ class DataStructuresApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
       queue: [],
       stack: [],
       showSpinner: false,
@@ -31,17 +32,12 @@ class DataStructuresApp extends React.Component {
       showErrorModal: false
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete= this.handleDelete.bind(this);
+    this.handleQueueAdd = this.handleQueueAdd.bind(this);
+    this.handleQueueRemove= this.handleQueueRemove.bind(this);
 
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
   }
 
   handleAjax(request) {
@@ -62,11 +58,11 @@ class DataStructuresApp extends React.Component {
     }
   }
 
-  handleSubmit(event) {
+  handleQueueAdd(event, item) {
     event.preventDefault();
     let data = {
       collection: this.state.queue,
-      item: this.state.value
+      item: item
     }
     let request = {
       url: ADD_QUEUE_ITEM_ENDPOINT,
@@ -89,7 +85,7 @@ class DataStructuresApp extends React.Component {
     this.handleAjax(request);
   }
 
-  handleDelete(event) {
+  handleQueueRemove(event) {
     event.preventDefault();
     let data = {
       collection: this.state.queue
@@ -135,7 +131,7 @@ class DataStructuresApp extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <_puzzleModalModule.render
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
@@ -149,40 +145,38 @@ class DataStructuresApp extends React.Component {
         <SpinnerModule
           show={this.state.showSpinner}
         />
-        <div className="row">
-          <div className="col-lg-4">
-            <div className="row splitter">
-              <div className="col">
-                <h3>Queue (FIFO)</h3>
-                <ul id="toDoList" className="list-group">
-                  {this.state.queue.map((item, index) => {
-                    let key = _keyGeneratorModule.generate(item);
-                    return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item}</li>
-                  })}
-                </ul>
-              </div>
-            </div>
-            <div className="row splitter">
-              <div className="col">
+        <Row>
+          <Col>
+            <Row>
+              <Col>
                 <_formModule.render
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                  handleSubmit={this.handleSubmit}
-                  handleDelete={this.handleDelete}
+                  title="Queue (FIFO)"
+                  listId="queueList"
+                  id="queueInput"
+                  handleAdd={this.handleQueueAdd}
+                  handleRemove={this.handleQueueRemove}
                   items={this.state.queue}
                 />
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div className="row splitter">
-              <div className="col">
-                <h3>Stack (LIFO)</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              </Col>
+            </Row>
+          </Col>
+          <Col>
+            <Row>
+              <Col>
+                <_formModule.render
+                  title="Stack (LIFO)"
+                  listId="stackList"
+                  id="stackInput"
+                  handleAdd={this.handleQueueAdd}
+                  handleRemove={this.handleQueueRemove}
+                  items={this.state.queue}
+                />
+                <h3></h3>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </>
     );
   }
 }
