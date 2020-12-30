@@ -55,10 +55,10 @@ export let FormModule = function() {
           <Col>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
               <Form.Row>
-                <Form.Label>
-                  Item to add
-                </Form.Label>
-                <InputGroup>
+                <Form.Group as={Col}>
+                  <Form.Label>
+                    Item to add
+                  </Form.Label>
                   <Form.Control
                     name={props.id}
                     id={props.id}
@@ -67,16 +67,18 @@ export let FormModule = function() {
                     required
                     value={props.value}
                   />
-                  <InputGroup.Append>
-                    <Button id="submit" variant="dark" type="submit">Add</Button>
-                  </InputGroup.Append>
-                  <InputGroup.Append>
-                    <Button id="remove" variant="danger" type="button" onClick={props.handleRemove}>Remove</Button>
-                  </InputGroup.Append>
                   <Form.Control.Feedback type="invalid">
                     Please enter a value.
                   </Form.Control.Feedback>
-                </InputGroup>
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+              <Form.Group as={Col} xs={6} md={3} lg={2}>
+                  <Button id="submit" variant="dark" type="submit">Add</Button>
+              </Form.Group>
+              <Form.Group as={Col} xs={6} md={3} lg={2}>
+                  <Button id="remove" variant="danger" type="button" onClick={props.handleRemove}>Remove</Button>
+              </Form.Group>
               </Form.Row>
             </Form>
           </Col>
