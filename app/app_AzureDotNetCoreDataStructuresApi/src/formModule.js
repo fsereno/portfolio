@@ -32,6 +32,9 @@ export let FormModule = function() {
       } else {
 
         setValidated(false);
+
+        form.reset();
+
         props.handleAdd(event, input);
 
       }
