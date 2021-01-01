@@ -1,3 +1,5 @@
+"use strict;"
+
 import Config from  '../../../config.json';
 
 export const ConfigUtilModule = (() => {

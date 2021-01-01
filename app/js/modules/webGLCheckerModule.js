@@ -1,3 +1,5 @@
+"use strict;"
+
 export const WebGLCheckerModule = (() => {
 
     let isWebGLAvailable = () => {

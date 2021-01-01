@@ -1,3 +1,5 @@
+"use strict;"
+
 export const jQueryAjaxModule = (() => {
 
     let handleAjax = (request, condition, conditionMetDeligate, failDeligate, conditionFailDeligate) => {
