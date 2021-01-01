@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
@@ -77,10 +76,10 @@ export let FormModule = function() {
               </Form.Row>
               <Form.Row>
               <Form.Group as={Col} xs={6} md={3} lg={2}>
-                  <Button id="submit" variant="dark" type="submit">Add</Button>
+                  <Button id={props.id + "_submit"} variant="dark" type="submit">Add</Button>
               </Form.Group>
               <Form.Group as={Col} xs={6} md={3} lg={2}>
-                  <Button id="remove" variant="danger" type="button" onClick={props.handleRemove}>Remove</Button>
+                  <Button id={props.id + "_remove"} variant="danger" type="button" onClick={props.handleRemove}>Remove</Button>
               </Form.Group>
               </Form.Row>
             </Form>
