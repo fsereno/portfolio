@@ -77,7 +77,7 @@ export let FormModule = function() {
               </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="3"> 
-              <Button variant="dark" type="submit">Add item</Button>
+              <Button variant="dark" id="submit" type="submit">Add item</Button>
             </Form.Group>
           </Form.Row>
         </Form>
