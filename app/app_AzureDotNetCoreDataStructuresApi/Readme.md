@@ -1,4 +1,4 @@
-# Master application Readme template
+# Azure Functions, .NET Core, Data Structures Api
 
 With this application I am demonstrating knowledge of data structures, Queue and Stack. With Queue being first in, first out and Stack being last in, first out.
 
