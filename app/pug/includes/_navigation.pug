@@ -37,7 +37,7 @@ nav#navBar.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
                         a(class=(locals.application.folder === application.folder
                         ? "active"
                         : "") + " dropdown-item",
-                        href=directory+locals.config.prefix+application.folder+"/index.html")= application.name
+                        href=directory+locals.config.prefix+application.folder)= application.name
                 .dropdown-divider
                 a(class=(locals.config.entry === application.folder
                 ? "active"

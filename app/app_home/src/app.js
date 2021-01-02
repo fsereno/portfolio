@@ -245,7 +245,7 @@ class HomeApp extends React.Component {
                       <h5 className="card-title">{application.name}</h5>
                       <p className="card-text">{application.subHeading}</p>
                       <a className="btn btn-dark mr-2 mb-2"
-                        href={`${CONFIG.prefix}${application.folder}/${CONFIG.index}`}>
+                        href={`${CONFIG.prefix}${application.folder}`}>
                           View app<i className="fa fa-eye ml-2"></i>
                       </a>
                       <a className="btn btn-dark mb-2"
