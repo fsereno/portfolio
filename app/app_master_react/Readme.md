@@ -6,7 +6,7 @@ With this application I have built...
 
 The interest in this application...
 
-### Project Files ###
+### Project comands ###
 
 Build JavaScript by running the default Gulp task from witin this directory
 ```

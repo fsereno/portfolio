@@ -1,6 +1,6 @@
 # Azure Functions, .NET Core, Data Structures Api
 
-With this application I am demonstrating knowledge of data structures, Queue and Stack. With Queue being first in, first out and Stack being last in, first out.
+With this application I am demonstrating knowledge of data the structures, Queue and Stack. With Queue being first in, first out and Stack being last in, first out.
 
 ### Explanation ###
 
@@ -14,7 +14,7 @@ Using Generics in .NET I have implemented an interface, which acts as the contra
 
 - Generics (https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/)
 
-### Project Files ###
+### Project commands ###
 
 Build JavaScript by running the default Gulp task from witin this directory
 ```

@@ -8,7 +8,7 @@ Whilst this functionality could be achieved with JavaScript alone, I wanted to d
 
 - IEqualityComparer (https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.iequalitycomparer-1?view=net-5.0)
 
-### Project Files ###
+### Project comands ###
 
 Build JavaScript by running the default Gulp task from witin this directory
 ```
