@@ -7,6 +7,7 @@ import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
+import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
 
 const PUZZLE = "3 + 1 + 1 =";
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreAsyncCoffeeMachine");
@@ -35,6 +36,8 @@ class CoffeeMakerApp extends React.Component {
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
+    this.handleBeforeAjax = this.handleBeforeAjax.bind(this);
+    this.handleFailedAjax = this.handleFailedAjax.bind(this);
   }
 
   handleRun() {
@@ -60,22 +63,22 @@ class CoffeeMakerApp extends React.Component {
     this.handleAjax(request);
   }
 
+  handleBeforeAjax() {
+    this.setState({
+      showSpinner: true,
+      showPuzzleModal: false
+    });
+  }
+
+  handleFailedAjax() {
+    this.setState({
+      showErrorModal: true,
+      showSpinner: false
+    });
+  }
+
   handleAjax(request) {
-    if (_puzzleModalModule.isSolved()) {
-      this.setState({
-        showSpinner: true,
-        showPuzzleModal: false
-      });
-      $.ajax(request)
-      .fail(() => {
-        this.setState({
-          showSpinner: false,
-          showErrorModal: true
-        });
-      });
-    } else {
-      this.handlePuzzleModalShow();
-    }
+    jQueryAjaxModule.handleAjax(request, _puzzleModalModule.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   renderProcessHeading() {
