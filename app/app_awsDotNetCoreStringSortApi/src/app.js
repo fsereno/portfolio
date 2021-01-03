@@ -14,7 +14,6 @@ const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreStringSortApi");
 const SORT_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sort}`;
 
 let _puzzleModalModule = PuzzleModalModule(11);
-let _errorModalModule = new ErrorModalModule("errorModule");
 let _formModule = FormModule();
 
 class StringSort extends React.Component {
@@ -123,7 +122,8 @@ class StringSort extends React.Component {
   render() {
     return (
       <div>
-        <_errorModalModule.render
+        <ErrorModalModule.render
+          id="errorModal"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
