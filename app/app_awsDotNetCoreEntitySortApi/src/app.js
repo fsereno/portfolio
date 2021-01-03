@@ -16,7 +16,6 @@ const SORT_SALARY_ASC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpo
 const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryDesc}`;
 
 let _puzzleModalModule = PuzzleModalModule(15);
-let _errorModalModule = new ErrorModalModule("errorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
 let _formModule = FormModule();
 
@@ -165,7 +164,8 @@ class EntitySort extends React.Component {
   render() {
     return (
       <div>
-        <_errorModalModule.render
+        <ErrorModalModule.render
+          id="errorModal"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />

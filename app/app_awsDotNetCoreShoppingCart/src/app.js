@@ -21,7 +21,6 @@ const DEFAULT_COLLECTION = [
 ]
 
 let _puzzleModalModule = PuzzleModalModule(15);
-let _errorModalModule = new ErrorModalModule("errorModule");
 let _formModule = FormModule();
 
 class ShoppingListApp extends React.Component {
@@ -182,7 +181,8 @@ class ShoppingListApp extends React.Component {
   render() {
     return (
       <div>
-        <_errorModalModule.render
+        <ErrorModalModule.render
+          id="errorModal"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
