@@ -21,8 +21,6 @@ const POSTCODE_INPUT = "postCodeInput";
 
 let _formModule = FormModule();
 let _puzzleModalModule = PuzzleModalModule(14);
-let _errorModalModule = new ErrorModalModule("errorModule");
-let _duplicateEntryErrorModalModule = new ErrorModalModule("duplicateEntryErrorModule");
 let _keyGeneratorModule = new KeyGeneratorModule();
 let _charFilterModule = new CharFilterModule();
 
@@ -164,11 +162,13 @@ class UniqueDataEntryApp extends React.Component {
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
         />
-        <_errorModalModule.render 
+        <ErrorModalModule.render
+          id="errorModule"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
-        <_duplicateEntryErrorModalModule.render
+        <ErrorModalModule.render
+          id="duplicateEntryErrorModule"
           show={this.state.showDuplicateErrorModal}
           title="Duplicate entry detected!"
           body="You cannot add a duplicate item."

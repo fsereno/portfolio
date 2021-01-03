@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 export const ErrorModalModule = (() => {
     let render = (props) => {
         return (
-            <Modal id={props.id} show={props.show} onHide={props.handleClose}>
+            <Modal id={props.modalId} show={props.show} onHide={props.handleClose}>
                 <Modal.Header>
                     <Modal.Title className="display-4">{props.title || "We have a problem!"}</Modal.Title>
                     <Button variant="link" className="close" onClick={props.handleClose}>

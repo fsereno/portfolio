@@ -19,7 +19,6 @@ const ADD_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoi
 const REMOVE_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.removeStackItem}`;
 
 let _puzzleModalModule = PuzzleModalModule(5);
-let _errorModalModule = new ErrorModalModule("errorModule");
 let _formModule = FormModule();
 
 class DataStructuresApp extends React.Component {
@@ -195,7 +194,8 @@ class DataStructuresApp extends React.Component {
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
         />
-        <_errorModalModule.render
+        <ErrorModalModule.render
+          id="errorModal"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
