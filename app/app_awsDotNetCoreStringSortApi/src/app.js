@@ -7,6 +7,7 @@ import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 import { FormModule } from "./formModule";
+import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
 
 const PUZZLE = "4 x 4 - 5 =";
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreStringSortApi");
@@ -31,6 +32,26 @@ class StringSort extends React.Component {
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
+    this.handleBeforeAjax = this.handleBeforeAjax.bind(this);
+    this.handleFailedAjax = this.handleFailedAjax.bind(this);
+  }
+
+  handleBeforeAjax() {
+    this.setState({
+      showSpinner: true,
+      showPuzzleModal: false
+    });
+  }
+
+  handleFailedAjax() {
+    this.setState({
+      showErrorModal: true,
+      showSpinner: false
+    });
+  }
+
+  handleAjax(request) {
+    jQueryAjaxModule.handleAjax(request, _puzzleModalModule.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   handleValuesChange(event) {
