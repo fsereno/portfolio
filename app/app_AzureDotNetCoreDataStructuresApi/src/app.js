@@ -194,7 +194,7 @@ class DataStructuresApp extends React.Component {
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
         />
-        <ErrorModalModule.render
+        <ErrorModalModule
           id="errorModal"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}

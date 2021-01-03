@@ -162,12 +162,12 @@ class UniqueDataEntryApp extends React.Component {
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
         />
-        <ErrorModalModule.render
+        <ErrorModalModule
           id="errorModule"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
-        <ErrorModalModule.render
+        <ErrorModalModule
           id="duplicateEntryErrorModule"
           show={this.state.showDuplicateErrorModal}
           title="Duplicate entry detected!"

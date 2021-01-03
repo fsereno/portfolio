@@ -5,7 +5,7 @@ import React from 'react';
 export let SpinnerModule = function(props) {
     let showSpinner = props.show || false;
     let hideClass = !showSpinner ? "d-none" : "";
-    return(
+    return (
         <div>
             <div id="spinner" className={`${hideClass} spinner-container overlay`}>
             </div>

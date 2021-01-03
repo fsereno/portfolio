@@ -181,7 +181,7 @@ class ShoppingListApp extends React.Component {
   render() {
     return (
       <div>
-        <ErrorModalModule.render
+        <ErrorModalModule
           id="errorModal"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
