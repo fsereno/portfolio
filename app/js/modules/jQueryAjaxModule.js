@@ -2,7 +2,7 @@
 
 export const jQueryAjaxModule = (() => {
 
-    let handleAjax = (request, condition, conditionMetDeligate, failDeligate, conditionFailDeligate) => {
+    let handleAjax = (request, condition, conditionMetDeligate, requestFailedDeligate, conditionFailedDeligate) => {
 
         if (condition) {
             if (typeof conditionMetDeligate === "function") {
@@ -10,13 +10,13 @@ export const jQueryAjaxModule = (() => {
             }
             $.ajax(request)
                 .fail(() => {
-                    if (typeof failDeligate === "function") {
-                        failDeligate();
+                    if (typeof requestFailedDeligate === "function") {
+                        requestFailedDeligate();
                     }
                 });
           } else {
-            if (typeof conditionFailDeligate === "function") {
-                conditionFailDeligate();
+            if (typeof conditionFailedDeligate === "function") {
+                conditionFailedDeligate();
             }
         }
     }
