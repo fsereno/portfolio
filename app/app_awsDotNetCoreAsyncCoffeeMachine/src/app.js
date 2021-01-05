@@ -15,8 +15,6 @@ const RUN_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.run}`;
 const RUN_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.runAsync}`;
 
 let _puzzleModalModule = PuzzleModalModule(5);
-let _keyGeneratorModule = new KeyGeneratorModule();
-
 class CoffeeMakerApp extends React.Component {
   constructor(props) {
     super(props);
@@ -136,7 +134,7 @@ class CoffeeMakerApp extends React.Component {
           <this.renderProcessHeading/>
             <ul id="resultOutput" className="list-group">
               {this.state.log.map((item, index) => {
-                let key = _keyGeneratorModule.generate(item.detail);
+                let key = KeyGeneratorModule.generate(item.detail);
                 return (
                   <li key={key} className="list-group-item d-flex align-items-center">
                       <span className="badge badge-primary badge-pill mr-3 bg-dark">{index+1}</span>

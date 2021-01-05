@@ -19,8 +19,6 @@ const CONTENT_CONTAINER_ID = "contentContainer";
 const IS_BROWSER_VALID = WebGLCheckerModule.isWebGL2Available() || WebGLCheckerModule.isWebGLAvailable();
 const CONFIG = ConfigUtilModule.get();
 const APP_CONFIG = ConfigUtilModule.get("home");
-const _stringSearchModule = new StringSearchModule();
-
 class HomeApp extends React.Component {
   constructor(props) {
     super(props);
@@ -53,7 +51,7 @@ class HomeApp extends React.Component {
         application.searchTerms
       ]
       let result = application.active && application.include
-        ? _stringSearchModule.searchCriterions(criterions, searchTerm)
+        ? StringSearchModule.searchCriterions(criterions, searchTerm)
         : false
       return result;
     });
@@ -84,8 +82,8 @@ class HomeApp extends React.Component {
     let searchTerm = event.target.value;
     let element = document.getElementById(SEARCH_INPUT_ID);
     let existingValue = element.value;
-    if (_stringSearchModule.searchDoesNotExist(existingValue, searchTerm)) {
-      let combinedSearch = _stringSearchModule.combineSearchTerms(existingValue, searchTerm);
+    if (StringSearchModule.searchDoesNotExist(existingValue, searchTerm)) {
+      let combinedSearch = StringSearchModule.combineSearchTerms(existingValue, searchTerm);
       element.value = combinedSearch
       this.handleSearch(combinedSearch);
     }

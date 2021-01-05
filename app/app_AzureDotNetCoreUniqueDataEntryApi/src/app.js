@@ -21,7 +21,6 @@ const POSTCODE_INPUT = "postCodeInput";
 
 let _formModule = FormModule();
 let _puzzleModalModule = PuzzleModalModule(14);
-let _keyGeneratorModule = new KeyGeneratorModule();
 class UniqueDataEntryApp extends React.Component {
   constructor(props) {
     super(props);
@@ -192,7 +191,7 @@ class UniqueDataEntryApp extends React.Component {
                 </thead>
                 <tbody>
                 {this.state.items.map((item, index) => {
-                    let key = _keyGeneratorModule.generate(`${item.secondName} ${item.contact} ${item.postCode}`);
+                    let key = KeyGeneratorModule.generate(`${item.secondName} ${item.contact} ${item.postCode}`);
                     return (
                       <tr key={key}>
                         <td>{item.firstName}</td>

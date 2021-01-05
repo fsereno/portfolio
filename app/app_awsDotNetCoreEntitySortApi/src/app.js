@@ -10,13 +10,12 @@ import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 import { FormModule } from "./formModule";
 import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
 
-const PUZZLE = "7 x 7 + 1 =";
+const PUZZLE = "7 x 2 + 1 =";
 const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreEntitySortApi");
 const SORT_SALARY_ASC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryAsc}`;
 const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryDesc}`;
 
 let _puzzleModalModule = PuzzleModalModule(15);
-let _keyGeneratorModule = new KeyGeneratorModule();
 let _formModule = FormModule();
 
 class EntitySort extends React.Component {
@@ -197,7 +196,7 @@ class EntitySort extends React.Component {
                 </thead>
                 <tbody>
                 {this.state.employees.map((employee, index) => {
-                    let key = _keyGeneratorModule.generate(`${employee.name} ${employee.salary}`);
+                    let key = KeyGeneratorModule.generate(`${employee.name} ${employee.salary}`);
                     return (
                       <tr key={key}>
                         <td>{employee.name}</td>

@@ -1,12 +1,5 @@
 export class StringSearchModule {
-    constructor() {
-        this.searchDoesNotExist = (existingValue = "", searchTerm = "") => (existingValue || "").toUpperCase().indexOf((searchTerm || "").toUpperCase()) === -1;
-        this.combineSearchTerms = (existingValue = "", searchTerm = "") => {
-            let result = `${existingValue} ${searchTerm}`;
-            return result.trim();
-        };
-    }
-    searchCriterions(criterions = [], searchTerm = "") {
+    static searchCriterions(criterions = [], searchTerm = "") {
         let searchResult = criterions.length > 0 ? criterions.filter(criterion => {
             let searchTerms = searchTerm.split(" ").filter(x => x);
             let searchTermSearch = searchTerms.filter((term) => {
@@ -18,4 +11,9 @@ export class StringSearchModule {
         return result;
     }
 }
+StringSearchModule.searchDoesNotExist = (existingValue = "", searchTerm = "") => (existingValue || "").toUpperCase().indexOf((searchTerm || "").toUpperCase()) === -1;
+StringSearchModule.combineSearchTerms = (existingValue = "", searchTerm = "") => {
+    let result = `${existingValue} ${searchTerm}`;
+    return result.trim();
+};
 //# sourceMappingURL=app.js.map
