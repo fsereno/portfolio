@@ -1,0 +1,29 @@
+
+export const FilterModule = (() => {
+
+    const filterInputOnRegex = (input: string, regex: RegExp) : string => {
+
+        let result = "";
+
+        for (let i = 0; i < input.length; i++) {
+
+            let test = regex.test(input[i]);
+
+            if (test) {
+                result = result += input[i];
+            }
+        }
+
+        return result;
+    }
+
+    const IsUniqueInArray = (collection: string[], input: string): boolean => {
+        let result = collection?.filter(x => x === input).length === 0 ?? true;
+        return result;
+    }
+
+    return {
+        filterInputOnRegex : filterInputOnRegex,
+        IsUniqueInArray : IsUniqueInArray
+    }
+})();

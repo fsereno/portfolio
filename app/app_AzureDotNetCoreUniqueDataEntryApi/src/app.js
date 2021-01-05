@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
-import { CharFilterModule } from '../../typeScript/Modules/charFilterModule/dist/app.js';
+import { FilterModule } from '../../typeScript/Modules/filterModule/dist/app.js';
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
@@ -22,8 +22,6 @@ const POSTCODE_INPUT = "postCodeInput";
 let _formModule = FormModule();
 let _puzzleModalModule = PuzzleModalModule(14);
 let _keyGeneratorModule = new KeyGeneratorModule();
-let _charFilterModule = new CharFilterModule();
-
 class UniqueDataEntryApp extends React.Component {
   constructor(props) {
     super(props);
@@ -83,8 +81,8 @@ class UniqueDataEntryApp extends React.Component {
       item: {
         firstName: firstName,
         secondName: secondName,
-        contact: _charFilterModule.filter(contact, /[0-9]/),
-        postCode: _charFilterModule.filter(postCode, /\w/),
+        contact: FilterModule.filterInputOnRegex(contact, /[0-9]/),
+        postCode: FilterModule.filterInputOnRegex(postCode, /\w/),
       }
     }
 
