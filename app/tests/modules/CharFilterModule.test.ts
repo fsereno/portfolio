@@ -8,6 +8,7 @@ describe("CharFilterModule", () => {
     beforeEach( () => sut = new CharFilterModule());
 
     describe("filter", () => {
+        let sut = new CharFilterModule();
         it("Should only return numeric values", () => {
             let result = sut.filter("+(44) 78965 67654", /[0-9]/);
             expect(result).to.equal("447896567654");

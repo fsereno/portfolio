@@ -3,5 +3,8 @@
         "noImplicitAny": true,
         "target": "ES6",
         "sourceMap": true,
-    }
+        "types": [],
+        "outDir": "./dist/"
+    },
+    "include": [ "app.ts"],
 }

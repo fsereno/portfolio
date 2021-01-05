@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
+import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
 import { configureStore, createAction, createReducer } from '@reduxjs/toolkit';
 import undoable, { ActionCreators } from 'redux-undo';
 import { FormModule } from './formModule';

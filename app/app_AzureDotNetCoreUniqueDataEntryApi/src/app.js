@@ -2,8 +2,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
-import { CharFilterModule } from '../../typeScript/Modules/charFilterModule/app.js';
+import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
+import { CharFilterModule } from '../../typeScript/Modules/charFilterModule/dist/app.js';
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';

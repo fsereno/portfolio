@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
+import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
 
 let _keyGeneratorModule = new KeyGeneratorModule();
 

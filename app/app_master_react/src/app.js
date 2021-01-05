@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/app.js';
+import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
 import { FormModule } from './formModule';
 
 let _keyGeneratorModule = new KeyGeneratorModule();
