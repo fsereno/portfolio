@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import { FilterModule } from '../../typeScript/Modules/filterModule/dist/app';
 
 export let FormModule = function() {
 
@@ -17,7 +18,7 @@ export let FormModule = function() {
       const data = new FormData(form);
       const input = data.get("itemInput");
 
-      let isNotUnique = props.items.filter(x => x === input).length > 0;
+      let isNotUnique = !FilterModule.isUniqueInArray(props.items, input);
 
       if (form.checkValidity() === false || isNotUnique) {
 

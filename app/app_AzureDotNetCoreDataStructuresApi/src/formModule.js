@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
+import { FilterModule } from '../../typeScript/Modules/filterModule/dist/app';
 
 let _keyGeneratorModule = new KeyGeneratorModule();
 
@@ -21,7 +22,7 @@ export let FormModule = function() {
       const data = new FormData(form);
       const input = data.get(props.id);
 
-      let isNotUnique = props.items.filter(x => x === input).length > 0;
+      let isNotUnique = !FilterModule.isUniqueInArray(props.items, input);
 
       if (form.checkValidity() === false || isNotUnique) {
 
