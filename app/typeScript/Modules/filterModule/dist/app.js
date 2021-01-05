@@ -1,5 +1,5 @@
-export const FilterModule = (() => {
-    const filterInputOnRegex = (input, regex) => {
+export class FilterModule {
+    static filterInputOnRegex(input, regex) {
         let result = "";
         for (let i = 0; i < input.length; i++) {
             let test = regex.test(input[i]);
@@ -8,15 +8,11 @@ export const FilterModule = (() => {
             }
         }
         return result;
-    };
-    const IsUniqueInArray = (collection, input) => {
+    }
+    static isUniqueInArray(collection, input) {
         var _a;
         let result = (_a = (collection === null || collection === void 0 ? void 0 : collection.filter(x => x === input).length) === 0) !== null && _a !== void 0 ? _a : true;
         return result;
-    };
-    return {
-        filterInputOnRegex: filterInputOnRegex,
-        IsUniqueInArray: IsUniqueInArray
-    };
-})();
+    }
+}
 //# sourceMappingURL=app.js.map

@@ -1,7 +1,7 @@
 
-export const FilterModule = (() => {
+export class FilterModule {
 
-    const filterInputOnRegex = (input: string, regex: RegExp) : string => {
+    public static filterInputOnRegex(input: string, regex: RegExp) : string {
 
         let result = "";
 
@@ -17,13 +17,8 @@ export const FilterModule = (() => {
         return result;
     }
 
-    const IsUniqueInArray = (collection: string[], input: string): boolean => {
+    public static isUniqueInArray(collection: string[], input: string): boolean {
         let result = collection?.filter(x => x === input).length === 0 ?? true;
         return result;
     }
-
-    return {
-        filterInputOnRegex : filterInputOnRegex,
-        IsUniqueInArray : IsUniqueInArray
-    }
-})();
+}

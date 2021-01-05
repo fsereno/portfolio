@@ -14,11 +14,11 @@ describe("FilterModule", () => {
     });
     describe("IsUniqueInArray", () => {
         it("Should return true if value is unique in array", () => {
-            let result = FilterModule.IsUniqueInArray(["a", "b", "c"], "d");
+            let result = FilterModule.isUniqueInArray(["a", "b", "c"], "d");
             expect(result).to.equal(true);
         });
         it("Should return false if value is not unique in array", () => {
-            let result = FilterModule.IsUniqueInArray(["a", "b", "c"], "a");
+            let result = FilterModule.isUniqueInArray(["a", "b", "c"], "a");
             expect(result).to.equal(false);
         });
     });
