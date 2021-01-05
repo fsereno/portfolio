@@ -19,7 +19,6 @@ const SECOND_NAME_INPUT = "secondNameInput";
 const CONTACT_INPUT = "contactInput";
 const POSTCODE_INPUT = "postCodeInput";
 
-let _formModule = FormModule();
 let _puzzleModalModule = PuzzleModalModule(14);
 class UniqueDataEntryApp extends React.Component {
   constructor(props) {
@@ -214,7 +213,7 @@ class UniqueDataEntryApp extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-12">
-            <_formModule.render handleSubmit={this.handleSubmit}/>
+            <FormModule handleSubmit={this.handleSubmit}/>
           </div>
         </div>
       </div>

@@ -24,9 +24,6 @@ const _undoableTodoReducer = undoable(_todoReducer);
 const _store = configureStore({
   reducer: _undoableTodoReducer
 });
-
-let _formModule = FormModule();
-
 class ToDoListForm extends React.Component {
   constructor(props) {
     super(props);
@@ -112,7 +109,7 @@ class ToDoListForm extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-6">
-            <_formModule.render
+            <FormModule
               value={this.state.value}
               onChange={this.handleChange}
               handleSubmit={this.handleSubmit}

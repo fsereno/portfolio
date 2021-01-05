@@ -7,71 +7,58 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-export let FormModule = function() {
+export function FormModule(props) {
 
-  function FormTemplate(props){
+  const [validated, setValidated] = useState(false);
 
-    const [validated, setValidated] = useState(false);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
 
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      const form = event.currentTarget;
+    if (form.checkValidity() === false) {
 
-      if (form.checkValidity() === false) {
+      event.stopPropagation();
 
-        event.stopPropagation();
+    } else {
 
-      } else {
+      props.handleSubmit(event);
 
-        props.handleSubmit(event);
+    }
 
-      }
+    setValidated(true);
+  };
 
-      setValidated(true);
-    };
-
-    return (
-      <>
-        <Row className="splitter">
-          <Col md={12}>
-            <Form id={`${props.id}_form`} noValidate validated={validated} onSubmit={handleSubmit}>
-              <Form.Row>
-                <Form.Label htmlFor={props.id}>
-                  {props.label}
-                </Form.Label>
-                <InputGroup>
-                  {props.children.map(item => {
-                    return (<Form.Control
-                      key={item.id}
-                      id={item.id}
-                      name={item.id}
-                      type={item.type || "text"}
-                      placeholder={item.placeholder}
-                      required={item.required ? "required" : ""}
-                    />)
-                  })}
-                  <InputGroup.Append>
-                    <Button id={`${props.id}_submit`} variant="dark api-submit" type="submit">{props.button}</Button>
-                  </InputGroup.Append>
-                  <Form.Control.Feedback type="invalid">
-                    {props.error || "Please enter a valid value."}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Row>
-            </Form>
-          </Col>
-        </Row>
-      </>
-    )
-  }
-
-  let render = function(props) {
-      return (
-          <FormTemplate {...props} />
-      )
-  }
-
-  return {
-    render: render
-  }
+  return (
+    <>
+      <Row className="splitter">
+        <Col md={12}>
+          <Form id={`${props.id}_form`} noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form.Row>
+              <Form.Label htmlFor={props.id}>
+                {props.label}
+              </Form.Label>
+              <InputGroup>
+                {props.children.map(item => {
+                  return (<Form.Control
+                    key={item.id}
+                    id={item.id}
+                    name={item.id}
+                    type={item.type || "text"}
+                    placeholder={item.placeholder}
+                    required={item.required ? "required" : ""}
+                  />)
+                })}
+                <InputGroup.Append>
+                  <Button id={`${props.id}_submit`} variant="dark api-submit" type="submit">{props.button}</Button>
+                </InputGroup.Append>
+                <Form.Control.Feedback type="invalid">
+                  {props.error || "Please enter a valid value."}
+                </Form.Control.Feedback>
+              </InputGroup>
+            </Form.Row>
+          </Form>
+        </Col>
+      </Row>
+    </>
+  )
 }

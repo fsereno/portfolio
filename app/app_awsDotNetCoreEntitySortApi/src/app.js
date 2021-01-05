@@ -16,8 +16,6 @@ const SORT_SALARY_ASC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpo
 const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryDesc}`;
 
 let _puzzleModalModule = PuzzleModalModule(15);
-let _formModule = FormModule();
-
 class EntitySort extends React.Component {
   constructor(props) {
     super(props);
@@ -218,7 +216,7 @@ class EntitySort extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-12">
-            <_formModule.render
+            <FormModule
               handleSubmit={this.handleSubmit}
               handleNameChange={this.handleNameChange}
               handleSalaryChange={this.handleSalaryChange}

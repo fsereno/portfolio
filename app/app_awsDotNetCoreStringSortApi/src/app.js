@@ -14,8 +14,6 @@ const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreStringSortApi");
 const SORT_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sort}`;
 
 let _puzzleModalModule = PuzzleModalModule(11);
-let _formModule = FormModule();
-
 class StringSort extends React.Component {
   constructor(props) {
     super(props);
@@ -149,7 +147,7 @@ class StringSort extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-12">
-            <_formModule.render
+            <FormModule
               value={this.state.values}
               onChange={this.handleValuesChange}
               handleSubmit={this.handleSubmit}

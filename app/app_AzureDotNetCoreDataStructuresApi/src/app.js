@@ -19,8 +19,6 @@ const ADD_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoi
 const REMOVE_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.removeStackItem}`;
 
 let _puzzleModalModule = PuzzleModalModule(5);
-let _formModule = FormModule();
-
 class DataStructuresApp extends React.Component {
   constructor(props) {
     super(props);
@@ -206,7 +204,7 @@ class DataStructuresApp extends React.Component {
           <Col>
             <Row>
               <Col>
-                <_formModule.render
+                <FormModule
                   title="Queue (FIFO)"
                   listId="queueList"
                   id="queueInput"
@@ -220,7 +218,7 @@ class DataStructuresApp extends React.Component {
           <Col>
             <Row>
               <Col>
-                <_formModule.render
+                <FormModule
                   title="Stack (LIFO)"
                   listId="stackList"
                   id="stackInput"

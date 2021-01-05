@@ -4,9 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
 import { FormModule } from './formModule';
-
-let _formModule = FormModule();
-
 class ToDoListForm extends React.Component {
   constructor(props) {
     super(props);
@@ -71,7 +68,7 @@ class ToDoListForm extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-6">
-            <_formModule.render
+            <FormModule
               value={this.state.value}
               onChange={this.handleChange}
               handleSubmit={this.handleSubmit}

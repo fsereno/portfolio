@@ -21,8 +21,6 @@ const DEFAULT_COLLECTION = [
 ]
 
 let _puzzleModalModule = PuzzleModalModule(15);
-let _formModule = FormModule();
-
 class ShoppingListApp extends React.Component {
   constructor(props) {
     super(props);
@@ -212,7 +210,7 @@ class ShoppingListApp extends React.Component {
         </div>
        <div className="row splitter">
           <div className="col-lg-4">
-            <_formModule.render
+            <FormModule
               handleSubmit={this.handleGetSubmit}
               button="Get"
               id="get"
@@ -223,7 +221,7 @@ class ShoppingListApp extends React.Component {
                   "type": "number"
                 }]}
             />
-            <_formModule.render
+            <FormModule
               handleSubmit={this.handleAddSubmit}
               button="Add"
               id="add"
@@ -234,7 +232,7 @@ class ShoppingListApp extends React.Component {
                   "required": true
                 }]}
             />
-            <_formModule.render
+            <FormModule
               handleSubmit={this.handleDeleteSubmit}
               button="Delete"
               id="delete"
@@ -246,7 +244,7 @@ class ShoppingListApp extends React.Component {
                   "type": "number"
                 }]}
             />
-            <_formModule.render
+            <FormModule
               handleSubmit={this.handleUpdateSubmit}
               button="Update"
               id="update"
