@@ -8,7 +8,7 @@ import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js';
 import { StringSearchUtil } from '../../typeScript/Utils/stringSearchUtil/dist/app.js';
 import { WebGLCheckerModule } from "../../js/modules/webGLCheckerModule.js";
 import { HomeThreeModule } from "./homeThreeModule.js";
-import { ConfigUtilModule } from "../../js/modules/configUtilModule";
+import { ConfigUtil } from "../../js/modules/utils/configUtil";
 
 const FAUX_LOADING_TIME = 500;
 const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
@@ -17,8 +17,8 @@ const MAIN_CONTAINER_ID = "mainContainer";
 const NAV_ID = "navBar";
 const CONTENT_CONTAINER_ID = "contentContainer";
 const IS_BROWSER_VALID = WebGLCheckerModule.isWebGL2Available() || WebGLCheckerModule.isWebGLAvailable();
-const CONFIG = ConfigUtilModule.get();
-const APP_CONFIG = ConfigUtilModule.get("home");
+const CONFIG = ConfigUtil.get();
+const APP_CONFIG = ConfigUtil.get("home");
 class HomeApp extends React.Component {
   constructor(props) {
     super(props);

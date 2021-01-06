@@ -7,12 +7,12 @@ import Row from 'react-bootstrap/Row';
 import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
-import { ConfigUtilModule } from "../../js/modules/configUtilModule";
+import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { FormModule } from './formModule';
 import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
 
 const PUZZLE = "3 x 2 - 1 =";
-const APP_CONFIG = ConfigUtilModule.get("azureDotNetCoreDataStructuresApi");
+const APP_CONFIG = ConfigUtil.get("azureDotNetCoreDataStructuresApi");
 const ADD_QUEUE_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.addQueueItem}`;
 const REMOVE_QUEUE_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.removeQueueItem}`;
 const ADD_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.addStackItem}`;

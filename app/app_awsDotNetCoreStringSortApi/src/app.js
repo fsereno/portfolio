@@ -5,12 +5,12 @@ import ReactDOM from 'react-dom';
 import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
-import { ConfigUtilModule } from "../../js/modules/configUtilModule";
+import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { FormModule } from "./formModule";
 import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
 
 const PUZZLE = "4 x 4 - 5 =";
-const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreStringSortApi");
+const APP_CONFIG = ConfigUtil.get("awsDotNetCoreStringSortApi");
 const SORT_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sort}`;
 
 let _puzzleModalComponent = PuzzleModalCompnent(11);

@@ -5,11 +5,11 @@ import ReactDOM from 'react-dom';
 import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
-import { ConfigUtilModule } from '../../js/modules/configUtilModule';
+import { ConfigUtil } from '../../js/modules/utils/configUtil';
 import { FormModule } from './formModule';
 import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
 
-const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreShoppingCart");
+const APP_CONFIG = ConfigUtil.get("awsDotNetCoreShoppingCart");
 const GET_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.get}`;
 const ADD_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.add}`;
 const DELETE_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.delete}`;
