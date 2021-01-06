@@ -5,8 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
-import { FilterModule } from '../../typeScript/Modules/filterModule/dist/app';
+import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
+import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/app';
 
 export function FormModule(props) {
 
@@ -19,7 +19,7 @@ export function FormModule(props) {
     const data = new FormData(form);
     const input = data.get(props.id);
 
-    let isNotUnique = !FilterModule.isUniqueInArray(props.items, input);
+    let isNotUnique = !FilterUtil.isUniqueInArray(props.items, input);
 
     if (form.checkValidity() === false || isNotUnique) {
 
@@ -45,7 +45,7 @@ export function FormModule(props) {
           <h3>{props.title}</h3>
           <ul id={props.listId} className="list-group">
             {props.items.map((item, index) => {
-              let key = KeyGeneratorModule.generate(item);
+              let key = KeyGeneratorUtil.generate(item);
               return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item}</li>
             })}
           </ul>

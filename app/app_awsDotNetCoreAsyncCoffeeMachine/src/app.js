@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
+import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
@@ -134,7 +134,7 @@ class CoffeeMakerApp extends React.Component {
           <this.renderProcessHeading/>
             <ul id="resultOutput" className="list-group">
               {this.state.log.map((item, index) => {
-                let key = KeyGeneratorModule.generate(item.detail);
+                let key = KeyGeneratorUtil.generate(item.detail);
                 return (
                   <li key={key} className="list-group-item d-flex align-items-center">
                       <span className="badge badge-primary badge-pill mr-3 bg-dark">{index+1}</span>

@@ -1,14 +1,13 @@
+"use strict;"
 
-export class FilterModule {
+export class FilterUtil {
 
     public static filterInputOnRegex(input: string, regex: RegExp) : string {
 
         let result = "";
 
         for (let i = 0; i < input.length; i++) {
-
             let test = regex.test(input[i]);
-
             if (test) {
                 result = result += input[i];
             }

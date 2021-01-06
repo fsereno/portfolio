@@ -2,8 +2,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
-import { FilterModule } from '../../typeScript/Modules/filterModule/dist/app.js';
+import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
+import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/app.js';
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
@@ -79,8 +79,8 @@ class UniqueDataEntryApp extends React.Component {
       item: {
         firstName: firstName,
         secondName: secondName,
-        contact: FilterModule.filterInputOnRegex(contact, /[0-9]/),
-        postCode: FilterModule.filterInputOnRegex(postCode, /\w/),
+        contact: FilterUtil.filterInputOnRegex(contact, /[0-9]/),
+        postCode: FilterUtil.filterInputOnRegex(postCode, /\w/),
       }
     }
 
@@ -190,7 +190,7 @@ class UniqueDataEntryApp extends React.Component {
                 </thead>
                 <tbody>
                 {this.state.items.map((item, index) => {
-                    let key = KeyGeneratorModule.generate(`${item.secondName} ${item.contact} ${item.postCode}`);
+                    let key = KeyGeneratorUtil.generate(`${item.secondName} ${item.contact} ${item.postCode}`);
                     return (
                       <tr key={key}>
                         <td>{item.firstName}</td>

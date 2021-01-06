@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
+import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
 import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
 import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
@@ -194,7 +194,7 @@ class EntitySort extends React.Component {
                 </thead>
                 <tbody>
                 {this.state.employees.map((employee, index) => {
-                    let key = KeyGeneratorModule.generate(`${employee.name} ${employee.salary}`);
+                    let key = KeyGeneratorUtil.generate(`${employee.name} ${employee.salary}`);
                     return (
                       <tr key={key}>
                         <td>{employee.name}</td>

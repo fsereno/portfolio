@@ -5,7 +5,7 @@ import "regenerator-runtime/runtime";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { SpinnerModule } from '../../js/modules/react/spinnerModule.js';
-import { StringSearchModule } from '../../typeScript/Modules/stringSearchModule/dist/app.js';
+import { StringSearchUtil } from '../../typeScript/Utils/stringSearchUtil/dist/app.js';
 import { WebGLCheckerModule } from "../../js/modules/webGLCheckerModule.js";
 import { HomeThreeModule } from "./homeThreeModule.js";
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
@@ -51,7 +51,7 @@ class HomeApp extends React.Component {
         application.searchTerms
       ]
       let result = application.active && application.include
-        ? StringSearchModule.searchCriterions(criterions, searchTerm)
+        ? StringSearchUtil.searchCriterions(criterions, searchTerm)
         : false
       return result;
     });
@@ -82,8 +82,8 @@ class HomeApp extends React.Component {
     let searchTerm = event.target.value;
     let element = document.getElementById(SEARCH_INPUT_ID);
     let existingValue = element.value;
-    if (StringSearchModule.searchDoesNotExist(existingValue, searchTerm)) {
-      let combinedSearch = StringSearchModule.combineSearchTerms(existingValue, searchTerm);
+    if (StringSearchUtil.searchDoesNotExist(existingValue, searchTerm)) {
+      let combinedSearch = StringSearchUtil.combineSearchTerms(existingValue, searchTerm);
       element.value = combinedSearch
       this.handleSearch(combinedSearch);
     }

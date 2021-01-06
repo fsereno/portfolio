@@ -285,7 +285,7 @@ gulp.task("test-func", (done) => {
 
 gulp.task("test", (done) => {
   testsTask("services");
-  testsTask("modules");
+  testsTask("utils");
   done();
 });
 

@@ -1,4 +1,7 @@
-export class StringSearchModule {
+"use strict;"
+
+export class StringSearchUtil {
+
     public static searchCriterions(criterions:string[] = [], searchTerm = "") {
         let searchResult = criterions.length > 0 ? criterions.filter(criterion => {
             let searchTerms = searchTerm.split(" ").filter(x => x);

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { KeyGeneratorModule } from '../../typeScript/Modules/keyGeneratorModule/dist/app.js';
+import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
 import { FormModule } from './formModule';
 class ToDoListForm extends React.Component {
   constructor(props) {
@@ -54,7 +54,7 @@ class ToDoListForm extends React.Component {
             <h3>Result:</h3>
             <ul id="toDoList" className="list-group">
               {this.state.list.map((item, index) => {
-                let key = KeyGeneratorModule.generate(item);
+                let key = KeyGeneratorUtil.generate(item);
                 return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
               })}
           </ul>

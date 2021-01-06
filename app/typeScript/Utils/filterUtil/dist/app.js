@@ -1,4 +1,5 @@
-export class FilterModule {
+"use strict;";
+export class FilterUtil {
     static filterInputOnRegex(input, regex) {
         let result = "";
         for (let i = 0; i < input.length; i++) {
