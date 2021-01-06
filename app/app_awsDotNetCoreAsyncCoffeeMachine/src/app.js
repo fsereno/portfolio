@@ -7,7 +7,7 @@ import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
-import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
+import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 
 const PUZZLE = "3 + 1 + 1 =";
 const APP_CONFIG = ConfigUtil.get("awsDotNetCoreAsyncCoffeeMachine");
@@ -75,7 +75,7 @@ class CoffeeMakerApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxModule.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   renderProcessHeading() {

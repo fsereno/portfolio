@@ -6,7 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js';
 import { StringSearchUtil } from '../../typeScript/Utils/stringSearchUtil/dist/app.js';
-import { WebGLCheckerModule } from "../../js/modules/webGLCheckerModule.js";
+import { WebGLCheckerUtil } from "../../js/modules/utils/webGLCheckerUtil";
 import { HomeThreeModule } from "./homeThreeModule.js";
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 
@@ -16,7 +16,7 @@ const SEARCH_INPUT_ID = "searchInput";
 const MAIN_CONTAINER_ID = "mainContainer";
 const NAV_ID = "navBar";
 const CONTENT_CONTAINER_ID = "contentContainer";
-const IS_BROWSER_VALID = WebGLCheckerModule.isWebGL2Available() || WebGLCheckerModule.isWebGLAvailable();
+const IS_BROWSER_VALID = WebGLCheckerUtil.isWebGL2Available() || WebGLCheckerUtil.isWebGLAvailable();
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("home");
 class HomeApp extends React.Component {

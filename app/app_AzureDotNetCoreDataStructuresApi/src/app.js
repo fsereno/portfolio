@@ -9,7 +9,7 @@ import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { FormModule } from './formModule';
-import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
+import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 
 const PUZZLE = "3 x 2 - 1 =";
 const APP_CONFIG = ConfigUtil.get("azureDotNetCoreDataStructuresApi");
@@ -56,7 +56,7 @@ class DataStructuresApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxModule.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   handleQueueAdd(event, item) {

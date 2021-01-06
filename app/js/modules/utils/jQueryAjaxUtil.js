@@ -1,8 +1,8 @@
 "use strict;"
 
-export const jQueryAjaxModule = (() => {
+export class jQueryAjaxUtil {
 
-    let handleAjax = (request, condition, conditionMetDeligate, requestFailedDeligate, conditionFailedDeligate) => {
+    static handleAjax(request, condition, conditionMetDeligate, requestFailedDeligate, conditionFailedDeligate) {
 
         if (condition) {
             if (typeof conditionMetDeligate === "function") {
@@ -20,8 +20,4 @@ export const jQueryAjaxModule = (() => {
             }
         }
     }
-
-    return {
-        handleAjax: handleAjax
-    }
-})();
+}
