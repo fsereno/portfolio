@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
 import { configureStore, createAction, createReducer } from '@reduxjs/toolkit';
 import undoable, { ActionCreators } from 'redux-undo';
-import { FormModule } from './formModule';
+import { FormComponent } from './formComponent';
 
 const _addToDo = createAction("ADD_TODO");
 const _removeToDo = createAction("REMOVE_TODO")
@@ -109,7 +109,7 @@ class ToDoListForm extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-6">
-            <FormModule
+            <FormComponent
               value={this.state.value}
               onChange={this.handleChange}
               handleSubmit={this.handleSubmit}

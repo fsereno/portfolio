@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Col from 'react-bootstrap/Col';
 import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/app';
 
-export function FormModule(props) {
+export function FormComponent(props) {
 
   const [validated, setValidated] = useState(false);
 
@@ -37,10 +38,10 @@ export function FormModule(props) {
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Row>
-          <Form.Label>
-            Item to add
-          </Form.Label>
-          <InputGroup>
+          <Form.Group as={Col}>
+            <Form.Label>
+              Item to add
+            </Form.Label>
             <Form.Control
               name="itemInput"
               id="itemInput"
@@ -50,13 +51,17 @@ export function FormModule(props) {
               onChange={props.onChange}
               value={props.value}
             />
-            <InputGroup.Append>
-              <Button id="submit" variant="dark" type="submit">Add item</Button>
-            </InputGroup.Append>
             <Form.Control.Feedback type="invalid">
               Please enter a value.
             </Form.Control.Feedback>
-          </InputGroup>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <ButtonGroup aria-label="Basic example">
+            <Button id="submit" variant="dark" type="submit">Add item</Button>
+            <Button id="undo" variant="danger" type="button" onClick={props.handleUndo}>Undo</Button>
+            <Button id="redo" variant="dark" type="button" onClick={props.handleRedo}>Redo</Button>
+          </ButtonGroup>
         </Form.Row>
       </Form>
     </>

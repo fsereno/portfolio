@@ -6,7 +6,7 @@ import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from '../../js/modules/utils/configUtil';
-import { FormModule } from './formModule';
+import { FormComponent } from './formComponent';
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 
 const APP_CONFIG = ConfigUtil.get("awsDotNetCoreShoppingCart");
@@ -210,7 +210,7 @@ class ShoppingListApp extends React.Component {
         </div>
        <div className="row splitter">
           <div className="col-lg-4">
-            <FormModule
+            <FormComponent
               handleSubmit={this.handleGetSubmit}
               button="Get"
               id="get"
@@ -221,7 +221,7 @@ class ShoppingListApp extends React.Component {
                   "type": "number"
                 }]}
             />
-            <FormModule
+            <FormComponent
               handleSubmit={this.handleAddSubmit}
               button="Add"
               id="add"
@@ -232,7 +232,7 @@ class ShoppingListApp extends React.Component {
                   "required": true
                 }]}
             />
-            <FormModule
+            <FormComponent
               handleSubmit={this.handleDeleteSubmit}
               button="Delete"
               id="delete"
@@ -244,7 +244,7 @@ class ShoppingListApp extends React.Component {
                   "type": "number"
                 }]}
             />
-            <FormModule
+            <FormComponent
               handleSubmit={this.handleUpdateSubmit}
               button="Update"
               id="update"

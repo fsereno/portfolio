@@ -3,17 +3,23 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/app';
 
-export function FormModule(props) {
+export function FormComponent(props) {
 
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const form = event.currentTarget;
 
-    if (form.checkValidity() === false) {
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const input = data.get("itemInput");
+
+    let isNotUnique = !FilterUtil.isUniqueInArray(props.items, input);
+
+    if (form.checkValidity() === false || isNotUnique) {
 
       setValidated(true);
       event.stopPropagation();
@@ -32,26 +38,25 @@ export function FormModule(props) {
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Row>
           <Form.Label>
-            Enter comma seperated values to sort
+            Item to add
           </Form.Label>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} md="3" controlId="valuesInput">
+          <InputGroup>
             <Form.Control
-              name="valuesInput"
+              name="itemInput"
+              id="itemInput"
               type="text"
-              placeholder="B,C,A..."
+              placeholder="Add to list..."
               required
               onChange={props.onChange}
               value={props.value}
             />
+            <InputGroup.Append>
+              <Button id="submit" variant="dark" type="submit">Add item</Button>
+            </InputGroup.Append>
             <Form.Control.Feedback type="invalid">
               Please enter a value.
             </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group as={Col} md="3">
-            <Button id="sort_submit" variant="dark" type="submit">Sort</Button>
-          </Form.Group>
+          </InputGroup>
         </Form.Row>
       </Form>
     </>

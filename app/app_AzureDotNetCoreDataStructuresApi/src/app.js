@@ -8,7 +8,7 @@ import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
-import { FormModule } from './formModule';
+import { FormComponent } from './formComponent';
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 
 const PUZZLE = "3 x 2 - 1 =";
@@ -204,7 +204,7 @@ class DataStructuresApp extends React.Component {
           <Col>
             <Row>
               <Col>
-                <FormModule
+                <FormComponent
                   title="Queue (FIFO)"
                   listId="queueList"
                   id="queueInput"
@@ -218,7 +218,7 @@ class DataStructuresApp extends React.Component {
           <Col>
             <Row>
               <Col>
-                <FormModule
+                <FormComponent
                   title="Stack (LIFO)"
                   listId="stackList"
                   id="stackInput"

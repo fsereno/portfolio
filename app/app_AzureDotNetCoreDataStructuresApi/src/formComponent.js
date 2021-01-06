@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
 import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/app';
 
-export function FormModule(props) {
+export function FormComponent(props) {
 
   const [validated, setValidated] = useState(false);
 

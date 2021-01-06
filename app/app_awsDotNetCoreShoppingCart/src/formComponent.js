@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-export function FormModule(props) {
+export function FormComponent(props) {
 
   const [validated, setValidated] = useState(false);
 

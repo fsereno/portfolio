@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/app';
 
-export function FormModule(props) {
+export function FormComponent(props) {
 
   const [validated, setValidated] = useState(false);
 

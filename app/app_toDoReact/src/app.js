@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
-import { FormModule } from './formModule';
+import { FormComponent } from './formComponent';
 class ToDoListForm extends React.Component {
   constructor(props) {
     super(props);
@@ -68,7 +68,7 @@ class ToDoListForm extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-6">
-            <FormModule
+            <FormComponent
               value={this.state.value}
               onChange={this.handleChange}
               handleSubmit={this.handleSubmit}

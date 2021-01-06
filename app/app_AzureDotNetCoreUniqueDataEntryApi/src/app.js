@@ -8,7 +8,7 @@ import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from '../../js/modules/utils/configUtil';
-import { FormModule } from './formModule';
+import { FormComponent } from './formComponent';
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 
 const PUZZLE = "4 x 4 - 2 =";
@@ -213,7 +213,7 @@ class UniqueDataEntryApp extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-12">
-            <FormModule handleSubmit={this.handleSubmit}/>
+            <FormComponent handleSubmit={this.handleSubmit}/>
           </div>
         </div>
       </div>
