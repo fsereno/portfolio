@@ -4,9 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
 import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/app.js';
-import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
-import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
-import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
+import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
+import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
+import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtilModule } from '../../js/modules/configUtilModule';
 import { FormModule } from './formModule';
 import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
@@ -19,7 +19,7 @@ const SECOND_NAME_INPUT = "secondNameInput";
 const CONTACT_INPUT = "contactInput";
 const POSTCODE_INPUT = "postCodeInput";
 
-let _puzzleModalModule = PuzzleModalModule(14);
+let _puzzleModalComponent = PuzzleModalCompnent(14);
 class UniqueDataEntryApp extends React.Component {
   constructor(props) {
     super(props);
@@ -62,7 +62,7 @@ class UniqueDataEntryApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxModule.handleAjax(request, _puzzleModalModule.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxModule.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   handleSubmit(event) {
@@ -152,25 +152,25 @@ class UniqueDataEntryApp extends React.Component {
   render() {
     return (
       <div>
-        <_puzzleModalModule.render
+        <_puzzleModalComponent.render
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
         />
-        <ErrorModalModule
+        <ErrorModalComponent
           id="errorModule"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
-        <ErrorModalModule
+        <ErrorModalComponent
           id="duplicateEntryErrorModule"
           show={this.state.showDuplicateErrorModal}
           title="Duplicate entry detected!"
           body="You cannot add a duplicate item."
           handleClose={this.handleDuplicateErrorModalClose}
         />
-        <SpinnerModule
+        <SpinnerComponent
           show={this.state.showSpinner}
         />
         <div className="row splitter">

@@ -4,9 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
-import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
-import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
+import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
+import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
+import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 import { FormModule } from './formModule';
 import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
@@ -18,7 +18,7 @@ const REMOVE_QUEUE_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.end
 const ADD_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.addStackItem}`;
 const REMOVE_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.removeStackItem}`;
 
-let _puzzleModalModule = PuzzleModalModule(5);
+let _puzzleModalComponent = PuzzleModalCompnent(5);
 class DataStructuresApp extends React.Component {
   constructor(props) {
     super(props);
@@ -56,7 +56,7 @@ class DataStructuresApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxModule.handleAjax(request, _puzzleModalModule.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxModule.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   handleQueueAdd(event, item) {
@@ -186,18 +186,18 @@ class DataStructuresApp extends React.Component {
   render() {
     return (
       <>
-        <_puzzleModalModule.render
+        <_puzzleModalComponent.render
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
         />
-        <ErrorModalModule
+        <ErrorModalComponent
           id="errorModal"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
-        <SpinnerModule
+        <SpinnerComponent
           show={this.state.showSpinner}
         />
         <Row>

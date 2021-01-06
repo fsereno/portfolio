@@ -2,9 +2,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
-import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
-import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
+import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
+import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
+import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtilModule } from '../../js/modules/configUtilModule';
 import { FormModule } from './formModule';
 import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
@@ -20,7 +20,7 @@ const DEFAULT_COLLECTION = [
   { name: "Banana" }
 ]
 
-let _puzzleModalModule = PuzzleModalModule(15);
+let _puzzleModalComponent = PuzzleModalCompnent(15);
 class ShoppingListApp extends React.Component {
   constructor(props) {
     super(props);
@@ -58,7 +58,7 @@ class ShoppingListApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxModule.handleAjax(request, _puzzleModalModule.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxModule.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   handleGetSubmit(event) {
@@ -179,15 +179,15 @@ class ShoppingListApp extends React.Component {
   render() {
     return (
       <div>
-        <ErrorModalModule
+        <ErrorModalComponent
           id="errorModal"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
-        <SpinnerModule
+        <SpinnerComponent
           show={this.state.showSpinner}
         />
-        <_puzzleModalModule.render
+        <_puzzleModalComponent.render
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
           handleClose={this.handlePuzzleModalClose}

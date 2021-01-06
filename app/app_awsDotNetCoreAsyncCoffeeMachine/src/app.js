@@ -3,9 +3,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
-import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
-import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
-import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
+import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
+import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
+import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
 
@@ -14,7 +14,7 @@ const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreAsyncCoffeeMachine");
 const RUN_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.run}`;
 const RUN_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.runAsync}`;
 
-let _puzzleModalModule = PuzzleModalModule(5);
+let _puzzleModalComponent = PuzzleModalCompnent(5);
 class CoffeeMakerApp extends React.Component {
   constructor(props) {
     super(props);
@@ -75,7 +75,7 @@ class CoffeeMakerApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxModule.handleAjax(request, _puzzleModalModule.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxModule.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   renderProcessHeading() {
@@ -106,15 +106,15 @@ class CoffeeMakerApp extends React.Component {
   render() {
     return (
       <div>
-        <ErrorModalModule
+        <ErrorModalComponent
           id="errorModal"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
-        <SpinnerModule
+        <SpinnerComponent
           show={this.state.showSpinner}
         />
-        <_puzzleModalModule.render
+        <_puzzleModalComponent.render
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
           handleClose={this.handlePuzzleModalClose}

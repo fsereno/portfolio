@@ -4,7 +4,7 @@ import "regenerator-runtime/runtime";
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { SpinnerModule } from '../../js/modules/react/spinnerModule.js';
+import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js';
 import { StringSearchUtil } from '../../typeScript/Utils/stringSearchUtil/dist/app.js';
 import { WebGLCheckerModule } from "../../js/modules/webGLCheckerModule.js";
 import { HomeThreeModule } from "./homeThreeModule.js";
@@ -272,7 +272,7 @@ class HomeApp extends React.Component {
   render() {
     return (
       <div>
-        <SpinnerModule
+        <SpinnerComponent
           show={this.state.showSpinner}
         />
         <this.renderIntroContainer

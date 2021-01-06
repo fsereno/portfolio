@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 
-export let PuzzleModalModule = function(answer) {
+export let PuzzleModalCompnent = function(answer) {
   let _isSolved = false;
 
   const isSolved = () => _isSolved;

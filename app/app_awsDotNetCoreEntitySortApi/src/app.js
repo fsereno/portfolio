@@ -3,9 +3,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
-import { PuzzleModalModule } from '../../js/modules/react/puzzleModalModule.js';
-import { SpinnerModule } from '../../js/modules/react/spinnerModule.js'
-import { ErrorModalModule } from '../../js/modules/react/errorModalModule.js';
+import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
+import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
+import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtilModule } from "../../js/modules/configUtilModule";
 import { FormModule } from "./formModule";
 import { jQueryAjaxModule } from '../../js/modules/jQueryAjaxModule';
@@ -15,7 +15,7 @@ const APP_CONFIG = ConfigUtilModule.get("awsDotNetCoreEntitySortApi");
 const SORT_SALARY_ASC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryAsc}`;
 const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryDesc}`;
 
-let _puzzleModalModule = PuzzleModalModule(15);
+let _puzzleModalComponent = PuzzleModalCompnent(15);
 class EntitySort extends React.Component {
   constructor(props) {
     super(props);
@@ -74,7 +74,7 @@ class EntitySort extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxModule.handleAjax(request, _puzzleModalModule.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxModule.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   handleSortSalaryAsc() {
@@ -161,15 +161,15 @@ class EntitySort extends React.Component {
   render() {
     return (
       <div>
-        <ErrorModalModule
+        <ErrorModalComponent
           id="errorModal"
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
-        <SpinnerModule
+        <SpinnerComponent
           show={this.state.showSpinner}
         />
-        <_puzzleModalModule.render
+        <_puzzleModalComponent.render
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
           handleClose={this.handlePuzzleModalClose}
