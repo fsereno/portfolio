@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
+import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
@@ -13,7 +13,6 @@ const PUZZLE = "4 x 4 - 5 =";
 const APP_CONFIG = ConfigUtil.get("awsDotNetCoreStringSortApi");
 const SORT_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sort}`;
 
-let _puzzleModalComponent = PuzzleModalCompnent(11);
 class StringSort extends React.Component {
   constructor(props) {
     super(props);
@@ -26,6 +25,7 @@ class StringSort extends React.Component {
     };
     this.handleValuesChange = this.handleValuesChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleIsPuzzleValid = this.handleIsPuzzleValid.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
@@ -48,29 +48,11 @@ class StringSort extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxUtil.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, this.state.isPuzzleValid, this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   handleValuesChange(event) {
     this.setState({values: event.target.value});
-  }
-
-  handleAjax(request) {
-    if (_puzzleModalComponent.isSolved()) {
-      this.setState({
-        showSpinner: true,
-        showPuzzleModal: false
-      });
-      $.ajax(request)
-      .fail(() => {
-        this.setState({
-          showSpinner: false,
-          showErrorModal: true
-        });
-      });
-    } else {
-      this.handlePuzzleModalShow();
-    }
   }
 
   handleSort() {
@@ -97,6 +79,13 @@ class StringSort extends React.Component {
     if (this.state.values.length > 0) {
       this.handleSort();
     }
+  }
+
+  handleIsPuzzleValid() {
+    this.setState({
+      isPuzzleValid: true,
+      showPuzzleModal: false
+    })
   }
 
   handlePuzzleModalClose() {
@@ -128,11 +117,13 @@ class StringSort extends React.Component {
         <SpinnerComponent
           show={this.state.showSpinner}
         />
-        <_puzzleModalComponent.render
+        <PuzzleModalComponent
+          answer={11}
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
+          handleIsValid={this.handleIsPuzzleValid}
         />
         <div className="row splitter">
           <div className="col-lg-12">
