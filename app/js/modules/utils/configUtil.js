@@ -1,7 +1,6 @@
 "use strict;"
 
 import Config from  '../../../../config.json';
-
 export class ConfigUtil {
 
     static get(applicationFolder) {

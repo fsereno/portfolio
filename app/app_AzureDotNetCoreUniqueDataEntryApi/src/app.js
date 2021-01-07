@@ -79,8 +79,8 @@ class UniqueDataEntryApp extends React.Component {
       item: {
         firstName: firstName,
         secondName: secondName,
-        contact: FilterUtil.filterInputOnRegex(contact, /[0-9]/),
-        postCode: FilterUtil.filterInputOnRegex(postCode, /\w/),
+        contact: contact,
+        postCode: postCode,
       }
     }
 

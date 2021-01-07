@@ -58,10 +58,11 @@ export function FormComponent(props) {
               name="contactInput"
               type="text"
               placeholder="Contact number..."
+              pattern="^[+ ()0-9-]*$"
               required
             />
             <Form.Control.Feedback type="invalid">
-              Please enter a value.
+              Please enter a valid value.
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group as={Col} md="2" controlId="postCodeInput">
