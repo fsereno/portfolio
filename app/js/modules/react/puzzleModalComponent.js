@@ -12,11 +12,6 @@ export let PuzzleModalComponent = function(props) {
 
   const handleShow = () => setValidated(false);
 
-  const handleChange = (event) => {
-    let answerValue = event.target.value;
-    handleIsInputValid(answerValue) ? setIsValid(true) : setIsValid(false);
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -55,7 +50,6 @@ export let PuzzleModalComponent = function(props) {
                     name="answerInput"
                     type="text"
                     placeholder="Answer..."
-                    onChange={handleChange}
                     pattern={props.answer}
                     required
                   />
