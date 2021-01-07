@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
-import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
+import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
@@ -15,7 +15,6 @@ const APP_CONFIG = ConfigUtil.get("awsDotNetCoreEntitySortApi");
 const SORT_SALARY_ASC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryAsc}`;
 const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryDesc}`;
 
-let _puzzleModalComponent = PuzzleModalCompnent(15);
 class EntitySort extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +31,7 @@ class EntitySort extends React.Component {
       showSpinner: false,
       showPuzzleModal: true,
       showErrorModal: false,
+      isPuzzleValid: false
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -40,6 +40,7 @@ class EntitySort extends React.Component {
     this.handleDelete= this.handleDelete.bind(this);
     this.handleSortSalaryAsc = this.handleSortSalaryAsc.bind(this);
     this.handleSortSalaryDesc = this.handleSortSalaryDesc.bind(this);
+    this.handleIsPuzzleValid = this.handleIsPuzzleValid.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
@@ -74,7 +75,7 @@ class EntitySort extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxUtil.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, this.state.isPuzzleValid, this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   handleSortSalaryAsc() {
@@ -140,6 +141,13 @@ class EntitySort extends React.Component {
     });
   }
 
+  handleIsPuzzleValid() {
+    this.setState({
+      isPuzzleValid: true,
+      showPuzzleModal: false
+    })
+  }
+
   handlePuzzleModalClose() {
     this.setState({
       showPuzzleModal: false
@@ -169,11 +177,13 @@ class EntitySort extends React.Component {
         <SpinnerComponent
           show={this.state.showSpinner}
         />
-        <_puzzleModalComponent.render
+        <PuzzleModalComponent
+          answer={15}
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
+          handleIsValid={this.handleIsPuzzleValid}
         />
         <div className="row splitter">
           <div className="col-lg-12">
