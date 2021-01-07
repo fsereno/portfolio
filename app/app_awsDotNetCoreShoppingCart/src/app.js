@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
+import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from '../../js/modules/utils/configUtil';
@@ -19,8 +19,6 @@ const DEFAULT_COLLECTION = [
   { name: "Apple" },
   { name: "Banana" }
 ]
-
-let _puzzleModalComponent = PuzzleModalCompnent(15);
 class ShoppingListApp extends React.Component {
   constructor(props) {
     super(props);
@@ -31,11 +29,13 @@ class ShoppingListApp extends React.Component {
       showSpinner: false,
       showPuzzleModal: true,
       showErrorModal: false,
+      isPuzzleValid: false
     };
     this.handleGetSubmit = this.handleGetSubmit.bind(this);
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
     this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this);
     this.handleDeleteSubmit = this.handleDeleteSubmit.bind(this);
+    this.handleIsPuzzleValid = this.handleIsPuzzleValid.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
@@ -58,7 +58,7 @@ class ShoppingListApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxUtil.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, this.state.isPuzzleValid, this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   handleGetSubmit(event) {
@@ -158,6 +158,13 @@ class ShoppingListApp extends React.Component {
     this.handleAjax(request);
   }
 
+  handleIsPuzzleValid() {
+    this.setState({
+      isPuzzleValid: true,
+      showPuzzleModal: false
+    })
+  }
+
   handlePuzzleModalClose() {
     this.setState({
       showPuzzleModal: false
@@ -187,11 +194,13 @@ class ShoppingListApp extends React.Component {
         <SpinnerComponent
           show={this.state.showSpinner}
         />
-        <_puzzleModalComponent.render
+        <PuzzleModalComponent
+          answer={15}
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
+          handleIsValid={this.handleIsPuzzleValid}
         />
         <div className="row splitter">
           <div className="col-lg-12">
