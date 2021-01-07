@@ -3,8 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
-import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/app.js';
-import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
+import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from '../../js/modules/utils/configUtil';
@@ -19,7 +18,6 @@ const SECOND_NAME_INPUT = "secondNameInput";
 const CONTACT_INPUT = "contactInput";
 const POSTCODE_INPUT = "postCodeInput";
 
-let _puzzleModalComponent = PuzzleModalCompnent(14);
 class UniqueDataEntryApp extends React.Component {
   constructor(props) {
     super(props);
@@ -35,10 +33,12 @@ class UniqueDataEntryApp extends React.Component {
       showSpinner: false,
       showPuzzleModal: true,
       showErrorModal: false,
-      showDuplicateErrorModal: false
+      showDuplicateErrorModal: false,
+      isPuzzleValid: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handlePuzzleIsValid = this.handlePuzzleIsValid.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
@@ -62,7 +62,7 @@ class UniqueDataEntryApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxUtil.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, this.state.isPuzzleValid, this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   handleSubmit(event) {
@@ -137,6 +137,13 @@ class UniqueDataEntryApp extends React.Component {
     })
   }
 
+  handlePuzzleIsValid() {
+    this.setState({
+      isPuzzleValid: true,
+      showPuzzleModal: false
+    })
+  }
+
   handlePuzzleModalClose() {
     this.setState({
       showPuzzleModal: false
@@ -152,11 +159,13 @@ class UniqueDataEntryApp extends React.Component {
   render() {
     return (
       <div>
-        <_puzzleModalComponent.render
+        <PuzzleModalComponent
+          answer={14}
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
+          handleIsValid={this.handlePuzzleIsValid}
         />
         <ErrorModalComponent
           id="errorModule"
