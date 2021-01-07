@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
+import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
@@ -17,8 +17,6 @@ const ADD_QUEUE_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoi
 const REMOVE_QUEUE_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.removeQueueItem}`;
 const ADD_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.addStackItem}`;
 const REMOVE_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.removeStackItem}`;
-
-let _puzzleModalComponent = PuzzleModalCompnent(5);
 class DataStructuresApp extends React.Component {
   constructor(props) {
     super(props);
@@ -27,13 +25,15 @@ class DataStructuresApp extends React.Component {
       stack: [],
       showSpinner: false,
       showPuzzleModal: true,
-      showErrorModal: false
+      showErrorModal: false,
+      isPuzzleValid: false
     };
 
     this.handleQueueAdd = this.handleQueueAdd.bind(this);
     this.handleQueueRemove= this.handleQueueRemove.bind(this);
     this.handleStackAdd = this.handleStackAdd.bind(this);
     this.handleStackRemove = this.handleStackRemove.bind(this);
+    this.handleIsPuzzleValid = this.handleIsPuzzleValid.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
@@ -56,7 +56,7 @@ class DataStructuresApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxUtil.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, this.state.isPuzzleValid, this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   handleQueueAdd(event, item) {
@@ -171,6 +171,13 @@ class DataStructuresApp extends React.Component {
     })
   }
 
+  handleIsPuzzleValid() {
+    this.setState({
+      isPuzzleValid: true,
+      showPuzzleModal: false
+    })
+  }
+
   handlePuzzleModalClose() {
     this.setState({
       showPuzzleModal: false
@@ -186,11 +193,13 @@ class DataStructuresApp extends React.Component {
   render() {
     return (
       <>
-        <_puzzleModalComponent.render
+        <PuzzleModalComponent
+          answer={5}
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
+          handleIsValid={this.handleIsPuzzleValid}
         />
         <ErrorModalComponent
           id="errorModal"
