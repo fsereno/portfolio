@@ -11,6 +11,7 @@
     "gitHubUrl": "https://github.com/fsereno",
     "author": "Fabio Sereno",
     "role": "Software developer",
+    "thumbnail": "PortfolioThumbnail.png",
     "applications": [
         {
             "name": "Portfolio",
