@@ -9,6 +9,7 @@ import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { FormComponent } from "./formComponent";
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
+import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/app.js';
 
 const PUZZLE = "7 x 2 + 1 =";
 const APP_CONFIG = ConfigUtil.get("awsDotNetCoreEntitySortApi");
@@ -21,11 +22,7 @@ class EntitySort extends React.Component {
     this.state = {
       name: '',
       salary: '',
-      employees: [{
-        name: "John Doe",
-        salary: 10000,
-        displaySalary: "£10,000.00"
-      }],
+      employees: [],
       counterLimit: 10,
       counter: 1,
       showSpinner: false,
@@ -116,16 +113,29 @@ class EntitySort extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.name.length > 0 && this.state.salary.length > 0 && this.state.counter < this.state.counterLimit) {
-      this.state.employees.push({
-          name: this.state.name,
-          salary: Number(this.state.salary),
-          displaySalary: this.formatCurrency(this.state.salary)
-        });
+
+    let employee = {
+      key: "",
+      name: this.state.name,
+      salary: Number(this.state.salary),
+      displaySalary: this.formatCurrency(this.state.salary)
+    }
+
+    employee.key = this.handleGenerateKey(employee);
+
+    let keys = this.state.employees.map(x => x.key);
+    let isUniqueEntry = FilterUtil.isUniqueInArray(keys, employee.key);
+
+    if (isUniqueEntry && this.state.counter < this.state.counterLimit) {
+
+      let employees = [...this.state.employees];
+
+      employees.push(employee);
+
       this.setState({
         name: "",
         salary: "",
-        employees: this.state.employees,
+        employees: employees,
         counter: this.state.counter + 1
       });
     }
@@ -166,6 +176,29 @@ class EntitySort extends React.Component {
     })
   }
 
+  handleGenerateKey(employee) {
+    return KeyGeneratorUtil.generate(`${employee.name}_${employee.salary}`);
+  }
+
+  componentDidMount() {
+
+    let employee = {
+      key: "",
+      name: "John Doe",
+      salary: 10000,
+      displaySalary: "£10,000.00"
+    }
+
+    employee.key = this.handleGenerateKey(employee);
+
+    let employees = [...this.state.employees];
+    employees.push(employee);
+
+    this.setState({
+      employees: employees
+    });
+  }
+
   render() {
     return (
       <div>
@@ -204,9 +237,9 @@ class EntitySort extends React.Component {
                 </thead>
                 <tbody>
                 {this.state.employees.map((employee, index) => {
-                    let key = KeyGeneratorUtil.generate(`${employee.name} ${employee.salary}`);
+                    //let key = KeyGeneratorUtil.generate(`${employee.name} ${employee.salary}`);
                     return (
-                      <tr key={key}>
+                      <tr key={employee.key} id={employee.key}>
                         <td>{employee.name}</td>
                         <td>{employee.displaySalary}</td>
                         <td><a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
