@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-export let SpinnerComponent = function(props) {
+export function SpinnerComponent(props) {
     let showSpinner = props.show || false;
     let hideClass = !showSpinner ? "d-none" : "";
     return (

@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
-import { PuzzleModalCompnent } from '../../js/modules/react/puzzleModalComponent.js';
+import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
@@ -14,7 +14,6 @@ const APP_CONFIG = ConfigUtil.get("awsDotNetCoreAsyncCoffeeMachine");
 const RUN_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.run}`;
 const RUN_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.runAsync}`;
 
-let _puzzleModalComponent = PuzzleModalCompnent(5);
 class CoffeeMakerApp extends React.Component {
   constructor(props) {
     super(props);
@@ -24,12 +23,14 @@ class CoffeeMakerApp extends React.Component {
       showSpinner: false,
       showPuzzleModal: true,
       showErrorModal: false,
+      isPuzzleValid: false
     };
     this.handleRun = this.handleRun.bind(this);
     this.handleRunAsync = this.handleRunAsync.bind(this);
     this.handleAjax = this.handleAjax.bind(this);
     this.handleRequest = this.handleRequest.bind(this);
     this.renderProcessHeading = this.renderProcessHeading.bind(this);
+    this.handleIsPuzzleValid = this.handleIsPuzzleValid.bind(this);
     this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
     this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
@@ -75,7 +76,7 @@ class CoffeeMakerApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxUtil.handleAjax(request, _puzzleModalComponent.isSolved(), this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, this.state.isPuzzleValid, this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
   }
 
   renderProcessHeading() {
@@ -83,6 +84,13 @@ class CoffeeMakerApp extends React.Component {
       return <h3 className="mb-4">Log of tasks carried out</h3>
     }
     return null;
+  }
+
+  handleIsPuzzleValid() {
+    this.setState({
+      isPuzzleValid: true,
+      showPuzzleModal: false
+    })
   }
 
   handlePuzzleModalClose() {
@@ -114,11 +122,13 @@ class CoffeeMakerApp extends React.Component {
         <SpinnerComponent
           show={this.state.showSpinner}
         />
-        <_puzzleModalComponent.render
+        <PuzzleModalComponent
+          answer={5}
           puzzle={PUZZLE}
           show={this.state.showPuzzleModal}
           handleClose={this.handlePuzzleModalClose}
           handleShow={this.handlePuzzleModalShow}
+          handleIsValid={this.handleIsPuzzleValid}
         />
         <div className="row mb-3">
           <div className="col-lg-6">

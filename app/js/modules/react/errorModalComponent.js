@@ -4,7 +4,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-export const ErrorModalComponent = function(props) {
+export function ErrorModalComponent(props) {
     return (
         <Modal id={props.id} show={props.show} onHide={props.handleClose}>
             <Modal.Header>

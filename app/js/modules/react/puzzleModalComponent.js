@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 
-export let PuzzleModalComponent = function(props) {
+export function PuzzleModalComponent(props) {
 
   const [validated, setValidated] = useState(false);
 
