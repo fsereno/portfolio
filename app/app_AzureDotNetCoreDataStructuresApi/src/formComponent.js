@@ -73,10 +73,10 @@ export function FormComponent(props) {
               </Form.Group>
             </Form.Row>
             <Form.Row>
-            <Form.Group as={Col} xs={6} md={3} lg={2}>
+            <Form.Group as={Col} xs="auto" md="auto" lg="auto">
                 <Button id={props.id + "_submit"} variant="dark" type="submit">Add</Button>
             </Form.Group>
-            <Form.Group as={Col} xs={6} md={3} lg={2}>
+            <Form.Group as={Col} xs="auto" md="auto" lg="auto">
                 <Button id={props.id + "_remove"} variant="danger" type="button" onClick={props.handleRemove}>Remove</Button>
             </Form.Group>
             </Form.Row>
