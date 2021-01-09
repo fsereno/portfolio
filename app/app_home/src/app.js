@@ -4,6 +4,9 @@ import "regenerator-runtime/runtime";
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js';
 import { StringSearchUtil } from '../../typeScript/Utils/stringSearchUtil/dist/app.js';
 import { WebGLCheckerUtil } from "../../js/modules/utils/webGLCheckerUtil";
@@ -238,7 +241,27 @@ class HomeApp extends React.Component {
             {this.state.applications.map((application, index) => {
               if (application.active && application.include) {
                 return (
-                  <div key={`${application.name}`} className="card p-3 bg-white min-height-160">
+                  <Card key={`${application.name}`}>
+                    <Card.Body>
+                      <Card.Title>
+                        {application.name}
+                      </Card.Title>
+
+                      <Card.Text>
+                        {application.subHeading}
+                      </Card.Text>
+                      <Card.Link className="btn btn-outline-dark btn-sm card-link" href={`${CONFIG.prefix}${application.folder}/index.html`}>View application</Card.Link>
+                      <Row className="mt-3">
+                        <Col>
+                          <span className="badge bg-danger text-light mr-2">Success</span>
+                          <span className="badge bg-warning text-light mr-2">Warning</span>
+                          <span className="badge bg-info text-light mr-2">Info</span>
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+
+                  /*<div key={`${application.name}`} className="card p-3 bg-white min-height-160">
                     <div className="card-body">
                       <h5 className="card-title">{application.name}</h5>
                       <p className="card-text">{application.subHeading}</p>
@@ -252,7 +275,7 @@ class HomeApp extends React.Component {
                           View code<i className="fa fa-github-square ml-2"></i>
                       </a>
                     </div>
-                  </div>
+                  </div>*/
                 );
               }
             })}
