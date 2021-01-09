@@ -31,12 +31,10 @@ export function FormComponent(props) {
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Row>
-          <Form.Label>
-            Enter comma seperated values to sort
-          </Form.Label>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} md="3" controlId="valuesInput">
+          <Form.Group as={Col} md="6" controlId="valuesInput">
+            <Form.Label>
+              Enter comma seperated values to sort
+            </Form.Label>
             <Form.Control
               name="valuesInput"
               type="text"
@@ -49,6 +47,8 @@ export function FormComponent(props) {
               Please enter a value.
             </Form.Control.Feedback>
           </Form.Group>
+        </Form.Row>
+        <Form.Row>
           <Form.Group as={Col} md="3">
             <Button id="sort_submit" variant="dark" type="submit">Sort</Button>
           </Form.Group>
