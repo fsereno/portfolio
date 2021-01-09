@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Badge from 'react-bootstrap/Badge';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js';
 import { StringSearchUtil } from '../../typeScript/Utils/stringSearchUtil/dist/app.js';
 import { WebGLCheckerUtil } from "../../js/modules/utils/webGLCheckerUtil";
@@ -253,9 +254,9 @@ class HomeApp extends React.Component {
                       <Card.Link className="btn btn-outline-dark btn-sm card-link" href={`${CONFIG.prefix}${application.folder}/index.html`}>View application</Card.Link>
                       <Row className="mt-3">
                         <Col>
-                          <span className="badge bg-danger text-light mr-2">Success</span>
-                          <span className="badge bg-warning text-light mr-2">Warning</span>
-                          <span className="badge bg-info text-light mr-2">Info</span>
+                          <Badge variant="danger" className="text-light mr-2">Cloud</Badge>
+                          <Badge variant="warning" className="text-light mr-2">JavaScript</Badge>
+                          <Badge variant="info" className="text-light mr-2">.NET</Badge>
                         </Col>
                       </Row>
                     </Card.Body>
