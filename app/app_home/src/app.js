@@ -23,6 +23,12 @@ const CONTENT_CONTAINER_ID = "contentContainer";
 const IS_BROWSER_VALID = WebGLCheckerUtil.isWebGL2Available() || WebGLCheckerUtil.isWebGLAvailable();
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("home");
+
+const labels = [
+  { id: 0, name: "JavaScript", class: "warning" },
+  { id: 1, name: "C#", class: "info" },
+  { id: 2, name: "Cloud", class: "danger" },
+]
 class HomeApp extends React.Component {
   constructor(props) {
     super(props);
@@ -254,9 +260,14 @@ class HomeApp extends React.Component {
                       <Card.Link className="btn btn-outline-dark btn-sm card-link" href={`${CONFIG.prefix}${application.folder}/index.html`}>View application</Card.Link>
                       <Row className="mt-3">
                         <Col>
-                          <Badge variant="danger" className="text-light mr-2">Cloud</Badge>
-                          <Badge variant="warning" className="text-light mr-2">JavaScript</Badge>
-                          <Badge variant="info" className="text-light mr-2">.NET</Badge>
+                          {application.labels ? application.labels.map(x => {
+
+                            let label = labels.filter(label => label.id === x )[0];
+
+                            return(
+                              <Badge key={label.id} variant={label.class} className="text-light mr-2">{label.name}</Badge>
+                            )
+                          }) : null }
                         </Col>
                       </Row>
                     </Card.Body>
