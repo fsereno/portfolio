@@ -24,11 +24,30 @@ const IS_BROWSER_VALID = WebGLCheckerUtil.isWebGL2Available() || WebGLCheckerUti
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("home");
 
-const labels = [
-  { id: 0, name: "JavaScript", class: "warning" },
-  { id: 1, name: "C#", class: "info" },
-  { id: 2, name: "Cloud", class: "danger" },
-]
+class Label {
+  constructor(id) {
+    this.id = id;
+    switch(id) {
+      case 0:
+        this.name = "JavaScript";
+        this.class = "warning";
+        break;
+      case 1:
+        this.name = "C#";
+        this.class = "info";
+        break;
+      case 2:
+        this.name = "Cloud";
+        this.class = "danger";
+        break;
+      default:
+        this.name = "";
+        this.class = "";
+    }
+  }
+}
+
+
 class HomeApp extends React.Component {
   constructor(props) {
     super(props);
@@ -262,7 +281,7 @@ class HomeApp extends React.Component {
                         <Col>
                           {application.labels ? application.labels.map(x => {
 
-                            let label = labels.filter(label => label.id === x )[0];
+                            let label = new Label(x);
 
                             return(
                               <Badge key={label.id} variant={label.class} className="text-light mr-2">{label.name}</Badge>
@@ -270,7 +289,7 @@ class HomeApp extends React.Component {
                           }) : null }
                         </Col>
                       </Row>
-                    </Card.Body>
+                    </Card.Body>  
                   </Card>
 
                   /*<div key={`${application.name}`} className="card p-3 bg-white min-height-160">
