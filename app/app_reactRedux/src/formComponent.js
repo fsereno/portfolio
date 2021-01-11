@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Col from 'react-bootstrap/Col';
-import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/app';
+import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/index';
 
 export function FormComponent(props) {
 

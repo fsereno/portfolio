@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { FilterUtil } from "../../typeScript/Utils/filterUtil/app";
+import { FilterUtil } from "../../typeScript/Utils/filterUtil/index";
 
 describe("FilterUtil", () => {
     describe("IsUniqueInArray", () => {

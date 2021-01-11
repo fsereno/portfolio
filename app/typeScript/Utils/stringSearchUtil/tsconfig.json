@@ -6,5 +6,5 @@
         "types": [],
         "outDir": "./dist/"
     },
-    "include": [ "app.ts"],
+    "include": [ "index.ts"],
 }

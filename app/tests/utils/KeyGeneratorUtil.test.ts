@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { KeyGeneratorUtil } from "../../typeScript/Utils/keyGeneratorUtil/app";
+import { KeyGeneratorUtil } from "../../typeScript/Utils/keyGeneratorUtil/index";
 
 describe("KeyGeneratorUtil", () => {
     describe("generate", () => {

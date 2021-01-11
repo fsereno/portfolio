@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { StringSearchUtil } from "../../typeScript/Utils/stringSearchUtil/app";
+import { StringSearchUtil } from "../../typeScript/Utils/stringSearchUtil/index";
 
 describe("StringSearchUtil", () => {
     describe("searchCriterions", () => {

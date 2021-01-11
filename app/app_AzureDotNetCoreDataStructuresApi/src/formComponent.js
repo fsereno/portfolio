@@ -5,8 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/app.js';
-import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/app';
+import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
+import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/index';
 
 export function FormComponent(props) {
 

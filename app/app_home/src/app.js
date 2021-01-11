@@ -9,10 +9,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js';
-import { StringSearchUtil } from '../../typeScript/Utils/stringSearchUtil/dist/app.js';
+import { StringSearchUtil } from '../../typeScript/Utils/stringSearchUtil/dist/index';
 import { WebGLCheckerUtil } from "../../js/modules/utils/webGLCheckerUtil";
 import { HomeThreeModule } from "./homeThreeModule.js";
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
+import { TechLabel } from "../../typeScript/Models/techLabel/dist/Models/techLabel/index";
 
 const FAUX_LOADING_TIME = 500;
 const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
@@ -23,30 +24,6 @@ const CONTENT_CONTAINER_ID = "contentContainer";
 const IS_BROWSER_VALID = WebGLCheckerUtil.isWebGL2Available() || WebGLCheckerUtil.isWebGLAvailable();
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("home");
-
-class Label {
-  constructor(id) {
-    this.id = id;
-    switch(id) {
-      case 0:
-        this.name = "JavaScript";
-        this.class = "warning";
-        break;
-      case 1:
-        this.name = "C#";
-        this.class = "info";
-        break;
-      case 2:
-        this.name = "Cloud";
-        this.class = "danger";
-        break;
-      default:
-        this.name = "";
-        this.class = "";
-    }
-  }
-}
-
 
 class HomeApp extends React.Component {
   constructor(props) {
@@ -281,10 +258,10 @@ class HomeApp extends React.Component {
                         <Col>
                           {application.labels ? application.labels.map(x => {
 
-                            let label = new Label(x);
+                            let label = new TechLabel(x);
 
                             return(
-                              <Badge key={label.id} variant={label.class} className="text-light mr-2">{label.name}</Badge>
+                              <Badge key={label.id} variant={label.class.toLowerCase()} className="text-light mr-2">{label.name}</Badge>
                             )
                           }) : null }
                         </Col>
