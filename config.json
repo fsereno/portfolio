@@ -12,6 +12,11 @@
     "author": "Fabio Sereno",
     "role": "Software developer",
     "thumbnail": "PortfolioThumbnail.png",
+    "labels": [
+        { "name": "JavaScript", "class": "warning" },
+        { "name": "C#", "class": "info" },
+        { "name": "Cloud", "class": "danger" }
+    ],
     "applications": [
         {
             "name": "Portfolio",

@@ -249,7 +249,6 @@ class HomeApp extends React.Component {
                       <Card.Title>
                         {application.name}
                       </Card.Title>
-
                       <Card.Text>
                         {application.subHeading}
                       </Card.Text>
@@ -258,15 +257,15 @@ class HomeApp extends React.Component {
                         <Col>
                           {application.labels ? application.labels.map(x => {
 
-                            let label = new TechLabel(x);
+                            let label = CONFIG.labels[x];
 
                             return(
-                              <Badge key={label.id} variant={label.class.toLowerCase()} className="text-light mr-2">{label.name}</Badge>
+                              <Badge key={x} variant={label.class} className="text-light mr-2">{label.name}</Badge>
                             )
                           }) : null }
                         </Col>
                       </Row>
-                    </Card.Body>  
+                    </Card.Body>
                   </Card>
 
                   /*<div key={`${application.name}`} className="card p-3 bg-white min-height-160">
