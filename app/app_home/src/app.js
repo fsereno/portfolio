@@ -13,7 +13,6 @@ import { StringSearchUtil } from '../../typeScript/Utils/stringSearchUtil/dist/i
 import { WebGLCheckerUtil } from "../../js/modules/utils/webGLCheckerUtil";
 import { HomeThreeModule } from "./homeThreeModule.js";
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
-import { TechLabel } from "../../typeScript/Models/techLabel/dist/Models/techLabel/index";
 
 const FAUX_LOADING_TIME = 500;
 const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
@@ -257,7 +256,7 @@ class HomeApp extends React.Component {
                         <Col>
                           {application.labels ? application.labels.map(x => {
 
-                            let label = CONFIG.labels[x];
+                            const label = CONFIG.labels[x];
 
                             return(
                               <Badge key={x} variant={label.class} className="text-light mr-2">{label.name}</Badge>
@@ -267,22 +266,6 @@ class HomeApp extends React.Component {
                       </Row>
                     </Card.Body>
                   </Card>
-
-                  /*<div key={`${application.name}`} className="card p-3 bg-white min-height-160">
-                    <div className="card-body">
-                      <h5 className="card-title">{application.name}</h5>
-                      <p className="card-text">{application.subHeading}</p>
-                      <a className="btn btn-dark mr-2 mb-2"
-                        href={`${CONFIG.prefix}${application.folder}/index.html`}>
-                          View app<i className="fa fa-eye ml-2"></i>
-                      </a>
-                      <a className="btn btn-dark mb-2"
-                        href={`${CONFIG.repoRootUrl}/${CONFIG.folderRoot}${CONFIG.prefix}${application.folder}`}
-                        target="_blank">
-                          View code<i className="fa fa-github-square ml-2"></i>
-                      </a>
-                    </div>
-                  </div>*/
                 );
               }
             })}

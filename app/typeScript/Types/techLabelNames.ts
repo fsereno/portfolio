@@ -1,1 +1,0 @@
-export type TechLabelNames = "JavaScript" | "C#" | "Cloud";
