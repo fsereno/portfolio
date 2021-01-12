@@ -185,7 +185,7 @@ class UniqueDataEntryApp extends React.Component {
         <div className="row splitter">
           <div className="col-lg-12">
             <h3>Items:</h3>
-            <p className="lead">Add new items to the table. Only unique entries are allowed.</p>
+            <p>Add new items to the table. Only unique entries are allowed.</p>
             <div className="table-responsive">
               <table className="table" id="itemTable">
                 <thead className="bg-dark text-white">
