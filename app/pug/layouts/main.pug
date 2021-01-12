@@ -15,11 +15,11 @@ html(lang="en")
     #mainContainer.container-fluid.pt-4.mt-5
       .row
         .col-lg-12
-          h2.display-4= locals.application.name
+          h2#pageHeading.display-4= locals.application.name
       .row
         .col-lg-12
-          h5=locals.application.subHeading
-          p.text-muted= locals.application.description
+          h5#pageSubHeading=locals.application.subHeading
+          p#pageDescription.text-muted= locals.application.description
           hr
       block content
       block footer
