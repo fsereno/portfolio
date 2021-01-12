@@ -9,8 +9,10 @@
     "repoRootUrl": "https://github.com/fsereno/portfolio",
     "linkedInUrl": "https://www.linkedin.com/in/fabio-sereno-6a97b986/",
     "gitHubUrl": "https://github.com/fsereno",
+    "title": "Portfolio",
     "author": "Fabio Sereno",
     "role": "Software developer",
+    "description": "Portfolio website for Fabio Sereno - Software Developer.",
     "thumbnail": "PortfolioThumbnail.png",
     "labels": [
         { "name": "JavaScript", "class": "warning" },
