@@ -106,7 +106,7 @@ describe(application, () => {
         it("Should add an item to the stack", function(){
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
                 .type('#puzzleModal input[type=text]', '5')
@@ -129,7 +129,7 @@ describe(application, () => {
         it("Should add an item to the stack", function(){
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
                 .type('#puzzleModal input[type=text]', '5')
