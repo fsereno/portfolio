@@ -1,4 +1,5 @@
 "use strict;"
+
 import { IStringService } from "../Interfaces/IStringService";
 import { IUnscrabbleService } from "../Interfaces/IUnscrabbleService"
 import { IDictionaryRepository } from "../Interfaces/IDictionaryRepository";

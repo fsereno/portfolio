@@ -1,4 +1,5 @@
 "use strict;"
+
 import { IValidatorService } from "../Interfaces/IValidatorService";
 
 export class ValidatorService implements IValidatorService {

@@ -1,4 +1,5 @@
 "use strict;"
+
 import { ICalculatorService } from "../Interfaces/ICalculatorService";
 
 export class CalculatorService implements ICalculatorService {

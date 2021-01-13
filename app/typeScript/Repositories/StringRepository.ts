@@ -1,4 +1,5 @@
 "use strict;"
+
 import { IStringRepository } from "../Interfaces/IStringRepository";
 
 export class StringRepository implements IStringRepository {
