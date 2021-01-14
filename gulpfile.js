@@ -173,7 +173,7 @@ let defaultTasks = (application) => {
 
 let publishTasks = (application) => {
   gulpUtil.runThis(application, userefTask);
-  gulpUtil.runThis(application, copyJsTask); // is this needed ? YES IT IS USED FOR THE ONLY REQUIRE JS EXAMPLE KEEP, BUT FLAG IT CORRECTLY!
+  gulpUtil.runThis(application, copyJsTask);
 }
 
 let createTasks = (application) => {
