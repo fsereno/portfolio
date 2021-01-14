@@ -111,6 +111,7 @@
             "folder": "findReplace",
             "active": true,
             "include": true,
+            "useWebpack": true,
             "labels": [0]
         },
         {
