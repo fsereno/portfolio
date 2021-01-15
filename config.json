@@ -299,6 +299,7 @@
             "folder": "koTypeScript",
             "active": true,
             "include": true,
+            "useWebpack": true,
             "labels": [0]
         },
         {
