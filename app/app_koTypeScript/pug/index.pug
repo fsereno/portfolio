@@ -23,7 +23,7 @@ block content
                         data-bind="click: clear",
                         data-toggle="modal",
                         data-target="#addModal")
-                        | Add user
+                        | Add user 
                         i.fa.fa-plus
                 tbody(data-bind="if: usersCollection().length === 0")
                   tr
@@ -59,12 +59,13 @@ block content
         .modal-dialog(role='document')
           .modal-content
             .modal-header
-              h5#deleteModalLabel.modal-title Are you sure ?
-              button.close(
+              .display-4.modal-title.h4 Are you sure ?
+              button.close.btn.btn-link(
                 type='button',
                 data-dismiss='modal',
                 aria-label='Close')
-                span(aria-hidden='true') &times;
+                span(class="lr")
+                    span(class="rl")
             .modal-body
               | Confirm you would like to delete the item.
             .modal-footer
@@ -83,12 +84,13 @@ block content
         .modal-dialog(role='document')
           .modal-content
             .modal-header
-              h5#editModalLabel.modal-title Edit Details
-              button.close(
+              .display-4.modal-title.h4 Are you sure ?
+              button.close.btn.btn-link(
                 type='button',
                 data-dismiss='modal',
                 aria-label='Close')
-                span(aria-hidden='true') &times;
+                span(class="lr")
+                    span(class="rl")
             .modal-body
               form#editForm
                 .form-group
@@ -128,12 +130,13 @@ block content
         .modal-dialog(role='document')
           .modal-content
             .modal-header
-              h5#editModalLabel.modal-title Add Details
-              button.close(
+              .display-4.modal-title.h4 Are you sure ?
+              button.close.btn.btn-link(
                 type='button',
                 data-dismiss='modal',
                 aria-label='Close')
-                span(aria-hidden='true') &times;
+                span(class="lr")
+                    span(class="rl")
             .modal-body
               form#editForm
                 .form-group

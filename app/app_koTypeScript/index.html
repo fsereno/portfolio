@@ -63,7 +63,7 @@
                   <th>Status</th>
                   <th>Delete</th>
                   <th class="text-right">
-                    <button class="btn btn-light" id="addItem" data-bind="click: clear" data-toggle="modal" data-target="#addModal">Add user<i class="fa fa-plus"></i></button>
+                    <button class="btn btn-light" id="addItem" data-bind="click: clear" data-toggle="modal" data-target="#addModal">Add user <i class="fa fa-plus"></i></button>
                   </th>
                 </thead>
                 <tbody data-bind="if: usersCollection().length === 0">
@@ -95,8 +95,8 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="deleteModalLabel">Are you sure ?</h5>
-              <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <div class="display-4 modal-title h4">Are you sure ?</div>
+              <button class="close btn btn-link" type="button" data-dismiss="modal" aria-label="Close"><span class="lr"><span class="rl"></span></span></button>
             </div>
             <div class="modal-body">Confirm you would like to delete the item.</div>
             <div class="modal-footer">
@@ -110,8 +110,8 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="editModalLabel">Edit Details</h5>
-              <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <div class="display-4 modal-title h4">Are you sure ?</div>
+              <button class="close btn btn-link" type="button" data-dismiss="modal" aria-label="Close"><span class="lr"><span class="rl"></span></span></button>
             </div>
             <div class="modal-body">
               <form id="editForm">
@@ -140,8 +140,8 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="editModalLabel">Add Details</h5>
-              <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <div class="display-4 modal-title h4">Are you sure ?</div>
+              <button class="close btn btn-link" type="button" data-dismiss="modal" aria-label="Close"><span class="lr"><span class="rl"></span></span></button>
             </div>
             <div class="modal-body">
               <form id="editForm">
