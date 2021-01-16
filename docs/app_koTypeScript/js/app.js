@@ -1,1 +1,155 @@
-!function n(r,a,u){function l(e,t){if(!a[e]){if(!r[e]){var i="function"==typeof require&&require;if(!t&&i)return i(e,!0);if(c)return c(e,!0);var s=new Error("Cannot find module '"+e+"'");throw s.code="MODULE_NOT_FOUND",s}var o=a[e]={exports:{}};r[e][0].call(o.exports,function(t){return l(r[e][1][t]||t)},o,o.exports,n,r,a,u)}return a[e].exports}for(var c="function"==typeof require&&require,t=0;t<u.length;t++)l(u[t]);return l}({1:[function(t,e,i){"use strict";Object.defineProperty(i,"__esModule",{value:!0});var s=function(){this.inactive="Inactive",this.pending="Pending",this.active="Active"};i.StatusLiterals=s},{}],2:[function(t,e,i){"use strict";Object.defineProperty(i,"__esModule",{value:!0});var s=t("./userModel"),o=t("./StatusLiterals"),n=function(){function t(t,e){var i=this;this.remove=function(t){return i.context=t},this.removeConfirm=function(){-1<i.usersCollection.indexOf(i.context)&&i.usersCollection.remove(i.context)},this.populateEdit=function(t){i.context=t,i.name(t.name),i.age(t.age),i.active(t.active),i.status(t.status)},this.clear=function(){i.name(""),i.age(0),i.active(!1),i.status(i.statusLiterals.inactive)},this.closeEdit=function(){return jQuery("#"+i.editModalId).modal("hide")},this.toggleStatus=function(t){i.populateEdit(t),i.update()},this.update=function(){if(jQuery("#"+i.formId).valid())if(-1<i.usersCollection.indexOf(i.context)&&0<i.name().length&&0<i.age()){var t=new s.userModel(i.name(),i.age(),i.active(),i.status());i.usersCollection.replace(i.context,t),i.closeEdit()}else 0<i.name().length&&0<i.age()&&(i.usersCollection.push(new s.userModel(i.name(),i.age(),i.active(),i.status())),i.closeEdit())},this.formId=t,this.editModalId=e,this.context=null,this.statusLiterals=new o.StatusLiterals,this.usersCollection=ko.observableArray(new Array),this.statusCollection=ko.observableArray(new Array),this.name=ko.observable(""),this.age=ko.observable(0),this.active=ko.observable(!1),this.status=ko.observable(this.statusLiterals.inactive),this.getUsers(),this.getStatus()}return t.prototype.getUsers=function(){this.usersCollection.push(new s.userModel("James Bond",23,!1,this.statusLiterals.inactive)),this.usersCollection.push(new s.userModel("Joe Bloggs",34,!1,this.statusLiterals.inactive))},t.prototype.getStatus=function(){this.statusCollection.push(this.statusLiterals.inactive),this.statusCollection.push(this.statusLiterals.pending),this.statusCollection.push(this.statusLiterals.active)},t}();i.UserViewModel=n},{"./StatusLiterals":1,"./userModel":3}],3:[function(t,e,i){"use strict";Object.defineProperty(i,"__esModule",{value:!0});var s=function(t,e,i,s){this.name=t,this.age=e,this.active=i,this.status=s};i.userModel=s},{}],4:[function(t,e,i){"use strict";Object.defineProperty(i,"__esModule",{value:!0});var s=t("./components/component"),o=new(t("../../typeScript/Services/validatorService").ValidatorService);new s.Component(o).init()},{"../../typeScript/Services/validatorService":6,"./components/component":5}],5:[function(t,e,i){"use strict";Object.defineProperty(i,"__esModule",{value:!0});var s=t("../Models/UserViewModel"),o=function(){function t(t){this.validatorService=t,this.formId="editForm",this.editModalId="editModal"}return t.prototype.init=function(){var t=this;jQuery(function(){t.validateForm(),t.bind()})},t.prototype.validateForm=function(){this.validatorService.ValidateForm(this.formId,null)},t.prototype.bind=function(){ko.applyBindings(new s.UserViewModel(this.formId,this.editModalId))},t}();i.Component=o},{"../Models/UserViewModel":2}],6:[function(t,e,i){"use strict";Object.defineProperty(i,"__esModule",{value:!0});var s=function(){function t(){jQuery.validator.addMethod("nonNumeric",function(t,e){return this.optional(e)||isNaN(Number(t))})}return t.prototype.ValidateForm=function(t,e){return jQuery("#"+t).validate(e)},t}();i.ValidatorService=s},{}]},{},[4]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./app/app_koTypeScript/typeScript/app.ts");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./app/app_koTypeScript/typeScript/Enums/StatusLiterals.ts":
+/*!*****************************************************************!*\
+  !*** ./app/app_koTypeScript/typeScript/Enums/StatusLiterals.ts ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar StatusLiterals;\n(function (StatusLiterals) {\n    StatusLiterals[\"Inactive\"] = \"Inactive\";\n    StatusLiterals[\"Pending\"] = \"Pending\";\n    StatusLiterals[\"Active\"] = \"Active\";\n})(StatusLiterals = exports.StatusLiterals || (exports.StatusLiterals = {}));\n\n\n//# sourceURL=webpack:///./app/app_koTypeScript/typeScript/Enums/StatusLiterals.ts?");
+
+/***/ }),
+
+/***/ "./app/app_koTypeScript/typeScript/Models/UserViewModel.ts":
+/*!*****************************************************************!*\
+  !*** ./app/app_koTypeScript/typeScript/Models/UserViewModel.ts ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar userModel_1 = __webpack_require__(/*! ./userModel */ \"./app/app_koTypeScript/typeScript/Models/userModel.ts\");\nvar StatusLiterals_1 = __webpack_require__(/*! ../Enums/StatusLiterals */ \"./app/app_koTypeScript/typeScript/Enums/StatusLiterals.ts\");\nvar UserViewModel = /** @class */ (function () {\n    function UserViewModel(formId, editModalId, addModalId) {\n        var _this = this;\n        this.remove = function (item) { return _this.context = item; };\n        this.removeConfirm = function () {\n            if (_this.usersCollection.indexOf(_this.context) > -1) {\n                _this.usersCollection.remove(_this.context);\n            }\n        };\n        this.populateEdit = function (item) {\n            _this.context = item;\n            _this.name(item.name);\n            _this.age(item.age);\n            _this.active(item.active);\n            _this.status(item.status);\n        };\n        this.clear = function () {\n            _this.name(\"\");\n            _this.age(0);\n            _this.active(false);\n            _this.status(StatusLiterals_1.StatusLiterals.Inactive);\n        };\n        this.close = function (id) {\n            var modalId = \"#\" + id;\n            jQuery(modalId).modal(\"hide\");\n        };\n        this.closeEdit = function () {\n            _this.close(_this.editModalId);\n        };\n        this.closeAdd = function () {\n            _this.close(_this.addModalId);\n        };\n        this.toggleStatus = function (item) {\n            _this.populateEdit(item);\n            _this.update();\n        };\n        this.update = function () {\n            if (jQuery(\"#\" + _this.formId).valid()) {\n                if (_this.usersCollection.indexOf(_this.context) > -1\n                    && _this.name().length > 0 && _this.age() > 0) {\n                    var replace = new userModel_1.userModel(_this.name(), _this.age(), _this.active(), _this.status());\n                    _this.usersCollection.replace(_this.context, replace);\n                    _this.closeEdit();\n                }\n            }\n        };\n        this.add = function () {\n            if (jQuery(\"#\" + _this.formId).valid()) {\n                if (_this.name().length > 0 && _this.age() > 0) {\n                    _this.usersCollection.push(new userModel_1.userModel(_this.name(), _this.age(), _this.active(), _this.status()));\n                    _this.closeAdd();\n                }\n            }\n        };\n        this.formId = formId;\n        this.editModalId = editModalId;\n        this.addModalId = addModalId;\n        this.context = null;\n        this.usersCollection = ko.observableArray(new Array());\n        this.statusCollection = ko.observableArray(new Array());\n        this.name = ko.observable(\"\");\n        this.age = ko.observable(0);\n        this.active = ko.observable(false);\n        this.status = ko.observable(StatusLiterals_1.StatusLiterals.Inactive);\n        this.getUsers();\n        this.getStatus();\n    }\n    UserViewModel.prototype.getUsers = function () {\n        this.usersCollection.push(new userModel_1.userModel(\"James Bond\", 23, false, StatusLiterals_1.StatusLiterals.Inactive));\n        this.usersCollection.push(new userModel_1.userModel(\"Joe Bloggs\", 34, false, StatusLiterals_1.StatusLiterals.Inactive));\n    };\n    UserViewModel.prototype.getStatus = function () {\n        this.statusCollection.push(StatusLiterals_1.StatusLiterals.Inactive);\n        this.statusCollection.push(StatusLiterals_1.StatusLiterals.Pending);\n        this.statusCollection.push(StatusLiterals_1.StatusLiterals.Active);\n    };\n    return UserViewModel;\n}());\nexports.UserViewModel = UserViewModel;\n\n\n//# sourceURL=webpack:///./app/app_koTypeScript/typeScript/Models/UserViewModel.ts?");
+
+/***/ }),
+
+/***/ "./app/app_koTypeScript/typeScript/Models/userModel.ts":
+/*!*************************************************************!*\
+  !*** ./app/app_koTypeScript/typeScript/Models/userModel.ts ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar userModel = /** @class */ (function () {\n    function userModel(name, age, active, status) {\n        this.name = name;\n        this.age = age;\n        this.active = active;\n        this.status = status;\n    }\n    return userModel;\n}());\nexports.userModel = userModel;\n\n\n//# sourceURL=webpack:///./app/app_koTypeScript/typeScript/Models/userModel.ts?");
+
+/***/ }),
+
+/***/ "./app/app_koTypeScript/typeScript/app.ts":
+/*!************************************************!*\
+  !*** ./app/app_koTypeScript/typeScript/app.ts ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar component_1 = __webpack_require__(/*! ./components/component */ \"./app/app_koTypeScript/typeScript/components/component.ts\");\nvar validatorService_1 = __webpack_require__(/*! ../../typeScript/Services/validatorService */ \"./app/typeScript/Services/validatorService.ts\");\nvar validatorService = new validatorService_1.ValidatorService();\nvar component = new component_1.Component(validatorService);\ncomponent.init();\n\n\n//# sourceURL=webpack:///./app/app_koTypeScript/typeScript/app.ts?");
+
+/***/ }),
+
+/***/ "./app/app_koTypeScript/typeScript/components/component.ts":
+/*!*****************************************************************!*\
+  !*** ./app/app_koTypeScript/typeScript/components/component.ts ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar UserViewModel_1 = __webpack_require__(/*! ../Models/UserViewModel */ \"./app/app_koTypeScript/typeScript/Models/UserViewModel.ts\");\nvar Component = /** @class */ (function () {\n    function Component(validatorService) {\n        this.validatorService = validatorService;\n    }\n    Component.prototype.init = function () {\n        var _this = this;\n        jQuery(function () {\n            _this.validateForm();\n            _this.bind();\n        });\n    };\n    Component.prototype.validateForm = function () {\n        this.validatorService.ValidateForm(this.formId, null);\n    };\n    Component.prototype.bind = function () {\n        ko.applyBindings(new UserViewModel_1.UserViewModel(\"editForm\", \"editModal\", \"addModal\"));\n    };\n    return Component;\n}());\nexports.Component = Component;\n\n\n//# sourceURL=webpack:///./app/app_koTypeScript/typeScript/components/component.ts?");
+
+/***/ }),
+
+/***/ "./app/typeScript/Services/validatorService.ts":
+/*!*****************************************************!*\
+  !*** ./app/typeScript/Services/validatorService.ts ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ValidatorService = /** @class */ (function () {\n    function ValidatorService() {\n        jQuery.validator.addMethod(\"nonNumeric\", function (value, element) {\n            return this.optional(element) || isNaN(Number(value));\n        });\n    }\n    ValidatorService.prototype.ValidateForm = function (formId, options) {\n        var validator = jQuery(\"#\" + formId).validate(options);\n        return validator;\n    };\n    return ValidatorService;\n}());\nexports.ValidatorService = ValidatorService;\n\n\n//# sourceURL=webpack:///./app/typeScript/Services/validatorService.ts?");
+
+/***/ })
+
+/******/ });
