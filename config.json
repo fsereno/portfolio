@@ -115,7 +115,7 @@
             "labels": [0]
         },
         {
-            "name": "Azure Functions .NET Core Unique Data Entry Api",
+            "name": "Azure Functions .NET Core Unique Data Entry",
             "subHeading": "Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries.",
             "description": "Using Azure Functions serverless compute and .NET Core, with a React user interface.",
             "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
@@ -131,7 +131,7 @@
             "labels": [0, 1, 2]
         },
         {
-            "name": "Azure Functions .NET Core Data Structures Api",
+            "name": "Azure Functions .NET Core Data Structures",
             "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implemented with Queue and Stack in .Net.",
             "description": "Using Azure Functions serverless compute and .NET Core, with a React user interface.",
             "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
@@ -150,7 +150,7 @@
             "labels": [0, 1, 2]
         },
         {
-            "name": "AWS .NET Core Entity Sorting API",
+            "name": "AWS .NET Core Entity Sort",
             "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
@@ -167,7 +167,7 @@
             "labels": [0, 1, 2]
         },
         {
-            "name": "AWS .NET Core Natural Sort API",
+            "name": "AWS .NET Core Natural Sort",
             "subHeading": "A natural string sorting algorithm implemnting IComparer, taking a comma seperated string of alphanumerical values.",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
@@ -183,7 +183,7 @@
             "labels": [0, 1, 2]
         },
         {
-            "name": "AWS .NET Core Shopping Cart API",
+            "name": "AWS .NET Core Shopping Cart",
             "subHeading": "A basic shopping cart application, with data processing handled by a Serverless .NET Core RESTful API. React handles the UI.",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
@@ -201,7 +201,7 @@
             "labels": [0, 1, 2]
         },
         {
-            "name": "AWS .NET Core Asynchronous Coffee Maker API",
+            "name": "AWS .NET Core Asynchronous Coffee Maker",
             "subHeading": "Demonstraiting knowledge of asynchrony and multithreading.",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
