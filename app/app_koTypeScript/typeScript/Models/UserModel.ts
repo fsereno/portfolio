@@ -1,4 +1,5 @@
 "use strict;"
+
 export class userModel {
     name: string;
     age: number;

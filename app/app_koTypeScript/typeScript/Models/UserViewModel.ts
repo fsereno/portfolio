@@ -2,6 +2,7 @@
 
 import { userModel } from "./userModel";
 import { StatusLiterals } from "./StatusLiterals";
+
 export class UserViewModel {
     private formId: string;
     private editModalId: string;

@@ -1,4 +1,5 @@
 "use strict;"
+
 export class StatusLiterals {
     inactive: string;
     pending: string;

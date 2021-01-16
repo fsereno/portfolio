@@ -16,14 +16,13 @@ describe(application, () => {
             function() {
                 this.timeout(0);
                     let test = async (url) => {
-                        return new Nightmare({show:false})
+                        return new Nightmare({show:true})
                         .goto(url)
                         .click("#addItem")
                         .wait(1000)
-                        .type('#name', 'Todd Terry')
-                        .type('#age', '')
-                        .type('#age', '45')
-                        .click("#saveChanges")
+                        .type('#addName', 'Todd Terry')
+                        .type('#addAge', '45')
+                        .click("#addUser")
                         .wait(1000)
                         .end()
                         .evaluate(() => {
