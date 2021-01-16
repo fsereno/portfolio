@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './typeScript/app.ts',
   output: {
     filename: 'app.js',

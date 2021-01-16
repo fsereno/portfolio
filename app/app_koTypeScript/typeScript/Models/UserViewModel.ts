@@ -1,9 +1,11 @@
 "use strict;"
+
 import { userModel } from "./userModel";
 import { StatusLiterals } from "./StatusLiterals";
 export class UserViewModel {
     private formId: string;
     private editModalId: string;
+    private addModalId: string;
     private context: userModel;
     private statusLiterals: StatusLiterals;
     public usersCollection: KnockoutObservableArray<userModel>;
@@ -13,9 +15,10 @@ export class UserViewModel {
     public active: KnockoutObservable<boolean>;
     public status: KnockoutObservable<string>;
 
-    constructor(formId: string, editModalId: string) {
+    constructor(formId: string, editModalId: string, addModalId: string) {
         this.formId = formId;
         this.editModalId = editModalId;
+        this.addModalId = addModalId;
         this.context = null;
         this.statusLiterals = new StatusLiterals();
         this.usersCollection = ko.observableArray(new Array<userModel>());
@@ -62,7 +65,18 @@ export class UserViewModel {
         this.status(this.statusLiterals.inactive);
     }
 
-    public closeEdit = () => jQuery("#" + this.editModalId).modal("hide");
+    private close = (id: string) => {
+        let modalId = "#" + id;
+        jQuery(modalId).modal("hide");
+    }
+
+    public closeEdit = () => {
+        this.close(this.editModalId);
+    }
+
+    public closeAdd = () => {
+        this.close(this.addModalId);
+    }
 
     public toggleStatus = (item: userModel) => {
         this.populateEdit(item);
@@ -80,15 +94,19 @@ export class UserViewModel {
                     this.status())
                 this.usersCollection.replace(this.context, replace);
                 this.closeEdit();
-            } else {
-                if (this.name().length > 0 && this.age() > 0) {
-                    this.usersCollection.push(new userModel(
-                        this.name(),
-                        this.age(),
-                        this.active(),
-                        this.status()));
-                    this.closeEdit();
-                }
+            }
+        }
+    }
+
+    public add = () => {
+        if (jQuery("#" + this.formId).valid()) {
+            if (this.name().length > 0 && this.age() > 0) {
+                this.usersCollection.push(new userModel(
+                    this.name(),
+                    this.age(),
+                    this.active(),
+                    this.status()));
+                this.closeAdd();
             }
         }
     }

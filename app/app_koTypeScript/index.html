@@ -63,7 +63,7 @@
                   <th>Status</th>
                   <th>Delete</th>
                   <th class="text-right">
-                    <button class="btn btn-light" id="addItem" data-bind="click: clear" data-toggle="modal" data-target="#editModal">Add user <i class="fa fa-plus"></i></button>
+                    <button class="btn btn-light" id="addItem" data-bind="click: clear" data-toggle="modal" data-target="#addModal">Add user<i class="fa fa-plus"></i></button>
                   </th>
                 </thead>
                 <tbody data-bind="if: usersCollection().length === 0">
@@ -132,6 +132,36 @@
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
               <button class="btn btn-dark" id="saveChanges" type="button" data-bind="click: update">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editModalLabel">Add Details</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form id="editForm">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input class="form-control" id="name" name="name" type="text" placeholder="Input..." data-bind="value: name" required>
+                </div>
+                <div class="form-group">
+                  <label for="age">Age</label>
+                  <input class="form-control" id="age" name="age" type="number" placeholder="Input..." data-bind="value: age" required>
+                </div>
+                <div class="form-group">
+                  <label for="active">Status</label>
+                  <select class="form-control statusSelect" name="status" data-bind="value: status, options: statusCollection"></select>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+              <button class="btn btn-dark" id="saveChanges" type="button" data-bind="click: add">Save Changes</button>
             </div>
           </div>
         </div>
