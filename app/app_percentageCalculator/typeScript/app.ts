@@ -1,8 +1,8 @@
 
 "use strict;"
 import { Component } from "./components/component";
-import { ValidatorService } from "../../typeScript/Services/validatorService";
-import { CalculatorService } from "../../typeScript/Services/calculatorService";
+import { ValidatorService } from "../../typeScript/Services/ValidatorService";
+import { CalculatorService } from "../../typeScript/Services/CalculatorService";
 
 let validatorService = new ValidatorService();
 let calculatorService = new CalculatorService();

@@ -1,8 +1,8 @@
 "use strict;"
 import { StringRepository } from '../../typeScript/Repositories/StringRepository';
-import { Component } from "./components/component";
+import { Component } from "./Components/component";
 import { StringService } from "../../typeScript/Services/StringService";
-import { ValidatorService } from "../../typeScript/Services/validatorService";
+import { ValidatorService } from "../../typeScript/Services/ValidatorService";
 
 let stringRepository = new StringRepository();
 let stringService = new StringService(stringRepository);

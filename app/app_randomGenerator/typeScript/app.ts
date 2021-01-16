@@ -1,7 +1,7 @@
 "use strict;"
 import { Component } from "./components/component";
 import { StringService } from "../../typeScript/Services/StringService";
-import { ValidatorService } from "../../typeScript/Services/validatorService";
+import { ValidatorService } from "../../typeScript/Services/ValidatorService";
 import { RandomGeneratorService } from "../../typeScript/Services/RandomGeneratorService"
 import { StringRepository } from "../../typeScript/Repositories/StringRepository";
 

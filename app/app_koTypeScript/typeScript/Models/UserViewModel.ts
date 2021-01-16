@@ -1,14 +1,14 @@
 "use strict;"
 
-import { userModel } from "./userModel";
+import { UserModel } from "./UserModel";
 import { StatusLiterals } from "../Enums/StatusLiterals";
 
 export class UserViewModel {
     private formId: string;
     private editModalId: string;
     private addModalId: string;
-    private context: userModel;
-    public usersCollection: KnockoutObservableArray<userModel>;
+    private context: UserModel;
+    public usersCollection: KnockoutObservableArray<UserModel>;
     public statusCollection: KnockoutObservableArray<string>;
     public name: KnockoutObservable<string>;
     public age: KnockoutObservable<number>;
@@ -20,7 +20,7 @@ export class UserViewModel {
         this.editModalId = editModalId;
         this.addModalId = addModalId;
         this.context = null;
-        this.usersCollection = ko.observableArray(new Array<userModel>());
+        this.usersCollection = ko.observableArray(new Array<UserModel>());
         this.statusCollection = ko.observableArray(new Array<string>());
         this.name = ko.observable("");
         this.age = ko.observable(0);
@@ -31,8 +31,8 @@ export class UserViewModel {
     }
 
     public getUsers(): void {
-        this.usersCollection.push(new userModel("James Bond", 23, false, StatusLiterals.Inactive));
-        this.usersCollection.push(new userModel("Joe Bloggs", 34, false, StatusLiterals.Inactive));
+        this.usersCollection.push(new UserModel("James Bond", 23, false, StatusLiterals.Inactive));
+        this.usersCollection.push(new UserModel("Joe Bloggs", 34, false, StatusLiterals.Inactive));
     }
 
     public getStatus(): void {
@@ -41,7 +41,7 @@ export class UserViewModel {
         this.statusCollection.push(StatusLiterals.Active);
     }
 
-    public remove = (item: userModel) => this.context = item;
+    public remove = (item: UserModel) => this.context = item;
 
     public removeConfirm = () => {
         if (this.usersCollection.indexOf(this.context) > -1) {
@@ -49,7 +49,7 @@ export class UserViewModel {
         }
     }
 
-    public populateEdit = (item: userModel) => {
+    public populateEdit = (item: UserModel) => {
         this.context = item;
         this.name(item.name);
         this.age(item.age);
@@ -77,7 +77,7 @@ export class UserViewModel {
         this.close(this.addModalId);
     }
 
-    public toggleStatus = (item: userModel) => {
+    public toggleStatus = (item: UserModel) => {
         this.populateEdit(item);
         this.update();
     }
@@ -86,7 +86,7 @@ export class UserViewModel {
         if (jQuery("#" + this.formId).valid()) {
             if (this.usersCollection.indexOf(this.context) > -1
                 && this.name().length > 0 && this.age() > 0) {
-                var replace = new userModel(
+                var replace = new UserModel(
                     this.name(),
                     this.age(),
                     this.active(),
@@ -100,7 +100,7 @@ export class UserViewModel {
     public add = () => {
         if (jQuery("#" + this.formId).valid()) {
             if (this.name().length > 0 && this.age() > 0) {
-                this.usersCollection.push(new userModel(
+                this.usersCollection.push(new UserModel(
                     this.name(),
                     this.age(),
                     this.active(),

@@ -1,6 +1,6 @@
 "use strict;"
 
-export class userModel {
+export class UserModel {
     name: string;
     age: number;
     active: boolean;
