@@ -1,4 +1,5 @@
 "use strict;"
+
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 import { UserViewModel } from "../Models/UserViewModel";
 
@@ -6,13 +7,9 @@ export class Component  {
 
     private validatorService: IValidatorService;
     private formId: string;
-    private editModalId: string;
 
-    constructor(
-        validatorService: IValidatorService) {
+    constructor(validatorService: IValidatorService) {
         this.validatorService = validatorService;
-        this.formId = "editForm";
-        this.editModalId = "editModal";
     }
     init() {
         jQuery(() => {
@@ -25,7 +22,7 @@ export class Component  {
     }
     bind() {
         ko.applyBindings(
-            new UserViewModel(this.formId, this.editModalId)
+            new UserViewModel("editForm", "editModal", "addModal")
         );
     }
 }

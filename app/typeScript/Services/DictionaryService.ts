@@ -1,7 +1,9 @@
 "use strict;"
+
 import { IDictionaryService } from "../Interfaces/IDictionaryService";
 import { IDictionaryRepository } from "../Interfaces/IDictionaryRepository";
 import { DictionaryResultModel } from "../Models/DictionaryResultModel";
+
 export class DictionaryService implements IDictionaryService {
 
     private dictionaryRepository: IDictionaryRepository;

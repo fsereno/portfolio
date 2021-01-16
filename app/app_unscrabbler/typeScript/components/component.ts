@@ -1,4 +1,5 @@
 "use strict;"
+
 import { IValidatorService } from "../../../typeScript/Interfaces/IValidatorService";
 import { IDictionaryService } from "../../../typeScript/Interfaces/IDictionaryService";
 import { IUnscrabbleService } from "../../../typeScript/Interfaces/IUnscrabbleService";

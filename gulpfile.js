@@ -26,9 +26,6 @@ Usage...
 */
 
 const gulp = require("gulp");
-const browserify = require("browserify");
-const source = require("vinyl-source-stream");
-const tsify = require("tsify");
 const useref = require("gulp-useref");
 const sass = require("gulp-sass");
 const pug = require("gulp-pug");
@@ -40,9 +37,7 @@ const directoryExists = require("directory-exists");
 const config = require("./config.json");
 const gulpUtil = require("./gulpUtil");
 const flatmap = require("gulp-flatmap");
-const uglify = require('gulp-uglify');
 const run = require('gulp-run-command').default;
-let buffer = require('vinyl-buffer');
 
 let cssTask = (application) => {
   let directories = gulpUtil.getApplicationDirectories(application);
@@ -59,36 +54,6 @@ let cssTask = (application) => {
     .pipe(sass({outputStyle: 'compressed'}).on("error", sass.logError))
     .pipe(gulp.dest(directories.applicationDirectory+"/css"))
     .pipe(connect.reload());
-}
-
-let applicationTypeScriptTask = (application) => {
-  let directories = gulpUtil.getApplicationDirectories(application);
-  if (gulpUtil.useWebpackIsTrue(application.useWebpack)) {
-    return false;
-  }
-  return browserify({
-    basedir: config.developmentDir+"/"+config.prefix+application.folder+"/typeScript/",
-    debug: true,
-    entries: "app.ts",
-    cache: {},
-    packageCache: {}
-  })
-  .plugin(tsify)
-  .bundle()
-  .pipe(source("app.js"))
-  .pipe(buffer())
-  .pipe(uglify())
-  .pipe(gulp.dest(directories.applicationDirectory+"/js"))
-  .pipe(connect.reload())
-  .pipe(logger(gulpUtil.populateLoggerOptions(
-    "Application TypeScript task started...",
-    "Application TypeScript task complete!",
-    ".js",
-    false,
-    "../js",
-    "Compiled to: ",
-    " " + logSymbols.success
-  )));
 }
 
 let htmlTask = (application) => {
@@ -167,13 +132,12 @@ let createTask = (application) => {
 
 let defaultTasks = (application) => {
   gulpUtil.runThis(application, cssTask);
-  gulpUtil.runThis(application, applicationTypeScriptTask);
   gulpUtil.runThis(application, htmlTask);
 }
 
 let publishTasks = (application) => {
   gulpUtil.runThis(application, userefTask);
-  gulpUtil.runThis(application, copyJsTask); // is this needed ? YES IT IS USED FOR THE ONLY REQUIRE JS EXAMPLE KEEP, BUT FLAG IT CORRECTLY!
+  gulpUtil.runThis(application, copyJsTask);
 }
 
 let createTasks = (application) => {
@@ -265,7 +229,6 @@ gulp.task('favicon', function(done){
 
 gulp.task("watch", (done) => {
   gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask);
-  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/typeScript/**/*.ts"), "typeScript", applicationTypeScriptTask);
   gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask);
   gulpUtil.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null);
   gulpUtil.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null);

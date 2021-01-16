@@ -1,6 +1,6 @@
 "use strict;"
-import { IStringRepository } from "./IStringRepository";
 
+import { IStringRepository } from "./IStringRepository";
 export interface IStringService  {
     stringRepository: IStringRepository;
     Alphas: string;

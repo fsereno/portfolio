@@ -1,6 +1,8 @@
 "use strict;"
+
 import { ITimerService } from '../Interfaces/ITimerService';
 import { IUpdateService } from '../Interfaces/IUpdateService';
+
 export class TimerService implements ITimerService {
     duration: number;
     counter: number;
