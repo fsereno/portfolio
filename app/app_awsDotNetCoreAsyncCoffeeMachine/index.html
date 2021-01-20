@@ -50,11 +50,22 @@
           <hr>
         </div>
       </div>
-      <div class="d-flex">
+      <div>
         <p>
           Think about how a cup of coffee is made.
           Typically tasks are carried out while the kettle is boiling.
           Why wait for a process to complete, when it could be run as a background task ?
+        </p>
+        <h2>How ?</h2>
+        <p>
+           Technically, when calling the Sync method, a series of actions are run in order of
+          execution, synchronously. With each action completing before the next is run.
+          When calling the Async method, however async / await are being used, spawning
+          a State Machine object, with Task acting as the interface between code and state.
+          The threadpool is free to use new threads if needed and return execution instead
+          of blocking execution as with a synchronous program.
+        </p>
+        <p>
           Run the process of making a cup of coffee both synchronously and asynchronously.
           Notice the difference in the order of tasks ?
         </p>
