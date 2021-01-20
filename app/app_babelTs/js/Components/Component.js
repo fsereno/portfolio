@@ -5,7 +5,7 @@ define(["exports"], function (_exports) {
   Object.defineProperty(_exports, "__esModule", {
     value: true
   });
-  _exports.IndexController = void 0;
+  _exports.Component = void 0;
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15,13 +15,13 @@ define(["exports"], function (_exports) {
 
   function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-  var IndexController =
+  var Component =
   /*#__PURE__*/
   function () {
-    function IndexController() {
+    function Component() {
       var _this = this;
 
-      _classCallCheck(this, IndexController);
+      _classCallCheck(this, Component);
 
       _defineProperty(this, "input", void 0);
 
@@ -141,7 +141,7 @@ define(["exports"], function (_exports) {
       this.form = jQuery("#inputForm");
     }
 
-    _createClass(IndexController, [{
+    _createClass(Component, [{
       key: "init",
       value: function init() {
         var _this2 = this;
@@ -154,8 +154,8 @@ define(["exports"], function (_exports) {
       }
     }]);
 
-    return IndexController;
+    return Component;
   }();
 
-  _exports.IndexController = IndexController;
+  _exports.Component = Component;
 });

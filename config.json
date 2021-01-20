@@ -50,8 +50,8 @@
         },
         {
             "name": "To-Do List (Basic)",
-            "subHeading": "A basic list builder",
-            "description": "Experimenting with Babel, TypeScript and Require JS.",
+            "subHeading": "A basic list builder written using TypeScript and JQuery",
+            "description": "Using Babel for compilation and Require to manage dependencies.",
             "searchTerms": "JavaScript,TypeScript,Babel,Require JS,JQuery,PUG,HTML,CSS,SASS",
             "folder": "babelTs",
             "active": true,
@@ -72,7 +72,7 @@
         },
         {
             "name": "To-Do List (React Redux)",
-            "subHeading": "A basic React Redux application",
+            "subHeading": "A basic list builder using React and Redux",
             "description": "Using Redux with React to manage application state, implementing Undo and Redo functionality.",
             "searchTerms": "JavaScript,React,Redux,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "reactRedux",
@@ -94,7 +94,7 @@
         },
         {
             "name": "Tic-Tac-Toe (React)",
-            "subHeading": "A Tic-Tac-Toe game built using React JS",
+            "subHeading": "A Tic-Tac-Toe game built using React",
             "description": "Experimenting with more complex aspects of React, Babel and Webpack.",
             "searchTerms": "JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "ticTacToeReact",
@@ -105,8 +105,8 @@
         },
         {
             "name": "TypeScript Find and Replace",
-            "subHeading": "A simple Find and Replace method",
-            "description": "Written with TypeScript, Sass and Pug. Capable of finding multiple occurrences and replacing all.",
+            "subHeading": "A simple Find and Replace method written with TypeScript",
+            "description": "TypeScript, Sass and Pug. Find all occurrences and replacing.",
             "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "findReplace",
             "active": true,
@@ -230,7 +230,7 @@
         },
         {
             "name": "AFrame React (Basic)",
-            "subHeading": "An AFrame Hello World application with React JS",
+            "subHeading": "An AFrame Hello World application with React",
             "description": "Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.",
             "searchTerms": "JavaScript,AFrame,Babel,WebPack,PUG,HTML,CSS,SASS,VR,Virtual Reality",
             "folder": "aframe",
@@ -252,8 +252,8 @@
         },
         {
             "name": "TypeScript Percentage Calculator",
-            "subHeading": "A simple percentage calculator method",
-            "description": "Written with TypeScript, Sass and Pug.",
+            "subHeading": "A simple percentage calculator method written with TypeScript",
+            "description": "TypeScript, Sass and Pug. Compiled using Webpack.",
             "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "percentageCalculator",
             "active": true,
@@ -262,9 +262,9 @@
             "labels": [0]
         },
         {
-            "name": "TypeScript Un-Scrabbler Word Game",
-            "subHeading": "A simple Scrabble Word Game, can you beat Unscrabbler?",
-            "description": "Written with TypeScript, Sass and Pug.",
+            "name": "Scrabble Game, Can you beat the Un-Scrabbler?",
+            "subHeading": "A simple Scrabble Word Game written using TypeScript",
+            "description": "TypeScript, Sass and Pug. Compiled using Webpack.",
             "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "unscrabbler",
             "active": true,
@@ -274,8 +274,8 @@
         },
         {
             "name": "TypeScript Random String Generator",
-            "subHeading": "A simple random generator",
-            "description": "Generating a random string of A-B, 0-9 and a given length. Written with TypeScript, Sass and Pug.",
+            "subHeading": "A simple random generator written with TypeScript",
+            "description": "Generating a random string of A-B, 0-9 and a given length. TypeScript, Sass and Pug. Compiled using Webpack.",
             "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "randomGenerator",
             "active": true,
@@ -285,8 +285,8 @@
         },
         {
             "name": "TypeScript Dictionary Word Finder",
-            "subHeading": "A simple dictionary word lookup tool",
-            "description": "Experimenting with a large index lookup search. Written with TypeScript, Sass and Pug.",
+            "subHeading": "A simple dictionary word lookup tool written using TypeScript",
+            "description": "A large indexing lookup search. TypeScript, Sass and Pug. Compiled using Webpack.",
             "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "dictionaryFinder",
             "active": true,
@@ -295,9 +295,9 @@
             "labels": [0]
         },
         {
-            "name": "Knockout + TypeScript",
-            "subHeading": "An example of KnockoutJS, enhanced by TypeScript",
-            "description": "Written with KnockoutJS, TypeScript, Sass and Pug.",
+            "name": "Knockout + TypeScript, Table of Users",
+            "subHeading": "An example of Knockout, enhanced by TypeScript",
+            "description": "Written with Knockout, TypeScript, Sass and Pug. Compiled using Webpack.",
             "searchTerms": "JavaScript,TypeScript,Knockout,PUG,HTML,CSS,SASS",
             "folder": "koTypeScript",
             "active": true,

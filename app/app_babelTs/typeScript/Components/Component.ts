@@ -1,5 +1,5 @@
 "use strict;"
-export class IndexController  {
+export class Component {
 
     private input: JQuery<HTMLElement>;
     private result: JQuery<HTMLElement>;

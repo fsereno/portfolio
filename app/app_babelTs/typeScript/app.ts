@@ -1,6 +1,6 @@
 "use strict;"
 
-import { IndexController } from "./Controllers/IndexController";
+import { Component } from './Components/Component';
 
-const indexController = new IndexController();
-indexController.init();
+const component = new Component();
+component.init();
