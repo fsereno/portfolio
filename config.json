@@ -116,7 +116,7 @@
         },
         {
             "name": "Azure Functions .NET Core Unique Data Entry",
-            "subHeading": "Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries.",
+            "subHeading": "Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries, with a React UI",
             "description": "Using Azure Functions serverless compute and .NET Core, with a React user interface.",
             "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "AzureDotNetCoreUniqueDataEntryApi",
@@ -132,7 +132,7 @@
         },
         {
             "name": "Azure Functions .NET Core Data Structures",
-            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implemented with Queue and Stack in .Net.",
+            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implemented with Queue and Stack in .Net, with a React UI",
             "description": "Using Azure Functions serverless compute and .NET Core, with a React user interface.",
             "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "AzureDotNetCoreDataStructuresApi",
@@ -151,7 +151,7 @@
         },
         {
             "name": "AWS .NET Core Entity Sort",
-            "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
+            "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreEntitySortApi",
@@ -168,7 +168,7 @@
         },
         {
             "name": "AWS .NET Core Natural Sort",
-            "subHeading": "A natural string sorting algorithm implemnting IComparer, taking a comma seperated string of alphanumerical values.",
+            "subHeading": "A natural string sorting algorithm implemnting IComparer, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreStringSortApi",
@@ -184,7 +184,7 @@
         },
         {
             "name": "AWS .NET Core Shopping Cart",
-            "subHeading": "A basic shopping cart application, with data processing handled by a Serverless .NET Core RESTful API. React handles the UI.",
+            "subHeading": "A basic shopping cart application, with data processing handled by a Serverless .NET Core RESTful API, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreShoppingCart",
@@ -202,7 +202,7 @@
         },
         {
             "name": "AWS .NET Core Asynchronous Coffee Maker",
-            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine.",
+            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreAsyncCoffeeMachine",
