@@ -1,4 +1,4 @@
-# ASP.NET Core Shopping List API. A Serverless Application with React Interface
+# ASP.NET Core Shopping Basket API. A Serverless Application with React Interface
 
 With this application I have built a simple shopping basket, each item consisting only of a primitive string value.
 

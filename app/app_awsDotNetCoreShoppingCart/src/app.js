@@ -213,7 +213,7 @@ class ShoppingListApp extends React.Component {
               })}
             </ul>
             <p className="lead">
-              Use the below interface to alter the baskets contents:
+              Use the below interface to alter the basket's contents:
             </p>
           </div>
         </div>
