@@ -4,7 +4,7 @@ With this application I have built a simple shopping basket, each item consistin
 
 The basket can be modified using the individual request inputs. The user interface and application state are React driven with data modification being processed via .NET Core running on AWS Lambda.
 
-Whilst this functionality could be achieved with JavaScript alone, I wanted to explore AWS Lambda and .NET Core. So the decision was made to go serverless compute for data modifications.
+Whilst this functionality could be achieved with JavaScript alone, I wanted to explore AWS Lambda and .NET Core and the use of List collections. So the decision was made to go serverless compute.
 
 - AWS Lambda Repository (https://github.com/fsereno/app_awsDotNetCoreShoppingCart)
 
