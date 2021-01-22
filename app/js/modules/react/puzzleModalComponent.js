@@ -45,7 +45,7 @@ export function PuzzleModalComponent(props) {
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Row>
               <Form.Group as={Col} controlId="answerInput">
-                <Form.Label>{`${props.label || "Whats is:"} ${props.puzzle} ?`}</Form.Label>
+                <Form.Label>{`${props.label || "What is:"} ${props.puzzle} ?`}</Form.Label>
                   <Form.Control
                     name="answerInput"
                     type="text"
