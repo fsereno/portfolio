@@ -105,7 +105,7 @@
         },
         {
             "name": "TypeScript Find and Replace",
-            "subHeading": "A simple Find and Replace method written with TypeScript",
+            "subHeading": "A simple multiple Find and Replace method written with TypeScript",
             "description": "TypeScript, Sass and Pug. Find all occurrences and replacing.",
             "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "findReplace",
@@ -132,7 +132,7 @@
         },
         {
             "name": "Azure Functions .NET Core Data Structures",
-            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implemented with Queue and Stack in .Net, with a React UI",
+            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET, with a React UI",
             "description": "Using Azure Functions serverless compute and .NET Core, with a React user interface.",
             "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "AzureDotNetCoreDataStructuresApi",
@@ -183,8 +183,8 @@
             "labels": [0, 1, 2]
         },
         {
-            "name": "AWS .NET Core Shopping Cart",
-            "subHeading": "A basic shopping cart application, with data processing handled by a Serverless .NET Core RESTful API, with a React UI",
+            "name": "AWS .NET Core Shopping List",
+            "subHeading": "A basic shopping list application, with data processing handled by a Serverless .NET Core RESTful API, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreShoppingCart",
@@ -274,7 +274,7 @@
         },
         {
             "name": "TypeScript Random String Generator",
-            "subHeading": "A simple random generator written with TypeScript",
+            "subHeading": "A simple random string generator written with TypeScript",
             "description": "Generating a random string of A-B, 0-9 and a given length. TypeScript, Sass and Pug. Compiled using Webpack.",
             "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
             "folder": "randomGenerator",
@@ -309,7 +309,7 @@
             "name": "JS Coding Standards",
             "subHeading": "A JavaScript Code Style Guide",
             "description": "By Fabio Sereno",
-            "searchTerms": "JavaScript,Solid Principles,YAGNI,DRY,KISS",
+            "searchTerms": "JavaScript,SOLID Principles,YAGNI,DRY,KISS",
             "folder": "jsCodingStandards",
             "active": false,
             "include": false,

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar component_1 = __webpack_require__(/*! ./components/component */ \"./app/app_randomGenerator/typeScript/components/component.ts\");\nvar StringService_1 = __webpack_require__(/*! ../../typeScript/Services/StringService */ \"./app/typeScript/Services/StringService.ts\");\nvar validatorService_1 = __webpack_require__(/*! ../../typeScript/Services/validatorService */ \"./app/typeScript/Services/validatorService.ts\");\nvar RandomGeneratorService_1 = __webpack_require__(/*! ../../typeScript/Services/RandomGeneratorService */ \"./app/typeScript/Services/RandomGeneratorService.ts\");\nvar StringRepository_1 = __webpack_require__(/*! ../../typeScript/Repositories/StringRepository */ \"./app/typeScript/Repositories/StringRepository.ts\");\nvar stringRepository = new StringRepository_1.StringRepository();\nvar stringService = new StringService_1.StringService(stringRepository);\nvar validatorService = new validatorService_1.ValidatorService();\nvar randomGeneratorService = new RandomGeneratorService_1.RandomGeneratorService(stringService);\nvar component = new component_1.Component(validatorService, randomGeneratorService, stringService);\ncomponent.init();\n\n\n//# sourceURL=webpack:///./app/app_randomGenerator/typeScript/app.ts?");
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar component_1 = __webpack_require__(/*! ./components/component */ \"./app/app_randomGenerator/typeScript/components/component.ts\");\nvar StringService_1 = __webpack_require__(/*! ../../typeScript/Services/StringService */ \"./app/typeScript/Services/StringService.ts\");\nvar ValidatorService_1 = __webpack_require__(/*! ../../typeScript/Services/ValidatorService */ \"./app/typeScript/Services/ValidatorService.ts\");\nvar RandomGeneratorService_1 = __webpack_require__(/*! ../../typeScript/Services/RandomGeneratorService */ \"./app/typeScript/Services/RandomGeneratorService.ts\");\nvar StringRepository_1 = __webpack_require__(/*! ../../typeScript/Repositories/StringRepository */ \"./app/typeScript/Repositories/StringRepository.ts\");\nvar stringRepository = new StringRepository_1.StringRepository();\nvar stringService = new StringService_1.StringService(stringRepository);\nvar validatorService = new ValidatorService_1.ValidatorService();\nvar randomGeneratorService = new RandomGeneratorService_1.RandomGeneratorService(stringService);\nvar component = new component_1.Component(validatorService, randomGeneratorService, stringService);\ncomponent.init();\n\n\n//# sourceURL=webpack:///./app/app_randomGenerator/typeScript/app.ts?");
 
 /***/ }),
 
@@ -141,14 +141,14 @@ eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esMo
 
 /***/ }),
 
-/***/ "./app/typeScript/Services/validatorService.ts":
+/***/ "./app/typeScript/Services/ValidatorService.ts":
 /*!*****************************************************!*\
-  !*** ./app/typeScript/Services/validatorService.ts ***!
+  !*** ./app/typeScript/Services/ValidatorService.ts ***!
   \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ValidatorService = /** @class */ (function () {\n    function ValidatorService() {\n        jQuery.validator.addMethod(\"nonNumeric\", function (value, element) {\n            return this.optional(element) || isNaN(Number(value));\n        });\n    }\n    ValidatorService.prototype.ValidateForm = function (formId, options) {\n        var validator = jQuery(\"#\" + formId).validate(options);\n        return validator;\n    };\n    return ValidatorService;\n}());\nexports.ValidatorService = ValidatorService;\n\n\n//# sourceURL=webpack:///./app/typeScript/Services/validatorService.ts?");
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ValidatorService = /** @class */ (function () {\n    function ValidatorService() {\n        jQuery.validator.addMethod(\"nonNumeric\", function (value, element) {\n            return this.optional(element) || isNaN(Number(value));\n        });\n    }\n    ValidatorService.prototype.ValidateForm = function (formId, options) {\n        var validator = jQuery(\"#\" + formId).validate(options);\n        return validator;\n    };\n    return ValidatorService;\n}());\nexports.ValidatorService = ValidatorService;\n\n\n//# sourceURL=webpack:///./app/typeScript/Services/ValidatorService.ts?");
 
 /***/ })
 

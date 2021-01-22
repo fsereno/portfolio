@@ -86,6 +86,17 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./app/app_findReplace/typeScript/Components/component.ts":
+/*!****************************************************************!*\
+  !*** ./app/app_findReplace/typeScript/Components/component.ts ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Component = /** @class */ (function () {\n    function Component(stringService, validatorService) {\n        this.stringService = stringService;\n        this.validatorService = validatorService;\n        this.result = jQuery(\"#result\");\n        this.findInput = jQuery(\"#findInput\");\n        this.replaceInput = jQuery(\"#replaceInput\");\n        this.formId = \"findReplaceForm\";\n    }\n    Component.prototype.init = function () {\n        var _this = this;\n        jQuery(function () {\n            _this.validateForm();\n        });\n    };\n    Component.prototype.validateForm = function () {\n        var _this = this;\n        var validateFormOptions = {\n            submitHandler: function (form) {\n                var valid = jQuery(form).valid();\n                var findThis = _this.findInput.val().toString();\n                var inThis = _this.result.text();\n                var replaceWithThis = _this.replaceInput.val().toString();\n                if (valid) {\n                    var textReplaced = _this.stringService.FindReplace(findThis, inThis, replaceWithThis);\n                    jQuery(\"#result\").text(textReplaced);\n                }\n            }\n        };\n        this.validatorService.ValidateForm(this.formId, validateFormOptions);\n    };\n    return Component;\n}());\nexports.Component = Component;\n\n\n//# sourceURL=webpack:///./app/app_findReplace/typeScript/Components/component.ts?");
+
+/***/ }),
+
 /***/ "./app/app_findReplace/typeScript/app.ts":
 /*!***********************************************!*\
   !*** ./app/app_findReplace/typeScript/app.ts ***!
@@ -93,18 +104,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar StringRepository_1 = __webpack_require__(/*! ../../typeScript/Repositories/StringRepository */ \"./app/typeScript/Repositories/StringRepository.ts\");\nvar component_1 = __webpack_require__(/*! ./components/component */ \"./app/app_findReplace/typeScript/components/component.ts\");\nvar StringService_1 = __webpack_require__(/*! ../../typeScript/Services/StringService */ \"./app/typeScript/Services/StringService.ts\");\nvar validatorService_1 = __webpack_require__(/*! ../../typeScript/Services/validatorService */ \"./app/typeScript/Services/validatorService.ts\");\nvar stringRepository = new StringRepository_1.StringRepository();\nvar stringService = new StringService_1.StringService(stringRepository);\nvar validatorService = new validatorService_1.ValidatorService();\nvar component = new component_1.Component(stringService, validatorService);\ncomponent.init();\n\n\n//# sourceURL=webpack:///./app/app_findReplace/typeScript/app.ts?");
-
-/***/ }),
-
-/***/ "./app/app_findReplace/typeScript/components/component.ts":
-/*!****************************************************************!*\
-  !*** ./app/app_findReplace/typeScript/components/component.ts ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar Component = /** @class */ (function () {\n    function Component(stringService, validatorService) {\n        this.stringService = stringService;\n        this.validatorService = validatorService;\n        this.result = jQuery(\"#result\");\n        this.findInput = jQuery(\"#findInput\");\n        this.replaceInput = jQuery(\"#replaceInput\");\n        this.formId = \"findReplaceForm\";\n    }\n    Component.prototype.init = function () {\n        var _this = this;\n        jQuery(function () {\n            _this.validateForm();\n        });\n    };\n    Component.prototype.validateForm = function () {\n        var _this = this;\n        var validateFormOptions = {\n            submitHandler: function (form) {\n                var valid = jQuery(form).valid();\n                var findThis = _this.findInput.val().toString();\n                var inThis = _this.result.text();\n                var replaceWithThis = _this.replaceInput.val().toString();\n                if (valid) {\n                    var textReplaced = _this.stringService.FindReplace(findThis, inThis, replaceWithThis);\n                    jQuery(\"#result\").text(textReplaced);\n                }\n            }\n        };\n        this.validatorService.ValidateForm(this.formId, validateFormOptions);\n    };\n    return Component;\n}());\nexports.Component = Component;\n\n\n//# sourceURL=webpack:///./app/app_findReplace/typeScript/components/component.ts?");
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar StringRepository_1 = __webpack_require__(/*! ../../typeScript/Repositories/StringRepository */ \"./app/typeScript/Repositories/StringRepository.ts\");\nvar component_1 = __webpack_require__(/*! ./Components/component */ \"./app/app_findReplace/typeScript/Components/component.ts\");\nvar StringService_1 = __webpack_require__(/*! ../../typeScript/Services/StringService */ \"./app/typeScript/Services/StringService.ts\");\nvar ValidatorService_1 = __webpack_require__(/*! ../../typeScript/Services/ValidatorService */ \"./app/typeScript/Services/ValidatorService.ts\");\nvar stringRepository = new StringRepository_1.StringRepository();\nvar stringService = new StringService_1.StringService(stringRepository);\nvar validatorService = new ValidatorService_1.ValidatorService();\nvar component = new component_1.Component(stringService, validatorService);\ncomponent.init();\n\n\n//# sourceURL=webpack:///./app/app_findReplace/typeScript/app.ts?");
 
 /***/ }),
 
@@ -130,14 +130,14 @@ eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esMo
 
 /***/ }),
 
-/***/ "./app/typeScript/Services/validatorService.ts":
+/***/ "./app/typeScript/Services/ValidatorService.ts":
 /*!*****************************************************!*\
-  !*** ./app/typeScript/Services/validatorService.ts ***!
+  !*** ./app/typeScript/Services/ValidatorService.ts ***!
   \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ValidatorService = /** @class */ (function () {\n    function ValidatorService() {\n        jQuery.validator.addMethod(\"nonNumeric\", function (value, element) {\n            return this.optional(element) || isNaN(Number(value));\n        });\n    }\n    ValidatorService.prototype.ValidateForm = function (formId, options) {\n        var validator = jQuery(\"#\" + formId).validate(options);\n        return validator;\n    };\n    return ValidatorService;\n}());\nexports.ValidatorService = ValidatorService;\n\n\n//# sourceURL=webpack:///./app/typeScript/Services/validatorService.ts?");
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ValidatorService = /** @class */ (function () {\n    function ValidatorService() {\n        jQuery.validator.addMethod(\"nonNumeric\", function (value, element) {\n            return this.optional(element) || isNaN(Number(value));\n        });\n    }\n    ValidatorService.prototype.ValidateForm = function (formId, options) {\n        var validator = jQuery(\"#\" + formId).validate(options);\n        return validator;\n    };\n    return ValidatorService;\n}());\nexports.ValidatorService = ValidatorService;\n\n\n//# sourceURL=webpack:///./app/typeScript/Services/ValidatorService.ts?");
 
 /***/ })
 

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar component_1 = __webpack_require__(/*! ./components/component */ \"./app/app_percentageCalculator/typeScript/components/component.ts\");\nvar validatorService_1 = __webpack_require__(/*! ../../typeScript/Services/validatorService */ \"./app/typeScript/Services/validatorService.ts\");\nvar calculatorService_1 = __webpack_require__(/*! ../../typeScript/Services/calculatorService */ \"./app/typeScript/Services/calculatorService.ts\");\nvar validatorService = new validatorService_1.ValidatorService();\nvar calculatorService = new calculatorService_1.CalculatorService();\nvar component = new component_1.Component(validatorService, calculatorService);\ncomponent.init();\n\n\n//# sourceURL=webpack:///./app/app_percentageCalculator/typeScript/app.ts?");
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar component_1 = __webpack_require__(/*! ./components/component */ \"./app/app_percentageCalculator/typeScript/components/component.ts\");\nvar ValidatorService_1 = __webpack_require__(/*! ../../typeScript/Services/ValidatorService */ \"./app/typeScript/Services/ValidatorService.ts\");\nvar CalculatorService_1 = __webpack_require__(/*! ../../typeScript/Services/CalculatorService */ \"./app/typeScript/Services/CalculatorService.ts\");\nvar validatorService = new ValidatorService_1.ValidatorService();\nvar calculatorService = new CalculatorService_1.CalculatorService();\nvar component = new component_1.Component(validatorService, calculatorService);\ncomponent.init();\n\n\n//# sourceURL=webpack:///./app/app_percentageCalculator/typeScript/app.ts?");
 
 /***/ }),
 
@@ -108,25 +108,25 @@ eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esMo
 
 /***/ }),
 
-/***/ "./app/typeScript/Services/calculatorService.ts":
+/***/ "./app/typeScript/Services/CalculatorService.ts":
 /*!******************************************************!*\
-  !*** ./app/typeScript/Services/calculatorService.ts ***!
+  !*** ./app/typeScript/Services/CalculatorService.ts ***!
   \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar CalculatorService = /** @class */ (function () {\n    function CalculatorService() {\n    }\n    CalculatorService.prototype.Add = function (a, b) {\n        return a + b;\n    };\n    CalculatorService.prototype.PercentageOf = function (percentage, ofThisNumber) {\n        var result = Number(percentage) / 100 * Number(ofThisNumber);\n        return result;\n    };\n    return CalculatorService;\n}());\nexports.CalculatorService = CalculatorService;\n\n\n//# sourceURL=webpack:///./app/typeScript/Services/calculatorService.ts?");
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar CalculatorService = /** @class */ (function () {\n    function CalculatorService() {\n    }\n    CalculatorService.prototype.Add = function (a, b) {\n        return a + b;\n    };\n    CalculatorService.prototype.PercentageOf = function (percentage, ofThisNumber) {\n        var result = Number(percentage) / 100 * Number(ofThisNumber);\n        return result;\n    };\n    return CalculatorService;\n}());\nexports.CalculatorService = CalculatorService;\n\n\n//# sourceURL=webpack:///./app/typeScript/Services/CalculatorService.ts?");
 
 /***/ }),
 
-/***/ "./app/typeScript/Services/validatorService.ts":
+/***/ "./app/typeScript/Services/ValidatorService.ts":
 /*!*****************************************************!*\
-  !*** ./app/typeScript/Services/validatorService.ts ***!
+  !*** ./app/typeScript/Services/ValidatorService.ts ***!
   \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ValidatorService = /** @class */ (function () {\n    function ValidatorService() {\n        jQuery.validator.addMethod(\"nonNumeric\", function (value, element) {\n            return this.optional(element) || isNaN(Number(value));\n        });\n    }\n    ValidatorService.prototype.ValidateForm = function (formId, options) {\n        var validator = jQuery(\"#\" + formId).validate(options);\n        return validator;\n    };\n    return ValidatorService;\n}());\nexports.ValidatorService = ValidatorService;\n\n\n//# sourceURL=webpack:///./app/typeScript/Services/validatorService.ts?");
+eval("\"use strict;\";\n\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nvar ValidatorService = /** @class */ (function () {\n    function ValidatorService() {\n        jQuery.validator.addMethod(\"nonNumeric\", function (value, element) {\n            return this.optional(element) || isNaN(Number(value));\n        });\n    }\n    ValidatorService.prototype.ValidateForm = function (formId, options) {\n        var validator = jQuery(\"#\" + formId).validate(options);\n        return validator;\n    };\n    return ValidatorService;\n}());\nexports.ValidatorService = ValidatorService;\n\n\n//# sourceURL=webpack:///./app/typeScript/Services/ValidatorService.ts?");
 
 /***/ })
 

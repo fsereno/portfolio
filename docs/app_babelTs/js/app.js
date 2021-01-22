@@ -1,7 +1,7 @@
-define(["./Controllers/IndexController"], function (_IndexController) {
+define(["./Components/Component"], function (_Component) {
   "use strict";
   "use strict;";
 
-  var indexController = new _IndexController.IndexController();
-  indexController.init();
+  var component = new _Component.Component();
+  component.init();
 });
