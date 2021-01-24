@@ -15,7 +15,6 @@ import { HomeThreeModule } from "./homeThreeModule.js";
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { ApplicationSortUtil } from "../../typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index";
 
-
 const FAUX_LOADING_TIME = 500;
 const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
 const SEARCH_INPUT_ID = "searchInput";
