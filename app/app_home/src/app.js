@@ -15,6 +15,7 @@ import { HomeThreeModule } from "./homeThreeModule.js";
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { ApplicationSortUtil } from "../../typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index";
 
+
 const FAUX_LOADING_TIME = 500;
 const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
 const SEARCH_INPUT_ID = "searchInput";
@@ -24,8 +25,6 @@ const CONTENT_CONTAINER_ID = "contentContainer";
 const IS_BROWSER_VALID = WebGLCheckerUtil.isWebGL2Available() || WebGLCheckerUtil.isWebGLAvailable();
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("home");
-
-// /https://www.npmjs.com/package/masonry-layout - this could be an option
 
 CONFIG.applications.sort(ApplicationSortUtil.sorter);
 
@@ -248,7 +247,7 @@ class HomeApp extends React.Component {
             {this.state.applications.map((application, index) => {
               if (application.active && application.include) {
                 return (
-                  <Card key={`${application.name}`}>
+                  <Card className="grid-item" key={`${application.name}`}>
                     <Card.Body>
                       <Card.Title>
                         {application.name}
