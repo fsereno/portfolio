@@ -128,7 +128,8 @@
                 "api": "https://app-azure-dotnetcore-unique-data-entry-api.azurewebsites.net/api",
                 "canItemBeAddedAsync": "canItemBeAddedAsync"
             },
-            "labels": [0, 1, 2]
+            "labels": [0, 1, 2],
+            "order": 0
         },
         {
             "name": "Azure Functions .NET Core Data Structures",
