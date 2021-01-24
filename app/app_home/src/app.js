@@ -25,7 +25,10 @@ const IS_BROWSER_VALID = WebGLCheckerUtil.isWebGL2Available() || WebGLCheckerUti
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("home");
 
+// /https://www.npmjs.com/package/masonry-layout - this could be an option
+
 CONFIG.applications.sort(ApplicationSortUtil.sorter);
+
 class HomeApp extends React.Component {
   constructor(props) {
     super(props);
