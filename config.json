@@ -129,7 +129,7 @@
                 "canItemBeAddedAsync": "canItemBeAddedAsync"
             },
             "labels": [0, 1, 2],
-            "order": 0
+            "order": 1
         },
         {
             "name": "Azure Functions .NET Core Data Structures",
@@ -148,7 +148,8 @@
                 "addStackItem": "addStackItemAsync",
                 "removeStackItem": "removeStackItemAsync"
             },
-            "labels": [0, 1, 2]
+            "labels": [0, 1, 2],
+            "order": 2
         },
         {
             "name": "AWS .NET Core Entity Sort",
@@ -165,7 +166,8 @@
                 "sortSalaryAsc": "sort/salary/asc",
                 "sortSalaryDesc": "sort/salary/desc"
             },
-            "labels": [0, 1, 2]
+            "labels": [0, 1, 2],
+            "order": 3
         },
         {
             "name": "AWS .NET Core Natural Sort",
@@ -181,7 +183,8 @@
                 "api": "https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values",
                 "sort": "sort"
             },
-            "labels": [0, 1, 2]
+            "labels": [0, 1, 2],
+            "order": 4
         },
         {
             "name": "AWS .NET Core Shopping Basket",
@@ -199,7 +202,8 @@
                 "delete": "delete",
                 "update": "update"
             },
-            "labels": [0, 1, 2]
+            "labels": [0, 1, 2],
+            "order": 5
         },
         {
             "name": "AWS .NET Core Asynchronous Coffee Maker",
@@ -216,7 +220,8 @@
                 "run": "run",
                 "runAsync": "runasync"
             },
-            "labels": [0, 1, 2]
+            "labels": [0, 1, 2],
+            "order": 6
         },
         {
             "name": "Three JS Scene (Basic)",

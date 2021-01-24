@@ -5,13 +5,16 @@ import { Application } from '../../Models/Application';
 
 export class ApplicationSortUtil {
 
-    public static Sorter(a: Application, b: Application) {
+    public static sorter(a: Application, b: Application) {
 
-        if (a.order < b.order) {
+        const aOrder = a.order || Number.MAX_VALUE;
+        const bOrder = b.order || Number.MAX_VALUE;
+
+        if (aOrder < bOrder) {
             return -1;
         }
 
-        if (a.order > b.order) {
+        if (aOrder > bOrder) {
             return 1;
         }
 

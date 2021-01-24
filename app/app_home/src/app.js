@@ -13,6 +13,7 @@ import { StringSearchUtil } from '../../typeScript/Utils/stringSearchUtil/dist/i
 import { WebGLCheckerUtil } from "../../js/modules/utils/webGLCheckerUtil";
 import { HomeThreeModule } from "./homeThreeModule.js";
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
+import { ApplicationSortUtil } from "../../typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index";
 
 const FAUX_LOADING_TIME = 500;
 const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
@@ -24,6 +25,7 @@ const IS_BROWSER_VALID = WebGLCheckerUtil.isWebGL2Available() || WebGLCheckerUti
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("home");
 
+CONFIG.applications.sort(ApplicationSortUtil.sorter);
 class HomeApp extends React.Component {
   constructor(props) {
     super(props);

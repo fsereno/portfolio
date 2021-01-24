@@ -18,7 +18,7 @@ describe("ApplicationSortUtil", () => {
     describe("Sorter", () => {
         it("Should return sorted array or applications", () => {
 
-            applications.sort(ApplicationSortUtil.Sorter);
+            applications.sort(ApplicationSortUtil.sorter);
 
             expect(applications[0].order).to.equal(1);
             expect(applications[1].order).to.equal(2);

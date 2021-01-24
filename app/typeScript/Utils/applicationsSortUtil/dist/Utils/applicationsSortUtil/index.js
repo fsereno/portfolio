@@ -1,10 +1,12 @@
 "use strict;";
-export class applicationSortUtil {
-    static Sorter(a, b) {
-        if (a.order < b.order) {
+export class ApplicationSortUtil {
+    static sorter(a, b) {
+        const aOrder = a.order || Number.MAX_VALUE;
+        const bOrder = b.order || Number.MAX_VALUE;
+        if (aOrder < bOrder) {
             return -1;
         }
-        if (a.order > b.order) {
+        if (aOrder > bOrder) {
             return 1;
         }
         return 0;

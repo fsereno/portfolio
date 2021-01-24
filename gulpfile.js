@@ -205,7 +205,7 @@ let faviconCopyTask = () => {
 }
 
 let testsTask = (directory) => {
-  return gulp.src(`${config.developmentDir}/tests/${directory}/**/ApplicationSortUtil.test.ts`)
+  return gulp.src(`${config.developmentDir}/tests/${directory}/**/*.test.ts`)
     .pipe(mocha({
         reporter: "spec",
         require: ["ts-node/register"]
