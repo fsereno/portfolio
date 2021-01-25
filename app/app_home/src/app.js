@@ -48,7 +48,7 @@ class HomeApp extends React.Component {
     this.RenderClearBtn = this.RenderClearBtn.bind(this);
     this.RenderIntroContainer = this.RenderIntroContainer.bind(this);
     this.RenderContenContainer = this.RenderContenContainer.bind(this);
-    this.RenderApplicationCards = this.RenderApplicationCards.bind(this);
+    this.RenderFeaturedContainer = this.RenderFeaturedContainer.bind(this);
   }
 
   filterApplications(applications, searchTerm) {
@@ -231,6 +231,28 @@ class HomeApp extends React.Component {
     }
   }
 
+  RenderFeaturedContainer(props) {
+    if (props.applications.length > 0) {
+      return (
+        <div className="bg-dark featured-container mb-3 pb-1 pt-2 px-3">
+            <h4 className="text-white">
+              Featured
+            </h4>
+            <div className="card-columns">
+              {props.applications.map((application, index) => {
+                return (<this.RenderApplicationCards
+                  application={application}
+                  condition={application.active && application.include}
+                />)
+              })}
+            </div>
+          </div>
+      )
+    } else {
+      return null;
+    }
+  }
+
   RenderContenContainer() {
     let fadeClass = this.getElementFadeClass(this.state.hasApplications);
     return (
@@ -273,27 +295,12 @@ class HomeApp extends React.Component {
             </div>
           </div>
         </form>
-        <h3>
-          Featured
-          <small className="text-muted">&nbsp;applications</small>
-        </h3>
+        <this.RenderFeaturedContainer applications={this.state.applications.filter(x => x.featured)} />
         <div className="card-columns">
           {this.state.applications.map((application, index) => {
             return (<this.RenderApplicationCards
               application={application}
-              condition={application.active && application.include && application.order}
-            />)
-          })}
-        </div>
-        <h3>
-          Miscellaneous
-          <small className="text-muted">&nbsp;applications</small>
-        </h3>
-        <div className="card-columns">
-          {this.state.applications.map((application, index) => {
-            return (<this.RenderApplicationCards
-              application={application}
-              condition={application.active && application.include && !application.order}
+              condition={application.active && application.include && !application.featured}
             />)
           })}
         </div>
