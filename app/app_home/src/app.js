@@ -45,9 +45,10 @@ class HomeApp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleScrollBtnClick = this.handleScrollBtnClick.bind(this);
     this.handleNavBarScrollClass = this.handleNavBarScrollClass.bind(this);
-    this.renderClearBtn = this.renderClearBtn.bind(this);
-    this.renderIntroContainer = this.renderIntroContainer.bind(this);
-    this.renderContenContainer = this.renderContenContainer.bind(this);
+    this.RenderClearBtn = this.RenderClearBtn.bind(this);
+    this.RenderIntroContainer = this.RenderIntroContainer.bind(this);
+    this.RenderContenContainer = this.RenderContenContainer.bind(this);
+    this.RenderApplicationCards = this.RenderApplicationCards.bind(this);
   }
 
   filterApplications(applications, searchTerm) {
@@ -162,7 +163,7 @@ class HomeApp extends React.Component {
     return fadeClass;
   }
 
-  renderClearBtn() {
+  RenderClearBtn() {
     if (this.state.showClear) {
       return(
         <div className="input-group-append" id="cancelBtn">
@@ -177,7 +178,7 @@ class HomeApp extends React.Component {
     return null;
   }
 
-  renderIntroContainer(props) {
+  RenderIntroContainer(props) {
     let fadeClass = this.getElementFadeClass(props.fadeIn);
     return (
       <div className="bg-dark" id="introContainer">
@@ -200,7 +201,37 @@ class HomeApp extends React.Component {
     );
   }
 
-  renderContenContainer() {
+  RenderApplicationCards(props) {
+    if (props.condition) {
+      return (
+        <Card className="grid-item" key={`${props.application.name}`}>
+          <Card.Body>
+            <Card.Title>
+              {props.application.name}
+            </Card.Title>
+            <Card.Text>
+              {props.application.subHeading}
+            </Card.Text>
+            <Card.Link className="btn btn-outline-dark btn-sm card-link" href={`${CONFIG.prefix}${props.application.folder}/index.html`}>View application</Card.Link>
+            <Row className="mt-3">
+              <Col>
+                {props.application.labels ? props.application.labels.map(x => {
+                  const label = CONFIG.labels[x];
+                  return(
+                    <Badge key={x} variant={label.class} className="text-light mr-2">{label.name}</Badge>
+                  )
+                }) : null }
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+      );
+    } else {
+      return null;
+    }
+  }
+
+  RenderContenContainer() {
     let fadeClass = this.getElementFadeClass(this.state.hasApplications);
     return (
       <div className={`${fadeClass} container-fluid pt-4 mt-5`} id="contentContainer">
@@ -224,7 +255,7 @@ class HomeApp extends React.Component {
               </span>
             </div>
             <input type="text" className="form-control" placeholder="Search applications..." id="searchInput" onChange={this.handleSearchChange}/>
-            <this.renderClearBtn/>
+            <this.RenderClearBtn/>
             <div className="input-group-append">
               <button id="openFilterBtn" className="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
                 <i className="fa fa-filter"></i>
@@ -242,36 +273,29 @@ class HomeApp extends React.Component {
             </div>
           </div>
         </form>
-        <div id="applicationsContainer" className="card-columns">
-            {this.state.applications.map((application, index) => {
-              if (application.active && application.include) {
-                return (
-                  <Card className="grid-item" key={`${application.name}`}>
-                    <Card.Body>
-                      <Card.Title>
-                        {application.name}
-                      </Card.Title>
-                      <Card.Text>
-                        {application.subHeading}
-                      </Card.Text>
-                      <Card.Link className="btn btn-outline-dark btn-sm card-link" href={`${CONFIG.prefix}${application.folder}/index.html`}>View application</Card.Link>
-                      <Row className="mt-3">
-                        <Col>
-                          {application.labels ? application.labels.map(x => {
-
-                            const label = CONFIG.labels[x];
-
-                            return(
-                              <Badge key={x} variant={label.class} className="text-light mr-2">{label.name}</Badge>
-                            )
-                          }) : null }
-                        </Col>
-                      </Row>
-                    </Card.Body>
-                  </Card>
-                );
-              }
-            })}
+        <h3>
+          Featured
+          <small className="text-muted">&nbsp;applications</small>
+        </h3>
+        <div className="card-columns">
+          {this.state.applications.map((application, index) => {
+            return (<this.RenderApplicationCards
+              application={application}
+              condition={application.active && application.include && application.order}
+            />)
+          })}
+        </div>
+        <h3>
+          Miscellaneous
+          <small className="text-muted">&nbsp;applications</small>
+        </h3>
+        <div className="card-columns">
+          {this.state.applications.map((application, index) => {
+            return (<this.RenderApplicationCards
+              application={application}
+              condition={application.active && application.include && !application.order}
+            />)
+          })}
         </div>
       </div>
     );
@@ -291,10 +315,10 @@ class HomeApp extends React.Component {
         <SpinnerComponent
           show={this.state.showSpinner}
         />
-        <this.renderIntroContainer
+        <this.RenderIntroContainer
           fadeIn={this.state.showIntro}
         />
-        <this.renderContenContainer/>
+        <this.RenderContenContainer/>
       </div>
     );
   }
