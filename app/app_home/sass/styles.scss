@@ -99,6 +99,9 @@
     min-height: 100vh;
     .featured-container {
       border-radius: .25rem;
+      .card {
+        border:none;
+      }
     }
   }
 }
