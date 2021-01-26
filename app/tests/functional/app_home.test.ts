@@ -85,7 +85,7 @@ describe(application, () => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(1500)
-                .type('#searchInput', 'TypeScript')
+                .type('#searchInput', 'abcd')
                 .click("#cancelBtn button")
                 .end()
                 .evaluate(() => {
