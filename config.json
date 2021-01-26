@@ -129,7 +129,6 @@
                 "canItemBeAddedAsync": "canItemBeAddedAsync"
             },
             "labels": [0, 1, 2],
-            "order": 1,
             "featured": true
         },
         {
@@ -150,7 +149,6 @@
                 "removeStackItem": "removeStackItemAsync"
             },
             "labels": [0, 1, 2],
-            "order": 2,
             "featured": true
         },
         {
@@ -169,12 +167,11 @@
                 "sortSalaryDesc": "sort/salary/desc"
             },
             "labels": [0, 1, 2],
-            "order": 3,
-            "featured": true
+            "order": 1
         },
         {
-            "name": "AWS .NET Core Natural Sort",
-            "subHeading": "A natural string sorting algorithm implemnting IComparer, with a React UI",
+            "name": "AWS .NET Core Natural Sorting Algorithm",
+            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET, passing in a custom comparer, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreStringSortApi",
@@ -187,7 +184,6 @@
                 "sort": "sort"
             },
             "labels": [0, 1, 2],
-            "order": 4,
             "featured": true
         },
         {
@@ -207,8 +203,7 @@
                 "update": "update"
             },
             "labels": [0, 1, 2],
-            "order": 5,
-            "featured": true
+            "order": 2
         },
         {
             "name": "AWS .NET Core Asynchronous Coffee Maker",
@@ -226,8 +221,7 @@
                 "runAsync": "runasync"
             },
             "labels": [0, 1, 2],
-            "order": 6,
-            "featured": true
+            "order": 3
         },
         {
             "name": "Three JS Scene (Basic)",
