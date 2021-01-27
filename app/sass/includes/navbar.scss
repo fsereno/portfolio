@@ -12,13 +12,20 @@
             overflow-y: scroll;
         }
     }
-    .dropdown-menu {
-        min-width: 380px;
-        .dropdown-item {
-            padding: 1rem 1.5rem;
-            white-space: pre-wrap;
-            &.active, &:active {
-                background-color: $darkGrey;
+    .navbar-collapse {
+
+       a {
+            font-weight: 300;
+       }
+
+        .dropdown-menu {
+            min-width: 380px;
+            .dropdown-item {
+                padding: 1rem 1.5rem;
+                white-space: pre-wrap;
+                &.active, &:active {
+                    background-color: $darkGrey;
+                }
             }
         }
     }
