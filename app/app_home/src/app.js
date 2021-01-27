@@ -48,7 +48,7 @@ class HomeApp extends React.Component {
     this.RenderClearBtn = this.RenderClearBtn.bind(this);
     this.RenderIntroContainer = this.RenderIntroContainer.bind(this);
     this.RenderContenContainer = this.RenderContenContainer.bind(this);
-    this.RenderFeaturedContainer = this.RenderFeaturedContainer.bind(this);
+    this.RenderCardContainer = this.RenderCardContainer.bind(this);
   }
 
   filterApplications(applications, searchTerm) {
@@ -231,22 +231,17 @@ class HomeApp extends React.Component {
     }
   }
 
-  RenderFeaturedContainer(props) {
+  RenderCardContainer(props) {
     if (props.applications.length > 0) {
       return (
-        <div className="bg-dark featured-container mb-3 pb-1 pt-2 px-3">
-            <h4 className="display-4 text-white">
-              Featured
-            </h4>
-            <div className="card-columns">
-              {props.applications.map((application, index) => {
-                return (<this.RenderApplicationCards
-                  application={application}
-                  condition={application.active && application.include}
-                />)
-              })}
-            </div>
-          </div>
+        <div className="card-columns">
+          {props.applications.map((application, index) => {
+            return (<this.RenderApplicationCards
+              application={application}
+              condition={application.active && application.include}
+            />)
+          })}
+        </div>
       )
     } else {
       return null;
@@ -295,15 +290,8 @@ class HomeApp extends React.Component {
             </div>
           </div>
         </form>
-        <this.RenderFeaturedContainer applications={this.state.applications.filter(x => x.featured)} />
-        <div id="applicationsContainer" className="card-columns px-3">
-          {this.state.applications.map((application, index) => {
-            return (<this.RenderApplicationCards
-              application={application}
-              condition={application.active && application.include && !application.featured}
-            />)
-          })}
-        </div>
+        <this.RenderCardContainer applications={this.state.applications.filter(x => x.featured)} />
+        <this.RenderCardContainer applications={this.state.applications.filter(x => !x.featured)} />
       </div>
     );
   }
