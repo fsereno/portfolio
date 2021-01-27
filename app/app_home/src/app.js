@@ -296,7 +296,7 @@ class HomeApp extends React.Component {
           </div>
         </form>
         <this.RenderFeaturedContainer applications={this.state.applications.filter(x => x.featured)} />
-        <div id="applicationsContainer" className="card-columns">
+        <div id="applicationsContainer" className="card-columns px-3">
           {this.state.applications.map((application, index) => {
             return (<this.RenderApplicationCards
               application={application}
