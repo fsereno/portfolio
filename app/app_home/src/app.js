@@ -235,7 +235,7 @@ class HomeApp extends React.Component {
     if (props.applications.length > 0) {
       return (
         <div className="bg-dark featured-container mb-3 pb-1 pt-2 px-3">
-            <h4 className="text-white">
+            <h4 className="display-4 text-white">
               Featured
             </h4>
             <div className="card-columns">
