@@ -152,7 +152,7 @@
             "featured": true
         },
         {
-            "name": "AWS .NET Core Entity Sort",
+            "name": "AWS .NET Core Complex Entity Sorting Algorithm",
             "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
@@ -167,7 +167,8 @@
                 "sortSalaryDesc": "sort/salary/desc"
             },
             "labels": [0, 1, 2],
-            "order": 1
+            "order": 1,
+            "featured": true
         },
         {
             "name": "AWS .NET Core Natural Sorting Algorithm",
@@ -187,7 +188,7 @@
             "featured": true
         },
         {
-            "name": "AWS .NET Core Shopping Basket",
+            "name": "AWS .NET Core Shopping Basket List Builder",
             "subHeading": "A basic shopping basket application, with data processing handled by a Serverless .NET Core RESTful API, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
@@ -203,7 +204,8 @@
                 "update": "update"
             },
             "labels": [0, 1, 2],
-            "order": 2
+            "order": 2,
+            "featured": true
         },
         {
             "name": "AWS .NET Core Asynchronous Coffee Maker",
@@ -221,7 +223,8 @@
                 "runAsync": "runasync"
             },
             "labels": [0, 1, 2],
-            "order": 3
+            "order": 3,
+            "featured": true
         },
         {
             "name": "Three JS Scene (Basic)",
