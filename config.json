@@ -333,6 +333,7 @@
             "active": true,
             "include": true,
             "useWebpack": true,
+            "masterTemplateDir": "master_react",
             "labels": [0]
         }
     ]
