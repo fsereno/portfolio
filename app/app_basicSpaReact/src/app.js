@@ -2,86 +2,66 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
-import { FormComponent } from './formComponent';
-class ToDoListForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: '',
-      list: [],
-      counterLimit: 10,
-      counter: 0,
-      selectedIndex: 0
-    };
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete= this.handleDelete.bind(this);
-  }
+function Home(props) {
+  return(
+    <div>
+      <h2>Home</h2>
+    </div>
+  )
+}
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
+function About(props) {
+  return(
+    <div>
+      <h2>About</h2>
+    </div>
+  )
+}
 
-  handleSubmit(event) {
-    event.preventDefault();
-    if (this.state.counter < this.state.counterLimit) {
-      let items = this.state.list.concat(this.state.value);
-      this.setState({
-        list: items,
-        value: "",
-        counter: this.state.counter + 1
-      });
-    }
-  }
+function Contact(props) {
+  return(
+    <div>
+      <h2>Contact</h2>
+    </div>
+  )
+}
 
-  handleDelete(event) {
-    event.preventDefault();
-    let index = Number(event.target.dataset.index);
-    this.state.list.splice(index, 1);
-    this.setState({
-      list: this.state.list,
-      counter: this.state.counter - 1
-    });
-  }
-
-  render() {
-    return (
+function App(props) {
+  return (
+    <Router>
       <div>
-        <div className="row splitter">
-          <div className="col-lg-4">
-            <h3>Result:</h3>
-            <ul id="toDoList" className="list-group">
-              {this.state.list.map((item, index) => {
-                let key = KeyGeneratorUtil.generate(item);
-                return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
-              })}
+        <nav>
+          <ul>
+            <li>
+              <Link to="/app_basicSpaReact/home">Home</Link>
+            </li>
+            <li>
+              <Link to="/app_basicSpaReact/about">About</Link>
+            </li>
+            <li>
+              <Link to="/app_basicSpaReact/contact">Contact</Link>
+            </li>
           </ul>
-          </div>
-        </div>
-        <div className="row splitter">
-          <div className="col-lg-12">
-            <p>Items: {this.state.counter}</p>
-            <p>Item to add: {this.state.value}</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-6">
-            <FormComponent
-              value={this.state.value}
-              onChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              items={this.state.list}
-            />
-          </div>
-        </div>
+        </nav>
+        <Switch>
+          <Route path="/app_basicSpaReact/home">
+            <Home/>
+          </Route>
+          <Route path="/app_basicSpaReact/about">
+            <About/>
+          </Route>
+          <Route path="/app_basicSpaReact/contact">
+            <Contact/>
+          </Route>
+        </Switch>
       </div>
-    );
-  }
+    </Router>
+  );
 }
 
 ReactDOM.render(
-  <ToDoListForm />,
+  <App />,
   document.getElementById('result')
 );
