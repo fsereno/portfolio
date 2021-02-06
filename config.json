@@ -334,6 +334,6 @@
             "include": true,
             "useWebpack": true,
             "labels": [0]
-        },
+        }
     ]
 }
