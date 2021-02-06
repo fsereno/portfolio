@@ -39,13 +39,13 @@ function App(props) {
         <nav>
           <ul>
             <li>
-              <Link to={HOME} replace>Home</Link>
+              <Link to={HOME}>Home</Link>
             </li>
             <li>
-              <Link to={ABOUT} replace>About</Link>
+              <Link to={ABOUT}>About</Link>
             </li>
             <li>
-              <Link to={CONTACT} replace>Contact</Link>
+              <Link to={CONTACT}>Contact</Link>
             </li>
           </ul>
         </nav>
