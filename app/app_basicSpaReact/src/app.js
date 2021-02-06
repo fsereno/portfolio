@@ -4,6 +4,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+import { ConfigUtil } from '../../js/modules/utils/configUtil';
+const CONFIG = ConfigUtil.get();
+const DIRECTORY = `${CONFIG.prefix}basicSpaReact`;
+const HOME = `/${DIRECTORY}/home.html`;
+const ABOUT = `/${DIRECTORY}/about.html`;
+const CONTACT = `/${DIRECTORY}/contact.html`;
+
 function Home(props) {
   return(
     <div>
@@ -35,24 +42,24 @@ function App(props) {
         <nav>
           <ul>
             <li>
-              <Link to="/app_basicSpaReact/home">Home</Link>
+              <Link to={HOME}>Home</Link>
             </li>
             <li>
-              <Link to="/app_basicSpaReact/about">About</Link>
+              <Link to={ABOUT}>About</Link>
             </li>
             <li>
-              <Link to="/app_basicSpaReact/contact">Contact</Link>
+              <Link to={CONTACT}>Contact</Link>
             </li>
           </ul>
         </nav>
         <Switch>
-          <Route path="/app_basicSpaReact/home">
+          <Route path={HOME}>
             <Home/>
           </Route>
-          <Route path="/app_basicSpaReact/about">
+          <Route path={ABOUT}>
             <About/>
           </Route>
-          <Route path="/app_basicSpaReact/contact">
+          <Route path={CONTACT}>
             <Contact/>
           </Route>
         </Switch>
