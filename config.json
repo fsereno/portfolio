@@ -62,7 +62,7 @@
         {
             "name": "To-Do List (React)",
             "subHeading": "A basic list builder using React",
-            "description": "Experimenting with React, Babel and Webpack.",
+            "description": "Using React, with Babel and Webpack.",
             "searchTerms": "JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
             "folder": "toDoReact",
             "active": true,
@@ -323,6 +323,17 @@
             "active": false,
             "include": false,
             "labels": [0]
-        }
+        },
+        {
+            "name": "Basic React Single Page Application (SPA)",
+            "subHeading": "A basic single page application using React",
+            "description": "Using React, Babel and Webpack.",
+            "searchTerms": "JavaScript,React,Babel,WebPack,PUG,HTML,CSS,SASS",
+            "folder": "basicSpaReact",
+            "active": true,
+            "include": true,
+            "useWebpack": true,
+            "labels": [0]
+        },
     ]
 }
