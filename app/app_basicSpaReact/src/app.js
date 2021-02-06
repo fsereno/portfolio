@@ -2,14 +2,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import { ConfigUtil } from '../../js/modules/utils/configUtil';
-const CONFIG = ConfigUtil.get();
-const DIRECTORY = `${CONFIG.prefix}basicSpaReact`;
-const HOME = `/${DIRECTORY}/home.html`;
-const ABOUT = `/${DIRECTORY}/about.html`;
-const CONTACT = `/${DIRECTORY}/contact.html`;
+const HOME = `/home`;
+const ABOUT = `/about`;
+const CONTACT = `/contact`;
 
 function Home(props) {
   return(
@@ -42,13 +39,13 @@ function App(props) {
         <nav>
           <ul>
             <li>
-              <Link to={HOME}>Home</Link>
+              <Link to={HOME} replace>Home</Link>
             </li>
             <li>
-              <Link to={ABOUT}>About</Link>
+              <Link to={ABOUT} replace>About</Link>
             </li>
             <li>
-              <Link to={CONTACT}>Contact</Link>
+              <Link to={CONTACT} replace>Contact</Link>
             </li>
           </ul>
         </nav>
