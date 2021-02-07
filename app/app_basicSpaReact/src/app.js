@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 
 const HOME = `/home`;
 const ABOUT = `/about`;
@@ -50,6 +50,9 @@ function App(props) {
           </ul>
         </nav>
         <Switch>
+          <Route exact path="/">
+            <Redirect to={HOME}></Redirect>
+          </Route>
           <Route path={HOME}>
             <Home/>
           </Route>
