@@ -3,6 +3,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 
 const HOME = `/home`;
 const ABOUT = `/about`;
@@ -35,35 +37,27 @@ function Contact(props) {
 function App(props) {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to={HOME}>Home</Link>
-            </li>
-            <li>
-              <Link to={ABOUT}>About</Link>
-            </li>
-            <li>
-              <Link to={CONTACT}>Contact</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route exact path="/">
-            <Redirect to={HOME}></Redirect>
-          </Route>
-          <Route path={HOME}>
-            <Home/>
-          </Route>
-          <Route path={ABOUT}>
-            <About/>
-          </Route>
-          <Route path={CONTACT}>
-            <Contact/>
-          </Route>
-        </Switch>
-      </div>
+      <Navbar bg="dark" variant="dark">
+        <Nav className="mr-auto">
+            <Link className="nav-link" to={HOME}>Home</Link>
+            <Link className="nav-link" to={ABOUT}>About</Link>
+            <Link className="nav-link" to={CONTACT}>Contact</Link>
+        </Nav>
+      </Navbar>
+      <Switch>
+        <Route exact path="/">
+          <Redirect to={HOME}></Redirect>
+        </Route>
+        <Route path={HOME}>
+          <Home/>
+        </Route>
+        <Route path={ABOUT}>
+          <About/>
+        </Route>
+        <Route path={CONTACT}>
+          <Contact/>
+        </Route>
+      </Switch>
     </Router>
   );
 }
