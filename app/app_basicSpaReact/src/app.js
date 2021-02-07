@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, Link, NavLink, Redirect } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
@@ -37,11 +37,11 @@ function Contact(props) {
 function App(props) {
   return (
     <Router>
-      <Navbar bg="dark" variant="dark">
+      <Navbar className="pb-2" id="spaNavBar" bg="dark" variant="dark">
         <Nav className="mr-auto">
-            <Link className="nav-link" to={HOME}>Home</Link>
-            <Link className="nav-link" to={ABOUT}>About</Link>
-            <Link className="nav-link" to={CONTACT}>Contact</Link>
+            <NavLink activeClassName="is-active" className="nav-link" to={HOME}>Home</NavLink>
+            <NavLink activeClassName="is-active" className="nav-link" to={ABOUT}>About</NavLink>
+            <NavLink activeClassName="is-active" className="nav-link" to={CONTACT}>Contact</NavLink>
         </Nav>
       </Navbar>
       <Switch>

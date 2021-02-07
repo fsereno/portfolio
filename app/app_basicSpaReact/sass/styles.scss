@@ -2,11 +2,9 @@
 @import "../../sass/includes/styles.scss";
 
 body {
-
-    h1 {
-
-        color: $black;
-
+    #spaNavBar {
+        a.is-active {
+            border-bottom: 1px solid $white;
+        }
     }
-
 }
