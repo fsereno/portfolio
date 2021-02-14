@@ -2,46 +2,55 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Switch, Route, Link, NavLink, Redirect } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, NavLink, Redirect } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Container from "react-bootstrap/Container";
 
 const HOME = `/home`;
 const ABOUT = `/about`;
 const CONTACT = `/contact`;
 
-function Home(props) {
+function Content(props) {
   return(
-    <div>
-      <h2>Home</h2>
-    </div>
+    <Jumbotron fluid>
+      <Container>
+        <h1>{props.title}</h1>
+        <p>
+          {props.content}
+        </p>
+      </Container>
+    </Jumbotron>
   )
 }
 
-function About(props) {
+function Home() {
   return(
-    <div>
-      <h2>About</h2>
-    </div>
+    <Content title="Home" content="This is the home route" />
   )
 }
 
-function Contact(props) {
+function About() {
   return(
-    <div>
-      <h2>Contact</h2>
-    </div>
+    <Content title="About" content="This this is the about route" />
   )
 }
 
-function App(props) {
+function Contact() {
+  return(
+    <Content title="Contact" content="This this is the contact route"/>
+  )
+}
+
+function App() {
   return (
     <Router>
-      <Navbar className="pb-2" id="spaNavBar" bg="dark" variant="dark">
+      <Navbar className="pb-2 px-2 pt-1" id="spaNavBar" bg="dark" variant="dark">
         <Nav className="mr-auto">
-            <NavLink activeClassName="is-active" className="nav-link" to={HOME}>Home</NavLink>
-            <NavLink activeClassName="is-active" className="nav-link" to={ABOUT}>About</NavLink>
-            <NavLink activeClassName="is-active" className="nav-link" to={CONTACT}>Contact</NavLink>
+            <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={HOME}>Home</NavLink>
+            <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={ABOUT}>About</NavLink>
+            <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={CONTACT}>Contact</NavLink>
         </Nav>
       </Navbar>
       <Switch>
