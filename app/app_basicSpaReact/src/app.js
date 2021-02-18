@@ -9,9 +9,9 @@ import { Home } from "./home";
 import { About } from "./about";
 import { Contact } from "./contact";
 
-const HOME = `/home`;
-const ABOUT = `/about`;
-const CONTACT = `/contact`;
+const HOME = "/home";
+const ABOUT = "/about";
+const CONTACT = "/contact";
 
 function App() {
   return (

@@ -12,6 +12,9 @@ export function Content(props) {
           <p>
             {props.content}
           </p>
+          {props.component &&
+              <props.component />
+          }
         </Container>
       </Jumbotron>
     )
