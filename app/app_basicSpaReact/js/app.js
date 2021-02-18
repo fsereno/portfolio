@@ -36199,6 +36199,32 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/about.js":
+/*!**********************!*\
+  !*** ./src/about.js ***!
+  \**********************/
+/*! exports provided: About */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "About", function() { return About; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./content */ "./src/content.js");
+"use strict;";
+
+
+
+function About() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_1__["Content"], {
+    title: "About",
+    content: "This is the about route"
+  });
+}
+
+/***/ }),
+
 /***/ "./src/app.js":
 /*!********************!*\
   !*** ./src/app.js ***!
@@ -36215,9 +36241,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Navbar */ "../../node_modules/react-bootstrap/esm/Navbar.js");
 /* harmony import */ var react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Nav */ "../../node_modules/react-bootstrap/esm/Nav.js");
-/* harmony import */ var react_bootstrap_Jumbotron__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Jumbotron */ "../../node_modules/react-bootstrap/esm/Jumbotron.js");
-/* harmony import */ var react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Container */ "../../node_modules/react-bootstrap/esm/Container.js");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home */ "./src/home.js");
+/* harmony import */ var _about__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./about */ "./src/about.js");
+/* harmony import */ var _contact__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./contact */ "./src/contact.js");
 "use strict;";
+
 
 
 
@@ -36229,33 +36257,6 @@ __webpack_require__.r(__webpack_exports__);
 var HOME = "/home";
 var ABOUT = "/about";
 var CONTACT = "/contact";
-
-function Content(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Jumbotron__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    fluid: true
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_6__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.content)));
-}
-
-function Home() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, {
-    title: "Home",
-    content: "This is the home route"
-  });
-}
-
-function About() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, {
-    title: "About",
-    content: "This this is the about route"
-  });
-}
-
-function Contact() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Content, {
-    title: "Contact",
-    content: "This this is the contact route"
-  });
-}
 
 function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -36284,14 +36285,93 @@ function App() {
     to: HOME
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: HOME
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Home, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home__WEBPACK_IMPORTED_MODULE_5__["Home"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: ABOUT
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(About, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_about__WEBPACK_IMPORTED_MODULE_6__["About"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: CONTACT
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Contact, null))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_contact__WEBPACK_IMPORTED_MODULE_7__["Contact"], null))));
 }
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('result'));
+
+/***/ }),
+
+/***/ "./src/contact.js":
+/*!************************!*\
+  !*** ./src/contact.js ***!
+  \************************/
+/*! exports provided: Contact */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Contact", function() { return Contact; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./content */ "./src/content.js");
+"use strict;";
+
+
+
+function Contact() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_1__["Content"], {
+    title: "Contact",
+    content: "This is the contact route"
+  });
+}
+
+/***/ }),
+
+/***/ "./src/content.js":
+/*!************************!*\
+  !*** ./src/content.js ***!
+  \************************/
+/*! exports provided: Content */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Content", function() { return Content; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_bootstrap_Jumbotron__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Jumbotron */ "../../node_modules/react-bootstrap/esm/Jumbotron.js");
+/* harmony import */ var react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Container */ "../../node_modules/react-bootstrap/esm/Container.js");
+"use strict;";
+
+
+
+
+function Content(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Jumbotron__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    fluid: true
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, props.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, props.content)));
+}
+
+/***/ }),
+
+/***/ "./src/home.js":
+/*!*********************!*\
+  !*** ./src/home.js ***!
+  \*********************/
+/*! exports provided: Home */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Home", function() { return Home; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./content */ "./src/content.js");
+"use strict;";
+
+
+
+function Home() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_1__["Content"], {
+    title: "Home",
+    content: "This is the home route"
+  });
+}
 
 /***/ })
 
