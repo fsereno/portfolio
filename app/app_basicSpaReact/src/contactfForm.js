@@ -47,7 +47,7 @@ function InputRow(props) {
 
 export function ContactForm() {
 
-  const [validated, setValidated] = useState(false);
+  const [ validated, setValidated ] = useState(false);
   const [ showState, setShowState ] = useState(false);
 
   const handleModalClose = (event) => {
