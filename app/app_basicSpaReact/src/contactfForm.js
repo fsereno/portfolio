@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { ModalComponent } from '../../js/modules/react/modalComponent';
 
 function Input(props) {
   return(
@@ -44,18 +45,22 @@ function InputRow(props) {
   )
 }
 
-export function ContactForm(props) {
+export function ContactForm() {
 
   const [validated, setValidated] = useState(false);
+  const [ showState, setShowState ] = useState(false);
+
+  const handleModalClose = (event) => {
+    event.preventDefault();
+    setShowState(false);
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const form = event.currentTarget;
-    const data = new FormData(form);
-    const input = data.get("firstNameInput");
 
-    if (form.checkValidity() === false || isNotUnique) {
+    if (form.checkValidity() === false) {
 
       setValidated(true);
       event.stopPropagation();
@@ -63,6 +68,7 @@ export function ContactForm(props) {
     } else {
 
       setValidated(false);
+      setShowState(true);
 
     }
 
@@ -80,6 +86,13 @@ export function ContactForm(props) {
           </Form.Group>
         </Form.Row>
       </Form>
+      <ModalComponent 
+        id="contactModal"
+        show={showState}
+        handleClose={handleModalClose}
+        title="Message submitted"
+        body="Your message has been submitted"
+      />
     </>
   );
 }

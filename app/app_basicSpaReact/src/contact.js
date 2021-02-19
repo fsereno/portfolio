@@ -1,8 +1,8 @@
 "use strict;"
 
 import React from 'react';
-import { Content } from "./content";
-import { ContactForm } from "./contactfForm";
+import { Content } from './content'
+import { ContactForm } from './contactfForm';
 
 export function Contact() {
     return(
