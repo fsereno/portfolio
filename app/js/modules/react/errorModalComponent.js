@@ -5,8 +5,8 @@ import { ModalComponent } from './modalComponent';
 
 export function ErrorModalComponent(props) {
     return (
-        <ModalComponent 
-            id={props.id} 
+        <ModalComponent
+            id={props.id}
             show={props.show}
             onHide={props.handleClose}
             handleClose={props.handleClose}

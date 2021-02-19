@@ -86,7 +86,7 @@ export function ContactForm() {
           </Form.Group>
         </Form.Row>
       </Form>
-      <ModalComponent 
+      <ModalComponent
         id="contactModal"
         show={showState}
         handleClose={handleModalClose}
