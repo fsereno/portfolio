@@ -45,7 +45,7 @@ function InputRow(props) {
   )
 }
 
-export function ContactForm() {
+export function RequestForm() {
 
   const [ validated, setValidated ] = useState(false);
   const [ showState, setShowState ] = useState(false);
@@ -87,11 +87,11 @@ export function ContactForm() {
         </Form.Row>
       </Form>
       <ModalComponent
-        id="contactModal"
+        id="RequestFormModal"
         show={showState}
         handleClose={handleModalClose}
-        title="Message submitted"
-        body="Your message has been submitted"
+        title="Request submitted"
+        body="Your request has been submitted"
       />
     </>
   );
