@@ -10,7 +10,7 @@ export function ReadingPane() {
     return(
         <>
             <h2>{context.selected.heading}</h2>
-            <h3>{context.selected.from}</h3>
+            <h4>From: {context.selected.from}</h4>
             {context.selected.body}
         </>
     )

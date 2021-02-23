@@ -17,7 +17,7 @@ export function BrowserPane() {
                         key={email.id}
                         id={email.id}
                         from={email.from}
-                        age={3}
+                        age={email.age}
                         heading={email.heading}
                         body={email.body}
                     />

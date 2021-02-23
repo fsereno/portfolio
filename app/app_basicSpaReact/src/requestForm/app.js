@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { ModalComponent } from '../../js/modules/react/modalComponent';
+import { ModalComponent } from '../../../js/modules/react/modalComponent';
 
 function Input(props) {
   return(
