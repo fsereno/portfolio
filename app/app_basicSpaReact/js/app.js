@@ -39259,7 +39259,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "../../node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
-/* harmony import */ var _emailClientContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./emailClientContext */ "./src/emailClientContext.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./globalContext */ "./src/globalContext.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -39310,7 +39310,7 @@ function App() {
 
   var context = _context;
   context.setContext = setContext;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailClientContext__WEBPACK_IMPORTED_MODULE_3__["EmailClientContext"].Provider, {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_3__["GlobalContext"].Provider, {
     value: context
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null));
 }
@@ -39358,14 +39358,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _listItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./listItem */ "./src/components/listItem.js");
-/* harmony import */ var _emailClientContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../emailClientContext */ "./src/emailClientContext.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 
 
 
 function BrowserPane() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_emailClientContext__WEBPACK_IMPORTED_MODULE_2__["EmailClientContext"]);
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_2__["GlobalContext"]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "list-group"
   }, context.inbox.collection.map(function (email, index) {
@@ -39421,14 +39421,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Badge */ "../../node_modules/react-bootstrap/esm/Badge.js");
-/* harmony import */ var _emailClientContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../emailClientContext */ "./src/emailClientContext.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 
 
 
 function Counter() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_emailClientContext__WEBPACK_IMPORTED_MODULE_2__["EmailClientContext"]);
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_2__["GlobalContext"]);
   var count = context.inbox.collection.filter(function (x) {
     return !x.read;
   }).length;
@@ -39463,43 +39463,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- //import { EmailClientContext } from '../emailClientContext';
 
-
-/*const collection = [
-    {
-        id: 0,
-        from: "someone@email.co.uk",
-        heading: "Some heading 1",
-        body: "Some body text here 1",
-        age: 1,
-        read: true
-    },
-    {
-        id: 1,
-        from: "someone@email.co.uk",
-        heading: "Some heading 2",
-        body: "Some body text here 2",
-        age: 2,
-        read: false
-    },
-    {
-        id: 2,
-        from: "someone@email.co.uk",
-        heading: "Some heading 3",
-        body: "Some body text here 3",
-        age: 3,
-        read: false
-    }
-]*/
 
 function EmailClient() {
-  /*const [ _context, setContext ] = useState({
-      collection,
-      selected: collection[0]
-  });
-   const context = _context;
-  context.setContext = setContext;*/
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], {
     className: "mb-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_3__["Counter"], null), " unread messages")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_browserPane__WEBPACK_IMPORTED_MODULE_5__["BrowserPane"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_4__["ReadingPane"], null))));
@@ -39573,7 +39539,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListItem", function() { return ListItem; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _emailClientContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../emailClientContext */ "./src/emailClientContext.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -39587,7 +39553,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 function ListItem(props) {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_emailClientContext__WEBPACK_IMPORTED_MODULE_1__["EmailClientContext"]);
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_1__["GlobalContext"]);
 
   var updateCollection = function updateCollection(id) {
     var collection = _toConsumableArray(context.inbox.collection);
@@ -39647,13 +39613,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReadingPane", function() { return ReadingPane; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _emailClientContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../emailClientContext */ "./src/emailClientContext.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 
 
 function ReadingPane() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_emailClientContext__WEBPACK_IMPORTED_MODULE_1__["EmailClientContext"]);
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_1__["GlobalContext"]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, context.inbox.selected.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "From: ", context.inbox.selected.from), context.inbox.selected.body);
 }
 
@@ -39888,22 +39854,22 @@ function Router() {
 
 /***/ }),
 
-/***/ "./src/emailClientContext.js":
-/*!***********************************!*\
-  !*** ./src/emailClientContext.js ***!
-  \***********************************/
-/*! exports provided: EmailClientContext */
+/***/ "./src/globalContext.js":
+/*!******************************!*\
+  !*** ./src/globalContext.js ***!
+  \******************************/
+/*! exports provided: GlobalContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmailClientContext", function() { return EmailClientContext; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobalContext", function() { return GlobalContext; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 "use strict;";
 
 
-var EmailClientContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext();
+var GlobalContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext();
 
 /***/ })
 

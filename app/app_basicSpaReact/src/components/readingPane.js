@@ -1,11 +1,11 @@
 "use strict;"
 
 import React from 'react';
-import { EmailClientContext } from '../emailClientContext';
+import { GlobalContext } from '../globalContext';
 
 export function ReadingPane() {
 
-    const context = React.useContext(EmailClientContext);
+    const context = React.useContext(GlobalContext);
 
     return(
         <>

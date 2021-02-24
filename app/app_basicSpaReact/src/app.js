@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from './components/router';
-import { EmailClientContext } from './emailClientContext';
+import { GlobalContext } from './globalContext';
 
 const collection = [
   {
@@ -45,9 +45,9 @@ function App() {
   context.setContext = setContext;
 
   return (
-    <EmailClientContext.Provider value={context}>
+    <GlobalContext.Provider value={context}>
       <Router />
-    </EmailClientContext.Provider>
+    </GlobalContext.Provider>
   );
 }
 

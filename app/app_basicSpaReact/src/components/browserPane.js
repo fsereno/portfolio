@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { ListItem } from './listItem';
-import { EmailClientContext } from '../emailClientContext';
+import { GlobalContext } from '../globalContext';
 
 export function BrowserPane() {
 
-    const context = React.useContext(EmailClientContext)
+    const context = React.useContext(GlobalContext)
 
     return(
         <div className="list-group">

@@ -2,11 +2,11 @@
 
 import React from 'react';
 import Badge from 'react-bootstrap/Badge';
-import { EmailClientContext } from '../emailClientContext';
+import { GlobalContext } from '../globalContext';
 
 export function Counter() {
 
-    const context = React.useContext(EmailClientContext);
+    const context = React.useContext(GlobalContext);
 
     const count = context.inbox.collection.filter(x => !x.read).length;
 
