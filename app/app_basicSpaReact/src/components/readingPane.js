@@ -9,9 +9,9 @@ export function ReadingPane() {
 
     return(
         <>
-            <h2>{context.selected.heading}</h2>
-            <h4>From: {context.selected.from}</h4>
-            {context.selected.body}
+            <h2>{context.inbox.selected.heading}</h2>
+            <h4>From: {context.inbox.selected.from}</h4>
+            {context.inbox.selected.body}
         </>
     )
 }

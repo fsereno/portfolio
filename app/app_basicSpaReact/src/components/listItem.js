@@ -9,7 +9,7 @@ export function ListItem(props) {
 
     const updateCollection = (id) => {
 
-        let collection = [...context.collection];
+        let collection = [...context.inbox.collection];
 
         collection = collection.map( item => {
             if (item.id === id) {
@@ -27,17 +27,19 @@ export function ListItem(props) {
         const collection = updateCollection(props.id);
 
         context.setContext({
-            collection,
-            selected: {
-                id: props.id,
-                from: props.from,
-                heading: props.heading,
-                body: props.body
+            inbox: {
+                collection,
+                selected: {
+                    id: props.id,
+                    from: props.from,
+                    heading: props.heading,
+                    body: props.body
+                }
             }
         });
     }
 
-    const activeClass = context.selected.id === props.id ? "active" : "";
+    const activeClass = context.inbox.selected.id === props.id ? "active" : "";
 
     return (
         <a href="#" onClick={handleClick} className={`list-group-item list-group-item-action ${activeClass}`} aria-current="true">

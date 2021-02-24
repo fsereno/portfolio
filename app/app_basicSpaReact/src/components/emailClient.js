@@ -5,10 +5,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Counter } from './counter';
 import { ReadingPane } from './readingPane';
-import { EmailClientContext } from '../emailClientContext';
+//import { EmailClientContext } from '../emailClientContext';
 import { BrowserPane } from './browserPane';
 
-const collection = [
+/*const collection = [
     {
         id: 0,
         from: "someone@email.co.uk",
@@ -33,20 +33,20 @@ const collection = [
         age: 3,
         read: false
     }
-]
+]*/
 
 export function EmailClient() {
 
-    const [ _context, setContext ] = useState({
+    /*const [ _context, setContext ] = useState({
         collection,
         selected: collection[0]
     });
 
     const context = _context;
-    context.setContext = setContext;
+    context.setContext = setContext;*/
 
     return(
-        <EmailClientContext.Provider value={context}>
+        <>
             <Row className="mb-2">
                 <Col>
                     You have <Counter/> unread messages
@@ -60,6 +60,6 @@ export function EmailClient() {
                     <ReadingPane />
                 </Col>
             </Row>
-        </EmailClientContext.Provider>
+        </>
     )
 }

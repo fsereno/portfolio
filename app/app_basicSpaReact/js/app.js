@@ -39259,14 +39259,60 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "../../node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
+/* harmony import */ var _emailClientContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./emailClientContext */ "./src/emailClientContext.js");
 "use strict;";
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+var collection = [{
+  id: 0,
+  from: "someone@email.co.uk",
+  heading: "Some heading 1",
+  body: "Some body text here 1",
+  age: 1,
+  read: true
+}, {
+  id: 1,
+  from: "someone@email.co.uk",
+  heading: "Some heading 2",
+  body: "Some body text here 2",
+  age: 2,
+  read: false
+}, {
+  id: 2,
+  from: "someone@email.co.uk",
+  heading: "Some heading 3",
+  body: "Some body text here 3",
+  age: 3,
+  read: false
+}];
 
 function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null);
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    inbox: {
+      collection: collection,
+      selected: collection[0]
+    }
+  }),
+      _useState2 = _slicedToArray(_useState, 2),
+      _context = _useState2[0],
+      setContext = _useState2[1];
+
+  var context = _context;
+  context.setContext = setContext;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailClientContext__WEBPACK_IMPORTED_MODULE_3__["EmailClientContext"].Provider, {
+    value: context
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null));
 }
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('result'));
@@ -39322,7 +39368,7 @@ function BrowserPane() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_emailClientContext__WEBPACK_IMPORTED_MODULE_2__["EmailClientContext"]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "list-group"
-  }, context.collection.map(function (email, index) {
+  }, context.inbox.collection.map(function (email, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listItem__WEBPACK_IMPORTED_MODULE_1__["ListItem"], {
       index: index,
       key: email.id,
@@ -39383,7 +39429,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function Counter() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_emailClientContext__WEBPACK_IMPORTED_MODULE_2__["EmailClientContext"]);
-  var count = context.collection.filter(function (x) {
+  var count = context.inbox.collection.filter(function (x) {
     return !x.read;
   }).length;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -39410,63 +39456,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
 /* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./counter */ "./src/components/counter.js");
 /* harmony import */ var _readingPane__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./readingPane */ "./src/components/readingPane.js");
-/* harmony import */ var _emailClientContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../emailClientContext */ "./src/emailClientContext.js");
-/* harmony import */ var _browserPane__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./browserPane */ "./src/components/browserPane.js");
+/* harmony import */ var _browserPane__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./browserPane */ "./src/components/browserPane.js");
 "use strict;";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
+ //import { EmailClientContext } from '../emailClientContext';
 
 
+/*const collection = [
+    {
+        id: 0,
+        from: "someone@email.co.uk",
+        heading: "Some heading 1",
+        body: "Some body text here 1",
+        age: 1,
+        read: true
+    },
+    {
+        id: 1,
+        from: "someone@email.co.uk",
+        heading: "Some heading 2",
+        body: "Some body text here 2",
+        age: 2,
+        read: false
+    },
+    {
+        id: 2,
+        from: "someone@email.co.uk",
+        heading: "Some heading 3",
+        body: "Some body text here 3",
+        age: 3,
+        read: false
+    }
+]*/
 
-
-var collection = [{
-  id: 0,
-  from: "someone@email.co.uk",
-  heading: "Some heading 1",
-  body: "Some body text here 1",
-  age: 1,
-  read: true
-}, {
-  id: 1,
-  from: "someone@email.co.uk",
-  heading: "Some heading 2",
-  body: "Some body text here 2",
-  age: 2,
-  read: false
-}, {
-  id: 2,
-  from: "someone@email.co.uk",
-  heading: "Some heading 3",
-  body: "Some body text here 3",
-  age: 3,
-  read: false
-}];
 function EmailClient() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    collection: collection,
-    selected: collection[0]
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      _context = _useState2[0],
-      setContext = _useState2[1];
-
-  var context = _context;
-  context.setContext = setContext;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailClientContext__WEBPACK_IMPORTED_MODULE_5__["EmailClientContext"].Provider, {
-    value: context
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  /*const [ _context, setContext ] = useState({
+      collection,
+      selected: collection[0]
+  });
+   const context = _context;
+  context.setContext = setContext;*/
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], {
     className: "mb-2"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_3__["Counter"], null), " unread messages")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_browserPane__WEBPACK_IMPORTED_MODULE_6__["BrowserPane"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_4__["ReadingPane"], null))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_3__["Counter"], null), " unread messages")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_browserPane__WEBPACK_IMPORTED_MODULE_5__["BrowserPane"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_4__["ReadingPane"], null))));
 }
 
 /***/ }),
@@ -39554,7 +39590,7 @@ function ListItem(props) {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_emailClientContext__WEBPACK_IMPORTED_MODULE_1__["EmailClientContext"]);
 
   var updateCollection = function updateCollection(id) {
-    var collection = _toConsumableArray(context.collection);
+    var collection = _toConsumableArray(context.inbox.collection);
 
     collection = collection.map(function (item) {
       if (item.id === id) {
@@ -39570,17 +39606,19 @@ function ListItem(props) {
     event.preventDefault();
     var collection = updateCollection(props.id);
     context.setContext({
-      collection: collection,
-      selected: {
-        id: props.id,
-        from: props.from,
-        heading: props.heading,
-        body: props.body
+      inbox: {
+        collection: collection,
+        selected: {
+          id: props.id,
+          from: props.from,
+          heading: props.heading,
+          body: props.body
+        }
       }
     });
   };
 
-  var activeClass = context.selected.id === props.id ? "active" : "";
+  var activeClass = context.inbox.selected.id === props.id ? "active" : "";
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     onClick: handleClick,
@@ -39616,7 +39654,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ReadingPane() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_emailClientContext__WEBPACK_IMPORTED_MODULE_1__["EmailClientContext"]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, context.selected.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "From: ", context.selected.from), context.selected.body);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, context.inbox.selected.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "From: ", context.inbox.selected.from), context.inbox.selected.body);
 }
 
 /***/ }),
