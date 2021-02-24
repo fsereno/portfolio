@@ -2,12 +2,13 @@
 
 import React from 'react';
 import { HashRouter, Switch, Route, NavLink, Redirect } from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import { Home } from "./home";
-import { About } from "./about";
-import { Inbox } from "./inbox";
-import { Request } from "./request";
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import { Home } from './home';
+import { About } from './about';
+import { Inbox } from './inbox';
+import { Request } from './request';
+import { Counter } from './counter';
 
 const HOME = "/home";
 const ABOUT = "/about";
@@ -21,7 +22,7 @@ export function Router() {
                 <Nav className="mr-auto">
                     <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={HOME}>Home</NavLink>
                     <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={ABOUT}>About</NavLink>
-                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={INBOX}>Inbox</NavLink>
+                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={INBOX}>Inbox <Counter/></NavLink>
                     <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={REQUEST}>Request</NavLink>
                 </Nav>
             </Navbar>

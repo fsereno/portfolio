@@ -39798,7 +39798,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _about__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./about */ "./src/components/about.js");
 /* harmony import */ var _inbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./inbox */ "./src/components/inbox.js");
 /* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./request */ "./src/components/request.js");
+/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./counter */ "./src/components/counter.js");
 "use strict;";
+
 
 
 
@@ -39832,7 +39834,7 @@ function Router() {
     activeClassName: "active",
     className: "nav-link pb-1 pt-1 px-5",
     to: INBOX
-  }, "Inbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+  }, "Inbox ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_8__["Counter"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
     className: "nav-link pb-1 pt-1 px-5",
     to: REQUEST

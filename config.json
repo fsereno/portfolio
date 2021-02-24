@@ -133,7 +133,7 @@
         },
         {
             "name": "Azure Functions .NET Core Data Structures",
-            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET, with a React UI",
+            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET Core, with a React UI",
             "description": "Using Azure Functions serverless compute and .NET Core, with a React user interface.",
             "searchTerms": "Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "AzureDotNetCoreDataStructuresApi",
@@ -172,7 +172,7 @@
         },
         {
             "name": "AWS .NET Core Natural Sorting Algorithm",
-            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET, passing in a custom comparer, with a React UI",
+            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET Core, passing in a custom comparer, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreStringSortApi",
@@ -209,7 +209,7 @@
         },
         {
             "name": "AWS .NET Core Asynchronous Coffee Maker",
-            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET, with a React UI",
+            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET Core, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
             "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreAsyncCoffeeMachine",
@@ -326,7 +326,7 @@
         },
         {
             "name": "Basic React Single Page Application (SPA)",
-            "subHeading": "A basic single page application using React and React Router",
+            "subHeading": "A basic single page application using React and React Router with a React context",
             "description": "Using React, Babel and Webpack.",
             "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "basicSpaReact",
