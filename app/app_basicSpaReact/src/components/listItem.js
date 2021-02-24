@@ -21,6 +21,16 @@ export function ListItem(props) {
         return collection;
     }
 
+    const truncateBody = (body, limit = 75) => {
+        let result = body;
+
+        if (body.length >= limit) {
+            result = body.substring(0, limit);
+        }
+
+        return result;
+    }
+
     const handleClick = (event) => {
         event.preventDefault();
 
@@ -48,7 +58,7 @@ export function ListItem(props) {
                 <small>{props.age} days ago</small>
             </div>
             <p className="mb-1">{props.heading}</p>
-            <small>{props.body}...</small>
+            <small>{truncateBody(props.body)}...</small>
         </a>
     )
 }

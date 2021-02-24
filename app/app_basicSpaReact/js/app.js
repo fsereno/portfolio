@@ -39278,21 +39278,21 @@ var collection = [{
   id: 0,
   from: "someone@email.co.uk",
   heading: "Some heading 1",
-  body: "Some body text here 1",
+  body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
   age: 1,
   read: true
 }, {
   id: 1,
   from: "someone@email.co.uk",
   heading: "Some heading 2",
-  body: "Some body text here 2",
+  body: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
   age: 2,
   read: false
 }, {
   id: 2,
   from: "someone@email.co.uk",
   heading: "Some heading 3",
-  body: "Some body text here 3",
+  body: "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC",
   age: 3,
   read: false
 }];
@@ -39568,6 +39568,17 @@ function ListItem(props) {
     return collection;
   };
 
+  var truncateBody = function truncateBody(body) {
+    var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 75;
+    var result = body;
+
+    if (body.length >= 15) {
+      result = body.substring(0, limit);
+    }
+
+    return result;
+  };
+
   var handleClick = function handleClick(event) {
     event.preventDefault();
     var collection = updateCollection(props.id);
@@ -39596,7 +39607,7 @@ function ListItem(props) {
     className: "mb-1"
   }, props.from), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.age, " days ago")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
-  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.body, "..."));
+  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, truncateBody(props.body), "..."));
 }
 
 /***/ }),
