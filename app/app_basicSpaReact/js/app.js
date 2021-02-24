@@ -39572,7 +39572,7 @@ function ListItem(props) {
     var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 75;
     var result = body;
 
-    if (body.length >= 15) {
+    if (body.length >= limit) {
       result = body.substring(0, limit);
     }
 
