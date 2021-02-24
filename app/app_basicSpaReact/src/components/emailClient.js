@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Counter } from './counter';
 import { ReadingPane } from './readingPane';
-import { EmailClientContext } from './emailClientContext';
+import { EmailClientContext } from '../emailClientContext';
 import { BrowserPane } from './browserPane';
 
 const collection = [

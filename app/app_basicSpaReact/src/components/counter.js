@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Badge from 'react-bootstrap/Badge';
-import { EmailClientContext } from './emailClientContext';
+import { EmailClientContext } from '../emailClientContext';
 
 export function Counter() {
 

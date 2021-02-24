@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ListItem } from './listItem';
-import { EmailClientContext } from './emailClientContext';
+import { EmailClientContext } from '../emailClientContext';
 
 export function BrowserPane() {
 

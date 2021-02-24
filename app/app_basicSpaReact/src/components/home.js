@@ -1,7 +1,7 @@
 "use strict;"
 
 import React from 'react';
-import { Content } from "../content";
+import { Content } from "./content";
 
 export function Home() {
     return(

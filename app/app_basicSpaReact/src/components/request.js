@@ -1,8 +1,8 @@
 "use strict;"
 
 import React from 'react';
-import { Content } from '../content'
-import { RequestForm } from '../requestForm/app';
+import { Content } from './content'
+import { RequestForm } from './requestForm';
 
 export function Request() {
     return(

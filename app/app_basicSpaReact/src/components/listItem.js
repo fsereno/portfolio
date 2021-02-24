@@ -1,7 +1,7 @@
 "use strict";
 
 import React from 'react';
-import { EmailClientContext } from './emailClientContext';
+import { EmailClientContext } from '../emailClientContext';
 
 export function ListItem(props) {
 

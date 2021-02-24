@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from './router';
+import { Router } from './components/router';
 
 function App() {
   return (

@@ -4,10 +4,10 @@ import React from 'react';
 import { HashRouter, Switch, Route, NavLink, Redirect } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { Home } from "./routes/home";
-import { About } from "./routes/about";
-import { Inbox } from "./routes/inbox";
-import { Request } from "./routes/request";
+import { Home } from "./home";
+import { About } from "./about";
+import { Inbox } from "./inbox";
+import { Request } from "./request";
 
 const HOME = "/home";
 const ABOUT = "/about";
