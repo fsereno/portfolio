@@ -334,7 +334,8 @@
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "master_react",
-            "labels": [0]
+            "labels": [0],
+            "order": 1
         }
     ]
 }
