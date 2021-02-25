@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 
 export function Content(props) {
     return(
-      <Container className="py-4">
+      <Container fluid className="py-4">
         <h1>{props.title}</h1>
         <p>
           {props.content}

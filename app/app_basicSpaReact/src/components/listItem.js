@@ -9,7 +9,7 @@ export function ListItem(props) {
 
     const updateCollection = (id) => {
 
-        let collection = [...context.inbox.collection];
+        let collection = [...context.collection];
 
         collection = collection.map( item => {
             if (item.id === id) {
@@ -22,6 +22,7 @@ export function ListItem(props) {
     }
 
     const truncateBody = (body, limit = 75) => {
+
         let result = body;
 
         if (body.length >= limit) {
@@ -36,25 +37,24 @@ export function ListItem(props) {
 
         const collection = updateCollection(props.id);
 
-        context.setContext({
-            inbox: {
-                collection,
-                selected: {
-                    id: props.id,
-                    from: props.from,
-                    heading: props.heading,
-                    body: props.body
-                }
-            }
+        context.setCollection(collection);
+
+        context.setSelected({
+            id: props.id,
+            from: props.from,
+            heading: props.heading,
+            body: props.body
         });
+
+        context.setIsEmailModalOpen(true);
     }
 
-    const activeClass = context.inbox.selected.id === props.id ? "active" : "";
+    const activeClass = context.selected.id === props.id ? "active" : "";
 
     return (
         <a href="#" onClick={handleClick} className={`list-group-item list-group-item-action ${activeClass}`} aria-current="true">
             <div className="d-flex w-100 justify-content-between">
-                <h5 className="mb-1">{props.from}</h5>
+                <p className="mb-1">{props.from}</p>
                 <small>{props.age} days ago</small>
             </div>
             <p className="mb-1">{props.heading}</p>

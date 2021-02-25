@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { Router } from './components/router';
 import { GlobalContext } from './globalContext';
 
-const collection = [
+const emails = [
   {
       id: 0,
       from: "someone@email.co.uk",
@@ -34,15 +34,18 @@ const collection = [
 
 function App() {
 
-  const [ _context, setContext ] = useState({
-      inbox: {
-        collection,
-        selected: collection[0]
-      }
-  });
+  const [ collection, setCollection ] = useState(emails);
+  const [ selected, setSelected ] = useState(emails[0]);
+  const [ isEmailModalOpen, setIsEmailModalOpen ] = useState(false);
 
-  const context = _context;
-  context.setContext = setContext;
+  const context = {
+    collection,
+    setCollection,
+    selected,
+    setSelected,
+    isEmailModalOpen,
+    setIsEmailModalOpen
+  }
 
   return (
     <GlobalContext.Provider value={context}>

@@ -8,7 +8,7 @@ export function Counter() {
 
     const context = React.useContext(GlobalContext);
 
-    const count = context.inbox.collection.filter(x => !x.read).length;
+    const count = context.collection.filter(x => !x.read).length;
 
     return(
         <Badge pill variant="dark">

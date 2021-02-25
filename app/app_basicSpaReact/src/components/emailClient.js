@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import { Counter } from './counter';
 import { ReadingPane } from './readingPane';
 import { BrowserPane } from './browserPane';
+import { EmailModal } from './emailModal'
 
 export function EmailClient() {
     return(
@@ -19,10 +20,8 @@ export function EmailClient() {
                 <Col>
                     <BrowserPane />
                 </Col>
-                <Col>
-                    <ReadingPane />
-                </Col>
             </Row>
+            <EmailModal/>
         </>
     )
 }
