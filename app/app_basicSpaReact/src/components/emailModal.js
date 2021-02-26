@@ -11,11 +11,17 @@ export function EmailModal() {
     const context = React.useContext(GlobalContext);
 
     const handleClose = () => {
-        context.setIsEmailModalOpen( false );
+
+        context.setContext(prevContext => (
+            {...prevContext, ...{
+                isSelected: false
+            } })
+        );
+
     }
 
     return (
-        <Modal show={context.isEmailModalOpen} onHide={handleClose}>
+        <Modal show={context.isSelected} onHide={handleClose}>
             <Modal.Header>
                 <Modal.Title className="display-4">{context.selected.heading}</Modal.Title>
                 <Button variant="link" className="close" onClick={handleClose}>

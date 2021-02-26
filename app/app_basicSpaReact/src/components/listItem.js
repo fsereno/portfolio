@@ -9,7 +9,7 @@ export function ListItem(props) {
 
     const updateCollection = (id) => {
 
-        let collection = [...context.collection];
+        let collection = [...context.inbox];
 
         collection = collection.map( item => {
             if (item.id === id) {
@@ -37,16 +37,18 @@ export function ListItem(props) {
 
         const collection = updateCollection(props.id);
 
-        context.setCollection(collection);
-
-        context.setSelected({
-            id: props.id,
-            from: props.from,
-            heading: props.heading,
-            body: props.body
-        });
-
-        context.setIsEmailModalOpen(true);
+        context.setContext(prevContext => (
+            {...prevContext, ...{
+                collection,
+                selected: {
+                    id: props.id,
+                    from: props.from,
+                    heading: props.heading,
+                    body: props.body
+                },
+                isSelected: true
+            } })
+        );
     }
 
     const activeClass = context.selected.id === props.id ? "active" : "";

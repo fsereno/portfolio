@@ -4,7 +4,6 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Counter } from './counter';
-import { ReadingPane } from './readingPane';
 import { BrowserPane } from './browserPane';
 import { EmailModal } from './emailModal'
 
