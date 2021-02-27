@@ -20,10 +20,10 @@ export function Router() {
         <HashRouter>
             <Navbar className="pb-2 px-2 pt-1" id="spaNavBar" bg="dark" variant="dark">
                 <Nav className="mr-auto">
-                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={HOME}>Home</NavLink>
-                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={ABOUT}>About</NavLink>
-                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={INBOX}>Inbox <Counter/></NavLink>
-                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-5" to={REQUEST}>Request</NavLink>
+                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={HOME}>Home</NavLink>
+                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={ABOUT}>About</NavLink>
+                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={INBOX}>Inbox <Counter/></NavLink>
+                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={REQUEST}>Request</NavLink>
                 </Nav>
             </Navbar>
             <Switch>

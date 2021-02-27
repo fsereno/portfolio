@@ -1,5 +1,4 @@
-$large: 1200px;
-$medium: 991px;
+@import "./constants.scss";
 
 @media screen and (max-width: $medium) {
     .navbar {

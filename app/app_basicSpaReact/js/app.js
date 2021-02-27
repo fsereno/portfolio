@@ -39352,6 +39352,33 @@ function About() {
 
 /***/ }),
 
+/***/ "./src/components/age.js":
+/*!*******************************!*\
+  !*** ./src/components/age.js ***!
+  \*******************************/
+/*! exports provided: Age */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Age", function() { return Age; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+"use strict;";
+
+
+function Age(props) {
+  var getDisplayAge = function getDisplayAge(age) {
+    var displayAge = "today";
+    displayAge = age === 1 ? "".concat(age, " day ago") : age > 1 ? "".concat(age, " days ago") : displayAge;
+    return displayAge;
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, getDisplayAge(props.age));
+}
+
+/***/ }),
+
 /***/ "./src/components/browserPane.js":
 /*!***************************************!*\
   !*** ./src/components/browserPane.js ***!
@@ -39609,6 +39636,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _age__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./age */ "./src/components/age.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -39624,6 +39652,7 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 
 
 
@@ -39664,19 +39693,12 @@ function ListItem(props) {
           id: props.id,
           from: props.from,
           heading: props.heading,
+          age: props.age,
           body: props.body
         },
         isSelected: true
       });
-    }); //context.setCollection(collection);
-
-    /*context.setSelected({
-        id: props.id,
-        from: props.from,
-        heading: props.heading,
-        body: props.body
     });
-     context.setIsEmailModalOpen(true);*/
   };
 
   var activeClass = context.selected.id === props.id ? "active" : "";
@@ -39689,7 +39711,9 @@ function ListItem(props) {
     className: "d-flex w-100 justify-content-between"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
-  }, props.from), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, props.age, " days ago")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, props.from), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_age__WEBPACK_IMPORTED_MODULE_2__["Age"], {
+    age: props.age
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
   }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, truncateBody(props.body), "..."));
 }
@@ -39708,14 +39732,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReadingPane", function() { return ReadingPane; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _age__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./age */ "./src/components/age.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 
 
+
 function ReadingPane() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_1__["GlobalContext"]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "From: ", context.selected.from), context.selected.body);
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_2__["GlobalContext"]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_age__WEBPACK_IMPORTED_MODULE_1__["Age"], {
+    age: context.selected.age
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "From: ", context.selected.from), context.selected.body);
 }
 
 /***/ }),
@@ -39919,19 +39947,19 @@ function Router() {
     className: "mr-auto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
-    className: "nav-link pb-1 pt-1 px-5",
+    className: "nav-link pb-1 pt-1 px-3",
     to: HOME
   }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
-    className: "nav-link pb-1 pt-1 px-5",
+    className: "nav-link pb-1 pt-1 px-3",
     to: ABOUT
   }, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
-    className: "nav-link pb-1 pt-1 px-5",
+    className: "nav-link pb-1 pt-1 px-3",
     to: INBOX
   }, "Inbox ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_8__["Counter"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
-    className: "nav-link pb-1 pt-1 px-5",
+    className: "nav-link pb-1 pt-1 px-3",
     to: REQUEST
   }, "Request"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
