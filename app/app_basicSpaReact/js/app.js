@@ -39462,7 +39462,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function Counter() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_3__["GlobalContext"]);
-  var count = Object(_utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_2__["getUnreadEmailCount"])(context.inbox);
+  var count = Object(_utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_2__["getUnreadEmailCount"])(context);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_1__["default"], {
     pill: true,
     variant: "dark"
@@ -40000,8 +40000,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict;";
 
 var getUnreadEmailCount = function getUnreadEmailCount() {
-  var inbox = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  return inbox.filter(function (x) {
+  var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+    inbox: []
+  };
+  return context.inbox.filter(function (x) {
     return !x.read;
   }).length;
 };
