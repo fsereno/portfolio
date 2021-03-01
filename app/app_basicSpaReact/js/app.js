@@ -39637,6 +39637,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 /* harmony import */ var _age__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./age */ "./src/components/age.js");
+/* harmony import */ var _utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/setEmailToRead */ "./src/utils/setEmailToRead.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -39645,32 +39646,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 
 
 
 function ListItem(props) {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_1__["GlobalContext"]);
-
-  var updateCollection = function updateCollection(id) {
-    var collection = _toConsumableArray(context.inbox);
-
-    collection = collection.map(function (item) {
-      if (item.id === id) {
-        item.read = true;
-      }
-
-      return item;
-    });
-    return collection;
-  };
 
   var truncateBody = function truncateBody(body) {
     var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 75;
@@ -39685,7 +39666,7 @@ function ListItem(props) {
 
   var handleClick = function handleClick(event) {
     event.preventDefault();
-    var collection = updateCollection(props.id);
+    var collection = Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_3__["setEmailToRead"])(props.id, context);
     context.setContext(function (prevContext) {
       return _objectSpread({}, prevContext, {}, {
         collection: collection,
@@ -39995,6 +39976,41 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var GlobalContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext();
+
+/***/ }),
+
+/***/ "./src/utils/setEmailToRead.js":
+/*!*************************************!*\
+  !*** ./src/utils/setEmailToRead.js ***!
+  \*************************************/
+/*! exports provided: setEmailToRead */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setEmailToRead", function() { return setEmailToRead; });
+"use strict;";
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+var setEmailToRead = function setEmailToRead(id, context) {
+  var collection = _toConsumableArray(context.inbox);
+
+  collection = collection.map(function (item) {
+    if (item.id === id) {
+      item.read = true;
+    }
+
+    return item;
+  });
+  return collection;
+};
 
 /***/ })
 

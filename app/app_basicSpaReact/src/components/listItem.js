@@ -3,24 +3,11 @@
 import React from 'react';
 import { GlobalContext } from '../globalContext';
 import { Age } from './age';
+import { setEmailToRead } from '../utils/setEmailToRead';
 
 export function ListItem(props) {
 
     const context = React.useContext(GlobalContext);
-
-    const updateCollection = (id) => {
-
-        let collection = [...context.inbox];
-
-        collection = collection.map( item => {
-            if (item.id === id) {
-                item.read = true;
-            }
-            return item;
-        });
-
-        return collection;
-    }
 
     const truncateBody = (body, limit = 75) => {
 
@@ -36,7 +23,7 @@ export function ListItem(props) {
     const handleClick = (event) => {
         event.preventDefault();
 
-        const collection = updateCollection(props.id);
+        const collection = setEmailToRead(props.id, context);
 
         context.setContext(prevContext => (
             {...prevContext, ...{
