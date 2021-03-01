@@ -25,6 +25,7 @@
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
+    "@babel/register": "^7.13.8",
     "@types/aframe": "^1.0.1",
     "@types/bootstrap": "^4.3.2",
     "@types/chai": "^4.1.4",
@@ -62,6 +63,7 @@
     "gulp-useref": "^3.1.5",
     "log-symbols": "^2.2.0",
     "mocha": "^5.2.0",
+    "mocha-loader": "^5.1.5",
     "nightmare": "^3.0.1",
     "pug": "^2.0.3",
     "requirejs": "^2.3.6",
@@ -73,6 +75,8 @@
     "vinyl-source-stream": "^2.0.0",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^2.5.2",
+    "webpack-shell-plugin": "^0.5.0",
     "wiredep": "^4.0.0"
   },
   "dependencies": {
