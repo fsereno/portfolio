@@ -144,6 +144,10 @@ let createTasks = (application) => {
   gulpUtil.runThis(application, createTask);
 }
 
+let testAllAppsTasks = (application) => {
+  gulpUtil.runThis(application, testAllAppsTask);
+}
+
 let startServerTask = () => {
   return new Promise((resolve, reject) => {
     try{
@@ -204,12 +208,20 @@ let faviconCopyTask = () => {
     .pipe(gulp.dest(config.publishDir));
 }
 
-let testsTask = (directory) => {
-  return gulp.src(`${config.developmentDir}/tests/${directory}/**/*.test.ts`)
+let testTask = (directory) => _testTask(`${config.developmentDir}/tests/${directory}`);
+
+let testAllAppsTask = (application) => _testTask(`${config.developmentDir}/${config.prefix}${application.folder}/tests`);
+
+let _testTask = (directory) => {
+  return directoryExists(directory).then((result) => {
+    if (result) {
+      gulp.src(`${directory}/*.test.{ts,js}`)
     .pipe(mocha({
         reporter: "spec",
         require: ["ts-node/register"]
     }));
+    }
+  });
 }
 
 gulp.task("images", (done) => {
@@ -247,8 +259,9 @@ gulp.task("test-func", (done) => {
 });
 
 gulp.task("test", (done) => {
-  testsTask("services");
-  testsTask("utils");
+  testTask("services");
+  testTask("utils");
+  config.applications.map(testAllAppsTasks);
   done();
 });
 
