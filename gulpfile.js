@@ -208,21 +208,9 @@ let faviconCopyTask = () => {
     .pipe(gulp.dest(config.publishDir));
 }
 
-let testTask = (directory) => _testTask(`${config.developmentDir}/tests/${directory}`);
+let testTask = (directory) => gulpUtil.testTask(`${config.developmentDir}/tests/${directory}`);
 
-let testAllAppsTask = (application) => _testTask(`${config.developmentDir}/${config.prefix}${application.folder}/tests`);
-
-let _testTask = (directory) => {
-  return directoryExists(directory).then((result) => {
-    if (result) {
-      gulp.src(`${directory}/*.test.{ts,js}`)
-    .pipe(mocha({
-        reporter: "spec",
-        require: ["@babel/register", "ts-node/register"]
-    }));
-    }
-  });
-}
+let testAllAppsTask = (application) => gulpUtil.testTask(`${config.developmentDir}/${config.prefix}${application.folder}/tests`);
 
 gulp.task("images", (done) => {
   imagesCopyTask();

@@ -1,3 +1,5 @@
+"use strict";
+
 import { expect } from "chai";
 import { utilTest } from '../src/utils/utilTest';
 
