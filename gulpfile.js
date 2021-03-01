@@ -218,7 +218,7 @@ let _testTask = (directory) => {
       gulp.src(`${directory}/*.test.{ts,js}`)
     .pipe(mocha({
         reporter: "spec",
-        require: ["ts-node/register"]
+        require: ["@babel/register", "ts-node/register"]
     }));
     }
   });
@@ -234,7 +234,7 @@ gulp.task("fonts", (done) => {
   done();
 });
 
-gulp.task('favicon', function(done){
+gulp.task('favicon', (done) => {
   faviconCopyTask();
   done();
 })

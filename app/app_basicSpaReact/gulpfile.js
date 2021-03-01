@@ -3,7 +3,9 @@ const gulp = require("gulp");
 const run = require('gulp-run-command').default;
 const mocha = require("gulp-mocha");
 
-const testsTask = () => gulp.src(`./tests/*.test.js`).pipe(mocha());
+const testsTask = () => gulp.src(`./tests/*.test.{js,ts}`).pipe(mocha({
+    require: ["@babel/register", "ts-node/register"]
+}));
 
 gulp.task("test", (done) => {
     testsTask();
