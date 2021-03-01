@@ -1,10 +1,9 @@
-const chai = require("chai");
+import { expect } from "chai";
+import { utilTest } from '../src/utils/utilTest';
 
-describe("Util", () => {
-    describe("Test", () => {
-        it("Should return true", () => {
-            let result = true;
-            chai.expect(result).to.equal(true);
-        });
+describe("utilTest", () => {
+    it("Should return true", () => {
+        let result = utilTest();
+        expect(result).to.equal(true);
     });
 });
