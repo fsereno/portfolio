@@ -3,12 +3,7 @@ const gulp = require("gulp");
 const run = require('gulp-run-command').default;
 const mocha = require("gulp-mocha");
 
-let testsTask = () => {
-    return gulp.src(`./tests/*.test.js`)
-      .pipe(mocha({
-          reporter: "spec",
-      }));
-}
+const testsTask = () => gulp.src(`./tests/*.test.js`).pipe(mocha());
 
 gulp.task("test", (done) => {
     testsTask();
