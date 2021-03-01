@@ -4,21 +4,11 @@ import React from 'react';
 import { GlobalContext } from '../globalContext';
 import { Age } from './age';
 import { setEmailToRead } from '../utils/setEmailToRead';
+import { truncateBody } from '../utils/truncateBody';
 
 export function ListItem(props) {
 
     const context = React.useContext(GlobalContext);
-
-    const truncateBody = (body, limit = 75) => {
-
-        let result = body;
-
-        if (body.length >= limit) {
-            result = body.substring(0, limit);
-        }
-
-        return result;
-    }
 
     const handleClick = (event) => {
         event.preventDefault();

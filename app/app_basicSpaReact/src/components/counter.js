@@ -2,13 +2,14 @@
 
 import React from 'react';
 import Badge from 'react-bootstrap/Badge';
+import { getUnreadEmailCount } from '../utils/getUnreadEmailCount';
 import { GlobalContext } from '../globalContext';
 
 export function Counter() {
 
     const context = React.useContext(GlobalContext);
 
-    const count = context.inbox.filter(x => !x.read).length;
+    const count = getUnreadEmailCount(context.inbox);
 
     return(
         <Badge pill variant="dark">

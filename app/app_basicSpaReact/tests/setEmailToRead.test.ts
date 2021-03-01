@@ -1,6 +1,6 @@
 "use strict";
 
-import { expect } from "chai";
+import { expect } from 'chai';
 import { setEmailToRead } from '../src/utils/setEmailToRead';
 
 describe("setEmailToRead", () => {

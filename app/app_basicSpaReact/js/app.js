@@ -39364,17 +39364,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Age", function() { return Age; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_getDisplayAge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/getDisplayAge */ "./src/utils/getDisplayAge.js");
 "use strict;";
 
 
-function Age(props) {
-  var getDisplayAge = function getDisplayAge(age) {
-    var displayAge = "today";
-    displayAge = age === 1 ? "".concat(age, " day ago") : age > 1 ? "".concat(age, " days ago") : displayAge;
-    return displayAge;
-  };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, getDisplayAge(props.age));
+function Age(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_getDisplayAge__WEBPACK_IMPORTED_MODULE_1__["getDisplayAge"])(props.age));
 }
 
 /***/ }),
@@ -39456,17 +39452,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Badge */ "../../node_modules/react-bootstrap/esm/Badge.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/getUnreadEmailCount */ "./src/utils/getUnreadEmailCount.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 
 
 
+
 function Counter() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_2__["GlobalContext"]);
-  var count = context.inbox.filter(function (x) {
-    return !x.read;
-  }).length;
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_3__["GlobalContext"]);
+  var count = Object(_utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_2__["getUnreadEmailCount"])(context.inbox);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_1__["default"], {
     pill: true,
     variant: "dark"
@@ -39638,6 +39634,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 /* harmony import */ var _age__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./age */ "./src/components/age.js");
 /* harmony import */ var _utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/setEmailToRead */ "./src/utils/setEmailToRead.js");
+/* harmony import */ var _utils_truncateBody__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/truncateBody */ "./src/utils/truncateBody.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -39650,19 +39647,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 function ListItem(props) {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_1__["GlobalContext"]);
-
-  var truncateBody = function truncateBody(body) {
-    var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 75;
-    var result = body;
-
-    if (body.length >= limit) {
-      result = body.substring(0, limit);
-    }
-
-    return result;
-  };
 
   var handleClick = function handleClick(event) {
     event.preventDefault();
@@ -39696,7 +39683,7 @@ function ListItem(props) {
     age: props.age
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
-  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, truncateBody(props.body), "..."));
+  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateBody__WEBPACK_IMPORTED_MODULE_4__["truncateBody"])(props.body), "..."));
 }
 
 /***/ }),
@@ -39979,6 +39966,48 @@ var GlobalContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext()
 
 /***/ }),
 
+/***/ "./src/utils/getDisplayAge.js":
+/*!************************************!*\
+  !*** ./src/utils/getDisplayAge.js ***!
+  \************************************/
+/*! exports provided: getDisplayAge */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDisplayAge", function() { return getDisplayAge; });
+"use strict;";
+
+var getDisplayAge = function getDisplayAge() {
+  var age = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var displayAge = "today";
+  displayAge = age === 1 ? "".concat(age, " day ago") : age > 1 ? "".concat(age, " days ago") : displayAge;
+  return displayAge;
+};
+
+/***/ }),
+
+/***/ "./src/utils/getUnreadEmailCount.js":
+/*!******************************************!*\
+  !*** ./src/utils/getUnreadEmailCount.js ***!
+  \******************************************/
+/*! exports provided: getUnreadEmailCount */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUnreadEmailCount", function() { return getUnreadEmailCount; });
+"use strict;";
+
+var getUnreadEmailCount = function getUnreadEmailCount() {
+  var inbox = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  return inbox.filter(function (x) {
+    return !x.read;
+  }).length;
+};
+
+/***/ }),
+
 /***/ "./src/utils/setEmailToRead.js":
 /*!*************************************!*\
   !*** ./src/utils/setEmailToRead.js ***!
@@ -40000,16 +40029,44 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 var setEmailToRead = function setEmailToRead(id, context) {
+  var read = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
   var collection = _toConsumableArray(context.inbox);
 
   collection = collection.map(function (item) {
     if (item.id === id) {
-      item.read = true;
+      item.read = read;
     }
 
     return item;
   });
   return collection;
+};
+
+/***/ }),
+
+/***/ "./src/utils/truncateBody.js":
+/*!***********************************!*\
+  !*** ./src/utils/truncateBody.js ***!
+  \***********************************/
+/*! exports provided: truncateBody */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "truncateBody", function() { return truncateBody; });
+"use strict;";
+
+var truncateBody = function truncateBody() {
+  var body = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 75;
+  var result = body;
+
+  if (body.length >= limit) {
+    result = body.substring(0, limit);
+  }
+
+  return result;
 };
 
 /***/ })

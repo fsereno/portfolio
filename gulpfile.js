@@ -150,13 +150,13 @@ let testAllAppsTasks = (application) => {
 
 let startServerTask = () => {
   return new Promise((resolve, reject) => {
-    try{
+    try {
       connect.server({
         root: ["./", ".", "./"+config.developmentDir],
         livereload: true
       }, () => resolve())
     }
-    catch(err){
+    catch(err) {
       reject(new Error(err))
     }
   });
