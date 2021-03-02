@@ -5,9 +5,6 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ReadingPane } from './readingPane';
-import { FormInput } from './formInput';
-import { FormTextArea } from './formTextArea';
-import { FormInputRow } from './formInputRow';
 import { GlobalContext } from '../globalContext';
 
 export function ReplyPane() {
@@ -29,6 +26,7 @@ export function ReplyPane() {
         } else {
 
           setValidated(false);
+
         }
 
       };
@@ -36,13 +34,44 @@ export function ReplyPane() {
     return(
         <>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                <FormInputRow label="First name" id="firstNameInput" component={FormInput} />
-                <FormInputRow label="Second name" id="secondNameInput" component={FormInput}/>
-                <FormInputRow label="Message" id="messageInput" component={FormTextArea} />
                 <Form.Row>
-                <Form.Group as={Col} md="4">
-                    <Button id="submit" variant="dark" type="submit">Submit</Button>
-                </Form.Group>
+                    <Form.Group as={Col}>
+                        <Form.Label>
+                           To:
+                        </Form.Label>
+                        <Form.Control
+                            name="toInput"
+                            id="toInput"
+                            type="text"
+                            value={context.selected.from}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please enter a value.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>
+                           Message:
+                        </Form.Label>
+                        <Form.Control
+                            name="message"
+                            id="message"
+                            as="textarea"
+                            rows={3}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please enter a value.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Button className="float-right" id="submit" variant="dark" type="submit">Submit</Button>
+                    </Form.Group>
                 </Form.Row>
             </Form>
             <hr/>

@@ -39201,50 +39201,6 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "../js/modules/react/modalComponent.js":
-/*!*********************************************!*\
-  !*** ../js/modules/react/modalComponent.js ***!
-  \*********************************************/
-/*! exports provided: ModalComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalComponent", function() { return ModalComponent; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Modal */ "../../node_modules/react-bootstrap/esm/Modal.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
-"use strict;";
-
-
-
-
-function ModalComponent(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    id: props.id,
-    show: props.show,
-    onHide: props.handleClose
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Header, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Title, {
-    className: "display-4"
-  }, props.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    variant: "link",
-    className: "close",
-    onClick: props.handleClose
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "lr"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "rl"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "lead px-2 ".concat(props.bodyClass)
-  }, props.body)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    variant: "dark",
-    onClick: props.handleClose
-  }, "Close")));
-}
-
-/***/ }),
-
 /***/ "./src/app.js":
 /*!********************!*\
   !*** ./src/app.js ***!
@@ -39549,7 +39505,6 @@ function EmailModal() {
     });
   };
 
-  var closeCTA = !context.isReply ? "Close" : "Cancel";
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
     show: context.isSelected,
     onHide: handleClose
@@ -39563,101 +39518,12 @@ function EmailModal() {
     className: "lr"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "rl"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, !context.isReply && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_3__["ReadingPane"], null), context.isReply && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_replyPane__WEBPACK_IMPORTED_MODULE_4__["ReplyPane"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Footer, null, !context.isReply && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, !context.isReply && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_3__["ReadingPane"], null), context.isReply && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_replyPane__WEBPACK_IMPORTED_MODULE_4__["ReplyPane"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Footer, null, !context.isReply && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onClick: handleReplyClick
   }, "Reply"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     variant: "dark",
     onClick: handleClose
-  }, closeCTA)));
-}
-
-/***/ }),
-
-/***/ "./src/components/formInput.js":
-/*!*************************************!*\
-  !*** ./src/components/formInput.js ***!
-  \*************************************/
-/*! exports provided: FormInput */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormInput", function() { return FormInput; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
-"use strict;";
-
-
-
-function FormInput(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1__["default"].Control, {
-    name: props.id,
-    id: props.id,
-    type: props.type || "text",
-    required: true
-  });
-}
-
-/***/ }),
-
-/***/ "./src/components/formInputRow.js":
-/*!****************************************!*\
-  !*** ./src/components/formInputRow.js ***!
-  \****************************************/
-/*! exports provided: FormInputRow */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormInputRow", function() { return FormInputRow; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
-"use strict;";
-
-
-
-
-function FormInputRow(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__["default"].Row, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__["default"].Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__["default"],
-    md: "4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__["default"].Label, null, props.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(props.component, {
-    id: props.id
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__["default"].Control.Feedback, {
-    type: "invalid"
-  }, "Please enter a value.")));
-}
-
-/***/ }),
-
-/***/ "./src/components/formTextArea.js":
-/*!****************************************!*\
-  !*** ./src/components/formTextArea.js ***!
-  \****************************************/
-/*! exports provided: FormTextArea */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormTextArea", function() { return FormTextArea; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
-"use strict;";
-
-
-
-function FormTextArea(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1__["default"].Control, {
-    name: props.id,
-    id: props.id,
-    as: "textarea",
-    rows: 3,
-    required: true
-  });
+  }, "Close"))));
 }
 
 /***/ }),
@@ -39811,10 +39677,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
 /* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
 /* harmony import */ var _readingPane__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./readingPane */ "./src/components/readingPane.js");
-/* harmony import */ var _formInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./formInput */ "./src/components/formInput.js");
-/* harmony import */ var _formTextArea__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./formTextArea */ "./src/components/formTextArea.js");
-/* harmony import */ var _formInputRow__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./formInputRow */ "./src/components/formInputRow.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -39824,9 +39687,6 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
 
 
 
@@ -39835,7 +39695,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function ReplyPane() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_8__["GlobalContext"]);
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_5__["GlobalContext"]);
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -39858,155 +39718,34 @@ function ReplyPane() {
     noValidate: true,
     validated: validated,
     onSubmit: handleSubmit
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_7__["FormInputRow"], {
-    label: "First name",
-    id: "firstNameInput",
-    component: _formInput__WEBPACK_IMPORTED_MODULE_5__["FormInput"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_7__["FormInputRow"], {
-    label: "Second name",
-    id: "secondNameInput",
-    component: _formInput__WEBPACK_IMPORTED_MODULE_5__["FormInput"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_7__["FormInputRow"], {
-    label: "Message",
-    id: "messageInput",
-    component: _formTextArea__WEBPACK_IMPORTED_MODULE_6__["FormTextArea"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__["default"],
-    md: "4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "To:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
+    name: "toInput",
+    id: "toInput",
+    type: "text",
+    value: context.selected.from,
+    required: true
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
+    type: "invalid"
+  }, "Please enter a value."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__["default"]
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, "Message:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
+    name: "message",
+    id: "message",
+    as: "textarea",
+    rows: 3,
+    required: true
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
+    type: "invalid"
+  }, "Please enter a value."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__["default"]
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "float-right",
     id: "submit",
     variant: "dark",
     type: "submit"
   }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_4__["ReadingPane"], null));
-}
-
-/***/ }),
-
-/***/ "./src/components/request.js":
-/*!***********************************!*\
-  !*** ./src/components/request.js ***!
-  \***********************************/
-/*! exports provided: Request */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Request", function() { return Request; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./content */ "./src/components/content.js");
-/* harmony import */ var _requestForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./requestForm */ "./src/components/requestForm.js");
-"use strict;";
-
-
-
-
-function Request() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_1__["Content"], {
-    title: "Request",
-    content: "Submit a request",
-    component: _requestForm__WEBPACK_IMPORTED_MODULE_2__["RequestForm"]
-  }));
-}
-
-/***/ }),
-
-/***/ "./src/components/requestForm.js":
-/*!***************************************!*\
-  !*** ./src/components/requestForm.js ***!
-  \***************************************/
-/*! exports provided: RequestForm */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RequestForm", function() { return RequestForm; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
-/* harmony import */ var _formInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./formInput */ "./src/components/formInput.js");
-/* harmony import */ var _formTextArea__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./formTextArea */ "./src/components/formTextArea.js");
-/* harmony import */ var _formInputRow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./formInputRow */ "./src/components/formInputRow.js");
-/* harmony import */ var _js_modules_react_modalComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../js/modules/react/modalComponent */ "../js/modules/react/modalComponent.js");
-"use strict;";
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
-
-
-function RequestForm() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      validated = _useState2[0],
-      setValidated = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      showState = _useState4[0],
-      setShowState = _useState4[1];
-
-  var handleModalClose = function handleModalClose(event) {
-    event.preventDefault();
-    setShowState(false);
-  };
-
-  var handleSubmit = function handleSubmit(event) {
-    event.preventDefault();
-    var form = event.currentTarget;
-
-    if (form.checkValidity() === false) {
-      setValidated(true);
-      event.stopPropagation();
-    } else {
-      setValidated(false);
-      setShowState(true);
-    }
-  };
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    noValidate: true,
-    validated: validated,
-    onSubmit: handleSubmit
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_6__["FormInputRow"], {
-    label: "First name",
-    id: "firstNameInput",
-    component: _formInput__WEBPACK_IMPORTED_MODULE_4__["FormInput"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_6__["FormInputRow"], {
-    label: "Second name",
-    id: "secondNameInput",
-    component: _formInput__WEBPACK_IMPORTED_MODULE_4__["FormInput"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_6__["FormInputRow"], {
-    label: "Message",
-    id: "messageInput",
-    component: _formTextArea__WEBPACK_IMPORTED_MODULE_5__["FormTextArea"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__["default"],
-    md: "4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    id: "submit",
-    variant: "dark",
-    type: "submit"
-  }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_modalComponent__WEBPACK_IMPORTED_MODULE_7__["ModalComponent"], {
-    id: "RequestFormModal",
-    show: showState,
-    handleClose: handleModalClose,
-    title: "Request submitted",
-    body: "Your request has been submitted"
-  }));
 }
 
 /***/ }),
@@ -40029,10 +39768,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home */ "./src/components/home.js");
 /* harmony import */ var _about__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./about */ "./src/components/about.js");
 /* harmony import */ var _inbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./inbox */ "./src/components/inbox.js");
-/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./request */ "./src/components/request.js");
-/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./counter */ "./src/components/counter.js");
+/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./counter */ "./src/components/counter.js");
 "use strict;";
-
 
 
 
@@ -40045,7 +39782,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var HOME = "/home";
 var ABOUT = "/about";
-var REQUEST = "/request";
 var INBOX = "/inbox";
 function Router() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -40067,11 +39803,7 @@ function Router() {
     activeClassName: "active",
     className: "nav-link pb-1 pt-1 px-3",
     to: INBOX
-  }, "Inbox ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_8__["Counter"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
-    activeClassName: "active",
-    className: "nav-link pb-1 pt-1 px-3",
-    to: REQUEST
-  }, "Request"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }, "Inbox ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_7__["Counter"], null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
@@ -40082,9 +39814,7 @@ function Router() {
     path: ABOUT
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_about__WEBPACK_IMPORTED_MODULE_5__["About"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: INBOX
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inbox__WEBPACK_IMPORTED_MODULE_6__["Inbox"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: REQUEST
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_request__WEBPACK_IMPORTED_MODULE_7__["Request"], null))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inbox__WEBPACK_IMPORTED_MODULE_6__["Inbox"], null))));
 }
 
 /***/ }),

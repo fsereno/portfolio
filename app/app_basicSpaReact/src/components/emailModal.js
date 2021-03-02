@@ -16,8 +16,6 @@ export function EmailModal() {
 
     const handleReplyClick = () => context.dispatch({ type: REPLY });
 
-    const closeCTA = !context.isReply ? "Close" : "Cancel";
-
     return (
         <Modal show={context.isSelected} onHide={handleClose}>
             {context.selected &&
@@ -42,13 +40,15 @@ export function EmailModal() {
             }
             <Modal.Footer>
                 {!context.isReply &&
-                    <Button onClick={handleReplyClick}>
-                        Reply
-                    </Button>
+                    <>
+                        <Button onClick={handleReplyClick}>
+                            Reply
+                        </Button>
+                        <Button variant="dark" onClick={handleClose}>
+                            Close
+                        </Button>
+                    </>
                 }
-                <Button variant="dark" onClick={handleClose}>
-                    {closeCTA}
-                </Button>
             </Modal.Footer>
         </Modal>
     )

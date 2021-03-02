@@ -7,13 +7,11 @@ import Nav from 'react-bootstrap/Nav';
 import { Home } from './home';
 import { About } from './about';
 import { Inbox } from './inbox';
-import { Request } from './request';
 import { Counter } from './counter';
 
 // put in constants
 const HOME = "/home";
 const ABOUT = "/about";
-const REQUEST = "/request";
 const INBOX = "/inbox";
 
 export function Router() {
@@ -24,7 +22,6 @@ export function Router() {
                     <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={HOME}>Home</NavLink>
                     <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={ABOUT}>About</NavLink>
                     <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={INBOX}>Inbox <Counter/></NavLink>
-                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={REQUEST}>Request</NavLink>
                 </Nav>
             </Navbar>
             <Switch>
@@ -39,9 +36,6 @@ export function Router() {
                 </Route>
                 <Route path={INBOX}>
                     <Inbox/>
-                </Route>
-                <Route path={REQUEST}>
-                    <Request/>
                 </Route>
             </Switch>
         </HashRouter>
