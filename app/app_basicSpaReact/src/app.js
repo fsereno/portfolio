@@ -3,7 +3,7 @@
 import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from './components/router';
-import { setEmailToRead } from './utils/setEmailToRead';
+import { reducer } from './reducers/reducer';
 import { GlobalContext } from './globalContext';
 
 const inbox = [
@@ -32,26 +32,6 @@ const inbox = [
       read: false
   }
 ]
-// move reducer into dedicated code
-// declare constants too
-function reducer(state, action) {
-  switch(action.type) {
-    case 'select':
-      return {
-        inbox: setEmailToRead(action.id, state),
-        selected: state.inbox.filter(x => x.id === action.id)[0], // this needs to be tested
-        isSelected: true
-      }
-    case 'deselect':
-      return {
-        ...state,
-        selected: {},
-        isSelected: false
-      }
-    default:
-      throw new Error();
-  }
-}
 
 function App() {
 

@@ -39259,9 +39259,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "../../node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
-/* harmony import */ var _utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/setEmailToRead */ "./src/utils/setEmailToRead.js");
+/* harmony import */ var _reducers_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reducers/reducer */ "./src/reducers/reducer.js");
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./globalContext */ "./src/globalContext.js");
 "use strict;";
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -39270,12 +39276,6 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -39304,33 +39304,28 @@ var inbox = [{
   age: 3,
   read: false
 }]; // move reducer into dedicated code
-// declare constants too
 
-function reducer(state, action) {
-  switch (action.type) {
-    case 'select':
+/*function reducer(state, action) {
+  switch(action.type) {
+    case SELECT:
       return {
-        inbox: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_3__["setEmailToRead"])(action.id, state),
-        selected: state.inbox.filter(function (x) {
-          return x.id === action.id;
-        })[0],
-        // this needs to be tested
+        inbox: setEmailToRead(action.id, state),
+        selected: state.inbox.filter(x => x.id === action.id)[0], // this needs to be tested
         isSelected: true
-      };
-
-    case 'deselect':
-      return _objectSpread({}, state, {
+      }
+    case DESELECT:
+      return {
+        ...state,
         selected: {},
         isSelected: false
-      });
-
+      }
     default:
       throw new Error();
   }
-}
+}*/
 
 function App() {
-  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(reducer, {
+  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_3__["reducer"], {
     inbox: inbox,
     selected: {},
     isSelected: false
@@ -39946,6 +39941,24 @@ function Router() {
 
 /***/ }),
 
+/***/ "./src/globalConstants.js":
+/*!********************************!*\
+  !*** ./src/globalConstants.js ***!
+  \********************************/
+/*! exports provided: SELECT, DESELECT */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SELECT", function() { return SELECT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DESELECT", function() { return DESELECT; });
+"use strict;";
+
+var SELECT = "select";
+var DESELECT = "deselect";
+
+/***/ }),
+
 /***/ "./src/globalContext.js":
 /*!******************************!*\
   !*** ./src/globalContext.js ***!
@@ -39962,6 +39975,53 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var GlobalContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext();
+
+/***/ }),
+
+/***/ "./src/reducers/reducer.js":
+/*!*********************************!*\
+  !*** ./src/reducers/reducer.js ***!
+  \*********************************/
+/*! exports provided: reducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
+/* harmony import */ var _utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/setEmailToRead */ "./src/utils/setEmailToRead.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+"use strict;";
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function reducer(state, action) {
+  switch (action.type) {
+    case _globalConstants__WEBPACK_IMPORTED_MODULE_1__["SELECT"]:
+      return {
+        inbox: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.id, state),
+        selected: state.inbox.filter(function (x) {
+          return x.id === action.id;
+        })[0],
+        // this needs to be tested
+        isSelected: true
+      };
+
+    case _globalConstants__WEBPACK_IMPORTED_MODULE_1__["DESELECT"]:
+      return _objectSpread({}, state, {
+        selected: {},
+        isSelected: false
+      });
+
+    default:
+      throw new Error();
+  }
+}
 
 /***/ }),
 
