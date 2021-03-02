@@ -38,7 +38,8 @@ function App() {
   const [ state, dispatch] = useReducer(reducer, {
     inbox,
     selected: {},
-    isSelected: false
+    isSelected: false,
+    isReply: false
   });
 
   const context = { ...state, dispatch };

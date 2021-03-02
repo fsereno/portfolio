@@ -39309,7 +39309,8 @@ function App() {
   var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_3__["reducer"], {
     inbox: inbox,
     selected: {},
-    isSelected: false
+    isSelected: false,
+    isReply: false
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
@@ -39521,7 +39522,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Modal */ "../../node_modules/react-bootstrap/esm/Modal.js");
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
 /* harmony import */ var _readingPane__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./readingPane */ "./src/components/readingPane.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _replyPane__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./replyPane */ "./src/components/replyPane.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 
@@ -39529,15 +39532,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 function EmailModal() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_4__["GlobalContext"]);
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_6__["GlobalContext"]);
 
   var handleClose = function handleClose() {
     return context.dispatch({
-      type: 'deselect'
+      type: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["DESELECT"]
     });
   };
 
+  var handleReplyClick = function handleReplyClick() {
+    return context.dispatch({
+      type: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["REPLY"]
+    });
+  };
+
+  var closeCTA = !context.isReply ? "Close" : "Cancel";
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
     show: context.isSelected,
     onHide: handleClose
@@ -39551,10 +39563,101 @@ function EmailModal() {
     className: "lr"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "rl"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_3__["ReadingPane"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, !context.isReply && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_3__["ReadingPane"], null), context.isReply && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_replyPane__WEBPACK_IMPORTED_MODULE_4__["ReplyPane"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Footer, null, !context.isReply && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    onClick: handleReplyClick
+  }, "Reply"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     variant: "dark",
     onClick: handleClose
-  }, "Close")));
+  }, closeCTA)));
+}
+
+/***/ }),
+
+/***/ "./src/components/formInput.js":
+/*!*************************************!*\
+  !*** ./src/components/formInput.js ***!
+  \*************************************/
+/*! exports provided: FormInput */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormInput", function() { return FormInput; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
+"use strict;";
+
+
+
+function FormInput(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1__["default"].Control, {
+    name: props.id,
+    id: props.id,
+    type: props.type || "text",
+    required: true
+  });
+}
+
+/***/ }),
+
+/***/ "./src/components/formInputRow.js":
+/*!****************************************!*\
+  !*** ./src/components/formInputRow.js ***!
+  \****************************************/
+/*! exports provided: FormInputRow */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormInputRow", function() { return FormInputRow; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
+"use strict;";
+
+
+
+
+function FormInputRow(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__["default"].Row, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__["default"].Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__["default"],
+    md: "4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__["default"].Label, null, props.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(props.component, {
+    id: props.id
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__["default"].Control.Feedback, {
+    type: "invalid"
+  }, "Please enter a value.")));
+}
+
+/***/ }),
+
+/***/ "./src/components/formTextArea.js":
+/*!****************************************!*\
+  !*** ./src/components/formTextArea.js ***!
+  \****************************************/
+/*! exports provided: FormTextArea */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormTextArea", function() { return FormTextArea; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
+"use strict;";
+
+
+
+function FormTextArea(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_1__["default"].Control, {
+    name: props.id,
+    id: props.id,
+    as: "textarea",
+    rows: 3,
+    required: true
+  });
 }
 
 /***/ }),
@@ -39625,9 +39728,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListItem", function() { return ListItem; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
-/* harmony import */ var _age__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./age */ "./src/components/age.js");
-/* harmony import */ var _utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/truncateEmailBody */ "./src/utils/truncateEmailBody.js");
+/* harmony import */ var _age__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./age */ "./src/components/age.js");
+/* harmony import */ var _utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/truncateEmailBody */ "./src/utils/truncateEmailBody.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+
 
 
 
@@ -39635,11 +39740,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ListItem(props) {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_1__["GlobalContext"]);
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_4__["GlobalContext"]);
 
   var handleClick = function handleClick() {
     return context.dispatch({
-      type: 'select',
+      type: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["SELECT"],
       id: props.id
     });
   };
@@ -39653,11 +39758,11 @@ function ListItem(props) {
     className: "d-flex w-100 justify-content-between"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
-  }, props.from), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_age__WEBPACK_IMPORTED_MODULE_2__["Age"], {
+  }, props.from), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_age__WEBPACK_IMPORTED_MODULE_1__["Age"], {
     age: props.age
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
-  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_3__["truncateEmailBody"])(props.body), "..."));
+  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_2__["truncateEmailBody"])(props.body), "..."));
 }
 
 /***/ }),
@@ -39686,6 +39791,93 @@ function ReadingPane() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_age__WEBPACK_IMPORTED_MODULE_1__["Age"], {
     age: context.selected.age
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "From: ", context.selected.from), context.selected.body);
+}
+
+/***/ }),
+
+/***/ "./src/components/replyPane.js":
+/*!*************************************!*\
+  !*** ./src/components/replyPane.js ***!
+  \*************************************/
+/*! exports provided: ReplyPane */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReplyPane", function() { return ReplyPane; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
+/* harmony import */ var _readingPane__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./readingPane */ "./src/components/readingPane.js");
+/* harmony import */ var _formInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./formInput */ "./src/components/formInput.js");
+/* harmony import */ var _formTextArea__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./formTextArea */ "./src/components/formTextArea.js");
+/* harmony import */ var _formInputRow__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./formInputRow */ "./src/components/formInputRow.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+"use strict;";
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+function ReplyPane() {
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_8__["GlobalContext"]);
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      validated = _useState2[0],
+      setValidated = _useState2[1];
+
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    var form = event.currentTarget;
+
+    if (form.checkValidity() === false) {
+      setValidated(true);
+      event.stopPropagation();
+    } else {
+      setValidated(false);
+    }
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    noValidate: true,
+    validated: validated,
+    onSubmit: handleSubmit
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_7__["FormInputRow"], {
+    label: "First name",
+    id: "firstNameInput",
+    component: _formInput__WEBPACK_IMPORTED_MODULE_5__["FormInput"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_7__["FormInputRow"], {
+    label: "Second name",
+    id: "secondNameInput",
+    component: _formInput__WEBPACK_IMPORTED_MODULE_5__["FormInput"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_7__["FormInputRow"], {
+    label: "Message",
+    id: "messageInput",
+    component: _formTextArea__WEBPACK_IMPORTED_MODULE_6__["FormTextArea"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__["default"],
+    md: "4"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "submit",
+    variant: "dark",
+    type: "submit"
+  }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_4__["ReadingPane"], null));
 }
 
 /***/ }),
@@ -39734,7 +39926,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
 /* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
-/* harmony import */ var _js_modules_react_modalComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../js/modules/react/modalComponent */ "../js/modules/react/modalComponent.js");
+/* harmony import */ var _formInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./formInput */ "./src/components/formInput.js");
+/* harmony import */ var _formTextArea__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./formTextArea */ "./src/components/formTextArea.js");
+/* harmony import */ var _formInputRow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./formInputRow */ "./src/components/formInputRow.js");
+/* harmony import */ var _js_modules_react_modalComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../js/modules/react/modalComponent */ "../js/modules/react/modalComponent.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -39751,35 +39946,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function Input(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
-    name: props.id,
-    id: props.id,
-    type: props.type || "text",
-    required: true
-  });
-}
 
-function TextArea(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control, {
-    name: props.id,
-    id: props.id,
-    as: "textarea",
-    rows: 3,
-    required: true
-  });
-}
-
-function InputRow(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__["default"],
-    md: "4"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Label, null, props.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(props.component, {
-    id: props.id
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
-    type: "invalid"
-  }, "Please enter a value.")));
-}
 
 function RequestForm() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
@@ -39814,18 +39981,18 @@ function RequestForm() {
     noValidate: true,
     validated: validated,
     onSubmit: handleSubmit
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InputRow, {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_6__["FormInputRow"], {
     label: "First name",
     id: "firstNameInput",
-    component: Input
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InputRow, {
+    component: _formInput__WEBPACK_IMPORTED_MODULE_4__["FormInput"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_6__["FormInputRow"], {
     label: "Second name",
     id: "secondNameInput",
-    component: Input
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(InputRow, {
+    component: _formInput__WEBPACK_IMPORTED_MODULE_4__["FormInput"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_formInputRow__WEBPACK_IMPORTED_MODULE_6__["FormInputRow"], {
     label: "Message",
     id: "messageInput",
-    component: TextArea
+    component: _formTextArea__WEBPACK_IMPORTED_MODULE_5__["FormTextArea"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
     as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__["default"],
     md: "4"
@@ -39833,7 +40000,7 @@ function RequestForm() {
     id: "submit",
     variant: "dark",
     type: "submit"
-  }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_modalComponent__WEBPACK_IMPORTED_MODULE_4__["ModalComponent"], {
+  }, "Submit")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_modalComponent__WEBPACK_IMPORTED_MODULE_7__["ModalComponent"], {
     id: "RequestFormModal",
     show: showState,
     handleClose: handleModalClose,
@@ -39926,17 +40093,19 @@ function Router() {
 /*!********************************!*\
   !*** ./src/globalConstants.js ***!
   \********************************/
-/*! exports provided: SELECT, DESELECT */
+/*! exports provided: SELECT, DESELECT, REPLY */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SELECT", function() { return SELECT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DESELECT", function() { return DESELECT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REPLY", function() { return REPLY; });
 "use strict;";
 
 var SELECT = "select";
 var DESELECT = "deselect";
+var REPLY = "reply";
 
 /***/ }),
 
@@ -39989,8 +40158,14 @@ function reducer(state, action) {
       return {
         inbox: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.id, state.inbox),
         selected: Object(_utils_getSelectedEmailById__WEBPACK_IMPORTED_MODULE_1__["getSelectedEmailById"])(state.inbox, action.id),
-        isSelected: true
+        isSelected: true,
+        isReply: false
       };
+
+    case _globalConstants__WEBPACK_IMPORTED_MODULE_2__["REPLY"]:
+      return _objectSpread({}, state, {
+        isReply: true
+      });
 
     case _globalConstants__WEBPACK_IMPORTED_MODULE_2__["DESELECT"]:
       return _objectSpread({}, state, {
