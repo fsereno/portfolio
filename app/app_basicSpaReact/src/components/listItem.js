@@ -3,7 +3,7 @@
 import React from 'react';
 import { GlobalContext } from '../globalContext';
 import { Age } from './age';
-import { truncateBody } from '../utils/truncateBody';
+import { truncateEmailBody } from '../utils/truncateEmailBody';
 
 export function ListItem(props) {
 
@@ -20,7 +20,7 @@ export function ListItem(props) {
                 <Age age={props.age}/>
             </div>
             <p className="mb-1">{props.heading}</p>
-            <small>{truncateBody(props.body)}...</small>
+            <small>{truncateEmailBody(props.body)}...</small>
         </button>
     )
 }

@@ -1,12 +1,12 @@
 "use strict;"
 
 import React from 'react';
-import { getDisplayAge } from '../utils/getDisplayAge';
+import { getEmailDisplayAge } from '../utils/getEmailDisplayAge';
 
 export function Age(props) {
     return(
         <small>
-            {getDisplayAge(props.age)}
+            {getEmailDisplayAge(props.age)}
         </small>
     );
 }

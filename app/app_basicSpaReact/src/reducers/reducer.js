@@ -1,6 +1,7 @@
 "use strict;"
 
 import { setEmailToRead } from '../utils/setEmailToRead';
+import { getSelectedEmailById } from '../utils/getSelectedEmailById';
 import { SELECT, DESELECT } from '../globalConstants';
 
 export function reducer(state, action) {
@@ -8,7 +9,7 @@ export function reducer(state, action) {
       case SELECT:
         return {
           inbox: setEmailToRead(action.id, state),
-          selected: state.inbox.filter(x => x.id === action.id)[0], // this needs to be tested
+          selected: getSelectedEmailById(state.inbox, action.id),
           isSelected: true
         }
       case DESELECT:

@@ -1,6 +1,6 @@
 "use strict;"
 
-export const truncateBody = (body = "", limit = 75) => {
+export const truncateEmailBody = (body = "", limit = 75) => {
 
     let result = body;
 

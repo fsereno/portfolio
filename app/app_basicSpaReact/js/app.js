@@ -39303,26 +39303,7 @@ var inbox = [{
   body: "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC",
   age: 3,
   read: false
-}]; // move reducer into dedicated code
-
-/*function reducer(state, action) {
-  switch(action.type) {
-    case SELECT:
-      return {
-        inbox: setEmailToRead(action.id, state),
-        selected: state.inbox.filter(x => x.id === action.id)[0], // this needs to be tested
-        isSelected: true
-      }
-    case DESELECT:
-      return {
-        ...state,
-        selected: {},
-        isSelected: false
-      }
-    default:
-      throw new Error();
-  }
-}*/
+}];
 
 function App() {
   var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_3__["reducer"], {
@@ -39385,13 +39366,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Age", function() { return Age; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _utils_getDisplayAge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/getDisplayAge */ "./src/utils/getDisplayAge.js");
+/* harmony import */ var _utils_getEmailDisplayAge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/getEmailDisplayAge */ "./src/utils/getEmailDisplayAge.js");
 "use strict;";
 
 
 
 function Age(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_getDisplayAge__WEBPACK_IMPORTED_MODULE_1__["getDisplayAge"])(props.age));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_getEmailDisplayAge__WEBPACK_IMPORTED_MODULE_1__["getEmailDisplayAge"])(props.age));
 }
 
 /***/ }),
@@ -39646,7 +39627,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 /* harmony import */ var _age__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./age */ "./src/components/age.js");
-/* harmony import */ var _utils_truncateBody__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/truncateBody */ "./src/utils/truncateBody.js");
+/* harmony import */ var _utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/truncateEmailBody */ "./src/utils/truncateEmailBody.js");
 
 
 
@@ -39676,7 +39657,7 @@ function ListItem(props) {
     age: props.age
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
-  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateBody__WEBPACK_IMPORTED_MODULE_3__["truncateBody"])(props.body), "..."));
+  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_3__["truncateEmailBody"])(props.body), "..."));
 }
 
 /***/ }),
@@ -39989,7 +39970,8 @@ var GlobalContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext()
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
 /* harmony import */ var _utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/setEmailToRead */ "./src/utils/setEmailToRead.js");
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _utils_getSelectedEmailById__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/getSelectedEmailById */ "./src/utils/getSelectedEmailById.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 "use strict;";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -40000,19 +39982,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 function reducer(state, action) {
   switch (action.type) {
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_1__["SELECT"]:
+    case _globalConstants__WEBPACK_IMPORTED_MODULE_2__["SELECT"]:
       return {
         inbox: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.id, state),
-        selected: state.inbox.filter(function (x) {
-          return x.id === action.id;
-        })[0],
-        // this needs to be tested
+        selected: Object(_utils_getSelectedEmailById__WEBPACK_IMPORTED_MODULE_1__["getSelectedEmailById"])(state.inbox, action.id),
         isSelected: true
       };
 
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_1__["DESELECT"]:
+    case _globalConstants__WEBPACK_IMPORTED_MODULE_2__["DESELECT"]:
       return _objectSpread({}, state, {
         selected: {},
         isSelected: false
@@ -40025,23 +40005,45 @@ function reducer(state, action) {
 
 /***/ }),
 
-/***/ "./src/utils/getDisplayAge.js":
-/*!************************************!*\
-  !*** ./src/utils/getDisplayAge.js ***!
-  \************************************/
-/*! exports provided: getDisplayAge */
+/***/ "./src/utils/getEmailDisplayAge.js":
+/*!*****************************************!*\
+  !*** ./src/utils/getEmailDisplayAge.js ***!
+  \*****************************************/
+/*! exports provided: getEmailDisplayAge */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDisplayAge", function() { return getDisplayAge; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEmailDisplayAge", function() { return getEmailDisplayAge; });
 "use strict;";
 
-var getDisplayAge = function getDisplayAge() {
+var getEmailDisplayAge = function getEmailDisplayAge() {
   var age = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
   var displayAge = "today";
   displayAge = age === 1 ? "".concat(age, " day ago") : age > 1 ? "".concat(age, " days ago") : displayAge;
   return displayAge;
+};
+
+/***/ }),
+
+/***/ "./src/utils/getSelectedEmailById.js":
+/*!*******************************************!*\
+  !*** ./src/utils/getSelectedEmailById.js ***!
+  \*******************************************/
+/*! exports provided: getSelectedEmailById */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSelectedEmailById", function() { return getSelectedEmailById; });
+"use strict;";
+
+var getSelectedEmailById = function getSelectedEmailById() {
+  var inbox = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  return inbox.filter(function (x) {
+    return x.id === id;
+  })[0];
 };
 
 /***/ }),
@@ -40106,19 +40108,19 @@ var setEmailToRead = function setEmailToRead(id, context) {
 
 /***/ }),
 
-/***/ "./src/utils/truncateBody.js":
-/*!***********************************!*\
-  !*** ./src/utils/truncateBody.js ***!
-  \***********************************/
-/*! exports provided: truncateBody */
+/***/ "./src/utils/truncateEmailBody.js":
+/*!****************************************!*\
+  !*** ./src/utils/truncateEmailBody.js ***!
+  \****************************************/
+/*! exports provided: truncateEmailBody */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "truncateBody", function() { return truncateBody; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "truncateEmailBody", function() { return truncateEmailBody; });
 "use strict;";
 
-var truncateBody = function truncateBody() {
+var truncateEmailBody = function truncateEmailBody() {
   var body = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
   var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 75;
   var result = body;
