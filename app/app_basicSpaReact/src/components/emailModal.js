@@ -10,9 +10,7 @@ export function EmailModal() {
 
     const context = React.useContext(GlobalContext);
 
-    const handleClose = () => {
-        context.dispatch({ type: 'deselect' });
-    }
+    const handleClose = () => context.dispatch({ type: 'deselect' });
 
     return (
         <Modal show={context.isSelected} onHide={handleClose}>

@@ -39288,7 +39288,7 @@ var inbox = [{
   heading: "Some heading 1",
   body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
   age: 1,
-  read: true
+  read: false
 }, {
   id: 1,
   from: "someone@email.co.uk",
@@ -39332,7 +39332,7 @@ function reducer(state, action) {
 function App() {
   var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(reducer, {
     inbox: inbox,
-    selected: inbox[0],
+    selected: {},
     isSelected: false
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
@@ -39557,7 +39557,7 @@ function EmailModal() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_4__["GlobalContext"]);
 
   var handleClose = function handleClose() {
-    context.dispatch({
+    return context.dispatch({
       type: 'deselect'
     });
   };
@@ -39661,17 +39661,15 @@ __webpack_require__.r(__webpack_exports__);
 function ListItem(props) {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_1__["GlobalContext"]);
 
-  var handleClick = function handleClick(event) {
-    event.preventDefault();
-    context.dispatch({
+  var handleClick = function handleClick() {
+    return context.dispatch({
       type: 'select',
       id: props.id
     });
   };
 
   var activeClass = context.selected.id === props.id ? "active" : "";
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "#",
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: handleClick,
     className: "list-group-item list-group-item-action ".concat(activeClass),
     "aria-current": "true"
@@ -39900,6 +39898,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ // put in constants
 
 var HOME = "/home";
 var ABOUT = "/about";

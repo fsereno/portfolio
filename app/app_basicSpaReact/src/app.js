@@ -13,7 +13,7 @@ const inbox = [
       heading: "Some heading 1",
       body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
       age: 1,
-      read: true
+      read: false
   },
   {
       id: 1,
@@ -57,7 +57,7 @@ function App() {
 
   const [ state, dispatch] = useReducer(reducer, {
     inbox: inbox,
-    selected: inbox[0],
+    selected: {},
     isSelected: false
   });
 
