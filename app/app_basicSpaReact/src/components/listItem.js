@@ -3,7 +3,6 @@
 import React from 'react';
 import { GlobalContext } from '../globalContext';
 import { Age } from './age';
-import { setEmailToRead } from '../utils/setEmailToRead';
 import { truncateBody } from '../utils/truncateBody';
 
 export function ListItem(props) {
@@ -12,22 +11,7 @@ export function ListItem(props) {
 
     const handleClick = (event) => {
         event.preventDefault();
-
-        const collection = setEmailToRead(props.id, context);
-
-        context.setContext(prevContext => (
-            {...prevContext, ...{
-                collection,
-                selected: {
-                    id: props.id,
-                    from: props.from,
-                    heading: props.heading,
-                    age: props.age,
-                    body: props.body
-                },
-                isSelected: true
-            } })
-        );
+        context.dispatch({ type: 'select', id: props.id });
     }
 
     const activeClass = context.selected.id === props.id ? "active" : "";

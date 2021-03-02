@@ -39259,14 +39259,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "../../node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./globalContext */ "./src/globalContext.js");
+/* harmony import */ var _utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/setEmailToRead */ "./src/utils/setEmailToRead.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./globalContext */ "./src/globalContext.js");
 "use strict;";
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -39275,6 +39270,13 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -39301,23 +39303,47 @@ var inbox = [{
   body: "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC",
   age: 3,
   read: false
-}];
+}]; // move reducer into dedicated code
+// declare constants too
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'select':
+      return {
+        inbox: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_3__["setEmailToRead"])(action.id, state),
+        selected: state.inbox.filter(function (x) {
+          return x.id === action.id;
+        })[0],
+        // this needs to be tested
+        isSelected: true
+      };
+
+    case 'deselect':
+      return _objectSpread({}, state, {
+        selected: {},
+        isSelected: false
+      });
+
+    default:
+      throw new Error();
+  }
+}
 
 function App() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(reducer, {
     inbox: inbox,
     selected: inbox[0],
     isSelected: false
   }),
-      _useState2 = _slicedToArray(_useState, 2),
-      _context = _useState2[0],
-      setContext = _useState2[1];
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      state = _useReducer2[0],
+      dispatch = _useReducer2[1];
 
-  var context = _objectSpread({}, _context, {
-    setContext: setContext
+  var context = _objectSpread({}, state, {
+    dispatch: dispatch
   });
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_3__["GlobalContext"].Provider, {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_4__["GlobalContext"].Provider, {
     value: context
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null));
 }
@@ -39398,7 +39424,7 @@ function BrowserPane() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_2__["GlobalContext"]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "list-group"
-  }, context.inbox.map(function (email, index) {
+  }, context.inbox && context.inbox.map(function (email, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listItem__WEBPACK_IMPORTED_MODULE_1__["ListItem"], {
       index: index,
       key: email.id,
@@ -39522,12 +39548,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -39537,17 +39557,15 @@ function EmailModal() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_4__["GlobalContext"]);
 
   var handleClose = function handleClose() {
-    context.setContext(function (prevContext) {
-      return _objectSpread({}, prevContext, {}, {
-        isSelected: false
-      });
+    context.dispatch({
+      type: 'deselect'
     });
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
     show: context.isSelected,
     onHide: handleClose
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Header, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Title, {
+  }, context.selected && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Header, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Title, {
     className: "display-4"
   }, context.selected.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     variant: "link",
@@ -39557,7 +39575,7 @@ function EmailModal() {
     className: "lr"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "rl"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_3__["ReadingPane"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_3__["ReadingPane"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     variant: "dark",
     onClick: handleClose
   }, "Close")));
@@ -39633,15 +39651,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 /* harmony import */ var _age__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./age */ "./src/components/age.js");
-/* harmony import */ var _utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/setEmailToRead */ "./src/utils/setEmailToRead.js");
-/* harmony import */ var _utils_truncateBody__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/truncateBody */ "./src/utils/truncateBody.js");
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+/* harmony import */ var _utils_truncateBody__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/truncateBody */ "./src/utils/truncateBody.js");
 
 
 
@@ -39653,19 +39663,9 @@ function ListItem(props) {
 
   var handleClick = function handleClick(event) {
     event.preventDefault();
-    var collection = Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_3__["setEmailToRead"])(props.id, context);
-    context.setContext(function (prevContext) {
-      return _objectSpread({}, prevContext, {}, {
-        collection: collection,
-        selected: {
-          id: props.id,
-          from: props.from,
-          heading: props.heading,
-          age: props.age,
-          body: props.body
-        },
-        isSelected: true
-      });
+    context.dispatch({
+      type: 'select',
+      id: props.id
     });
   };
 
@@ -39683,7 +39683,7 @@ function ListItem(props) {
     age: props.age
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
-  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateBody__WEBPACK_IMPORTED_MODULE_4__["truncateBody"])(props.body), "..."));
+  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateBody__WEBPACK_IMPORTED_MODULE_3__["truncateBody"])(props.body), "..."));
 }
 
 /***/ }),
@@ -40003,9 +40003,9 @@ var getUnreadEmailCount = function getUnreadEmailCount() {
   var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
     inbox: []
   };
-  return context.inbox.filter(function (x) {
+  return context.inbox ? context.inbox.filter(function (x) {
     return !x.read;
-  }).length;
+  }).length : 0;
 };
 
 /***/ }),

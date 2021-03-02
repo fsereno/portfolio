@@ -1,8 +1,9 @@
 "use strict;"
 
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from './components/router';
+import { setEmailToRead } from './utils/setEmailToRead';
 import { GlobalContext } from './globalContext';
 
 const inbox = [
@@ -31,16 +32,36 @@ const inbox = [
       read: false
   }
 ]
+// move reducer into dedicated code
+// declare constants too
+function reducer(state, action) {
+  switch(action.type) {
+    case 'select':
+      return {
+        inbox: setEmailToRead(action.id, state),
+        selected: state.inbox.filter(x => x.id === action.id)[0], // this needs to be tested
+        isSelected: true
+      }
+    case 'deselect':
+      return {
+        ...state,
+        selected: {},
+        isSelected: false
+      }
+    default:
+      throw new Error();
+  }
+}
 
 function App() {
 
-  const [ _context, setContext ] = useState({
-      inbox: inbox,
-      selected: inbox[0],
-      isSelected: false
+  const [ state, dispatch] = useReducer(reducer, {
+    inbox: inbox,
+    selected: inbox[0],
+    isSelected: false
   });
 
-  const context = { ..._context, setContext };
+  const context = { ...state, dispatch };
 
   return (
     <GlobalContext.Provider value={context}>

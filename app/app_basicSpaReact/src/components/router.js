@@ -10,6 +10,7 @@ import { Inbox } from './inbox';
 import { Request } from './request';
 import { Counter } from './counter';
 
+// put in constants
 const HOME = "/home";
 const ABOUT = "/about";
 const REQUEST = "/request";

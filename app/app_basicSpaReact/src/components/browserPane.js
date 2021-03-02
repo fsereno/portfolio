@@ -10,7 +10,7 @@ export function BrowserPane() {
 
     return(
         <div className="list-group">
-            {context.inbox.map((email, index) => {
+            {context.inbox && context.inbox.map((email, index) => {
                 return(
                     <ListItem
                         index={index}
