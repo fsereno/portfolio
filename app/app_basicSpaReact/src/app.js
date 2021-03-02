@@ -56,7 +56,7 @@ function reducer(state, action) {
 function App() {
 
   const [ state, dispatch] = useReducer(reducer, {
-    inbox: inbox,
+    inbox,
     selected: {},
     isSelected: false
   });
