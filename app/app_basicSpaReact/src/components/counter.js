@@ -9,7 +9,7 @@ export function Counter() {
 
     const context = React.useContext(GlobalContext);
 
-    const count = getUnreadEmailCount(context);
+    const count = getUnreadEmailCount(context.inbox);
 
     return(
         <Badge pill variant="dark">

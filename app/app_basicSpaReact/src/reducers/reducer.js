@@ -8,7 +8,7 @@ export function reducer(state, action) {
     switch(action.type) {
       case SELECT:
         return {
-          inbox: setEmailToRead(action.id, state),
+          inbox: setEmailToRead(action.id, state.inbox),
           selected: getSelectedEmailById(state.inbox, action.id),
           isSelected: true
         }

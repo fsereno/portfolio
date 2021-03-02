@@ -39464,7 +39464,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function Counter() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_3__["GlobalContext"]);
-  var count = Object(_utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_2__["getUnreadEmailCount"])(context);
+  var count = Object(_utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_2__["getUnreadEmailCount"])(context.inbox);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_1__["default"], {
     pill: true,
     variant: "dark"
@@ -39987,7 +39987,7 @@ function reducer(state, action) {
   switch (action.type) {
     case _globalConstants__WEBPACK_IMPORTED_MODULE_2__["SELECT"]:
       return {
-        inbox: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.id, state),
+        inbox: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.id, state.inbox),
         selected: Object(_utils_getSelectedEmailById__WEBPACK_IMPORTED_MODULE_1__["getSelectedEmailById"])(state.inbox, action.id),
         isSelected: true
       };
@@ -40061,10 +40061,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict;";
 
 var getUnreadEmailCount = function getUnreadEmailCount() {
-  var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    inbox: []
-  };
-  return context.inbox ? context.inbox.filter(function (x) {
+  var inbox = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  return inbox.length > 0 ? inbox.filter(function (x) {
     return !x.read;
   }).length : 0;
 };
@@ -40091,10 +40089,10 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-var setEmailToRead = function setEmailToRead(id, context) {
+var setEmailToRead = function setEmailToRead(id, inbox) {
   var read = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  var collection = _toConsumableArray(context.inbox);
+  var collection = _toConsumableArray(inbox);
 
   collection = collection.map(function (item) {
     if (item.id === id) {
