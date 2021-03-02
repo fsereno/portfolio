@@ -33,10 +33,13 @@ const inbox = [
   }
 ]
 
+const outbox = [];
+
 function App() {
 
   const [ state, dispatch] = useReducer(reducer, {
     inbox,
+    outbox,
     selected: {},
     isSelected: false,
     isReply: false

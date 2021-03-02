@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ReadingPane } from './readingPane';
+import { SUBMIT } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
 export function ReplyPane() {
@@ -17,18 +18,21 @@ export function ReplyPane() {
         event.preventDefault();
 
         const form = event.currentTarget;
+        const formData = new FormData(form);
 
         if (form.checkValidity() === false) {
 
-          setValidated(true);
-          event.stopPropagation();
+            setValidated(true);
+            event.stopPropagation();
 
         } else {
 
-          setValidated(false);
-
+            setValidated(false);
+            context.dispatch({
+                type: SUBMIT,
+                selected: { ...context.selected, body: formData.get("message") }
+            });
         }
-
       };
 
     return(
@@ -37,15 +41,8 @@ export function ReplyPane() {
                 <Form.Row>
                     <Form.Group as={Col}>
                         <Form.Label>
-                           To:
+                           To: {context.selected.from}
                         </Form.Label>
-                        <Form.Control
-                            name="toInput"
-                            id="toInput"
-                            type="text"
-                            value={context.selected.from}
-                            required
-                        />
                         <Form.Control.Feedback type="invalid">
                             Please enter a value.
                         </Form.Control.Feedback>

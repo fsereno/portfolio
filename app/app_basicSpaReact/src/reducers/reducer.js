@@ -2,22 +2,37 @@
 
 import { setEmailToRead } from '../utils/setEmailToRead';
 import { getSelectedEmailById } from '../utils/getSelectedEmailById';
-import { SELECT, DESELECT, REPLY } from '../globalConstants';
+import { SELECT, DESELECT, REPLY, SUBMIT } from '../globalConstants';
 
 export function reducer(state, action) {
     switch(action.type) {
       case SELECT:
         return {
+          ...state,
           inbox: setEmailToRead(action.id, state.inbox),
           selected: getSelectedEmailById(state.inbox, action.id),
           isSelected: true,
           isReply: false
         }
-        case REPLY:
-          return {
-            ...state,
-            isReply: true
-          }
+      case REPLY:
+        return {
+          ...state,
+          isReply: true
+        }
+      case SUBMIT:
+
+        const outbox = [ ...state.outbox ];
+
+        //const data = { ...action.selected, body: action.body };
+
+        outbox.push(action.selected);
+
+        return {
+          ...state,
+          outbox,
+          selected: {},
+          isSelected: false
+        }
       case DESELECT:
         return {
           ...state,
