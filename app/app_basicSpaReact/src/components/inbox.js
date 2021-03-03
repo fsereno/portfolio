@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { Content } from "./content";
-import { EmailClient } from "./emailClient";
+import { InboxClient } from "./inboxClient";
 
 export function Inbox() {
     return(
-      <Content title="Inbox" component={EmailClient} />
+      <Content title="Inbox" component={InboxClient} />
     )
 }

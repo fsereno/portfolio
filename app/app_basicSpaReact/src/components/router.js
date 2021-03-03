@@ -6,8 +6,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { Home } from './home';
 import { Inbox } from './inbox';
+import { Outbox } from './outbox';
 import { Counter } from './counter';
-import { HOME, INBOX } from '../globalConstants';
+import { HOME, INBOX, OUTBOX } from '../globalConstants';
 
 export function Router() {
     return(
@@ -16,6 +17,7 @@ export function Router() {
                 <Nav className="mr-auto">
                     <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={HOME}>Home</NavLink>
                     <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={INBOX}>Inbox <Counter/></NavLink>
+                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={OUTBOX}>Outbox</NavLink>
                 </Nav>
             </Navbar>
             <Switch>
@@ -27,6 +29,9 @@ export function Router() {
                 </Route>
                 <Route path={INBOX}>
                     <Inbox/>
+                </Route>
+                <Route path={OUTBOX}>
+                    <Outbox/>
                 </Route>
             </Switch>
         </HashRouter>

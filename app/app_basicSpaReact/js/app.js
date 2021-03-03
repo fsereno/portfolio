@@ -39217,6 +39217,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
 /* harmony import */ var _reducers_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reducers/reducer */ "./src/reducers/reducer.js");
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./globalContext */ "./src/globalContext.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./globalConstants */ "./src/globalConstants.js");
 "use strict;";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -39238,34 +39239,36 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var inbox = [{
   id: 0,
   from: "someone@email.co.uk",
   heading: "Some heading 1",
   body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
   age: 1,
-  read: false
+  read: false,
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["INBOX"]
 }, {
   id: 1,
   from: "someone@email.co.uk",
   heading: "Some heading 2",
   body: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
   age: 2,
-  read: false
+  read: false,
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["INBOX"]
 }, {
   id: 2,
   from: "someone@email.co.uk",
   heading: "Some heading 3",
   body: "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC",
   age: 3,
-  read: false
+  read: false,
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["INBOX"]
 }];
-var outbox = [];
 
 function App() {
   var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_3__["reducer"], {
     inbox: inbox,
-    outbox: outbox,
     selected: {},
     isSelected: false,
     isReply: false
@@ -39323,17 +39326,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _listItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./listItem */ "./src/components/listItem.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 
 
-
-function BrowserPane() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_2__["GlobalContext"]);
+function BrowserPane(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "list-group"
-  }, context.inbox && context.inbox.map(function (email, index) {
+  }, props.collection.map(function (email, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listItem__WEBPACK_IMPORTED_MODULE_1__["ListItem"], {
       index: index,
       key: email.id,
@@ -39402,39 +39402,6 @@ function Counter() {
     pill: true,
     variant: "dark"
   }, count);
-}
-
-/***/ }),
-
-/***/ "./src/components/emailClient.js":
-/*!***************************************!*\
-  !*** ./src/components/emailClient.js ***!
-  \***************************************/
-/*! exports provided: EmailClient */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmailClient", function() { return EmailClient; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./counter */ "./src/components/counter.js");
-/* harmony import */ var _browserPane__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./browserPane */ "./src/components/browserPane.js");
-/* harmony import */ var _emailModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./emailModal */ "./src/components/emailModal.js");
-"use strict;";
-
-
-
-
-
-
-
-function EmailClient() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    className: "mb-2"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_3__["Counter"], null), " unread messages")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_browserPane__WEBPACK_IMPORTED_MODULE_4__["BrowserPane"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailModal__WEBPACK_IMPORTED_MODULE_5__["EmailModal"], null));
 }
 
 /***/ }),
@@ -39543,7 +39510,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./content */ "./src/components/content.js");
-/* harmony import */ var _emailClient__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./emailClient */ "./src/components/emailClient.js");
+/* harmony import */ var _inboxClient__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./inboxClient */ "./src/components/inboxClient.js");
 "use strict;";
 
 
@@ -39552,8 +39519,50 @@ __webpack_require__.r(__webpack_exports__);
 function Inbox() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_1__["Content"], {
     title: "Inbox",
-    component: _emailClient__WEBPACK_IMPORTED_MODULE_2__["EmailClient"]
+    component: _inboxClient__WEBPACK_IMPORTED_MODULE_2__["InboxClient"]
   });
+}
+
+/***/ }),
+
+/***/ "./src/components/inboxClient.js":
+/*!***************************************!*\
+  !*** ./src/components/inboxClient.js ***!
+  \***************************************/
+/*! exports provided: InboxClient */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InboxClient", function() { return InboxClient; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./counter */ "./src/components/counter.js");
+/* harmony import */ var _browserPane__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./browserPane */ "./src/components/browserPane.js");
+/* harmony import */ var _emailModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./emailModal */ "./src/components/emailModal.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+"use strict;";
+
+
+
+
+
+
+
+
+
+function InboxClient() {
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_7__["GlobalContext"]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "mb-2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_3__["Counter"], null), " unread messages")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_browserPane__WEBPACK_IMPORTED_MODULE_4__["BrowserPane"], {
+    collection: context.inbox.filter(function (x) {
+      return x.dir === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"];
+    })
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailModal__WEBPACK_IMPORTED_MODULE_5__["EmailModal"], null));
 }
 
 /***/ }),
@@ -39605,6 +39614,72 @@ function ListItem(props) {
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
   }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_2__["truncateEmailBody"])(props.body), "..."));
+}
+
+/***/ }),
+
+/***/ "./src/components/outbox.js":
+/*!**********************************!*\
+  !*** ./src/components/outbox.js ***!
+  \**********************************/
+/*! exports provided: Outbox */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Outbox", function() { return Outbox; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./content */ "./src/components/content.js");
+/* harmony import */ var _outboxClient__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./outboxClient */ "./src/components/outboxClient.js");
+"use strict;";
+
+
+
+
+function Outbox() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_1__["Content"], {
+    title: "Outbox",
+    component: _outboxClient__WEBPACK_IMPORTED_MODULE_2__["OutboxClient"]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/components/outboxClient.js":
+/*!****************************************!*\
+  !*** ./src/components/outboxClient.js ***!
+  \****************************************/
+/*! exports provided: OutboxClient */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OutboxClient", function() { return OutboxClient; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var _browserPane__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./browserPane */ "./src/components/browserPane.js");
+/* harmony import */ var _emailModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./emailModal */ "./src/components/emailModal.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+"use strict;";
+
+
+
+
+
+
+
+
+function OutboxClient() {
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_6__["GlobalContext"]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_browserPane__WEBPACK_IMPORTED_MODULE_3__["BrowserPane"], {
+    collection: context.inbox.filter(function (x) {
+      return x.dir === _globalConstants__WEBPACK_IMPORTED_MODULE_5__["OUTBOX"];
+    })
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailModal__WEBPACK_IMPORTED_MODULE_4__["EmailModal"], null));
 }
 
 /***/ }),
@@ -39696,10 +39771,13 @@ function ReplyPane() {
       event.stopPropagation();
     } else {
       setValidated(false);
+      var body = formData.get("message");
       context.dispatch({
         type: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["SUBMIT"],
         selected: _objectSpread({}, context.selected, {
-          body: formData.get("message")
+          id: Math.random() * 10,
+          body: body,
+          dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["OUTBOX"]
         })
       });
     }
@@ -39752,9 +39830,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Nav */ "../../node_modules/react-bootstrap/esm/Nav.js");
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home */ "./src/components/home.js");
 /* harmony import */ var _inbox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./inbox */ "./src/components/inbox.js");
-/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./counter */ "./src/components/counter.js");
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _outbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./outbox */ "./src/components/outbox.js");
+/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./counter */ "./src/components/counter.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 "use strict;";
+
 
 
 
@@ -39775,21 +39855,27 @@ function Router() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
     className: "nav-link pb-1 pt-1 px-3",
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["HOME"]
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["HOME"]
   }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
     className: "nav-link pb-1 pt-1 px-3",
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["INBOX"]
-  }, "Inbox ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_6__["Counter"], null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["INBOX"]
+  }, "Inbox ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_7__["Counter"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    activeClassName: "active",
+    className: "nav-link pb-1 pt-1 px-3",
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["OUTBOX"]
+  }, "Outbox"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["HOME"]
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["HOME"]
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["HOME"]
+    path: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["HOME"]
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home__WEBPACK_IMPORTED_MODULE_4__["Home"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["INBOX"]
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inbox__WEBPACK_IMPORTED_MODULE_5__["Inbox"], null))));
+    path: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["INBOX"]
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inbox__WEBPACK_IMPORTED_MODULE_5__["Inbox"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["OUTBOX"]
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outbox__WEBPACK_IMPORTED_MODULE_6__["Outbox"], null))));
 }
 
 /***/ }),
@@ -39798,7 +39884,7 @@ function Router() {
 /*!********************************!*\
   !*** ./src/globalConstants.js ***!
   \********************************/
-/*! exports provided: SELECT, DESELECT, REPLY, SUBMIT, HOME, INBOX */
+/*! exports provided: SELECT, DESELECT, REPLY, SUBMIT, HOME, INBOX, OUTBOX */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39809,6 +39895,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUBMIT", function() { return SUBMIT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HOME", function() { return HOME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INBOX", function() { return INBOX; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OUTBOX", function() { return OUTBOX; });
 "use strict;";
 
 var SELECT = "select";
@@ -39817,6 +39904,7 @@ var REPLY = "reply";
 var SUBMIT = "submit";
 var HOME = "/home";
 var INBOX = "/inbox";
+var OUTBOX = "/outbox";
 
 /***/ }),
 
@@ -39874,12 +39962,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function reducer(state, action) {
   switch (action.type) {
     case _globalConstants__WEBPACK_IMPORTED_MODULE_2__["SELECT"]:
-      return _objectSpread({}, state, {
+      return {
         inbox: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.id, state.inbox),
         selected: Object(_utils_getSelectedEmailById__WEBPACK_IMPORTED_MODULE_1__["getSelectedEmailById"])(state.inbox, action.id),
         isSelected: true,
         isReply: false
-      });
+      };
 
     case _globalConstants__WEBPACK_IMPORTED_MODULE_2__["REPLY"]:
       return _objectSpread({}, state, {
@@ -39887,12 +39975,11 @@ function reducer(state, action) {
       });
 
     case _globalConstants__WEBPACK_IMPORTED_MODULE_2__["SUBMIT"]:
-      var outbox = _toConsumableArray(state.outbox); //const data = { ...action.selected, body: action.body };
+      var inbox = _toConsumableArray(state.inbox);
 
-
-      outbox.push(action.selected);
+      inbox.push(action.selected);
       return _objectSpread({}, state, {
-        outbox: outbox,
+        inbox: inbox,
         selected: {},
         isSelected: false
       });

@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ReadingPane } from './readingPane';
-import { SUBMIT } from '../globalConstants';
+import { SUBMIT, OUTBOX } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
 export function ReplyPane() {
@@ -28,9 +28,17 @@ export function ReplyPane() {
         } else {
 
             setValidated(false);
+
+            const body = formData.get("message");
+
             context.dispatch({
                 type: SUBMIT,
-                selected: { ...context.selected, body: formData.get("message") }
+                selected: {
+                    ...context.selected,
+                    id: Math.random() * 10,
+                    body,
+                    dir: OUTBOX
+                }
             });
         }
       };

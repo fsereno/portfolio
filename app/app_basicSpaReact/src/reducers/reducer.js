@@ -8,7 +8,6 @@ export function reducer(state, action) {
     switch(action.type) {
       case SELECT:
         return {
-          ...state,
           inbox: setEmailToRead(action.id, state.inbox),
           selected: getSelectedEmailById(state.inbox, action.id),
           isSelected: true,
@@ -21,15 +20,13 @@ export function reducer(state, action) {
         }
       case SUBMIT:
 
-        const outbox = [ ...state.outbox ];
+        const inbox = [ ...state.inbox ];
 
-        //const data = { ...action.selected, body: action.body };
-
-        outbox.push(action.selected);
+        inbox.push(action.selected);
 
         return {
           ...state,
-          outbox,
+          inbox,
           selected: {},
           isSelected: false
         }

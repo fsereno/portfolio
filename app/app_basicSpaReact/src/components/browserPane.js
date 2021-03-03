@@ -2,15 +2,11 @@
 
 import React from 'react';
 import { ListItem } from './listItem';
-import { GlobalContext } from '../globalContext';
 
-export function BrowserPane() {
-
-    const context = React.useContext(GlobalContext)
-
+export function BrowserPane(props) {
     return(
         <div className="list-group">
-            {context.inbox && context.inbox.map((email, index) => {
+            {props.collection.map((email, index) => {
                 return(
                     <ListItem
                         index={index}

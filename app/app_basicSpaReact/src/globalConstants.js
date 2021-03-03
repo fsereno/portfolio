@@ -6,3 +6,4 @@ export const REPLY = "reply";
 export const SUBMIT = "submit";
 export const HOME = "/home";
 export const INBOX = "/inbox";
+export const OUTBOX = "/outbox";
