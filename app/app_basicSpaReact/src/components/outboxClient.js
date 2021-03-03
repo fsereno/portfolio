@@ -15,7 +15,6 @@ export function OutboxClient() {
                     <EmailClient dir={OUTBOX} />
                 </Col>
             </Row>
-            <EmailModal/>
         </>
     )
 }

@@ -12,6 +12,7 @@ export function ReadingPane() {
         <>
             <Age age={context.selected.age}/>
             <p>From: {context.selected.from}</p>
+            <p>To: {context.selected.to}</p>
             {context.selected.body && context.selected.body.map(body => {
                 return (
                     <div>

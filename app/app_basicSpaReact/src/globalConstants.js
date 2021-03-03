@@ -7,3 +7,4 @@ export const SUBMIT = "submit";
 export const HOME = "/home";
 export const INBOX = "/inbox";
 export const OUTBOX = "/outbox";
+export const MY_ADDRESS = "me@portfolio.co.uk";

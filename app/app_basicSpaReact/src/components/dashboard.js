@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Counter } from './counter';
+import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
 import { INBOX, OUTBOX } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
@@ -9,9 +10,9 @@ export function Dashboard() {
 
     const context = React.useContext(GlobalContext)
 
-    const inboxCount = context.messages.filter(x => x.dir === INBOX).length;
+    const inboxCount = getMessagesByDirectory(context.messages, INBOX).length;
 
-    const outboxCount = context.messages.filter(x => x.dir === OUTBOX).length;
+    const outboxCount = getMessagesByDirectory(context.messages, OUTBOX).length;
 
     return(
         <>

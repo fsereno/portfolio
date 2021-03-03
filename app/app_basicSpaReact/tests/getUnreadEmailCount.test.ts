@@ -9,18 +9,18 @@ describe("getUnreadEmailCount", () => {
         expect(result).to.equal(0);
     });
     it("Should return 1 when array passed has 1 unread", () => {
-        const inbox = [ { read: false } ];
-        const result = getUnreadEmailCount(inbox);
+        const inbox = [ { read: false, dir: "A" }, { read: false, dir: "B" } ];
+        const result = getUnreadEmailCount(inbox, "A");
         expect(result).to.equal(1);
     });
     it("Should return 1 when array passed has 1 unread and 1 read", () => {
-        const inbox = [ { read: false }, { read: true } ];
-        const result = getUnreadEmailCount(inbox);
+        const inbox = [ { read: false, dir: "A" }, { read: true, dir: "A" } ];
+        const result = getUnreadEmailCount(inbox, "A");
         expect(result).to.equal(1);
     });
     it("Should return 0 when array passed has all read", () => {
-        const inbox = [ { read: true }, { read: true } ];
-        const result = getUnreadEmailCount(inbox);
+        const inbox = [ { read: true, dir: "A" }, { read: true, dir: "A" } ];
+        const result = getUnreadEmailCount(inbox, "A");
         expect(result).to.equal(0);
     });
 });

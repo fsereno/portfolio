@@ -16,7 +16,7 @@ export function Router() {
 
     const context = React.useContext(GlobalContext);
 
-    const count = getUnreadEmailCount(context.messages);
+    const count = getUnreadEmailCount(context.messages, INBOX);
 
     return(
         <HashRouter>

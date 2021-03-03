@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ReadingPane } from './readingPane';
-import { SUBMIT, OUTBOX } from '../globalConstants';
+import { SUBMIT, OUTBOX, MY_ADDRESS } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
 export function ReplyPane() {
@@ -13,6 +13,13 @@ export function ReplyPane() {
     const context = React.useContext(GlobalContext);
 
     const [ validated, setValidated ] = useState(false);
+
+    const [ to, setTo ] = useState(context.selected.to && context.selected.from
+            ? context.selected.to === MY_ADDRESS
+                ? context.selected.from
+                : context.selected.to
+            : "");
+    const [ subject, setSubject ] = useState(context.selected.heading || "");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -29,15 +36,20 @@ export function ReplyPane() {
 
             setValidated(false);
 
-            const body = [ ...context.selected.body ];
+            const subject = formData.get("subject");
+            const body = context.selected.body ? [ ...context.selected.body ] : [];
             body.unshift(formData.get("message"));
 
             context.dispatch({
                 type: SUBMIT,
                 selected: {
                     ...context.selected,
+                    heading: subject,
                     id: Math.random() * 10,
+                    from: formData.get("from"),
+                    to: formData.get("to"),
                     body,
+                    read: false,
                     dir: OUTBOX
                 }
             });
@@ -50,8 +62,51 @@ export function ReplyPane() {
                 <Form.Row>
                     <Form.Group as={Col}>
                         <Form.Label>
-                           To: {context.selected.from}
+                           From:
                         </Form.Label>
+                        <Form.Control
+                            name="from"
+                            id="from"
+                            type="text"
+                            value={MY_ADDRESS}
+                            readOnly
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please enter a value.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>
+                           To:
+                        </Form.Label>
+                        <Form.Control
+                            name="to"
+                            id="to"
+                            type="text"
+                            value={to}
+                            onChange={event => setTo(event.target.value)}
+                            required
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please enter a value.
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col}>
+                        <Form.Label>
+                           Subject:
+                        </Form.Label>
+                        <Form.Control
+                            name="subject"
+                            id="subject"
+                            type="text"
+                            value={subject}
+                            onChange={event => setSubject(event.target.value)}
+                            required
+                        />
                         <Form.Control.Feedback type="invalid">
                             Please enter a value.
                         </Form.Control.Feedback>
