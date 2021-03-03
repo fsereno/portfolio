@@ -39244,7 +39244,7 @@ var inbox = [{
   id: 0,
   from: "someone@email.co.uk",
   heading: "Some heading 1",
-  body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+  body: ["Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."],
   age: 1,
   read: false,
   dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["INBOX"]
@@ -39252,7 +39252,7 @@ var inbox = [{
   id: 1,
   from: "someone@email.co.uk",
   heading: "Some heading 2",
-  body: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
+  body: ["Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source."],
   age: 2,
   read: false,
   dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["INBOX"]
@@ -39260,7 +39260,7 @@ var inbox = [{
   id: 2,
   from: "someone@email.co.uk",
   heading: "Some heading 3",
-  body: "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC",
+  body: ["Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC"],
   age: 3,
   read: false,
   dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["INBOX"]
@@ -39613,7 +39613,7 @@ function ListItem(props) {
     age: props.age
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
-  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_2__["truncateEmailBody"])(props.body), "..."));
+  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_2__["truncateEmailBody"])(props.body.reverse()[0]), "..."));
 }
 
 /***/ }),
@@ -39707,7 +39707,9 @@ function ReadingPane() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_2__["GlobalContext"]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_age__WEBPACK_IMPORTED_MODULE_1__["Age"], {
     age: context.selected.age
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "From: ", context.selected.from), context.selected.body);
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "From: ", context.selected.from), context.selected.body && context.selected.body.reverse().map(function (body) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), body);
+  }));
 }
 
 /***/ }),
@@ -39737,6 +39739,14 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -39771,7 +39781,10 @@ function ReplyPane() {
       event.stopPropagation();
     } else {
       setValidated(false);
-      var body = formData.get("message");
+
+      var body = _toConsumableArray(context.selected.body);
+
+      body.push(formData.get("message"));
       context.dispatch({
         type: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["SUBMIT"],
         selected: _objectSpread({}, context.selected, {

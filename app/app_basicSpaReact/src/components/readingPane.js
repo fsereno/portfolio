@@ -12,7 +12,14 @@ export function ReadingPane() {
         <>
             <Age age={context.selected.age}/>
             <p>From: {context.selected.from}</p>
-            {context.selected.body}
+            {context.selected.body && context.selected.body.reverse().map(body => {
+                return (
+                    <div>
+                        <hr/>
+                        {body}
+                    </div>
+                )
+            })}
         </>
     )
 }
