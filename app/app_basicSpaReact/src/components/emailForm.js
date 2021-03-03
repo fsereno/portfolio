@@ -46,6 +46,7 @@ export function EmailForm() {
                     from: formData.get("from"),
                     to: formData.get("to"),
                     body,
+                    age: 0,
                     dir: OUTBOX
                 }
             });

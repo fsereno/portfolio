@@ -39566,6 +39566,7 @@ function EmailForm() {
           from: formData.get("from"),
           to: formData.get("to"),
           body: body,
+          age: 0,
           dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["OUTBOX"]
         })
       });
