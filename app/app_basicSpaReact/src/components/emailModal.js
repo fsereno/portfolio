@@ -5,7 +5,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { ReadingPane } from './readingPane';
 import { ReplyPane } from './replyPane';
-import { DESELECT, REPLY } from '../globalConstants';
+import { NewPane } from './newPane';
+import { DESELECT, REPLY, READ, NEW_MESSAGE } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
 export function EmailModal() {
@@ -17,7 +18,7 @@ export function EmailModal() {
     const handleReplyClick = () => context.dispatch({ type: REPLY });
 
     return (
-        <Modal show={context.isSelected} onHide={handleClose}>
+        <Modal show={context.showModal} onHide={handleClose}>
             {context.selected &&
                 <>
                     <Modal.Header>
@@ -29,17 +30,20 @@ export function EmailModal() {
                         </Button>
                     </Modal.Header>
                     <Modal.Body>
-                        {!context.isReply &&
+                        {context.mode === READ &&
                             <ReadingPane/>
                         }
-                        {context.isReply &&
+                        {context.mode === REPLY &&
                             <ReplyPane/>
+                        }
+                        {context.mode === NEW_MESSAGE &&
+                            <NewPane/>
                         }
                     </Modal.Body>
                 </>
             }
             <Modal.Footer>
-                {!context.isReply &&
+                {context.mode === READ &&
                     <>
                         <Button onClick={handleReplyClick}>
                             Reply

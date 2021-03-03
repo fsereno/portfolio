@@ -2,7 +2,7 @@
 
 import { setEmailToRead } from '../utils/setEmailToRead';
 import { getSelectedEmailById } from '../utils/getSelectedEmailById';
-import { SELECT, DESELECT, REPLY, SUBMIT, NEW_MESSAGE } from '../globalConstants';
+import { SELECT, DESELECT, REPLY, SUBMIT, NEW_MESSAGE, READ } from '../globalConstants';
 
 export function reducer(state, action) {
     switch(action.type) {
@@ -10,13 +10,13 @@ export function reducer(state, action) {
         return {
           messages: setEmailToRead(action.id, state.messages),
           selected: getSelectedEmailById(state.messages, action.id),
-          isSelected: true,
-          isReply: false
+          showModal: true,
+          mode: READ
         }
       case REPLY:
         return {
           ...state,
-          isReply: true
+          mode: REPLY
         }
       case SUBMIT:
 
@@ -28,20 +28,21 @@ export function reducer(state, action) {
           ...state,
           messages,
           selected: {},
-          isSelected: false
+          showModal: false
         }
       case DESELECT:
         return {
           ...state,
           selected: {},
-          isSelected: false
+          showModal: false,
+          mode: READ
         }
         case NEW_MESSAGE:
           return {
             ...state,
             selected: {},
-            isSelected: true,
-            isReply: true
+            showModal: true,
+            mode: NEW_MESSAGE
           }
       default:
         throw new Error();

@@ -6,8 +6,7 @@ import { Router } from './components/router';
 import { reducer } from './reducers/reducer';
 import { EmailModal } from './components/emailModal';
 import { GlobalContext } from './globalContext';
-import { MY_ADDRESS } from './globalConstants';
-import { INBOX } from './globalConstants';
+import { MY_ADDRESS, INBOX, READ } from './globalConstants';
 
 const messages = [
   {
@@ -47,8 +46,8 @@ function App() {
   const [ state, dispatch] = useReducer(reducer, {
     messages,
     selected: {},
-    isSelected: false,
-    isReply: false
+    showModal: false,
+    mode: READ
   });
 
   const context = { ...state, dispatch };

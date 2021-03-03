@@ -4,7 +4,6 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Counter } from './counter';
-import { EmailModal } from './emailModal'
 import { EmailClient } from './emailClient'
 import { getUnreadEmailCount } from '../utils/getUnreadEmailCount';
 import { INBOX } from '../globalConstants';

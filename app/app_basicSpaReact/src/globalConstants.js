@@ -5,6 +5,7 @@ export const DESELECT = "deselect";
 export const REPLY = "reply";
 export const SUBMIT = "submit";
 export const NEW_MESSAGE = "newMessage";
+export const READ = "read";
 
 export const HOME = "/home";
 export const INBOX = "/inbox";
