@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ReadingPane } from './readingPane';
+import { getReplyToEmailAddress } from '../utils/getReplyToEmailAddress';
 import { SUBMIT, OUTBOX, MY_ADDRESS } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
@@ -14,11 +15,8 @@ export function ReplyPane() {
 
     const [ validated, setValidated ] = useState(false);
 
-    const [ to, setTo ] = useState(context.selected.to && context.selected.from
-            ? context.selected.to === MY_ADDRESS
-                ? context.selected.from
-                : context.selected.to
-            : "");
+    const [ to, setTo ] = useState(getReplyToEmailAddress(context.selected));
+
     const [ subject, setSubject ] = useState(context.selected.heading || "");
 
     const handleSubmit = (event) => {
@@ -49,7 +47,6 @@ export function ReplyPane() {
                     from: formData.get("from"),
                     to: formData.get("to"),
                     body,
-                    read: false,
                     dir: OUTBOX
                 }
             });

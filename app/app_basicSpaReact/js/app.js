@@ -39802,8 +39802,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
 /* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
 /* harmony import */ var _readingPane__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./readingPane */ "./src/components/readingPane.js");
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _utils_getReplyToEmailAddress__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/getReplyToEmailAddress */ "./src/utils/getReplyToEmailAddress.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -39835,15 +39836,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function ReplyPane() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_6__["GlobalContext"]);
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_7__["GlobalContext"]);
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       validated = _useState2[0],
       setValidated = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(context.selected.to && context.selected.from ? context.selected.to === _globalConstants__WEBPACK_IMPORTED_MODULE_5__["MY_ADDRESS"] ? context.selected.from : context.selected.to : ""),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(Object(_utils_getReplyToEmailAddress__WEBPACK_IMPORTED_MODULE_5__["getReplyToEmailAddress"])(context.selected)),
       _useState4 = _slicedToArray(_useState3, 2),
       to = _useState4[0],
       setTo = _useState4[1];
@@ -39869,15 +39871,14 @@ function ReplyPane() {
       var body = context.selected.body ? _toConsumableArray(context.selected.body) : [];
       body.unshift(formData.get("message"));
       context.dispatch({
-        type: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["SUBMIT"],
+        type: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["SUBMIT"],
         selected: _objectSpread({}, context.selected, {
           heading: _subject,
           id: Math.random() * 10,
           from: formData.get("from"),
           to: formData.get("to"),
           body: body,
-          read: false,
-          dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["OUTBOX"]
+          dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["OUTBOX"]
         })
       });
     }
@@ -39893,7 +39894,7 @@ function ReplyPane() {
     name: "from",
     id: "from",
     type: "text",
-    value: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["MY_ADDRESS"],
+    value: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
     readOnly: true
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Control.Feedback, {
     type: "invalid"
@@ -40178,6 +40179,32 @@ var getMessagesByDirectory = function getMessagesByDirectory() {
   return messages.filter(function (x) {
     return x.dir === dir;
   });
+};
+
+/***/ }),
+
+/***/ "./src/utils/getReplyToEmailAddress.js":
+/*!*********************************************!*\
+  !*** ./src/utils/getReplyToEmailAddress.js ***!
+  \*********************************************/
+/*! exports provided: getReplyToEmailAddress */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getReplyToEmailAddress", function() { return getReplyToEmailAddress; });
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+"use strict;";
+
+
+var getReplyToEmailAddress = function getReplyToEmailAddress(selected) {
+  var address = "";
+
+  if (selected.to && selected.from) {
+    address = selected.to === _globalConstants__WEBPACK_IMPORTED_MODULE_0__["MY_ADDRESS"] ? selected.from : selected.to;
+  }
+
+  return address;
 };
 
 /***/ }),
