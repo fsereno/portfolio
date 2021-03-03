@@ -22,7 +22,7 @@ export function reducer(state, action) {
 
         const inbox = [ ...state.inbox ];
 
-        inbox.push(action.selected);
+        inbox.unshift(action.selected);
 
         return {
           ...state,

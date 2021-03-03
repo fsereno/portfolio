@@ -30,7 +30,7 @@ export function ReplyPane() {
             setValidated(false);
 
             const body = [ ...context.selected.body ];
-            body.push(formData.get("message"));
+            body.unshift(formData.get("message"));
 
             context.dispatch({
                 type: SUBMIT,
