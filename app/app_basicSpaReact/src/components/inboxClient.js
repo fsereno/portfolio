@@ -14,7 +14,7 @@ export function InboxClient() {
 
     const context = React.useContext(GlobalContext);
 
-    const count = getUnreadEmailCount(context.inbox);
+    const count = getUnreadEmailCount(context.messages);
 
     return(
         <>

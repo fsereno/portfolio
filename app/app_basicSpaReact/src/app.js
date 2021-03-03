@@ -7,7 +7,7 @@ import { reducer } from './reducers/reducer';
 import { GlobalContext } from './globalContext';
 import { INBOX } from './globalConstants';
 
-const inbox = [
+const messages = [
   {
       id: 0,
       from: "someone@email.co.uk",
@@ -40,7 +40,7 @@ const inbox = [
 function App() {
 
   const [ state, dispatch] = useReducer(reducer, {
-    inbox,
+    messages,
     selected: {},
     isSelected: false,
     isReply: false

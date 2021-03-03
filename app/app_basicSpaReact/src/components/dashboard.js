@@ -9,9 +9,9 @@ export function Dashboard() {
 
     const context = React.useContext(GlobalContext)
 
-    const inboxCount = context.inbox.filter(x => x.dir === INBOX).length;
+    const inboxCount = context.messages.filter(x => x.dir === INBOX).length;
 
-    const outboxCount = context.inbox.filter(x => x.dir === OUTBOX).length;
+    const outboxCount = context.messages.filter(x => x.dir === OUTBOX).length;
 
     return(
         <>

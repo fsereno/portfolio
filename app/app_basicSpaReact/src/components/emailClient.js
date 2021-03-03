@@ -11,7 +11,7 @@ export function EmailClient(props) {
 
     const context = React.useContext(GlobalContext)
 
-    const collection = context.inbox.filter(x => x.dir === props.dir);
+    const collection = context.messages.filter(x => x.dir === props.dir);
 
     return(
         <>

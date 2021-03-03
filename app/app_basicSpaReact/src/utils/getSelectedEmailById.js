@@ -1,3 +1,3 @@
 "use strict;"
 
-export const getSelectedEmailById = (inbox = [], id = 0) => inbox.filter(x => x.id === id)[0];
+export const getSelectedEmailById = (messages = [], id = 0) => messages.filter(x => x.id === id)[0];

@@ -39240,7 +39240,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var inbox = [{
+var messages = [{
   id: 0,
   from: "someone@email.co.uk",
   heading: "Some heading 1",
@@ -39268,7 +39268,7 @@ var inbox = [{
 
 function App() {
   var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_3__["reducer"], {
-    inbox: inbox,
+    messages: messages,
     selected: {},
     isSelected: false,
     isReply: false
@@ -39423,10 +39423,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function Dashboard() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_3__["GlobalContext"]);
-  var inboxCount = context.inbox.filter(function (x) {
+  var inboxCount = context.messages.filter(function (x) {
     return x.dir === _globalConstants__WEBPACK_IMPORTED_MODULE_2__["INBOX"];
   }).length;
-  var outboxCount = context.inbox.filter(function (x) {
+  var outboxCount = context.messages.filter(function (x) {
     return x.dir === _globalConstants__WEBPACK_IMPORTED_MODULE_2__["OUTBOX"];
   }).length;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_1__["Counter"], {
@@ -39465,7 +39465,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function EmailClient(props) {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_5__["GlobalContext"]);
-  var collection = context.inbox.filter(function (x) {
+  var collection = context.messages.filter(function (x) {
     return x.dir === props.dir;
   });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, collection.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_browserPane__WEBPACK_IMPORTED_MODULE_3__["BrowserPane"], {
@@ -39562,7 +39562,7 @@ __webpack_require__.r(__webpack_exports__);
 function Home() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_2__["Content"], {
     title: "Home",
-    content: "This is the home route",
+    content: "A simple SPA email client application.",
     component: _dashboard__WEBPACK_IMPORTED_MODULE_1__["Dashboard"]
   });
 }
@@ -39630,7 +39630,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function InboxClient() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_8__["GlobalContext"]);
-  var count = Object(_utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_6__["getUnreadEmailCount"])(context.inbox);
+  var count = Object(_utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_6__["getUnreadEmailCount"])(context.messages);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], {
     className: "mb-2"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_3__["Counter"], {
@@ -39933,7 +39933,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function Router() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_10__["GlobalContext"]);
-  var count = Object(_utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_8__["getUnreadEmailCount"])(context.inbox);
+  var count = Object(_utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_8__["getUnreadEmailCount"])(context.messages);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: "pb-2 px-2 pt-1",
     id: "spaNavBar",
@@ -40054,8 +40054,8 @@ function reducer(state, action) {
   switch (action.type) {
     case _globalConstants__WEBPACK_IMPORTED_MODULE_2__["SELECT"]:
       return {
-        inbox: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.id, state.inbox),
-        selected: Object(_utils_getSelectedEmailById__WEBPACK_IMPORTED_MODULE_1__["getSelectedEmailById"])(state.inbox, action.id),
+        messages: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.id, state.messages),
+        selected: Object(_utils_getSelectedEmailById__WEBPACK_IMPORTED_MODULE_1__["getSelectedEmailById"])(state.messages, action.id),
         isSelected: true,
         isReply: false
       };
@@ -40066,11 +40066,11 @@ function reducer(state, action) {
       });
 
     case _globalConstants__WEBPACK_IMPORTED_MODULE_2__["SUBMIT"]:
-      var inbox = _toConsumableArray(state.inbox);
+      var messages = _toConsumableArray(state.messages);
 
-      inbox.unshift(action.selected);
+      messages.unshift(action.selected);
       return _objectSpread({}, state, {
-        inbox: inbox,
+        messages: messages,
         selected: {},
         isSelected: false
       });
@@ -40122,9 +40122,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict;";
 
 var getSelectedEmailById = function getSelectedEmailById() {
-  var inbox = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var messages = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  return inbox.filter(function (x) {
+  return messages.filter(function (x) {
     return x.id === id;
   })[0];
 };
@@ -40144,8 +40144,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict;";
 
 var getUnreadEmailCount = function getUnreadEmailCount() {
-  var inbox = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  return inbox.length > 0 ? inbox.filter(function (x) {
+  var messages = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  return messages.length > 0 ? messages.filter(function (x) {
     return !x.read;
   }).length : 0;
 };
@@ -40172,10 +40172,10 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-var setEmailToRead = function setEmailToRead(id, inbox) {
+var setEmailToRead = function setEmailToRead(id, messages) {
   var read = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
 
-  var collection = _toConsumableArray(inbox);
+  var collection = _toConsumableArray(messages);
 
   collection = collection.map(function (item) {
     if (item.id === id) {

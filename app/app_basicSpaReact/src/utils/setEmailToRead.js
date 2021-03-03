@@ -1,8 +1,8 @@
 "use strict;"
 
-export const setEmailToRead = (id, inbox, read = true) => {
+export const setEmailToRead = (id, messages, read = true) => {
 
-    let collection = [...inbox];
+    let collection = [...messages];
 
     collection = collection.map( item => {
         if (item.id === id) {

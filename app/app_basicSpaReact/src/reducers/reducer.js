@@ -8,8 +8,8 @@ export function reducer(state, action) {
     switch(action.type) {
       case SELECT:
         return {
-          inbox: setEmailToRead(action.id, state.inbox),
-          selected: getSelectedEmailById(state.inbox, action.id),
+          messages: setEmailToRead(action.id, state.messages),
+          selected: getSelectedEmailById(state.messages, action.id),
           isSelected: true,
           isReply: false
         }
@@ -20,13 +20,13 @@ export function reducer(state, action) {
         }
       case SUBMIT:
 
-        const inbox = [ ...state.inbox ];
+        const messages = [ ...state.messages ];
 
-        inbox.unshift(action.selected);
+        messages.unshift(action.selected);
 
         return {
           ...state,
-          inbox,
+          messages,
           selected: {},
           isSelected: false
         }

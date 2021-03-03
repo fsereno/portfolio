@@ -1,3 +1,3 @@
 "use strict;"
 
-export const getUnreadEmailCount = (inbox = []) => inbox.length > 0 ? inbox.filter(x => !x.read).length : 0;
+export const getUnreadEmailCount = (messages = []) => messages.length > 0 ? messages.filter(x => !x.read).length : 0;
