@@ -18,7 +18,7 @@ export function EmailClient(props) {
             <Row>
                 {collection.length > 0 &&
                     <Col>
-                        <BrowserPane collection={context.inbox.filter(x => x.dir === props.dir)}/>
+                        <BrowserPane collection={collection}/>
                     </Col>
                 }
                 {collection.length === 0 &&
