@@ -20,7 +20,7 @@ export function ListItem(props) {
                 <p className="mb-1">{props.from}</p>
                 <Age age={props.age}/>
             </div>
-            <p className="mb-1">{props.heading}</p>
+            <p className="mb-1">{props.subject}</p>
             <small>{truncateEmailBody(props.body[0])}...</small>
         </button>
     )

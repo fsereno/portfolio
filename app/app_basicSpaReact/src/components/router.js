@@ -9,7 +9,7 @@ import { Inbox } from './inbox';
 import { Outbox } from './outbox';
 import { Counter } from './counter';
 import { getUnreadEmailCount } from '../utils/getUnreadEmailCount';
-import { HOME, INBOX, OUTBOX } from '../globalConstants';
+import { HOME, INBOX, OUTBOX, NEW, NEW_MESSAGE } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
 export function Router() {
@@ -25,6 +25,7 @@ export function Router() {
                     <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={HOME}>Home</NavLink>
                     <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={INBOX}>Inbox <Counter count={count}/></NavLink>
                     <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={OUTBOX}>Outbox</NavLink>
+                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={NEW} onClick={() => context.dispatch({ type: NEW_MESSAGE })}>New</NavLink>
                 </Nav>
             </Navbar>
             <Switch>
@@ -39,6 +40,9 @@ export function Router() {
                 </Route>
                 <Route path={OUTBOX}>
                     <Outbox/>
+                </Route>
+                <Route exact path={NEW}>
+                    <Redirect to={OUTBOX}></Redirect>
                 </Route>
             </Switch>
         </HashRouter>

@@ -4,7 +4,6 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { BrowserPane } from './browserPane';
-import { EmailModal } from './emailModal'
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
 import { GlobalContext } from '../globalContext';
 
@@ -28,7 +27,6 @@ export function EmailClient(props) {
                     </Col>
                 }
             </Row>
-            <EmailModal/>
         </>
     )
 }

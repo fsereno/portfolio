@@ -17,7 +17,7 @@ export function ReplyPane() {
 
     const [ to, setTo ] = useState(getReplyToEmailAddress(context.selected));
 
-    const [ subject, setSubject ] = useState(context.selected.heading || "");
+    const [ subject, setSubject ] = useState(context.selected.subject || "");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -42,7 +42,7 @@ export function ReplyPane() {
                 type: SUBMIT,
                 selected: {
                     ...context.selected,
-                    heading: subject,
+                    subject: subject,
                     id: Math.random() * 10,
                     from: formData.get("from"),
                     to: formData.get("to"),

@@ -39216,8 +39216,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
 /* harmony import */ var _reducers_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reducers/reducer */ "./src/reducers/reducer.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./globalContext */ "./src/globalContext.js");
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _components_emailModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/emailModal */ "./src/components/emailModal.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./globalContext */ "./src/globalContext.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./globalConstants */ "./src/globalConstants.js");
 "use strict;";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -39241,33 +39242,34 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var messages = [{
   id: 0,
   from: "james@hsbc.co.uk",
-  to: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["MY_ADDRESS"],
-  heading: "Some heading 1",
+  to: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
+  subject: "Subject 1",
   body: ["Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."],
   age: 1,
   read: false,
-  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["INBOX"]
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"]
 }, {
   id: 1,
   from: "sarah@ford.co.uk",
-  to: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["MY_ADDRESS"],
-  heading: "Some heading 2",
+  to: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
+  subject: "Subject 2",
   body: ["Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source."],
   age: 2,
   read: false,
-  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["INBOX"]
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"]
 }, {
   id: 2,
   from: "tim.jones@hmrc.co.uk",
-  to: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["MY_ADDRESS"],
-  heading: "Some heading 3",
+  to: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
+  subject: "Subject 3",
   body: ["Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC"],
   age: 3,
   read: false,
-  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["INBOX"]
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"]
 }];
 
 function App() {
@@ -39285,9 +39287,9 @@ function App() {
     dispatch: dispatch
   });
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_4__["GlobalContext"].Provider, {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_5__["GlobalContext"].Provider, {
     value: context
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_emailModal__WEBPACK_IMPORTED_MODULE_4__["EmailModal"], null));
 }
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('result'));
@@ -39344,7 +39346,7 @@ function BrowserPane(props) {
       id: email.id,
       from: email.from,
       age: email.age,
-      heading: email.heading,
+      subject: email.subject,
       body: email.body
     });
   }));
@@ -39455,9 +39457,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
 /* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
 /* harmony import */ var _browserPane__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./browserPane */ "./src/components/browserPane.js");
-/* harmony import */ var _emailModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./emailModal */ "./src/components/emailModal.js");
-/* harmony import */ var _utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/getMessagesByDirectory */ "./src/utils/getMessagesByDirectory.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/getMessagesByDirectory */ "./src/utils/getMessagesByDirectory.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 
@@ -39466,13 +39467,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 function EmailClient(props) {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_6__["GlobalContext"]);
-  var collection = Object(_utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_5__["getMessagesByDirectory"])(context.messages, props.dir);
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_5__["GlobalContext"]);
+  var collection = Object(_utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_4__["getMessagesByDirectory"])(context.messages, props.dir);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, collection.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_browserPane__WEBPACK_IMPORTED_MODULE_3__["BrowserPane"], {
     collection: collection
-  })), collection.length === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You have no messages"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailModal__WEBPACK_IMPORTED_MODULE_4__["EmailModal"], null));
+  })), collection.length === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You have no messages"))));
 }
 
 /***/ }),
@@ -39524,7 +39524,7 @@ function EmailModal() {
     onHide: handleClose
   }, context.selected && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Header, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Title, {
     className: "display-4"
-  }, context.selected.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, context.selected.subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     variant: "link",
     className: "close",
     onClick: handleClose
@@ -39690,7 +39690,7 @@ function ListItem(props) {
     age: props.age
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
-  }, props.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_2__["truncateEmailBody"])(props.body[0]), "..."));
+  }, props.subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_2__["truncateEmailBody"])(props.body[0]), "..."));
 }
 
 /***/ }),
@@ -39850,7 +39850,7 @@ function ReplyPane() {
       to = _useState4[0],
       setTo = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(context.selected.heading || ""),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(context.selected.subject || ""),
       _useState6 = _slicedToArray(_useState5, 2),
       subject = _useState6[0],
       setSubject = _useState6[1];
@@ -39873,7 +39873,7 @@ function ReplyPane() {
       context.dispatch({
         type: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["SUBMIT"],
         selected: _objectSpread({}, context.selected, {
-          heading: _subject,
+          subject: _subject,
           id: Math.random() * 10,
           from: formData.get("from"),
           to: formData.get("to"),
@@ -40005,7 +40005,16 @@ function Router() {
     activeClassName: "active",
     className: "nav-link pb-1 pt-1 px-3",
     to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["OUTBOX"]
-  }, "Outbox"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }, "Outbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    activeClassName: "active",
+    className: "nav-link pb-1 pt-1 px-3",
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["NEW"],
+    onClick: function onClick() {
+      return context.dispatch({
+        type: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["NEW_MESSAGE"]
+      });
+    }
+  }, "New"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
@@ -40016,7 +40025,12 @@ function Router() {
     path: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["INBOX"]
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inbox__WEBPACK_IMPORTED_MODULE_5__["Inbox"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["OUTBOX"]
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outbox__WEBPACK_IMPORTED_MODULE_6__["Outbox"], null))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outbox__WEBPACK_IMPORTED_MODULE_6__["Outbox"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["NEW"]
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["OUTBOX"]
+  }))));
 }
 
 /***/ }),
@@ -40025,7 +40039,7 @@ function Router() {
 /*!********************************!*\
   !*** ./src/globalConstants.js ***!
   \********************************/
-/*! exports provided: SELECT, DESELECT, REPLY, SUBMIT, HOME, INBOX, OUTBOX, MY_ADDRESS */
+/*! exports provided: SELECT, DESELECT, REPLY, SUBMIT, NEW_MESSAGE, HOME, INBOX, OUTBOX, NEW, MY_ADDRESS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -40034,9 +40048,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DESELECT", function() { return DESELECT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REPLY", function() { return REPLY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUBMIT", function() { return SUBMIT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NEW_MESSAGE", function() { return NEW_MESSAGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HOME", function() { return HOME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INBOX", function() { return INBOX; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OUTBOX", function() { return OUTBOX; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NEW", function() { return NEW; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MY_ADDRESS", function() { return MY_ADDRESS; });
 "use strict;";
 
@@ -40044,9 +40060,11 @@ var SELECT = "select";
 var DESELECT = "deselect";
 var REPLY = "reply";
 var SUBMIT = "submit";
+var NEW_MESSAGE = "newMessage";
 var HOME = "/home";
 var INBOX = "/inbox";
 var OUTBOX = "/outbox";
+var NEW = "/new";
 var MY_ADDRESS = "me@portfolio.co.uk";
 
 /***/ }),
@@ -40131,6 +40149,13 @@ function reducer(state, action) {
       return _objectSpread({}, state, {
         selected: {},
         isSelected: false
+      });
+
+    case _globalConstants__WEBPACK_IMPORTED_MODULE_2__["NEW_MESSAGE"]:
+      return _objectSpread({}, state, {
+        selected: {},
+        isSelected: true,
+        isReply: true
       });
 
     default:

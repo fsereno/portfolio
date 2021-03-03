@@ -21,7 +21,7 @@ export function EmailModal() {
             {context.selected &&
                 <>
                     <Modal.Header>
-                        <Modal.Title className="display-4">{context.selected.heading}</Modal.Title>
+                        <Modal.Title className="display-4">{context.selected.subject}</Modal.Title>
                         <Button variant="link" className="close" onClick={handleClose}>
                         <span className="lr">
                             <span className="rl"></span>

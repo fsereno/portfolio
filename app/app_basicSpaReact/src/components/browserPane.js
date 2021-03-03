@@ -14,7 +14,7 @@ export function BrowserPane(props) {
                         id={email.id}
                         from={email.from}
                         age={email.age}
-                        heading={email.heading}
+                        subject={email.subject}
                         body={email.body}
                     />
                 )
