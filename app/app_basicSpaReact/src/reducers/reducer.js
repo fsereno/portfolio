@@ -2,6 +2,7 @@
 
 import { setEmailToRead } from '../utils/setEmailToRead';
 import { getSelectedEmailById } from '../utils/getSelectedEmailById';
+import { getEmailsByThread } from '../utils/getEmailsByThread';
 import { SELECT, DESELECT, REPLY, SUBMIT, NEW_MESSAGE, READ } from '../globalConstants';
 
 export function reducer(state, action) {
@@ -9,7 +10,7 @@ export function reducer(state, action) {
       case SELECT:
         return {
           messages: setEmailToRead(action.id, state.messages),
-          selected: getSelectedEmailById(state.messages, action.id),
+          selected: getEmailsByThread(state.messages, action.selected),
           showModal: true,
           mode: READ
         }
@@ -22,25 +23,25 @@ export function reducer(state, action) {
 
         const messages = [ ...state.messages ];
 
-        messages.unshift(action.selected);
+        messages.unshift(action.new);
 
         return {
           ...state,
           messages,
-          selected: {},
+          selected: [],
           showModal: false
         }
       case DESELECT:
         return {
           ...state,
-          selected: {},
+          selected: [],
           showModal: false,
           mode: READ
         }
         case NEW_MESSAGE:
           return {
             ...state,
-            selected: {},
+            selected: [],
             showModal: true,
             mode: NEW_MESSAGE
           }

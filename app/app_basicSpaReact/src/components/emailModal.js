@@ -13,35 +13,33 @@ export function EmailModal() {
 
     const context = React.useContext(GlobalContext);
 
+    const title = context.selected.length > 0 ? context.selected[0].subject : "New message";
+
     const handleClose = () => context.dispatch({ type: DESELECT });
 
     const handleReplyClick = () => context.dispatch({ type: REPLY });
 
     return (
         <Modal show={context.showModal} onHide={handleClose}>
-            {context.selected &&
-                <>
-                    <Modal.Header>
-                        <Modal.Title className="display-4">{context.selected.subject}</Modal.Title>
-                        <Button variant="link" className="close" onClick={handleClose}>
-                        <span className="lr">
-                            <span className="rl"></span>
-                        </span>
-                        </Button>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {context.mode === READ &&
-                            <ReadingPane/>
-                        }
-                        {context.mode === REPLY &&
-                            <ReplyPane/>
-                        }
-                        {context.mode === NEW_MESSAGE &&
-                            <NewPane/>
-                        }
-                    </Modal.Body>
-                </>
-            }
+            <Modal.Header>
+                <Modal.Title className="display-4">{title}</Modal.Title>
+                <Button variant="link" className="close" onClick={handleClose}>
+                <span className="lr">
+                    <span className="rl"></span>
+                </span>
+                </Button>
+            </Modal.Header>
+            <Modal.Body>
+                {context.mode === READ &&
+                    <ReadingPane/>
+                }
+                {context.mode === REPLY &&
+                    <ReplyPane/>
+                }
+                {context.mode === NEW_MESSAGE &&
+                    <NewPane/>
+                }
+            </Modal.Body>
             <Modal.Footer>
                 {context.mode === READ &&
                     <>

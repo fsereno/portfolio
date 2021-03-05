@@ -10,15 +10,15 @@ export function ReadingPane() {
 
     return(
         <>
-            <Age age={context.selected.age}/>
-            <p>From: {context.selected.from}</p>
-            <p>To: {context.selected.to}</p>
-            {context.selected.body && context.selected.body.map(body => {
+            {context.selected.map(selected => {
                 return (
-                    <div>
-                        <hr/>
-                        {body}
-                    </div>
+                    <>
+                        <Age age={selected.age}/>
+                        <p>From: {selected.from}</p>
+                        <p>To: {selected.to}</p>
+                        <p>To: {selected.subject}</p>
+                        {selected.body}
+                    </>
                 )
             })}
         </>

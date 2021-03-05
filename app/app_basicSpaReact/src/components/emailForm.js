@@ -14,9 +14,12 @@ export function EmailForm() {
 
     const [ validated, setValidated ] = useState(false);
 
-    const [ to, setTo ] = useState(getReplyToEmailAddress(context.selected));
+    const toFromSelected = context.selected.length > 0 ? getReplyToEmailAddress(context.selected[0]) : "";
+    const subjectFromSelected = context.selected.length > 0 ? context.selected[0].subject : "";
 
-    const [ subject, setSubject ] = useState(context.selected.subject || "");
+    const [ to, setTo ] = useState(toFromSelected);
+
+    const [ subject, setSubject ] = useState(subjectFromSelected);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,18 +36,20 @@ export function EmailForm() {
 
             setValidated(false);
 
+            const from = formData.get("from");
+            const to = formData.get("to");
             const subject = formData.get("subject");
-            const body = context.selected.body ? [ ...context.selected.body ] : [];
-            body.unshift(formData.get("message"));
+            const body = formData.get("body")
 
             context.dispatch({
                 type: SUBMIT,
-                selected: {
+                new: {
                     ...context.selected,
-                    subject: subject,
+                    subject,
+                    thread: `${from}_${to}_${subject}`,
                     id: Math.random() * 10,
-                    from: formData.get("from"),
-                    to: formData.get("to"),
+                    from,
+                    to,
                     body,
                     age: 0,
                     dir: OUTBOX
@@ -115,8 +120,8 @@ export function EmailForm() {
                            Message:
                         </Form.Label>
                         <Form.Control
-                            name="message"
-                            id="message"
+                            name="body"
+                            id="body"
                             as="textarea"
                             rows={3}
                             required
