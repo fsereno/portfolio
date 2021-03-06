@@ -40180,7 +40180,7 @@ function reducer(state, action) {
   switch (action.type) {
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["SELECT"]:
       return {
-        messages: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.id, state.messages),
+        messages: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.selected.id, state.messages),
         selected: Object(_utils_getEmailsByThread__WEBPACK_IMPORTED_MODULE_2__["getEmailsByThread"])(state.messages, action.selected),
         showModal: true,
         mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["READ"]

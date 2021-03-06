@@ -9,7 +9,7 @@ export function reducer(state, action) {
     switch(action.type) {
       case SELECT:
         return {
-          messages: setEmailToRead(action.id, state.messages),
+          messages: setEmailToRead(action.selected.id, state.messages),
           selected: getEmailsByThread(state.messages, action.selected),
           showModal: true,
           mode: READ
