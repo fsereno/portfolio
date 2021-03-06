@@ -39956,10 +39956,18 @@ __webpack_require__.r(__webpack_exports__);
 
 function ReadingPane() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_2__["GlobalContext"]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, context.selected.map(function (selected) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_age__WEBPACK_IMPORTED_MODULE_1__["Age"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, context.selected.map(function (selected, index) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, index > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_age__WEBPACK_IMPORTED_MODULE_1__["Age"], {
       age: selected.age
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "From: ", selected.from), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To: ", selected.to), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "To: ", selected.subject), selected.body);
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "mb-0"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "From:"), " ", selected.from), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "mb-0"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "To:"), " ", selected.to), index > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "lead mb-0"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Subject:"), " ", selected.subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "mt-3"
+    }, selected.body));
   }));
 }
 
@@ -39985,7 +39993,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ReplyPane() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailForm__WEBPACK_IMPORTED_MODULE_2__["EmailForm"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_1__["ReadingPane"], null));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailForm__WEBPACK_IMPORTED_MODULE_2__["EmailForm"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_1__["ReadingPane"], null));
 }
 
 /***/ }),

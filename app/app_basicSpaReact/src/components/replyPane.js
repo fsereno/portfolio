@@ -8,7 +8,6 @@ export function ReplyPane() {
     return(
         <>
             <EmailForm/>
-            <hr/>
             <ReadingPane/>
         </>
     )

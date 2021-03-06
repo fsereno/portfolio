@@ -5,8 +5,6 @@ import { getEmailDisplayAge } from '../utils/getEmailDisplayAge';
 
 export function Age(props) {
     return(
-        <small>
-            {getEmailDisplayAge(props.age)}
-        </small>
+        <small>{getEmailDisplayAge(props.age)}</small>
     );
 }

@@ -10,15 +10,18 @@ export function ReadingPane() {
 
     return(
         <>
-            {context.selected.map(selected => {
+            {context.selected.map((selected, index) => {
                 return (
-                    <>
+                    <div>
+                        {index > 0 && <hr/>}
                         <Age age={selected.age}/>
-                        <p>From: {selected.from}</p>
-                        <p>To: {selected.to}</p>
-                        <p>To: {selected.subject}</p>
-                        {selected.body}
-                    </>
+                        <p className="mb-0"><strong>From:</strong> {selected.from}</p>
+                        <p className="mb-0"><strong>To:</strong> {selected.to}</p>
+                        {index > 0 && <p className="lead mb-0"><strong>Subject:</strong> {selected.subject}</p>}
+                        <div className="mt-3">
+                            {selected.body}
+                        </div>
+                    </div>
                 )
             })}
         </>
