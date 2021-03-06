@@ -39243,6 +39243,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var messages = [{
+  id: 0.5,
+  from: "james@hsbc.co.uk",
+  to: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
+  subject: "Subject 1",
+  thread: "james@hsbc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"], "_Subject 1"),
+  body: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
+  age: 0,
+  read: false,
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"]
+}, {
   id: 0,
   from: "james@hsbc.co.uk",
   to: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],

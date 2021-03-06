@@ -10,6 +10,17 @@ import { MY_ADDRESS, INBOX, READ } from './globalConstants';
 
 const messages = [
   {
+    id: 0.5,
+    from: "james@hsbc.co.uk",
+    to: MY_ADDRESS,
+    subject: "Subject 1",
+    thread: `james@hsbc.co.uk_${MY_ADDRESS}_Subject 1`,
+    body: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
+    age: 0,
+    read: false,
+    dir: INBOX
+  },
+  {
       id: 0,
       from: "james@hsbc.co.uk",
       to: MY_ADDRESS,
