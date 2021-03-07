@@ -2,14 +2,16 @@
 
 import { MY_ADDRESS } from '../globalConstants';
 
-export const getReplyToEmailAddress = (selected) => {
+export const getReplyToEmailAddress = (from = "", to = "") => {
+
+    console.log(MY_ADDRESS)
 
     let address = "";
 
-    if (selected.to && selected.from) {
-        address = selected.to === MY_ADDRESS
-        ? selected.from
-        : selected.to;
+    if (to && from) {
+        address = to === MY_ADDRESS
+        ? from
+        : to;
     }
 
     return address;

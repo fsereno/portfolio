@@ -13,16 +13,19 @@ export function EmailModal() {
 
     const context = React.useContext(GlobalContext);
 
-    const title = context.selected.length > 0 ? context.selected[0].subject : "New message";
-
     const handleClose = () => context.dispatch({ type: DESELECT });
 
-    const handleReplyClick = () => context.dispatch({ type: REPLY });
+    const handleReplyClick = () => context.dispatch({
+        type: REPLY,
+        to: context.to,
+        from: context.from,
+        subject: context.subject
+    });
 
     return (
         <Modal show={context.showModal} onHide={handleClose}>
             <Modal.Header>
-                <Modal.Title className="display-4">{title}</Modal.Title>
+                <Modal.Title className="display-4">{context.subject}</Modal.Title>
                 <Button variant="link" className="close" onClick={handleClose}>
                 <span className="lr">
                     <span className="rl"></span>
