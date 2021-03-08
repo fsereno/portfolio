@@ -39532,24 +39532,24 @@ function EmailForm() {
         type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["SHOW_VALIDATION"]
       });
       event.stopPropagation();
+    } else {
+      context.dispatch({
+        type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["HIDE_VALIDATION"]
+      });
+      context.dispatch({
+        type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["SUBMIT"],
+        "new": _objectSpread({}, context.selected, {
+          subject: context.subject,
+          thread: "".concat(context.from, "_").concat(context.to, "_").concat(context.subject),
+          id: Math.random() * 10,
+          from: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["MY_ADDRESS"],
+          to: context.to,
+          body: context.body,
+          age: 0,
+          dir: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["OUTBOX"]
+        })
+      });
     }
-
-    context.dispatch({
-      type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["HIDE_VALIDATION"]
-    });
-    context.dispatch({
-      type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["SUBMIT"],
-      "new": _objectSpread({}, context.selected, {
-        subject: context.subject,
-        thread: "".concat(context.from, "_").concat(context.to, "_").concat(context.subject),
-        id: Math.random() * 10,
-        from: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["MY_ADDRESS"],
-        to: context.to,
-        body: context.body,
-        age: 0,
-        dir: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["OUTBOX"]
-      })
-    });
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -39686,12 +39686,12 @@ function EmailModal() {
     className: "lr"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "rl"
-  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["READ"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_3__["ReadingPane"], null), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["REPLY"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_replyPane__WEBPACK_IMPORTED_MODULE_4__["ReplyPane"], null), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["NEW_MESSAGE"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_newPane__WEBPACK_IMPORTED_MODULE_5__["NewPane"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Footer, null, context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["READ"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["READ"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_3__["ReadingPane"], null), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["REPLY"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_replyPane__WEBPACK_IMPORTED_MODULE_4__["ReplyPane"], null), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["NEW_MESSAGE"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_newPane__WEBPACK_IMPORTED_MODULE_5__["NewPane"], null)), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["READ"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     onClick: handleReplyClick
   }, "Reply"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     variant: "dark",
     onClick: handleClose
-  }, "Close"))));
+  }, "Close")));
 }
 
 /***/ }),

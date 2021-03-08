@@ -43,18 +43,16 @@ export function EmailModal() {
                     <NewPane/>
                 }
             </Modal.Body>
-            <Modal.Footer>
-                {context.mode === READ &&
-                    <>
-                        <Button onClick={handleReplyClick}>
-                            Reply
-                        </Button>
-                        <Button variant="dark" onClick={handleClose}>
-                            Close
-                        </Button>
-                    </>
-                }
-            </Modal.Footer>
+            {context.mode === READ &&
+                <Modal.Footer>
+                    <Button onClick={handleReplyClick}>
+                        Reply
+                    </Button>
+                    <Button variant="dark" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            }
         </Modal>
     )
 }
