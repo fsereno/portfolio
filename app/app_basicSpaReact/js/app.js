@@ -39293,7 +39293,8 @@ function App() {
     messages: messages,
     selected: [],
     showModal: false,
-    mode: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["READ"]
+    mode: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["READ"],
+    showValidation: false
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
@@ -39514,14 +39515,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -39531,38 +39524,37 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function EmailForm() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_5__["GlobalContext"]);
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      validated = _useState2[0],
-      setValidated = _useState2[1];
-
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
 
     if (event.currentTarget.checkValidity() === false) {
-      setValidated(true);
-      event.stopPropagation();
-    } else {
-      setValidated(false);
       context.dispatch({
-        type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["SUBMIT"],
-        "new": _objectSpread({}, context.selected, {
-          subject: context.subject,
-          thread: "".concat(context.from, "_").concat(context.to, "_").concat(context.subject),
-          id: Math.random() * 10,
-          from: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["MY_ADDRESS"],
-          to: context.to,
-          body: context.body,
-          age: 0,
-          dir: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["OUTBOX"]
-        })
+        type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["SHOW_VALIDATION"]
       });
+      event.stopPropagation();
     }
+
+    context.dispatch({
+      type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["HIDE_VALIDATION"]
+    });
+    context.dispatch({
+      type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["SUBMIT"],
+      "new": _objectSpread({}, context.selected, {
+        subject: context.subject,
+        thread: "".concat(context.from, "_").concat(context.to, "_").concat(context.subject),
+        id: Math.random() * 10,
+        from: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["MY_ADDRESS"],
+        to: context.to,
+        body: context.body,
+        age: 0,
+        dir: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["OUTBOX"]
+      })
+    });
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"], {
     noValidate: true,
-    validated: validated,
+    validated: context.showValidation,
     onSubmit: handleSubmit
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Row, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__["default"].Group, {
     as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -40095,7 +40087,7 @@ function Router() {
 /*!********************************!*\
   !*** ./src/globalConstants.js ***!
   \********************************/
-/*! exports provided: SELECT, DESELECT, REPLY, SUBMIT, NEW_MESSAGE, NEW_SUBJECT, READ, UPDATE_TO, UPDATE_SUBJECT, UPDATE_BODY, HOME, INBOX, OUTBOX, NEW, MY_ADDRESS */
+/*! exports provided: SELECT, DESELECT, REPLY, SUBMIT, NEW_MESSAGE, NEW_SUBJECT, READ, UPDATE_TO, UPDATE_SUBJECT, UPDATE_BODY, SHOW_VALIDATION, HIDE_VALIDATION, HOME, INBOX, OUTBOX, NEW, MY_ADDRESS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -40110,6 +40102,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_TO", function() { return UPDATE_TO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SUBJECT", function() { return UPDATE_SUBJECT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_BODY", function() { return UPDATE_BODY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SHOW_VALIDATION", function() { return SHOW_VALIDATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HIDE_VALIDATION", function() { return HIDE_VALIDATION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HOME", function() { return HOME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INBOX", function() { return INBOX; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OUTBOX", function() { return OUTBOX; });
@@ -40127,6 +40121,8 @@ var READ = "read";
 var UPDATE_TO = "updateTo";
 var UPDATE_SUBJECT = "updateSubject";
 var UPDATE_BODY = "updateBody";
+var SHOW_VALIDATION = "showValidation";
+var HIDE_VALIDATION = "hideValidation";
 var HOME = "/home";
 var INBOX = "/inbox";
 var OUTBOX = "/outbox";
@@ -40243,14 +40239,23 @@ function reducer(state, action) {
         subject: "",
         body: "",
         messages: messages,
-        selected: [],
         showModal: false
       });
 
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["DESELECT"]:
       return _objectSpread({}, state, {
-        selected: [],
-        showModal: false
+        showModal: false,
+        showValidation: false
+      });
+
+    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["SHOW_VALIDATION"]:
+      return _objectSpread({}, state, {
+        showValidation: true
+      });
+
+    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["HIDE_VALIDATION"]:
+      return _objectSpread({}, state, {
+        showValidation: false
       });
 
     default:

@@ -65,7 +65,8 @@ function App() {
     messages,
     selected: [],
     showModal: false,
-    mode: READ
+    mode: READ,
+    showValidation: false
   });
 
   const context = { ...state, dispatch };

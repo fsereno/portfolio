@@ -326,7 +326,7 @@
         },
         {
             "name": "React Single Page Application (SPA)",
-            "subHeading": "An SPA using React, React Router, React Context, useReducer and useState",
+            "subHeading": "An SPA using React, React Router, React Context and useReducer to handle application state",
             "description": "Using React, Babel and Webpack.",
             "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "basicSpaReact",

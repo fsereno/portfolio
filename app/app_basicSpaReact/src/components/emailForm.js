@@ -1,30 +1,36 @@
 "use strict;"
 
-import React, { useState } from 'react';
+import React from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { SUBMIT, OUTBOX, MY_ADDRESS, UPDATE_TO, UPDATE_SUBJECT, UPDATE_BODY } from '../globalConstants';
+import {
+    SUBMIT,
+    OUTBOX,
+    MY_ADDRESS,
+    UPDATE_TO,
+    UPDATE_SUBJECT,
+    UPDATE_BODY,
+    SHOW_VALIDATION,
+    HIDE_VALIDATION
+} from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
 export function EmailForm() {
 
     const context = React.useContext(GlobalContext);
 
-    const [ validated, setValidated ] = useState(false);
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
         if (event.currentTarget.checkValidity() === false) {
 
-            setValidated(true);
+            context.dispatch({ type: SHOW_VALIDATION });
             event.stopPropagation();
 
         } else {
 
-            setValidated(false);
-
+            context.dispatch({ type: HIDE_VALIDATION });
             context.dispatch({
                 type: SUBMIT,
                 new: {
@@ -43,7 +49,7 @@ export function EmailForm() {
     };
 
     return (
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form noValidate validated={context.showValidation} onSubmit={handleSubmit}>
             <Form.Row>
                 <Form.Group as={Col}>
                     <Form.Label>

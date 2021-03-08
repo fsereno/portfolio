@@ -10,6 +10,8 @@ export const READ = "read";
 export const UPDATE_TO = "updateTo";
 export const UPDATE_SUBJECT = "updateSubject";
 export const UPDATE_BODY = "updateBody";
+export const SHOW_VALIDATION = "showValidation";
+export const HIDE_VALIDATION = "hideValidation";
 
 export const HOME = "/home";
 export const INBOX = "/inbox";
