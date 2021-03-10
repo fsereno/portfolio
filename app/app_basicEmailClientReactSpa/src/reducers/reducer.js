@@ -61,7 +61,7 @@ export function reducer(state, action) {
         showModal: true,
         mode: NEW_MESSAGE,
         to: "",
-        subject: NEW_SUBJECT,
+        subject: "",
         body: ""
       }
     case SUBMIT:
