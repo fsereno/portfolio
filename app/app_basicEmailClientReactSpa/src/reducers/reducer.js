@@ -24,10 +24,13 @@ export function reducer(state, action) {
       return {
         messages: setEmailToRead(action.item.id, state.messages),
         selectedThread: getEmailsByThread(state.messages, action.item),
-        id: action.item.id,
-        to: action.item.to,
-        from: action.item.from,
-        subject: action.item.subject,
+        selected: {
+          ...state.selected,
+          id: action.item.id,
+          to: action.item.to,
+          from: action.item.from,
+          subject: action.item.subject,
+        },
         showModal: true,
         mode: READ
       }
@@ -35,24 +38,36 @@ export function reducer(state, action) {
       return {
         ...state,
         mode: REPLY,
-        to: getReplyToEmailAddress(action.from, action.to),
-        from: MY_ADDRESS,
-        subject: action.subject
+        selected: {
+          ...state.selected,
+          to: getReplyToEmailAddress(action.selected.from, action.selected.to),
+          from: MY_ADDRESS,
+          subject: action.selected.subject
+        }
       }
     case UPDATE_TO:
       return {
         ...state,
-        to: action.input,
+        selected: {
+          ...state.selected,
+          to: action.input
+        }
       }
     case UPDATE_SUBJECT:
       return {
         ...state,
-        subject: action.input,
+        selected: {
+          ...state.selected,
+          subject: action.input
+        }
       }
     case UPDATE_BODY:
       return {
         ...state,
-        body: action.input,
+        selected: {
+          ...state.selected,
+          body: action.input
+        }
       }
     case NEW_MESSAGE:
       return {
@@ -60,9 +75,12 @@ export function reducer(state, action) {
         selectedThread: [],
         showModal: true,
         mode: NEW_MESSAGE,
-        to: "",
-        subject: "",
-        body: ""
+        selected: {
+          ...state.selected,
+          to: "",
+          subject: "",
+          body: ""
+        }
       }
     case SUBMIT:
 
@@ -72,16 +90,26 @@ export function reducer(state, action) {
 
       return {
         ...state,
-        to: "",
-        subject: "",
-        body: "",
+        selected: {
+          ...state.selected,
+          id: -1,
+          to: "",
+          subject: "",
+          body: "",
+        },
         messages,
         showModal: false
       }
     case DESELECT:
       return {
         ...state,
-        id: -1,
+        selected: {
+          ...state.selected,
+          id: -1,
+          to: "",
+          subject: "",
+          body: "",
+        },
         showModal: false,
         showValidation: false
       }

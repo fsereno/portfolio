@@ -39286,10 +39286,13 @@ var messages = [{
 
 function App() {
   var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_3__["reducer"], {
-    to: "",
-    from: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
-    subject: "",
-    body: "",
+    selected: {
+      id: -1,
+      to: "",
+      from: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
+      subject: "",
+      body: ""
+    },
     messages: messages,
     selectedThread: [],
     showModal: false,
@@ -39533,12 +39536,12 @@ function EmailForm() {
       context.dispatch({
         type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["SUBMIT"],
         "new": {
-          subject: context.subject,
-          thread: "".concat(context.from, "_").concat(context.to, "_").concat(context.subject),
+          subject: context.selected.subject,
+          thread: "".concat(context.selected.from, "_").concat(context.selected.to, "_").concat(context.selected.subject),
           id: Math.random() * 10,
           from: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["MY_ADDRESS"],
-          to: context.to,
-          body: context.body,
+          to: context.selected.to,
+          body: context.selected.body,
           age: 0,
           dir: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["OUTBOX"]
         }
@@ -39566,7 +39569,7 @@ function EmailForm() {
     name: "to",
     id: "to",
     type: "text",
-    value: context.to,
+    value: context.selected.to,
     onChange: function onChange(event) {
       return context.dispatch({
         type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["UPDATE_TO"],
@@ -39582,7 +39585,7 @@ function EmailForm() {
     name: "subject",
     id: "subject",
     type: "text",
-    value: context.subject,
+    value: context.selected.subject,
     onChange: function onChange(event) {
       return context.dispatch({
         type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["UPDATE_SUBJECT"],
@@ -39661,9 +39664,7 @@ function EmailModal() {
   var handleReplyClick = function handleReplyClick() {
     return context.dispatch({
       type: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["REPLY"],
-      to: context.to,
-      from: context.from,
-      subject: context.subject
+      selected: context.selected
     });
   };
 
@@ -39672,7 +39673,7 @@ function EmailModal() {
     onHide: handleClose
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Header, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Title, {
     className: "display-4"
-  }, context.subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, context.selected.subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     variant: "link",
     className: "close",
     onClick: handleClose
@@ -39823,7 +39824,7 @@ function ListItem(props) {
     });
   };
 
-  var activeClass = context.id === props.item.id ? "active" : "";
+  var activeClass = context.selected.id === props.item.id ? "active" : "";
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: handleClick,
     className: "list-group-item list-group-item-action ".concat(activeClass),
@@ -40175,10 +40176,12 @@ function reducer(state, action) {
       return {
         messages: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.item.id, state.messages),
         selectedThread: Object(_utils_getEmailsByThread__WEBPACK_IMPORTED_MODULE_1__["getEmailsByThread"])(state.messages, action.item),
-        id: action.item.id,
-        to: action.item.to,
-        from: action.item.from,
-        subject: action.item.subject,
+        selected: _objectSpread({}, state.selected, {
+          id: action.item.id,
+          to: action.item.to,
+          from: action.item.from,
+          subject: action.item.subject
+        }),
         showModal: true,
         mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["READ"]
       };
@@ -40186,24 +40189,32 @@ function reducer(state, action) {
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["REPLY"]:
       return _objectSpread({}, state, {
         mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["REPLY"],
-        to: Object(_utils_getReplyToEmailAddress__WEBPACK_IMPORTED_MODULE_2__["getReplyToEmailAddress"])(action.from, action.to),
-        from: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["MY_ADDRESS"],
-        subject: action.subject
+        selected: _objectSpread({}, state.selected, {
+          to: Object(_utils_getReplyToEmailAddress__WEBPACK_IMPORTED_MODULE_2__["getReplyToEmailAddress"])(action.selected.from, action.selected.to),
+          from: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["MY_ADDRESS"],
+          subject: action.selected.subject
+        })
       });
 
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["UPDATE_TO"]:
       return _objectSpread({}, state, {
-        to: action.input
+        selected: _objectSpread({}, state.selected, {
+          to: action.input
+        })
       });
 
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["UPDATE_SUBJECT"]:
       return _objectSpread({}, state, {
-        subject: action.input
+        selected: _objectSpread({}, state.selected, {
+          subject: action.input
+        })
       });
 
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["UPDATE_BODY"]:
       return _objectSpread({}, state, {
-        body: action.input
+        selected: _objectSpread({}, state.selected, {
+          body: action.input
+        })
       });
 
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["NEW_MESSAGE"]:
@@ -40211,9 +40222,11 @@ function reducer(state, action) {
         selectedThread: [],
         showModal: true,
         mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["NEW_MESSAGE"],
-        to: "",
-        subject: "",
-        body: ""
+        selected: _objectSpread({}, state.selected, {
+          to: "",
+          subject: "",
+          body: ""
+        })
       });
 
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["SUBMIT"]:
@@ -40221,16 +40234,24 @@ function reducer(state, action) {
 
       messages.unshift(action["new"]);
       return _objectSpread({}, state, {
-        to: "",
-        subject: "",
-        body: "",
+        selected: _objectSpread({}, state.selected, {
+          id: -1,
+          to: "",
+          subject: "",
+          body: ""
+        }),
         messages: messages,
         showModal: false
       });
 
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["DESELECT"]:
       return _objectSpread({}, state, {
-        id: -1,
+        selected: _objectSpread({}, state.selected, {
+          id: -1,
+          to: "",
+          subject: "",
+          body: ""
+        }),
         showModal: false,
         showValidation: false
       });

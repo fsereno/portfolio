@@ -34,12 +34,12 @@ export function EmailForm() {
             context.dispatch({
                 type: SUBMIT,
                 new: {
-                    subject: context.subject,
-                    thread: `${context.from}_${context.to}_${context.subject}`,
+                    subject: context.selected.subject,
+                    thread: `${context.selected.from}_${context.selected.to}_${context.selected.subject}`,
                     id: Math.random() * 10,
                     from: MY_ADDRESS,
-                    to: context.to,
-                    body: context.body,
+                    to: context.selected.to,
+                    body: context.selected.body,
                     age: 0,
                     dir: OUTBOX
                 }
@@ -75,7 +75,7 @@ export function EmailForm() {
                         name="to"
                         id="to"
                         type="text"
-                        value={context.to}
+                        value={context.selected.to}
                         onChange={event => context.dispatch({ type: UPDATE_TO, input: event.target.value })}
                         required
                     />
@@ -93,7 +93,7 @@ export function EmailForm() {
                         name="subject"
                         id="subject"
                         type="text"
-                        value={context.subject}
+                        value={context.selected.subject}
                         onChange={event => context.dispatch({ type: UPDATE_SUBJECT, input: event.target.value })}
                         required
                     />

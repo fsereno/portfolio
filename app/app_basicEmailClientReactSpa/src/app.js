@@ -58,10 +58,13 @@ const messages = [
 function App() {
 
   const [ state, dispatch] = useReducer(reducer, {
-    to: "",
-    from: MY_ADDRESS,
-    subject: "",
-    body: "",
+    selected: {
+      id: -1,
+      to: "",
+      from: MY_ADDRESS,
+      subject: "",
+      body: "",
+    },
     messages,
     selectedThread: [],
     showModal: false,

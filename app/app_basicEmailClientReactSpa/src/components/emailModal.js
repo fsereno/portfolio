@@ -15,17 +15,12 @@ export function EmailModal() {
 
     const handleClose = () => context.dispatch({ type: DESELECT });
 
-    const handleReplyClick = () => context.dispatch({
-        type: REPLY,
-        to: context.to,
-        from: context.from,
-        subject: context.subject
-    });
+    const handleReplyClick = () => context.dispatch({ type: REPLY, selected: context.selected });
 
     return (
         <Modal show={context.showModal} onHide={handleClose}>
             <Modal.Header>
-                <Modal.Title className="display-4">{context.subject}</Modal.Title>
+                <Modal.Title className="display-4">{context.selected.subject}</Modal.Title>
                 <Button variant="link" className="close" onClick={handleClose}>
                 <span className="lr">
                     <span className="rl"></span>

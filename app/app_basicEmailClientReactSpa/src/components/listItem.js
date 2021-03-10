@@ -12,7 +12,7 @@ export function ListItem(props) {
 
     const handleClick = () => context.dispatch({ type: SELECT, item: props.item });
 
-    const activeClass = context.id === props.item.id ? "active" : "";
+    const activeClass = context.selected.id === props.item.id ? "active" : "";
 
     return (
         <button onClick={handleClick} className={`list-group-item list-group-item-action ${activeClass}`} aria-current="true">
