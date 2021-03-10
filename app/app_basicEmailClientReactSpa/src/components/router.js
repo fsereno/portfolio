@@ -20,12 +20,12 @@ export function Router() {
 
     return(
         <HashRouter>
-            <Navbar className="pb-2 px-2 pt-1" id="spaNavBar" bg="dark" variant="dark">
+            <Navbar className="pb-2 px-2 pt-3" id="spaNavBar" bg="dark" variant="dark">
                 <Nav className="mr-auto">
-                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={HOME}>Home</NavLink>
-                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={INBOX}>Inbox <Counter count={count}/></NavLink>
-                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={OUTBOX}>Outbox</NavLink>
-                    <NavLink activeClassName="active" className="nav-link pb-1 pt-1 px-3" to={NEW} onClick={() => context.dispatch({ type: NEW_MESSAGE })}>New</NavLink>
+                    <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={HOME}>Home</NavLink>
+                    <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={INBOX}>Inbox <Counter count={count}/></NavLink>
+                    <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={OUTBOX}>Outbox</NavLink>
+                    <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={NEW} onClick={() => context.dispatch({ type: NEW_MESSAGE })}>New</NavLink>
                 </Nav>
             </Navbar>
             <Switch>

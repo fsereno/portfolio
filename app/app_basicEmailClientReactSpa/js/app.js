@@ -40033,7 +40033,7 @@ function Router() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_10__["GlobalContext"]);
   var count = Object(_utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_8__["getUnreadEmailCount"])(context.messages, _globalConstants__WEBPACK_IMPORTED_MODULE_9__["INBOX"]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    className: "pb-2 px-2 pt-1",
+    className: "pb-2 px-2 pt-3",
     id: "spaNavBar",
     bg: "dark",
     variant: "dark"
@@ -40041,21 +40041,21 @@ function Router() {
     className: "mr-auto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
-    className: "nav-link pb-1 pt-1 px-3",
+    className: "nav-link pb-3 pt-1 px-3",
     to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["HOME"]
   }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
-    className: "nav-link pb-1 pt-1 px-3",
+    className: "nav-link pb-3 pt-1 px-3",
     to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["INBOX"]
   }, "Inbox ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_7__["Counter"], {
     count: count
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
-    className: "nav-link pb-1 pt-1 px-3",
+    className: "nav-link pb-3 pt-1 px-3",
     to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["OUTBOX"]
   }, "Outbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
-    className: "nav-link pb-1 pt-1 px-3",
+    className: "nav-link pb-3 pt-1 px-3",
     to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["NEW"],
     onClick: function onClick() {
       return context.dispatch({
