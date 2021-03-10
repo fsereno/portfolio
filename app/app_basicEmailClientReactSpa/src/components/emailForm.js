@@ -34,7 +34,6 @@ export function EmailForm() {
             context.dispatch({
                 type: SUBMIT,
                 new: {
-                    ...context.selected,
                     subject: context.subject,
                     thread: `${context.from}_${context.to}_${context.subject}`,
                     id: Math.random() * 10,

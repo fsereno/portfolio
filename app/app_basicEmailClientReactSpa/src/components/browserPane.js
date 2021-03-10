@@ -6,12 +6,12 @@ import { ListItem } from './listItem';
 export function BrowserPane(props) {
     return(
         <div className="list-group">
-            {props.collection.map((selected, index) => {
+            {props.collection.map((item, index) => {
                 return(
                     <ListItem
                         index={index}
-                        key={selected.id}
-                        selected={selected}
+                        key={item.id}
+                        item={item}
                     />
                 )
             })}

@@ -9,7 +9,6 @@ import {
   REPLY,
   SUBMIT,
   NEW_MESSAGE,
-  NEW_SUBJECT,
   READ,
   UPDATE_TO,
   UPDATE_SUBJECT,
@@ -23,11 +22,12 @@ export function reducer(state, action) {
   switch(action.type) {
     case SELECT:
       return {
-        messages: setEmailToRead(action.selected.id, state.messages),
-        selected: getEmailsByThread(state.messages, action.selected),
-        to: action.selected.to,
-        from: action.selected.from,
-        subject: action.selected.subject,
+        messages: setEmailToRead(action.item.id, state.messages),
+        selectedThread: getEmailsByThread(state.messages, action.item),
+        id: action.item.id,
+        to: action.item.to,
+        from: action.item.from,
+        subject: action.item.subject,
         showModal: true,
         mode: READ
       }
@@ -57,7 +57,7 @@ export function reducer(state, action) {
     case NEW_MESSAGE:
       return {
         ...state,
-        selected: [],
+        selectedThread: [],
         showModal: true,
         mode: NEW_MESSAGE,
         to: "",
@@ -81,6 +81,7 @@ export function reducer(state, action) {
     case DESELECT:
       return {
         ...state,
+        id: -1,
         showModal: false,
         showValidation: false
       }

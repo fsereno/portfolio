@@ -10,16 +10,16 @@ export function ReadingPane() {
 
     return(
         <>
-            {context.selected.map((selected, index) => {
+            {context.selectedThread.map((thread, index) => {
                 return (
                     <div>
                         {index > 0 && <hr/>}
-                        <Age age={selected.age}/>
-                        <p className="mb-0"><strong>From:</strong> {selected.from}</p>
-                        <p className="mb-0"><strong>To:</strong> {selected.to}</p>
-                        {index > 0 && <p className="lead mb-0"><strong>Subject:</strong> {selected.subject}</p>}
+                        <Age age={thread.age}/>
+                        <p className="mb-0"><strong>From:</strong> {thread.from}</p>
+                        <p className="mb-0"><strong>To:</strong> {thread.to}</p>
+                        {index > 0 && <p className="lead mb-0"><strong>Subject:</strong> {thread.subject}</p>}
                         <div className="mt-3">
-                            {selected.body}
+                            {thread.body}
                         </div>
                     </div>
                 )

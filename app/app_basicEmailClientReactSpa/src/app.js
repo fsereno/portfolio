@@ -63,7 +63,7 @@ function App() {
     subject: "",
     body: "",
     messages,
-    selected: [],
+    selectedThread: [],
     showModal: false,
     mode: READ,
     showValidation: false
