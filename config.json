@@ -325,15 +325,15 @@
             "labels": [0]
         },
         {
-            "name": "React Single Page Application (SPA)",
+            "name": "Basic React Email Client",
             "subHeading": "An SPA using React, React Router, React Context and useReducer to handle application state",
             "description": "Using React, Babel and Webpack.",
             "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "basicSpaReact",
+            "folder": "basicEmailClientReactSpa",
             "active": true,
             "include": true,
             "useWebpack": true,
-            "masterTemplateDir": "master_react",
+            "masterTemplateDir": "basicSpaReact",
             "labels": [0],
             "order": 1
         }
