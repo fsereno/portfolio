@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Age } from './age';
+import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { GlobalContext } from '../globalContext';
 
 export function ReadingPane() {
@@ -10,16 +11,19 @@ export function ReadingPane() {
 
     return(
         <>
-            {context.selectedThread.map((thread, index) => {
+            {context.selectedThread.map((item, index) => {
+
+                const key = getKeyFromMessage(item);
+
                 return (
-                    <div>
+                    <div key={key}>
                         {index > 0 && <hr/>}
-                        <Age age={thread.age}/>
-                        <p className="mb-0"><strong>From:</strong> {thread.from}</p>
-                        <p className="mb-0"><strong>To:</strong> {thread.to}</p>
-                        {index > 0 && <p className="lead mb-0"><strong>Subject:</strong> {thread.subject}</p>}
+                        <Age age={item.age}/>
+                        <p className="mb-0"><strong>From:</strong> {item.from}</p>
+                        <p className="mb-0"><strong>To:</strong> {item.to}</p>
+                        {index > 0 && <p className="lead mb-0"><strong>Subject:</strong> {item.subject}</p>}
                         <div className="mt-3">
-                            {thread.body}
+                            {item.body}
                         </div>
                     </div>
                 )

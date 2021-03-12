@@ -4,8 +4,6 @@ import { MY_ADDRESS } from '../globalConstants';
 
 export const getReplyToEmailAddress = (from = "", to = "") => {
 
-    console.log(MY_ADDRESS)
-
     let address = "";
 
     if (to && from) {

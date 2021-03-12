@@ -18,7 +18,7 @@ import {
   MY_ADDRESS
 } from '../globalConstants';
 
-export function reducer(state, action) {
+export function Reducer(state, action) {
   switch(action.type) {
     case SELECT:
       return {

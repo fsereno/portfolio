@@ -39243,16 +39243,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var messages = [{
-  id: 0.5,
-  from: "james@hsbc.co.uk",
-  to: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
-  subject: "Subject 1",
-  thread: "james@hsbc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"], "_Subject 1"),
-  body: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
-  age: 0,
-  read: false,
-  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"]
-}, {
   id: 0,
   from: "james@hsbc.co.uk",
   to: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
@@ -39285,7 +39275,7 @@ var messages = [{
 }];
 
 function App() {
-  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_3__["reducer"], {
+  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_3__["Reducer"], {
     selected: {
       id: -1,
       to: "",
@@ -39352,7 +39342,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _listItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./listItem */ "./src/components/listItem.js");
+/* harmony import */ var _utils_getKeyFromMessage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/getKeyFromMessage */ "./src/utils/getKeyFromMessage.js");
 "use strict;";
+
 
 
 
@@ -39360,10 +39352,11 @@ function BrowserPane(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "list-group"
   }, props.collection.map(function (item, index) {
+    var key = Object(_utils_getKeyFromMessage__WEBPACK_IMPORTED_MODULE_2__["getKeyFromMessage"])(item);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listItem__WEBPACK_IMPORTED_MODULE_1__["ListItem"], {
       index: index,
-      key: item.id,
-      item: item
+      item: item,
+      key: key
     });
   }));
 }
@@ -39826,6 +39819,7 @@ function ListItem(props) {
 
   var activeClass = context.selected.id === props.item.id ? "active" : "";
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "id_".concat(props.item.id),
     onClick: handleClick,
     className: "list-group-item list-group-item-action ".concat(activeClass),
     "aria-current": "true"
@@ -39939,26 +39933,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _age__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./age */ "./src/components/age.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _utils_getKeyFromMessage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/getKeyFromMessage */ "./src/utils/getKeyFromMessage.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 
 
 
+
 function ReadingPane() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_2__["GlobalContext"]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, context.selectedThread.map(function (thread, index) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, index > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_age__WEBPACK_IMPORTED_MODULE_1__["Age"], {
-      age: thread.age
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_3__["GlobalContext"]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, context.selectedThread.map(function (item, index) {
+    var key = Object(_utils_getKeyFromMessage__WEBPACK_IMPORTED_MODULE_2__["getKeyFromMessage"])(item);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: key
+    }, index > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_age__WEBPACK_IMPORTED_MODULE_1__["Age"], {
+      age: item.age
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "mb-0"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "From:"), " ", thread.from), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "From:"), " ", item.from), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "mb-0"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "To:"), " ", thread.to), index > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "To:"), " ", item.to), index > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "lead mb-0"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Subject:"), " ", thread.subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Subject:"), " ", item.subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "mt-3"
-    }, thread.body));
+    }, item.body));
   }));
 }
 
@@ -40140,12 +40139,12 @@ var GlobalContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext()
 /*!*********************************!*\
   !*** ./src/reducers/reducer.js ***!
   \*********************************/
-/*! exports provided: reducer */
+/*! exports provided: Reducer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Reducer", function() { return Reducer; });
 /* harmony import */ var _utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/setEmailToRead */ "./src/utils/setEmailToRead.js");
 /* harmony import */ var _utils_getEmailsByThread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/getEmailsByThread */ "./src/utils/getEmailsByThread.js");
 /* harmony import */ var _utils_getReplyToEmailAddress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/getReplyToEmailAddress */ "./src/utils/getReplyToEmailAddress.js");
@@ -40170,7 +40169,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-function reducer(state, action) {
+function Reducer(state, action) {
   switch (action.type) {
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["SELECT"]:
       return {
@@ -40326,6 +40325,24 @@ var getEmailsByThread = function getEmailsByThread() {
 
 /***/ }),
 
+/***/ "./src/utils/getKeyFromMessage.js":
+/*!****************************************!*\
+  !*** ./src/utils/getKeyFromMessage.js ***!
+  \****************************************/
+/*! exports provided: getKeyFromMessage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getKeyFromMessage", function() { return getKeyFromMessage; });
+"use strict;";
+
+var getKeyFromMessage = function getKeyFromMessage(message) {
+  return "".concat(message.id, "_").concat(message.thread);
+};
+
+/***/ }),
+
 /***/ "./src/utils/getMessagesByDirectory.js":
 /*!*********************************************!*\
   !*** ./src/utils/getMessagesByDirectory.js ***!
@@ -40365,7 +40382,6 @@ __webpack_require__.r(__webpack_exports__);
 var getReplyToEmailAddress = function getReplyToEmailAddress() {
   var from = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
   var to = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
-  console.log(_globalConstants__WEBPACK_IMPORTED_MODULE_0__["MY_ADDRESS"]);
   var address = "";
 
   if (to && from) {

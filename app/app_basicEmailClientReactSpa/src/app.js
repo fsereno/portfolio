@@ -3,7 +3,7 @@
 import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from './components/router';
-import { reducer } from './reducers/reducer';
+import { Reducer } from './reducers/reducer';
 import { EmailModal } from './components/emailModal';
 import { GlobalContext } from './globalContext';
 import { MY_ADDRESS, INBOX, READ } from './globalConstants';
@@ -46,7 +46,7 @@ const messages = [
 
 function App() {
 
-  const [ state, dispatch] = useReducer(reducer, {
+  const [ state, dispatch] = useReducer(Reducer, {
     selected: {
       id: -1,
       to: "",
