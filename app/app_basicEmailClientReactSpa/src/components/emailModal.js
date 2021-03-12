@@ -40,10 +40,10 @@ export function EmailModal() {
             </Modal.Body>
             {context.mode === READ &&
                 <Modal.Footer>
-                    <Button onClick={handleReplyClick}>
+                    <Button id="replyBtn" onClick={handleReplyClick}>
                         Reply
                     </Button>
-                    <Button variant="dark" onClick={handleClose}>
+                    <Button id="closeBtn" variant="dark" onClick={handleClose}>
                         Close
                     </Button>
                 </Modal.Footer>

@@ -39675,8 +39675,10 @@ function EmailModal() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "rl"
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Body, null, context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["READ"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_3__["ReadingPane"], null), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["REPLY"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_replyPane__WEBPACK_IMPORTED_MODULE_4__["ReplyPane"], null), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["NEW_MESSAGE"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_newPane__WEBPACK_IMPORTED_MODULE_5__["NewPane"], null)), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_6__["READ"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Footer, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "replyBtn",
     onClick: handleReplyClick
   }, "Reply"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "closeBtn",
     variant: "dark",
     onClick: handleClose
   }, "Close")));
