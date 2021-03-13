@@ -16,8 +16,8 @@ export function Dashboard() {
 
     return(
         <>
-            <p>You have <Counter count={inboxCount}/> message(s) in your inbox</p>
-            <p>You have <Counter count={outboxCount}/> message(s) in your outbox</p>
+            <p id="inboxCounter">You have <Counter count={inboxCount}/> message(s) in your inbox</p>
+            <p id="outboxCounter">You have <Counter count={outboxCount}/> message(s) in your outbox</p>
         </>
     )
 }

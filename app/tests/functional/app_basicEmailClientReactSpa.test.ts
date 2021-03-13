@@ -96,4 +96,33 @@ describe(application, () => {
             return  test(url).should.eventually.equal(true)
         });
     });
+    describe("Verify Dashboard", () => {
+        it("Should submit a new message and confirm the Dashboard is correct and updated.", function() {
+            this.timeout(0);
+            let test = async (url) => {
+                return new Nightmare({show:true})
+                .goto(url)
+                .wait(2000)
+                .click('#new')
+                .wait(2000)
+                .type('#to', 'test@email.co.uk')
+                .type('#subject', 'This is a new Subject')
+                .type('#body', 'This is a new message')
+                .click("#submit")
+                .wait(2000)
+                .click("a[href='#/home']")
+                .wait(2000)
+                .end()
+                .evaluate(() => {
+
+                    const inboxCounter  = $("#inboxCounter span").text();
+                    const outboxCounter  = $("#outboxCounter span").text();
+
+                    return inboxCounter === '3' && outboxCounter === '1';
+                })
+                .end();
+            }
+            return  test(url).should.eventually.equal(true)
+        });
+    });
 });

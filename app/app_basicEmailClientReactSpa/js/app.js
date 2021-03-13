@@ -39442,9 +39442,13 @@ function Dashboard() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_4__["GlobalContext"]);
   var inboxCount = Object(_utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_2__["getMessagesByDirectory"])(context.messages, _globalConstants__WEBPACK_IMPORTED_MODULE_3__["INBOX"]).length;
   var outboxCount = Object(_utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_2__["getMessagesByDirectory"])(context.messages, _globalConstants__WEBPACK_IMPORTED_MODULE_3__["OUTBOX"]).length;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_1__["Counter"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    id: "inboxCounter"
+  }, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_1__["Counter"], {
     count: inboxCount
-  }), " message(s) in your inbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_1__["Counter"], {
+  }), " message(s) in your inbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    id: "outboxCounter"
+  }, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_1__["Counter"], {
     count: outboxCount
   }), " message(s) in your outbox"));
 }
