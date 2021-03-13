@@ -25,7 +25,7 @@ export function Router() {
                     <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={HOME}>Home</NavLink>
                     <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={INBOX}>Inbox <Counter count={count}/></NavLink>
                     <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={OUTBOX}>Outbox</NavLink>
-                    <Nav.Link className="nav-link pb-3 pt-1 px-3" onClick={() => context.dispatch({ type: NEW_MESSAGE })}>New</Nav.Link>
+                    <Nav.Link id="new" className="nav-link pb-3 pt-1 px-3" onClick={() => context.dispatch({ type: NEW_MESSAGE })}>New</Nav.Link>
                 </Nav>
             </Navbar>
             <Switch>

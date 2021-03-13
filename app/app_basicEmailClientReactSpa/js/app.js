@@ -40050,6 +40050,7 @@ function Router() {
     className: "nav-link pb-3 pt-1 px-3",
     to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["OUTBOX"]
   }, "Outbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
+    id: "new",
     className: "nav-link pb-3 pt-1 px-3",
     onClick: function onClick() {
       return context.dispatch({
