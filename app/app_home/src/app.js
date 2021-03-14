@@ -234,8 +234,8 @@ class HomeApp extends React.Component {
   RenderCardContainer(props) {
     if (props.applications.length > 0) {
       return (
-        <div className="card-columns">
-          {props.applications.map((application, index) => {
+        <div id="applicationsContainer" className="card-columns">
+          {props.applications.map(application => {
             return (<this.RenderApplicationCards
               application={application}
               condition={application.active && application.include}
