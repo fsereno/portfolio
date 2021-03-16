@@ -4,7 +4,7 @@ With this application I am demonstrating knowledge of data the structures, Queue
 
 ### Explanation ###
 
-Using Generics in .NET I have implemented an interface, which acts as the contract to allow for a polymorphic nature when instructing the Queue and Stack structures to add and remove items.
+Using Generics in .NET I have implemented an interface, which acts as the contract using polymorphism when instructing the Queue and Stack structures to add and remove items.
 
 - Azure Functions Repository (https://github.com/fsereno/app_AzureDotNetCoreDataStructuresApi)
 

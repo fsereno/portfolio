@@ -44,9 +44,9 @@ class Perceptron {
 
 let p = new Perceptron();
 
-p.train([0, 1], 1);
-p.train([-1, 0], 0);
-p.train([0, 1], 1);
+p.train([0], 1);
+p.train([1], 0);
+p.train([0], 1);
 
-console.log(p.predict([-1, 0]));
-console.log(p.predict([0, 5]));
+console.log(p.predict([0]));
+console.log(p.predict([1]));

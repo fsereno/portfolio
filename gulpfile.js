@@ -164,7 +164,7 @@ let startServerTask = () => {
 
 let frontendTestTask = () => {
   return new Promise((resolve, reject) => {
-      gulp.src(config.developmentDir+"/tests/functional/**/*.test.ts")
+      gulp.src(config.developmentDir+"/tests/functional/**/app_basicEmailClientReactSpa.test.ts")
         .pipe(flatmap((stream) => {
           return stream
             .pipe(mocha({

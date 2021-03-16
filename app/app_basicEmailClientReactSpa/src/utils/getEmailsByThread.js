@@ -1,12 +1,21 @@
 "use strict;"
 
-export const getEmailsByThread = (messages = [], args = { from: "", to: "", subject: "" }) => {
+import { INBOX } from "../globalConstants";
+
+export const getEmailsByThread = (messages = [], args = { from: "", to: "", subject: "", dir: "" }) => {
 
     let result = [];
 
-    if (args.from !== "" && args.to !== "" && args.subject !== "") {
-        result = messages.filter(x => x.thread.includes(args.from)
-            && x.thread.includes(args.to) && x.thread.includes(args.subject));
+    const filter = x => x.thread.includes(args.from)
+        && x.thread.includes(args.to) && x.thread.includes(args.subject);
+
+    const isValid = args.from !== "" && args.to !== "" && args.subject !== "";
+
+    if (isValid) {
+
+        result = messages.filter(x => args.dir === INBOX
+                ? x.dir === INBOX && filter(x)
+                : filter(x));
     }
 
     return result;

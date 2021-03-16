@@ -71,7 +71,4 @@ function App() {
   );
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('result')
-);
+ReactDOM.render(<App />,document.getElementById('result'));
