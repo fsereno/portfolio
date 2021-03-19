@@ -3,9 +3,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { ReadingPane } from './readingPane';
-import { ReplyPane } from './replyPane';
-import { NewPane } from './newPane';
+import { ViewingPane } from './viewingPane';
 import { DESELECT, REPLY, READ, NEW_MESSAGE } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
@@ -28,15 +26,7 @@ export function EmailModal() {
                 </Button>
             </Modal.Header>
             <Modal.Body>
-                {context.mode === READ &&
-                    <ReadingPane/>
-                }
-                {context.mode === REPLY &&
-                    <ReplyPane/>
-                }
-                {context.mode === NEW_MESSAGE &&
-                    <NewPane/>
-                }
+                <ViewingPane />
             </Modal.Body>
             {context.mode === READ &&
                 <Modal.Footer>

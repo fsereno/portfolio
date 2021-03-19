@@ -2,6 +2,7 @@
 
 export const SELECT = "select";
 export const DESELECT = "deselect";
+export const DESELECT_THREAD = "deselectThread";
 export const REPLY = "reply";
 export const SUBMIT = "submit";
 export const NEW_MESSAGE = "newMessage";

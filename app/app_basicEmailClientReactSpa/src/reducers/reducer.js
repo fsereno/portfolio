@@ -6,6 +6,7 @@ import { getReplyToEmailAddress } from '../utils/getReplyToEmailAddress';
 import {
   SELECT,
   DESELECT,
+  DESELECT_THREAD,
   REPLY,
   SUBMIT,
   NEW_MESSAGE,
@@ -111,10 +112,24 @@ export function Reducer(state, action) {
           subject: "",
           body: "",
         },
-        selectedThread: [],
         showModal: false,
         showValidation: false
       }
+      case DESELECT_THREAD:
+        return {
+          ...state,
+          selected: {
+            id: -1,
+            to: "",
+            from: "",
+            subject: "",
+            body: "",
+          },
+          selectedThread: [],
+          showModal: false,
+          showValidation: false,
+          mode: READ
+        }
     case SHOW_VALIDATION:
       return {
         ...state,

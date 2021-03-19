@@ -4,7 +4,7 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { BrowserPane } from './browserPane';
-import { ReadingPane } from './readingPane';
+import { ViewingPane } from './viewingPane';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
 import { GlobalContext } from '../globalContext';
 
@@ -23,7 +23,7 @@ export function EmailClient(props) {
                             <BrowserPane collection={collection}/>
                         </Col>
                         <Col className="d-none d-md-block">
-                            <ReadingPane/>
+                            <ViewingPane />
                         </Col>
                     </>
                 }

@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { Content } from "./content";
 import { OutboxClient } from "./outboxClient";
 import { GlobalContext } from '../globalContext';
-import { DESELECT } from '../globalConstants';
+import { DESELECT_THREAD } from '../globalConstants';
 
 export function Outbox() {
 
@@ -14,7 +14,7 @@ export function Outbox() {
     const location = useLocation();
 
     useLayoutEffect(() => {
-      context.dispatch({ type: DESELECT });
+      context.dispatch({ type: DESELECT_THREAD });
     },[location]);
 
     return(

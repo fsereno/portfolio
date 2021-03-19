@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { Content } from './content';
 import { InboxClient } from './inboxClient';
 import { GlobalContext } from '../globalContext';
-import { DESELECT } from '../globalConstants';
+import { DESELECT_THREAD } from '../globalConstants';
 
 export function Inbox() {
 
@@ -14,7 +14,7 @@ export function Inbox() {
     const location = useLocation();
 
     useLayoutEffect(() => {
-      context.dispatch({ type: DESELECT });
+      context.dispatch({ type: DESELECT_THREAD });
     },[location]);
 
     return(
