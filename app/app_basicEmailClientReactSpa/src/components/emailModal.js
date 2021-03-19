@@ -4,7 +4,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { ViewingPane } from './viewingPane';
-import { DESELECT, REPLY, READ, NEW_MESSAGE } from '../globalConstants';
+import { DESELECT, REPLY_MESSAGE, READ } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
 export function EmailModal() {
@@ -13,7 +13,7 @@ export function EmailModal() {
 
     const handleClose = () => context.dispatch({ type: DESELECT });
 
-    const handleReplyClick = () => context.dispatch({ type: REPLY, selected: context.selected });
+    const handleReplyClick = () => context.dispatch({ type: REPLY_MESSAGE, selected: context.selected });
 
     return (
         <Modal show={context.showModal} onHide={handleClose}>

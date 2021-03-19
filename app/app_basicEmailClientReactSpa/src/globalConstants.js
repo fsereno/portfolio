@@ -3,9 +3,10 @@
 export const SELECT = "select";
 export const DESELECT = "deselect";
 export const DESELECT_THREAD = "deselectThread";
+export const REPLY_MESSAGE = "replyMessage";
+export const NEW_MESSAGE = "newMessage";
 export const REPLY = "reply";
 export const SUBMIT = "submit";
-export const NEW_MESSAGE = "newMessage";
 export const READ = "read";
 export const UPDATE_TO = "updateTo";
 export const UPDATE_SUBJECT = "updateSubject";

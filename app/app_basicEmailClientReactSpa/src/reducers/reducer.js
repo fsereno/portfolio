@@ -7,10 +7,11 @@ import {
   SELECT,
   DESELECT,
   DESELECT_THREAD,
-  REPLY,
+  REPLY_MESSAGE,
   SUBMIT,
   NEW_MESSAGE,
   READ,
+  REPLY,
   UPDATE_TO,
   UPDATE_SUBJECT,
   UPDATE_BODY,
@@ -35,7 +36,7 @@ export function Reducer(state, action) {
         showModal: action.showModal,
         mode: READ
       }
-    case REPLY:
+    case REPLY_MESSAGE:
       return {
         ...state,
         mode: REPLY,
@@ -128,7 +129,7 @@ export function Reducer(state, action) {
           selectedThread: [],
           showModal: false,
           showValidation: false,
-          mode: READ
+          mode: ""
         }
     case SHOW_VALIDATION:
       return {

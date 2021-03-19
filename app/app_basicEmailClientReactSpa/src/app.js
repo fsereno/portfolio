@@ -57,7 +57,7 @@ function App() {
     messages,
     selectedThread: [],
     showModal: false,
-    mode: READ,
+    mode: "",
     showValidation: false
   });
 
