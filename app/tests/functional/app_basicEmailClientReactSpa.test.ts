@@ -11,8 +11,8 @@ chai.use(chaiAsPromised);
 const url = "http://localhost:8080/"+application+"/index.html";
 
 describe(application, () => {
-    describe("Open Read Modal", () => {
-        it("Should show the modal after clicking on an Inbox message.", function() {
+    describe("Populdate reading pane", () => {
+        it("Should populate the reading pane when item selected.", function() {
             this.timeout(0);
             let test = async (url) => {
                 return new Nightmare()
@@ -23,7 +23,7 @@ describe(application, () => {
                 .end()
                 .evaluate(() => {
 
-                    const modal = $(".fade.modal.show");
+                    const modal = $("#readingPane").text();
 
                     return modal.length > 0;
                 })

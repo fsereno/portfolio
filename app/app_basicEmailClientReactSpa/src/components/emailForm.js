@@ -35,7 +35,7 @@ export function EmailForm() {
                 type: SUBMIT,
                 new: {
                     subject: context.selected.subject,
-                    thread: `${context.selected.from}_${context.selected.to}_${context.selected.subject}`,
+                    thread: `${MY_ADDRESS}_${context.selected.to}_${context.selected.subject}`,
                     id: Math.random() * 10,
                     from: MY_ADDRESS,
                     to: context.selected.to,
@@ -112,6 +112,7 @@ export function EmailForm() {
                         id="body"
                         as="textarea"
                         rows={3}
+                        value={context.selected.body}
                         onChange={event => context.dispatch({ type: UPDATE_BODY, input: event.target.value })}
                         required
                     />

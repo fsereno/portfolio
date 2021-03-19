@@ -17,3 +17,5 @@ export const INBOX = "/inbox";
 export const OUTBOX = "/outbox";
 export const NEW = "/new";
 export const MY_ADDRESS = "me@portfolio.co.uk";
+
+export const MIN_VIEWPORT_WIDTH = 768;

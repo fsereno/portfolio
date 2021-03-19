@@ -10,7 +10,7 @@ export function ReadingPane() {
     const context = React.useContext(GlobalContext);
 
     return(
-        <>
+        <div id="readingPane">
             {context.selectedThread.map((item, index) => {
 
                 const key = getKeyFromMessage(item);
@@ -28,6 +28,6 @@ export function ReadingPane() {
                     </div>
                 )
             })}
-        </>
+        </div>
     )
 }

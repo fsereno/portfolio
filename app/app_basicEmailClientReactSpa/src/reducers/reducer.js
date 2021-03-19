@@ -31,7 +31,7 @@ export function Reducer(state, action) {
           from: action.item.from,
           subject: action.item.subject,
         },
-        showModal: true,
+        showModal: action.showModal,
         mode: READ
       }
     case REPLY:
@@ -73,11 +73,12 @@ export function Reducer(state, action) {
       return {
         ...state,
         selectedThread: [],
-        showModal: true,
+        showModal: action.showModal,
         mode: NEW_MESSAGE,
         selected: {
           ...state.selected,
           to: "",
+          from: "",
           subject: "",
           body: ""
         }
@@ -91,9 +92,9 @@ export function Reducer(state, action) {
       return {
         ...state,
         selected: {
-          ...state.selected,
           id: -1,
           to: "",
+          from: "",
           subject: "",
           body: "",
         },
@@ -104,12 +105,13 @@ export function Reducer(state, action) {
       return {
         ...state,
         selected: {
-          ...state.selected,
           id: -1,
           to: "",
+          from: "",
           subject: "",
           body: "",
         },
+        selectedThread: [],
         showModal: false,
         showValidation: false
       }
