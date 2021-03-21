@@ -39928,13 +39928,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewPane", function() { return NewPane; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _emailForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./emailForm */ "./src/components/emailForm.js");
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var _emailForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./emailForm */ "./src/components/emailForm.js");
 "use strict;";
 
 
 
+
+
 function NewPane() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailForm__WEBPACK_IMPORTED_MODULE_1__["EmailForm"], null));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    lg: 6
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailForm__WEBPACK_IMPORTED_MODULE_3__["EmailForm"], null)));
 }
 
 /***/ }),
