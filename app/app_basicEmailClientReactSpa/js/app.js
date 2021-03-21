@@ -39503,7 +39503,7 @@ function EmailClient(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "bi bi-arrow-90deg-left"
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_viewingPane__WEBPACK_IMPORTED_MODULE_4__["ViewingPane"], null)))), collection.length === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You have no messages"))));
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_viewingPane__WEBPACK_IMPORTED_MODULE_4__["ViewingPane"], null))), collection.length === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You have no messages"))));
 }
 
 /***/ }),
@@ -40185,11 +40185,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewingPane", function() { return ViewingPane; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
-/* harmony import */ var _readingPane__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./readingPane */ "./src/components/readingPane.js");
-/* harmony import */ var _replyPane__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./replyPane */ "./src/components/replyPane.js");
-/* harmony import */ var _newPane__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./newPane */ "./src/components/newPane.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _readingPane__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./readingPane */ "./src/components/readingPane.js");
+/* harmony import */ var _replyPane__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./replyPane */ "./src/components/replyPane.js");
+/* harmony import */ var _newPane__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./newPane */ "./src/components/newPane.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
 
@@ -40198,9 +40200,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 function ViewingPane() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_5__["GlobalContext"]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_1__["READ"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_2__["ReadingPane"], null), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_1__["REPLY"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_replyPane__WEBPACK_IMPORTED_MODULE_3__["ReplyPane"], null), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_1__["NEW_MESSAGE"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_newPane__WEBPACK_IMPORTED_MODULE_4__["NewPane"], null));
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_7__["GlobalContext"]);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_3__["READ"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_readingPane__WEBPACK_IMPORTED_MODULE_4__["ReadingPane"], null), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_3__["REPLY"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_replyPane__WEBPACK_IMPORTED_MODULE_5__["ReplyPane"], null), context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_3__["NEW_MESSAGE"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_newPane__WEBPACK_IMPORTED_MODULE_6__["NewPane"], null)));
 }
 
 /***/ }),

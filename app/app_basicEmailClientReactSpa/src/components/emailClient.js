@@ -31,9 +31,7 @@ export function EmailClient(props) {
                                     </button>
                                 </Row>
                             }
-                            <Row>
-                                <ViewingPane />
-                            </Row>
+                            <ViewingPane />
                         </Col>
                     </>
                 }
