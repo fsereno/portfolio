@@ -39251,7 +39251,8 @@ var messages = [{
   body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
   age: 1,
   read: false,
-  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"]
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"],
+  time: new Date().getTime()
 }, {
   id: 1,
   from: "sarah@ford.co.uk",
@@ -39261,7 +39262,8 @@ var messages = [{
   body: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
   age: 2,
   read: false,
-  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"]
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"],
+  time: new Date().getTime()
 }, {
   id: 2,
   from: "tim.jones@hmrc.co.uk",
@@ -39271,7 +39273,8 @@ var messages = [{
   body: "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC",
   age: 3,
   read: false,
-  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"]
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"],
+  time: new Date().getTime()
 }];
 
 function App() {
@@ -39281,7 +39284,8 @@ function App() {
       to: "",
       from: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
       subject: "",
-      body: ""
+      body: "",
+      time: 0
     },
     messages: messages,
     selectedThread: [],
@@ -39545,6 +39549,7 @@ function EmailForm() {
       });
       event.stopPropagation();
     } else {
+      var time = new Date().getTime();
       context.dispatch({
         type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["HIDE_VALIDATION"]
       });
@@ -39558,7 +39563,8 @@ function EmailForm() {
           to: context.selected.to,
           body: context.selected.body,
           age: 0,
-          dir: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["OUTBOX"]
+          dir: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["OUTBOX"],
+          time: time
         }
       });
     }
@@ -40323,6 +40329,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function Reducer(state, action) {
   switch (action.type) {
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["SELECT"]:
+      console.log(state.messages);
+      console.log(action.item);
       return {
         messages: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.item.id, state.messages),
         selectedThread: Object(_utils_getEmailsByThread__WEBPACK_IMPORTED_MODULE_1__["getEmailsByThread"])(state.messages, action.item),
@@ -40330,7 +40338,8 @@ function Reducer(state, action) {
           id: action.item.id,
           to: action.item.to,
           from: action.item.from,
-          subject: action.item.subject
+          subject: action.item.subject,
+          time: action.item.time
         }),
         showModal: action.showModal,
         mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["READ"]
@@ -40487,7 +40496,7 @@ var getEmailsByThread = function getEmailsByThread() {
   var result = [];
 
   var filter = function filter(x) {
-    return x.thread.includes(args.from) && x.thread.includes(args.to) && x.thread.includes(args.subject);
+    return x.thread.includes(args.from) && x.thread.includes(args.to) && x.thread.includes(args.subject) && x.time <= args.time;
   };
 
   var isValid = args.from !== "" && args.to !== "" && args.subject !== "";

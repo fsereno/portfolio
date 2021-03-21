@@ -7,7 +7,8 @@ export const getEmailsByThread = (messages = [], args = { from: "", to: "", subj
     let result = [];
 
     const filter = x => x.thread.includes(args.from)
-        && x.thread.includes(args.to) && x.thread.includes(args.subject);
+        && x.thread.includes(args.to) && x.thread.includes(args.subject)
+        && x.time <= args.time;
 
     const isValid = args.from !== "" && args.to !== "" && args.subject !== "";
 

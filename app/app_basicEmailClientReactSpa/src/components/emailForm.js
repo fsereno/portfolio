@@ -29,6 +29,7 @@ export function EmailForm() {
             event.stopPropagation();
 
         } else {
+            const time = new Date().getTime();
 
             context.dispatch({ type: HIDE_VALIDATION });
             context.dispatch({
@@ -41,7 +42,8 @@ export function EmailForm() {
                     to: context.selected.to,
                     body: context.selected.body,
                     age: 0,
-                    dir: OUTBOX
+                    dir: OUTBOX,
+                    time
                 }
             });
         }
