@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { Router } from './components/router';
 import { Reducer } from './reducers/reducer';
 import { EmailModal } from './components/emailModal';
+import { Toasts } from '../../js/modules/react/toasts';
 import { GlobalContext } from './globalContext';
 import { MY_ADDRESS, INBOX } from './globalConstants';
 
@@ -47,6 +48,21 @@ const messages = [
   }
 ]
 
+const toasts = [ 
+  {
+      heading: "Some heading", 
+      label: "Some label", 
+      body: "Heads up, toasts will stack automatically", 
+      show: true 
+  },
+  {
+      heading: "Some other heading", 
+      label: "Some label", 
+      body: "Heads up, toasts will stack automatically", 
+      show: true 
+  } 
+];
+
 function App() {
 
   const [ state, dispatch] = useReducer(Reducer, {
@@ -62,7 +78,8 @@ function App() {
     selectedThread: [],
     showModal: false,
     mode: "",
-    showValidation: false
+    showValidation: false,
+    toasts
   });
 
   const context = { ...state, dispatch };
@@ -71,6 +88,7 @@ function App() {
     <GlobalContext.Provider value={context}>
       <Router />
       <EmailModal />
+      <Toasts items={state.toasts} />
     </GlobalContext.Provider>
   );
 }

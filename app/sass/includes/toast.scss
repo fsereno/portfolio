@@ -1,0 +1,11 @@
+.toasts-container {
+
+    position: relative;
+    min-height: 200px;
+
+    .toasts-position {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
