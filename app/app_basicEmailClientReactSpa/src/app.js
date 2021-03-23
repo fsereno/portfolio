@@ -48,7 +48,7 @@ const messages = [
   }
 ]
 
-const toasts = [ 
+/*const toasts = [ 
   {
       heading: "Some heading", 
       label: "Some label", 
@@ -61,7 +61,7 @@ const toasts = [
       body: "Heads up, toasts will stack automatically", 
       show: true 
   } 
-];
+];*/
 
 function App() {
 
@@ -78,8 +78,7 @@ function App() {
     selectedThread: [],
     showModal: false,
     mode: "",
-    showValidation: false,
-    toasts
+    showValidation: false
   });
 
   const context = { ...state, dispatch };
@@ -88,7 +87,7 @@ function App() {
     <GlobalContext.Provider value={context}>
       <Router />
       <EmailModal />
-      <Toasts items={state.toasts} />
+      <Toasts />
     </GlobalContext.Provider>
   );
 }

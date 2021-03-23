@@ -1,22 +1,24 @@
 "use strict;"
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { ToastContext } from './toastContext';
+import { REMOVE_TOAST } from './toastConstants';
 
 export function Toast(props) {
 
-    const getFadeInClass = show => show ? "in" : "out";
-    const [showClass, setShowClass ] = useState(getFadeInClass(props.item.show));
-    const handleClose = () => setShowClass(getFadeInClass(false));
+    const context = React.useContext(ToastContext);
 
-    useEffect(() => {
+    const handleClose = () => context.dispatch( { type: REMOVE_TOAST, index: props.index });
+
+  /*useEffect(() => {
         setTimeout(() => {
             handleClose();
         }, 5000)
-    }, [showClass]);
+    }, []);*/
 
     return (
         <>
-            <div className={`toast fade-element ${showClass}`} role="alert" aria-live="assertive" aria-atomic="true">
+            <div className="toast" role="alert" aria-live="assertive" aria-atomic="true" style={ { opacity: 1 }}>
                 <div className="toast-header">
                     <strong className="mr-auto">{props.item.heading}</strong>
                     <small className="text-muted">{props.item.label}</small>
