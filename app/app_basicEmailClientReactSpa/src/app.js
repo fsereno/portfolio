@@ -5,9 +5,10 @@ import ReactDOM from 'react-dom';
 import { Router } from './components/router';
 import { Reducer } from './reducers/reducer';
 import { EmailModal } from './components/emailModal';
-import { Toasts } from '../../js/modules/react/toasts';
 import { GlobalContext } from './globalContext';
 import { MY_ADDRESS, INBOX } from './globalConstants';
+import { Toasts } from '../../js/modules/react/toasts';
+import { ToastReducer } from '../../js/modules/react/toasts';
 
 const messages = [
   {
@@ -48,21 +49,6 @@ const messages = [
   }
 ]
 
-/*const toasts = [ 
-  {
-      heading: "Some heading", 
-      label: "Some label", 
-      body: "Heads up, toasts will stack automatically", 
-      show: true 
-  },
-  {
-      heading: "Some other heading", 
-      label: "Some label", 
-      body: "Heads up, toasts will stack automatically", 
-      show: true 
-  } 
-];*/
-
 function App() {
 
   const [ state, dispatch] = useReducer(Reducer, {
@@ -81,14 +67,18 @@ function App() {
     showValidation: false
   });
 
-  const context = { ...state, dispatch };
+  const [ toastState, toastDispatch ] = useReducer(ToastReducer, []);
+
+  const context = { ...state, dispatch, toastDispatch };
 
   return (
-    <GlobalContext.Provider value={context}>
-      <Router />
-      <EmailModal />
-      <Toasts />
-    </GlobalContext.Provider>
+    <>
+      <GlobalContext.Provider value={context}>
+        <Router />
+        <EmailModal />
+      </GlobalContext.Provider>
+      <Toasts items={toastState} dispatch={toastDispatch}/>
+    </>
   );
 }
 

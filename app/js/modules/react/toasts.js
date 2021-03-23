@@ -1,59 +1,46 @@
 "use strict;"
 
-import React, { useReducer } from 'react';
+import React from 'react';
 import { Toast } from './toast';
-import { ToastContext } from './toastContext';
-import { ADD_TOAST, REMOVE_TOAST } from './toastConstants';
 
-function ToastReducer(state, action) {
+export const ENQUEUE_TOAST = "enqueueToast";
+export const DEQUEUE_TOAST = "dequeueToast";
+export const REMOVE_TOAST_AT_INDEX = "removeToastAtIndex";
+
+export function ToastReducer(state, action) {
     switch(action.type) {
-        case ADD_TOAST:
+        case ENQUEUE_TOAST:
             return [...state, action.item]
-        case REMOVE_TOAST:
+        case DEQUEUE_TOAST: {
+            const toasts = [...state]
+            toasts.shift();
+            return toasts
+        }
+        case REMOVE_TOAST_AT_INDEX: {
             const toasts = [...state];
             toasts.splice(action.index, 1);
             return toasts
+        }
         default:
             throw new Error();
     }
-}
+  }
 
-export function Toasts() {
-
-    const initialState = [ 
-        {
-            heading: "Some heading", 
-            label: "Some label", 
-            body: "Heads up, toasts will stack automatically", 
-            show: true 
-        },
-        {
-            heading: "Some other heading", 
-            label: "Some label", 
-            body: "Heads up, toasts will stack automatically", 
-            show: true 
-        } 
-    ];
-
-    const [ state, dispatch ] = useReducer(ToastReducer, initialState);
-
-    const context = {...state, dispatch };
-
+export function Toasts(props) {
     return (
-        <ToastContext.Provider value={context}>
-            <div className="toasts-container" aria-live="polite" aria-atomic="true">
-                <div className="toasts-position">
-                    {state.map((item, index) => {
-                        return (
-                            <Toast
-                                key={`toast_${index}`}
-                                index={index}
-                                item={item}
-                            />
-                        )
-                    })}
-                </div>
+        <div className="toasts-container" aria-live="polite" aria-atomic="true">
+            <div className="toasts-position">
+                {props.items.map((item, index) => {
+                    return (
+                        <Toast
+                            key={`toast_${index}`}
+                            index={index}
+                            item={item}
+                            dispatch={props.dispatch}
+                        />
+                    )
+                })}
             </div>
-        </ToastContext.Provider>
+        </div>
     )
 }

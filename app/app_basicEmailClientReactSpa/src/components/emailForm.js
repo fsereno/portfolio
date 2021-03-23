@@ -15,6 +15,7 @@ import {
     HIDE_VALIDATION
 } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
+import { ENQUEUE_TOAST } from '../../../js/modules/react/toasts';
 
 export function EmailForm() {
 
@@ -46,6 +47,8 @@ export function EmailForm() {
                     time
                 }
             });
+
+            context.toastDispatch( { type: ENQUEUE_TOAST, item: { heading: "Message sent", body: "Your message has been sent" } } );
         }
     };
 

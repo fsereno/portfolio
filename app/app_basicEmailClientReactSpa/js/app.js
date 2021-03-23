@@ -39213,29 +39213,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Toast", function() { return Toast; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _toastContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toastContext */ "../js/modules/react/toastContext.js");
-/* harmony import */ var _toastConstants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./toastConstants */ "../js/modules/react/toastConstants.js");
+/* harmony import */ var _toasts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toasts */ "../js/modules/react/toasts.js");
 "use strict;";
 
 
 
-
 function Toast(props) {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_toastContext__WEBPACK_IMPORTED_MODULE_1__["ToastContext"]);
-
   var handleClose = function handleClose() {
-    return context.dispatch({
-      type: _toastConstants__WEBPACK_IMPORTED_MODULE_2__["REMOVE_TOAST"],
+    return props.dispatch({
+      type: _toasts__WEBPACK_IMPORTED_MODULE_1__["REMOVE_TOAST_AT_INDEX"],
       index: props.index
     });
   };
-  /*useEffect(() => {
-        setTimeout(() => {
-            handleClose();
-        }, 5000)
-    }, []);*/
 
-
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setTimeout(function () {
+      props.dispatch({
+        type: _toasts__WEBPACK_IMPORTED_MODULE_1__["DEQUEUE_TOAST"]
+      });
+    }, 5000);
+  }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "toast",
     role: "alert",
@@ -39248,9 +39245,7 @@ function Toast(props) {
     className: "toast-header"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", {
     className: "mr-auto"
-  }, props.item.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    className: "text-muted"
-  }, props.item.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, props.item.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     onClick: function onClick(event) {
       return event.preventDefault() & handleClose();
@@ -39265,73 +39260,24 @@ function Toast(props) {
 
 /***/ }),
 
-/***/ "../js/modules/react/toastConstants.js":
-/*!*********************************************!*\
-  !*** ../js/modules/react/toastConstants.js ***!
-  \*********************************************/
-/*! exports provided: ADD_TOAST, REMOVE_TOAST */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_TOAST", function() { return ADD_TOAST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_TOAST", function() { return REMOVE_TOAST; });
-"use strict;";
-
-var ADD_TOAST = "add";
-var REMOVE_TOAST = "remove";
-
-/***/ }),
-
-/***/ "../js/modules/react/toastContext.js":
-/*!*******************************************!*\
-  !*** ../js/modules/react/toastContext.js ***!
-  \*******************************************/
-/*! exports provided: ToastContext */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToastContext", function() { return ToastContext; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-"use strict;";
-
-
-var ToastContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext();
-
-/***/ }),
-
 /***/ "../js/modules/react/toasts.js":
 /*!*************************************!*\
   !*** ../js/modules/react/toasts.js ***!
   \*************************************/
-/*! exports provided: Toasts */
+/*! exports provided: ENQUEUE_TOAST, DEQUEUE_TOAST, REMOVE_TOAST_AT_INDEX, ToastReducer, Toasts */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ENQUEUE_TOAST", function() { return ENQUEUE_TOAST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEQUEUE_TOAST", function() { return DEQUEUE_TOAST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_TOAST_AT_INDEX", function() { return REMOVE_TOAST_AT_INDEX; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToastReducer", function() { return ToastReducer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Toasts", function() { return Toasts; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _toast__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toast */ "../js/modules/react/toast.js");
-/* harmony import */ var _toastContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./toastContext */ "../js/modules/react/toastContext.js");
-/* harmony import */ var _toastConstants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./toastConstants */ "../js/modules/react/toastConstants.js");
 "use strict;";
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
@@ -39343,62 +39289,50 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 
-
-
-
+var ENQUEUE_TOAST = "enqueueToast";
+var DEQUEUE_TOAST = "dequeueToast";
+var REMOVE_TOAST_AT_INDEX = "removeToastAtIndex";
 function ToastReducer(state, action) {
   switch (action.type) {
-    case _toastConstants__WEBPACK_IMPORTED_MODULE_3__["ADD_TOAST"]:
+    case ENQUEUE_TOAST:
       return [].concat(_toConsumableArray(state), [action.item]);
 
-    case _toastConstants__WEBPACK_IMPORTED_MODULE_3__["REMOVE_TOAST"]:
-      var toasts = _toConsumableArray(state);
+    case DEQUEUE_TOAST:
+      {
+        var toasts = _toConsumableArray(state);
 
-      toasts.splice(action.index, 1);
-      return toasts;
+        toasts.shift();
+        return toasts;
+      }
+
+    case REMOVE_TOAST_AT_INDEX:
+      {
+        var _toasts = _toConsumableArray(state);
+
+        _toasts.splice(action.index, 1);
+
+        return _toasts;
+      }
 
     default:
       throw new Error();
   }
 }
-
-function Toasts() {
-  var initialState = [{
-    heading: "Some heading",
-    label: "Some label",
-    body: "Heads up, toasts will stack automatically",
-    show: true
-  }, {
-    heading: "Some other heading",
-    label: "Some label",
-    body: "Heads up, toasts will stack automatically",
-    show: true
-  }];
-
-  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(ToastReducer, initialState),
-      _useReducer2 = _slicedToArray(_useReducer, 2),
-      state = _useReducer2[0],
-      dispatch = _useReducer2[1];
-
-  var context = _objectSpread({}, state, {
-    dispatch: dispatch
-  });
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_toastContext__WEBPACK_IMPORTED_MODULE_2__["ToastContext"].Provider, {
-    value: context
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+function Toasts(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "toasts-container",
     "aria-live": "polite",
     "aria-atomic": "true"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "toasts-position"
-  }, state.map(function (item, index) {
+  }, props.items.map(function (item, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_toast__WEBPACK_IMPORTED_MODULE_1__["Toast"], {
       key: "toast_".concat(index),
       index: index,
-      item: item
+      item: item,
+      dispatch: props.dispatch
     });
-  }))));
+  })));
 }
 
 /***/ }),
@@ -39419,9 +39353,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
 /* harmony import */ var _reducers_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reducers/reducer */ "./src/reducers/reducer.js");
 /* harmony import */ var _components_emailModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/emailModal */ "./src/components/emailModal.js");
-/* harmony import */ var _js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/modules/react/toasts */ "../js/modules/react/toasts.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./globalContext */ "./src/globalContext.js");
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./globalContext */ "./src/globalContext.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/modules/react/toasts */ "../js/modules/react/toasts.js");
 "use strict;";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -39446,61 +39380,48 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var messages = [{
   id: 0,
   from: "james@hsbc.co.uk",
-  to: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["MY_ADDRESS"],
+  to: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
   subject: "Subject 1",
-  thread: "james@hsbc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_7__["MY_ADDRESS"], "_Subject 1"),
+  thread: "james@hsbc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"], "_Subject 1"),
   body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
   age: 1,
   read: false,
-  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["INBOX"],
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"],
   time: new Date().getTime()
 }, {
   id: 1,
   from: "sarah@ford.co.uk",
-  to: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["MY_ADDRESS"],
+  to: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
   subject: "Subject 2",
-  thread: "sarah@ford.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_7__["MY_ADDRESS"], "_Subject 2"),
+  thread: "sarah@ford.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"], "_Subject 2"),
   body: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
   age: 2,
   read: false,
-  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["INBOX"],
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"],
   time: new Date().getTime()
 }, {
   id: 2,
   from: "tim.jones@hmrc.co.uk",
-  to: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["MY_ADDRESS"],
+  to: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
   subject: "Subject 3",
-  thread: "tim.jones@hmrc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_7__["MY_ADDRESS"], "_Subject 3"),
+  thread: "tim.jones@hmrc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"], "_Subject 3"),
   body: "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC",
   age: 3,
   read: false,
-  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["INBOX"],
+  dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"],
   time: new Date().getTime()
 }];
-/*const toasts = [ 
-  {
-      heading: "Some heading", 
-      label: "Some label", 
-      body: "Heads up, toasts will stack automatically", 
-      show: true 
-  },
-  {
-      heading: "Some other heading", 
-      label: "Some label", 
-      body: "Heads up, toasts will stack automatically", 
-      show: true 
-  } 
-];*/
 
 function App() {
   var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_3__["Reducer"], {
     selected: {
       id: -1,
       to: "",
-      from: _globalConstants__WEBPACK_IMPORTED_MODULE_7__["MY_ADDRESS"],
+      from: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["MY_ADDRESS"],
       subject: "",
       body: "",
       time: 0
@@ -39515,13 +39436,22 @@ function App() {
       state = _useReducer2[0],
       dispatch = _useReducer2[1];
 
+  var _useReducer3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_7__["ToastReducer"], []),
+      _useReducer4 = _slicedToArray(_useReducer3, 2),
+      toastState = _useReducer4[0],
+      toastDispatch = _useReducer4[1];
+
   var context = _objectSpread({}, state, {
-    dispatch: dispatch
+    dispatch: dispatch,
+    toastDispatch: toastDispatch
   });
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_6__["GlobalContext"].Provider, {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_5__["GlobalContext"].Provider, {
     value: context
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_emailModal__WEBPACK_IMPORTED_MODULE_4__["EmailModal"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_5__["Toasts"], null));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_emailModal__WEBPACK_IMPORTED_MODULE_4__["EmailModal"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_7__["Toasts"], {
+    items: toastState,
+    dispatch: toastDispatch
+  }));
 }
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('result'));
@@ -39747,7 +39677,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
 /* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../js/modules/react/toasts */ "../js/modules/react/toasts.js");
 "use strict;";
+
 
 
 
@@ -39783,6 +39715,13 @@ function EmailForm() {
           age: 0,
           dir: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["OUTBOX"],
           time: time
+        }
+      });
+      context.toastDispatch({
+        type: _js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_6__["ENQUEUE_TOAST"],
+        item: {
+          heading: "Message sent",
+          body: "Your message has been sent"
         }
       });
     }
