@@ -50,19 +50,6 @@ table {
     min-height: 100vh;
 }
 
-.fade-element {
-    -webkit-transition: opacity .5s ease-in;
-    -moz-transition: opacity .5s ease-in;
-    -o-transition: opacity .5s ease-in;
-    transition: opacity .5s ease-in;
-    opacity: 0;
-    visibility: hidden;
-}
-.fade-element.in {
-    opacity: 1;
-    visibility: visible;
-}
-
 h1, h2, h3, h4, h5 {
     font-weight: 300;
 }

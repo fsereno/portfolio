@@ -4,21 +4,23 @@ import React, { useState, useEffect } from 'react';
 
 export function Toast(props) {
 
-    const [opacity, setOpacity ] = useState(props.item.show ? 1 : 0);
+    const getFadeInClass = show => show ? "in" : "out";
+    const [showClass, setShowClass ] = useState(getFadeInClass(props.item.show));
+    const handleClose = () => setShowClass(getFadeInClass(false));
 
     useEffect(() => {
         setTimeout(() => {
-            setOpacity(0);
-        }, 3000)
-    }, [opacity]);
+            handleClose();
+        }, 5000)
+    }, [showClass]);
 
     return (
         <>
-            <div className="toast" role="alert" aria-live="assertive" aria-atomic="true" style={{ opacity: opacity }}>
+            <div className={`toast fade-element ${showClass}`} role="alert" aria-live="assertive" aria-atomic="true">
                 <div className="toast-header">
                     <strong className="mr-auto">{props.item.heading}</strong>
                     <small className="text-muted">{props.item.label}</small>
-                    <a href="#" onClick={event => event.preventDefault() & setOpacity(0)}className="text-dark h3 mb-0">
+                    <a href="#" onClick={event => event.preventDefault() & handleClose()}className="text-dark h3 mb-0">
                         <i className="bi bi-x"></i>
                     </a>
                 </div>

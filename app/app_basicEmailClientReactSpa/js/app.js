@@ -39225,24 +39225,29 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Toast(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(props.item.show ? 1 : 0),
+  var getFadeInClass = function getFadeInClass(show) {
+    return show ? "in" : "out";
+  };
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getFadeInClass(props.item.show)),
       _useState2 = _slicedToArray(_useState, 2),
-      opacity = _useState2[0],
-      setOpacity = _useState2[1];
+      showClass = _useState2[0],
+      setShowClass = _useState2[1];
+
+  var handleClose = function handleClose() {
+    return setShowClass(getFadeInClass(false));
+  };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     setTimeout(function () {
-      setOpacity(0);
-    }, 3000);
-  }, [opacity]);
+      handleClose();
+    }, 5000);
+  }, [showClass]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "toast",
+    className: "toast fade-element ".concat(showClass),
     role: "alert",
     "aria-live": "assertive",
-    "aria-atomic": "true",
-    style: {
-      opacity: opacity
-    }
+    "aria-atomic": "true"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "toast-header"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", {
@@ -39252,7 +39257,7 @@ function Toast(props) {
   }, props.item.label), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     onClick: function onClick(event) {
-      return event.preventDefault() & setOpacity(0);
+      return event.preventDefault() & handleClose();
     },
     className: "text-dark h3 mb-0"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {

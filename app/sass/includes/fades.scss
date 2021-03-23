@@ -1,0 +1,17 @@
+.fade-element {
+    -webkit-transition: opacity .5s ease-in;
+    -moz-transition: opacity .5s ease-in;
+    -o-transition: opacity .5s ease-in;
+    transition: opacity .5s ease-in;
+    opacity: 0;
+    visibility: hidden;
+}
+.fade-element.in {
+    opacity: 1;
+    visibility: visible;
+}
+
+.fade-element.out {
+    opacity: 0;
+    visibility: visible;
+}
