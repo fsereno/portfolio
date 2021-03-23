@@ -1,7 +1,7 @@
 "use strict;"
 
 import React from 'react';
-import { Toaster } from './toaster';
+import { Toast } from './toast';
 
 export function Toasts(props) {
     return (
@@ -9,11 +9,9 @@ export function Toasts(props) {
             <div className="toasts-position">
                 {props.items && props.items.map((item, index) => {
                     return (
-                        <Toaster
+                        <Toast
                             key={`toast_${index}`}
-                            heading={item.heading}
-                            label={item.label}
-                            body={item.body}
+                            item={item}
                         />
                     )
                 })}

@@ -23,8 +23,6 @@ import {
 export function Reducer(state, action) {
   switch(action.type) {
     case SELECT:
-      console.log(state.messages)
-      console.log(action.item)
       return {
         messages: setEmailToRead(action.item.id, state.messages),
         selectedThread: getEmailsByThread(state.messages, action.item),
