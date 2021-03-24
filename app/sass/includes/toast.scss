@@ -1,9 +1,13 @@
 .toasts-container {
-
-    position: relative;
     min-height: 200px;
+    position: fixed;
+    min-height: 200px;
+    top: 5rem;
+    right: 1rem;
+    z-index: 1000;
 
     .toasts-position {
+        width: 300px;
         position: absolute;
         top: 0;
         right: 0;

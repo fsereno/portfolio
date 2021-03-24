@@ -1,6 +1,6 @@
 "use strict;"
 
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { Toast } from './toast';
 
 export const ENQUEUE_TOAST = "enqueueToast";
@@ -27,8 +27,15 @@ export function ToastReducer(state, action) {
   }
 
 export function Toasts(props) {
+
+    const [ isVisible, setIsVisible ] = useState(false);
+
+    useLayoutEffect(() => {
+        setIsVisible(props.items.length > 0);
+    });
+
     return (
-        <div className="toasts-container" aria-live="polite" aria-atomic="true">
+        <div className="toasts-container" aria-live="polite" aria-atomic="true" style={ { visibility: isVisible ? "visible" : "hidden" } }>
             <div className="toasts-position">
                 {props.items.map((item, index) => {
                     return (
