@@ -40241,7 +40241,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _age__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./age */ "./src/components/age.js");
 /* harmony import */ var _utils_getKeyFromMessage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/getKeyFromMessage */ "./src/utils/getKeyFromMessage.js");
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 "use strict;";
+
 
 
 
@@ -40253,6 +40255,7 @@ function ReadingPane() {
     id: "readingPane"
   }, context.selectedThread.map(function (item, index) {
     var key = Object(_utils_getKeyFromMessage__WEBPACK_IMPORTED_MODULE_2__["getKeyFromMessage"])(item);
+    var showSubject = window.innerWidth > _globalConstants__WEBPACK_IMPORTED_MODULE_4__["MIN_VIEWPORT_WIDTH"] || window.innerWidth < _globalConstants__WEBPACK_IMPORTED_MODULE_4__["MIN_VIEWPORT_WIDTH"] && index > 0;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key
     }, index > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_age__WEBPACK_IMPORTED_MODULE_1__["Age"], {
@@ -40261,8 +40264,8 @@ function ReadingPane() {
       className: "mb-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "From:"), " ", item.from), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "mb-0"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "To:"), " ", item.to), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "lead mb-0"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "To:"), " ", item.to), showSubject && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "mb-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Subject:"), " ", item.subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "mt-3"
     }, item.body));
