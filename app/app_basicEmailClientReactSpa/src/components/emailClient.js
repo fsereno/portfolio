@@ -26,7 +26,7 @@ export function EmailClient(props) {
                         <Col className="d-none d-md-block">
                             {context.mode === READ &&
                                 <Row className="justify-content-end">
-                                    <button className="btn btn-sm btn-dark" onClick={() => context.dispatch({ type: REPLY_MESSAGE, selected: context.selected }) }>
+                                    <button id="desktopReplyBtn" className="btn btn-sm btn-dark" onClick={() => context.dispatch({ type: REPLY_MESSAGE, selected: context.selected }) }>
                                         <i className="bi bi-arrow-90deg-left"></i>
                                     </button>
                                 </Row>

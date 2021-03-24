@@ -39691,6 +39691,7 @@ function EmailClient(props) {
   }, context.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_7__["READ"] && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], {
     className: "justify-content-end"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "desktopReplyBtn",
     className: "btn btn-sm btn-dark",
     onClick: function onClick() {
       return context.dispatch({

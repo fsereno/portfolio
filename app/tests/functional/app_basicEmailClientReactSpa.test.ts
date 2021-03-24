@@ -23,9 +23,9 @@ describe(application, () => {
                 .end()
                 .evaluate(() => {
 
-                    const modal = $("#readingPane").text();
+                    const text = $("#readingPane").text();
 
-                    return modal.length > 0;
+                    return text.length > 0;
                 })
                 .end();
             }
@@ -36,12 +36,12 @@ describe(application, () => {
         it("Should submit a reply and confirm in Outbox.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare()
+                return new Nightmare({show:true})
                 .goto(`${url}#/inbox`)
                 .wait(1000)
                 .click('#id_0')
                 .wait(1000)
-                .click('#replyBtn')
+                .click('#desktopReplyBtn')
                 .wait(1000)
                 .type('textarea#body', 'This is a reply')
                 .click('#submit')
@@ -53,10 +53,9 @@ describe(application, () => {
                 .end()
                 .evaluate(() => {
 
-                    const modal = $(".fade.modal.show");
-                    const hasCorrectBody = $(".fade.modal.show:contains('This is a reply')");
+                    const hasCorrectBody = $("#readingPane:contains('This is a reply')");
 
-                    return modal.length > 0 && hasCorrectBody.length > 0;
+                    return hasCorrectBody.length > 0;
                 })
                 .end();
             }
@@ -67,10 +66,8 @@ describe(application, () => {
         it("Should submit a new message and confirm in Outbox.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare()
-                .goto(url)
-                .wait(1000)
-                .click('#new')
+                return new Nightmare({show:true})
+                .goto(`${url}#/new`)
                 .wait(1000)
                 .type('#to', 'test@email.co.uk')
                 .type('#subject', 'This is a new Subject')
@@ -84,12 +81,11 @@ describe(application, () => {
                 .end()
                 .evaluate(() => {
 
-                    const modal = $(".fade.modal.show");
-                    const hasCorrectTo = $(".fade.modal.show:contains('test@email.co.uk')");
-                    const hasCorrectSubject = $(".fade.modal.show:contains('This is a new Subject')");
-                    const hasCorrectBody = $(".fade.modal.show:contains('This is a new message')");
+                    const hasCorrectTo = $("#readingPane:contains('test@email.co.uk')");
+                    const hasCorrectSubject = $("#readingPane:contains('This is a new Subject')");
+                    const hasCorrectBody = $("#readingPane:contains('This is a new message')");
 
-                    return modal.length > 0 && hasCorrectTo.length > 0 && hasCorrectBody.length > 0 && hasCorrectSubject.length > 0;
+                    return hasCorrectTo.length > 0 && hasCorrectBody.length > 0 && hasCorrectSubject.length > 0;
                 })
                 .end();
             }
@@ -101,9 +97,7 @@ describe(application, () => {
             this.timeout(0);
             let test = async (url) => {
                 return new Nightmare()
-                .goto(url)
-                .wait(1000)
-                .click('#new')
+                .goto(`${url}#/new`)
                 .wait(1000)
                 .type('#to', 'test@email.co.uk')
                 .type('#subject', 'This is a new Subject')
