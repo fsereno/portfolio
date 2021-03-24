@@ -1,6 +1,6 @@
 "use strict;"
 
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Toast } from './toast';
 
 export const ENQUEUE_TOAST = "enqueueToast";
@@ -9,17 +9,20 @@ export const REMOVE_TOAST_AT_INDEX = "removeToastAtIndex";
 
 export function ToastReducer(state, action) {
     switch(action.type) {
-        case ENQUEUE_TOAST:
-            return [...state, action.item]
+        case ENQUEUE_TOAST: {
+            const toasts = [...state];
+            toasts.unshift(action.item);
+            return toasts;
+        }
         case DEQUEUE_TOAST: {
             const toasts = [...state]
-            toasts.shift();
-            return toasts
+            toasts.pop();
+            return toasts;
         }
         case REMOVE_TOAST_AT_INDEX: {
             const toasts = [...state];
             toasts.splice(action.index, 1);
-            return toasts
+            return toasts;
         }
         default:
             throw new Error();
@@ -30,7 +33,7 @@ export function Toasts(props) {
 
     const [ isVisible, setIsVisible ] = useState(false);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         setIsVisible(props.items.length > 0);
     });
 

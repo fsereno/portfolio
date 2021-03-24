@@ -48,7 +48,7 @@ export function EmailForm() {
                 }
             });
 
-            context.toastDispatch( { type: ENQUEUE_TOAST, item: { heading: "Message sent", body: "Your message has been sent" } } );
+            context.toastDispatch( { type: ENQUEUE_TOAST, item: { heading: "Sent successfully!", body: `Your message RE: ${context.selected.subject}, has now been sent` } } );
         }
     };
 

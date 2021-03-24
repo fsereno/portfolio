@@ -39225,13 +39225,14 @@ function Toast(props) {
       index: props.index
     });
   };
-  /*useEffect(() => {
-      setTimeout(() => {
-          props.dispatch( { type: DEQUEUE_TOAST });
-      }, 5000)
-  }, []);*/
 
-
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setTimeout(function () {
+      props.dispatch({
+        type: _toasts__WEBPACK_IMPORTED_MODULE_1__["DEQUEUE_TOAST"]
+      });
+    }, 5000);
+  }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "toast",
     role: "alert",
@@ -39244,7 +39245,7 @@ function Toast(props) {
     className: "toast-header"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", {
     className: "mr-auto text-dark lead"
-  }, props.item.heading, " ", props.index), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, props.item.heading), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     onClick: function onClick(event) {
       return event.preventDefault() & handleClose();
@@ -39302,23 +39303,29 @@ var REMOVE_TOAST_AT_INDEX = "removeToastAtIndex";
 function ToastReducer(state, action) {
   switch (action.type) {
     case ENQUEUE_TOAST:
-      return [].concat(_toConsumableArray(state), [action.item]);
-
-    case DEQUEUE_TOAST:
       {
         var toasts = _toConsumableArray(state);
 
-        toasts.shift();
+        toasts.unshift(action.item);
         return toasts;
+      }
+
+    case DEQUEUE_TOAST:
+      {
+        var _toasts = _toConsumableArray(state);
+
+        _toasts.pop();
+
+        return _toasts;
       }
 
     case REMOVE_TOAST_AT_INDEX:
       {
-        var _toasts = _toConsumableArray(state);
+        var _toasts2 = _toConsumableArray(state);
 
-        _toasts.splice(action.index, 1);
+        _toasts2.splice(action.index, 1);
 
-        return _toasts;
+        return _toasts2;
       }
 
     default:
@@ -39331,7 +39338,7 @@ function Toasts(props) {
       isVisible = _useState2[0],
       setIsVisible = _useState2[1];
 
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"])(function () {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     setIsVisible(props.items.length > 0);
   });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -39738,8 +39745,8 @@ function EmailForm() {
       context.toastDispatch({
         type: _js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_6__["ENQUEUE_TOAST"],
         item: {
-          heading: "Message sent",
-          body: "Your message has been sent"
+          heading: "Sent successfully!",
+          body: "Your message RE: ".concat(context.selected.subject, ", has now been sent")
         }
       });
     }
