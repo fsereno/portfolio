@@ -39213,23 +39213,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Toast", function() { return Toast; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _toasts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toasts */ "../js/modules/react/toasts.js");
+/* harmony import */ var _toaster__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toaster */ "../js/modules/react/toaster.js");
 "use strict;";
 
 
 
+
 function Toast(props) {
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_toaster__WEBPACK_IMPORTED_MODULE_1__["ToasterContext"]);
+
   var handleClose = function handleClose() {
-    return props.dispatch({
-      type: _toasts__WEBPACK_IMPORTED_MODULE_1__["REMOVE_TOAST_AT_INDEX"],
+    return context.dispatch({
+      type: _toaster__WEBPACK_IMPORTED_MODULE_1__["REMOVE_TOAST_AT_INDEX"],
       index: props.index
     });
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     setTimeout(function () {
-      props.dispatch({
-        type: _toasts__WEBPACK_IMPORTED_MODULE_1__["DEQUEUE_TOAST"]
+      context.dispatch({
+        type: _toaster__WEBPACK_IMPORTED_MODULE_1__["DEQUEUE_TOAST"]
       });
     }, 5000);
   }, []);
@@ -39260,11 +39263,11 @@ function Toast(props) {
 
 /***/ }),
 
-/***/ "../js/modules/react/toasts.js":
-/*!*************************************!*\
-  !*** ../js/modules/react/toasts.js ***!
-  \*************************************/
-/*! exports provided: ENQUEUE_TOAST, DEQUEUE_TOAST, REMOVE_TOAST_AT_INDEX, ToastReducer, Toasts */
+/***/ "../js/modules/react/toaster.js":
+/*!**************************************!*\
+  !*** ../js/modules/react/toaster.js ***!
+  \**************************************/
+/*! exports provided: ENQUEUE_TOAST, DEQUEUE_TOAST, REMOVE_TOAST_AT_INDEX, ToasterContext, ToastReducer, Toaster */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39272,8 +39275,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ENQUEUE_TOAST", function() { return ENQUEUE_TOAST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEQUEUE_TOAST", function() { return DEQUEUE_TOAST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_TOAST_AT_INDEX", function() { return REMOVE_TOAST_AT_INDEX; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToasterContext", function() { return ToasterContext; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToastReducer", function() { return ToastReducer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Toasts", function() { return Toasts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Toaster", function() { return Toaster; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _toast__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toast */ "../js/modules/react/toast.js");
@@ -39286,6 +39290,12 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
@@ -39300,46 +39310,54 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var ENQUEUE_TOAST = "enqueueToast";
 var DEQUEUE_TOAST = "dequeueToast";
 var REMOVE_TOAST_AT_INDEX = "removeToastAtIndex";
+var ToasterContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext();
 function ToastReducer(state, action) {
   switch (action.type) {
     case ENQUEUE_TOAST:
       {
-        var toasts = _toConsumableArray(state);
+        var items = _toConsumableArray(state.items);
 
-        toasts.unshift(action.item);
-        return toasts;
+        items.unshift(action.item);
+        return _objectSpread({}, state, {
+          items: items
+        });
       }
 
     case DEQUEUE_TOAST:
       {
-        var _toasts = _toConsumableArray(state);
+        var _items = _toConsumableArray(state.items);
 
-        _toasts.pop();
+        _items.pop();
 
-        return _toasts;
+        return _objectSpread({}, state, {
+          items: _items
+        });
       }
 
     case REMOVE_TOAST_AT_INDEX:
       {
-        var _toasts2 = _toConsumableArray(state);
+        var _items2 = _toConsumableArray(state.items);
 
-        _toasts2.splice(action.index, 1);
+        _items2.splice(action.index, 1);
 
-        return _toasts2;
+        return _objectSpread({}, state, {
+          items: _items2
+        });
       }
 
     default:
       throw new Error();
   }
 }
-function Toasts(props) {
+function Toaster() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       isVisible = _useState2[0],
       setIsVisible = _useState2[1];
 
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(ToasterContext);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    setIsVisible(props.items.length > 0);
+    setIsVisible(context.items.length > 0);
   });
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "toasts-container",
@@ -39350,12 +39368,11 @@ function Toasts(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "toasts-position"
-  }, props.items.map(function (item, index) {
+  }, context.items.map(function (item, index) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_toast__WEBPACK_IMPORTED_MODULE_1__["Toast"], {
       key: "toast_".concat(index),
       index: index,
-      item: item,
-      dispatch: props.dispatch
+      item: item
     });
   })));
 }
@@ -39380,7 +39397,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_emailModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/emailModal */ "./src/components/emailModal.js");
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./globalContext */ "./src/globalContext.js");
 /* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./globalConstants */ "./src/globalConstants.js");
-/* harmony import */ var _js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/modules/react/toasts */ "../js/modules/react/toasts.js");
+/* harmony import */ var _js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/modules/react/toaster */ "../js/modules/react/toaster.js");
 "use strict;";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -39396,7 +39413,6 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -39461,22 +39477,26 @@ function App() {
       state = _useReducer2[0],
       dispatch = _useReducer2[1];
 
-  var _useReducer3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_7__["ToastReducer"], []),
+  var _useReducer3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_7__["ToastReducer"], {
+    items: []
+  }),
       _useReducer4 = _slicedToArray(_useReducer3, 2),
       toastState = _useReducer4[0],
       toastDispatch = _useReducer4[1];
 
   var context = _objectSpread({}, state, {
-    dispatch: dispatch,
-    toastDispatch: toastDispatch
+    dispatch: dispatch
+  });
+
+  var toasterContext = _objectSpread({}, toastState, {
+    dispatch: toastDispatch
   });
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_5__["GlobalContext"].Provider, {
     value: context
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_emailModal__WEBPACK_IMPORTED_MODULE_4__["EmailModal"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_7__["Toasts"], {
-    items: toastState,
-    dispatch: toastDispatch
-  }));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_7__["ToasterContext"].Provider, {
+    value: toasterContext
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_emailModal__WEBPACK_IMPORTED_MODULE_4__["EmailModal"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_7__["Toaster"], null))));
 }
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('result'));
@@ -39702,7 +39722,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
 /* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
-/* harmony import */ var _js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../js/modules/react/toasts */ "../js/modules/react/toasts.js");
+/* harmony import */ var _js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../js/modules/react/toaster */ "../js/modules/react/toaster.js");
 "use strict;";
 
 
@@ -39714,6 +39734,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function EmailForm() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_5__["GlobalContext"]);
+  var toasterContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_6__["ToasterContext"]);
 
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
@@ -39742,11 +39763,11 @@ function EmailForm() {
           time: time
         }
       });
-      context.toastDispatch({
-        type: _js_modules_react_toasts__WEBPACK_IMPORTED_MODULE_6__["ENQUEUE_TOAST"],
+      toasterContext.dispatch({
+        type: _js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_6__["ENQUEUE_TOAST"],
         item: {
           heading: "Sent successfully!",
-          body: "Your message RE: ".concat(context.selected.subject, ", has now been sent")
+          body: "Your message RE: ".concat(context.selected.subject, ", has now been sent.")
         }
       });
     }

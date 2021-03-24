@@ -7,8 +7,7 @@ import { Reducer } from './reducers/reducer';
 import { EmailModal } from './components/emailModal';
 import { GlobalContext } from './globalContext';
 import { MY_ADDRESS, INBOX } from './globalConstants';
-import { Toasts } from '../../js/modules/react/toasts';
-import { ToastReducer } from '../../js/modules/react/toasts';
+import { Toaster, ToastReducer, ToasterContext } from '../../js/modules/react/toaster';
 
 const messages = [
   {
@@ -67,17 +66,21 @@ function App() {
     showValidation: false
   });
 
-  const [ toastState, toastDispatch ] = useReducer(ToastReducer, []);
+  const [ toastState, toastDispatch ] = useReducer(ToastReducer, { items: [] });
 
-  const context = { ...state, dispatch, toastDispatch };
+  const context = { ...state, dispatch };
+
+  const toasterContext = { ...toastState, dispatch: toastDispatch };
 
   return (
     <>
       <GlobalContext.Provider value={context}>
-        <Router />
-        <EmailModal />
+        <ToasterContext.Provider value={toasterContext}>
+          <Router />
+          <EmailModal />
+          <Toaster/>
+        </ToasterContext.Provider>
       </GlobalContext.Provider>
-      <Toasts items={toastState} dispatch={toastDispatch}/>
     </>
   );
 }

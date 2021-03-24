@@ -15,11 +15,13 @@ import {
     HIDE_VALIDATION
 } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
-import { ENQUEUE_TOAST } from '../../../js/modules/react/toasts';
+import { ENQUEUE_TOAST, ToasterContext } from '../../../js/modules/react/toaster';
 
 export function EmailForm() {
 
     const context = React.useContext(GlobalContext);
+
+    const toasterContext = React.useContext(ToasterContext);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -48,7 +50,7 @@ export function EmailForm() {
                 }
             });
 
-            context.toastDispatch( { type: ENQUEUE_TOAST, item: { heading: "Sent successfully!", body: `Your message RE: ${context.selected.subject}, has now been sent.` } } );
+            toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Sent successfully!", body: `Your message RE: ${context.selected.subject}, has now been sent.` } } );
         }
     };
 

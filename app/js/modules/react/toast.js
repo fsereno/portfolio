@@ -1,15 +1,18 @@
 "use strict;"
 
 import React, { useEffect } from 'react';
-import { DEQUEUE_TOAST, REMOVE_TOAST_AT_INDEX } from './toasts';
+import { ToasterContext } from './toaster';
+import { DEQUEUE_TOAST, REMOVE_TOAST_AT_INDEX } from './toaster';
 
 export function Toast(props) {
 
-    const handleClose = () => props.dispatch( { type: REMOVE_TOAST_AT_INDEX, index: props.index });
+    const context = React.useContext(ToasterContext);
+
+    const handleClose = () => context.dispatch( { type: REMOVE_TOAST_AT_INDEX, index: props.index });
 
     useEffect(() => {
         setTimeout(() => {
-            props.dispatch( { type: DEQUEUE_TOAST });
+            context.dispatch( { type: DEQUEUE_TOAST });
         }, 5000)
     }, []);
 
