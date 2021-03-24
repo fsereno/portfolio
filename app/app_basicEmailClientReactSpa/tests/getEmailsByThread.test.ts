@@ -10,22 +10,26 @@ describe("getEmailsByThread", () => {
         const messages = [
             {
                 thread: "from@mail.com_to@mail.com_Subject 1",
-                dir: INBOX
+                dir: INBOX,
+                time: 1616625116244
             },
             {
                 thread: "to@mail.com_from@mail.com_Subject 1",
-                dir: INBOX
+                dir: INBOX,
+                time: 1616625116244
             },
             {
                 thread: "to@mail.com_from@mail.com_Subject 2",
-                dir: INBOX
+                dir: INBOX,
+                time: 1616625116244
             } ];
 
         const selected = {
             from: "from@mail.com",
             to: "to@mail.com",
             subject: "Subject 1",
-            dir: INBOX
+            dir: INBOX,
+            time: 1616625116244
         }
 
         const result = getEmailsByThread(messages, selected);
@@ -37,11 +41,13 @@ describe("getEmailsByThread", () => {
         const messages = [
             {
                 thread: "test@mail.com_test@mail.com_Subject 1",
-                dir: INBOX
+                dir: INBOX,
+                time: 1616625116244
             },
             {
                 thread: "test@mail.com_test@mail.com_Subject 1",
-                dir: INBOX
+                dir: INBOX,
+                time: 1616625116244
             },
         ];
 
@@ -49,7 +55,8 @@ describe("getEmailsByThread", () => {
             from: "from@mail.com",
             to: "to@mail.com",
             subject: "Subject 1",
-            dir: INBOX
+            dir: INBOX,
+            time: 1616625116244
         }
 
         const result = getEmailsByThread(messages, selected);
@@ -65,22 +72,26 @@ describe("getEmailsByThread", () => {
         const messages = [
             {
                 thread: "from@mail.com_to@mail.com_Subject 1",
-                dir: INBOX
+                dir: INBOX,
+                time: 1616625116244
             },
             {
                 thread: "to@mail.com_from@mail.com_Subject 1",
-                dir: OUTBOX
+                dir: OUTBOX,
+                time: 1616625116244
             },
             {
                 thread: "to@mail.com_from@mail.com_Subject 2",
-                dir: INBOX
+                dir: INBOX,
+                time: 1616625116244
             } ];
 
         const selected = {
             from: "from@mail.com",
             to: "to@mail.com",
             subject: "Subject 1",
-            dir: INBOX
+            dir: INBOX,
+            time: 1616625116244
         }
 
         const result = getEmailsByThread(messages, selected);
