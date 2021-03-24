@@ -21,7 +21,7 @@ export function ReadingPane() {
                         <Age age={item.age}/>
                         <p className="mb-0"><strong>From:</strong> {item.from}</p>
                         <p className="mb-0"><strong>To:</strong> {item.to}</p>
-                        {index > 0 && <p className="lead mb-0"><strong>Subject:</strong> {item.subject}</p>}
+                        <p className="lead mb-0"><strong>Subject:</strong> {item.subject}</p>
                         <div className="mt-3">
                             {item.body}
                         </div>

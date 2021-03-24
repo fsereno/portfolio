@@ -40261,7 +40261,7 @@ function ReadingPane() {
       className: "mb-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "From:"), " ", item.from), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "mb-0"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "To:"), " ", item.to), index > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "To:"), " ", item.to), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "lead mb-0"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Subject:"), " ", item.subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "mt-3"
