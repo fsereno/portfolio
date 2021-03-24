@@ -198,6 +198,11 @@ let fontsCopyTask = () => {
     .pipe(gulp.dest(config.publishDir+"/fonts"));
 }
 
+let cssFontsCopyTask = () => {
+  return gulp.src(config.developmentDir+"/css/fonts/**/*")
+    .pipe(gulp.dest(config.publishDir+"/css/fonts"));
+}
+
 let imagesCopyTask = () => {
   return gulp.src(config.developmentDir+"/images/**/*")
   .pipe(gulp.dest(config.publishDir+"/images"));
@@ -219,6 +224,7 @@ gulp.task("images", (done) => {
 
 gulp.task("fonts", (done) => {
   fontsCopyTask();
+  cssFontsCopyTask();
   done();
 });
 
