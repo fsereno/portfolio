@@ -3,12 +3,12 @@
 import React, { useEffect } from 'react';
 import { Age } from './age';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
-import { GlobalContext } from '../globalContext';
+import { GlobalContext, SelectedContext } from '../globalContext';
 import { MIN_VIEWPORT_WIDTH, DESELECT_THREAD } from '../globalConstants'
 
 export function ReadingPane() {
 
-    const context = React.useContext(GlobalContext);
+    const context = React.useContext(SelectedContext);
 
     useEffect( () => {
         return () => {

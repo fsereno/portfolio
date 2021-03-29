@@ -4,19 +4,24 @@ import React from 'react';
 import { Age } from './age';
 import { truncateEmailBody } from '../utils/truncateEmailBody';
 import { SELECT, MIN_VIEWPORT_WIDTH } from '../globalConstants'
-import { GlobalContext } from '../globalContext';
+import { GlobalContext, SelectedContext } from '../globalContext';
 
 export function ListItem(props) {
 
-    const context = React.useContext(GlobalContext);
+    const globalContext = React.useContext(GlobalContext);
+    const selectedContext = React.useContext(SelectedContext);
 
     const handleClick = (event) => {
         event.preventDefault();
         const showModal = window.innerWidth < MIN_VIEWPORT_WIDTH;
-        context.dispatch({ type: SELECT, item: props.item, showModal: showModal });
+        selectedContext.dispatch({
+            type: SELECT,
+            messages: globalContext.state.messages,
+            item: props.item
+        });
     }
 
-    const activeClass = context.state.selected.id === props.item.id ? "active" : "";
+   const activeClass = selectedContext.state.selected.id === props.item.id ? "active" : "";
 
     return (
         <a href="#" id={`id_${props.item.id}`} onClick={handleClick} className={`list-group-item list-group-item-action ${activeClass}`} aria-current="true">

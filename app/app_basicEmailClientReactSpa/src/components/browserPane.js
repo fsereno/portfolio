@@ -1,10 +1,19 @@
 "use strict;"
 
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ListItem } from './listItem';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
-import { GlobalContext } from '../globalContext';
+import { GlobalContext, SelectedContext } from '../globalContext';
+import { DESELECT_THREAD } from '../globalConstants';
+
+
+function ButtonTest() {
+    const context = React.useContext(SelectedContext);
+    return (
+        <button onClick={() => context.dispatch({ type: DESELECT_THREAD })}></button>
+    )
+}
 
 export function BrowserPane(props) {
 
@@ -23,25 +32,26 @@ export function BrowserPane(props) {
 
     return(
         <>
-        {collection.length > 0 &&
-            <div className="list-group">
-                {collection.map((item, index) => {
+            <ButtonTest/>
+            {collection.length > 0 &&
+                <div className="list-group">
+                    {collection.map((item, index) => {
 
-                    const key = getKeyFromMessage(item);
+                        const key = getKeyFromMessage(item);
 
-                    return (
-                        <ListItem
-                            index={index}
-                            item={item}
-                            key={key}
-                        />
-                    )
-                })}
-            </div>
-        }
-        {collection.length === 0 &&
-            <p>You have no messages</p>
-        }
+                        return (
+                            <ListItem
+                                index={index}
+                                item={item}
+                                key={key}
+                            />
+                        )
+                    })}
+                </div>
+            }
+            {collection.length === 0 &&
+                <p>You have no messages</p>
+            }
         </>
     )
 }

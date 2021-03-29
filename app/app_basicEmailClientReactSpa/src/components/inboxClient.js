@@ -19,7 +19,7 @@ export function InboxClient() {
         <>
             <Row className="mb-2">
                 <Col>
-                    
+                    Count ?
                 </Col>
             </Row>
             <Row>

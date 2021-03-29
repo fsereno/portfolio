@@ -152,7 +152,7 @@ export function SelectedReducer(state, action) {
   switch(action.type) {
     case SELECT:
       return {
-        selectedThread: getEmailsByThread(state.messages, action.item),
+        selectedThread: getEmailsByThread(action.messages, action.item),
         selected: {
           ...state.selected,
           id: action.item.id,

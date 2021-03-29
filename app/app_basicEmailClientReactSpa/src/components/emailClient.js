@@ -1,20 +1,36 @@
 "use strict;"
 
-import React from 'react';
+import React, { useReducer, useMemo } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { BrowserPane } from './browserPane';
 import { ViewingPane } from './viewingPane';
-import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
-import { GlobalContext } from '../globalContext';
-import { READ, REPLY_MESSAGE } from '../globalConstants';
+import { GlobalContext, SelectedContext } from '../globalContext';
+import { READ, REPLY_MESSAGE, MY_ADDRESS } from '../globalConstants';
+import { SelectedReducer } from '../reducers/reducer';
 
 export function EmailClient(props) {
 
     const context = React.useContext(GlobalContext)
 
+    const [state, dispatch] = useReducer(SelectedReducer, {
+        selected: {
+            id: -1,
+            to: "",
+            from: MY_ADDRESS,
+            subject: "",
+            body: "",
+            time: 0
+        },
+        selectedThread: []
+    });
+
+    const stateValue = useMemo(() => {
+        return { state, dispatch };
+    }, [state, dispatch]);
+
     return(
-        <>
+        <SelectedContext.Provider value={stateValue}>
             <Row>
                 <Col>
                     <BrowserPane dir={props.dir}/>
@@ -30,6 +46,6 @@ export function EmailClient(props) {
                     <ViewingPane />
                 </Col>
             </Row>
-        </>
+        </SelectedContext.Provider>
     )
 }
