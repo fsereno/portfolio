@@ -1,24 +1,47 @@
 "use strict;"
 
-import React from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ListItem } from './listItem';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
+import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
+import { GlobalContext } from '../globalContext';
 
 export function BrowserPane(props) {
+
+    const context = React.useContext(GlobalContext)
+
+    const [ collection, setCollection ] = useState([]);
+
+    useEffect(() => {
+        const mimicAjaxCall  = setTimeout(() => {
+            const collection = getMessagesByDirectory(context.state.messages, props.dir);
+            setCollection(collection);
+        }, 1000)
+
+        return () => clearTimeout(mimicAjaxCall);
+    },[])
+
     return(
-        <div className="list-group">
-            {props.collection.map((item, index) => {
+        <>
+        {collection.length > 0 &&
+            <div className="list-group">
+                {collection.map((item, index) => {
 
-                const key = getKeyFromMessage(item);
+                    const key = getKeyFromMessage(item);
 
-                return (
-                    <ListItem
-                        index={index}
-                        item={item}
-                        key={key}
-                    />
-                )
-            })}
-        </div>
+                    return (
+                        <ListItem
+                            index={index}
+                            item={item}
+                            key={key}
+                        />
+                    )
+                })}
+            </div>
+        }
+        {collection.length === 0 &&
+            <p>You have no messages</p>
+        }
+        </>
     )
 }

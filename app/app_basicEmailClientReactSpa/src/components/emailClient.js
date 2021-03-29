@@ -13,33 +13,22 @@ export function EmailClient(props) {
 
     const context = React.useContext(GlobalContext)
 
-    const collection = getMessagesByDirectory(context.messages, props.dir);
-
     return(
         <>
             <Row>
-                {collection.length > 0 &&
-                    <>
-                        <Col>
-                            <BrowserPane collection={collection}/>
-                        </Col>
-                        <Col className="d-none d-md-block">
-                            {context.mode === READ &&
-                                <Row className="justify-content-end">
-                                    <button id="desktopReplyBtn" className="btn btn-sm btn-dark" onClick={() => context.dispatch({ type: REPLY_MESSAGE, selected: context.selected }) }>
-                                        <i className="bi bi-arrow-90deg-left"></i>
-                                    </button>
-                                </Row>
-                            }
-                            <ViewingPane />
-                        </Col>
-                    </>
-                }
-                {collection.length === 0 &&
-                    <Col>
-                        <p>You have no messages</p>
-                    </Col>
-                }
+                <Col>
+                    <BrowserPane dir={props.dir}/>
+                </Col>
+                <Col className="d-none d-md-block">
+                    {context.state.mode === READ &&
+                        <Row className="justify-content-end">
+                            <button id="desktopReplyBtn" className="btn btn-sm btn-dark" onClick={() => context.dispatch({ type: REPLY_MESSAGE, selected: context.state.selected }) }>
+                                <i className="bi bi-arrow-90deg-left"></i>
+                            </button>
+                        </Row>
+                    }
+                    <ViewingPane />
+                </Col>
             </Row>
         </>
     )

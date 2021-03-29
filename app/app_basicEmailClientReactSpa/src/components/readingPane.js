@@ -1,18 +1,24 @@
 "use strict;"
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Age } from './age';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { GlobalContext } from '../globalContext';
-import { MIN_VIEWPORT_WIDTH } from '../globalConstants'
+import { MIN_VIEWPORT_WIDTH, DESELECT_THREAD } from '../globalConstants'
 
 export function ReadingPane() {
 
     const context = React.useContext(GlobalContext);
 
+    useEffect( () => {
+        return () => {
+            context.dispatch({ type: DESELECT_THREAD })
+        }
+    }, [])
+
     return(
         <div id="readingPane">
-            {context.selectedThread.map((item, index) => {
+            {context.state.selectedThread.map((item, index) => {
 
                 const key = getKeyFromMessage(item);
 

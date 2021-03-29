@@ -10,11 +10,11 @@ export function Toast(props) {
 
     const handleClose = () => context.dispatch( { type: REMOVE_TOAST_AT_INDEX, index: props.index });
 
-    useEffect(() => {
+    /*useEffect(() => {
         setTimeout(() => {
             context.dispatch( { type: DEQUEUE_TOAST });
         }, 5000)
-    }, []);
+    }, []);*/
 
     return (
         <>

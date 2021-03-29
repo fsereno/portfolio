@@ -16,13 +16,13 @@ export function ViewingPane() {
     return (
         <Row>
             <Col>
-                {context.mode === READ &&
+                {context.state.mode === READ &&
                     <ReadingPane/>
                 }
-                {context.mode === REPLY &&
+                {context.state.mode === REPLY &&
                     <ReplyPane/>
                 }
-                {context.mode === NEW_MESSAGE &&
+                {context.state.mode === NEW_MESSAGE &&
                     <NewPane/>
                 }
             </Col>

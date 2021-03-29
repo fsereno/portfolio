@@ -11,15 +11,15 @@ import { GlobalContext } from '../globalContext';
 
 export function InboxClient() {
 
-    //const context = React.useContext(GlobalContext);
+    const context = React.useContext(GlobalContext);
 
-    //const count = getUnreadEmailCount(context.messages, INBOX);
+    const count = getUnreadEmailCount(context.messages, INBOX);
 
     return(
         <>
             <Row className="mb-2">
                 <Col>
-                    
+                    You have <Counter count={count}/> unread messages
                 </Col>
             </Row>
             <Row>

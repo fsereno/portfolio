@@ -39,28 +39,38 @@ export function ToastReducer(state, action) {
     }
   }
 
+function Toasts(props) {
+    return(
+        <>
+            {props.items.map((item, index) => {
+                return (
+                    <Toast
+                        key={`toast_${index}`}
+                        index={index}
+                        item={item}
+                    />
+                )
+            })}
+        </>
+    )
+}
+
 export function Toaster() {
 
     const [ isVisible, setIsVisible ] = useState(false);
+    const [ collection, setCollection ] = useState([]);
 
     const context = React.useContext(ToasterContext);
 
     useEffect(() => {
-        setIsVisible(context.items.length > 0);
-    });
+        setCollection(context.state.items);
+        setIsVisible(context.state.items.length > 0);
+    },[]);
 
     return (
         <div className="toasts-container" aria-live="polite" aria-atomic="true" style={ { visibility: isVisible ? "visible" : "hidden" } }>
             <div className="toasts-position">
-                {context.items.map((item, index) => {
-                    return (
-                        <Toast
-                            key={`toast_${index}`}
-                            index={index}
-                            item={item}
-                        />
-                    )
-                })}
+                <Toasts items={collection}/>
             </div>
         </div>
     )

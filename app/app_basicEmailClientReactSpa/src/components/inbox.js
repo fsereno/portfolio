@@ -1,23 +1,25 @@
 "use strict;"
 
-import React, { useLayoutEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
 import { Content } from './content';
 import { InboxClient } from './inboxClient';
 import { GlobalContext } from '../globalContext';
 import { DESELECT_THREAD } from '../globalConstants';
 
+function Button() {
+
+  const context = React.useContext(GlobalContext);
+
+  return (
+    <button onClick={() => context.dispatch({ type: DESELECT_THREAD })}></button>
+  )
+
+}
 export function Inbox() {
-
-    const context = React.useContext(GlobalContext);
-
-    const location = useLocation();
-
-    useLayoutEffect(() => {
-      context.dispatch({ type: DESELECT_THREAD });
-    },[location]);
-
-    return(
+  return (
+    <>
+      <Button />
       <Content title="Inbox" component={InboxClient} />
-    )
+    </>
+  )
 }
