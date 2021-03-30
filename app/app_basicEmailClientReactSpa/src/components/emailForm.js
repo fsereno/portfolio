@@ -1,61 +1,57 @@
 "use strict;"
 
-import React from 'react';
+import React, { useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {
-    SUBMIT,
-    OUTBOX,
-    MY_ADDRESS,
-    UPDATE_TO,
-    UPDATE_SUBJECT,
-    UPDATE_BODY,
-    SHOW_VALIDATION,
-    HIDE_VALIDATION
-} from '../globalConstants';
-import { GlobalContext } from '../globalContext';
+import { SUBMIT, OUTBOX, MY_ADDRESS } from '../globalConstants';
+import { GlobalContext, EmailClientContext } from '../globalContext';
 import { ENQUEUE_TOAST, ToasterContext } from '../../../js/modules/react/toaster';
 
 export function EmailForm() {
 
-    const context = React.useContext(GlobalContext);
-
+    const globalContext = React.useContext(GlobalContext);
+    const emailClientContext = React.useContext(EmailClientContext);
     const toasterContext = React.useContext(ToasterContext);
+
+    const [ showValidation, setShowValidation ] = useState(false);
+    const [ to, setTo ] = useState(emailClientContext.state.selected.to);
+    const [ subject, setSubject ] = useState(emailClientContext.state.selected.subject);
+    const [ body, setBody ] = useState(emailClientContext.state.selected.body);
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         if (event.currentTarget.checkValidity() === false) {
 
-            context.dispatch({ type: SHOW_VALIDATION });
+            setShowValidation(true);
             event.stopPropagation();
 
         } else {
             const time = new Date().getTime();
+            setShowValidation(false);
 
-            context.dispatch({ type: HIDE_VALIDATION });
-            context.dispatch({
+            globalContext.dispatch({
                 type: SUBMIT,
                 new: {
-                    subject: context.selected.subject,
-                    thread: `${MY_ADDRESS}_${context.selected.to}_${context.selected.subject}`,
+                    subject: emailClientContext.state.selected.subject,
+                    thread: `${MY_ADDRESS}_${emailClientContext.state.selected.to}_${emailClientContext.state.selected.subject}`,
                     id: Math.random() * 10,
                     from: MY_ADDRESS,
-                    to: context.selected.to,
-                    body: context.selected.body,
+                    to: emailClientContext.state.selected.to,
+                    body: emailClientContext.state.selected.body,
                     age: 0,
                     dir: OUTBOX,
                     time
                 }
             });
 
-            toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Sent successfully!", body: `Your message RE: ${context.selected.subject}, has now been sent.` } } );
+            toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Sent successfully!", body: `Your message RE: ${emailClientContext.state.selected.subject}, has now been sent.` } } );
         }
     };
 
     return (
-        <Form noValidate validated={context.showValidation} onSubmit={handleSubmit}>
+        <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
             <Form.Row>
                 <Form.Group as={Col}>
                     <Form.Label>
@@ -82,8 +78,8 @@ export function EmailForm() {
                         name="to"
                         id="to"
                         type="text"
-                        value={context.selected.to}
-                        onChange={event => context.dispatch({ type: UPDATE_TO, input: event.target.value })}
+                        value={to}
+                        onChange={event => setTo(event.target.value)}
                         required
                     />
                     <Form.Control.Feedback type="invalid">
@@ -100,8 +96,8 @@ export function EmailForm() {
                         name="subject"
                         id="subject"
                         type="text"
-                        value={context.selected.subject}
-                        onChange={event => context.dispatch({ type: UPDATE_SUBJECT, input: event.target.value })}
+                        value={subject}
+                        onChange={event => setSubject(event.target.value)}
                         required
                     />
                     <Form.Control.Feedback type="invalid">
@@ -119,8 +115,8 @@ export function EmailForm() {
                         id="body"
                         as="textarea"
                         rows={3}
-                        value={context.selected.body}
-                        onChange={event => context.dispatch({ type: UPDATE_BODY, input: event.target.value })}
+                        value={body}
+                        onChange={event => setBody(event.target.value)}
                         required
                     />
                     <Form.Control.Feedback type="invalid">

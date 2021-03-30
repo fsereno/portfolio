@@ -179,6 +179,17 @@ export function EmailClientReducer(state, action) {
           showValidation: false,
           mode: ""
         }
+      case REPLY_MESSAGE:
+        return {
+          ...state,
+          mode: REPLY,
+          selected: {
+            ...state.selected,
+            to: getReplyToEmailAddress(action.selected.from, action.selected.to),
+            from: MY_ADDRESS,
+            subject: action.selected.subject
+          }
+        }
     default:
       throw new Error();
   }

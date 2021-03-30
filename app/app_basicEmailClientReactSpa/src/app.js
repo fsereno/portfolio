@@ -13,7 +13,7 @@ function App() {
       <ToasterContextProvider>
         { console.log("render app")}
         <Router />
-        <Toaster />
+        
       </ToasterContextProvider>
     </GlobalContextProvider>
   );

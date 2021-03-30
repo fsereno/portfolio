@@ -14,6 +14,7 @@ export const BrowserPane = (props) => {
 
     useEffect(() => {
         const mimicAjaxCall  = setTimeout(() => {
+            console.log("browser pane useEffect fired after timeout 1000")
             const collection = getMessagesByDirectory(context.state.messages, props.dir);
             setCollection(collection);
         }, 1000)
@@ -21,12 +22,12 @@ export const BrowserPane = (props) => {
         return () => clearTimeout(mimicAjaxCall);
     },[])
 
-    return(
+    return (
         <>
             {collection.length > 0 &&
                 <div className="list-group">
                     {collection.map((item, index) => {
-
+                        console.log("mapping")
                         const key = getKeyFromMessage(item);
 
                         return (

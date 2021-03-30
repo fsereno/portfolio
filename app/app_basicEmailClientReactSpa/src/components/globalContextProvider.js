@@ -6,7 +6,7 @@ import { INBOX, OUTBOX, MY_ADDRESS } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
 function createMessages(messages) {
-    const limit = 3000;
+    const limit = 500;
     const result = [...messages];
 
     for (let i = 0; i < limit; i++) {
