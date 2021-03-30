@@ -13,17 +13,17 @@ import { HOME, INBOX, OUTBOX, NEW_MESSAGE, NEW, DESELECT_THREAD, MY_ADDRESS } fr
 import { GlobalContext } from '../globalContext';
 
 function createMessages(messages) {
-    const limit = 3000;
+    const limit = 1000;
     const result = [...messages];
 
     for (let i = 0; i < limit; i++) {
         result.push(
             {
                 id: Math.random(),
-                from: "james@hsbc.co.uk",
+                from: "some@email.co.uk",
                 to: MY_ADDRESS,
-                subject: "Subject 1",
-                thread: `james@hsbc.co.uk_${MY_ADDRESS}_Subject 1`,
+                subject: `Subject ${i}`,
+                thread: `some@email.co.uk_${MY_ADDRESS}_Subject ${i}`,
                 body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
                 age: 1,
                 read: false,
@@ -35,9 +35,7 @@ function createMessages(messages) {
 
     return result;
 }
-
-
-export function Router(props) {
+export function Router() {
 
     let messages = [
         {

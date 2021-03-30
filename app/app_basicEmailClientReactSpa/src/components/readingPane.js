@@ -3,18 +3,20 @@
 import React, { useEffect } from 'react';
 import { Age } from './age';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
-import { GlobalContext, SelectedContext } from '../globalContext';
+import { EmailClientContext } from '../globalContext';
 import { MIN_VIEWPORT_WIDTH, DESELECT_THREAD } from '../globalConstants'
 
 export function ReadingPane() {
 
-    const context = React.useContext(SelectedContext);
+    const context = React.useContext(EmailClientContext);
 
-    useEffect( () => {
+    /*
+        this causes big re-renders!
+    useEffect( () => { 
         return () => {
             context.dispatch({ type: DESELECT_THREAD })
         }
-    }, [])
+    }, [])*/
 
     return(
         <div id="readingPane">

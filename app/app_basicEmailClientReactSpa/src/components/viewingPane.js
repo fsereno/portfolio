@@ -7,11 +7,11 @@ import { READ, REPLY, NEW_MESSAGE } from '../globalConstants';
 import { ReadingPane } from './readingPane';
 import { ReplyPane } from './replyPane';
 import { NewPane } from './newPane';
-import { GlobalContext, SelectedContext } from '../globalContext';
+import { EmailClientContext } from '../globalContext';
 
 export function ViewingPane() {
 
-    const context = React.useContext(SelectedContext);
+    const context = React.useContext(EmailClientContext);
 
     return (
         <Row>

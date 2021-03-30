@@ -4,24 +4,29 @@ import React from 'react';
 import { Age } from './age';
 import { truncateEmailBody } from '../utils/truncateEmailBody';
 import { SELECT, MIN_VIEWPORT_WIDTH } from '../globalConstants'
-import { GlobalContext, SelectedContext } from '../globalContext';
+import { GlobalContext, EmailClientContext, EmailModalContext } from '../globalContext';
+import { getEmailsByThread } from '../utils/getEmailsByThread';
 
-export function ListItem(props) {
+export const ListItem = React.memo((props) => {
 
     const globalContext = React.useContext(GlobalContext);
-    const selectedContext = React.useContext(SelectedContext);
+    const emailClientContext = React.useContext(EmailClientContext);
+    const emailModalContext = React.useContext(EmailModalContext);
+
+    const thread = getEmailsByThread(globalContext.state.messages, props.item);
 
     const handleClick = (event) => {
         event.preventDefault();
         const showModal = window.innerWidth < MIN_VIEWPORT_WIDTH;
-        selectedContext.dispatch({
+        emailClientContext.dispatch({
             type: SELECT,
-            messages: globalContext.state.messages,
+            thread: thread,
             item: props.item
         });
+        emailModalContext.setState(showModal);
     }
 
-   const activeClass = selectedContext.state.selected.id === props.item.id ? "active" : "";
+   const activeClass = emailClientContext.state.selected.id === props.item.id ? "active" : "";
 
     return (
         <a href="#" id={`id_${props.item.id}`} onClick={handleClick} className={`list-group-item list-group-item-action ${activeClass}`} aria-current="true">
@@ -33,4 +38,4 @@ export function ListItem(props) {
             <small>{truncateEmailBody(props.item.body)}...</small>
         </a>
     )
-}
+})

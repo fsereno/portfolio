@@ -4,18 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { ListItem } from './listItem';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
-import { GlobalContext, SelectedContext } from '../globalContext';
-import { DESELECT_THREAD } from '../globalConstants';
+import { GlobalContext } from '../globalContext';
 
-
-function ButtonTest() {
-    const context = React.useContext(SelectedContext);
-    return (
-        <button onClick={() => context.dispatch({ type: DESELECT_THREAD })}></button>
-    )
-}
-
-export function BrowserPane(props) {
+export const BrowserPane = (props) => {
 
     const context = React.useContext(GlobalContext)
 
@@ -32,7 +23,6 @@ export function BrowserPane(props) {
 
     return(
         <>
-            <ButtonTest/>
             {collection.length > 0 &&
                 <div className="list-group">
                     {collection.map((item, index) => {

@@ -148,11 +148,11 @@ export function Reducer(state, action) {
 }
 
 
-export function SelectedReducer(state, action) {
+export function EmailClientReducer(state, action) {
   switch(action.type) {
     case SELECT:
       return {
-        selectedThread: getEmailsByThread(action.messages, action.item),
+        selectedThread: action.thread,
         selected: {
           ...state.selected,
           id: action.item.id,
@@ -163,19 +163,6 @@ export function SelectedReducer(state, action) {
         },
         showModal: action.showModal,
         mode: READ
-      }
-    case DESELECT:
-      return {
-        ...state,
-        selected: {
-          id: -1,
-          to: "",
-          from: "",
-          subject: "",
-          body: "",
-        },
-        showModal: false,
-        showValidation: false
       }
       case DESELECT_THREAD:
         return {

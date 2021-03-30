@@ -4,21 +4,22 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { ViewingPane } from './viewingPane';
-import { DESELECT, REPLY_MESSAGE, READ } from '../globalConstants';
-import { GlobalContext } from '../globalContext';
+import { REPLY_MESSAGE, READ } from '../globalConstants';
+import { EmailClientContext, EmailModalContext } from '../globalContext';
 
 export function EmailModal() {
 
-    const context = React.useContext(GlobalContext);
+    const context = React.useContext(EmailClientContext);
+    const emailModalContext = React.useContext(EmailModalContext);
 
-    const handleClose = () => context.dispatch({ type: DESELECT });
+    const handleClose = () => emailModalContext.setState(false);
 
-    const handleReplyClick = () => context.dispatch({ type: REPLY_MESSAGE, selected: context.selected });
+    const handleReplyClick = () => context.dispatch({ type: REPLY_MESSAGE, selected: context.state.selected });
 
     return (
-        <Modal show={context.showModal} onHide={handleClose}>
+        <Modal show={emailModalContext.state} onHide={handleClose}>
             <Modal.Header>
-                <Modal.Title className="display-4">{context.selected.subject}</Modal.Title>
+                <Modal.Title className="display-4">{context.state.selected.subject}</Modal.Title>
                 <Button variant="link" className="close" onClick={handleClose}>
                 <span className="lr">
                     <span className="rl"></span>
@@ -28,7 +29,7 @@ export function EmailModal() {
             <Modal.Body>
                 <ViewingPane />
             </Modal.Body>
-            {context.mode === READ &&
+            {context.state.mode === READ &&
                 <Modal.Footer>
                     <Button id="replyBtn" onClick={handleReplyClick}>
                         Reply
