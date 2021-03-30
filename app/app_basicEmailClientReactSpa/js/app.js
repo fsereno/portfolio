@@ -39405,14 +39405,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "../../node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
+/* harmony import */ var _components_globalContextProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/globalContextProvider */ "./src/components/globalContextProvider.js");
+/* harmony import */ var _components_toasterContextProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/toasterContextProvider */ "./src/components/toasterContextProvider.js");
+/* harmony import */ var _js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/modules/react/toaster */ "../js/modules/react/toaster.js");
 "use strict;";
 
 
 
 
 
+
+
+
 function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, console.log("render app"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_globalContextProvider__WEBPACK_IMPORTED_MODULE_3__["GlobalContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_toasterContextProvider__WEBPACK_IMPORTED_MODULE_4__["ToasterContextProvider"], null, console.log("render app"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_5__["Toaster"], null)));
 }
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('result'));
@@ -39969,6 +39975,146 @@ function EmailModalContextProvider(_ref) {
 
 /***/ }),
 
+/***/ "./src/components/globalContextProvider.js":
+/*!*************************************************!*\
+  !*** ./src/components/globalContextProvider.js ***!
+  \*************************************************/
+/*! exports provided: GlobalContextProvider */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobalContextProvider", function() { return GlobalContextProvider; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reducers_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reducers/reducer */ "./src/reducers/reducer.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+"use strict;";
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+
+
+
+
+
+function createMessages(messages) {
+  var limit = 3000;
+
+  var result = _toConsumableArray(messages);
+
+  for (var i = 0; i < limit; i++) {
+    result.push({
+      id: Math.random(),
+      from: "some@email.co.uk",
+      to: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
+      subject: "Subject ".concat(i),
+      thread: "some@email.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject ").concat(i),
+      body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+      age: 1,
+      read: false,
+      dir: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["INBOX"],
+      time: new Date().getTime()
+    });
+  }
+
+  return result;
+}
+
+function GlobalContextProvider(_ref) {
+  var children = _ref.children;
+  var messages = [{
+    id: 0,
+    from: "james@hsbc.co.uk",
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
+    subject: "Subject 1",
+    thread: "james@hsbc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject 1"),
+    body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+    age: 1,
+    read: false,
+    dir: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["INBOX"],
+    time: new Date().getTime()
+  }, {
+    id: 1,
+    from: "sarah@ford.co.uk",
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
+    subject: "Subject 2",
+    thread: "sarah@ford.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject 2"),
+    body: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
+    age: 2,
+    read: false,
+    dir: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["INBOX"],
+    time: new Date().getTime()
+  }, {
+    id: 2,
+    from: "tim.jones@hmrc.co.uk",
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
+    subject: "Subject 3",
+    thread: "tim.jones@hmrc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject 3"),
+    body: "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC",
+    age: 3,
+    read: false,
+    dir: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["INBOX"],
+    time: new Date().getTime()
+  }, {
+    id: 3,
+    from: "tim.jones@hmrc.co.uk",
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
+    subject: "Subject 3",
+    thread: "tim.jones@hmrc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject 3"),
+    body: "Some reply",
+    age: 3,
+    read: false,
+    dir: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["OUTBOX"],
+    time: new Date().getTime()
+  }];
+  var messagesToUse = createMessages(messages);
+
+  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_1__["Reducer"], {
+    selected: {
+      id: -1,
+      to: "",
+      from: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
+      subject: "",
+      body: "",
+      time: 0
+    },
+    messages: messagesToUse,
+    selectedThread: [],
+    showModal: false,
+    mode: "",
+    showValidation: false
+  }),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      state = _useReducer2[0],
+      dispatch = _useReducer2[1];
+
+  var stateValue = {
+    state: state,
+    dispatch: dispatch
+  };
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_3__["GlobalContext"].Provider, {
+    value: stateValue
+  }, children);
+}
+
+/***/ }),
+
 /***/ "./src/components/home.js":
 /*!********************************!*\
   !*** ./src/components/home.js ***!
@@ -40096,11 +40242,11 @@ var ListItem = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (props
   var globalContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_4__["GlobalContext"]);
   var emailClientContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_4__["EmailClientContext"]);
   var emailModalContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_4__["EmailModalContext"]);
-  var thread = Object(_utils_getEmailsByThread__WEBPACK_IMPORTED_MODULE_5__["getEmailsByThread"])(globalContext.state.messages, props.item);
 
   var handleClick = function handleClick(event) {
     event.preventDefault();
     var showModal = window.innerWidth < _globalConstants__WEBPACK_IMPORTED_MODULE_3__["MIN_VIEWPORT_WIDTH"];
+    var thread = Object(_utils_getEmailsByThread__WEBPACK_IMPORTED_MODULE_5__["getEmailsByThread"])(globalContext.state.messages, props.item);
     emailClientContext.dispatch({
       type: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["SELECT"],
       thread: thread,
@@ -40342,34 +40488,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _reducers_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/reducer */ "./src/reducers/reducer.js");
-/* harmony import */ var react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Navbar */ "../../node_modules/react-bootstrap/esm/Navbar.js");
-/* harmony import */ var react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Nav */ "../../node_modules/react-bootstrap/esm/Nav.js");
-/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home */ "./src/components/home.js");
-/* harmony import */ var _inbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./inbox */ "./src/components/inbox.js");
-/* harmony import */ var _new__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./new */ "./src/components/new.js");
-/* harmony import */ var _outbox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./outbox */ "./src/components/outbox.js");
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
-/* harmony import */ var _toasterContextProvider__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./toasterContextProvider */ "./src/components/toasterContextProvider.js");
-/* harmony import */ var _js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../js/modules/react/toaster */ "../js/modules/react/toaster.js");
+/* harmony import */ var react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Navbar */ "../../node_modules/react-bootstrap/esm/Navbar.js");
+/* harmony import */ var react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Nav */ "../../node_modules/react-bootstrap/esm/Nav.js");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home */ "./src/components/home.js");
+/* harmony import */ var _inbox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./inbox */ "./src/components/inbox.js");
+/* harmony import */ var _new__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./new */ "./src/components/new.js");
+/* harmony import */ var _outbox__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./outbox */ "./src/components/outbox.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 "use strict;";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 
 
@@ -40379,148 +40506,45 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 
-
-
-
-
-
-
-function createMessages(messages) {
-  var limit = 1000;
-
-  var result = _toConsumableArray(messages);
-
-  for (var i = 0; i < limit; i++) {
-    result.push({
-      id: Math.random(),
-      from: "some@email.co.uk",
-      to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["MY_ADDRESS"],
-      subject: "Subject ".concat(i),
-      thread: "some@email.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_9__["MY_ADDRESS"], "_Subject ").concat(i),
-      body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
-      age: 1,
-      read: false,
-      dir: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["INBOX"],
-      time: new Date().getTime()
-    });
-  }
-
-  return result;
-}
-
-function Router() {
-  var messages = [{
-    id: 0,
-    from: "james@hsbc.co.uk",
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["MY_ADDRESS"],
-    subject: "Subject 1",
-    thread: "james@hsbc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_9__["MY_ADDRESS"], "_Subject 1"),
-    body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
-    age: 1,
-    read: false,
-    dir: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["INBOX"],
-    time: new Date().getTime()
-  }, {
-    id: 1,
-    from: "sarah@ford.co.uk",
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["MY_ADDRESS"],
-    subject: "Subject 2",
-    thread: "sarah@ford.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_9__["MY_ADDRESS"], "_Subject 2"),
-    body: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
-    age: 2,
-    read: false,
-    dir: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["INBOX"],
-    time: new Date().getTime()
-  }, {
-    id: 2,
-    from: "tim.jones@hmrc.co.uk",
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["MY_ADDRESS"],
-    subject: "Subject 3",
-    thread: "tim.jones@hmrc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_9__["MY_ADDRESS"], "_Subject 3"),
-    body: "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC",
-    age: 3,
-    read: false,
-    dir: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["INBOX"],
-    time: new Date().getTime()
-  }, {
-    id: 3,
-    from: "tim.jones@hmrc.co.uk",
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["MY_ADDRESS"],
-    subject: "Subject 3",
-    thread: "tim.jones@hmrc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_9__["MY_ADDRESS"], "_Subject 3"),
-    body: "Some reply",
-    age: 3,
-    read: false,
-    dir: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["OUTBOX"],
-    time: new Date().getTime()
-  }];
-  var messagesToUse = createMessages(messages);
-
-  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_2__["Reducer"], {
-    selected: {
-      id: -1,
-      to: "",
-      from: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["MY_ADDRESS"],
-      subject: "",
-      body: "",
-      time: 0
-    },
-    messages: messagesToUse,
-    selectedThread: [],
-    showModal: false,
-    mode: "",
-    showValidation: false
-  }),
-      _useReducer2 = _slicedToArray(_useReducer, 2),
-      state = _useReducer2[0],
-      dispatch = _useReducer2[1];
-
-  var stateValue = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(function () {
-    return {
-      state: state,
-      dispatch: dispatch
-    };
-  }, [state, dispatch]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_10__["GlobalContext"].Provider, {
-    value: stateValue
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_toasterContextProvider__WEBPACK_IMPORTED_MODULE_11__["ToasterContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_12__["Toaster"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+var Router = function Router() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: "pb-2 px-2 pt-3",
     id: "spaNavBar",
     bg: "dark",
     variant: "dark"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Nav__WEBPACK_IMPORTED_MODULE_3__["default"], {
     className: "mr-auto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
     className: "nav-link pb-3 pt-1 px-3",
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["HOME"]
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["HOME"]
   }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
     className: "nav-link pb-3 pt-1 px-3",
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["INBOX"]
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["INBOX"]
   }, "Inbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
     className: "nav-link pb-3 pt-1 px-3",
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["OUTBOX"]
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["OUTBOX"]
   }, "Outbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
     className: "d-none d-md-block nav-link pb-3 pt-1 px-3",
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["NEW"]
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["NEW"]
   }, "New"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["HOME"]
+    to: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["HOME"]
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["HOME"]
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home__WEBPACK_IMPORTED_MODULE_5__["Home"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["INBOX"]
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inbox__WEBPACK_IMPORTED_MODULE_6__["Inbox"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["OUTBOX"]
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outbox__WEBPACK_IMPORTED_MODULE_8__["Outbox"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    path: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["NEW"]
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_new__WEBPACK_IMPORTED_MODULE_7__["New"], null))))));
-}
+    path: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["HOME"]
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_home__WEBPACK_IMPORTED_MODULE_4__["Home"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["INBOX"]
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_inbox__WEBPACK_IMPORTED_MODULE_5__["Inbox"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["OUTBOX"]
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outbox__WEBPACK_IMPORTED_MODULE_7__["Outbox"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["NEW"]
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_new__WEBPACK_IMPORTED_MODULE_6__["New"], null))));
+};
 
 /***/ }),
 

@@ -13,11 +13,10 @@ export const ListItem = React.memo((props) => {
     const emailClientContext = React.useContext(EmailClientContext);
     const emailModalContext = React.useContext(EmailModalContext);
 
-    const thread = getEmailsByThread(globalContext.state.messages, props.item);
-
     const handleClick = (event) => {
         event.preventDefault();
         const showModal = window.innerWidth < MIN_VIEWPORT_WIDTH;
+        const thread = getEmailsByThread(globalContext.state.messages, props.item);
         emailClientContext.dispatch({
             type: SELECT,
             thread: thread,
