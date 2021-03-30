@@ -10,6 +10,8 @@ import { GlobalContext } from '../globalContext';
 import { READ, REPLY_MESSAGE } from '../globalConstants';
 import { EmailClientContextProvider } from './emailClientContextProvider';
 import { EmailModalContextProvider } from './emailModalContextProvider';
+import { ToasterContextProvider } from './toasterContextProvider';
+import { Toaster } from '../../../js/modules/react/toaster';
 
 export function EmailClient(props) {
 

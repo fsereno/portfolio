@@ -1,8 +1,8 @@
 
 "use strict;"
 
-import React, { useReducer, useMemo } from 'react';
-import { Toaster, ToastReducer, ToasterContext } from '../../../js/modules/react/toaster';
+import React, { useReducer } from 'react';
+import { ToastReducer, ToasterContext } from '../../../js/modules/react/toaster';
 
 const createToasts = () => {
     const limit = 3000;
@@ -12,20 +12,18 @@ const createToasts = () => {
     }
     return toasts;
 }
-export function ToasterContainer() {
+export function ToasterContextProvider({children}) {
 
     const toasts = createToasts();
 
     const [ state, dispatch ] = useReducer(ToastReducer, { items: toasts });
 
-    const stateValue = useMemo(() => {
-        return { state, dispatch };
-    }, [state, dispatch]);
+    const stateValue = { state, dispatch };
 
     return (
         <>
             <ToasterContext.Provider value={stateValue}>
-                <Toaster/>
+                {children}
             </ToasterContext.Provider>
         </>
     )

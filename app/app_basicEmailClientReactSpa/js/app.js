@@ -39405,16 +39405,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "../../node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
-/* harmony import */ var _components_toasterContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/toasterContainer */ "./src/components/toasterContainer.js");
 "use strict;";
 
 
 
 
 
-
 function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, console.log("render app"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_toasterContainer__WEBPACK_IMPORTED_MODULE_3__["ToasterContainer"], null));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, console.log("render app"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null));
 }
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('result'));
@@ -39684,7 +39682,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 /* harmony import */ var _emailClientContextProvider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./emailClientContextProvider */ "./src/components/emailClientContextProvider.js");
 /* harmony import */ var _emailModalContextProvider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./emailModalContextProvider */ "./src/components/emailModalContextProvider.js");
+/* harmony import */ var _toasterContextProvider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./toasterContextProvider */ "./src/components/toasterContextProvider.js");
+/* harmony import */ var _js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../js/modules/react/toaster */ "../js/modules/react/toaster.js");
 "use strict;";
+
+
 
 
 
@@ -40349,6 +40351,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _outbox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./outbox */ "./src/components/outbox.js");
 /* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _toasterContextProvider__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./toasterContextProvider */ "./src/components/toasterContextProvider.js");
+/* harmony import */ var _js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../js/modules/react/toaster */ "../js/modules/react/toaster.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -40366,6 +40370,8 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+
 
 
 
@@ -40477,7 +40483,7 @@ function Router() {
   }, [state, dispatch]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_10__["GlobalContext"].Provider, {
     value: stateValue
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_toasterContextProvider__WEBPACK_IMPORTED_MODULE_11__["ToasterContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_12__["Toaster"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
     className: "pb-2 px-2 pt-3",
     id: "spaNavBar",
     bg: "dark",
@@ -40513,21 +40519,21 @@ function Router() {
     path: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["OUTBOX"]
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_outbox__WEBPACK_IMPORTED_MODULE_8__["Outbox"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: _globalConstants__WEBPACK_IMPORTED_MODULE_9__["NEW"]
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_new__WEBPACK_IMPORTED_MODULE_7__["New"], null)))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_new__WEBPACK_IMPORTED_MODULE_7__["New"], null))))));
 }
 
 /***/ }),
 
-/***/ "./src/components/toasterContainer.js":
-/*!********************************************!*\
-  !*** ./src/components/toasterContainer.js ***!
-  \********************************************/
-/*! exports provided: ToasterContainer */
+/***/ "./src/components/toasterContextProvider.js":
+/*!**************************************************!*\
+  !*** ./src/components/toasterContextProvider.js ***!
+  \**************************************************/
+/*! exports provided: ToasterContextProvider */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToasterContainer", function() { return ToasterContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToasterContextProvider", function() { return ToasterContextProvider; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../js/modules/react/toaster */ "../js/modules/react/toaster.js");
@@ -40558,7 +40564,8 @@ var createToasts = function createToasts() {
   return toasts;
 };
 
-function ToasterContainer() {
+function ToasterContextProvider(_ref) {
+  var children = _ref.children;
   var toasts = createToasts();
 
   var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_1__["ToastReducer"], {
@@ -40568,15 +40575,13 @@ function ToasterContainer() {
       state = _useReducer2[0],
       dispatch = _useReducer2[1];
 
-  var stateValue = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(function () {
-    return {
-      state: state,
-      dispatch: dispatch
-    };
-  }, [state, dispatch]);
+  var stateValue = {
+    state: state,
+    dispatch: dispatch
+  };
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_1__["ToasterContext"].Provider, {
     value: stateValue
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_1__["Toaster"], null)));
+  }, children));
 }
 
 /***/ }),

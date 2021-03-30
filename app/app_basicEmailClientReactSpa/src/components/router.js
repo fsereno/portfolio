@@ -11,6 +11,8 @@ import { New } from './new';
 import { Outbox } from './outbox';
 import { HOME, INBOX, OUTBOX, NEW_MESSAGE, NEW, DESELECT_THREAD, MY_ADDRESS } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
+import { ToasterContextProvider } from './toasterContextProvider';
+import { Toaster } from '../../../js/modules/react/toaster';
 
 function createMessages(messages) {
     const limit = 1000;
@@ -112,33 +114,36 @@ export function Router() {
 
     return (
         <GlobalContext.Provider value={stateValue}>
-            <HashRouter>
-                <Navbar className="pb-2 px-2 pt-3" id="spaNavBar" bg="dark" variant="dark">
-                    <Nav className="mr-auto">
-                        <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={HOME}>Home</NavLink>
-                        <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={INBOX}>Inbox</NavLink>
-                        <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={OUTBOX}>Outbox</NavLink>
-                        <NavLink activeClassName="active" className="d-none d-md-block nav-link pb-3 pt-1 px-3" to={NEW}>New</NavLink>
-                    </Nav>
-                </Navbar>
-                <Switch>
-                    <Route exact path="/">
-                        <Redirect to={HOME}></Redirect>
-                    </Route>
-                    <Route path={HOME}>
-                        <Home />
-                    </Route>
-                    <Route path={INBOX}>
-                        <Inbox />
-                    </Route>
-                    <Route path={OUTBOX}>
-                        <Outbox />
-                    </Route>
-                    <Route path={NEW}>
-                        <New />
-                    </Route>
-                </Switch>
-            </HashRouter>
+             <ToasterContextProvider>
+                <Toaster />
+                <HashRouter>
+                    <Navbar className="pb-2 px-2 pt-3" id="spaNavBar" bg="dark" variant="dark">
+                        <Nav className="mr-auto">
+                            <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={HOME}>Home</NavLink>
+                            <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={INBOX}>Inbox</NavLink>
+                            <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={OUTBOX}>Outbox</NavLink>
+                            <NavLink activeClassName="active" className="d-none d-md-block nav-link pb-3 pt-1 px-3" to={NEW}>New</NavLink>
+                        </Nav>
+                    </Navbar>
+                    <Switch>
+                        <Route exact path="/">
+                            <Redirect to={HOME}></Redirect>
+                        </Route>
+                        <Route path={HOME}>
+                            <Home />
+                        </Route>
+                        <Route path={INBOX}>
+                            <Inbox />
+                        </Route>
+                        <Route path={OUTBOX}>
+                            <Outbox />
+                        </Route>
+                        <Route path={NEW}>
+                            <New />
+                        </Route>
+                    </Switch>
+                </HashRouter>
+            </ToasterContextProvider>
         </GlobalContext.Provider>
     )
 }
