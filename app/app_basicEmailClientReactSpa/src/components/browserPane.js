@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { ListItem } from './listItem';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
-import { GlobalContext } from '../globalContext';
+import { GlobalContext, EmailClientContext } from '../globalContext';
 
 export const BrowserPane = (props) => {
 
-    const context = React.useContext(GlobalContext)
+    const context = React.useContext(GlobalContext);
 
     const [ collection, setCollection ] = useState([]);
 

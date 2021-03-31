@@ -3,39 +3,29 @@
 import React from 'react';
 import { Age } from './age';
 import { truncateEmailBody } from '../utils/truncateEmailBody';
-import { SELECT, MIN_VIEWPORT_WIDTH } from '../globalConstants'
-import { GlobalContext, EmailClientContext, EmailModalContext } from '../globalContext';
-import { getEmailsByThread } from '../utils/getEmailsByThread';
+import { EmailClientHandlerContext, EmailClientContext } from '../globalContext';
 
-export const ListItem = React.memo((props) => {
+export const ListItem = ({item, isActive}) => {
 
-   // const globalContext = React.useContext(GlobalContext);
-    const emailClientContext = React.useContext(EmailClientContext);
-    const emailModalContext = React.useContext(EmailModalContext);
+    const context = React.useContext(EmailClientHandlerContext);
+    //const emailClientContext = React.useContext(EmailClientContext);
 
     const handleClick = (event) => {
         event.preventDefault();
-        const showModal = window.innerWidth < MIN_VIEWPORT_WIDTH;
-        //const thread = getEmailsByThread(globalContext.state.messages, props.item);
-        emailClientContext.dispatch({
-            type: SELECT,
-            thread: "thread",
-            item: props.item
-        });
-        emailModalContext.setState(showModal);
+        context.selectListItemHandler(item);
     }
 
-   const activeClass = "" //emailClientContext.state.selected.id === props.item.id ? "active" : "";
+    const activeClass = "" //emailClientContext.state.selected.id === item.id ? "active" : "";
 
     return (
-        <a href="#" id={`id_${props.item.id}`} onClick={handleClick} className={`list-group-item list-group-item-action ${activeClass}`} aria-current="true">
-            {console.log("list item render")}
+        <a href="#" id={`id_${item.id}`} onClick={handleClick} className={`list-group-item list-group-item-action ${activeClass}`} aria-current="true">
+            {console.log("list item return")}
             <div className="d-flex w-100 justify-content-between">
-                <p className="mb-1">{props.item.from}</p>
-                <Age age={props.item.age}/>
+                <p className="mb-1">{item.from}</p>
+                <Age age={item.age} />
             </div>
-            <p className="mb-1">{props.item.subject}</p>
-            <small>{truncateEmailBody(props.item.body)}...</small>
+            <p className="mb-1">{item.subject}</p>
+            <small>{truncateEmailBody(item.body)}...</small>
         </a>
     )
-})
+}
