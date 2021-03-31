@@ -2,11 +2,11 @@
 
 import React, { useReducer } from 'react';
 import { Reducer } from '../reducers/reducer';
-import { INBOX, OUTBOX, MY_ADDRESS } from '../globalConstants';
+import { INBOX, MY_ADDRESS } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
 function createMessages(messages) {
-    const limit = 0;
+    const limit = 1000;
     const result = [...messages];
 
     for (let i = 0; i < limit; i++) {
