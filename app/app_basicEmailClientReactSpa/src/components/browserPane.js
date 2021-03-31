@@ -17,6 +17,7 @@ export const BrowserPane = (props) => {
             console.log("browser pane useEffect fired after timeout 1000")
             const collection = getMessagesByDirectory(context.state.messages, props.dir);
             setCollection(collection);
+            console.log(context.state.messages)
         }, 1000)
 
         return () => clearTimeout(mimicAjaxCall);

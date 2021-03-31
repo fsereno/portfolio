@@ -8,7 +8,7 @@ import { Home } from './home';
 import { Inbox } from './inbox';
 import { New } from './new';
 import { Outbox } from './outbox';
-import { HOME, INBOX, OUTBOX, NEW } from '../globalConstants';
+import { HOME, INBOX, OUTBOX, NEW, NEW_MESSAGE } from '../globalConstants';
 
 export const Router = () => {
     return (

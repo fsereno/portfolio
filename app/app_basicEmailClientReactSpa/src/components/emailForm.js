@@ -1,10 +1,10 @@
 "use strict;"
 
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { SUBMIT, OUTBOX, MY_ADDRESS } from '../globalConstants';
+import { SUBMIT, OUTBOX, MY_ADDRESS, REPLY } from '../globalConstants';
 import { GlobalContext, EmailClientContext } from '../globalContext';
 import { ENQUEUE_TOAST, ToasterContext } from '../../../js/modules/react/toaster';
 
@@ -15,9 +15,18 @@ export function EmailForm() {
     const toasterContext = React.useContext(ToasterContext);
 
     const [ showValidation, setShowValidation ] = useState(false);
-    const [ to, setTo ] = useState(emailClientContext.state.selected.to);
-    const [ subject, setSubject ] = useState(emailClientContext.state.selected.subject);
-    const [ body, setBody ] = useState(emailClientContext.state.selected.body);
+    const [ to, setTo ] = useState("");
+    const [ subject, setSubject ] = useState("");
+    const [ body, setBody ] = useState("");
+    //const [ isNew, setIsNew ] = useState(false);
+
+    useLayoutEffect(() => {
+        if (emailClientContext.state.mode === REPLY) {
+            setTo(emailClientContext.state.selected.to);
+            setSubject(emailClientContext.state.selected.subject);
+        }
+    },[emailClientContext.state.mode]);
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,13 +42,13 @@ export function EmailForm() {
 
             globalContext.dispatch({
                 type: SUBMIT,
-                new: {
-                    subject: emailClientContext.state.selected.subject,
-                    thread: `${MY_ADDRESS}_${emailClientContext.state.selected.to}_${emailClientContext.state.selected.subject}`,
+                item: {
+                    subject,
+                    thread: `${MY_ADDRESS}_${to}_${subject}`,
                     id: Math.random() * 10,
                     from: MY_ADDRESS,
-                    to: emailClientContext.state.selected.to,
-                    body: emailClientContext.state.selected.body,
+                    to,
+                    body,
                     age: 0,
                     dir: OUTBOX,
                     time

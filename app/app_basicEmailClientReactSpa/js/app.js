@@ -39563,6 +39563,7 @@ var BrowserPane = function BrowserPane(props) {
       console.log("browser pane useEffect fired after timeout 1000");
       var collection = Object(_utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_3__["getMessagesByDirectory"])(context.state.messages, props.dir);
       setCollection(collection);
+      console.log(context.state.messages);
     }, 1000);
     return function () {
       return clearTimeout(mimicAjaxCall);
@@ -39848,7 +39849,10 @@ function EmailClientHandlerContextProvider(_ref) {
     var showModal = window.innerWidth < _globalConstants__WEBPACK_IMPORTED_MODULE_1__["MIN_VIEWPORT_WIDTH"];
 
     if (item) {
+      console.log(globalContext.state.messages);
+      console.log(item);
       var thread = Object(_utils_getEmailsByThread__WEBPACK_IMPORTED_MODULE_3__["getEmailsByThread"])(globalContext.state.messages, item);
+      console.log(thread);
       emailClientContext.dispatch({
         type: _globalConstants__WEBPACK_IMPORTED_MODULE_1__["SELECT"],
         thread: thread,
@@ -39857,7 +39861,7 @@ function EmailClientHandlerContextProvider(_ref) {
     }
 
     emailModalContext.setState(showModal);
-  }, []);
+  }, [globalContext.state.messages]);
   var context = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(function () {
     return {
       selectListItemHandler: selectListItemHandler
@@ -39915,20 +39919,28 @@ function EmailForm() {
       showValidation = _useState2[0],
       setShowValidation = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(emailClientContext.state.selected.to),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState4 = _slicedToArray(_useState3, 2),
       to = _useState4[0],
       setTo = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(emailClientContext.state.selected.subject),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState6 = _slicedToArray(_useState5, 2),
       subject = _useState6[0],
       setSubject = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(emailClientContext.state.selected.body),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState8 = _slicedToArray(_useState7, 2),
       body = _useState8[0],
-      setBody = _useState8[1];
+      setBody = _useState8[1]; //const [ isNew, setIsNew ] = useState(false);
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"])(function () {
+    if (emailClientContext.state.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_4__["REPLY"]) {
+      setTo(emailClientContext.state.selected.to);
+      setSubject(emailClientContext.state.selected.subject);
+    }
+  }, [emailClientContext.state.mode]);
 
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
@@ -39941,13 +39953,13 @@ function EmailForm() {
       setShowValidation(false);
       globalContext.dispatch({
         type: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["SUBMIT"],
-        "new": {
-          subject: emailClientContext.state.selected.subject,
-          thread: "".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_4__["MY_ADDRESS"], "_").concat(emailClientContext.state.selected.to, "_").concat(emailClientContext.state.selected.subject),
+        item: {
+          subject: subject,
+          thread: "".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_4__["MY_ADDRESS"], "_").concat(to, "_").concat(subject),
           id: Math.random() * 10,
           from: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["MY_ADDRESS"],
-          to: emailClientContext.state.selected.to,
-          body: emailClientContext.state.selected.body,
+          to: to,
+          body: body,
           age: 0,
           dir: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["OUTBOX"],
           time: time
@@ -40112,7 +40124,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 function createMessages(messages) {
-  var limit = 500;
+  var limit = 0;
 
   var result = _toConsumableArray(messages);
 
@@ -40169,34 +40181,11 @@ function GlobalContextProvider(_ref) {
     read: false,
     dir: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["INBOX"],
     time: new Date().getTime()
-  }, {
-    id: 3,
-    from: "tim.jones@hmrc.co.uk",
-    to: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
-    subject: "Subject 3",
-    thread: "tim.jones@hmrc.co.uk_".concat(_globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject 3"),
-    body: "Some reply",
-    age: 3,
-    read: false,
-    dir: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["OUTBOX"],
-    time: new Date().getTime()
   }];
   var messagesToUse = createMessages(messages);
 
   var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_1__["Reducer"], {
-    selected: {
-      id: -1,
-      to: "",
-      from: _globalConstants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
-      subject: "",
-      body: "",
-      time: 0
-    },
-    messages: messagesToUse,
-    selectedThread: [],
-    showModal: false,
-    mode: "",
-    showValidation: false
+    messages: messagesToUse
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
@@ -40284,11 +40273,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
 /* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./counter */ "./src/components/counter.js");
-/* harmony import */ var _emailClient__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./emailClient */ "./src/components/emailClient.js");
-/* harmony import */ var _utils_getUnreadEmailCount__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/getUnreadEmailCount */ "./src/utils/getUnreadEmailCount.js");
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _emailClient__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./emailClient */ "./src/components/emailClient.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 "use strict;";
 
 
@@ -40296,16 +40282,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 function InboxClient() {
-  //const context = React.useContext(GlobalContext);
-  //const count = getUnreadEmailCount(context.messages, INBOX);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    className: "mb-2"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Count ?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailClient__WEBPACK_IMPORTED_MODULE_4__["EmailClient"], {
-    dir: _globalConstants__WEBPACK_IMPORTED_MODULE_6__["INBOX"]
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailClient__WEBPACK_IMPORTED_MODULE_3__["EmailClient"], {
+    dir: _globalConstants__WEBPACK_IMPORTED_MODULE_4__["INBOX"]
   }))));
 }
 
@@ -40406,23 +40385,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
 /* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
 /* harmony import */ var _emailForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./emailForm */ "./src/components/emailForm.js");
-/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
-/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 "use strict;";
 
 
 
 
 
-
-
 function NewPane() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_4__["EmailClientContext"]);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"])(function () {
-    context.dispatch({
-      type: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["NEW_MESSAGE"]
-    });
-  }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], {
     lg: 6
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailForm__WEBPACK_IMPORTED_MODULE_3__["EmailForm"], null)));
@@ -40520,14 +40489,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function ReadingPane() {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_3__["EmailClientContext"]);
-  /*
-      this causes big re-renders!
-  useEffect( () => { 
-      return () => {
-          context.dispatch({ type: DESELECT_THREAD })
-      }
-  }, [])*/
-
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "readingPane"
   }, context.state.selectedThread.map(function (item, index) {
@@ -40751,7 +40712,7 @@ function ViewingPane() {
 /*!********************************!*\
   !*** ./src/globalConstants.js ***!
   \********************************/
-/*! exports provided: SELECT, DESELECT, DESELECT_THREAD, REPLY_MESSAGE, NEW_MESSAGE, REPLY, SUBMIT, READ, UPDATE_TO, UPDATE_SUBJECT, UPDATE_BODY, SHOW_VALIDATION, HIDE_VALIDATION, HOME, INBOX, OUTBOX, NEW, MY_ADDRESS, MIN_VIEWPORT_WIDTH */
+/*! exports provided: SELECT, DESELECT, DESELECT_THREAD, REPLY_MESSAGE, NEW_MESSAGE, REPLY, SUBMIT, READ, RESET_MODE, HOME, INBOX, OUTBOX, NEW, MY_ADDRESS, MIN_VIEWPORT_WIDTH */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -40764,11 +40725,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REPLY", function() { return REPLY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUBMIT", function() { return SUBMIT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "READ", function() { return READ; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_TO", function() { return UPDATE_TO; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SUBJECT", function() { return UPDATE_SUBJECT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_BODY", function() { return UPDATE_BODY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SHOW_VALIDATION", function() { return SHOW_VALIDATION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HIDE_VALIDATION", function() { return HIDE_VALIDATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET_MODE", function() { return RESET_MODE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HOME", function() { return HOME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INBOX", function() { return INBOX; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OUTBOX", function() { return OUTBOX; });
@@ -40785,11 +40742,7 @@ var NEW_MESSAGE = "newMessage";
 var REPLY = "reply";
 var SUBMIT = "submit";
 var READ = "read";
-var UPDATE_TO = "updateTo";
-var UPDATE_SUBJECT = "updateSubject";
-var UPDATE_BODY = "updateBody";
-var SHOW_VALIDATION = "showValidation";
-var HIDE_VALIDATION = "hideValidation";
+var RESET_MODE = "resetMode";
 var HOME = "/home";
 var INBOX = "/inbox";
 var OUTBOX = "/outbox";
@@ -40841,6 +40794,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 "use strict;";
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -40849,129 +40808,18 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
 
 function Reducer(state, action) {
   switch (action.type) {
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["SELECT"]:
-      return {
-        messages: Object(_utils_setEmailToRead__WEBPACK_IMPORTED_MODULE_0__["setEmailToRead"])(action.item.id, state.messages),
-        selectedThread: Object(_utils_getEmailsByThread__WEBPACK_IMPORTED_MODULE_1__["getEmailsByThread"])(state.messages, action.item),
-        selected: _objectSpread({}, state.selected, {
-          id: action.item.id,
-          to: action.item.to,
-          from: action.item.from,
-          subject: action.item.subject,
-          time: action.item.time
-        }),
-        showModal: action.showModal,
-        mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["READ"]
-      };
-
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["REPLY_MESSAGE"]:
-      return _objectSpread({}, state, {
-        mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["REPLY"],
-        selected: _objectSpread({}, state.selected, {
-          to: Object(_utils_getReplyToEmailAddress__WEBPACK_IMPORTED_MODULE_2__["getReplyToEmailAddress"])(action.selected.from, action.selected.to),
-          from: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["MY_ADDRESS"],
-          subject: action.selected.subject
-        })
-      });
-
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["UPDATE_TO"]:
-      return _objectSpread({}, state, {
-        selected: _objectSpread({}, state.selected, {
-          to: action.input
-        })
-      });
-
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["UPDATE_SUBJECT"]:
-      return _objectSpread({}, state, {
-        selected: _objectSpread({}, state.selected, {
-          subject: action.input
-        })
-      });
-
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["UPDATE_BODY"]:
-      return _objectSpread({}, state, {
-        selected: _objectSpread({}, state.selected, {
-          body: action.input
-        })
-      });
-
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["NEW_MESSAGE"]:
-      return _objectSpread({}, state, {
-        selectedThread: [],
-        showModal: action.showModal,
-        mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["NEW_MESSAGE"],
-        selected: _objectSpread({}, state.selected, {
-          to: "",
-          from: "",
-          subject: "",
-          body: ""
-        })
-      });
-
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["SUBMIT"]:
       var messages = _toConsumableArray(state.messages);
 
-      messages.unshift(action["new"]);
+      messages.unshift(action.item);
       return _objectSpread({}, state, {
-        selected: {
-          id: -1,
-          to: "",
-          from: "",
-          subject: "",
-          body: ""
-        },
-        messages: messages,
-        showModal: false
-      });
-
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["DESELECT"]:
-      return _objectSpread({}, state, {
-        selected: {
-          id: -1,
-          to: "",
-          from: "",
-          subject: "",
-          body: ""
-        },
-        showModal: false,
-        showValidation: false
-      });
-
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["DESELECT_THREAD"]:
-      return _objectSpread({}, state, {
-        selected: {
-          id: -1,
-          to: "",
-          from: "",
-          subject: "",
-          body: ""
-        },
-        selectedThread: [],
-        showModal: false,
-        showValidation: false,
-        mode: ""
-      });
-
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["SHOW_VALIDATION"]:
-      return _objectSpread({}, state, {
-        showValidation: true
-      });
-
-    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["HIDE_VALIDATION"]:
-      return _objectSpread({}, state, {
-        showValidation: false
+        messages: messages
       });
 
     default:
@@ -41019,13 +40867,12 @@ function EmailClientReducer(state, action) {
     case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["NEW_MESSAGE"]:
       return _objectSpread({}, state, {
         selectedThread: [],
-        mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["NEW_MESSAGE"],
-        selected: _objectSpread({}, state.selected, {
-          to: "",
-          from: "",
-          subject: "",
-          body: ""
-        })
+        mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["NEW_MESSAGE"]
+      });
+
+    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["RESET_MODE"]:
+      return _objectSpread({}, state, {
+        mode: ""
       });
 
     default:
@@ -41161,28 +41008,6 @@ var getReplyToEmailAddress = function getReplyToEmailAddress() {
   }
 
   return address;
-};
-
-/***/ }),
-
-/***/ "./src/utils/getUnreadEmailCount.js":
-/*!******************************************!*\
-  !*** ./src/utils/getUnreadEmailCount.js ***!
-  \******************************************/
-/*! exports provided: getUnreadEmailCount */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUnreadEmailCount", function() { return getUnreadEmailCount; });
-"use strict;";
-
-var getUnreadEmailCount = function getUnreadEmailCount() {
-  var messages = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var directory = arguments.length > 1 ? arguments[1] : undefined;
-  return messages.length > 0 ? messages.filter(function (x) {
-    return !x.read && x.dir === directory;
-  }).length : 0;
 };
 
 /***/ }),

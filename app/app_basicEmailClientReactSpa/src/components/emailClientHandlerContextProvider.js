@@ -15,7 +15,13 @@ export function EmailClientHandlerContextProvider({children}) {
         const showModal = window.innerWidth < MIN_VIEWPORT_WIDTH;
 
         if (item) {
+
+            console.log(globalContext.state.messages)
+            console.log(item)
+
             const thread = getEmailsByThread(globalContext.state.messages, item);
+            
+            console.log(thread)
             emailClientContext.dispatch({
                 type: SELECT,
                 thread: thread,
@@ -24,7 +30,7 @@ export function EmailClientHandlerContextProvider({children}) {
         }
 
         emailModalContext.setState(showModal);
-    },[])
+    },[globalContext.state.messages])
 
     const context = useMemo( () => {
         return { selectListItemHandler }

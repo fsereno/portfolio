@@ -6,7 +6,7 @@ import { INBOX, OUTBOX, MY_ADDRESS } from '../globalConstants';
 import { GlobalContext } from '../globalContext';
 
 function createMessages(messages) {
-    const limit = 500;
+    const limit = 0;
     const result = [...messages];
 
     for (let i = 0; i < limit; i++) {
@@ -66,37 +66,13 @@ export function GlobalContextProvider({children}) {
             read: false,
             dir: INBOX,
             time: new Date().getTime()
-        },
-        {
-            id: 3,
-            from: "tim.jones@hmrc.co.uk",
-            to: MY_ADDRESS,
-            subject: "Subject 3",
-            thread: `tim.jones@hmrc.co.uk_${MY_ADDRESS}_Subject 3`,
-            body: "Some reply",
-            age: 3,
-            read: false,
-            dir: OUTBOX,
-            time: new Date().getTime()
         }
     ]
 
     const messagesToUse = createMessages(messages);
 
     const [state, dispatch] = useReducer(Reducer, {
-        selected: {
-            id: -1,
-            to: "",
-            from: MY_ADDRESS,
-            subject: "",
-            body: "",
-            time: 0
-        },
-        messages: messagesToUse,
-        selectedThread: [],
-        showModal: false,
-        mode: "",
-        showValidation: false
+        messages: messagesToUse
     });
 
     const stateValue = { state, dispatch };
