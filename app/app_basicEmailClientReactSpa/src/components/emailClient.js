@@ -7,20 +7,27 @@ import { BrowserPane } from './browserPane';
 import { ViewingPane } from './viewingPane';
 import { EmailModal } from './EmailModal';
 import { DesktopReplyBtn } from './desktopReplyBtn';
+import { EmailClientContextProvider } from './emailClientContextProvider';
+import { EmailModalContextProvider } from './emailModalContextProvider';
+import { EmailClientHandlerContextProvider } from './emailClientHandlerContextProvider';
 
 export function EmailClient(props) {
     return (
-        <>
-            <Row>
-                <Col>
-                    <BrowserPane dir={props.dir}/>
-                </Col>
-                <Col className="d-none d-md-block">
-                    <DesktopReplyBtn />
-                    <ViewingPane />
-                </Col>
-            </Row>
-            <EmailModal />
-        </>
+        <EmailClientContextProvider>
+            <EmailModalContextProvider>
+                <EmailClientHandlerContextProvider>
+                    <Row>
+                        <Col>
+                            <BrowserPane dir={props.dir} />
+                        </Col>
+                        <Col className="d-none d-md-block">
+                            <DesktopReplyBtn />
+                            <ViewingPane />
+                        </Col>
+                    </Row>
+                    <EmailModal />
+                </EmailClientHandlerContextProvider>
+            </EmailModalContextProvider>
+        </EmailClientContextProvider>
     )
 }

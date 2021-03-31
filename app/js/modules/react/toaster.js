@@ -1,6 +1,6 @@
 "use strict;"
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Toast } from './toast';
 
 export const ENQUEUE_TOAST = "enqueueToast";
@@ -62,15 +62,14 @@ export function Toaster() {
 
     const context = React.useContext(ToasterContext);
 
-    useEffect(() => {
-        setCollection(context.state.items);
-        setIsVisible(context.state.items.length > 0);
-    },[]);
+    console.log(context)
+
+    
 
     return (
-        <div className="toasts-container" aria-live="polite" aria-atomic="true" style={ { visibility: isVisible ? "visible" : "hidden" } }>
+        <div className="toasts-container" aria-live="polite" aria-atomic="true" style={ { visibility: context.state.items.length > 0 ? "visible" : "hidden" } }>
             <div className="toasts-position">
-                <Toasts items={collection}/>
+                <Toasts items={context.state.items}/>
             </div>
         </div>
     )

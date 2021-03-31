@@ -55,7 +55,9 @@ export function EmailForm() {
                 }
             });
 
-            toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Sent successfully!", body: `Your message RE: ${emailClientContext.state.selected.subject}, has now been sent.` } } );
+            toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Sent successfully!", body: `Your message RE: ${subject}, has now been sent.` } } );
+
+            console.log(toasterContext)
         }
     };
 
