@@ -161,7 +161,6 @@ export function EmailClientReducer(state, action) {
           subject: action.item.subject,
           time: action.item.time
         },
-        showModal: action.showModal,
         mode: READ
       }
       case DESELECT_THREAD:
@@ -175,8 +174,6 @@ export function EmailClientReducer(state, action) {
             body: "",
           },
           selectedThread: [],
-          showModal: false,
-          showValidation: false,
           mode: ""
         }
       case REPLY_MESSAGE:
@@ -190,6 +187,19 @@ export function EmailClientReducer(state, action) {
             subject: action.selected.subject
           }
         }
+        case NEW_MESSAGE:
+          return {
+            ...state,
+            selectedThread: [],
+            mode: NEW_MESSAGE,
+            selected: {
+              ...state.selected,
+              to: "",
+              from: "",
+              subject: "",
+              body: ""
+            }
+          }
     default:
       throw new Error();
   }

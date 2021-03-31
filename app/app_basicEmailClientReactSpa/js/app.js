@@ -39407,7 +39407,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
 /* harmony import */ var _components_globalContextProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/globalContextProvider */ "./src/components/globalContextProvider.js");
 /* harmony import */ var _components_toasterContextProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/toasterContextProvider */ "./src/components/toasterContextProvider.js");
-/* harmony import */ var _js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/modules/react/toaster */ "../js/modules/react/toaster.js");
+/* harmony import */ var _components_emailClientContextProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/emailClientContextProvider */ "./src/components/emailClientContextProvider.js");
+/* harmony import */ var _components_emailModalContextProvider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/emailModalContextProvider */ "./src/components/emailModalContextProvider.js");
+/* harmony import */ var _components_emailClientHandlerContextProvider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/emailClientHandlerContextProvider */ "./src/components/emailClientHandlerContextProvider.js");
+/* harmony import */ var _js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../js/modules/react/toaster */ "../js/modules/react/toaster.js");
 "use strict;";
 
 
@@ -39417,8 +39420,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_globalContextProvider__WEBPACK_IMPORTED_MODULE_3__["GlobalContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_toasterContextProvider__WEBPACK_IMPORTED_MODULE_4__["ToasterContextProvider"], null, console.log("render app"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null)));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_globalContextProvider__WEBPACK_IMPORTED_MODULE_3__["GlobalContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_toasterContextProvider__WEBPACK_IMPORTED_MODULE_4__["ToasterContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_emailClientContextProvider__WEBPACK_IMPORTED_MODULE_5__["EmailClientContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_emailModalContextProvider__WEBPACK_IMPORTED_MODULE_6__["EmailModalContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_emailClientHandlerContextProvider__WEBPACK_IMPORTED_MODULE_7__["EmailClientHandlerContextProvider"], null, console.log("render app"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__["Router"], null))))));
 }
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('result'));
@@ -39733,9 +39739,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _viewingPane__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./viewingPane */ "./src/components/viewingPane.js");
 /* harmony import */ var _EmailModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EmailModal */ "./src/components/EmailModal.js");
 /* harmony import */ var _desktopReplyBtn__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./desktopReplyBtn */ "./src/components/desktopReplyBtn.js");
-/* harmony import */ var _emailClientContextProvider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./emailClientContextProvider */ "./src/components/emailClientContextProvider.js");
-/* harmony import */ var _emailModalContextProvider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./emailModalContextProvider */ "./src/components/emailModalContextProvider.js");
-/* harmony import */ var _emailClientHandlerContextProvider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./emailClientHandlerContextProvider */ "./src/components/emailClientHandlerContextProvider.js");
 "use strict;";
 
 
@@ -39745,15 +39748,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 function EmailClient(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailClientContextProvider__WEBPACK_IMPORTED_MODULE_7__["EmailClientContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailModalContextProvider__WEBPACK_IMPORTED_MODULE_8__["EmailModalContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailClientHandlerContextProvider__WEBPACK_IMPORTED_MODULE_9__["EmailClientHandlerContextProvider"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_browserPane__WEBPACK_IMPORTED_MODULE_3__["BrowserPane"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_browserPane__WEBPACK_IMPORTED_MODULE_3__["BrowserPane"], {
     dir: props.dir
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: "d-none d-md-block"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_desktopReplyBtn__WEBPACK_IMPORTED_MODULE_6__["DesktopReplyBtn"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_viewingPane__WEBPACK_IMPORTED_MODULE_4__["ViewingPane"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EmailModal__WEBPACK_IMPORTED_MODULE_5__["EmailModal"], null))));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_desktopReplyBtn__WEBPACK_IMPORTED_MODULE_6__["DesktopReplyBtn"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_viewingPane__WEBPACK_IMPORTED_MODULE_4__["ViewingPane"], null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EmailModal__WEBPACK_IMPORTED_MODULE_5__["EmailModal"], null));
 }
 
 /***/ }),
@@ -40335,7 +40335,7 @@ __webpack_require__.r(__webpack_exports__);
 var ListItem = function ListItem(_ref) {
   var item = _ref.item,
       isActive = _ref.isActive;
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_3__["EmailClientHandlerContext"]); //const emailClientContext = React.useContext(EmailClientContext);
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_3__["EmailClientHandlerContext"]);
 
   var handleClick = function handleClick(event) {
     event.preventDefault();
@@ -40376,13 +40376,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./content */ "./src/components/content.js");
+/* harmony import */ var _newPane__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./newPane */ "./src/components/newPane.js");
 "use strict;";
+
 
 
 
 function New() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_1__["Content"], {
-    title: "New message"
+    title: "New message",
+    component: _newPane__WEBPACK_IMPORTED_MODULE_2__["NewPane"]
   }));
 }
 
@@ -40403,13 +40406,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
 /* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
 /* harmony import */ var _emailForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./emailForm */ "./src/components/emailForm.js");
+/* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
+/* harmony import */ var _globalConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../globalConstants */ "./src/globalConstants.js");
 "use strict;";
 
 
 
 
 
+
+
 function NewPane() {
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_4__["EmailClientContext"]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"])(function () {
+    context.dispatch({
+      type: _globalConstants__WEBPACK_IMPORTED_MODULE_5__["NEW_MESSAGE"]
+    });
+  }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_2__["default"], {
     lg: 6
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_emailForm__WEBPACK_IMPORTED_MODULE_3__["EmailForm"], null)));
@@ -40616,7 +40629,7 @@ var Router = function Router() {
     to: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["OUTBOX"]
   }, "Outbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     activeClassName: "active",
-    className: "d-none d-md-block nav-link pb-3 pt-1 px-3",
+    className: "nav-link pb-3 pt-1 px-3",
     to: _globalConstants__WEBPACK_IMPORTED_MODULE_8__["NEW"]
   }, "New"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
@@ -40977,7 +40990,6 @@ function EmailClientReducer(state, action) {
           subject: action.item.subject,
           time: action.item.time
         }),
-        showModal: action.showModal,
         mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["READ"]
       };
 
@@ -40991,8 +41003,6 @@ function EmailClientReducer(state, action) {
           body: ""
         },
         selectedThread: [],
-        showModal: false,
-        showValidation: false,
         mode: ""
       });
 
@@ -41003,6 +41013,18 @@ function EmailClientReducer(state, action) {
           to: Object(_utils_getReplyToEmailAddress__WEBPACK_IMPORTED_MODULE_2__["getReplyToEmailAddress"])(action.selected.from, action.selected.to),
           from: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["MY_ADDRESS"],
           subject: action.selected.subject
+        })
+      });
+
+    case _globalConstants__WEBPACK_IMPORTED_MODULE_3__["NEW_MESSAGE"]:
+      return _objectSpread({}, state, {
+        selectedThread: [],
+        mode: _globalConstants__WEBPACK_IMPORTED_MODULE_3__["NEW_MESSAGE"],
+        selected: _objectSpread({}, state.selected, {
+          to: "",
+          from: "",
+          subject: "",
+          body: ""
         })
       });
 

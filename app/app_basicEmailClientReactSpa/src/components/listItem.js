@@ -3,13 +3,11 @@
 import React from 'react';
 import { Age } from './age';
 import { truncateEmailBody } from '../utils/truncateEmailBody';
-import { EmailClientHandlerContext, EmailClientContext } from '../globalContext';
+import { EmailClientHandlerContext } from '../globalContext';
 
 export const ListItem = ({item, isActive}) => {
 
     const context = React.useContext(EmailClientHandlerContext);
-    //const emailClientContext = React.useContext(EmailClientContext);
-
     const handleClick = (event) => {
         event.preventDefault();
         context.selectListItemHandler(item);

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { ListItem } from './listItem';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
-import { GlobalContext, EmailClientContext } from '../globalContext';
+import { GlobalContext } from '../globalContext';
 
 export const BrowserPane = (props) => {
 

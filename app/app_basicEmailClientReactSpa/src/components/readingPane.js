@@ -1,22 +1,14 @@
 "use strict;"
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Age } from './age';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { EmailClientContext } from '../globalContext';
-import { MIN_VIEWPORT_WIDTH, DESELECT_THREAD } from '../globalConstants'
+import { MIN_VIEWPORT_WIDTH } from '../globalConstants'
 
 export function ReadingPane() {
 
     const context = React.useContext(EmailClientContext);
-
-    /*
-        this causes big re-renders!
-    useEffect( () => { 
-        return () => {
-            context.dispatch({ type: DESELECT_THREAD })
-        }
-    }, [])*/
 
     return(
         <div id="readingPane">
