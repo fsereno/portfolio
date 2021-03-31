@@ -85,7 +85,6 @@ function App() {
 
   return (
     <>
-      { console.log("render app")}
       <GlobalContext.Provider value={context}>
         <ToasterContext.Provider value={toasterContext}>
           <Router />

@@ -39228,13 +39228,14 @@ function Toast(props) {
       index: props.index
     });
   };
-  /*useEffect(() => {
-      setTimeout(() => {
-          context.dispatch( { type: DEQUEUE_TOAST });
-      }, 5000)
-  }, []);*/
 
-
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setTimeout(function () {
+      context.dispatch({
+        type: _toaster__WEBPACK_IMPORTED_MODULE_1__["DEQUEUE_TOAST"]
+      });
+    }, 2000);
+  }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "toast",
     role: "alert",
@@ -39371,18 +39372,21 @@ function Toaster() {
       setCollection = _useState4[1];
 
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(ToasterContext);
-  console.log(context);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setCollection(context.state.items);
+    setIsVisible(context.state.items.length > 0);
+  }, [context.state.items]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "toasts-container",
     "aria-live": "polite",
     "aria-atomic": "true",
     style: {
-      visibility: context.state.items.length > 0 ? "visible" : "hidden"
+      visibility: isVisible ? "visible" : "hidden"
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "toasts-position"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Toasts, {
-    items: context.state.items
+    items: collection
   })));
 }
 
@@ -39965,7 +39969,6 @@ function EmailForm() {
           body: "Your message RE: ".concat(subject, ", has now been sent.")
         }
       });
-      console.log(toasterContext);
     }
   };
 

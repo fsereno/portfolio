@@ -9,14 +9,12 @@ import { Toaster } from '../../js/modules/react/toaster';
 
 function App() {
   return (
-    <ToasterContextProvider>
-      <GlobalContextProvider>
-      
-        { console.log("render app")}
-        <Router />
-        <Toaster/>
-      
-    </GlobalContextProvider>
+      <ToasterContextProvider>
+        <GlobalContextProvider>
+          { console.log("render app")}
+          <Router />
+          <Toaster/>
+      </GlobalContextProvider>
     </ToasterContextProvider>
   );
 }
