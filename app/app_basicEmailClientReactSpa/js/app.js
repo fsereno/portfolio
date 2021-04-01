@@ -40173,7 +40173,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 function createMessages(messages) {
-  var limit = 1000;
+  var limit = 5000;
 
   var result = _toConsumableArray(messages);
 
