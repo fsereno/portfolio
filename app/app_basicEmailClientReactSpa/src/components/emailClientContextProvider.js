@@ -1,8 +1,8 @@
 "use strict;"
 
 import React, { useReducer } from 'react';
-import { MY_ADDRESS, READ } from '../globalConstants';
-import { EmailClientContext } from '../globalContext';
+import { MY_ADDRESS, READ } from '../constants';
+import { EmailClientContext } from '../contexts';
 import { EmailClientReducer } from '../reducers/reducer';
 
 export function EmailClientContextProvider({children}) {

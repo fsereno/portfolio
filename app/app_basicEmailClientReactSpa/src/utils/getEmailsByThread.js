@@ -1,6 +1,6 @@
 "use strict;"
 
-import { INBOX } from "../globalConstants";
+import { INBOX } from "../constants";
 
 export const getEmailsByThread = (messages = [], args = { from: "", to: "", subject: "", dir: "" }) => {
 

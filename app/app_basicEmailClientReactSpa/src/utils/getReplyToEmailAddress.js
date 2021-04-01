@@ -1,6 +1,6 @@
 "use strict;"
 
-import { MY_ADDRESS } from '../globalConstants';
+import { MY_ADDRESS } from '../constants';
 
 export const getReplyToEmailAddress = (from = "", to = "") => {
 

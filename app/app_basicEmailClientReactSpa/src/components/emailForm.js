@@ -4,8 +4,8 @@ import React, { useState, useLayoutEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { SUBMIT, OUTBOX, MY_ADDRESS, REPLY } from '../globalConstants';
-import { GlobalContext, EmailClientContext, EmailModalContext} from '../globalContext';
+import { SUBMIT, OUTBOX, MY_ADDRESS, REPLY } from '../constants';
+import { GlobalContext, EmailClientContext, EmailModalContext} from '../contexts';
 import { ENQUEUE_TOAST, ToasterContext } from '../../../js/modules/react/toaster';
 
 export function EmailForm() {

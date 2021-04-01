@@ -3,8 +3,8 @@
 import React from 'react';
 import { Age } from './age';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
-import { EmailClientContext } from '../globalContext';
-import { MIN_VIEWPORT_WIDTH } from '../globalConstants'
+import { EmailClientContext } from '../contexts';
+import { MIN_VIEWPORT_WIDTH } from '../constants'
 
 export function ReadingPane() {
 

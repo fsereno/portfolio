@@ -3,8 +3,8 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { EmailClientContext } from '../globalContext';
-import { READ, REPLY_MESSAGE } from '../globalConstants';
+import { EmailClientContext } from '../contexts';
+import { READ, REPLY_MESSAGE } from '../constants';
 
 export function DesktopReplyBtn() {
 

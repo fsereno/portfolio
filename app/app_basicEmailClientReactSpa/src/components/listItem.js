@@ -3,7 +3,7 @@
 import React from 'react';
 import { Age } from './age';
 import { truncateEmailBody } from '../utils/truncateEmailBody';
-import { EmailClientHandlerContext } from '../globalContext';
+import { EmailClientHandlerContext } from '../contexts';
 
 export const ListItem = ({item, isActive}) => {
 

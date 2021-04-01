@@ -1,8 +1,8 @@
 "use strict;"
 
 import React from 'react';
-import { EmailClientContext } from '../globalContext';
-import { DESELECT_THREAD } from '../globalConstants';
+import { EmailClientContext } from '../contexts';
+import { DESELECT_THREAD } from '../constants';
 
 export function ButtonTest() {
     const context = React.useContext(EmailClientContext);

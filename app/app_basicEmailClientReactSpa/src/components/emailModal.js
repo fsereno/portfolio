@@ -4,8 +4,8 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { ViewingPane } from './viewingPane';
-import { REPLY_MESSAGE, READ } from '../globalConstants';
-import { EmailClientContext, EmailModalContext } from '../globalContext';
+import { REPLY_MESSAGE, READ } from '../constants';
+import { EmailClientContext, EmailModalContext } from '../contexts';
 
 export function EmailModal() {
 

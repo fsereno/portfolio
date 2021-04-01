@@ -4,7 +4,7 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { EmailClient } from './emailClient'
-import { INBOX } from '../globalConstants';
+import { INBOX } from '../constants';
 
 export function InboxClient() {
     return(

@@ -18,7 +18,7 @@ import {
   SHOW_VALIDATION,
   HIDE_VALIDATION,
   MY_ADDRESS
-} from '../globalConstants';
+} from '../constants';
 
 export function Reducer(state, action) {
   switch(action.type) {

@@ -3,11 +3,11 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { READ, REPLY, NEW_MESSAGE } from '../globalConstants';
+import { READ, REPLY, NEW_MESSAGE } from '../constants';
 import { ReadingPane } from './readingPane';
 import { ReplyPane } from './replyPane';
 import { NewPane } from './newPane';
-import { EmailClientContext } from '../globalContext';
+import { EmailClientContext } from '../contexts';
 
 export function ViewingPane() {
 
