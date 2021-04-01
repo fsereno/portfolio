@@ -1,9 +1,9 @@
 "use strict;"
 
 import React, { useReducer } from 'react';
-import { Reducer } from '../reducers/reducer';
-import { INBOX, MY_ADDRESS } from '../constants';
-import { GlobalContext } from '../contexts';
+import { Reducer } from '../../reducers/reducer';
+import { INBOX, MY_ADDRESS } from '../../constants';
+import { GlobalContext } from '../../contexts';
 
 function createMessages(messages) {
     const limit = 5000;

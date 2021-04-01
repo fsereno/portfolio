@@ -5,7 +5,7 @@ import { Age } from './age';
 import { truncateEmailBody } from '../utils/truncateEmailBody';
 import { EmailClientHandlerContext } from '../contexts';
 
-export const ListItem = ({item, isActive}) => {
+export const ListItem = ({item}) => {
 
     const context = React.useContext(EmailClientHandlerContext);
     const handleClick = (event) => {
@@ -14,8 +14,6 @@ export const ListItem = ({item, isActive}) => {
     }
 
     const activeClass = "" //emailClientContext.state.selected.id === item.id ? "active" : "";
-
-    console.log("render list item")
 
     return (
         <a href="#" id={`id_${item.id}`} onClick={handleClick} className={`list-group-item list-group-item-action ${activeClass}`} aria-current="true">

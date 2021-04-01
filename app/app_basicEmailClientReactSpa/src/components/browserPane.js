@@ -64,7 +64,6 @@ export const BrowserPane = (props) => {
             {collection.length > 0 &&
                 <div id="browserPane" className="list-group">
                     {collection.map((item, index) => {
-                        console.log("mapping")
                         const key = getKeyFromMessage(item, index);
 
                         return (

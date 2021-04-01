@@ -2,7 +2,7 @@
 "use strict;"
 
 import React, { useReducer } from 'react';
-import { ToastReducer, ToasterContext } from '../../../js/modules/react/toaster';
+import { ToastReducer, ToasterContext } from '../../../../js/modules/react/toaster';
 
 const createToasts = () => {
     const limit = 0;

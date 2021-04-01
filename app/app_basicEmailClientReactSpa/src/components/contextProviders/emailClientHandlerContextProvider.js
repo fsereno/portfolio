@@ -1,9 +1,9 @@
 "use strict;"
 
 import React, { useMemo, useCallback }from 'react';
-import { SELECT, MIN_VIEWPORT_WIDTH } from '../constants';
-import { EmailClientContext, EmailClientHandlerContext, GlobalContext, EmailModalContext } from '../contexts';
-import { getEmailsByThread } from '../utils/getEmailsByThread';
+import { SELECT, MIN_VIEWPORT_WIDTH } from '../../constants';
+import { EmailClientContext, EmailClientHandlerContext, GlobalContext, EmailModalContext } from '../../contexts';
+import { getEmailsByThread } from '../../utils/getEmailsByThread';
 
 export function EmailClientHandlerContextProvider({children}) {
 

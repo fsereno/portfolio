@@ -1,7 +1,7 @@
 "use strict;"
 
 import React, { useState } from 'react';
-import { EmailModalContext } from '../contexts';
+import { EmailModalContext } from '../../contexts';
 
 export function EmailModalContextProvider({children}) {
 

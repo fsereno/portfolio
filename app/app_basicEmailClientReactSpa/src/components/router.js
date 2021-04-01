@@ -4,10 +4,10 @@ import React from 'react';
 import { HashRouter, Switch, Route, NavLink, Redirect } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { Home } from './home';
-import { Inbox } from './inbox';
-import { New } from './new';
-import { Outbox } from './outbox';
+import { Home } from './pages/home';
+import { Inbox } from './pages/inbox';
+import { New } from './pages/new';
+import { Outbox } from './pages/outbox';
 import { HOME, INBOX, OUTBOX, NEW } from '../constants';
 
 export const Router = () => {

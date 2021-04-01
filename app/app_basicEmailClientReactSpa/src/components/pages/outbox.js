@@ -1,9 +1,9 @@
 "use strict;"
 
 import React from 'react';
-import { OutboxClient } from "./outboxClient";
-import { ContentContainer } from './contentContainer';
-import { Content } from "./content";
+import { OutboxClient } from "../outboxClient";
+import { ContentContainer } from '../contentContainer';
+import { Content } from "../content";
 
 export function Outbox() {
   return (
