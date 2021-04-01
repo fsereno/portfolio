@@ -14,7 +14,7 @@ export function ReadingPane() {
         <div id="readingPane">
             {context.state.selectedThread.map((item, index) => {
 
-                const key = getKeyFromMessage(item);
+                const key = getKeyFromMessage(item, index);
 
                 const showSubject = window.innerWidth > MIN_VIEWPORT_WIDTH || window.innerWidth < MIN_VIEWPORT_WIDTH && index > 0;
 

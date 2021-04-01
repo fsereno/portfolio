@@ -39234,7 +39234,7 @@ function Toast(props) {
       context.dispatch({
         type: _toaster__WEBPACK_IMPORTED_MODULE_1__["DEQUEUE_TOAST"]
       });
-    }, 2000);
+    }, 5000);
   }, []);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "toast",
@@ -39532,6 +39532,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _globalContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../globalContext */ "./src/globalContext.js");
 "use strict;";
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -39553,21 +39561,64 @@ var BrowserPane = function BrowserPane(props) {
       collection = _useState2[0],
       setCollection = _useState2[1];
 
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+  var onGoingCollection = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(collection);
+
+  var getEveryThree = function getEveryThree() {
+    var onGoing = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var collection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+    var dir = arguments.length > 2 ? arguments[2] : undefined;
+    var indexLimit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 3;
+
+    var result = _toConsumableArray(onGoing);
+
+    var count = 0;
+
+    for (var i = onGoing.length; i < onGoing.length + indexLimit; i++) {
+      result.push(collection[i]);
+    }
+
+    return result;
+  };
+
+  var scrollHandler = function scrollHandler() {
+    var browserPane = document.getElementById("browserPane");
+
+    if (browserPane) {
+      var isWithinRange = window.innerHeight + window.scrollY >= document.body.offsetHeight;
+
+      if (isWithinRange) {
+        var firstThree = getEveryThree(onGoingCollection.current, context.state.messages, props.dir); //[context.state.messages[0], context.state.messages[1], context.state.messages[3]]
+
+        var collectionByDir = firstThree; //getMessagesByDirectory(firstThree, props.dir);
+
+        onGoingCollection.current = collectionByDir;
+        setCollection(collectionByDir);
+      }
+    }
+  };
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"])(function () {
+    window.addEventListener("scroll", scrollHandler);
     var mimicAjaxCall = setTimeout(function () {
-      console.log("browser pane useEffect fired after timeout 1000");
-      var collection = Object(_utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_3__["getMessagesByDirectory"])(context.state.messages, props.dir);
-      setCollection(collection);
-    }, 1000);
+      //console.log("browser pane useEffect fired after timeout 1000";
+      var firstThree = getEveryThree([], context.state.messages, props.dir); //[context.state.messages[0], context.state.messages[1], context.state.messages[3]]
+
+      var collectionByDir = firstThree; // getMessagesByDirectory(firstThree, props.dir);
+
+      onGoingCollection.current = collectionByDir;
+      setCollection(collectionByDir);
+    }, 500);
     return function () {
-      return clearTimeout(mimicAjaxCall);
+      window.removeEventListener("scroll", scrollHandler);
+      clearTimeout(mimicAjaxCall);
     };
-  }, []);
+  }, [context.state.messages]);
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, collection.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "browserPane",
     className: "list-group"
   }, collection.map(function (item, index) {
     console.log("mapping");
-    var key = Object(_utils_getKeyFromMessage__WEBPACK_IMPORTED_MODULE_2__["getKeyFromMessage"])(item);
+    var key = Object(_utils_getKeyFromMessage__WEBPACK_IMPORTED_MODULE_2__["getKeyFromMessage"])(item, index);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listItem__WEBPACK_IMPORTED_MODULE_1__["ListItem"], {
       index: index,
       item: item,
@@ -40121,7 +40172,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 function createMessages(messages) {
-  var limit = 0;
+  var limit = 1000;
 
   var result = _toConsumableArray(messages);
 
@@ -40320,13 +40371,14 @@ var ListItem = function ListItem(_ref) {
 
   var activeClass = ""; //emailClientContext.state.selected.id === item.id ? "active" : "";
 
+  console.log("render list item");
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     id: "id_".concat(item.id),
     onClick: handleClick,
     className: "list-group-item list-group-item-action ".concat(activeClass),
     "aria-current": "true"
-  }, console.log("list item return"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex w-100 justify-content-between"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
@@ -40489,7 +40541,7 @@ function ReadingPane() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "readingPane"
   }, context.state.selectedThread.map(function (item, index) {
-    var key = Object(_utils_getKeyFromMessage__WEBPACK_IMPORTED_MODULE_2__["getKeyFromMessage"])(item);
+    var key = Object(_utils_getKeyFromMessage__WEBPACK_IMPORTED_MODULE_2__["getKeyFromMessage"])(item, index);
     var showSubject = window.innerWidth > _globalConstants__WEBPACK_IMPORTED_MODULE_4__["MIN_VIEWPORT_WIDTH"] || window.innerWidth < _globalConstants__WEBPACK_IMPORTED_MODULE_4__["MIN_VIEWPORT_WIDTH"] && index > 0;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: key
@@ -40953,8 +41005,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getKeyFromMessage", function() { return getKeyFromMessage; });
 "use strict;";
 
-var getKeyFromMessage = function getKeyFromMessage(message) {
-  return "".concat(message.id, "_").concat(message.thread);
+var getKeyFromMessage = function getKeyFromMessage(message, index) {
+  return "".concat(message.id, "_").concat(message.thread, "_").concat(index);
 };
 
 /***/ }),

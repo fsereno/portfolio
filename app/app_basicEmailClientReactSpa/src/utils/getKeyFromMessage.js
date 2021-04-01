@@ -1,3 +1,3 @@
 "use strict;"
 
-export const getKeyFromMessage = message => `${message.id}_${message.thread}`;
+export const getKeyFromMessage = (message, index) => `${message.id}_${message.thread}_${index}`;
