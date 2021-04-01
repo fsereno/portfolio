@@ -19,7 +19,7 @@ export function DesktopReplyBtn() {
 
     return (
         <>
-            {context.state.mode === READ &&
+            {context.state.mode === READ && context.state.selectedThread.length > 0 &&
                 <Row className="justify-content-end">
                     <button id="desktopReplyBtn" className="btn btn-sm btn-dark" onClick={clickHandler}>
                         <i className="bi bi-arrow-90deg-left"></i>

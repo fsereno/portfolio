@@ -1,6 +1,6 @@
 "use strict;"
 
-import React, { useReducer, useMemo } from 'react';
+import React, { useReducer } from 'react';
 import { MY_ADDRESS, READ } from '../globalConstants';
 import { EmailClientContext } from '../globalContext';
 import { EmailClientReducer } from '../reducers/reducer';

@@ -1,6 +1,6 @@
 "use strict;"
 
-import React, { useEffect, useLayoutEffect, useState, useMemo, useRef } from 'react';
+import React, { useLayoutEffect, useState, useRef } from 'react';
 import { ListItem } from './listItem';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
@@ -10,7 +10,7 @@ export const BrowserPane = (props) => {
 
     const context = React.useContext(GlobalContext);
 
-    const [ collection, setCollection ] = useState([]);
+    const [collection, setCollection] = useState([]);
 
     const onGoingCollection = useRef(collection);
 
@@ -21,10 +21,8 @@ export const BrowserPane = (props) => {
         let i = onGoing.length;
 
         while (count < limit && i < collectionByDir.length) {
-            //if (collection[i].dir === dir) {
-                result.push(collectionByDir[i]);
-                count++;
-            //}
+            result.push(collectionByDir[i]);
+            count++;
             i++;
         }
 
@@ -33,17 +31,15 @@ export const BrowserPane = (props) => {
 
     const scrollHandler = () => {
 
-        const limit = 3;
-
-        let browserPane = document.getElementById("browserPane");
+        const browserPane = document.getElementById("browserPane");
 
         if (browserPane) {
 
             const isWithinRange = (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
-            const isWithinLimit = onGoingCollection.current.length === 0 || onGoingCollection.current.length >= limit;
+            const isWithinLimit = onGoingCollection.current.length === 0 || onGoingCollection.current.length >= props.limit;
 
-            if ( isWithinRange && isWithinLimit) {
-                const everyThree = getEveryThree(onGoingCollection.current, context.state.messages, props.dir, limit);
+            if (isWithinRange && isWithinLimit) {
+                const everyThree = getEveryThree(onGoingCollection.current, context.state.messages, props.dir, props.limit);
                 onGoingCollection.current = everyThree;
                 setCollection(everyThree);
             }
@@ -53,18 +49,15 @@ export const BrowserPane = (props) => {
     useLayoutEffect(() => {
 
         window.addEventListener("scroll", scrollHandler);
-
-        const mimicAjaxCall  = setTimeout(() => {
-            const firstThree = getEveryThree([], context.state.messages,props.dir);
-            onGoingCollection.current = firstThree;
-            setCollection(firstThree);
-        }, 500)
+        const firstThree = getEveryThree([], context.state.messages, props.dir);
+        onGoingCollection.current = firstThree;
+        setCollection(firstThree);
 
         return () => {
             window.removeEventListener("scroll", scrollHandler);
-            clearTimeout(mimicAjaxCall);
         }
-    },[context.state.messages]);
+
+    }, [context.state.messages]);
 
     return (
         <>

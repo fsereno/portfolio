@@ -1,14 +1,15 @@
 "use strict;"
 
 import React from 'react';
-import { Content } from './content';
 import { NewPane } from './newPane';
+import { ContentContainer } from './contentContainer';
+import { Content } from "./content";
 
 export function New() {
-
-    return(
-      <>
-        <Content title="New message" component={NewPane} />
-      </>
-    )
+  return (
+    <ContentContainer>
+      <Content title="New message" />
+      <NewPane />
+    </ContentContainer>
+  )
 }

@@ -1,14 +1,15 @@
 "use strict;"
 
-import React, { useLayoutEffect } from 'react';
-import { Content } from "./content";
-import { useLocation } from 'react-router-dom';
+import React from 'react';
 import { OutboxClient } from "./outboxClient";
-import { GlobalContext } from '../globalContext';
-import { DESELECT_THREAD } from '../globalConstants';
+import { ContentContainer } from './contentContainer';
+import { Content } from "./content";
 
 export function Outbox() {
-  return(
-    <Content title="Outbox" component={OutboxClient} />
+  return (
+    <ContentContainer>
+      <Content title="Outbox" />
+      <OutboxClient />
+    </ContentContainer>
   )
 }
