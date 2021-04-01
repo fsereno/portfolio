@@ -23,7 +23,7 @@ export function EmailClientHandlerContextProvider({children}) {
             });
         }
 
-        emailModalContext.setState(showModal);
+        emailModalContext.setShow(showModal);
     },[globalContext.state.messages])
 
     const context = useMemo( () => {

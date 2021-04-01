@@ -5,9 +5,9 @@ import { EmailModalContext } from '../globalContext';
 
 export function EmailModalContextProvider({children}) {
 
-    const [state, setState] = useState(false)
+    const [show, setShow] = useState(false)
 
-    const context = { state, setState };
+    const context = { state: { show }, setShow };
 
     return (
         <EmailModalContext.Provider value={context}>

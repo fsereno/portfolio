@@ -39456,7 +39456,7 @@ function EmailModal() {
   var emailModalContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_5__["EmailModalContext"]);
 
   var handleClose = function handleClose() {
-    return emailModalContext.setState(false);
+    return emailModalContext.setShow(false);
   };
 
   var handleReplyClick = function handleReplyClick() {
@@ -39467,7 +39467,7 @@ function EmailModal() {
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    show: emailModalContext.state,
+    show: emailModalContext.state.show,
     onHide: handleClose
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Header, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Modal__WEBPACK_IMPORTED_MODULE_1__["default"].Title, {
     className: "display-4"
@@ -39928,7 +39928,7 @@ function EmailClientHandlerContextProvider(_ref) {
       });
     }
 
-    emailModalContext.setState(showModal);
+    emailModalContext.setShow(showModal);
   }, [globalContext.state.messages]);
   var context = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(function () {
     return {
@@ -39981,6 +39981,7 @@ function EmailForm() {
   var globalContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_5__["GlobalContext"]);
   var emailClientContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_5__["EmailClientContext"]);
   var toasterContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_6__["ToasterContext"]);
+  var emailModalContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_globalContext__WEBPACK_IMPORTED_MODULE_5__["EmailModalContext"]);
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -40000,8 +40001,7 @@ function EmailForm() {
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState8 = _slicedToArray(_useState7, 2),
       body = _useState8[0],
-      setBody = _useState8[1]; //const [ isNew, setIsNew ] = useState(false);
-
+      setBody = _useState8[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"])(function () {
     if (emailClientContext.state.mode === _globalConstants__WEBPACK_IMPORTED_MODULE_4__["REPLY"]) {
@@ -40033,6 +40033,11 @@ function EmailForm() {
           time: time
         }
       });
+
+      if (emailModalContext.state.show) {
+        emailModalContext.setShow(false);
+      }
+
       toasterContext.dispatch({
         type: _js_modules_react_toaster__WEBPACK_IMPORTED_MODULE_6__["ENQUEUE_TOAST"],
         item: {
@@ -40139,12 +40144,14 @@ function EmailModalContextProvider(_ref) {
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
-      state = _useState2[0],
-      setState = _useState2[1];
+      show = _useState2[0],
+      setShow = _useState2[1];
 
   var context = {
-    state: state,
-    setState: setState
+    state: {
+      show: show
+    },
+    setShow: setShow
   };
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_globalContext__WEBPACK_IMPORTED_MODULE_1__["EmailModalContext"].Provider, {
     value: context

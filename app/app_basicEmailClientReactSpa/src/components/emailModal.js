@@ -12,12 +12,12 @@ export function EmailModal() {
     const context = React.useContext(EmailClientContext);
     const emailModalContext = React.useContext(EmailModalContext);
 
-    const handleClose = () => emailModalContext.setState(false);
+    const handleClose = () => emailModalContext.setShow(false);
 
     const handleReplyClick = () => context.dispatch({ type: REPLY_MESSAGE, selected: context.state.selected });
 
     return (
-        <Modal show={emailModalContext.state} onHide={handleClose}>
+        <Modal show={emailModalContext.state.show} onHide={handleClose}>
             <Modal.Header>
                 <Modal.Title className="display-4">{context.state.selected.subject}</Modal.Title>
                 <Button variant="link" className="close" onClick={handleClose}>
