@@ -39567,32 +39567,37 @@ var BrowserPane = function BrowserPane(props) {
     var onGoing = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var collection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
     var dir = arguments.length > 2 ? arguments[2] : undefined;
-    var indexLimit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 3;
+    var limit = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 3;
 
     var result = _toConsumableArray(onGoing);
 
+    var collectionByDir = Object(_utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_3__["getMessagesByDirectory"])(collection, dir);
     var count = 0;
+    var i = onGoing.length;
 
-    for (var i = onGoing.length; i < onGoing.length + indexLimit; i++) {
-      result.push(collection[i]);
+    while (count < limit && i < collectionByDir.length) {
+      //if (collection[i].dir === dir) {
+      result.push(collectionByDir[i]);
+      count++; //}
+
+      i++;
     }
 
     return result;
   };
 
   var scrollHandler = function scrollHandler() {
+    var limit = 3;
     var browserPane = document.getElementById("browserPane");
 
     if (browserPane) {
       var isWithinRange = window.innerHeight + window.scrollY >= document.body.offsetHeight;
+      var isWithinLimit = onGoingCollection.current.length === 0 || onGoingCollection.current.length >= limit;
 
-      if (isWithinRange) {
-        var firstThree = getEveryThree(onGoingCollection.current, context.state.messages, props.dir); //[context.state.messages[0], context.state.messages[1], context.state.messages[3]]
-
-        var collectionByDir = firstThree; //getMessagesByDirectory(firstThree, props.dir);
-
-        onGoingCollection.current = collectionByDir;
-        setCollection(collectionByDir);
+      if (isWithinRange && isWithinLimit) {
+        var everyThree = getEveryThree(onGoingCollection.current, context.state.messages, props.dir, limit);
+        onGoingCollection.current = everyThree;
+        setCollection(everyThree);
       }
     }
   };
@@ -39600,13 +39605,9 @@ var BrowserPane = function BrowserPane(props) {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"])(function () {
     window.addEventListener("scroll", scrollHandler);
     var mimicAjaxCall = setTimeout(function () {
-      //console.log("browser pane useEffect fired after timeout 1000";
-      var firstThree = getEveryThree([], context.state.messages, props.dir); //[context.state.messages[0], context.state.messages[1], context.state.messages[3]]
-
-      var collectionByDir = firstThree; // getMessagesByDirectory(firstThree, props.dir);
-
-      onGoingCollection.current = collectionByDir;
-      setCollection(collectionByDir);
+      var firstThree = getEveryThree([], context.state.messages, props.dir);
+      onGoingCollection.current = firstThree;
+      setCollection(firstThree);
     }, 500);
     return function () {
       window.removeEventListener("scroll", scrollHandler);

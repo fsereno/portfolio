@@ -14,12 +14,18 @@ export const BrowserPane = (props) => {
 
     const onGoingCollection = useRef(collection);
 
-    const getEveryThree = (onGoing = [], collection = [], dir, indexLimit = 3) => {
+    const getEveryThree = (onGoing = [], collection = [], dir, limit = 3) => {
         let result = [...onGoing];
+        let collectionByDir = getMessagesByDirectory(collection, dir);
         let count = 0;
-        
-        for (let i = onGoing.length; i < onGoing.length + indexLimit; i++) {
-            result.push(collection[i])
+        let i = onGoing.length;
+
+        while (count < limit && i < collectionByDir.length) {
+            //if (collection[i].dir === dir) {
+                result.push(collectionByDir[i]);
+                count++;
+            //}
+            i++;
         }
 
         return result;
@@ -27,17 +33,19 @@ export const BrowserPane = (props) => {
 
     const scrollHandler = () => {
 
+        const limit = 3;
+
         let browserPane = document.getElementById("browserPane");
 
         if (browserPane) {
 
             const isWithinRange = (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+            const isWithinLimit = onGoingCollection.current.length === 0 || onGoingCollection.current.length >= limit;
 
-            if ( isWithinRange ) {
-                const firstThree = getEveryThree(onGoingCollection.current, context.state.messages, props.dir); //[context.state.messages[0], context.state.messages[1], context.state.messages[3]]
-                const collectionByDir = firstThree //getMessagesByDirectory(firstThree, props.dir);
-                onGoingCollection.current = collectionByDir;
-                setCollection(collectionByDir);
+            if ( isWithinRange && isWithinLimit) {
+                const everyThree = getEveryThree(onGoingCollection.current, context.state.messages, props.dir, limit);
+                onGoingCollection.current = everyThree;
+                setCollection(everyThree);
             }
         }
     }
@@ -47,11 +55,9 @@ export const BrowserPane = (props) => {
         window.addEventListener("scroll", scrollHandler);
 
         const mimicAjaxCall  = setTimeout(() => {
-            //console.log("browser pane useEffect fired after timeout 1000";
-            const firstThree = getEveryThree([], context.state.messages,props.dir); //[context.state.messages[0], context.state.messages[1], context.state.messages[3]]
-            const collectionByDir = firstThree// getMessagesByDirectory(firstThree, props.dir);
-            onGoingCollection.current = collectionByDir;
-            setCollection(collectionByDir);
+            const firstThree = getEveryThree([], context.state.messages,props.dir);
+            onGoingCollection.current = firstThree;
+            setCollection(firstThree);
         }, 500)
 
         return () => {
