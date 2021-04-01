@@ -2,7 +2,7 @@
 
 import { expect } from 'chai';
 import { getReplyToEmailAddress } from '../src/utils/getReplyToEmailAddress';
-import { MY_ADDRESS } from '../src/globalConstants';
+import { MY_ADDRESS } from '../src/constants';
 
 describe("getToEmailAddress", () => {
     it("Should return the from address when to matches the default address", () => {

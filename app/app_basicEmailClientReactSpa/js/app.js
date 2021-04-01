@@ -40987,6 +40987,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
 "use strict;";
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 var getEmailsByThread = function getEmailsByThread() {
   var messages = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -40999,7 +41007,13 @@ var getEmailsByThread = function getEmailsByThread() {
   var result = [];
 
   var filter = function filter(x) {
-    return x.thread.includes(args.from) && x.thread.includes(args.to) && x.thread.includes(args.subject) && x.time <= args.time;
+    var _x$thread$split = x.thread.split("_"),
+        _x$thread$split2 = _slicedToArray(_x$thread$split, 3),
+        from = _x$thread$split2[0],
+        to = _x$thread$split2[1],
+        subject = _x$thread$split2[2];
+
+    return (from === args.from || from === args.to) && (to === args.to || to === args.from) && subject === args.subject && x.time <= args.time;
   };
 
   var isValid = args.from !== "" && args.to !== "" && args.subject !== "";
