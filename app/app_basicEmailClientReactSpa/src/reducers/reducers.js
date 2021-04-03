@@ -1,22 +1,14 @@
 "use strict;"
 
-import { setEmailToRead } from '../utils/setEmailToRead';
-import { getEmailsByThread } from '../utils/getEmailsByThread';
 import { getReplyToEmailAddress } from '../utils/getReplyToEmailAddress';
 import {
   SELECT,
-  DESELECT,
   DESELECT_THREAD,
   REPLY_MESSAGE,
   SUBMIT,
   NEW_MESSAGE,
   READ,
   REPLY,
-  UPDATE_TO,
-  UPDATE_SUBJECT,
-  UPDATE_BODY,
-  SHOW_VALIDATION,
-  HIDE_VALIDATION,
   MY_ADDRESS,
   RESET_MODE
 } from '../constants';

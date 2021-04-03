@@ -3,7 +3,7 @@
 import React, { useReducer } from 'react';
 import { MY_ADDRESS, READ } from '../../constants';
 import { EmailClientContext } from '../../contexts';
-import { EmailClientReducer } from '../../reducers/reducer';
+import { EmailClientReducer } from '../../reducers/reducers';
 
 export function EmailClientContextProvider({children}) {
 

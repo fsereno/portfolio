@@ -1,7 +1,7 @@
 "use strict;"
 
 import React, { useReducer } from 'react';
-import { Reducer } from '../../reducers/reducer';
+import { Reducer } from '../../reducers/reducers';
 import { INBOX, MY_ADDRESS, INITIAL_NUMBER_OF_MESSAGES } from '../../constants';
 import { GlobalContext } from '../../contexts';
 import { getRandomInt } from '../../../../js/modules/utils/randomUtil';
