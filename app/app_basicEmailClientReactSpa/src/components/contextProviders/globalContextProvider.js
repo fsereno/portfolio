@@ -22,7 +22,7 @@ function createMessages(numberOf) {
 
         result.push(
             {
-                id: Math.random(),
+                id: i,
                 from: `dummy.${i}@email.co.uk`,
                 to: MY_ADDRESS,
                 subject: `Subject ${i}`,

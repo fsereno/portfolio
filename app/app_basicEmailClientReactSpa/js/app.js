@@ -39882,7 +39882,7 @@ function createMessages(numberOf) {
   for (var i = 0; i < numberOf; i++) {
     var randomInt = Object(_js_modules_utils_randomUtil__WEBPACK_IMPORTED_MODULE_4__["getRandomInt"])(0, 2);
     result.push({
-      id: Math.random(),
+      id: i,
       from: "dummy.".concat(i, "@email.co.uk"),
       to: _constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
       subject: "Subject ".concat(i),

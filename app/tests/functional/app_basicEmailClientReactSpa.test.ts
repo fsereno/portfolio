@@ -36,7 +36,7 @@ describe(application, () => {
         it("Should submit a reply and confirm in Outbox.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare()
                 .goto(`${url}#/inbox`)
                 .wait(1000)
                 .click('#id_0')
@@ -66,7 +66,7 @@ describe(application, () => {
         it("Should submit a new message and confirm in Outbox.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare()
                 .goto(`${url}#/new`)
                 .wait(1000)
                 .type('#to', 'test@email.co.uk')
@@ -96,7 +96,7 @@ describe(application, () => {
         it("Should submit a new message and confirm the Dashboard is correct and updated.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare()
+                return new Nightmare({show:true})
                 .goto(`${url}#/new`)
                 .wait(1000)
                 .type('#to', 'test@email.co.uk')
@@ -112,7 +112,7 @@ describe(application, () => {
                     const inboxCounter  = $("#inboxCounter span").text();
                     const outboxCounter  = $("#outboxCounter span").text();
 
-                    return inboxCounter === '3' && outboxCounter === '1';
+                    return inboxCounter === '10' && outboxCounter === '1';
                 })
                 .end();
             }
