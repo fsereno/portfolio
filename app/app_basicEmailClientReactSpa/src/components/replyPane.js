@@ -5,7 +5,7 @@ import { ReadingPane } from './readingPane';
 import { EmailForm } from './emailForm';
 
 export function ReplyPane() {
-    return(
+    return (
         <>
             <EmailForm/>
             <ReadingPane/>

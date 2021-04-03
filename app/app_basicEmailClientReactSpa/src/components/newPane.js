@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import { EmailForm } from './emailForm';
 
 export function NewPane() {
-    return(
+    return (
         <Row>
             <Col lg={6}>
                 <EmailForm/>

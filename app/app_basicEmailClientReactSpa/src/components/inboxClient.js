@@ -7,7 +7,7 @@ import { EmailClient } from './emailClient'
 import { INBOX } from '../constants';
 
 export function InboxClient() {
-    return(
+    return (
         <>
             <Row>
                 <Col>

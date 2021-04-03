@@ -39392,6 +39392,26 @@ function Toaster() {
 
 /***/ }),
 
+/***/ "../js/modules/utils/randomUtil.js":
+/*!*****************************************!*\
+  !*** ../js/modules/utils/randomUtil.js ***!
+  \*****************************************/
+/*! exports provided: getRandomInt */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRandomInt", function() { return getRandomInt; });
+"use strict;";
+
+var getRandomInt = function getRandomInt() {
+  var min = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+/***/ }),
+
 /***/ "./src/app.js":
 /*!********************!*\
   !*** ./src/app.js ***!
@@ -39561,9 +39581,7 @@ var BrowserPane = function BrowserPane(props) {
       collection = _useState2[0],
       setCollection = _useState2[1];
 
-  var onGoingCollection = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(collection);
-
-  var getEveryThree = function getEveryThree() {
+  var getNext = function getNext() {
     var onGoing = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     var collection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
     var dir = arguments.length > 2 ? arguments[2] : undefined;
@@ -39584,31 +39602,16 @@ var BrowserPane = function BrowserPane(props) {
     return result;
   };
 
-  var scrollHandler = function scrollHandler() {
-    var browserPane = document.getElementById("browserPane");
-
-    if (browserPane) {
-      var isWithinRange = window.innerHeight + window.scrollY >= document.body.offsetHeight;
-      var isWithinLimit = onGoingCollection.current.length === 0 || onGoingCollection.current.length >= props.limit;
-
-      if (isWithinRange && isWithinLimit) {
-        var everyThree = getEveryThree(onGoingCollection.current, context.state.messages, props.dir, props.limit);
-        onGoingCollection.current = everyThree;
-        setCollection(everyThree);
-      }
-    }
+  var loadMoreClickHandler = function loadMoreClickHandler() {
+    var next = getNext(collection, context.state.messages, props.dir, props.limit);
+    setCollection(next);
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"])(function () {
-    window.addEventListener("scroll", scrollHandler);
-    var firstThree = getEveryThree([], context.state.messages, props.dir);
-    onGoingCollection.current = firstThree;
+    var firstThree = getNext([], context.state.messages, props.dir);
     setCollection(firstThree);
-    return function () {
-      window.removeEventListener("scroll", scrollHandler);
-    };
   }, [context.state.messages]);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, collection.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, collection.length > 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "browserPane",
     className: "list-group"
   }, collection.map(function (item, index) {
@@ -39618,7 +39621,10 @@ var BrowserPane = function BrowserPane(props) {
       item: item,
       key: key
     });
-  })), collection.length === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You have no messages"));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "btn btn-dark col-4 mt-5 offset-4",
+    onClick: loadMoreClickHandler
+  }, "Load more")), collection.length === 0 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You have no messages"));
 };
 
 /***/ }),
@@ -39852,6 +39858,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../reducers/reducer */ "./src/reducers/reducer.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
+/* harmony import */ var _js_modules_utils_randomUtil__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../js/modules/utils/randomUtil */ "../js/modules/utils/randomUtil.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -39862,33 +39869,26 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 
 
 
 
 
-function createMessages(messages) {
-  var limit = 5000;
+function createMessages(numberOf) {
+  var result = [];
+  var bodies = ["Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.", "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.", "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC"];
 
-  var result = _toConsumableArray(messages);
-
-  for (var i = 0; i < limit; i++) {
+  for (var i = 0; i < numberOf; i++) {
+    var randomInt = Object(_js_modules_utils_randomUtil__WEBPACK_IMPORTED_MODULE_4__["getRandomInt"])(0, 2);
     result.push({
       id: Math.random(),
-      from: "some@email.co.uk",
+      from: "dummy.".concat(i, "@email.co.uk"),
       to: _constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
       subject: "Subject ".concat(i),
-      thread: "some@email.co.uk_".concat(_constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject ").concat(i),
-      body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
-      age: 1,
+      thread: "dummy.".concat(i, "@email.co.uk_").concat(_constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject ").concat(i),
+      body: bodies[randomInt],
+      age: randomInt,
       read: false,
       dir: _constants__WEBPACK_IMPORTED_MODULE_2__["INBOX"],
       time: new Date().getTime()
@@ -39900,41 +39900,7 @@ function createMessages(messages) {
 
 function GlobalContextProvider(_ref) {
   var children = _ref.children;
-  var messages = [{
-    id: 0,
-    from: "james@hsbc.co.uk",
-    to: _constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
-    subject: "Subject 1",
-    thread: "james@hsbc.co.uk_".concat(_constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject 1"),
-    body: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
-    age: 1,
-    read: false,
-    dir: _constants__WEBPACK_IMPORTED_MODULE_2__["INBOX"],
-    time: new Date().getTime()
-  }, {
-    id: 1,
-    from: "sarah@ford.co.uk",
-    to: _constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
-    subject: "Subject 2",
-    thread: "sarah@ford.co.uk_".concat(_constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject 2"),
-    body: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
-    age: 2,
-    read: false,
-    dir: _constants__WEBPACK_IMPORTED_MODULE_2__["INBOX"],
-    time: new Date().getTime()
-  }, {
-    id: 2,
-    from: "tim.jones@hmrc.co.uk",
-    to: _constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
-    subject: "Subject 3",
-    thread: "tim.jones@hmrc.co.uk_".concat(_constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject 3"),
-    body: "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC",
-    age: 3,
-    read: false,
-    dir: _constants__WEBPACK_IMPORTED_MODULE_2__["INBOX"],
-    time: new Date().getTime()
-  }];
-  var messagesToUse = createMessages(messages);
+  var messagesToUse = createMessages(_constants__WEBPACK_IMPORTED_MODULE_2__["INITIAL_NUMBER_OF_MESSAGES"]);
 
   var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducer__WEBPACK_IMPORTED_MODULE_1__["Reducer"], {
     messages: messagesToUse
@@ -40399,13 +40365,11 @@ var ListItem = function ListItem(_ref) {
     context.selectListItemHandler(item);
   };
 
-  var activeClass = ""; //emailClientContext.state.selected.id === item.id ? "active" : "";
-
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     id: "id_".concat(item.id),
     onClick: handleClick,
-    className: "list-group-item list-group-item-action ".concat(activeClass),
+    className: "list-group-item list-group-item-action",
     "aria-current": "true"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex w-100 justify-content-between"
@@ -40783,7 +40747,7 @@ function ViewingPane() {
 /*!**************************!*\
   !*** ./src/constants.js ***!
   \**************************/
-/*! exports provided: SELECT, DESELECT, DESELECT_THREAD, REPLY_MESSAGE, NEW_MESSAGE, REPLY, SUBMIT, READ, RESET_MODE, HOME, INBOX, OUTBOX, NEW, MY_ADDRESS, MIN_VIEWPORT_WIDTH */
+/*! exports provided: SELECT, DESELECT, DESELECT_THREAD, REPLY_MESSAGE, NEW_MESSAGE, REPLY, SUBMIT, READ, RESET_MODE, HOME, INBOX, OUTBOX, NEW, MY_ADDRESS, MIN_VIEWPORT_WIDTH, INITIAL_NUMBER_OF_MESSAGES */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -40803,6 +40767,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NEW", function() { return NEW; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MY_ADDRESS", function() { return MY_ADDRESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MIN_VIEWPORT_WIDTH", function() { return MIN_VIEWPORT_WIDTH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIAL_NUMBER_OF_MESSAGES", function() { return INITIAL_NUMBER_OF_MESSAGES; });
 "use strict;";
 
 var SELECT = "select";
@@ -40820,6 +40785,7 @@ var OUTBOX = "/outbox";
 var NEW = "/new";
 var MY_ADDRESS = "me@portfolio.co.uk";
 var MIN_VIEWPORT_WIDTH = 768;
+var INITIAL_NUMBER_OF_MESSAGES = 10;
 
 /***/ }),
 

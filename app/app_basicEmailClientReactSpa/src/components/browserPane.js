@@ -1,6 +1,6 @@
 "use strict;"
 
-import React, { useLayoutEffect, useState, useRef } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { ListItem } from './listItem';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
@@ -12,9 +12,7 @@ export const BrowserPane = (props) => {
 
     const [collection, setCollection] = useState([]);
 
-    const onGoingCollection = useRef(collection);
-
-    const getEveryThree = (onGoing = [], collection = [], dir, limit = 3) => {
+    const getNext = (onGoing = [], collection = [], dir, limit = 3) => {
         let result = [...onGoing];
         let collectionByDir = getMessagesByDirectory(collection, dir);
         let count = 0;
@@ -29,52 +27,37 @@ export const BrowserPane = (props) => {
         return result;
     }
 
-    const scrollHandler = () => {
-
-        const browserPane = document.getElementById("browserPane");
-
-        if (browserPane) {
-
-            const isWithinRange = (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
-            const isWithinLimit = onGoingCollection.current.length === 0 || onGoingCollection.current.length >= props.limit;
-
-            if (isWithinRange && isWithinLimit) {
-                const everyThree = getEveryThree(onGoingCollection.current, context.state.messages, props.dir, props.limit);
-                onGoingCollection.current = everyThree;
-                setCollection(everyThree);
-            }
-        }
+    const loadMoreClickHandler = () => {
+        const next = getNext(collection, context.state.messages, props.dir, props.limit);
+        setCollection(next);
     }
 
     useLayoutEffect(() => {
 
-        window.addEventListener("scroll", scrollHandler);
-        const firstThree = getEveryThree([], context.state.messages, props.dir);
-        onGoingCollection.current = firstThree;
+        const firstThree = getNext([], context.state.messages, props.dir);
         setCollection(firstThree);
-
-        return () => {
-            window.removeEventListener("scroll", scrollHandler);
-        }
 
     }, [context.state.messages]);
 
     return (
         <>
             {collection.length > 0 &&
-                <div id="browserPane" className="list-group">
-                    {collection.map((item, index) => {
-                        const key = getKeyFromMessage(item, index);
+                <>
+                    <div id="browserPane" className="list-group">
+                        {collection.map((item, index) => {
+                            const key = getKeyFromMessage(item, index);
 
-                        return (
-                            <ListItem
-                                index={index}
-                                item={item}
-                                key={key}
-                            />
-                        )
-                    })}
-                </div>
+                            return (
+                                <ListItem
+                                    index={index}
+                                    item={item}
+                                    key={key}
+                                />
+                            )
+                        })}
+                    </div>
+                    <button className="btn btn-dark col-4 mt-5 offset-4" onClick={loadMoreClickHandler}>Load more</button>
+                </>
             }
             {collection.length === 0 &&
                 <p>You have no messages</p>

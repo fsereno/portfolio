@@ -4,7 +4,7 @@ import React from 'react';
 import { getEmailDisplayAge } from '../utils/getEmailDisplayAge';
 
 export const Age = React.memo((props) => {
-    return(
+    return (
         <small>{getEmailDisplayAge(props.age)}</small>
     );
 })

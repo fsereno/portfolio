@@ -10,7 +10,7 @@ export function ReadingPane() {
 
     const context = React.useContext(EmailClientContext);
 
-    return(
+    return (
         <div id="readingPane">
             {context.state.selectedThread.map((item, index) => {
 
