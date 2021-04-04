@@ -39575,6 +39575,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var BrowserPane = function BrowserPane(props) {
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_contexts__WEBPACK_IMPORTED_MODULE_4__["GlobalContext"]);
+  var emailClientContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_contexts__WEBPACK_IMPORTED_MODULE_4__["EmailClientContext"]);
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -39619,7 +39620,8 @@ var BrowserPane = function BrowserPane(props) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listItem__WEBPACK_IMPORTED_MODULE_1__["ListItem"], {
       index: index,
       item: item,
-      key: key
+      key: key,
+      active: emailClientContext.state.selected.id === item.id
     });
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn btn-dark col-4 mt-5 offset-4",
@@ -39888,7 +39890,7 @@ function createMessages(numberOf) {
       subject: "Subject ".concat(i),
       thread: "dummy.".concat(i, "@email.co.uk_").concat(_constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject ").concat(i),
       body: bodies[randomInt],
-      age: randomInt,
+      age: 0,
       read: false,
       dir: _constants__WEBPACK_IMPORTED_MODULE_2__["INBOX"],
       time: new Date().getTime()
@@ -40356,8 +40358,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var ListItem = function ListItem(_ref) {
-  var item = _ref.item;
+var ListItem = react__WEBPACK_IMPORTED_MODULE_0___default.a.memo(function (_ref) {
+  var item = _ref.item,
+      active = _ref.active;
   var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__["EmailClientHandlerContext"]);
 
   var handleClick = function handleClick(event) {
@@ -40369,7 +40372,7 @@ var ListItem = function ListItem(_ref) {
     href: "#",
     id: "id_".concat(item.id),
     onClick: handleClick,
-    className: "list-group-item list-group-item-action",
+    className: "list-group-item list-group-item-action ".concat(active ? "active" : ""),
     "aria-current": "true"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex w-100 justify-content-between"
@@ -40380,7 +40383,13 @@ var ListItem = function ListItem(_ref) {
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1"
   }, item.subject), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, Object(_utils_truncateEmailBody__WEBPACK_IMPORTED_MODULE_2__["truncateEmailBody"])(item.body), "..."));
-};
+}, function (prev, next) {
+  if (prev.active === next.active) {
+    return true;
+  }
+
+  return false;
+});
 
 /***/ }),
 
@@ -40468,7 +40477,7 @@ __webpack_require__.r(__webpack_exports__);
 function Home() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_2__["ContentContainer"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_content__WEBPACK_IMPORTED_MODULE_3__["Content"], {
     title: "Home",
-    content: "A simple email client application"
+    content: "A simple email client application. Send a new message or a reply to an existing one. Context allows for state to be passed around the app."
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dashboard__WEBPACK_IMPORTED_MODULE_1__["Dashboard"], null));
 }
 

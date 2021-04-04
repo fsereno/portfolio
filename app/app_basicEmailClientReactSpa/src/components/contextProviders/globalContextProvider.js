@@ -28,7 +28,7 @@ function createMessages(numberOf) {
                 subject: `Subject ${i}`,
                 thread: `dummy.${i}@email.co.uk_${MY_ADDRESS}_Subject ${i}`,
                 body: bodies[randomInt],
-                age: randomInt,
+                age: 0,
                 read: false,
                 dir: INBOX,
                 time: new Date().getTime()

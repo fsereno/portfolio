@@ -4,11 +4,13 @@ import React, { useLayoutEffect, useState } from 'react';
 import { ListItem } from './listItem';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
-import { GlobalContext } from '../contexts';
+import { GlobalContext, EmailClientContext } from '../contexts';
 
 export const BrowserPane = (props) => {
 
     const context = React.useContext(GlobalContext);
+
+    const emailClientContext = React.useContext(EmailClientContext);
 
     const [collection, setCollection] = useState([]);
 
@@ -33,10 +35,8 @@ export const BrowserPane = (props) => {
     }
 
     useLayoutEffect(() => {
-
         const firstThree = getNext([], context.state.messages, props.dir);
         setCollection(firstThree);
-
     }, [context.state.messages]);
 
     return (
@@ -52,6 +52,7 @@ export const BrowserPane = (props) => {
                                     index={index}
                                     item={item}
                                     key={key}
+                                    active={emailClientContext.state.selected.id === item.id}
                                 />
                             )
                         })}
