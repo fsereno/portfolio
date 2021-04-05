@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { BrowserPane } from './browserPane';
 import { ViewingPane } from './viewingPane';
-import { EmailModal } from './EmailModal';
+import { EmailModal } from './emailModal';
 import { DesktopReplyBtn } from './desktopReplyBtn';
 
 export function EmailClient(props) {
