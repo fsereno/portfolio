@@ -3,7 +3,7 @@
 import React from 'react';
 import { Dashboard } from '../dashboard';
 import { ContentContainer } from '../contentContainer';
-import { Content } from "../content";
+import { Content } from '../content';
 
 export function Home() {
   return (

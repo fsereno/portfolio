@@ -1,7 +1,6 @@
 "use strict;"
 
 import React from 'react';
-import { Counter } from './counter';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
 import { INBOX, OUTBOX } from '../constants';
 import { GlobalContext } from '../contexts';

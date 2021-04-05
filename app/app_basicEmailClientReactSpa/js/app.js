@@ -3661,52 +3661,6 @@ AbstractNavItem.defaultProps = defaultProps;
 
 /***/ }),
 
-/***/ "../../node_modules/react-bootstrap/esm/Badge.js":
-/*!************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-bootstrap/esm/Badge.js ***!
-  \************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "../../node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "../../node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "../../node_modules/react-bootstrap/esm/ThemeProvider.js");
-
-
-
-
-
-var defaultProps = {
-  pill: false
-};
-var Badge = react__WEBPACK_IMPORTED_MODULE_3___default.a.forwardRef(function (_ref, ref) {
-  var bsPrefix = _ref.bsPrefix,
-      variant = _ref.variant,
-      pill = _ref.pill,
-      className = _ref.className,
-      _ref$as = _ref.as,
-      Component = _ref$as === void 0 ? 'span' : _ref$as,
-      props = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref, ["bsPrefix", "variant", "pill", "className", "as"]);
-
-  var prefix = Object(_ThemeProvider__WEBPACK_IMPORTED_MODULE_4__["useBootstrapPrefix"])(bsPrefix, 'badge');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(Component, Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-    ref: ref
-  }, props, {
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, prefix, pill && prefix + "-pill", variant && prefix + "-" + variant)
-  }));
-});
-Badge.displayName = 'Badge';
-Badge.defaultProps = defaultProps;
-/* harmony default export */ __webpack_exports__["default"] = (Badge);
-
-/***/ }),
-
 /***/ "../../node_modules/react-bootstrap/esm/BootstrapModalManager.js":
 /*!****************************************************************************************************!*\
   !*** /Users/fabiosereno/sites/portfolio/node_modules/react-bootstrap/esm/BootstrapModalManager.js ***!
@@ -39984,32 +39938,6 @@ function ToasterContextProvider(_ref) {
 
 /***/ }),
 
-/***/ "./src/components/counter.js":
-/*!***********************************!*\
-  !*** ./src/components/counter.js ***!
-  \***********************************/
-/*! exports provided: Counter */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Counter", function() { return Counter; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap/Badge */ "../../node_modules/react-bootstrap/esm/Badge.js");
-"use strict;";
-
-
-
-function Counter(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    pill: true,
-    variant: "dark"
-  }, props.count);
-}
-
-/***/ }),
-
 /***/ "./src/components/dashboard.js":
 /*!*************************************!*\
   !*** ./src/components/dashboard.js ***!
@@ -40022,28 +39950,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Dashboard", function() { return Dashboard; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./counter */ "./src/components/counter.js");
-/* harmony import */ var _utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/getMessagesByDirectory */ "./src/utils/getMessagesByDirectory.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
+/* harmony import */ var _utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/getMessagesByDirectory */ "./src/utils/getMessagesByDirectory.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
 "use strict;";
 
 
 
 
 
-
 function Dashboard() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_contexts__WEBPACK_IMPORTED_MODULE_4__["GlobalContext"]);
-  var inboxCount = Object(_utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_2__["getMessagesByDirectory"])(context.state.messages, _constants__WEBPACK_IMPORTED_MODULE_3__["INBOX"]).length;
-  var outboxCount = Object(_utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_2__["getMessagesByDirectory"])(context.state.messages, _constants__WEBPACK_IMPORTED_MODULE_3__["OUTBOX"]).length;
+  var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__["GlobalContext"]);
+  var inboxCount = Object(_utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_1__["getMessagesByDirectory"])(context.state.messages, _constants__WEBPACK_IMPORTED_MODULE_2__["INBOX"]).length;
+  var outboxCount = Object(_utils_getMessagesByDirectory__WEBPACK_IMPORTED_MODULE_1__["getMessagesByDirectory"])(context.state.messages, _constants__WEBPACK_IMPORTED_MODULE_2__["OUTBOX"]).length;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     id: "inboxCounter"
-  }, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_1__["Counter"], {
+  }, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Counter, {
     count: inboxCount
   }), " message(s) in your inbox"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     id: "outboxCounter"
-  }, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_counter__WEBPACK_IMPORTED_MODULE_1__["Counter"], {
+  }, "You have ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Counter, {
     count: outboxCount
   }), " message(s) in your outbox"));
 }
