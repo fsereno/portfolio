@@ -31,7 +31,9 @@ export const BrowserPane = (props) => {
 
     const loadMoreClickHandler = () => {
         const next = getNext(collection, context.state.messages, props.dir, props.limit);
-        setCollection(next);
+        if (next.length !== collection.length) {
+            setCollection(next);
+        }
     }
 
     useLayoutEffect(() => {

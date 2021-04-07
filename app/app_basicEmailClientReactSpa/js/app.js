@@ -39540,7 +39540,10 @@ var BrowserPane = function BrowserPane(props) {
 
   var loadMoreClickHandler = function loadMoreClickHandler() {
     var next = getNext(collection, context.state.messages, props.dir, props.limit);
-    setCollection(next);
+
+    if (next.length !== collection.length) {
+      setCollection(next);
+    }
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"])(function () {
