@@ -96,7 +96,7 @@ describe(application, () => {
         it("Should submit a new message and confirm the Dashboard is correct and updated.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare()
                 .goto(`${url}#/new`)
                 .wait(1000)
                 .type('#to', 'test@email.co.uk')
