@@ -2,12 +2,12 @@
 
 import React, { useMemo, useCallback }from 'react';
 import { SELECT, MIN_VIEWPORT_WIDTH } from '../../constants';
-import { EmailClientContext, EmailClientHandlerContext, GlobalContext, EmailModalContext } from '../../contexts';
+import { EmailClientContext, EmailClientHandlerContext, EmailContext, EmailModalContext } from '../../contexts';
 import { getEmailsByThread } from '../../utils/getEmailsByThread';
 
 export function EmailClientHandlerContextProvider({children}) {
 
-    const globalContext = React.useContext(GlobalContext);
+    const emailContext = React.useContext(EmailContext);
     const emailClientContext = React.useContext(EmailClientContext);
     const emailModalContext = React.useContext(EmailModalContext);
 
@@ -15,7 +15,7 @@ export function EmailClientHandlerContextProvider({children}) {
         const showModal = window.innerWidth < MIN_VIEWPORT_WIDTH;
 
         if (item) {
-            const thread = getEmailsByThread(globalContext.state.messages, item);
+            const thread = getEmailsByThread(emailContext.state.messages, item);
             emailClientContext.dispatch({
                 type: SELECT,
                 thread: thread,
@@ -24,7 +24,7 @@ export function EmailClientHandlerContextProvider({children}) {
         }
 
         emailModalContext.setShow(showModal);
-    },[globalContext.state.messages])
+    },[emailContext.state.messages])
 
     const context = useMemo( () => {
         return { selectListItemHandler }

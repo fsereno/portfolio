@@ -2,12 +2,13 @@
 
 import React from 'react';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
+import { Counter } from './counter';
 import { INBOX, OUTBOX } from '../constants';
-import { GlobalContext } from '../contexts';
+import { EmailContext } from '../contexts';
 
 export function Dashboard() {
 
-    const context = React.useContext(GlobalContext)
+    const context = React.useContext(EmailContext)
 
     const inboxCount = getMessagesByDirectory(context.state.messages, INBOX).length;
 

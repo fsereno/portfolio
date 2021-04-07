@@ -3,7 +3,7 @@
 import React, { useReducer } from 'react';
 import { Reducer } from '../../reducers/reducers';
 import { INBOX, MY_ADDRESS, INITIAL_NUMBER_OF_MESSAGES } from '../../constants';
-import { GlobalContext } from '../../contexts';
+import { EmailContext } from '../../contexts';
 import { getRandomInt } from '../../../../js/modules/utils/randomUtil';
 
 function createMessages(numberOf) {
@@ -38,7 +38,7 @@ function createMessages(numberOf) {
 
     return result;
 }
-export function GlobalContextProvider({children}) {
+export function EmailContextProvider({children}) {
 
     const messagesToUse = createMessages(INITIAL_NUMBER_OF_MESSAGES);
 
@@ -49,8 +49,8 @@ export function GlobalContextProvider({children}) {
     const stateValue = { state, dispatch };
 
     return (
-        <GlobalContext.Provider value={stateValue}>
+        <EmailContext.Provider value={stateValue}>
              {children}
-        </GlobalContext.Provider>
+        </EmailContext.Provider>
     )
 }

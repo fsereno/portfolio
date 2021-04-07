@@ -4,11 +4,11 @@ import React, { useLayoutEffect, useState } from 'react';
 import { ListItem } from './listItem';
 import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
-import { GlobalContext, EmailClientContext } from '../contexts';
+import { EmailContext, EmailClientContext } from '../contexts';
 
 export const BrowserPane = (props) => {
 
-    const context = React.useContext(GlobalContext);
+    const context = React.useContext(EmailContext);
 
     const emailClientContext = React.useContext(EmailClientContext);
 

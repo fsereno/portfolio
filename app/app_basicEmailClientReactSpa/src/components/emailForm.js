@@ -5,12 +5,12 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { SUBMIT, OUTBOX, MY_ADDRESS, REPLY } from '../constants';
-import { GlobalContext, EmailClientContext, EmailModalContext} from '../contexts';
+import { EmailContext, EmailClientContext, EmailModalContext} from '../contexts';
 import { ENQUEUE_TOAST, ToasterContext } from '../../../js/modules/react/toaster';
 
 export function EmailForm() {
 
-    const globalContext = React.useContext(GlobalContext);
+    const emailContext = React.useContext(EmailContext);
     const emailClientContext = React.useContext(EmailClientContext);
     const toasterContext = React.useContext(ToasterContext);
     const emailModalContext = React.useContext(EmailModalContext);
@@ -40,7 +40,7 @@ export function EmailForm() {
             const time = new Date().getTime();
             setShowValidation(false);
 
-            globalContext.dispatch({
+            emailContext.dispatch({
                 type: SUBMIT,
                 item: {
                     subject,
