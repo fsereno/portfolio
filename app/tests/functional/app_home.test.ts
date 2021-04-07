@@ -15,7 +15,7 @@ describe(application, () => {
         it(`Should return at least 7 or more when TypeScript is passed`, function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:true})
+                return new Nightmare()
                 .goto(url)
                 .wait(1500)
                 .type('#searchInput', 'TypeScript')

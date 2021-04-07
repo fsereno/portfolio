@@ -74,7 +74,7 @@ describe(application, () => {
         });
     });
     describe("Run Async", () => {
-        it("Should run the process synchronously.", function(){
+        it("Should run the process asynchronously.", function(){
             this.timeout(0);
             let test = async (url) => {
                 return new Nightmare({show:false})

@@ -16,7 +16,7 @@ describe(application, () => {
             function() {
                 this.timeout(0);
                     let test = async (url) => {
-                        return new Nightmare({show:true})
+                        return new Nightmare()
                         .goto(url)
                         .click("#addItem")
                         .wait(1000)
