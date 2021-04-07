@@ -16,18 +16,27 @@ function createMessages(numberOf) {
         "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC"
     ];
 
+    const emailAddresses = [
+        "james@itservices.co.uk",
+        "anna@squaresource.co.uk",
+        "matt@mgelectricals.co.uk",
+        "sarah@the-coffee-shop.co.uk"
+    ]
+
     for (let i = 0; i < numberOf; i++) {
 
-        const randomInt = getRandomInt(0, 2);
+        const emailBodyRandomInt = getRandomInt(0, 2);
+        const emailsRandomInt = getRandomInt(0, 3);
+        const dummyEmail = emailAddresses[emailsRandomInt];
 
         result.push(
             {
                 id: i,
-                from: `dummy.${i}@email.co.uk`,
+                from: dummyEmail,
                 to: MY_ADDRESS,
                 subject: `Subject ${i}`,
-                thread: `dummy.${i}@email.co.uk_${MY_ADDRESS}_Subject ${i}`,
-                body: bodies[randomInt],
+                thread: `${dummyEmail}_${MY_ADDRESS}_Subject ${i}`,
+                body: bodies[emailBodyRandomInt],
                 age: 0,
                 read: false,
                 dir: INBOX,

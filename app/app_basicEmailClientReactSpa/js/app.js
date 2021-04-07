@@ -39769,16 +39769,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function createMessages(numberOf) {
   var result = [];
   var bodies = ["Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.", "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.", "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC"];
+  var emailAddresses = ["james@itservices.co.uk", "anna@squaresource.co.uk", "matt@mgelectricals.co.uk", "sarah@the-coffee-shop.co.uk"];
 
   for (var i = 0; i < numberOf; i++) {
-    var randomInt = Object(_js_modules_utils_randomUtil__WEBPACK_IMPORTED_MODULE_4__["getRandomInt"])(0, 2);
+    var emailBodyRandomInt = Object(_js_modules_utils_randomUtil__WEBPACK_IMPORTED_MODULE_4__["getRandomInt"])(0, 2);
+    var emailsRandomInt = Object(_js_modules_utils_randomUtil__WEBPACK_IMPORTED_MODULE_4__["getRandomInt"])(0, 3);
+    var dummyEmail = emailAddresses[emailsRandomInt];
     result.push({
       id: i,
-      from: "dummy.".concat(i, "@email.co.uk"),
+      from: dummyEmail,
       to: _constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"],
       subject: "Subject ".concat(i),
-      thread: "dummy.".concat(i, "@email.co.uk_").concat(_constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject ").concat(i),
-      body: bodies[randomInt],
+      thread: "".concat(dummyEmail, "_").concat(_constants__WEBPACK_IMPORTED_MODULE_2__["MY_ADDRESS"], "_Subject ").concat(i),
+      body: bodies[emailBodyRandomInt],
       age: 0,
       read: false,
       dir: _constants__WEBPACK_IMPORTED_MODULE_2__["INBOX"],
