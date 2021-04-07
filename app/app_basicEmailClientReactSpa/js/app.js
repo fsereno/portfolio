@@ -39636,7 +39636,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
-/* harmony import */ var _reducers_reducers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/reducers */ "./src/reducers/reducers.js");
+/* harmony import */ var _reducers_emailClientContextReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/emailClientContextReducer */ "./src/reducers/emailClientContextReducer.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -39654,7 +39654,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function EmailClientContextProvider(_ref) {
   var children = _ref.children;
 
-  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducers__WEBPACK_IMPORTED_MODULE_3__["EmailClientReducer"], {
+  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_emailClientContextReducer__WEBPACK_IMPORTED_MODULE_3__["EmailClientContextReducer"], {
     selected: {
       id: -1,
       to: "",
@@ -39746,7 +39746,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmailContextProvider", function() { return EmailContextProvider; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _reducers_reducers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../reducers/reducers */ "./src/reducers/reducers.js");
+/* harmony import */ var _reducers_emailContextReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../reducers/emailContextReducer */ "./src/reducers/emailContextReducer.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
 /* harmony import */ var _js_modules_utils_randomUtil__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../js/modules/utils/randomUtil */ "../js/modules/utils/randomUtil.js");
@@ -39793,7 +39793,7 @@ function EmailContextProvider(_ref) {
   var children = _ref.children;
   var messagesToUse = createMessages(_constants__WEBPACK_IMPORTED_MODULE_2__["INITIAL_NUMBER_OF_MESSAGES"]);
 
-  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_reducers__WEBPACK_IMPORTED_MODULE_1__["Reducer"], {
+  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useReducer"])(_reducers_emailContextReducer__WEBPACK_IMPORTED_MODULE_1__["EmailContextReducer"], {
     messages: messagesToUse
   }),
       _useReducer2 = _slicedToArray(_useReducer, 2),
@@ -40823,17 +40823,16 @@ var EmailClientHandlerContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.cre
 
 /***/ }),
 
-/***/ "./src/reducers/reducers.js":
-/*!**********************************!*\
-  !*** ./src/reducers/reducers.js ***!
-  \**********************************/
-/*! exports provided: Reducer, EmailClientReducer */
+/***/ "./src/reducers/emailClientContextReducer.js":
+/*!***************************************************!*\
+  !*** ./src/reducers/emailClientContextReducer.js ***!
+  \***************************************************/
+/*! exports provided: EmailClientContextReducer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Reducer", function() { return Reducer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmailClientReducer", function() { return EmailClientReducer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmailClientContextReducer", function() { return EmailClientContextReducer; });
 /* harmony import */ var _utils_getReplyToEmailAddress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/getReplyToEmailAddress */ "./src/utils/getReplyToEmailAddress.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
 "use strict;";
@@ -40844,31 +40843,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 
-
-function Reducer(state, action) {
-  switch (action.type) {
-    case _constants__WEBPACK_IMPORTED_MODULE_1__["SUBMIT"]:
-      var messages = _toConsumableArray(state.messages);
-
-      messages.unshift(action.item);
-      return _objectSpread({}, state, {
-        messages: messages
-      });
-
-    default:
-      throw new Error();
-  }
-}
-function EmailClientReducer(state, action) {
+function EmailClientContextReducer(state, action) {
   switch (action.type) {
     case _constants__WEBPACK_IMPORTED_MODULE_1__["SELECT"]:
       return {
@@ -40915,6 +40892,51 @@ function EmailClientReducer(state, action) {
     case _constants__WEBPACK_IMPORTED_MODULE_1__["RESET_MODE"]:
       return _objectSpread({}, state, {
         mode: ""
+      });
+
+    default:
+      throw new Error();
+  }
+}
+
+/***/ }),
+
+/***/ "./src/reducers/emailContextReducer.js":
+/*!*********************************************!*\
+  !*** ./src/reducers/emailContextReducer.js ***!
+  \*********************************************/
+/*! exports provided: EmailContextReducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmailContextReducer", function() { return EmailContextReducer; });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
+"use strict;";
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+
+function EmailContextReducer(state, action) {
+  switch (action.type) {
+    case _constants__WEBPACK_IMPORTED_MODULE_0__["SUBMIT"]:
+      var messages = _toConsumableArray(state.messages);
+
+      messages.unshift(action.item);
+      return _objectSpread({}, state, {
+        messages: messages
       });
 
     default:

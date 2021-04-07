@@ -3,11 +3,11 @@
 import React, { useReducer } from 'react';
 import { MY_ADDRESS, READ } from '../../constants';
 import { EmailClientContext } from '../../contexts';
-import { EmailClientReducer } from '../../reducers/reducers';
+import { EmailClientContextReducer } from '../../reducers/emailClientContextReducer';
 
 export function EmailClientContextProvider({children}) {
 
-    const [state, dispatch] = useReducer(EmailClientReducer, {
+    const [state, dispatch] = useReducer(EmailClientContextReducer, {
         selected: {
             id: -1,
             to: "",

@@ -1,7 +1,7 @@
 "use strict;"
 
 import React, { useReducer } from 'react';
-import { Reducer } from '../../reducers/reducers';
+import { EmailContextReducer } from '../../reducers/emailContextReducer';
 import { INBOX, MY_ADDRESS, INITIAL_NUMBER_OF_MESSAGES } from '../../constants';
 import { EmailContext } from '../../contexts';
 import { getRandomInt } from '../../../../js/modules/utils/randomUtil';
@@ -42,7 +42,7 @@ export function EmailContextProvider({children}) {
 
     const messagesToUse = createMessages(INITIAL_NUMBER_OF_MESSAGES);
 
-    const [state, dispatch] = useReducer(Reducer, {
+    const [state, dispatch] = useReducer(EmailContextReducer, {
         messages: messagesToUse
     });
 
