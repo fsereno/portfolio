@@ -102,7 +102,7 @@
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "redux-undo": "^1.0.1",
-    "three": "^0.116.1",
+    "three": "^0.125.0",
     "ts-loader": "^8.0.14",
     "vue": "^2.6.11"
   }
