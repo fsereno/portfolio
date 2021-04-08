@@ -182,7 +182,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "../js/";
+/******/ 	__webpack_require__.p = "/js/";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
@@ -196,15 +196,1049 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/app.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./app/app_home/src/app.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "../../config.json":
-/*!******************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/config.json ***!
-  \******************************************************/
+/***/ "./app/app_home/src/app.js":
+/*!*********************************!*\
+  !*** ./app/app_home/src/app.js ***!
+  \*********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Card */ "./node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Row */ "./node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Col */ "./node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Badge */ "./node_modules/react-bootstrap/esm/Badge.js");
+/* harmony import */ var _js_modules_react_spinnerComponent_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/modules/react/spinnerComponent.js */ "./app/js/modules/react/spinnerComponent.js");
+/* harmony import */ var _typeScript_Utils_stringSearchUtil_dist_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../typeScript/Utils/stringSearchUtil/dist/index */ "./app/typeScript/Utils/stringSearchUtil/dist/index.js");
+/* harmony import */ var _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../js/modules/utils/webGLCheckerUtil */ "./app/js/modules/utils/webGLCheckerUtil.js");
+/* harmony import */ var _homeThreeModule_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./homeThreeModule.js */ "./app/app_home/src/homeThreeModule.js");
+/* harmony import */ var _js_modules_utils_configUtil__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../js/modules/utils/configUtil */ "./app/js/modules/utils/configUtil.js");
+/* harmony import */ var _typeScript_Utils_applicationsSortUtil_dist_Utils_applicationsSortUtil_index__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index */ "./app/typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index.js");
+"use strict;";
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var FAUX_LOADING_TIME = 500;
+var NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
+var SEARCH_INPUT_ID = "searchInput";
+var MAIN_CONTAINER_ID = "mainContainer";
+var NAV_ID = "navBar";
+var CONTENT_CONTAINER_ID = "contentContainer";
+var IS_BROWSER_VALID = _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_9__["WebGLCheckerUtil"].isWebGL2Available() || _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_9__["WebGLCheckerUtil"].isWebGLAvailable();
+var CONFIG = _js_modules_utils_configUtil__WEBPACK_IMPORTED_MODULE_11__["ConfigUtil"].get();
+var APP_CONFIG = _js_modules_utils_configUtil__WEBPACK_IMPORTED_MODULE_11__["ConfigUtil"].get("home");
+CONFIG.applications.sort(_typeScript_Utils_applicationsSortUtil_dist_Utils_applicationsSortUtil_index__WEBPACK_IMPORTED_MODULE_12__["ApplicationSortUtil"].sorter);
+
+var HomeApp =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(HomeApp, _React$Component);
+
+  function HomeApp(props) {
+    var _this;
+
+    _classCallCheck(this, HomeApp);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(HomeApp).call(this, props));
+    _this.state = {
+      applications: [],
+      applicationsImmutable: [],
+      hasApplications: false,
+      showClear: false,
+      showIntro: false,
+      showSpinner: true,
+      isBrowserValid: true
+    };
+    _this.handleSearchChange = _this.handleSearchChange.bind(_assertThisInitialized(_this));
+    _this.handleQuickFilter = _this.handleQuickFilter.bind(_assertThisInitialized(_this));
+    _this.handleClearSearch = _this.handleClearSearch.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleScrollBtnClick = _this.handleScrollBtnClick.bind(_assertThisInitialized(_this));
+    _this.handleNavBarScrollClass = _this.handleNavBarScrollClass.bind(_assertThisInitialized(_this));
+    _this.RenderClearBtn = _this.RenderClearBtn.bind(_assertThisInitialized(_this));
+    _this.RenderIntroContainer = _this.RenderIntroContainer.bind(_assertThisInitialized(_this));
+    _this.RenderContenContainer = _this.RenderContenContainer.bind(_assertThisInitialized(_this));
+    _this.RenderCardContainer = _this.RenderCardContainer.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(HomeApp, [{
+    key: "filterApplications",
+    value: function filterApplications(applications, searchTerm) {
+      var filteredApplications = applications.filter(function (application) {
+        var criterions = [application.name, application.subHeading, application.description, application.searchTerms];
+        var result = application.active && application.include ? _typeScript_Utils_stringSearchUtil_dist_index__WEBPACK_IMPORTED_MODULE_8__["StringSearchUtil"].searchCriterions(criterions, searchTerm) : false;
+        return result;
+      });
+      return filteredApplications;
+    }
+  }, {
+    key: "handleSearch",
+    value: function handleSearch(searchTerm) {
+      if (searchTerm.length > 0) {
+        var filteredApplications = this.filterApplications(this.state.applicationsImmutable, searchTerm);
+        this.setState({
+          applications: filteredApplications,
+          showClear: true
+        });
+      } else {
+        this.setState({
+          applications: this.state.applicationsImmutable,
+          showClear: false
+        });
+      }
+    }
+  }, {
+    key: "handleSearchChange",
+    value: function handleSearchChange(event) {
+      var searchTerm = event.target.value;
+      this.handleSearch(searchTerm);
+    }
+  }, {
+    key: "handleQuickFilter",
+    value: function handleQuickFilter(event) {
+      var searchTerm = event.target.value;
+      var element = document.getElementById(SEARCH_INPUT_ID);
+      var existingValue = element.value;
+
+      if (_typeScript_Utils_stringSearchUtil_dist_index__WEBPACK_IMPORTED_MODULE_8__["StringSearchUtil"].searchDoesNotExist(existingValue, searchTerm)) {
+        var combinedSearch = _typeScript_Utils_stringSearchUtil_dist_index__WEBPACK_IMPORTED_MODULE_8__["StringSearchUtil"].combineSearchTerms(existingValue, searchTerm);
+        element.value = combinedSearch;
+        this.handleSearch(combinedSearch);
+      }
+    }
+  }, {
+    key: "handleClearSearch",
+    value: function handleClearSearch() {
+      var element = document.getElementById(SEARCH_INPUT_ID);
+      element.value = "";
+      this.setState({
+        applications: this.state.applicationsImmutable,
+        showClear: false
+      });
+    }
+  }, {
+    key: "addNavBarScrollDownClass",
+    value: function addNavBarScrollDownClass() {
+      var condition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      var navbar = document.getElementById(NAV_ID);
+
+      if (condition) {
+        navbar.classList.remove(NAVBAR_SCROLL_DOWN_CLASS);
+      } else {
+        navbar.classList.add(NAVBAR_SCROLL_DOWN_CLASS);
+      }
+    }
+  }, {
+    key: "isScrollYAtZero",
+    value: function isScrollYAtZero() {
+      return window.scrollY === 0;
+    }
+  }, {
+    key: "handleNavBarScrollClass",
+    value: function handleNavBarScrollClass() {
+      this.addNavBarScrollDownClass(this.isScrollYAtZero());
+    }
+  }, {
+    key: "addNavbarTransScrollEventListener",
+    value: function addNavbarTransScrollEventListener() {
+      this.addNavBarScrollDownClass();
+      window.addEventListener("scroll", this.handleNavBarScrollClass);
+    }
+  }, {
+    key: "handleScrollBtnClick",
+    value: function handleScrollBtnClick(event) {
+      event.preventDefault();
+      var container = document.getElementById(CONTENT_CONTAINER_ID);
+      window.scrollTo({
+        top: container.offsetTop - 50,
+        left: 0,
+        behavior: "smooth"
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(event) {
+      event.preventDefault();
+    }
+  }, {
+    key: "delayAppRender",
+    value: function delayAppRender() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.removeDarkClass();
+
+        _this2.setState({
+          applications: CONFIG.applications,
+          applicationsImmutable: CONFIG.applications,
+          hasApplications: true,
+          showIntro: true,
+          showSpinner: false
+        });
+      }, FAUX_LOADING_TIME);
+    }
+  }, {
+    key: "removeDarkClass",
+    value: function removeDarkClass() {
+      var mainContainer = document.getElementById(MAIN_CONTAINER_ID);
+      mainContainer.classList.remove("bg-dark");
+    }
+  }, {
+    key: "getElementFadeClass",
+    value: function getElementFadeClass() {
+      var condition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var fadeClass = "fade-element";
+      fadeClass = condition ? "".concat(fadeClass, " in") : fadeClass;
+      return fadeClass;
+    }
+  }, {
+    key: "RenderClearBtn",
+    value: function RenderClearBtn() {
+      if (this.state.showClear) {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "input-group-append",
+          id: "cancelBtn"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+          className: "btn",
+          type: "button",
+          onClick: this.handleClearSearch
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "lr"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: "rl"
+        }))));
+      }
+
+      return null;
+    }
+  }, {
+    key: "RenderIntroContainer",
+    value: function RenderIntroContainer(props) {
+      var fadeClass = this.getElementFadeClass(props.fadeIn);
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "bg-dark",
+        id: "introContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        id: "introContent",
+        className: fadeClass
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        id: "canvasContainer"
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        id: "introContentInner"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        id: "introImage",
+        className: "text-center element"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        className: "img-fluid",
+        src: "images/FSLogo.png",
+        alt: "Logo"
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        id: "introHeadings",
+        className: "text-center element"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
+        className: "display-4 mb-0"
+      }, CONFIG.author), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
+        className: "display-4 sub-heading lead text-white"
+      }, CONFIG.role)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        id: "btnContainer",
+        className: "text-center element pt-2"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-outline-light",
+        onClick: this.handleScrollBtnClick
+      }, "View Portfolio")))));
+    }
+  }, {
+    key: "RenderApplicationCards",
+    value: function RenderApplicationCards(props) {
+      if (props.condition) {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          className: "grid-item",
+          key: "".concat(props.application.name)
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Body, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Title, null, props.application.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Text, null, props.application.subHeading), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
+          className: "btn btn-outline-dark btn-sm card-link",
+          href: "".concat(CONFIG.prefix).concat(props.application.folder, "/index.html")
+        }, "View application"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          className: "mt-3"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], null, props.application.labels ? props.application.labels.map(function (x) {
+          var label = CONFIG.labels[x];
+          return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            key: x,
+            variant: label["class"],
+            className: "text-light mr-2"
+          }, label.name);
+        }) : null))));
+      } else {
+        return null;
+      }
+    }
+  }, {
+    key: "RenderCardContainer",
+    value: function RenderCardContainer(props) {
+      var _this3 = this;
+
+      if (props.applications.length > 0) {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          id: "applicationsContainer",
+          className: "card-columns"
+        }, props.applications.map(function (application) {
+          return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_this3.RenderApplicationCards, {
+            application: application,
+            condition: application.active && application.include
+          });
+        }));
+      } else {
+        return null;
+      }
+    }
+  }, {
+    key: "RenderContenContainer",
+    value: function RenderContenContainer() {
+      var fadeClass = this.getElementFadeClass(this.state.hasApplications);
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "".concat(fadeClass, " container-fluid pt-4 mt-5"),
+        id: "contentContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-lg-12"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+        className: "display-4"
+      }, APP_CONFIG.name))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "col-lg-12"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, APP_CONFIG.subHeading), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+        className: "text-muted"
+      }, APP_CONFIG.description), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        id: "searchBar",
+        className: "input-group mb-3"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        className: "input-group-text"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+        className: "fa fa-search"
+      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        placeholder: "Search applications...",
+        id: "searchInput",
+        onChange: this.handleSearchChange
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.RenderClearBtn, null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "input-group-append"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        id: "openFilterBtn",
+        className: "btn btn-dark",
+        type: "button",
+        "data-toggle": "collapse",
+        "data-target": "#filterContainer",
+        "aria-expanded": "false",
+        "aria-controls": "filterContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+        className: "fa fa-filter"
+      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "collapse",
+        id: "filterContainer"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "pb-3"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+        className: "d-flex flex-row justify-content-center"
+      }, "Quick search"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "btn-group d-flex flex-row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-outline-dark flex-grow-0",
+        value: "React",
+        onClick: this.handleQuickFilter
+      }, "React"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-outline-dark flex-grow-0",
+        value: "TypeScript",
+        onClick: this.handleQuickFilter
+      }, "TypeScript"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-outline-dark flex-grow-0",
+        value: ".NET Core",
+        onClick: this.handleQuickFilter
+      }, ".NET Core"))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.RenderCardContainer, {
+        applications: this.state.applications.filter(function (x) {
+          return x.featured;
+        })
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.RenderCardContainer, {
+        applications: this.state.applications.filter(function (x) {
+          return !x.featured;
+        })
+      }));
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.delayAppRender();
+      this.addNavbarTransScrollEventListener();
+
+      if (IS_BROWSER_VALID) {
+        _homeThreeModule_js__WEBPACK_IMPORTED_MODULE_10__["HomeThreeModule"].then(function (homeThreeModule) {
+          return homeThreeModule.init();
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_js_modules_react_spinnerComponent_js__WEBPACK_IMPORTED_MODULE_7__["SpinnerComponent"], {
+        show: this.state.showSpinner
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.RenderIntroContainer, {
+        fadeIn: this.state.showIntro
+      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.RenderContenContainer, null));
+    }
+  }]);
+
+  return HomeApp;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
+
+react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(HomeApp, null), document.getElementById('result'));
+
+/***/ }),
+
+/***/ "./app/app_home/src/homeThreeModule.js":
+/*!*********************************************!*\
+  !*** ./app/app_home/src/homeThreeModule.js ***!
+  \*********************************************/
+/*! exports provided: HomeThreeModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeThreeModule", function() { return HomeThreeModule; });
+"use strict;";
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var HomeThreeModule = _asyncToGenerator(
+/*#__PURE__*/
+regeneratorRuntime.mark(function _callee() {
+  var THREE, CANNON, DAMPING, TIMESTEP, XROTATION, OBJECT_LIMIT, _containerId, _container, _scene, _camera, _renderer, _world, _raycaster, _mouse, _fragmentGroup, initPhysics, initScene, setCameraPosition, setRenderer, setResizeEventHandler, animateParticles, createParticles, createFragments, animateFragments, createCube, createCubes, addLight, updatePhysics, setAnimationLoop, createPlane, objectsReact, setMouseMoved, init;
+
+  return regeneratorRuntime.wrap(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! three */ "./node_modules/three/build/three.module.js"));
+
+        case 2:
+          THREE = _context.sent;
+          _context.next = 5;
+          return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.t.bind(null, /*! cannon */ "./node_modules/cannon/build/cannon.js", 7));
+
+        case 5:
+          CANNON = _context.sent;
+          DAMPING = 0.9;
+          TIMESTEP = 1.0 / 60.0;
+          XROTATION = -Math.PI / 2;
+          OBJECT_LIMIT = 20;
+
+          initPhysics = function initPhysics() {
+            _world = new CANNON.World();
+
+            _world.gravity.set(0, -10, 0);
+
+            _world.broadphase = new CANNON.NaiveBroadphase();
+            _world.solver.iterations = 10;
+          };
+
+          initScene = function initScene() {
+            _containerId = "canvasContainer";
+            _container = document.getElementById(_containerId);
+            _scene = new THREE.Scene();
+            _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
+            _mouse = new THREE.Vector3();
+            _raycaster = new THREE.Raycaster();
+            _fragmentGroup = new THREE.Object3D();
+          };
+
+          setCameraPosition = function setCameraPosition() {
+            _camera.position.x = 0;
+            _camera.position.y = 4;
+            _camera.position.z = 10;
+          };
+
+          setRenderer = function setRenderer() {
+            var container = document.getElementById(_containerId);
+            _renderer = new THREE.WebGLRenderer({
+              antialias: true,
+              alpha: true
+            });
+
+            _renderer.setSize(container.offsetWidth, container.offsetHeight);
+
+            _renderer.shadowMap.enabled = true;
+            _renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(_renderer.domElement);
+          };
+
+          setResizeEventHandler = function setResizeEventHandler() {
+            window.addEventListener("resize", function () {
+              var container = document.getElementById(_containerId);
+
+              _renderer.setSize(container.offsetWidth, container.offsetHeight);
+
+              _camera.aspect = container.offsetWidth / container.offsetHeight;
+
+              _camera.updateProjectionMatrix();
+            });
+          };
+
+          animateParticles = function animateParticles() {
+            var time = Date.now() * 0.000001;
+
+            for (var i = 0; i < _scene.children.length; i++) {
+              var object = _scene.children[i];
+
+              if (object instanceof THREE.Points) {
+                object.rotation.y = time * (i < 4 ? i + 1 : -(i + 1));
+              }
+            }
+          };
+
+          createParticles = function createParticles() {
+            var numberOfParticles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10000;
+            var numberOfparticleGroups = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5;
+            var verticies = [];
+
+            for (var i = 0; i < numberOfParticles; i++) {
+              var x = THREE.MathUtils.randFloatSpread(2000);
+              var y = THREE.MathUtils.randFloatSpread(2000);
+              var z = THREE.MathUtils.randFloatSpread(3000);
+              verticies.push(x, y, z);
+            }
+
+            var geometry = new THREE.BufferGeometry();
+            geometry.setAttribute("position", new THREE.Float32BufferAttribute(verticies, 3));
+            var material = new THREE.PointsMaterial({
+              size: 0.5
+            });
+
+            for (var _i = 0; _i < numberOfparticleGroups; _i++) {
+              var particles = new THREE.Points(geometry, material);
+              particles.rotation.x = Math.random() * 6;
+              particles.rotation.y = Math.random() * 6;
+              particles.rotation.z = Math.random() * 6;
+
+              _scene.add(particles);
+            }
+          };
+
+          createFragments = function createFragments(numberOfFragments) {
+            var geometry = new THREE.CircleGeometry(5, 10);
+            var material = new THREE.MeshPhysicalMaterial({
+              color: 0xFFFFFF,
+              side: THREE.DoubleSide
+            });
+
+            for (var i = 0; i < numberOfFragments; i++) {
+              var scale = THREE.MathUtils.randFloat(0.01, 0.02);
+              var fragment = new THREE.Mesh(geometry, material);
+              fragment.position.set(THREE.MathUtils.randFloat(-300, 200), THREE.MathUtils.randFloat(5, 50), THREE.MathUtils.randFloat(5, 50));
+              fragment.rotation.set(THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05));
+              fragment.scale.set(scale, scale, scale);
+              fragment.speedValue = THREE.MathUtils.randFloat(-0.25, 0.70);
+
+              _fragmentGroup.add(fragment);
+            }
+
+            _scene.add(_fragmentGroup);
+          };
+
+          animateFragments = function animateFragments() {
+            for (var i = 0; i < _fragmentGroup.children.length; i++) {
+              var fragment = _fragmentGroup.children[i];
+              fragment.rotation.x += fragment.speedValue / 10;
+              fragment.rotation.y += fragment.speedValue / 10;
+              fragment.rotation.z += fragment.speedValue / 10;
+            }
+
+            ;
+            _fragmentGroup.rotation.y += 0.004;
+          };
+
+          createCube = function createCube() {
+            var x = Math.random() * 0.3 + 1;
+            var y = 15;
+            var z = 0;
+            var scale = Math.random() - Math.random() * 0.5 + 1;
+            var meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
+            var meshMaterial = new THREE.MeshLambertMaterial({
+              color: 0x5c6670
+            });
+            var mesh = new THREE.Mesh(meshGeometry, meshMaterial);
+            mesh.position.set(x, y, z);
+            mesh.updatePhysics = true;
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+            var shape = new CANNON.Box(new CANNON.Vec3(scale / 2, scale / 2, scale / 2));
+            var bodyMaterial = new CANNON.Material();
+            var body = new CANNON.Body({
+              mass: 5,
+              material: bodyMaterial
+            });
+            body.addShape(shape);
+            body.position.set(x, y, z);
+            body.linearDamping = DAMPING;
+            body.updatePhysics = true;
+            body.isCube = true;
+            body.angularVelocity.set(1, 0.5, 1);
+            return {
+              mesh: mesh,
+              body: body
+            };
+          };
+
+          createCubes = function createCubes() {
+            if (_world.bodies.filter(function (x) {
+              return x.isCube;
+            }).length <= OBJECT_LIMIT) {
+              var object = createCube();
+
+              _world.addBody(object.body);
+
+              _scene.add(object.mesh);
+            }
+          };
+
+          addLight = function addLight() {
+            var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0xFFFFFF;
+            var intensity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+            var distance = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
+            var x = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+            var y = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+            var z = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+            var light = new THREE.SpotLight(color, intensity, distance);
+            light.position.set(x, y, z);
+            light.penumbra = 1;
+            light.castShadow = true;
+            light.shadow.mapSize.width = 2560;
+            light.shadow.mapSize.height = 2560;
+            light.shadow.camera.near = 0.5;
+            light.shadow.camera.far = 500;
+            light.shadow.focus = 1;
+
+            _scene.add(light);
+          };
+
+          updatePhysics = function updatePhysics() {
+            _world.step(TIMESTEP);
+
+            var bodies = _world.bodies.filter(function (x) {
+              return x.updatePhysics;
+            });
+
+            var meshes = _scene.children.filter(function (x) {
+              return x.updatePhysics;
+            });
+
+            if (bodies.length === meshes.length) {
+              for (var i = 0; i < meshes.length; i++) {
+                var mesh = meshes[i];
+                var body = bodies[i];
+                mesh.position.copy(body.position);
+                mesh.quaternion.copy(body.quaternion);
+              }
+            }
+          };
+
+          setAnimationLoop = function setAnimationLoop() {
+            _renderer.setAnimationLoop(function () {
+              animateParticles();
+              updatePhysics();
+              animateFragments();
+
+              _renderer.render(_scene, _camera);
+            });
+          };
+
+          createPlane = function createPlane() {
+            var planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 1, 1);
+            var planeMaterial = new THREE.MeshPhongMaterial({
+              color: 0x2e3338,
+              shininess: 150
+            });
+            var ground = new THREE.Mesh(planeGeometry, planeMaterial);
+            ground.rotation.x = XROTATION;
+            ground.receiveShadow = true;
+
+            _scene.add(ground);
+
+            var groundShape = new CANNON.Plane();
+            var groundMaterial = new CANNON.Material();
+            var groundBody = new CANNON.Body({
+              mass: 0,
+              material: groundMaterial
+            });
+            groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), XROTATION);
+            groundBody.addShape(groundShape);
+
+            _world.add(groundBody);
+          };
+
+          objectsReact = function objectsReact(event) {
+            event.preventDefault();
+            _mouse.x = event.clientX / window.innerWidth * 2 - 1;
+            _mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            _mouse.z = 0.5;
+
+            _raycaster.setFromCamera(_mouse, _camera);
+
+            var intersects = _raycaster.intersectObjects(_scene.children, true);
+
+            if (intersects.length > 0) {
+              var object = intersects[0].object;
+
+              if (object.updatePhysics) {
+                var matchingBody = _world.bodies.filter(function (x) {
+                  return x.position.x === object.position.x && x.position.y === object.position.y && x.position.z === object.position.z;
+                });
+
+                if (matchingBody.length > 0) {
+                  var body = matchingBody[0];
+                  var x = _mouse.x * 10;
+                  var y = _mouse.y * 10;
+                  body.angularVelocity.set(x, y, 0);
+                }
+              }
+            }
+          };
+
+          setMouseMoved = function setMouseMoved() {
+            window.addEventListener("mousemove", objectsReact);
+          };
+
+          init = function init() {
+            initScene();
+            initPhysics();
+            createPlane();
+            setCameraPosition();
+            setRenderer();
+            setResizeEventHandler();
+            setInterval(createCubes, 1000);
+            createParticles(20000, 10);
+            createFragments(25);
+            addLight(0xFFFFFF, 2, 500, 0, 10, 5);
+            setMouseMoved();
+            setAnimationLoop();
+          };
+
+          return _context.abrupt("return", {
+            init: init
+          });
+
+        case 29:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _callee);
+}))();
+
+/***/ }),
+
+/***/ "./app/js/modules/react/spinnerComponent.js":
+/*!**************************************************!*\
+  !*** ./app/js/modules/react/spinnerComponent.js ***!
+  \**************************************************/
+/*! exports provided: SpinnerComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpinnerComponent", function() { return SpinnerComponent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+"use strict;";
+
+
+function SpinnerComponent(props) {
+  var showSpinner = props.show || false;
+  var hideClass = !showSpinner ? "d-none" : "";
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "spinner",
+    className: "".concat(hideClass, " spinner-container overlay")
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "loader",
+    className: "".concat(hideClass, " item loading")
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "spinner"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "circle circle-1"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "circle-inner"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "circle circle-2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "circle-inner"
+  })))));
+}
+;
+
+/***/ }),
+
+/***/ "./app/js/modules/utils/configUtil.js":
+/*!********************************************!*\
+  !*** ./app/js/modules/utils/configUtil.js ***!
+  \********************************************/
+/*! exports provided: ConfigUtil */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfigUtil", function() { return ConfigUtil; });
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../config.json */ "./config.json");
+var _config_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../../../config.json */ "./config.json", 1);
+"use strict;";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+var ConfigUtil =
+/*#__PURE__*/
+function () {
+  function ConfigUtil() {
+    _classCallCheck(this, ConfigUtil);
+  }
+
+  _createClass(ConfigUtil, null, [{
+    key: "get",
+    value: function get(applicationFolder) {
+      var application = applicationFolder ? _config_json__WEBPACK_IMPORTED_MODULE_0__.applications.filter(function (x) {
+        return x.folder.toLowerCase() === applicationFolder.toLowerCase();
+      }) : [];
+      var result = application.length > 0 ? application[0] : _config_json__WEBPACK_IMPORTED_MODULE_0__;
+      return result;
+    }
+  }]);
+
+  return ConfigUtil;
+}();
+
+/***/ }),
+
+/***/ "./app/js/modules/utils/webGLCheckerUtil.js":
+/*!**************************************************!*\
+  !*** ./app/js/modules/utils/webGLCheckerUtil.js ***!
+  \**************************************************/
+/*! exports provided: WebGLCheckerUtil */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WebGLCheckerUtil", function() { return WebGLCheckerUtil; });
+"use strict;";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var WebGLCheckerUtil =
+/*#__PURE__*/
+function () {
+  function WebGLCheckerUtil() {
+    _classCallCheck(this, WebGLCheckerUtil);
+  }
+
+  _createClass(WebGLCheckerUtil, null, [{
+    key: "isWebGLAvailable",
+    value: function isWebGLAvailable() {
+      try {
+        var canvas = document.createElement('canvas');
+        return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+      } catch (e) {
+        return false;
+      }
+    }
+  }, {
+    key: "isWebGL2Available",
+    value: function isWebGL2Available() {
+      try {
+        var canvas = document.createElement('canvas');
+        return !!(window.WebGL2RenderingContext && canvas.getContext('webgl2'));
+      } catch (e) {
+        return false;
+      }
+    }
+  }]);
+
+  return WebGLCheckerUtil;
+}();
+
+/***/ }),
+
+/***/ "./app/typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index.js":
+/*!********************************************************************************************!*\
+  !*** ./app/typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index.js ***!
+  \********************************************************************************************/
+/*! exports provided: ApplicationSortUtil */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApplicationSortUtil", function() { return ApplicationSortUtil; });
+"use strict;";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ApplicationSortUtil =
+/*#__PURE__*/
+function () {
+  function ApplicationSortUtil() {
+    _classCallCheck(this, ApplicationSortUtil);
+  }
+
+  _createClass(ApplicationSortUtil, null, [{
+    key: "sorter",
+    value: function sorter(a, b) {
+      var aOrder = a.order || Number.MAX_VALUE;
+      var bOrder = b.order || Number.MAX_VALUE;
+
+      if (aOrder < bOrder) {
+        return -1;
+      }
+
+      if (aOrder > bOrder) {
+        return 1;
+      }
+
+      return 0;
+    }
+  }]);
+
+  return ApplicationSortUtil;
+}();
+
+/***/ }),
+
+/***/ "./app/typeScript/Utils/stringSearchUtil/dist/index.js":
+/*!*************************************************************!*\
+  !*** ./app/typeScript/Utils/stringSearchUtil/dist/index.js ***!
+  \*************************************************************/
+/*! exports provided: StringSearchUtil */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StringSearchUtil", function() { return StringSearchUtil; });
+"use strict;";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var StringSearchUtil =
+/*#__PURE__*/
+function () {
+  function StringSearchUtil() {
+    _classCallCheck(this, StringSearchUtil);
+  }
+
+  _createClass(StringSearchUtil, null, [{
+    key: "searchCriterions",
+    value: function searchCriterions() {
+      var criterions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      var searchTerm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+      var searchResult = criterions.length > 0 ? criterions.filter(function (criterion) {
+        var searchTerms = searchTerm.split(" ").filter(function (x) {
+          return x;
+        });
+        var searchTermSearch = searchTerms.filter(function (term) {
+          return criterion.toUpperCase().indexOf(term.toUpperCase()) !== -1;
+        });
+        return searchTermSearch.length > 0;
+      }) : [];
+      var result = searchResult.length > 0;
+      return result;
+    }
+  }]);
+
+  return StringSearchUtil;
+}();
+
+StringSearchUtil.searchDoesNotExist = function () {
+  var existingValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  var searchTerm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+  return (existingValue || "").toUpperCase().indexOf((searchTerm || "").toUpperCase()) === -1;
+};
+
+StringSearchUtil.combineSearchTerms = function () {
+  var existingValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  var searchTerm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+  var result = "".concat(existingValue, " ").concat(searchTerm);
+  return result.trim();
+};
+
+/***/ }),
+
+/***/ "./config.json":
+/*!*********************!*\
+  !*** ./config.json ***!
+  \*********************/
 /*! exports provided: prefix, entry, index, masterTemplateDir, developmentDir, publishDir, folderRoot, repoRootUrl, linkedInUrl, gitHubUrl, title, author, role, description, thumbnail, labels, applications, default */
 /***/ (function(module) {
 
@@ -212,10 +1246,10 @@ module.exports = JSON.parse("{\"prefix\":\"app_\",\"entry\":\"home\",\"index\":\
 
 /***/ }),
 
-/***/ "../../node_modules/@babel/runtime/helpers/esm/extends.js":
-/*!*********************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/@babel/runtime/helpers/esm/extends.js ***!
-  \*********************************************************************************************/
+/***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -242,10 +1276,10 @@ function _extends() {
 
 /***/ }),
 
-/***/ "../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":
-/*!******************************************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
-  \******************************************************************************************************************/
+/***/ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js ***!
+  \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -269,10 +1303,10 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 /***/ }),
 
-/***/ "../../node_modules/classnames/index.js":
-/*!***************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/classnames/index.js ***!
-  \***************************************************************************/
+/***/ "./node_modules/classnames/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/classnames/index.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -331,10 +1365,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ "../../node_modules/dom-helpers/esm/camelize.js":
-/*!***********************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/dom-helpers/esm/camelize.js ***!
-  \***********************************************************************************/
+/***/ "./node_modules/dom-helpers/esm/camelize.js":
+/*!**************************************************!*\
+  !*** ./node_modules/dom-helpers/esm/camelize.js ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -350,10 +1384,10 @@ function camelize(string) {
 
 /***/ }),
 
-/***/ "../../node_modules/prop-types/checkPropTypes.js":
-/*!************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/prop-types/checkPropTypes.js ***!
-  \************************************************************************************/
+/***/ "./node_modules/prop-types/checkPropTypes.js":
+/*!***************************************************!*\
+  !*** ./node_modules/prop-types/checkPropTypes.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -370,7 +1404,7 @@ function camelize(string) {
 var printWarning = function() {};
 
 if (true) {
-  var ReactPropTypesSecret = __webpack_require__(/*! ./lib/ReactPropTypesSecret */ "../../node_modules/prop-types/lib/ReactPropTypesSecret.js");
+  var ReactPropTypesSecret = __webpack_require__(/*! ./lib/ReactPropTypesSecret */ "./node_modules/prop-types/lib/ReactPropTypesSecret.js");
   var loggedTypeFailures = {};
   var has = Function.call.bind(Object.prototype.hasOwnProperty);
 
@@ -464,10 +1498,10 @@ module.exports = checkPropTypes;
 
 /***/ }),
 
-/***/ "../../node_modules/prop-types/lib/ReactPropTypesSecret.js":
-/*!**********************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/prop-types/lib/ReactPropTypesSecret.js ***!
-  \**********************************************************************************************/
+/***/ "./node_modules/prop-types/lib/ReactPropTypesSecret.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/prop-types/lib/ReactPropTypesSecret.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -488,22 +1522,22 @@ module.exports = ReactPropTypesSecret;
 
 /***/ }),
 
-/***/ "../../node_modules/react-bootstrap/esm/Badge.js":
-/*!************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-bootstrap/esm/Badge.js ***!
-  \************************************************************************************/
+/***/ "./node_modules/react-bootstrap/esm/Badge.js":
+/*!***************************************************!*\
+  !*** ./node_modules/react-bootstrap/esm/Badge.js ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "../../node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "../../node_modules/classnames/index.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "../../node_modules/react-bootstrap/esm/ThemeProvider.js");
+/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "./node_modules/react-bootstrap/esm/ThemeProvider.js");
 
 
 
@@ -534,26 +1568,26 @@ Badge.defaultProps = defaultProps;
 
 /***/ }),
 
-/***/ "../../node_modules/react-bootstrap/esm/Card.js":
-/*!***********************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-bootstrap/esm/Card.js ***!
-  \***********************************************************************************/
+/***/ "./node_modules/react-bootstrap/esm/Card.js":
+/*!**************************************************!*\
+  !*** ./node_modules/react-bootstrap/esm/Card.js ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "../../node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "../../node_modules/classnames/index.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "../../node_modules/react-bootstrap/esm/ThemeProvider.js");
-/* harmony import */ var _createWithBsPrefix__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./createWithBsPrefix */ "../../node_modules/react-bootstrap/esm/createWithBsPrefix.js");
-/* harmony import */ var _divWithClassName__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./divWithClassName */ "../../node_modules/react-bootstrap/esm/divWithClassName.js");
-/* harmony import */ var _CardContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CardContext */ "../../node_modules/react-bootstrap/esm/CardContext.js");
-/* harmony import */ var _CardImg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./CardImg */ "../../node_modules/react-bootstrap/esm/CardImg.js");
+/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "./node_modules/react-bootstrap/esm/ThemeProvider.js");
+/* harmony import */ var _createWithBsPrefix__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./createWithBsPrefix */ "./node_modules/react-bootstrap/esm/createWithBsPrefix.js");
+/* harmony import */ var _divWithClassName__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./divWithClassName */ "./node_modules/react-bootstrap/esm/divWithClassName.js");
+/* harmony import */ var _CardContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CardContext */ "./node_modules/react-bootstrap/esm/CardContext.js");
+/* harmony import */ var _CardImg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./CardImg */ "./node_modules/react-bootstrap/esm/CardImg.js");
 
 
 
@@ -628,16 +1662,16 @@ Card.ImgOverlay = CardImgOverlay;
 
 /***/ }),
 
-/***/ "../../node_modules/react-bootstrap/esm/CardContext.js":
-/*!******************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-bootstrap/esm/CardContext.js ***!
-  \******************************************************************************************/
+/***/ "./node_modules/react-bootstrap/esm/CardContext.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/react-bootstrap/esm/CardContext.js ***!
+  \*********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 var context = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(null);
@@ -646,22 +1680,22 @@ context.displayName = 'CardContext';
 
 /***/ }),
 
-/***/ "../../node_modules/react-bootstrap/esm/CardImg.js":
-/*!**************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-bootstrap/esm/CardImg.js ***!
-  \**************************************************************************************/
+/***/ "./node_modules/react-bootstrap/esm/CardImg.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/react-bootstrap/esm/CardImg.js ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "../../node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "../../node_modules/classnames/index.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "../../node_modules/react-bootstrap/esm/ThemeProvider.js");
+/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "./node_modules/react-bootstrap/esm/ThemeProvider.js");
 
 
 
@@ -691,22 +1725,22 @@ CardImg.defaultProps = defaultProps;
 
 /***/ }),
 
-/***/ "../../node_modules/react-bootstrap/esm/Col.js":
-/*!**********************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-bootstrap/esm/Col.js ***!
-  \**********************************************************************************/
+/***/ "./node_modules/react-bootstrap/esm/Col.js":
+/*!*************************************************!*\
+  !*** ./node_modules/react-bootstrap/esm/Col.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "../../node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "../../node_modules/classnames/index.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "../../node_modules/react-bootstrap/esm/ThemeProvider.js");
+/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "./node_modules/react-bootstrap/esm/ThemeProvider.js");
 
 
 
@@ -760,22 +1794,22 @@ Col.displayName = 'Col';
 
 /***/ }),
 
-/***/ "../../node_modules/react-bootstrap/esm/Row.js":
-/*!**********************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-bootstrap/esm/Row.js ***!
-  \**********************************************************************************/
+/***/ "./node_modules/react-bootstrap/esm/Row.js":
+/*!*************************************************!*\
+  !*** ./node_modules/react-bootstrap/esm/Row.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "../../node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "../../node_modules/classnames/index.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "../../node_modules/react-bootstrap/esm/ThemeProvider.js");
+/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "./node_modules/react-bootstrap/esm/ThemeProvider.js");
 
 
 
@@ -822,10 +1856,10 @@ Row.defaultProps = defaultProps;
 
 /***/ }),
 
-/***/ "../../node_modules/react-bootstrap/esm/ThemeProvider.js":
-/*!********************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-bootstrap/esm/ThemeProvider.js ***!
-  \********************************************************************************************/
+/***/ "./node_modules/react-bootstrap/esm/ThemeProvider.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/react-bootstrap/esm/ThemeProvider.js ***!
+  \***********************************************************/
 /*! exports provided: useBootstrapPrefix, createBootstrapComponent, ThemeConsumer, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -834,8 +1868,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useBootstrapPrefix", function() { return useBootstrapPrefix; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBootstrapComponent", function() { return createBootstrapComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThemeConsumer", function() { return Consumer; });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "../../node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 
 
@@ -887,24 +1921,24 @@ function createBootstrapComponent(Component, opts) {
 
 /***/ }),
 
-/***/ "../../node_modules/react-bootstrap/esm/createWithBsPrefix.js":
-/*!*************************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-bootstrap/esm/createWithBsPrefix.js ***!
-  \*************************************************************************************************/
+/***/ "./node_modules/react-bootstrap/esm/createWithBsPrefix.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/react-bootstrap/esm/createWithBsPrefix.js ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return createWithBsPrefix; });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "../../node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "../../node_modules/classnames/index.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var dom_helpers_camelize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! dom-helpers/camelize */ "../../node_modules/dom-helpers/esm/camelize.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var dom_helpers_camelize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! dom-helpers/camelize */ "./node_modules/dom-helpers/esm/camelize.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ThemeProvider */ "../../node_modules/react-bootstrap/esm/ThemeProvider.js");
+/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ThemeProvider */ "./node_modules/react-bootstrap/esm/ThemeProvider.js");
 
 
 
@@ -944,19 +1978,19 @@ function createWithBsPrefix(prefix, _temp) {
 
 /***/ }),
 
-/***/ "../../node_modules/react-bootstrap/esm/divWithClassName.js":
-/*!***********************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-bootstrap/esm/divWithClassName.js ***!
-  \***********************************************************************************************/
+/***/ "./node_modules/react-bootstrap/esm/divWithClassName.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/react-bootstrap/esm/divWithClassName.js ***!
+  \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "../../node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "../../node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
 /* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -972,10 +2006,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "../../node_modules/react-dom/cjs/react-dom.development.js":
-/*!**********************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-dom/cjs/react-dom.development.js ***!
-  \**********************************************************************************************/
+/***/ "./node_modules/react-dom/cjs/react-dom.development.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/react-dom/cjs/react-dom.development.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -997,11 +2031,11 @@ if (true) {
   (function() {
 'use strict';
 
-var React = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-var _assign = __webpack_require__(/*! object-assign */ "../../node_modules/react-dom/node_modules/object-assign/index.js");
-var Scheduler = __webpack_require__(/*! scheduler */ "../../node_modules/scheduler/index.js");
-var checkPropTypes = __webpack_require__(/*! prop-types/checkPropTypes */ "../../node_modules/prop-types/checkPropTypes.js");
-var tracing = __webpack_require__(/*! scheduler/tracing */ "../../node_modules/scheduler/tracing.js");
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var _assign = __webpack_require__(/*! object-assign */ "./node_modules/react-dom/node_modules/object-assign/index.js");
+var Scheduler = __webpack_require__(/*! scheduler */ "./node_modules/scheduler/index.js");
+var checkPropTypes = __webpack_require__(/*! prop-types/checkPropTypes */ "./node_modules/prop-types/checkPropTypes.js");
+var tracing = __webpack_require__(/*! scheduler/tracing */ "./node_modules/scheduler/tracing.js");
 
 var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED; // Prevent newer renderers from RTE when used with older react package versions.
 // Current owner and dispatcher used to share the same ref,
@@ -26030,10 +27064,10 @@ exports.version = ReactVersion;
 
 /***/ }),
 
-/***/ "../../node_modules/react-dom/index.js":
-/*!**************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-dom/index.js ***!
-  \**************************************************************************/
+/***/ "./node_modules/react-dom/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/react-dom/index.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26069,16 +27103,16 @@ function checkDCE() {
 }
 
 if (false) {} else {
-  module.exports = __webpack_require__(/*! ./cjs/react-dom.development.js */ "../../node_modules/react-dom/cjs/react-dom.development.js");
+  module.exports = __webpack_require__(/*! ./cjs/react-dom.development.js */ "./node_modules/react-dom/cjs/react-dom.development.js");
 }
 
 
 /***/ }),
 
-/***/ "../../node_modules/react-dom/node_modules/object-assign/index.js":
-/*!*****************************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react-dom/node_modules/object-assign/index.js ***!
-  \*****************************************************************************************************/
+/***/ "./node_modules/react-dom/node_modules/object-assign/index.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/react-dom/node_modules/object-assign/index.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26177,10 +27211,10 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 /***/ }),
 
-/***/ "../../node_modules/react/cjs/react.development.js":
-/*!**************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react/cjs/react.development.js ***!
-  \**************************************************************************************/
+/***/ "./node_modules/react/cjs/react.development.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/react/cjs/react.development.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26202,8 +27236,8 @@ if (true) {
   (function() {
 'use strict';
 
-var _assign = __webpack_require__(/*! object-assign */ "../../node_modules/react/node_modules/object-assign/index.js");
-var checkPropTypes = __webpack_require__(/*! prop-types/checkPropTypes */ "../../node_modules/prop-types/checkPropTypes.js");
+var _assign = __webpack_require__(/*! object-assign */ "./node_modules/react/node_modules/object-assign/index.js");
+var checkPropTypes = __webpack_require__(/*! prop-types/checkPropTypes */ "./node_modules/prop-types/checkPropTypes.js");
 
 var ReactVersion = '16.13.0';
 
@@ -28101,10 +29135,10 @@ exports.version = ReactVersion;
 
 /***/ }),
 
-/***/ "../../node_modules/react/index.js":
-/*!**********************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react/index.js ***!
-  \**********************************************************************/
+/***/ "./node_modules/react/index.js":
+/*!*************************************!*\
+  !*** ./node_modules/react/index.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28112,16 +29146,16 @@ exports.version = ReactVersion;
 
 
 if (false) {} else {
-  module.exports = __webpack_require__(/*! ./cjs/react.development.js */ "../../node_modules/react/cjs/react.development.js");
+  module.exports = __webpack_require__(/*! ./cjs/react.development.js */ "./node_modules/react/cjs/react.development.js");
 }
 
 
 /***/ }),
 
-/***/ "../../node_modules/react/node_modules/object-assign/index.js":
-/*!*************************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/react/node_modules/object-assign/index.js ***!
-  \*************************************************************************************************/
+/***/ "./node_modules/react/node_modules/object-assign/index.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/react/node_modules/object-assign/index.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28220,10 +29254,10 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 /***/ }),
 
-/***/ "../../node_modules/regenerator-runtime/runtime.js":
-/*!**************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/regenerator-runtime/runtime.js ***!
-  \**************************************************************************************/
+/***/ "./node_modules/regenerator-runtime/runtime.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -28958,10 +29992,10 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 /***/ }),
 
-/***/ "../../node_modules/scheduler/cjs/scheduler-tracing.development.js":
-/*!******************************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/scheduler/cjs/scheduler-tracing.development.js ***!
-  \******************************************************************************************************/
+/***/ "./node_modules/scheduler/cjs/scheduler-tracing.development.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/scheduler/cjs/scheduler-tracing.development.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29319,10 +30353,10 @@ exports.unstable_wrap = unstable_wrap;
 
 /***/ }),
 
-/***/ "../../node_modules/scheduler/cjs/scheduler.development.js":
-/*!**********************************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/scheduler/cjs/scheduler.development.js ***!
-  \**********************************************************************************************/
+/***/ "./node_modules/scheduler/cjs/scheduler.development.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/scheduler/cjs/scheduler.development.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30189,1079 +31223,37 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 
 /***/ }),
 
-/***/ "../../node_modules/scheduler/index.js":
-/*!**************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/scheduler/index.js ***!
-  \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-if (false) {} else {
-  module.exports = __webpack_require__(/*! ./cjs/scheduler.development.js */ "../../node_modules/scheduler/cjs/scheduler.development.js");
-}
-
-
-/***/ }),
-
-/***/ "../../node_modules/scheduler/tracing.js":
-/*!****************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/scheduler/tracing.js ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-if (false) {} else {
-  module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "../../node_modules/scheduler/cjs/scheduler-tracing.development.js");
-}
-
-
-/***/ }),
-
-/***/ "../js/modules/react/spinnerComponent.js":
-/*!***********************************************!*\
-  !*** ../js/modules/react/spinnerComponent.js ***!
-  \***********************************************/
-/*! exports provided: SpinnerComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpinnerComponent", function() { return SpinnerComponent; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-"use strict;";
-
-
-function SpinnerComponent(props) {
-  var showSpinner = props.show || false;
-  var hideClass = !showSpinner ? "d-none" : "";
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "spinner",
-    className: "".concat(hideClass, " spinner-container overlay")
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "loader",
-    className: "".concat(hideClass, " item loading")
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "spinner"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "circle circle-1"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "circle-inner"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "circle circle-2"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "circle-inner"
-  })))));
-}
-;
-
-/***/ }),
-
-/***/ "../js/modules/utils/configUtil.js":
+/***/ "./node_modules/scheduler/index.js":
 /*!*****************************************!*\
-  !*** ../js/modules/utils/configUtil.js ***!
+  !*** ./node_modules/scheduler/index.js ***!
   \*****************************************/
-/*! exports provided: ConfigUtil */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfigUtil", function() { return ConfigUtil; });
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../config.json */ "../../config.json");
-var _config_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../../../config.json */ "../../config.json", 1);
-"use strict;";
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-var ConfigUtil =
-/*#__PURE__*/
-function () {
-  function ConfigUtil() {
-    _classCallCheck(this, ConfigUtil);
-  }
+if (false) {} else {
+  module.exports = __webpack_require__(/*! ./cjs/scheduler.development.js */ "./node_modules/scheduler/cjs/scheduler.development.js");
+}
 
-  _createClass(ConfigUtil, null, [{
-    key: "get",
-    value: function get(applicationFolder) {
-      var application = applicationFolder ? _config_json__WEBPACK_IMPORTED_MODULE_0__.applications.filter(function (x) {
-        return x.folder.toLowerCase() === applicationFolder.toLowerCase();
-      }) : [];
-      var result = application.length > 0 ? application[0] : _config_json__WEBPACK_IMPORTED_MODULE_0__;
-      return result;
-    }
-  }]);
-
-  return ConfigUtil;
-}();
 
 /***/ }),
 
-/***/ "../js/modules/utils/webGLCheckerUtil.js":
-/*!***********************************************!*\
-  !*** ../js/modules/utils/webGLCheckerUtil.js ***!
-  \***********************************************/
-/*! exports provided: WebGLCheckerUtil */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/scheduler/tracing.js":
+/*!*******************************************!*\
+  !*** ./node_modules/scheduler/tracing.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WebGLCheckerUtil", function() { return WebGLCheckerUtil; });
-"use strict;";
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+if (false) {} else {
+  module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
+}
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var WebGLCheckerUtil =
-/*#__PURE__*/
-function () {
-  function WebGLCheckerUtil() {
-    _classCallCheck(this, WebGLCheckerUtil);
-  }
-
-  _createClass(WebGLCheckerUtil, null, [{
-    key: "isWebGLAvailable",
-    value: function isWebGLAvailable() {
-      try {
-        var canvas = document.createElement('canvas');
-        return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
-      } catch (e) {
-        return false;
-      }
-    }
-  }, {
-    key: "isWebGL2Available",
-    value: function isWebGL2Available() {
-      try {
-        var canvas = document.createElement('canvas');
-        return !!(window.WebGL2RenderingContext && canvas.getContext('webgl2'));
-      } catch (e) {
-        return false;
-      }
-    }
-  }]);
-
-  return WebGLCheckerUtil;
-}();
-
-/***/ }),
-
-/***/ "../typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index.js":
-/*!*****************************************************************************************!*\
-  !*** ../typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index.js ***!
-  \*****************************************************************************************/
-/*! exports provided: ApplicationSortUtil */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApplicationSortUtil", function() { return ApplicationSortUtil; });
-"use strict;";
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var ApplicationSortUtil =
-/*#__PURE__*/
-function () {
-  function ApplicationSortUtil() {
-    _classCallCheck(this, ApplicationSortUtil);
-  }
-
-  _createClass(ApplicationSortUtil, null, [{
-    key: "sorter",
-    value: function sorter(a, b) {
-      var aOrder = a.order || Number.MAX_VALUE;
-      var bOrder = b.order || Number.MAX_VALUE;
-
-      if (aOrder < bOrder) {
-        return -1;
-      }
-
-      if (aOrder > bOrder) {
-        return 1;
-      }
-
-      return 0;
-    }
-  }]);
-
-  return ApplicationSortUtil;
-}();
-
-/***/ }),
-
-/***/ "../typeScript/Utils/stringSearchUtil/dist/index.js":
-/*!**********************************************************!*\
-  !*** ../typeScript/Utils/stringSearchUtil/dist/index.js ***!
-  \**********************************************************/
-/*! exports provided: StringSearchUtil */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StringSearchUtil", function() { return StringSearchUtil; });
-"use strict;";
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var StringSearchUtil =
-/*#__PURE__*/
-function () {
-  function StringSearchUtil() {
-    _classCallCheck(this, StringSearchUtil);
-  }
-
-  _createClass(StringSearchUtil, null, [{
-    key: "searchCriterions",
-    value: function searchCriterions() {
-      var criterions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      var searchTerm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
-      var searchResult = criterions.length > 0 ? criterions.filter(function (criterion) {
-        var searchTerms = searchTerm.split(" ").filter(function (x) {
-          return x;
-        });
-        var searchTermSearch = searchTerms.filter(function (term) {
-          return criterion.toUpperCase().indexOf(term.toUpperCase()) !== -1;
-        });
-        return searchTermSearch.length > 0;
-      }) : [];
-      var result = searchResult.length > 0;
-      return result;
-    }
-  }]);
-
-  return StringSearchUtil;
-}();
-
-StringSearchUtil.searchDoesNotExist = function () {
-  var existingValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-  var searchTerm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
-  return (existingValue || "").toUpperCase().indexOf((searchTerm || "").toUpperCase()) === -1;
-};
-
-StringSearchUtil.combineSearchTerms = function () {
-  var existingValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-  var searchTerm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
-  var result = "".concat(existingValue, " ").concat(searchTerm);
-  return result.trim();
-};
-
-/***/ }),
-
-/***/ "./src/app.js":
-/*!********************!*\
-  !*** ./src/app.js ***!
-  \********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime/runtime */ "../../node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "../../node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Card */ "../../node_modules/react-bootstrap/esm/Card.js");
-/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Badge */ "../../node_modules/react-bootstrap/esm/Badge.js");
-/* harmony import */ var _js_modules_react_spinnerComponent_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/modules/react/spinnerComponent.js */ "../js/modules/react/spinnerComponent.js");
-/* harmony import */ var _typeScript_Utils_stringSearchUtil_dist_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../typeScript/Utils/stringSearchUtil/dist/index */ "../typeScript/Utils/stringSearchUtil/dist/index.js");
-/* harmony import */ var _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../js/modules/utils/webGLCheckerUtil */ "../js/modules/utils/webGLCheckerUtil.js");
-/* harmony import */ var _homeThreeModule_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./homeThreeModule.js */ "./src/homeThreeModule.js");
-/* harmony import */ var _js_modules_utils_configUtil__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../js/modules/utils/configUtil */ "../js/modules/utils/configUtil.js");
-/* harmony import */ var _typeScript_Utils_applicationsSortUtil_dist_Utils_applicationsSortUtil_index__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index */ "../typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index.js");
-"use strict;";
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var FAUX_LOADING_TIME = 500;
-var NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
-var SEARCH_INPUT_ID = "searchInput";
-var MAIN_CONTAINER_ID = "mainContainer";
-var NAV_ID = "navBar";
-var CONTENT_CONTAINER_ID = "contentContainer";
-var IS_BROWSER_VALID = _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_9__["WebGLCheckerUtil"].isWebGL2Available() || _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_9__["WebGLCheckerUtil"].isWebGLAvailable();
-var CONFIG = _js_modules_utils_configUtil__WEBPACK_IMPORTED_MODULE_11__["ConfigUtil"].get();
-var APP_CONFIG = _js_modules_utils_configUtil__WEBPACK_IMPORTED_MODULE_11__["ConfigUtil"].get("home");
-CONFIG.applications.sort(_typeScript_Utils_applicationsSortUtil_dist_Utils_applicationsSortUtil_index__WEBPACK_IMPORTED_MODULE_12__["ApplicationSortUtil"].sorter);
-
-var HomeApp =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(HomeApp, _React$Component);
-
-  function HomeApp(props) {
-    var _this;
-
-    _classCallCheck(this, HomeApp);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(HomeApp).call(this, props));
-    _this.state = {
-      applications: [],
-      applicationsImmutable: [],
-      hasApplications: false,
-      showClear: false,
-      showIntro: false,
-      showSpinner: true,
-      isBrowserValid: true
-    };
-    _this.handleSearchChange = _this.handleSearchChange.bind(_assertThisInitialized(_this));
-    _this.handleQuickFilter = _this.handleQuickFilter.bind(_assertThisInitialized(_this));
-    _this.handleClearSearch = _this.handleClearSearch.bind(_assertThisInitialized(_this));
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.handleScrollBtnClick = _this.handleScrollBtnClick.bind(_assertThisInitialized(_this));
-    _this.handleNavBarScrollClass = _this.handleNavBarScrollClass.bind(_assertThisInitialized(_this));
-    _this.RenderClearBtn = _this.RenderClearBtn.bind(_assertThisInitialized(_this));
-    _this.RenderIntroContainer = _this.RenderIntroContainer.bind(_assertThisInitialized(_this));
-    _this.RenderContenContainer = _this.RenderContenContainer.bind(_assertThisInitialized(_this));
-    _this.RenderCardContainer = _this.RenderCardContainer.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(HomeApp, [{
-    key: "filterApplications",
-    value: function filterApplications(applications, searchTerm) {
-      var filteredApplications = applications.filter(function (application) {
-        var criterions = [application.name, application.subHeading, application.description, application.searchTerms];
-        var result = application.active && application.include ? _typeScript_Utils_stringSearchUtil_dist_index__WEBPACK_IMPORTED_MODULE_8__["StringSearchUtil"].searchCriterions(criterions, searchTerm) : false;
-        return result;
-      });
-      return filteredApplications;
-    }
-  }, {
-    key: "handleSearch",
-    value: function handleSearch(searchTerm) {
-      if (searchTerm.length > 0) {
-        var filteredApplications = this.filterApplications(this.state.applicationsImmutable, searchTerm);
-        this.setState({
-          applications: filteredApplications,
-          showClear: true
-        });
-      } else {
-        this.setState({
-          applications: this.state.applicationsImmutable,
-          showClear: false
-        });
-      }
-    }
-  }, {
-    key: "handleSearchChange",
-    value: function handleSearchChange(event) {
-      var searchTerm = event.target.value;
-      this.handleSearch(searchTerm);
-    }
-  }, {
-    key: "handleQuickFilter",
-    value: function handleQuickFilter(event) {
-      var searchTerm = event.target.value;
-      var element = document.getElementById(SEARCH_INPUT_ID);
-      var existingValue = element.value;
-
-      if (_typeScript_Utils_stringSearchUtil_dist_index__WEBPACK_IMPORTED_MODULE_8__["StringSearchUtil"].searchDoesNotExist(existingValue, searchTerm)) {
-        var combinedSearch = _typeScript_Utils_stringSearchUtil_dist_index__WEBPACK_IMPORTED_MODULE_8__["StringSearchUtil"].combineSearchTerms(existingValue, searchTerm);
-        element.value = combinedSearch;
-        this.handleSearch(combinedSearch);
-      }
-    }
-  }, {
-    key: "handleClearSearch",
-    value: function handleClearSearch() {
-      var element = document.getElementById(SEARCH_INPUT_ID);
-      element.value = "";
-      this.setState({
-        applications: this.state.applicationsImmutable,
-        showClear: false
-      });
-    }
-  }, {
-    key: "addNavBarScrollDownClass",
-    value: function addNavBarScrollDownClass() {
-      var condition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var navbar = document.getElementById(NAV_ID);
-
-      if (condition) {
-        navbar.classList.remove(NAVBAR_SCROLL_DOWN_CLASS);
-      } else {
-        navbar.classList.add(NAVBAR_SCROLL_DOWN_CLASS);
-      }
-    }
-  }, {
-    key: "isScrollYAtZero",
-    value: function isScrollYAtZero() {
-      return window.scrollY === 0;
-    }
-  }, {
-    key: "handleNavBarScrollClass",
-    value: function handleNavBarScrollClass() {
-      this.addNavBarScrollDownClass(this.isScrollYAtZero());
-    }
-  }, {
-    key: "addNavbarTransScrollEventListener",
-    value: function addNavbarTransScrollEventListener() {
-      this.addNavBarScrollDownClass();
-      window.addEventListener("scroll", this.handleNavBarScrollClass);
-    }
-  }, {
-    key: "handleScrollBtnClick",
-    value: function handleScrollBtnClick(event) {
-      event.preventDefault();
-      var container = document.getElementById(CONTENT_CONTAINER_ID);
-      window.scrollTo({
-        top: container.offsetTop - 50,
-        left: 0,
-        behavior: "smooth"
-      });
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(event) {
-      event.preventDefault();
-    }
-  }, {
-    key: "delayAppRender",
-    value: function delayAppRender() {
-      var _this2 = this;
-
-      setTimeout(function () {
-        _this2.removeDarkClass();
-
-        _this2.setState({
-          applications: CONFIG.applications,
-          applicationsImmutable: CONFIG.applications,
-          hasApplications: true,
-          showIntro: true,
-          showSpinner: false
-        });
-      }, FAUX_LOADING_TIME);
-    }
-  }, {
-    key: "removeDarkClass",
-    value: function removeDarkClass() {
-      var mainContainer = document.getElementById(MAIN_CONTAINER_ID);
-      mainContainer.classList.remove("bg-dark");
-    }
-  }, {
-    key: "getElementFadeClass",
-    value: function getElementFadeClass() {
-      var condition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var fadeClass = "fade-element";
-      fadeClass = condition ? "".concat(fadeClass, " in") : fadeClass;
-      return fadeClass;
-    }
-  }, {
-    key: "RenderClearBtn",
-    value: function RenderClearBtn() {
-      if (this.state.showClear) {
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          className: "input-group-append",
-          id: "cancelBtn"
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-          className: "btn",
-          type: "button",
-          onClick: this.handleClearSearch
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "lr"
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-          className: "rl"
-        }))));
-      }
-
-      return null;
-    }
-  }, {
-    key: "RenderIntroContainer",
-    value: function RenderIntroContainer(props) {
-      var fadeClass = this.getElementFadeClass(props.fadeIn);
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "bg-dark",
-        id: "introContainer"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "introContent",
-        className: fadeClass
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "canvasContainer"
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "introContentInner"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "introImage",
-        className: "text-center element"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        className: "img-fluid",
-        src: "images/FSLogo.png",
-        alt: "Logo"
-      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "introHeadings",
-        className: "text-center element"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
-        className: "display-4 mb-0"
-      }, CONFIG.author), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h4", {
-        className: "display-4 sub-heading lead text-white"
-      }, CONFIG.role)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "btnContainer",
-        className: "text-center element pt-2"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-outline-light",
-        onClick: this.handleScrollBtnClick
-      }, "View Portfolio")))));
-    }
-  }, {
-    key: "RenderApplicationCards",
-    value: function RenderApplicationCards(props) {
-      if (props.condition) {
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          className: "grid-item",
-          key: "".concat(props.application.name)
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Body, null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Title, null, props.application.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Text, null, props.application.subHeading), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
-          className: "btn btn-outline-dark btn-sm card-link",
-          href: "".concat(CONFIG.prefix).concat(props.application.folder, "/index.html")
-        }, "View application"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          className: "mt-3"
-        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__["default"], null, props.application.labels ? props.application.labels.map(function (x) {
-          var label = CONFIG.labels[x];
-          return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_6__["default"], {
-            key: x,
-            variant: label["class"],
-            className: "text-light mr-2"
-          }, label.name);
-        }) : null))));
-      } else {
-        return null;
-      }
-    }
-  }, {
-    key: "RenderCardContainer",
-    value: function RenderCardContainer(props) {
-      var _this3 = this;
-
-      if (props.applications.length > 0) {
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-          id: "applicationsContainer",
-          className: "card-columns"
-        }, props.applications.map(function (application) {
-          return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_this3.RenderApplicationCards, {
-            application: application,
-            condition: application.active && application.include
-          });
-        }));
-      } else {
-        return null;
-      }
-    }
-  }, {
-    key: "RenderContenContainer",
-    value: function RenderContenContainer() {
-      var fadeClass = this.getElementFadeClass(this.state.hasApplications);
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "".concat(fadeClass, " container-fluid pt-4 mt-5"),
-        id: "contentContainer"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-lg-12"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
-        className: "display-4"
-      }, APP_CONFIG.name))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-lg-12"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, APP_CONFIG.subHeading), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
-        className: "text-muted"
-      }, APP_CONFIG.description), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-        onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        id: "searchBar",
-        className: "input-group mb-3"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "input-group-prepend"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-        className: "input-group-text"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-        className: "fa fa-search"
-      }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        placeholder: "Search applications...",
-        id: "searchInput",
-        onChange: this.handleSearchChange
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.RenderClearBtn, null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "input-group-append"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        id: "openFilterBtn",
-        className: "btn btn-dark",
-        type: "button",
-        "data-toggle": "collapse",
-        "data-target": "#filterContainer",
-        "aria-expanded": "false",
-        "aria-controls": "filterContainer"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-        className: "fa fa-filter"
-      })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "collapse",
-        id: "filterContainer"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "pb-3"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "d-flex flex-row justify-content-center"
-      }, "Quick search"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "btn-group d-flex flex-row justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-outline-dark flex-grow-0",
-        value: "React",
-        onClick: this.handleQuickFilter
-      }, "React"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-outline-dark flex-grow-0",
-        value: "TypeScript",
-        onClick: this.handleQuickFilter
-      }, "TypeScript"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-outline-dark flex-grow-0",
-        value: ".NET Core",
-        onClick: this.handleQuickFilter
-      }, ".NET Core"))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.RenderCardContainer, {
-        applications: this.state.applications.filter(function (x) {
-          return x.featured;
-        })
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.RenderCardContainer, {
-        applications: this.state.applications.filter(function (x) {
-          return !x.featured;
-        })
-      }));
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.delayAppRender();
-      this.addNavbarTransScrollEventListener();
-
-      if (IS_BROWSER_VALID) {
-        _homeThreeModule_js__WEBPACK_IMPORTED_MODULE_10__["HomeThreeModule"].then(function (homeThreeModule) {
-          return homeThreeModule.init();
-        });
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_js_modules_react_spinnerComponent_js__WEBPACK_IMPORTED_MODULE_7__["SpinnerComponent"], {
-        show: this.state.showSpinner
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.RenderIntroContainer, {
-        fadeIn: this.state.showIntro
-      }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.RenderContenContainer, null));
-    }
-  }]);
-
-  return HomeApp;
-}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
-
-react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(HomeApp, null), document.getElementById('result'));
-
-/***/ }),
-
-/***/ "./src/homeThreeModule.js":
-/*!********************************!*\
-  !*** ./src/homeThreeModule.js ***!
-  \********************************/
-/*! exports provided: HomeThreeModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeThreeModule", function() { return HomeThreeModule; });
-"use strict;";
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-var HomeThreeModule = _asyncToGenerator(
-/*#__PURE__*/
-regeneratorRuntime.mark(function _callee() {
-  var THREE, CANNON, DAMPING, TIMESTEP, XROTATION, OBJECT_LIMIT, _containerId, _container, _scene, _camera, _renderer, _world, _raycaster, _mouse, _fragmentGroup, initPhysics, initScene, setCameraPosition, setRenderer, setResizeEventHandler, animateParticles, createParticles, createFragments, animateFragments, createCube, createCubes, addLight, updatePhysics, setAnimationLoop, createPlane, objectsReact, setMouseMoved, init;
-
-  return regeneratorRuntime.wrap(function _callee$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          _context.next = 2;
-          return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! three */ "../../node_modules/three/build/three.module.js"));
-
-        case 2:
-          THREE = _context.sent;
-          _context.next = 5;
-          return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.t.bind(null, /*! cannon */ "../../node_modules/cannon/build/cannon.js", 7));
-
-        case 5:
-          CANNON = _context.sent;
-          DAMPING = 0.9;
-          TIMESTEP = 1.0 / 60.0;
-          XROTATION = -Math.PI / 2;
-          OBJECT_LIMIT = 20;
-
-          initPhysics = function initPhysics() {
-            _world = new CANNON.World();
-
-            _world.gravity.set(0, -10, 0);
-
-            _world.broadphase = new CANNON.NaiveBroadphase();
-            _world.solver.iterations = 10;
-          };
-
-          initScene = function initScene() {
-            _containerId = "canvasContainer";
-            _container = document.getElementById(_containerId);
-            _scene = new THREE.Scene();
-            _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
-            _mouse = new THREE.Vector3();
-            _raycaster = new THREE.Raycaster();
-            _fragmentGroup = new THREE.Object3D();
-          };
-
-          setCameraPosition = function setCameraPosition() {
-            _camera.position.x = 0;
-            _camera.position.y = 4;
-            _camera.position.z = 10;
-          };
-
-          setRenderer = function setRenderer() {
-            var container = document.getElementById(_containerId);
-            _renderer = new THREE.WebGLRenderer({
-              antialias: true,
-              alpha: true
-            });
-
-            _renderer.setSize(container.offsetWidth, container.offsetHeight);
-
-            _renderer.shadowMap.enabled = true;
-            _renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            container.appendChild(_renderer.domElement);
-          };
-
-          setResizeEventHandler = function setResizeEventHandler() {
-            window.addEventListener("resize", function () {
-              var container = document.getElementById(_containerId);
-
-              _renderer.setSize(container.offsetWidth, container.offsetHeight);
-
-              _camera.aspect = container.offsetWidth / container.offsetHeight;
-
-              _camera.updateProjectionMatrix();
-            });
-          };
-
-          animateParticles = function animateParticles() {
-            var time = Date.now() * 0.000001;
-
-            for (var i = 0; i < _scene.children.length; i++) {
-              var object = _scene.children[i];
-
-              if (object instanceof THREE.Points) {
-                object.rotation.y = time * (i < 4 ? i + 1 : -(i + 1));
-              }
-            }
-          };
-
-          createParticles = function createParticles() {
-            var numberOfParticles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10000;
-            var numberOfparticleGroups = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5;
-            var verticies = [];
-
-            for (var i = 0; i < numberOfParticles; i++) {
-              var x = THREE.MathUtils.randFloatSpread(2000);
-              var y = THREE.MathUtils.randFloatSpread(2000);
-              var z = THREE.MathUtils.randFloatSpread(3000);
-              verticies.push(x, y, z);
-            }
-
-            var geometry = new THREE.BufferGeometry();
-            geometry.setAttribute("position", new THREE.Float32BufferAttribute(verticies, 3));
-            var material = new THREE.PointsMaterial({
-              size: 0.5
-            });
-
-            for (var _i = 0; _i < numberOfparticleGroups; _i++) {
-              var particles = new THREE.Points(geometry, material);
-              particles.rotation.x = Math.random() * 6;
-              particles.rotation.y = Math.random() * 6;
-              particles.rotation.z = Math.random() * 6;
-
-              _scene.add(particles);
-            }
-          };
-
-          createFragments = function createFragments(numberOfFragments) {
-            var geometry = new THREE.CircleGeometry(5, 10);
-            var material = new THREE.MeshPhysicalMaterial({
-              color: 0xFFFFFF,
-              side: THREE.DoubleSide
-            });
-
-            for (var i = 0; i < numberOfFragments; i++) {
-              var scale = THREE.MathUtils.randFloat(0.01, 0.02);
-              var fragment = new THREE.Mesh(geometry, material);
-              fragment.position.set(THREE.MathUtils.randFloat(-300, 200), THREE.MathUtils.randFloat(5, 50), THREE.MathUtils.randFloat(5, 50));
-              fragment.rotation.set(THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05));
-              fragment.scale.set(scale, scale, scale);
-              fragment.speedValue = THREE.MathUtils.randFloat(-0.25, 0.70);
-
-              _fragmentGroup.add(fragment);
-            }
-
-            _scene.add(_fragmentGroup);
-          };
-
-          animateFragments = function animateFragments() {
-            for (var i = 0; i < _fragmentGroup.children.length; i++) {
-              var fragment = _fragmentGroup.children[i];
-              fragment.rotation.x += fragment.speedValue / 10;
-              fragment.rotation.y += fragment.speedValue / 10;
-              fragment.rotation.z += fragment.speedValue / 10;
-            }
-
-            ;
-            _fragmentGroup.rotation.y += 0.004;
-          };
-
-          createCube = function createCube() {
-            var x = Math.random() * 0.3 + 1;
-            var y = 15;
-            var z = 0;
-            var scale = Math.random() - Math.random() * 0.5 + 1;
-            var meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
-            var meshMaterial = new THREE.MeshLambertMaterial({
-              color: 0x5c6670
-            });
-            var mesh = new THREE.Mesh(meshGeometry, meshMaterial);
-            mesh.position.set(x, y, z);
-            mesh.updatePhysics = true;
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
-            var shape = new CANNON.Box(new CANNON.Vec3(scale / 2, scale / 2, scale / 2));
-            var bodyMaterial = new CANNON.Material();
-            var body = new CANNON.Body({
-              mass: 5,
-              material: bodyMaterial
-            });
-            body.addShape(shape);
-            body.position.set(x, y, z);
-            body.linearDamping = DAMPING;
-            body.updatePhysics = true;
-            body.isCube = true;
-            body.angularVelocity.set(1, 0.5, 1);
-            return {
-              mesh: mesh,
-              body: body
-            };
-          };
-
-          createCubes = function createCubes() {
-            if (_world.bodies.filter(function (x) {
-              return x.isCube;
-            }).length <= OBJECT_LIMIT) {
-              var object = createCube();
-
-              _world.addBody(object.body);
-
-              _scene.add(object.mesh);
-            }
-          };
-
-          addLight = function addLight() {
-            var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0xFFFFFF;
-            var intensity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-            var distance = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
-            var x = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-            var y = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-            var z = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
-            var light = new THREE.SpotLight(color, intensity, distance);
-            light.position.set(x, y, z);
-            light.penumbra = 1;
-            light.castShadow = true; //light.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 100, 1, 10, 2500 ) );
-            //light.shadow.bias = 0.0001;
-            //light.shadow.mapSize.width = 2560;
-            //light.shadow.mapSize.height = 2560;
-
-            light.shadow.mapSize.width = 2560; // default
-
-            light.shadow.mapSize.height = 2560; // default
-
-            light.shadow.camera.near = 0.5; // default
-
-            light.shadow.camera.far = 500; // default
-
-            light.shadow.focus = 1; // default
-
-            _scene.add(light);
-          };
-
-          updatePhysics = function updatePhysics() {
-            _world.step(TIMESTEP);
-
-            var bodies = _world.bodies.filter(function (x) {
-              return x.updatePhysics;
-            });
-
-            var meshes = _scene.children.filter(function (x) {
-              return x.updatePhysics;
-            });
-
-            if (bodies.length === meshes.length) {
-              for (var i = 0; i < meshes.length; i++) {
-                var mesh = meshes[i];
-                var body = bodies[i];
-                mesh.position.copy(body.position);
-                mesh.quaternion.copy(body.quaternion);
-              }
-            }
-          };
-
-          setAnimationLoop = function setAnimationLoop() {
-            _renderer.setAnimationLoop(function () {
-              animateParticles();
-              updatePhysics();
-              animateFragments();
-
-              _renderer.render(_scene, _camera);
-            });
-          };
-
-          createPlane = function createPlane() {
-            var planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 1, 1);
-            var planeMaterial = new THREE.MeshPhongMaterial({
-              color: 0x2e3338,
-              shininess: 150
-            });
-            var ground = new THREE.Mesh(planeGeometry, planeMaterial);
-            ground.rotation.x = XROTATION;
-            ground.receiveShadow = true;
-
-            _scene.add(ground);
-
-            var groundShape = new CANNON.Plane();
-            var groundMaterial = new CANNON.Material();
-            var groundBody = new CANNON.Body({
-              mass: 0,
-              material: groundMaterial
-            });
-            groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), XROTATION);
-            groundBody.addShape(groundShape);
-
-            _world.add(groundBody);
-          };
-
-          objectsReact = function objectsReact(event) {
-            event.preventDefault();
-            _mouse.x = event.clientX / window.innerWidth * 2 - 1;
-            _mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-            _mouse.z = 0.5;
-
-            _raycaster.setFromCamera(_mouse, _camera);
-
-            var intersects = _raycaster.intersectObjects(_scene.children, true);
-
-            if (intersects.length > 0) {
-              var object = intersects[0].object;
-
-              if (object.updatePhysics) {
-                var matchingBody = _world.bodies.filter(function (x) {
-                  return x.position.x === object.position.x && x.position.y === object.position.y && x.position.z === object.position.z;
-                });
-
-                if (matchingBody.length > 0) {
-                  var body = matchingBody[0];
-                  var x = _mouse.x * 10;
-                  var y = _mouse.y * 10;
-                  body.angularVelocity.set(x, y, 0);
-                }
-              }
-            }
-          };
-
-          setMouseMoved = function setMouseMoved() {
-            window.addEventListener("mousemove", objectsReact);
-          };
-
-          init = function init() {
-            initScene();
-            initPhysics();
-            createPlane();
-            setCameraPosition();
-            setRenderer();
-            setResizeEventHandler();
-            setInterval(createCubes, 1000);
-            createParticles(20000, 10);
-            createFragments(25);
-            addLight(0xFFFFFF, 2, 500, 0, 10, 5);
-            setMouseMoved();
-            setAnimationLoop();
-          };
-
-          return _context.abrupt("return", {
-            init: init
-          });
-
-        case 29:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, _callee);
-}))();
 
 /***/ })
 

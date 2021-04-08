@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
-/***/ "../../node_modules/cannon/build/cannon.js":
-/*!******************************************************************************!*\
-  !*** /Users/fabiosereno/sites/portfolio/node_modules/cannon/build/cannon.js ***!
-  \******************************************************************************/
+/***/ "./node_modules/cannon/build/cannon.js":
+/*!*********************************************!*\
+  !*** ./node_modules/cannon/build/cannon.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
