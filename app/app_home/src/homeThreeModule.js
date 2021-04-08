@@ -168,11 +168,13 @@ export const HomeThreeModule = (async () => {
     const addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
         let light = new THREE.SpotLight(color, intensity, distance);
         light.position.set(x,y,z);
+        light.penumbra = 1;
         light.castShadow = true;
-        light.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 100, 1, 10, 2500 ) );
-        light.shadow.bias = 0.0001;
         light.shadow.mapSize.width = 2560;
         light.shadow.mapSize.height = 2560;
+        light.shadow.camera.near = 0.5;
+        light.shadow.camera.far = 500;
+        light.shadow.focus = 1;
         _scene.add( light );
     }
 
@@ -268,7 +270,7 @@ export const HomeThreeModule = (async () => {
         setInterval(createCubes, 1000);
         createParticles(20000, 10);
         createFragments(25);
-        addLight(0xFFFFFF, 2, 1000, 10, 20, 10);
+        addLight(0xFFFFFF, 2, 500, 0, 10, 5);
         setMouseMoved();
         setAnimationLoop();
     }
