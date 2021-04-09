@@ -84,7 +84,6 @@
     "@reduxjs/toolkit": "^1.4.0",
     "aframe": "^1.0.4",
     "aframe-animation-component": "^5.1.2",
-    "aframe-cursor-teleport-component": "0.0.3",
     "aframe-teleport-controls": "^0.3.1",
     "bootstrap": "^4.5.3",
     "bootstrap-icons": "^1.4.0",
