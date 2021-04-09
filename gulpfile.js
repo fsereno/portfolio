@@ -28,7 +28,7 @@ Usage...
 const gulp = require("gulp");
 const useref = require("gulp-useref");
 const sass = require("gulp-sass");
-const pug = require("gulp-pug");
+const pug = require("gulp-pug-3");
 const mocha = require("gulp-mocha");
 const connect = require("gulp-connect");
 const logger = require("gulp-logger");
