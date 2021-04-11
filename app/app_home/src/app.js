@@ -15,6 +15,10 @@ import { HomeThreeModule } from "./homeThreeModule.js";
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { ApplicationSortUtil } from "../../typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index";
 
+import { ApplicationsContextProvider } from './components/contextProviders/applicationsContextProvider';
+import { ContentContainer } from './components/contentContainer';
+import { IntroContainer } from './components/introContainer';
+
 const FAUX_LOADING_TIME = 500;
 const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
 const SEARCH_INPUT_ID = "searchInput";
@@ -183,7 +187,7 @@ class HomeApp extends React.Component {
     return (
       <div className="bg-dark" id="introContainer">
         <div id="introContent" className={fadeClass}>
-          <div id="canvasContainer"></div>
+          <div id="canvasContainerX"></div>
           <div id="introContentInner">
             <div id="introImage" className="text-center element">
               <img className="img-fluid" src="images/FSLogo.png" alt="Logo" />
@@ -310,16 +314,31 @@ class HomeApp extends React.Component {
         <SpinnerComponent
           show={this.state.showSpinner}
         />
-        <this.RenderIntroContainer
+        {/*<this.RenderIntroContainer
           fadeIn={this.state.showIntro}
         />
-        <this.RenderContenContainer/>
+        <this.RenderContenContainer/>*/
+        }
       </div>
     );
   }
 }
 
+function App() {
+  return (
+    <ApplicationsContextProvider>
+        <IntroContainer/>
+        <ContentContainer/>
+    </ApplicationsContextProvider>
+  )
+}
+
 ReactDOM.render(
   <HomeApp />,
   document.getElementById('result')
+);
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('app')
 );
