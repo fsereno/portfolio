@@ -1,18 +1,15 @@
 "use strict;"
 
 import React, { useState } from 'react';
-import { ApplicationsContext } from '../../contexts';
-import { ConfigUtil } from '../../../../js/modules/utils/configUtil';
+import { ApplicationsContext, ConfigContext } from '../../contexts';
 
 export function ApplicationsContextProvider({children}) {
 
-    const CONFIG = ConfigUtil.get();
+    const configContext = React.useContext(ConfigContext);
 
-    const APP_CONFIG = ConfigUtil.get("home");
+    const [ applications, setApplications ] = useState(configContext.config.applications);
 
-    const [ applications, setApplications ] = useState(CONFIG.applications);
-
-    const context = { config: CONFIG, appConfig: APP_CONFIG, applications: applications, set: setApplications }
+    const context = { applications, set: setApplications }
 
     return (
         <ApplicationsContext.Provider value={context}>

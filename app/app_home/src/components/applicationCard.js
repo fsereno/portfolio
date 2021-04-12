@@ -5,11 +5,11 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
-import { ApplicationsContext } from '../contexts';
+import { ConfigContext } from '../contexts';
 
 export function ApplicationCard(props) {
 
-    const context = React.useContext(ApplicationsContext);
+    const configContext = React.useContext(ConfigContext);
 
     if (props.condition) {
         return (
@@ -21,11 +21,11 @@ export function ApplicationCard(props) {
                     <Card.Text>
                         {props.application.subHeading}
                     </Card.Text>
-                    <Card.Link className="btn btn-outline-dark btn-sm card-link" href={`${context.config.prefix}${props.application.folder}/index.html`}>View application</Card.Link>
+                    <Card.Link className="btn btn-outline-dark btn-sm card-link" href={`${configContext.config.prefix}${props.application.folder}/index.html`}>View application</Card.Link>
                     <Row className="mt-3">
                         <Col>
                             {props.application.labels ? props.application.labels.map(x => {
-                                const label = context.config.labels[x];
+                                const label = configContext.config.labels[x];
                                 return (
                                     <Badge key={x} variant={label.class} className="text-light mr-2">{label.name}</Badge>
                                 )

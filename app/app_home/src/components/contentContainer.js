@@ -1,22 +1,20 @@
 
 "use strict;"
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { SearchBar } from './searchBar';
-import { ApplicationsContext } from '../contexts';
+import { ConfigContext } from '../contexts';
 import { CardsContainer } from './cardsContainer';
+import { getElementFadeClass } from '../utils/getElementFadeClass';
 
 export function ContentContainer() {
 
-    const context = React.useContext(ApplicationsContext);
+    const context = React.useContext(ConfigContext);
+    const [ fadeClass, setFadeClass ] = useState(getElementFadeClass(false));
 
-    const getElementFadeClass = (condition = false) => {
-        let fadeClass = "fade-element";
-        fadeClass = condition ? `${fadeClass} in` : fadeClass;
-        return fadeClass;
-    }
-
-    let fadeClass = getElementFadeClass(context.applications);
+    useEffect(() => {
+      setFadeClass(getElementFadeClass(true));
+    },[])
 
     return (
       <div className={`${fadeClass} container-fluid pt-4 mt-5`} id="contentContainer">

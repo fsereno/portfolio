@@ -18,6 +18,8 @@ import { ApplicationSortUtil } from "../../typeScript/Utils/applicationsSortUtil
 import { ApplicationsContextProvider } from './components/contextProviders/applicationsContextProvider';
 import { ContentContainer } from './components/contentContainer';
 import { IntroContainer } from './components/introContainer';
+import { SpinnerContextProvider } from "./components/contextProviders/spinnerContextProvider.js";
+import { ConfigContextProvider } from "./components/contextProviders/configContextProvider.js";
 
 const FAUX_LOADING_TIME = 500;
 const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
@@ -161,11 +163,11 @@ class HomeApp extends React.Component {
     mainContainer.classList.remove("bg-dark");
   }
 
-  getElementFadeClass (condition = false) {
+  /*getElementFadeClass (condition = false) {
     let fadeClass = "fade-element";
     fadeClass = condition ? `${fadeClass} in` : fadeClass;
     return fadeClass;
-  }
+  }*/
 
   RenderClearBtn() {
     if (this.state.showClear) {
@@ -311,10 +313,10 @@ class HomeApp extends React.Component {
   render() {
     return (
       <div>
-        <SpinnerComponent
+        {/*<SpinnerComponent
           show={this.state.showSpinner}
         />
-        {/*<this.RenderIntroContainer
+        <this.RenderIntroContainer
           fadeIn={this.state.showIntro}
         />
         <this.RenderContenContainer/>*/
@@ -326,17 +328,21 @@ class HomeApp extends React.Component {
 
 function App() {
   return (
-    <ApplicationsContextProvider>
-        <IntroContainer/>
-        <ContentContainer/>
-    </ApplicationsContextProvider>
+    <ConfigContextProvider>
+      <ApplicationsContextProvider>
+        <SpinnerContextProvider>
+          <IntroContainer/>
+          <ContentContainer/>
+        </SpinnerContextProvider>
+      </ApplicationsContextProvider>
+    </ConfigContextProvider>
   )
 }
 
-ReactDOM.render(
+/*ReactDOM.render(
   <HomeApp />,
   document.getElementById('result')
-);
+);*/
 
 ReactDOM.render(
   <App />,
