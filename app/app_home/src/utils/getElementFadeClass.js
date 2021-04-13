@@ -1,6 +1,7 @@
 "use strict;"
 
 export const getElementFadeClass = (condition = false) => {
-    let fadeClass = "fade-element";
-    return condition ? `${fadeClass} in` : fadeClass;
+    const fadeClass = "fade-element";
+    const action = condition ? "in" : "out";
+    return `${fadeClass} ${action}`;
 }

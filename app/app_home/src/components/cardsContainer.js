@@ -17,20 +17,10 @@ export function CardsContainer() {
             {(featured.length > 0 || applications.length > 0) &&
                 <div id="applicationsContainer">
                     <div className="card-columns">
-                        {featured.map(application => {
-                            return ( <ApplicationCard
-                                application={application}
-                                condition={application.active && application.include} />
-                            )
-                        })}
+                        {featured.map(application => <ApplicationCard application={application}/>)}
                     </div>
                     <div className="card-columns">
-                        {applications.map(application => {
-                            return ( <ApplicationCard
-                                application={application}
-                                condition={application.active && application.include} />
-                            )
-                        })}
+                        {applications.map(application => <ApplicationCard application={application} />)}
                     </div>
               </div>
             }

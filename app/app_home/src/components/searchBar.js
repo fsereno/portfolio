@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { StringSearchUtil } from '../../../typeScript/Utils/stringSearchUtil/dist';
+import { SEARCH_INPUT_ID } from '../constants';
 import { ApplicationsContext } from '../contexts';
 
 export function SearchBar() {
@@ -9,12 +10,23 @@ export function SearchBar() {
     const context = React.useContext(ApplicationsContext);
     const [ showClear, setShowClear ] = useState(false);
 
+    const resetApplications = () => {
+        setShowClear(false);
+        manuallyClearInput();
+        context.setApplications(context.unmodified);
+    }
+
+    const manuallyClearInput = () => {
+        const element = document.getElementById(SEARCH_INPUT_ID);
+        element.value = "";
+    }
+
     const handleSubmit = (event) => event.preventDefault();
 
     const onSearchHandler = (event) => {
-        let searchTerm = event.target.value;
+        const searchTerm = event.target.value;
 
-        if (searchTerm.length > 0) { // perhaps map over instead here changing a prop to show or not
+        if (searchTerm.length > 0) {
             const filteredApplications = context.applications.filter( application => {
 
                 const criterions = [
@@ -24,16 +36,13 @@ export function SearchBar() {
                     application.searchTerms
                 ]
 
-                return application.active && application.include
-                    ? StringSearchUtil.searchCriterions(criterions, searchTerm)
-                    : false
+                return application.include ? StringSearchUtil.searchCriterions(criterions, searchTerm) : false;
             });
             setShowClear(true);
             context.setApplications(filteredApplications);
 
         } else {
-            setShowClear(false);
-            context.setApplications(context.unmodified);
+            resetApplications();
         }
     }
 
@@ -48,7 +57,7 @@ export function SearchBar() {
                 <input type="text" className="form-control" placeholder="Search applications..." id="searchInput" onChange={onSearchHandler}/>
                 {showClear &&
                     <div className="input-group-append" id="cancelBtn">
-                        <button className="btn" type="button" >
+                        <button className="btn" type="button" onClick={resetApplications}>
                             <span className="lr">
                                 <span className="rl"></span>
                             </span>

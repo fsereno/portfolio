@@ -24,11 +24,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ApplicationCard": () => (/* binding */ ApplicationCard)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Card */ "../../node_modules/react-bootstrap/esm/Card.js");
-/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Badge */ "../../node_modules/react-bootstrap/esm/Badge.js");
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Card */ "../../node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Badge */ "../../node_modules/react-bootstrap/esm/Badge.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
+/* harmony import */ var _utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/getElementFadeClass */ "./src/utils/getElementFadeClass.js");
 "use strict;";
 
 
@@ -37,29 +38,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function ApplicationCard(props) {
-  var configContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_1__.ConfigContext);
 
-  if (props.condition) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__.default, {
-      className: "grid-item",
-      key: "".concat(props.application.name)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__.default.Title, null, props.application.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__.default.Text, null, props.application.subHeading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__.default.Link, {
-      className: "btn btn-outline-dark btn-sm card-link",
-      href: "".concat(configContext.config.prefix).concat(props.application.folder, "/index.html")
-    }, "View application"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3__.default, {
-      className: "mt-3"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4__.default, null, props.application.labels ? props.application.labels.map(function (x) {
-      var label = configContext.config.labels[x];
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_5__.default, {
-        key: x,
-        variant: label["class"],
-        className: "text-light mr-2"
-      }, label.name);
-    }) : null))));
-  } else {
-    return null;
-  }
+function ApplicationCard(_ref) {
+  var application = _ref.application;
+  var configContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_1__.ConfigContext);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, application.include && application.active && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__.default, {
+    className: "grid-item",
+    key: "".concat(application.name)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__.default.Title, null, application.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__.default.Text, null, application.subHeading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__.default.Link, {
+    className: "btn btn-outline-dark btn-sm card-link",
+    href: "".concat(configContext.config.prefix).concat(application.folder, "/index.html")
+  }, "View application"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__.default, {
+    className: "mt-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__.default, null, application.labels ? application.labels.map(function (x) {
+    var label = configContext.config.labels[x];
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_6__.default, {
+      key: x,
+      variant: label["class"],
+      className: "text-light mr-2"
+    }, label.name);
+  }) : null)))));
 }
 
 /***/ }),
@@ -97,15 +95,13 @@ function CardsContainer() {
     className: "card-columns"
   }, featured.map(function (application) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_applicationCard__WEBPACK_IMPORTED_MODULE_1__.ApplicationCard, {
-      application: application,
-      condition: application.active && application.include
+      application: application
     });
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "card-columns"
   }, applications.map(function (application) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_applicationCard__WEBPACK_IMPORTED_MODULE_1__.ApplicationCard, {
-      application: application,
-      condition: application.active && application.include
+      application: application
     });
   }))));
 }
@@ -444,7 +440,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var _typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../typeScript/Utils/stringSearchUtil/dist */ "../typeScript/Utils/stringSearchUtil/dist/index.js");
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -462,13 +459,25 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function SearchBar() {
-  var context = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_2__.ApplicationsContext);
+  var context = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__.ApplicationsContext);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       showClear = _useState2[0],
       setShowClear = _useState2[1];
+
+  var resetApplications = function resetApplications() {
+    setShowClear(false);
+    manuallyClearInput();
+    context.setApplications(context.unmodified);
+  };
+
+  var manuallyClearInput = function manuallyClearInput() {
+    var element = document.getElementById(_constants__WEBPACK_IMPORTED_MODULE_2__.SEARCH_INPUT_ID);
+    element.value = "";
+  };
 
   var handleSubmit = function handleSubmit(event) {
     return event.preventDefault();
@@ -480,13 +489,12 @@ function SearchBar() {
     if (searchTerm.length > 0) {
       var filteredApplications = context.applications.filter(function (application) {
         var criterions = [application.name, application.subHeading, application.description, application.searchTerms];
-        return application.active && application.include ? _typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__.StringSearchUtil.searchCriterions(criterions, searchTerm) : false;
+        return application.include ? _typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__.StringSearchUtil.searchCriterions(criterions, searchTerm) : false;
       });
       setShowClear(true);
       context.setApplications(filteredApplications);
     } else {
-      setShowClear(false);
-      context.setApplications(context.unmodified);
+      resetApplications();
     }
   };
 
@@ -512,7 +520,8 @@ function SearchBar() {
     id: "cancelBtn"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "btn",
-    type: "button"
+    type: "button",
+    onClick: resetApplications
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "lr"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
@@ -1019,7 +1028,8 @@ __webpack_require__.r(__webpack_exports__);
 var getElementFadeClass = function getElementFadeClass() {
   var condition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
   var fadeClass = "fade-element";
-  return condition ? "".concat(fadeClass, " in") : fadeClass;
+  var action = condition ? "in" : "out";
+  return "".concat(fadeClass, " ").concat(action);
 };
 
 /***/ }),
