@@ -87,11 +87,11 @@ function CardsContainer() {
   var context = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_2__.ApplicationsContext);
   var featured = context.applications.filter(function (x) {
     return x.featured;
-  });
+  }) || [];
   var applications = context.applications.filter(function (x) {
     return !x.featured;
-  });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, applications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }) || [];
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (featured.length > 0 || applications.length > 0) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "applicationsContainer"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "card-columns"
@@ -217,8 +217,9 @@ function ApplicationsContextProvider(_ref) {
       setApplications = _useState2[1];
 
   var context = {
+    unmodified: configContext.config.applications,
     applications: applications,
-    set: setApplications
+    setApplications: setApplications
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_1__.ApplicationsContext.Provider, {
     value: context
@@ -442,26 +443,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SearchBar": () => (/* binding */ SearchBar)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var _typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../typeScript/Utils/stringSearchUtil/dist */ "../typeScript/Utils/stringSearchUtil/dist/index.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
 "use strict;";
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
-function RenderClearBtn() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "input-group-append",
-    id: "cancelBtn"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    className: "btn",
-    type: "button"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-    className: "lr"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-    className: "rl"
-  }))));
-}
+
 
 function SearchBar() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  var context = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_2__.ApplicationsContext);
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      showClear = _useState2[0],
+      setShowClear = _useState2[1];
+
+  var handleSubmit = function handleSubmit(event) {
+    return event.preventDefault();
+  };
+
+  var onSearchHandler = function onSearchHandler(event) {
+    var searchTerm = event.target.value;
+
+    if (searchTerm.length > 0) {
+      var filteredApplications = context.applications.filter(function (application) {
+        var criterions = [application.name, application.subHeading, application.description, application.searchTerms];
+        return application.active && application.include ? _typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__.StringSearchUtil.searchCriterions(criterions, searchTerm) : false;
+      });
+      setShowClear(true);
+      context.setApplications(filteredApplications);
+    } else {
+      setShowClear(false);
+      context.setApplications(context.unmodified);
+    }
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "searchBar",
     className: "input-group mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -474,8 +505,19 @@ function SearchBar() {
     type: "text",
     className: "form-control",
     placeholder: "Search applications...",
-    id: "searchInput"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(RenderClearBtn, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    id: "searchInput",
+    onChange: onSearchHandler
+  }), showClear && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "input-group-append",
+    id: "cancelBtn"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "btn",
+    type: "button"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: "lr"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: "rl"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "input-group-append"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     id: "openFilterBtn",

@@ -8,13 +8,13 @@ export function CardsContainer() {
 
     const context = React.useContext(ApplicationsContext);
 
-    const featured = context.applications.filter(x => x.featured);
+    const featured = context.applications.filter(x => x.featured) || [];
 
-    const applications = context.applications.filter(x => !x.featured);
+    const applications = context.applications.filter(x => !x.featured) || [];
 
     return (
         <>
-            {applications.length > 0 &&
+            {(featured.length > 0 || applications.length > 0) &&
                 <div id="applicationsContainer">
                     <div className="card-columns">
                         {featured.map(application => {

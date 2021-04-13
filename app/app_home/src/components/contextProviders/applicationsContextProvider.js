@@ -9,7 +9,7 @@ export function ApplicationsContextProvider({children}) {
 
     const [ applications, setApplications ] = useState(configContext.config.applications);
 
-    const context = { applications, set: setApplications }
+    const context = { unmodified: configContext.config.applications, applications, setApplications }
 
     return (
         <ApplicationsContext.Provider value={context}>
