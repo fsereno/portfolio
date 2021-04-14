@@ -8,8 +8,8 @@ export const HomeThreeModule = (async () => {
     const TIMESTEP = 1.0/60.0;
     const XROTATION = -Math.PI / 2;
     const OBJECT_LIMIT = 20;
+    const CONTAINER_ID = "canvasContainer";
 
-    let _containerId;
     let _container;
     let _scene;
     let _camera;
@@ -27,8 +27,7 @@ export const HomeThreeModule = (async () => {
     }
 
     const initScene = () => {
-        _containerId = "canvasContainer";
-        _container = document.getElementById(_containerId);
+        _container = document.getElementById(CONTAINER_ID);
         _scene = new THREE.Scene();
         _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
         _mouse = new THREE.Vector3();
@@ -43,7 +42,7 @@ export const HomeThreeModule = (async () => {
     }
 
     const setRenderer = () => {
-        let container = document.getElementById(_containerId);
+        let container = document.getElementById(CONTAINER_ID);
         _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         _renderer.setSize(container.offsetWidth, container.offsetHeight);
         _renderer.shadowMap.enabled = true;
@@ -53,7 +52,7 @@ export const HomeThreeModule = (async () => {
 
     const setResizeEventHandler = () => {
         window.addEventListener("resize", () => {
-            let container = document.getElementById(_containerId);
+            let container = document.getElementById(CONTAINER_ID);
             _renderer.setSize(container.offsetWidth, container.offsetHeight);
             _camera.aspect = container.offsetWidth / container.offsetHeight;
             _camera.updateProjectionMatrix();

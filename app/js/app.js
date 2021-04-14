@@ -661,7 +661,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var HomeThreeModule = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-  var THREE, CANNON, DAMPING, TIMESTEP, XROTATION, OBJECT_LIMIT, _containerId, _container, _scene, _camera, _renderer, _world, _raycaster, _mouse, _fragmentGroup, initPhysics, initScene, setCameraPosition, setRenderer, setResizeEventHandler, animateParticles, createParticles, createFragments, animateFragments, createCube, createCubes, addLight, updatePhysics, setAnimationLoop, createPlane, objectsReact, setMouseMoved, init;
+  var THREE, CANNON, DAMPING, TIMESTEP, XROTATION, OBJECT_LIMIT, CONTAINER_ID, _container, _scene, _camera, _renderer, _world, _raycaster, _mouse, _fragmentGroup, initPhysics, initScene, setCameraPosition, setRenderer, setResizeEventHandler, animateParticles, createParticles, createFragments, animateFragments, createCube, createCubes, addLight, updatePhysics, setAnimationLoop, createPlane, objectsReact, setMouseMoved, init;
 
   return regeneratorRuntime.wrap(function _callee$(_context) {
     while (1) {
@@ -681,6 +681,7 @@ var HomeThreeModule = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(fu
           TIMESTEP = 1.0 / 60.0;
           XROTATION = -Math.PI / 2;
           OBJECT_LIMIT = 20;
+          CONTAINER_ID = "canvasContainer";
 
           initPhysics = function initPhysics() {
             _world = new CANNON.World();
@@ -692,8 +693,7 @@ var HomeThreeModule = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(fu
           };
 
           initScene = function initScene() {
-            _containerId = "canvasContainer";
-            _container = document.getElementById(_containerId);
+            _container = document.getElementById(CONTAINER_ID);
             _scene = new THREE.Scene();
             _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
             _mouse = new THREE.Vector3();
@@ -708,7 +708,7 @@ var HomeThreeModule = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(fu
           };
 
           setRenderer = function setRenderer() {
-            var container = document.getElementById(_containerId);
+            var container = document.getElementById(CONTAINER_ID);
             _renderer = new THREE.WebGLRenderer({
               antialias: true,
               alpha: true
@@ -723,7 +723,7 @@ var HomeThreeModule = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(fu
 
           setResizeEventHandler = function setResizeEventHandler() {
             window.addEventListener("resize", function () {
-              var container = document.getElementById(_containerId);
+              var container = document.getElementById(CONTAINER_ID);
 
               _renderer.setSize(container.offsetWidth, container.offsetHeight);
 
@@ -976,7 +976,7 @@ var HomeThreeModule = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(fu
             init: init
           });
 
-        case 29:
+        case 30:
         case "end":
           return _context.stop();
       }
