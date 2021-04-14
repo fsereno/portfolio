@@ -23,11 +23,4 @@ export const ListItem = React.memo(({ item, active }) => {
             <small>{truncateEmailBody(item.body)}...</small>
         </a>
     )
-}, (prev, next) => {
-
-    if (prev.active === next.active) {
-        return true;
-    }
-
-    return false;
-})
+}, (prev, next) => prev.active === next.active);
