@@ -6,7 +6,7 @@ import { CONTENT_CONTAINER_ID, FAUX_LOADING_TIME } from '../constants';
 import { ConfigContext, SpinnerContext } from '../contexts';
 import { HomeThreeModule } from '../homeThreeModule';
 import { addNavbarTransScrollEventListener } from '../utils/addNavbarTransScrollEventListener';
-import { getElementFadeClass } from '../utils/getElementFadeClass';
+import { getElementFadeClass } from '../../../js/modules/utils/getElementFadeClass';
 import { removeDarkClass } from '../utils/removeDarkClass';
 
 export function IntroContainer() {

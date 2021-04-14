@@ -58,11 +58,7 @@ var ApplicationCard = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(funct
     }, label.name);
   }) : null)))));
 }, function (prev, next) {
-  if (prev.condition === next.condition) {
-    return true;
-  }
-
-  return false;
+  return prev.condition === next.condition;
 });
 
 /***/ }),
@@ -132,7 +128,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _searchBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./searchBar */ "./src/components/searchBar.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
 /* harmony import */ var _cardsContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cardsContainer */ "./src/components/cardsContainer.js");
-/* harmony import */ var _utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/getElementFadeClass */ "./src/utils/getElementFadeClass.js");
+/* harmony import */ var _js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../js/modules/utils/getElementFadeClass */ "../js/modules/utils/getElementFadeClass.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -155,13 +151,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function ContentContainer() {
   var context = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_2__.ConfigContext);
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_4__.getElementFadeClass)(false)),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_4__.getElementFadeClass)(false)),
       _useState2 = _slicedToArray(_useState, 2),
       fadeClass = _useState2[0],
       setFadeClass = _useState2[1];
 
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    setFadeClass((0,_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_4__.getElementFadeClass)(true));
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
+    setFadeClass((0,_js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_4__.getElementFadeClass)(true));
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "".concat(fadeClass, " container-fluid pt-4 mt-5"),
@@ -336,7 +332,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
 /* harmony import */ var _homeThreeModule__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../homeThreeModule */ "./src/homeThreeModule.js");
 /* harmony import */ var _utils_addNavbarTransScrollEventListener__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/addNavbarTransScrollEventListener */ "./src/utils/addNavbarTransScrollEventListener.js");
-/* harmony import */ var _utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/getElementFadeClass */ "./src/utils/getElementFadeClass.js");
+/* harmony import */ var _js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../js/modules/utils/getElementFadeClass */ "../js/modules/utils/getElementFadeClass.js");
 /* harmony import */ var _utils_removeDarkClass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/removeDarkClass */ "./src/utils/removeDarkClass.js");
 "use strict;";
 
@@ -365,7 +361,7 @@ function IntroContainer() {
   var context = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__.ConfigContext);
   var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__.SpinnerContext);
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_6__.getElementFadeClass)(false)),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_6__.getElementFadeClass)(false)),
       _useState2 = _slicedToArray(_useState, 2),
       fadeClass = _useState2[0],
       setFadeClass = _useState2[1];
@@ -383,7 +379,7 @@ function IntroContainer() {
   var loadHandler = function loadHandler() {
     setTimeout(function () {
       (0,_utils_removeDarkClass__WEBPACK_IMPORTED_MODULE_7__.removeDarkClass)();
-      setFadeClass((0,_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_6__.getElementFadeClass)(true));
+      setFadeClass((0,_js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_6__.getElementFadeClass)(true));
       spinnerContext.setShow(false);
     }, _constants__WEBPACK_IMPORTED_MODULE_2__.FAUX_LOADING_TIME);
   };
@@ -449,8 +445,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var _typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../typeScript/Utils/stringSearchUtil/dist */ "../typeScript/Utils/stringSearchUtil/dist/index.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -468,19 +463,23 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 function SearchBar() {
-  var configContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__.ConfigContext);
-  var context = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__.ApplicationsContext);
+  var configContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_2__.ConfigContext);
+  var context = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_2__.ApplicationsContext);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       showClear = _useState2[0],
       setShowClear = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      searchValue = _useState4[0],
+      setSearcValue = _useState4[1];
+
   var resetApplications = function resetApplications() {
     setShowClear(false);
-    manuallyClearInput();
+    setSearcValue("");
     var resetApplications = context.applications.map(function (application) {
       application.active = application.include ? true : false;
       return application;
@@ -488,27 +487,22 @@ function SearchBar() {
     context.setApplications(resetApplications);
   };
 
-  var manuallyClearInput = function manuallyClearInput() {
-    var element = document.getElementById(_constants__WEBPACK_IMPORTED_MODULE_2__.SEARCH_INPUT_ID);
-    element.value = "";
-  };
-
   var handleSubmit = function handleSubmit(event) {
     return event.preventDefault();
   };
 
   var onSearchHandler = function onSearchHandler(event) {
-    return handleSearch(event.target.value);
+    var searchTerm = event.target.value;
+    setSearcValue(searchTerm);
+    handleSearch(searchTerm);
   };
 
   var handleQuickFilter = function handleQuickFilter(event) {
     var searchTerm = event.target.value;
-    var element = document.getElementById(_constants__WEBPACK_IMPORTED_MODULE_2__.SEARCH_INPUT_ID);
-    var existingValue = element.value;
 
-    if (_typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__.StringSearchUtil.searchDoesNotExist(existingValue, searchTerm)) {
-      var combinedSearch = _typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__.StringSearchUtil.combineSearchTerms(existingValue, searchTerm);
-      element.value = combinedSearch;
+    if (_typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__.StringSearchUtil.searchDoesNotExist(searchValue, searchTerm)) {
+      var combinedSearch = _typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__.StringSearchUtil.combineSearchTerms(searchValue, searchTerm);
+      setSearcValue(combinedSearch);
       handleSearch(combinedSearch);
     }
   };
@@ -545,6 +539,7 @@ function SearchBar() {
     className: "form-control",
     placeholder: "Search applications...",
     id: "searchInput",
+    value: searchValue,
     onChange: onSearchHandler
   }), showClear && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "input-group-append",
@@ -1039,28 +1034,6 @@ var addNavbarTransScrollEventListener = function addNavbarTransScrollEventListen
 
 /***/ }),
 
-/***/ "./src/utils/getElementFadeClass.js":
-/*!******************************************!*\
-  !*** ./src/utils/getElementFadeClass.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getElementFadeClass": () => (/* binding */ getElementFadeClass)
-/* harmony export */ });
-"use strict;";
-
-var getElementFadeClass = function getElementFadeClass() {
-  var condition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-  var fadeClass = "fade-element";
-  var action = condition ? "in" : "out";
-  return "".concat(fadeClass, " ").concat(action);
-};
-
-/***/ }),
-
 /***/ "./src/utils/removeDarkClass.js":
 /*!**************************************!*\
   !*** ./src/utils/removeDarkClass.js ***!
@@ -1162,6 +1135,28 @@ var ConfigUtil = /*#__PURE__*/function () {
 
   return ConfigUtil;
 }();
+
+/***/ }),
+
+/***/ "../js/modules/utils/getElementFadeClass.js":
+/*!**************************************************!*\
+  !*** ../js/modules/utils/getElementFadeClass.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getElementFadeClass": () => (/* binding */ getElementFadeClass)
+/* harmony export */ });
+"use strict;";
+
+var getElementFadeClass = function getElementFadeClass() {
+  var condition = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var fadeClass = "fade-element";
+  var action = condition ? "in" : "out";
+  return "".concat(fadeClass, " ").concat(action);
+};
 
 /***/ }),
 

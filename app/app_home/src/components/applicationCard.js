@@ -1,6 +1,6 @@
 "use strict;"
 
-import React, { useLayoutEffect, useState }from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -38,12 +38,4 @@ export const ApplicationCard = React.memo(({application, condition}) => {
             }
         </>
     );
-}, (prev, next) => {
-
-    if(prev.condition === next.condition) {
-        return true;
-    }
-
-    return false;
-
-});
+}, (prev, next) => prev.condition === next.condition);

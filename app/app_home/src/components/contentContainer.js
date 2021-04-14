@@ -1,18 +1,18 @@
 
 "use strict;"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { SearchBar } from './searchBar';
 import { ConfigContext } from '../contexts';
 import { CardsContainer } from './cardsContainer';
-import { getElementFadeClass } from '../utils/getElementFadeClass';
+import { getElementFadeClass } from '../../../js/modules/utils/getElementFadeClass';
 
 export function ContentContainer() {
 
     const context = React.useContext(ConfigContext);
     const [ fadeClass, setFadeClass ] = useState(getElementFadeClass(false));
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       setFadeClass(getElementFadeClass(true));
     },[])
 
