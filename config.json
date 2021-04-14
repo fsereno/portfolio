@@ -19,6 +19,12 @@
         { "name": "C#", "class": "info" },
         { "name": "Cloud", "class": "danger" }
     ],
+    "quickSearch": [
+        "React",
+        "TypeScript",
+        ".NET Core",
+        "Cloud"
+    ],
     "applications": [
         {
             "name": "Portfolio",
@@ -211,7 +217,7 @@
             "name": "AWS .NET Core Asynchronous Coffee Maker",
             "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET Core, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
-            "searchTerms": "AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreAsyncCoffeeMachine",
             "active": true,
             "include": true,

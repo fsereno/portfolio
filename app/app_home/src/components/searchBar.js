@@ -3,17 +3,22 @@
 import React, { useState } from 'react';
 import { StringSearchUtil } from '../../../typeScript/Utils/stringSearchUtil/dist';
 import { SEARCH_INPUT_ID } from '../constants';
-import { ApplicationsContext } from '../contexts';
+import { ApplicationsContext, ConfigContext } from '../contexts';
 
 export function SearchBar() {
 
+    const configContext = React.useContext(ConfigContext);
     const context = React.useContext(ApplicationsContext);
     const [ showClear, setShowClear ] = useState(false);
 
     const resetApplications = () => {
         setShowClear(false);
         manuallyClearInput();
-        context.setApplications(context.unmodified);
+        const resetApplications = context.applications.map( application => {
+            application.active = application.include ? true : false;
+            return application;
+        });
+        context.setApplications(resetApplications);
     }
 
     const manuallyClearInput = () => {
@@ -23,11 +28,22 @@ export function SearchBar() {
 
     const handleSubmit = (event) => event.preventDefault();
 
-    const onSearchHandler = (event) => {
-        const searchTerm = event.target.value;
+    const onSearchHandler = (event) => handleSearch(event.target.value);
 
+    const handleQuickFilter = (event) => {
+        const searchTerm = event.target.value;
+        const element = document.getElementById(SEARCH_INPUT_ID);
+        const existingValue = element.value;
+        if (StringSearchUtil.searchDoesNotExist(existingValue, searchTerm)) {
+          const combinedSearch = StringSearchUtil.combineSearchTerms(existingValue, searchTerm);
+          element.value = combinedSearch;
+          handleSearch(combinedSearch);
+        }
+      }
+
+    const handleSearch = (searchTerm = "") => {
         if (searchTerm.length > 0) {
-            const filteredApplications = context.applications.filter( application => {
+            const filteredApplications = context.applications.map( application => {
 
                 const criterions = [
                     application.name,
@@ -36,7 +52,9 @@ export function SearchBar() {
                     application.searchTerms
                 ]
 
-                return application.include ? StringSearchUtil.searchCriterions(criterions, searchTerm) : false;
+                application.active = application.include ? StringSearchUtil.searchCriterions(criterions, searchTerm) : false;
+
+                return application;
             });
             setShowClear(true);
             context.setApplications(filteredApplications);
@@ -62,8 +80,7 @@ export function SearchBar() {
                                 <span className="rl"></span>
                             </span>
                         </button>
-                    </div>
-                }
+                    </div>}
             <div className="input-group-append">
                     <button id="openFilterBtn" className="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
                         <i className="fa fa-filter"></i>
@@ -74,9 +91,7 @@ export function SearchBar() {
                 <div className="pb-3">
                     <label className="d-flex flex-row justify-content-center">Quick search</label>
                     <div className="btn-group d-flex flex-row justify-content-center">
-                        <button type="button" className="btn btn-outline-dark flex-grow-0" value="React" >React</button>
-                        <button type="button" className="btn btn-outline-dark flex-grow-0" value="TypeScript" >TypeScript</button>
-                        <button type="button" className="btn btn-outline-dark flex-grow-0" value=".NET Core" >.NET Core</button>
+                        {configContext.config.quickSearch.map(term => <button key={term} type="button" className="btn btn-outline-dark flex-grow-0" value={term} onClick={handleQuickFilter}>{term}</button>)}
                     </div>
                 </div>
             </div>

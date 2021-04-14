@@ -7,13 +7,13 @@ import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 import { ConfigContext } from '../contexts';
 
-export function ApplicationCard({application}) {
+export const ApplicationCard = React.memo(({application, condition}) => {
 
     const configContext = React.useContext(ConfigContext);
 
     return (
         <>
-            { application.include && application.active &&
+            { condition &&
                 <Card className="grid-item" key={`${application.name}`}>
                     <Card.Body>
                         <Card.Title>
@@ -38,4 +38,12 @@ export function ApplicationCard({application}) {
             }
         </>
     );
-}
+}, (prev, next) => {
+
+    if(prev.condition === next.condition) {
+        return true;
+    }
+
+    return false;
+
+});

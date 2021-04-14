@@ -8,7 +8,7 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"prefix":"app_","entry":"home","index":"index.html","masterTemplateDir":"master","developmentDir":"app","publishDir":"docs","folderRoot":"/tree/master/app/","repoRootUrl":"https://github.com/fsereno/portfolio","linkedInUrl":"https://www.linkedin.com/in/fabio-sereno-6a97b986/","gitHubUrl":"https://github.com/fsereno","title":"Portfolio","author":"Fabio Sereno","role":"Software developer","description":"Portfolio website for Fabio Sereno - Software Developer.","thumbnail":"PortfolioThumbnail.png","labels":[{"name":"JavaScript","class":"warning"},{"name":"C#","class":"info"},{"name":"Cloud","class":"danger"}],"applications":[{"name":"Portfolio","subHeading":"By Fabio Sereno","description":"Highly experienced, highly self-motivated, enthusiastic, professional Full Stack Web Developer.","folder":"home","active":true,"include":false,"folderRoot":"/","useWebpack":true,"useRoot":true,"isLandingPage":true},{"name":"Application master template","subHeading":"","description":"The template application.","folder":"master","active":true,"include":false},{"name":"MIT Licence","subHeading":"MIT Licence for this repository.","description":"","folder":"licence","active":true,"include":false},{"name":"To-Do List (Basic)","subHeading":"A basic list builder written using TypeScript and JQuery","description":"Using Babel for compilation and Require to manage dependencies.","searchTerms":"JavaScript,TypeScript,Babel,Require JS,JQuery,PUG,HTML,CSS,SASS","folder":"babelTs","active":true,"include":true,"useRequire":true,"labels":[0]},{"name":"To-Do List (React)","subHeading":"A basic list builder using React","description":"Using React, with Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"toDoReact","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"To-Do List (React Redux)","subHeading":"A basic list builder using React and Redux","description":"Using Redux with React to manage application state, implementing Undo and Redo functionality.","searchTerms":"JavaScript,React,Redux,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"reactRedux","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"To-Do List (Vue)","subHeading":"A basic list builder using Vue","description":"Experimenting with Vue, Babel and Webpack.","searchTerms":"JavaScript,Vue,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"toDoVue","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Tic-Tac-Toe (React)","subHeading":"A Tic-Tac-Toe game built using React","description":"Experimenting with more complex aspects of React, Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"ticTacToeReact","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Find and Replace","subHeading":"A simple multiple Find and Replace method written with TypeScript","description":"TypeScript, Sass and Pug. Find all occurrences and replacing.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"findReplace","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Azure Functions .NET Core Unique Data Entry","subHeading":"Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries, with a React UI","description":"Using Azure Functions serverless compute and .NET Core, with a React user interface.","searchTerms":"Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"AzureDotNetCoreUniqueDataEntryApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://app-azure-dotnetcore-unique-data-entry-api.azurewebsites.net/api","canItemBeAddedAsync":"canItemBeAddedAsync"},"labels":[0,1,2],"featured":true},{"name":"Azure Functions .NET Core Data Structures","subHeading":"First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET Core, with a React UI","description":"Using Azure Functions serverless compute and .NET Core, with a React user interface.","searchTerms":"Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"AzureDotNetCoreDataStructuresApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://app-azure-dotnetcore-data-structures-api.azurewebsites.net/api","addQueueItem":"addQueueItemAsync","removeQueueItem":"removeQueueItemAsync","addStackItem":"addStackItemAsync","removeStackItem":"removeStackItemAsync"},"labels":[0,1,2],"featured":true},{"name":"AWS .NET Core Complex Entity Sorting Algorithm","subHeading":"A sorting mechanism, implementing IComparable and IComparer to sort complex types, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreEntitySortApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees","sortSalaryAsc":"sort/salary/asc","sortSalaryDesc":"sort/salary/desc"},"labels":[0,1,2],"order":1,"featured":true},{"name":"AWS .NET Core Natural Sorting Algorithm","subHeading":"A natural string sorting algorithm, implementing IComparer in .NET Core, passing in a custom comparer, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreStringSortApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values","sort":"sort"},"labels":[0,1,2],"featured":true},{"name":"AWS .NET Core Shopping Basket List Builder","subHeading":"A basic shopping basket application, with data processing handled by a Serverless .NET Core RESTful API, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreShoppingCart","active":true,"include":true,"useWebpack":true,"endpoints":{"api":"https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket","get":"get","add":"add","delete":"delete","update":"update"},"labels":[0,1,2],"order":2,"featured":true},{"name":"AWS .NET Core Asynchronous Coffee Maker","subHeading":"Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET Core, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreAsyncCoffeeMachine","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://ro5qqsplje.execute-api.eu-west-2.amazonaws.com/Prod/api/values","run":"run","runAsync":"runasync"},"labels":[0,1,2],"order":3,"featured":true},{"name":"Three JS Scene (Basic)","subHeading":"A basic THREE JS scene","description":"An interactive Three JS scene, using Babel and Webpack.","searchTerms":"JavaScript,Three JS,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"threeJSScene","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"AFrame React (Basic)","subHeading":"An AFrame Hello World application with React","description":"Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.","searchTerms":"JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality","folder":"aframe","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"AFrame React (Complex)","subHeading":"A slightly more complex AFrame application with React, allowing user input","description":"Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.","searchTerms":"JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality","folder":"aframeComplex","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Percentage Calculator","subHeading":"A simple percentage calculator method written with TypeScript","description":"TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"percentageCalculator","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Scrabble Game, Can you beat the Un-Scrabbler?","subHeading":"A simple Scrabble Word Game written using TypeScript","description":"TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"unscrabbler","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Random String Generator","subHeading":"A simple random string generator written with TypeScript","description":"Generating a random string of A-B, 0-9 and a given length. TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"randomGenerator","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Dictionary Word Finder","subHeading":"A simple dictionary word lookup tool written using TypeScript","description":"A large indexing lookup search. TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"dictionaryFinder","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Knockout + TypeScript, Table of Users","subHeading":"An example of Knockout, enhanced by TypeScript","description":"Written with Knockout, TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,Knockout,PUG,HTML,CSS,SASS","folder":"koTypeScript","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"JS Coding Standards","subHeading":"A JavaScript Code Style Guide","description":"By Fabio Sereno","searchTerms":"JavaScript,SOLID Principles,YAGNI,DRY,KISS","folder":"jsCodingStandards","active":false,"include":false,"labels":[0]},{"name":"Basic React Email Client","subHeading":"An SPA using React, React Router, React Context and useReducer to handle application state","description":"Using React, Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"basicEmailClientReactSpa","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"basicSpaReact","labels":[0],"order":1}]}');
+module.exports = JSON.parse('{"prefix":"app_","entry":"home","index":"index.html","masterTemplateDir":"master","developmentDir":"app","publishDir":"docs","folderRoot":"/tree/master/app/","repoRootUrl":"https://github.com/fsereno/portfolio","linkedInUrl":"https://www.linkedin.com/in/fabio-sereno-6a97b986/","gitHubUrl":"https://github.com/fsereno","title":"Portfolio","author":"Fabio Sereno","role":"Software developer","description":"Portfolio website for Fabio Sereno - Software Developer.","thumbnail":"PortfolioThumbnail.png","labels":[{"name":"JavaScript","class":"warning"},{"name":"C#","class":"info"},{"name":"Cloud","class":"danger"}],"quickSearch":["React","TypeScript",".NET Core","Cloud"],"applications":[{"name":"Portfolio","subHeading":"By Fabio Sereno","description":"Highly experienced, highly self-motivated, enthusiastic, professional Full Stack Web Developer.","folder":"home","active":true,"include":false,"folderRoot":"/","useWebpack":true,"useRoot":true,"isLandingPage":true},{"name":"Application master template","subHeading":"","description":"The template application.","folder":"master","active":true,"include":false},{"name":"MIT Licence","subHeading":"MIT Licence for this repository.","description":"","folder":"licence","active":true,"include":false},{"name":"To-Do List (Basic)","subHeading":"A basic list builder written using TypeScript and JQuery","description":"Using Babel for compilation and Require to manage dependencies.","searchTerms":"JavaScript,TypeScript,Babel,Require JS,JQuery,PUG,HTML,CSS,SASS","folder":"babelTs","active":true,"include":true,"useRequire":true,"labels":[0]},{"name":"To-Do List (React)","subHeading":"A basic list builder using React","description":"Using React, with Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"toDoReact","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"To-Do List (React Redux)","subHeading":"A basic list builder using React and Redux","description":"Using Redux with React to manage application state, implementing Undo and Redo functionality.","searchTerms":"JavaScript,React,Redux,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"reactRedux","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"To-Do List (Vue)","subHeading":"A basic list builder using Vue","description":"Experimenting with Vue, Babel and Webpack.","searchTerms":"JavaScript,Vue,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"toDoVue","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Tic-Tac-Toe (React)","subHeading":"A Tic-Tac-Toe game built using React","description":"Experimenting with more complex aspects of React, Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"ticTacToeReact","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Find and Replace","subHeading":"A simple multiple Find and Replace method written with TypeScript","description":"TypeScript, Sass and Pug. Find all occurrences and replacing.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"findReplace","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Azure Functions .NET Core Unique Data Entry","subHeading":"Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries, with a React UI","description":"Using Azure Functions serverless compute and .NET Core, with a React user interface.","searchTerms":"Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"AzureDotNetCoreUniqueDataEntryApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://app-azure-dotnetcore-unique-data-entry-api.azurewebsites.net/api","canItemBeAddedAsync":"canItemBeAddedAsync"},"labels":[0,1,2],"featured":true},{"name":"Azure Functions .NET Core Data Structures","subHeading":"First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET Core, with a React UI","description":"Using Azure Functions serverless compute and .NET Core, with a React user interface.","searchTerms":"Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"AzureDotNetCoreDataStructuresApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://app-azure-dotnetcore-data-structures-api.azurewebsites.net/api","addQueueItem":"addQueueItemAsync","removeQueueItem":"removeQueueItemAsync","addStackItem":"addStackItemAsync","removeStackItem":"removeStackItemAsync"},"labels":[0,1,2],"featured":true},{"name":"AWS .NET Core Complex Entity Sorting Algorithm","subHeading":"A sorting mechanism, implementing IComparable and IComparer to sort complex types, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreEntitySortApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees","sortSalaryAsc":"sort/salary/asc","sortSalaryDesc":"sort/salary/desc"},"labels":[0,1,2],"order":1,"featured":true},{"name":"AWS .NET Core Natural Sorting Algorithm","subHeading":"A natural string sorting algorithm, implementing IComparer in .NET Core, passing in a custom comparer, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreStringSortApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values","sort":"sort"},"labels":[0,1,2],"featured":true},{"name":"AWS .NET Core Shopping Basket List Builder","subHeading":"A basic shopping basket application, with data processing handled by a Serverless .NET Core RESTful API, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreShoppingCart","active":true,"include":true,"useWebpack":true,"endpoints":{"api":"https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket","get":"get","add":"add","delete":"delete","update":"update"},"labels":[0,1,2],"order":2,"featured":true},{"name":"AWS .NET Core Asynchronous Coffee Maker","subHeading":"Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET Core, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreAsyncCoffeeMachine","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://ro5qqsplje.execute-api.eu-west-2.amazonaws.com/Prod/api/values","run":"run","runAsync":"runasync"},"labels":[0,1,2],"order":3,"featured":true},{"name":"Three JS Scene (Basic)","subHeading":"A basic THREE JS scene","description":"An interactive Three JS scene, using Babel and Webpack.","searchTerms":"JavaScript,Three JS,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"threeJSScene","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"AFrame React (Basic)","subHeading":"An AFrame Hello World application with React","description":"Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.","searchTerms":"JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality","folder":"aframe","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"AFrame React (Complex)","subHeading":"A slightly more complex AFrame application with React, allowing user input","description":"Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.","searchTerms":"JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality","folder":"aframeComplex","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Percentage Calculator","subHeading":"A simple percentage calculator method written with TypeScript","description":"TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"percentageCalculator","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Scrabble Game, Can you beat the Un-Scrabbler?","subHeading":"A simple Scrabble Word Game written using TypeScript","description":"TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"unscrabbler","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Random String Generator","subHeading":"A simple random string generator written with TypeScript","description":"Generating a random string of A-B, 0-9 and a given length. TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"randomGenerator","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Dictionary Word Finder","subHeading":"A simple dictionary word lookup tool written using TypeScript","description":"A large indexing lookup search. TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"dictionaryFinder","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Knockout + TypeScript, Table of Users","subHeading":"An example of Knockout, enhanced by TypeScript","description":"Written with Knockout, TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,Knockout,PUG,HTML,CSS,SASS","folder":"koTypeScript","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"JS Coding Standards","subHeading":"A JavaScript Code Style Guide","description":"By Fabio Sereno","searchTerms":"JavaScript,SOLID Principles,YAGNI,DRY,KISS","folder":"jsCodingStandards","active":false,"include":false,"labels":[0]},{"name":"Basic React Email Client","subHeading":"An SPA using React, React Router, React Context and useReducer to handle application state","description":"Using React, Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"basicEmailClientReactSpa","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"basicSpaReact","labels":[0],"order":1}]}');
 
 /***/ }),
 
@@ -24,12 +24,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ApplicationCard": () => (/* binding */ ApplicationCard)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Card */ "../../node_modules/react-bootstrap/esm/Card.js");
-/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Badge */ "../../node_modules/react-bootstrap/esm/Badge.js");
+/* harmony import */ var react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Card */ "../../node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Badge */ "../../node_modules/react-bootstrap/esm/Badge.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
-/* harmony import */ var _utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/getElementFadeClass */ "./src/utils/getElementFadeClass.js");
 "use strict;";
 
 
@@ -38,27 +37,33 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-function ApplicationCard(_ref) {
-  var application = _ref.application;
+var ApplicationCard = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(function (_ref) {
+  var application = _ref.application,
+      condition = _ref.condition;
   var configContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_1__.ConfigContext);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, application.include && application.active && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__.default, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, condition && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__.default, {
     className: "grid-item",
     key: "".concat(application.name)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__.default.Title, null, application.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__.default.Text, null, application.subHeading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_3__.default.Link, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__.default.Title, null, application.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__.default.Text, null, application.subHeading), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Card__WEBPACK_IMPORTED_MODULE_2__.default.Link, {
     className: "btn btn-outline-dark btn-sm card-link",
     href: "".concat(configContext.config.prefix).concat(application.folder, "/index.html")
-  }, "View application"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__.default, {
+  }, "View application"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_3__.default, {
     className: "mt-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_5__.default, null, application.labels ? application.labels.map(function (x) {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_4__.default, null, application.labels ? application.labels.map(function (x) {
     var label = configContext.config.labels[x];
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_6__.default, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Badge__WEBPACK_IMPORTED_MODULE_5__.default, {
       key: x,
       variant: label["class"],
       className: "text-light mr-2"
     }, label.name);
   }) : null)))));
-}
+}, function (prev, next) {
+  if (prev.condition === next.condition) {
+    return true;
+  }
+
+  return false;
+});
 
 /***/ }),
 
@@ -95,12 +100,16 @@ function CardsContainer() {
     className: "card-columns"
   }, featured.map(function (application) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_applicationCard__WEBPACK_IMPORTED_MODULE_1__.ApplicationCard, {
+      key: "featured_".concat(application.folder),
+      condition: application.active,
       application: application
     });
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "card-columns"
   }, applications.map(function (application) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_applicationCard__WEBPACK_IMPORTED_MODULE_1__.ApplicationCard, {
+      key: application.folder,
+      condition: application.active,
       application: application
     });
   }))));
@@ -461,6 +470,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function SearchBar() {
+  var configContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__.ConfigContext);
   var context = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__.ApplicationsContext);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
@@ -471,7 +481,11 @@ function SearchBar() {
   var resetApplications = function resetApplications() {
     setShowClear(false);
     manuallyClearInput();
-    context.setApplications(context.unmodified);
+    var resetApplications = context.applications.map(function (application) {
+      application.active = application.include ? true : false;
+      return application;
+    });
+    context.setApplications(resetApplications);
   };
 
   var manuallyClearInput = function manuallyClearInput() {
@@ -484,12 +498,29 @@ function SearchBar() {
   };
 
   var onSearchHandler = function onSearchHandler(event) {
+    return handleSearch(event.target.value);
+  };
+
+  var handleQuickFilter = function handleQuickFilter(event) {
     var searchTerm = event.target.value;
+    var element = document.getElementById(_constants__WEBPACK_IMPORTED_MODULE_2__.SEARCH_INPUT_ID);
+    var existingValue = element.value;
+
+    if (_typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__.StringSearchUtil.searchDoesNotExist(existingValue, searchTerm)) {
+      var combinedSearch = _typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__.StringSearchUtil.combineSearchTerms(existingValue, searchTerm);
+      element.value = combinedSearch;
+      handleSearch(combinedSearch);
+    }
+  };
+
+  var handleSearch = function handleSearch() {
+    var searchTerm = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
 
     if (searchTerm.length > 0) {
-      var filteredApplications = context.applications.filter(function (application) {
+      var filteredApplications = context.applications.map(function (application) {
         var criterions = [application.name, application.subHeading, application.description, application.searchTerms];
-        return application.include ? _typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__.StringSearchUtil.searchCriterions(criterions, searchTerm) : false;
+        application.active = application.include ? _typeScript_Utils_stringSearchUtil_dist__WEBPACK_IMPORTED_MODULE_1__.StringSearchUtil.searchCriterions(criterions, searchTerm) : false;
+        return application;
       });
       setShowClear(true);
       context.setApplications(filteredApplications);
@@ -547,19 +578,15 @@ function SearchBar() {
     className: "d-flex flex-row justify-content-center"
   }, "Quick search"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "btn-group d-flex flex-row justify-content-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    type: "button",
-    className: "btn btn-outline-dark flex-grow-0",
-    value: "React"
-  }, "React"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    type: "button",
-    className: "btn btn-outline-dark flex-grow-0",
-    value: "TypeScript"
-  }, "TypeScript"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    type: "button",
-    className: "btn btn-outline-dark flex-grow-0",
-    value: ".NET Core"
-  }, ".NET Core")))));
+  }, configContext.config.quickSearch.map(function (term) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      key: term,
+      type: "button",
+      className: "btn btn-outline-dark flex-grow-0",
+      value: term,
+      onClick: handleQuickFilter
+    }, term);
+  })))));
 }
 
 /***/ }),
