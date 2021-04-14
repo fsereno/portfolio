@@ -20,6 +20,7 @@ import { ContentContainer } from './components/contentContainer';
 import { IntroContainer } from './components/introContainer';
 import { SpinnerContextProvider } from "./components/contextProviders/spinnerContextProvider.js";
 import { ConfigContextProvider } from "./components/contextProviders/configContextProvider.js";
+import { AppContainer } from "./components/appContainer.js";
 
 const FAUX_LOADING_TIME = 500;
 const NAVBAR_SCROLL_DOWN_CLASS = "scroll-down";
@@ -31,7 +32,7 @@ const IS_BROWSER_VALID = WebGLCheckerUtil.isWebGL2Available() || WebGLCheckerUti
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("home");
 
-CONFIG.applications.sort(ApplicationSortUtil.sorter);
+//CONFIG.applications.sort(ApplicationSortUtil.sorter);
 
 class HomeApp extends React.Component {
   constructor(props) {
@@ -331,8 +332,10 @@ function App() {
     <ConfigContextProvider>
       <ApplicationsContextProvider>
         <SpinnerContextProvider>
-          <IntroContainer/>
-          <ContentContainer/>
+          <AppContainer>
+            <IntroContainer/>
+            <ContentContainer/>
+          </AppContainer>
         </SpinnerContextProvider>
       </ApplicationsContextProvider>
     </ConfigContextProvider>

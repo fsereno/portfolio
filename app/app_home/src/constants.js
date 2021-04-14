@@ -6,3 +6,4 @@ export const SEARCH_INPUT_ID = "searchInput";
 export const MAIN_CONTAINER_ID = "mainContainer";
 export const NAV_ID = "navBar";
 export const CONTENT_CONTAINER_ID = "contentContainer";
+export const APP_ID = "app";
