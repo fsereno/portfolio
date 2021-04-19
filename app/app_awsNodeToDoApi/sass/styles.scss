@@ -1,0 +1,16 @@
+@import "../../sass/includes/colours.scss";
+@import "../../sass/includes/styles.scss";
+@import "../../sass/includes/constants.scss";
+
+body {
+    #spaNavBar {
+        a.active {
+            border-bottom: 1px solid $white;
+        }
+        .navbar-nav {
+            @media screen and (max-width: $small) {
+                margin: auto;
+            }
+        }
+    }
+}

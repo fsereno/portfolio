@@ -173,7 +173,6 @@
                 "sortSalaryDesc": "sort/salary/desc"
             },
             "labels": [0, 1, 2],
-            "order": 1,
             "featured": true
         },
         {
@@ -210,8 +209,7 @@
                 "update": "update"
             },
             "labels": [0, 1, 2],
-            "order": 2,
-            "featured": true
+            "order": 2
         },
         {
             "name": "AWS .NET Core Asynchronous Coffee Maker",
@@ -342,6 +340,20 @@
             "masterTemplateDir": "basicSpaReact",
             "labels": [0],
             "order": 1
+        },
+        {
+            "name": "AWS, End-to-end, To-Do List SPA",
+            "subHeading": "Authenticated with Cognito, data stored with Dynamo DB, driven by Lambda Functions and a React UI",
+            "description": "Built with Node JS, The AWS Serverless Framework and managed by an HTTP API Gateway.",
+            "searchTerms": "Cloud,AWS,Amazon Web Services,Serverless Framework,Node JS,Cognito,Dynamo DB,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "awsNodeToDoApi",
+            "active": true,
+            "include": true,
+            "useWebpack": true,
+            "masterTemplateDir": "basicEmailClientReactSpa",
+            "labels": [0,2],
+            "order": 1,
+            "featured": true
         }
     ]
 }
