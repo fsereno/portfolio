@@ -10,6 +10,9 @@ export const SUBMIT = "submit";
 export const READ = "read";
 export const RESET_MODE = "resetMode";
 
+export const LOGIN = "/login";
+export const MANAGE = "/manage";
+export const LOGOUT = "/logout";
 export const HOME = "/home";
 export const INBOX = "/inbox";
 export const OUTBOX = "/outbox";

@@ -1,15 +1,15 @@
 "use strict;"
 
 import React from 'react';
-import { NewPane } from '../newPane';
 import { ContentContainer } from '../contentContainer';
 import { Content } from '../content';
+import { LogoutForm } from '../logoutForm';
 
-export function New() {
+export function Logout() {
   return (
     <ContentContainer>
-      <Content title="New message" />
-      <NewPane />
+      <Content title="Logout" />
+      <LogoutForm />
     </ContentContainer>
   )
 }

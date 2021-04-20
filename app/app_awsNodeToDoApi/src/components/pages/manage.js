@@ -1,15 +1,13 @@
 "use strict;"
 
 import React from 'react';
-import { InboxClient } from '../inboxClient';
 import { ContentContainer } from '../contentContainer';
 import { Content } from '../content';
 
-export function Inbox() {
+export function Manage() {
   return (
     <ContentContainer>
-      <Content title="Inbox" />
-      <InboxClient />
+      <Content title="Manage" />
     </ContentContainer>
   )
 }

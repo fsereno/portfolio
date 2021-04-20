@@ -1,15 +1,15 @@
 "use strict;"
 
 import React from 'react';
-import { OutboxClient } from "../outboxClient";
 import { ContentContainer } from '../contentContainer';
 import { Content } from '../content';
+import { LoginForm } from '../loginForm';
 
-export function Outbox() {
+export function Login() {
   return (
     <ContentContainer>
-      <Content title="Outbox" />
-      <OutboxClient />
+      <Content title="Login" />
+      <LoginForm />
     </ContentContainer>
   )
 }
