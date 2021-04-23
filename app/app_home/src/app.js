@@ -7,9 +7,9 @@ import ReactDOM from 'react-dom';
 import { ApplicationsContextProvider } from './components/contextProviders/applicationsContextProvider';
 import { ContentContainer } from './components/contentContainer';
 import { IntroContainer } from './components/introContainer';
-import { SpinnerContextProvider } from "./components/contextProviders/spinnerContextProvider";
 import { ConfigContextProvider } from "./components/contextProviders/configContextProvider";
 import { AppContainer } from "./components/appContainer";
+import { SpinnerContextProvider } from "../../js/modules/react/spinnerComponent";
 
 function App() {
   return (

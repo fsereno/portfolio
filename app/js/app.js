@@ -24,10 +24,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AppContainer": () => (/* binding */ AppContainer)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var _js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../js/modules/utils/getElementFadeClass */ "../js/modules/utils/getElementFadeClass.js");
-/* harmony import */ var _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../js/modules/utils/webGLCheckerUtil */ "../js/modules/utils/webGLCheckerUtil.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
+/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
+/* harmony import */ var _js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../js/modules/utils/getElementFadeClass */ "../js/modules/utils/getElementFadeClass.js");
+/* harmony import */ var _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../js/modules/utils/webGLCheckerUtil */ "../js/modules/utils/webGLCheckerUtil.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
 /* harmony import */ var _homeThreeModule__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../homeThreeModule */ "./src/homeThreeModule.js");
 /* harmony import */ var _utils_addNavbarTransScrollEventListener__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/addNavbarTransScrollEventListener */ "./src/utils/addNavbarTransScrollEventListener.js");
 "useStrict;";
@@ -53,22 +53,23 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var AppContainer = function AppContainer(_ref) {
   var children = _ref.children;
-  var isBrowserValid = _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_2__.WebGLCheckerUtil.isWebGL2Available() || _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_2__.WebGLCheckerUtil.isWebGLAvailable();
-  var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_4__.SpinnerContext);
+  var isBrowserValid = _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_3__.WebGLCheckerUtil.isWebGL2Available() || _js_modules_utils_webGLCheckerUtil__WEBPACK_IMPORTED_MODULE_3__.WebGLCheckerUtil.isWebGLAvailable();
+  var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_1__.SpinnerContext);
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_1__.getElementFadeClass)(false)),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_2__.getElementFadeClass)(false)),
       _useState2 = _slicedToArray(_useState, 2),
       fadeClass = _useState2[0],
       setFadeClass = _useState2[1];
 
   var loadHandler = function loadHandler() {
     setTimeout(function () {
-      setFadeClass((0,_js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_1__.getElementFadeClass)(true));
+      setFadeClass((0,_js_modules_utils_getElementFadeClass__WEBPACK_IMPORTED_MODULE_2__.getElementFadeClass)(true));
       spinnerContext.setShow(false);
-    }, _constants__WEBPACK_IMPORTED_MODULE_3__.FAUX_LOADING_TIME);
+    }, _constants__WEBPACK_IMPORTED_MODULE_4__.FAUX_LOADING_TIME);
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
+    spinnerContext.setShow(true);
     (0,_utils_addNavbarTransScrollEventListener__WEBPACK_IMPORTED_MODULE_6__.addNavbarTransScrollEventListener)();
 
     if (isBrowserValid) {
@@ -314,58 +315,6 @@ function ConfigContextProvider(_ref) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_1__.ConfigContext.Provider, {
     value: context
   }, children);
-}
-
-/***/ }),
-
-/***/ "./src/components/contextProviders/spinnerContextProvider.js":
-/*!*******************************************************************!*\
-  !*** ./src/components/contextProviders/spinnerContextProvider.js ***!
-  \*******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SpinnerContextProvider": () => (/* binding */ SpinnerContextProvider)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
-"use strict;";
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-function SpinnerContextProvider(_ref) {
-  var children = _ref.children;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
-      _useState2 = _slicedToArray(_useState, 2),
-      show = _useState2[0],
-      setShow = _useState2[1];
-
-  var context = {
-    show: show,
-    setShow: setShow
-  };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_2__.SpinnerContext.Provider, {
-    value: context
-  }, children, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_1__.SpinnerComponent, {
-    show: context.show
-  }));
 }
 
 /***/ }),
@@ -630,7 +579,6 @@ var APP_ID = "app";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ApplicationsContext": () => (/* binding */ ApplicationsContext),
-/* harmony export */   "SpinnerContext": () => (/* binding */ SpinnerContext),
 /* harmony export */   "ConfigContext": () => (/* binding */ ConfigContext)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
@@ -638,7 +586,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ApplicationsContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
-var SpinnerContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
 var ConfigContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
 
 /***/ }),
@@ -1050,12 +997,27 @@ var addNavbarTransScrollEventListener = function addNavbarTransScrollEventListen
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SpinnerComponent": () => (/* binding */ SpinnerComponent)
+/* harmony export */   "SpinnerContext": () => (/* binding */ SpinnerContext),
+/* harmony export */   "SpinnerComponent": () => (/* binding */ SpinnerComponent),
+/* harmony export */   "SpinnerContextProvider": () => (/* binding */ SpinnerContextProvider)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 "use strict;";
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+var SpinnerContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
 function SpinnerComponent(props) {
   var showSpinner = props.show || false;
   var hideClass = !showSpinner ? "d-none" : "";
@@ -1078,6 +1040,24 @@ function SpinnerComponent(props) {
   })))));
 }
 ;
+function SpinnerContextProvider(_ref) {
+  var children = _ref.children;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      show = _useState2[0],
+      setShow = _useState2[1];
+
+  var context = {
+    show: show,
+    setShow: setShow
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(SpinnerContext.Provider, {
+    value: context
+  }, children, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(SpinnerComponent, {
+    show: context.show
+  }));
+}
 
 /***/ }),
 
@@ -31561,9 +31541,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_contextProviders_applicationsContextProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/contextProviders/applicationsContextProvider */ "./src/components/contextProviders/applicationsContextProvider.js");
 /* harmony import */ var _components_contentContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/contentContainer */ "./src/components/contentContainer.js");
 /* harmony import */ var _components_introContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/introContainer */ "./src/components/introContainer.js");
-/* harmony import */ var _components_contextProviders_spinnerContextProvider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/contextProviders/spinnerContextProvider */ "./src/components/contextProviders/spinnerContextProvider.js");
-/* harmony import */ var _components_contextProviders_configContextProvider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/contextProviders/configContextProvider */ "./src/components/contextProviders/configContextProvider.js");
-/* harmony import */ var _components_appContainer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/appContainer */ "./src/components/appContainer.js");
+/* harmony import */ var _components_contextProviders_configContextProvider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/contextProviders/configContextProvider */ "./src/components/contextProviders/configContextProvider.js");
+/* harmony import */ var _components_appContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/appContainer */ "./src/components/appContainer.js");
+/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
 "use strict;";
 
 
@@ -31577,7 +31557,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_contextProviders_configContextProvider__WEBPACK_IMPORTED_MODULE_7__.ConfigContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_contextProviders_applicationsContextProvider__WEBPACK_IMPORTED_MODULE_3__.ApplicationsContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_contextProviders_spinnerContextProvider__WEBPACK_IMPORTED_MODULE_6__.SpinnerContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_appContainer__WEBPACK_IMPORTED_MODULE_8__.AppContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_introContainer__WEBPACK_IMPORTED_MODULE_5__.IntroContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_contentContainer__WEBPACK_IMPORTED_MODULE_4__.ContentContainer, null)))));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_contextProviders_configContextProvider__WEBPACK_IMPORTED_MODULE_6__.ConfigContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_contextProviders_applicationsContextProvider__WEBPACK_IMPORTED_MODULE_3__.ApplicationsContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_8__.SpinnerContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_appContainer__WEBPACK_IMPORTED_MODULE_7__.AppContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_introContainer__WEBPACK_IMPORTED_MODULE_5__.IntroContainer, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_contentContainer__WEBPACK_IMPORTED_MODULE_4__.ContentContainer, null)))));
 }
 
 react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(App, null), document.getElementById('app'));
