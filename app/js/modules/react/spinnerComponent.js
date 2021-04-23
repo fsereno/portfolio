@@ -1,10 +1,12 @@
 "use strict;"
 
-import React from 'react';
+import React, { useState } from 'react';
+
+export const SpinnerContext = React.createContext();
 
 export function SpinnerComponent(props) {
-    let showSpinner = props.show || false;
-    let hideClass = !showSpinner ? "d-none" : "";
+    const showSpinner = props.show || false;
+    const hideClass = !showSpinner ? "d-none" : "";
     return (
         <div>
             <div id="spinner" className={`${hideClass} spinner-container overlay`}>
@@ -22,3 +24,17 @@ export function SpinnerComponent(props) {
         </div>
     );
 };
+
+export function SpinnerContextProvider({children}) {
+
+    const [ show, setShow ] = useState(false);
+
+    const context = { show, setShow }
+
+    return (
+        <SpinnerContext.Provider value={context}>
+            {children}
+            <SpinnerComponent show={context.show}/>
+        </SpinnerContext.Provider>
+    )
+}

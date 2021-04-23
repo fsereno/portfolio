@@ -6,14 +6,17 @@ import { Router } from './components/router';
 import { ToasterContextProvider } from './components/contextProviders/toasterContextProvider';
 import { Toaster } from '../../js/modules/react/toaster';
 import { LoginContextProvider } from './components/contextProviders/loginContextProvider';
+import { SpinnerContextProvider } from '../../js/modules/react/spinnerComponent';
 
 function App() {
   return (
     <ToasterContextProvider>
-      <LoginContextProvider>
-        <Router />
-        <Toaster/>
-      </LoginContextProvider>
+      <SpinnerContextProvider>
+        <LoginContextProvider>
+          <Router />
+          <Toaster/>
+        </LoginContextProvider>
+      </SpinnerContextProvider>
     </ToasterContextProvider>
   );
 }

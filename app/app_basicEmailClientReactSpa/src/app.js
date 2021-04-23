@@ -9,13 +9,13 @@ import { Toaster } from '../../js/modules/react/toaster';
 
 function App() {
   return (
-      <ToasterContextProvider>
-        <EmailContextProvider>
-          <Router />
-          <Toaster/>
+    <ToasterContextProvider>
+      <EmailContextProvider>
+        <Router />
+        <Toaster />
       </EmailContextProvider>
     </ToasterContextProvider>
   );
 }
 
-ReactDOM.render(<App />,document.getElementById('result'));
+ReactDOM.render(<App />, document.getElementById('result'));

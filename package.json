@@ -85,6 +85,7 @@
     "aframe": "^1.2.0",
     "aframe-animation-component": "^5.1.2",
     "aframe-teleport-controls": "^0.3.1",
+    "amazon-cognito-identity-js": "^4.6.0",
     "bootstrap": "^4.6.0",
     "bootstrap-icons": "^1.4.1",
     "cannon": "^0.6.2",

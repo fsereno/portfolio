@@ -21,3 +21,12 @@ export const MY_ADDRESS = "me@portfolio.co.uk";
 
 export const MIN_VIEWPORT_WIDTH = 768;
 export const INITIAL_NUMBER_OF_MESSAGES = 10;
+
+export const POOL_DATA = {
+    UserPoolId: 'eu-west-2_s4syVYS6n',
+    ClientId: '60jvm1avgd6t55k4uc15dgu6iq'
+};
+
+export const TOKEN = 'token';
+export const USERNAME = 'username';
+export const SUCCESS = "SUCCESS";

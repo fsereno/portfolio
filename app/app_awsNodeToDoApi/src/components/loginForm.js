@@ -6,15 +6,24 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LoginContext } from '../contexts';
-import { MANAGE } from '../constants';
+import { MANAGE, POOL_DATA, TOKEN, USERNAME } from '../constants';
+
+import {
+	CognitoUser,
+    AuthenticationDetails
+} from 'amazon-cognito-identity-js';
+import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 
 export function LoginForm() {
 
     const loginContext = React.useContext(LoginContext);
+    const spinnerContext = React.useContext(SpinnerContext);
 
     const history = useHistory();
 
     const [ showValidation, setShowValidation ] = useState(false);
+    const [ showFeedback, setShowFeedback ] = useState(false);
+    const [ feedbackError, setFeedbackError ] = useState("");
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
 
@@ -22,19 +31,50 @@ export function LoginForm() {
         event.preventDefault();
 
         if (event.currentTarget.checkValidity() === false) {
-
             setShowValidation(true);
             event.stopPropagation();
 
         } else {
 
-            console.log(username)
-            console.log(password)
+            spinnerContext.setShow(true);
 
-            setShowValidation(false);
+            const authenticationData = {
+                Username: username,
+                Password: password,
+            };
 
-            loginContext.setAuthenticated(true);
-            history.push(MANAGE)
+            const authenticationDetails = new AuthenticationDetails(authenticationData);
+
+            const userData = {
+                Username: username,
+                Pool: loginContext.userPool,
+            };
+
+            const cognitoUser = new CognitoUser(userData);
+
+            loginContext.setCognitoUser(cognitoUser);
+
+            cognitoUser.authenticateUser(authenticationDetails, {
+                onSuccess: function(result) {
+                    const accessToken = result.getAccessToken().getJwtToken();
+                    const username = loginContext.userPool.getCurrentUser().getUsername();
+
+                    sessionStorage.setItem(TOKEN, accessToken);
+                    sessionStorage.setItem(USERNAME, username);
+
+                    setShowValidation(false);
+                    setShowFeedback(false);
+
+                    spinnerContext.setShow(false);
+                    loginContext.setAuthenticated(true);
+                    history.push(MANAGE)
+                },
+                onFailure: function(err) {
+                    setFeedbackError(err.message);
+                    setShowFeedback(true);
+                    spinnerContext.setShow(false);
+                },
+            });
         }
     };
 
@@ -53,14 +93,14 @@ export function LoginForm() {
                         required
                     />
                     <Form.Control.Feedback type="invalid">
-                        Please enter a value.
+                        Please enter a valid value
                     </Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>
             <Form.Row>
                 <Form.Group as={Col}>
                     <Form.Label>
-                        To:
+                        Password:
                     </Form.Label>
                     <Form.Control
                         name="password"
@@ -70,13 +110,18 @@ export function LoginForm() {
                         required
                     />
                     <Form.Control.Feedback type="invalid">
-                        Please enter a value.
+                        Please enter a valid value
                     </Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>
             <Form.Row>
                 <Form.Group as={Col}>
                     <Button className="float-right" id="submit" variant="dark" type="submit">Login</Button>
+                    {showFeedback &&
+                        <div className="text-danger">
+                            {feedbackError}
+                        </div>
+                    }
                 </Form.Group>
             </Form.Row>
         </Form>

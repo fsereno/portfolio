@@ -6,18 +6,36 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LoginContext } from '../contexts';
-import { LOGIN } from '../constants';
+import { LOGIN, USERNAME, TOKEN, SUCCESS } from '../constants';
+import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 
 export function LogoutForm() {
 
     const loginContext = React.useContext(LoginContext);
+    const spinnerContext = React.useContext(SpinnerContext);
 
     const history = useHistory();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        loginContext.setAuthenticated(false);
-        history.push(LOGIN)
+
+        spinnerContext.setShow(true);
+
+        loginContext.cognitoUser.globalSignOut({
+            onSuccess: function (result) {
+                if (result === SUCCESS) {
+                    sessionStorage.removeItem(USERNAME);
+                    sessionStorage.removeItem(TOKEN);
+                    loginContext.setAuthenticated(false);
+                    spinnerContext.setShow(false);
+                    history.push(LOGIN)
+                }
+            },
+            onFailure: function (err) {
+                spinnerContext.setShow(false);
+                console.error(err.message)
+            },
+        });
     };
 
     return (
