@@ -7037,18 +7037,18 @@ function LoginContextProvider(_ref) {
       authenticated = _useState2[0],
       setAuthenticated = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
-      _useState4 = _slicedToArray(_useState3, 2),
-      cognitoUser = _useState4[0],
-      setCognitoUser = _useState4[1];
-
   var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_2__.POOL_DATA);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
+    var currentUser = userPool.getCurrentUser();
+
+    if (currentUser != null) {
+      setAuthenticated(true);
+    }
+  }, []);
   var context = {
     authenticated: authenticated,
     setAuthenticated: setAuthenticated,
-    userPool: userPool,
-    cognitoUser: cognitoUser,
-    setCognitoUser: setCognitoUser
+    userPool: userPool
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_3__.LoginContext.Provider, {
     value: context
@@ -7198,13 +7198,8 @@ function LoginForm() {
         Pool: loginContext.userPool
       };
       var cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_3__.CognitoUser(userData);
-      loginContext.setCognitoUser(cognitoUser);
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function onSuccess(result) {
-          var accessToken = result.getAccessToken().getJwtToken();
-          var username = loginContext.userPool.getCurrentUser().getUsername();
-          sessionStorage.setItem(_constants__WEBPACK_IMPORTED_MODULE_2__.TOKEN, accessToken);
-          sessionStorage.setItem(_constants__WEBPACK_IMPORTED_MODULE_2__.USERNAME, username);
           setShowValidation(false);
           setShowFeedback(false);
           spinnerContext.setShow(false);
@@ -7299,21 +7294,17 @@ function LogoutForm() {
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
     spinnerContext.setShow(true);
-    loginContext.cognitoUser.globalSignOut({
-      onSuccess: function onSuccess(result) {
-        if (result === _constants__WEBPACK_IMPORTED_MODULE_2__.SUCCESS) {
-          sessionStorage.removeItem(_constants__WEBPACK_IMPORTED_MODULE_2__.USERNAME);
-          sessionStorage.removeItem(_constants__WEBPACK_IMPORTED_MODULE_2__.TOKEN);
-          loginContext.setAuthenticated(false);
-          spinnerContext.setShow(false);
-          history.push(_constants__WEBPACK_IMPORTED_MODULE_2__.LOGIN);
-        }
-      },
-      onFailure: function onFailure(err) {
-        spinnerContext.setShow(false);
-        console.error(err.message);
-      }
-    });
+    var currentUser = loginContext.userPool.getCurrentUser();
+
+    if (currentUser != null) {
+      currentUser.signOut();
+    }
+
+    if (loginContext.userPool.getCurrentUser() === null) {
+      loginContext.setAuthenticated(false);
+      spinnerContext.setShow(false);
+      history.push(_constants__WEBPACK_IMPORTED_MODULE_2__.LOGIN);
+    }
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_5__.default, {
@@ -7516,7 +7507,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "POOL_DATA": () => (/* binding */ POOL_DATA),
 /* harmony export */   "TOKEN": () => (/* binding */ TOKEN),
 /* harmony export */   "USERNAME": () => (/* binding */ USERNAME),
-/* harmony export */   "SUCCESS": () => (/* binding */ SUCCESS)
+/* harmony export */   "SUCCESS": () => (/* binding */ SUCCESS),
+/* harmony export */   "USER": () => (/* binding */ USER)
 /* harmony export */ });
 "use strict;";
 
@@ -7546,6 +7538,7 @@ var POOL_DATA = {
 var TOKEN = 'token';
 var USERNAME = 'username';
 var SUCCESS = "SUCCESS";
+var USER = "cognitoUser";
 
 /***/ }),
 

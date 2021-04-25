@@ -30,3 +30,4 @@ export const POOL_DATA = {
 export const TOKEN = 'token';
 export const USERNAME = 'username';
 export const SUCCESS = "SUCCESS";
+export const USER = "cognitoUser";

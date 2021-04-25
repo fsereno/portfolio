@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LoginContext } from '../contexts';
-import { MANAGE, POOL_DATA, TOKEN, USERNAME } from '../constants';
+import { MANAGE } from '../constants';
 
 import {
 	CognitoUser,
@@ -52,15 +52,8 @@ export function LoginForm() {
 
             const cognitoUser = new CognitoUser(userData);
 
-            loginContext.setCognitoUser(cognitoUser);
-
             cognitoUser.authenticateUser(authenticationDetails, {
                 onSuccess: function(result) {
-                    const accessToken = result.getAccessToken().getJwtToken();
-                    const username = loginContext.userPool.getCurrentUser().getUsername();
-
-                    sessionStorage.setItem(TOKEN, accessToken);
-                    sessionStorage.setItem(USERNAME, username);
 
                     setShowValidation(false);
                     setShowFeedback(false);

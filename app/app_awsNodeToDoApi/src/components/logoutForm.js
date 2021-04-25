@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LoginContext } from '../contexts';
-import { LOGIN, USERNAME, TOKEN, SUCCESS } from '../constants';
+import { LOGIN } from '../constants';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 
 export function LogoutForm() {
@@ -21,21 +21,17 @@ export function LogoutForm() {
 
         spinnerContext.setShow(true);
 
-        loginContext.cognitoUser.globalSignOut({
-            onSuccess: function (result) {
-                if (result === SUCCESS) {
-                    sessionStorage.removeItem(USERNAME);
-                    sessionStorage.removeItem(TOKEN);
-                    loginContext.setAuthenticated(false);
-                    spinnerContext.setShow(false);
-                    history.push(LOGIN)
-                }
-            },
-            onFailure: function (err) {
-                spinnerContext.setShow(false);
-                console.error(err.message)
-            },
-        });
+        const currentUser = loginContext.userPool.getCurrentUser();
+
+        if (currentUser != null ) {
+            currentUser.signOut();
+        }
+
+        if (loginContext.userPool.getCurrentUser() === null) {
+            loginContext.setAuthenticated(false);
+            spinnerContext.setShow(false);
+            history.push(LOGIN)
+        }
     };
 
     return (

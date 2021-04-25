@@ -1,18 +1,27 @@
 "use strict;"
 
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
-import { POOL_DATA } from '../../constants';
+import { POOL_DATA, TOKEN, USERNAME } from '../../constants';
 import { LoginContext } from '../../contexts';
 
 export function LoginContextProvider({children}) {
 
     const [ authenticated, setAuthenticated ] = useState(false);
-    const [ cognitoUser, setCognitoUser ] = useState({});
 
     const userPool = new CognitoUserPool(POOL_DATA);
 
-    const context = { authenticated, setAuthenticated, userPool, cognitoUser, setCognitoUser };
+    useLayoutEffect(() => {
+
+        const currentUser = userPool.getCurrentUser();
+
+        if (currentUser != null ) {
+            setAuthenticated(true);
+        }
+
+    },[]);
+
+    const context = { authenticated, setAuthenticated, userPool };
 
     return (
         <>
