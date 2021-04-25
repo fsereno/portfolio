@@ -13,6 +13,7 @@ import {
     AuthenticationDetails
 } from 'amazon-cognito-identity-js';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
+import { Row } from 'react-bootstrap';
 
 export function LoginForm() {
 
@@ -72,51 +73,55 @@ export function LoginForm() {
     };
 
     return (
-        <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
-            <Form.Row>
-                <Form.Group as={Col}>
-                    <Form.Label>
-                        Username:
-                    </Form.Label>
-                    <Form.Control
-                        name="username"
-                        id="username"
-                        type="text"
-                        onChange={event => setUsername(event.target.value)}
-                        required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        Please enter a valid value
-                    </Form.Control.Feedback>
-                </Form.Group>
-            </Form.Row>
-            <Form.Row>
-                <Form.Group as={Col}>
-                    <Form.Label>
-                        Password:
-                    </Form.Label>
-                    <Form.Control
-                        name="password"
-                        id="password"
-                        type="password"
-                        onChange={event => setPassword(event.target.value)}
-                        required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        Please enter a valid value
-                    </Form.Control.Feedback>
-                </Form.Group>
-            </Form.Row>
-            <Form.Row>
-                <Form.Group as={Col}>
-                    <Button className="float-right" id="submit" variant="dark" type="submit">Login</Button>
-                    {showFeedback &&
-                        <div className="text-danger">
-                            {feedbackError}
-                        </div>
-                    }
-                </Form.Group>
-            </Form.Row>
-        </Form>
+        <Row>
+            <Col lg={4}>
+                <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Form.Label>
+                                Username:
+                            </Form.Label>
+                            <Form.Control
+                                name="username"
+                                id="username"
+                                type="text"
+                                onChange={event => setUsername(event.target.value)}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please enter a valid value
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Form.Label>
+                                Password:
+                            </Form.Label>
+                            <Form.Control
+                                name="password"
+                                id="password"
+                                type="password"
+                                onChange={event => setPassword(event.target.value)}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please enter a valid value
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Button className="float-right" id="submit" variant="dark" type="submit">Login</Button>
+                            {showFeedback &&
+                                <div className="text-danger">
+                                    {feedbackError}
+                                </div>
+                            }
+                        </Form.Group>
+                    </Form.Row>
+                </Form>
+            </Col>
+        </Row>
     )
 }

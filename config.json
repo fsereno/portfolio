@@ -329,7 +329,7 @@
             "labels": [0]
         },
         {
-            "name": "Basic React Email Client",
+            "name": "Basic React Email Client (SPA)",
             "subHeading": "An SPA using React, React Router, React Context and useReducer to handle application state",
             "description": "Using React, Babel and Webpack.",
             "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
@@ -342,8 +342,8 @@
             "order": 1
         },
         {
-            "name": "AWS, End-to-end, To-Do List SPA",
-            "subHeading": "Authenticated with Cognito, data stored with Dynamo DB, driven by Lambda Functions and a React UI",
+            "name": "AWS, B2C To-Do List API (SPA)",
+            "subHeading": "Authenticated with Cognito, data stored using Dynamo DB, driven by Lambda Functions and with a React UI",
             "description": "Built with Node JS, The AWS Serverless Framework and managed by an HTTP API Gateway.",
             "searchTerms": "Cloud,AWS,Amazon Web Services,Serverless Framework,Node JS,Cognito,Dynamo DB,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "awsNodeToDoApi",
