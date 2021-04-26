@@ -6,8 +6,9 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LoginContext } from '../contexts';
-import { LOGIN } from '../constants';
+import { LOGIN, POOL_DATA, SUCCESS } from '../constants';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
+import { CognitoUserPool } from 'amazon-cognito-identity-js';
 
 export function LogoutForm() {
 
@@ -21,16 +22,39 @@ export function LogoutForm() {
 
         spinnerContext.setShow(true);
 
-        const currentUser = loginContext.userPool.getCurrentUser();
+        const userPool = new CognitoUserPool(POOL_DATA);
+
+        const currentUser = userPool.getCurrentUser();
 
         if (currentUser != null ) {
-            currentUser.signOut();
-        }
 
-        if (loginContext.userPool.getCurrentUser() === null) {
-            loginContext.setAuthenticated(false);
-            spinnerContext.setShow(false);
-            history.push(LOGIN)
+            currentUser.getSession(err => {
+
+                if (err != null ) {
+
+                    console.error(err.message);
+
+                } else {
+                    currentUser.globalSignOut({
+                        onSuccess: function (result) {
+
+                            if (result === SUCCESS) {
+
+                                loginContext.setAuthenticated(false);
+                                spinnerContext.setShow(false);
+                                history.push(LOGIN);
+
+                            }
+                        },
+                        onFailure: function (err) {
+
+                            spinnerContext.setShow(false);
+                            console.error(err.message)
+
+                        },
+                    });
+                }
+            });
         }
     };
 

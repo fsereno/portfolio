@@ -6,12 +6,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LoginContext } from '../contexts';
-import { MANAGE } from '../constants';
-
-import {
-	CognitoUser,
-    AuthenticationDetails
-} from 'amazon-cognito-identity-js';
+import { MANAGE, POOL_DATA } from '../constants';
+import { CognitoUser, AuthenticationDetails, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 import { Row } from 'react-bootstrap';
 
@@ -48,7 +44,7 @@ export function LoginForm() {
 
             const userData = {
                 Username: username,
-                Pool: loginContext.userPool,
+                Pool: new CognitoUserPool(POOL_DATA),
             };
 
             const cognitoUser = new CognitoUser(userData);
