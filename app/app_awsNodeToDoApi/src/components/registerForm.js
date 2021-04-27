@@ -10,6 +10,7 @@ import { CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-j
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 import { Row } from 'react-bootstrap';
 import { ToasterContext, ENQUEUE_TOAST } from '../../../js/modules/react/toasterComponent';
+import { ToolTip } from './tooltip';
 
 export function RegisterForm() {
 
@@ -77,7 +78,7 @@ export function RegisterForm() {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>
-                                Name: <small>Make this fictional and not personal</small>
+                                Name: <ToolTip message="Make this fictional and not personal" />
                             </Form.Label>
                             <Form.Control
                                 name="name"
@@ -94,7 +95,7 @@ export function RegisterForm() {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>
-                                Username: <small>This is case insensitive</small>
+                                Username: <ToolTip message="This is case insensitive" />
                             </Form.Label>
                             <Form.Control
                                 name="username"
@@ -111,7 +112,7 @@ export function RegisterForm() {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>
-                                Password: <small>Alphanumeric, case sensitive, special characters</small>
+                                Password: <ToolTip message="Alphanumeric and case sensitive. Use a special character!" />
                             </Form.Label>
                             <Form.Control
                                 name="password"
