@@ -1,11 +1,11 @@
 "use strict;"
 
-import React, { useEffect, useState } from 'react';
-import { Toast } from './toast';
+import React, { useEffect, useState, useReducer } from 'react';
 
 export const ENQUEUE_TOAST = "enqueueToast";
 export const DEQUEUE_TOAST = "dequeueToast";
 export const REMOVE_TOAST_AT_INDEX = "removeToastAtIndex";
+
 export const ToasterContext = React.createContext();
 
 export function ToastReducer(state, action) {
@@ -73,5 +73,50 @@ export function Toaster() {
                 <Toasts items={collection}/>
             </div>
         </div>
+    )
+}
+
+export function ToasterContextProvider({children}) {
+
+    const [ state, dispatch ] = useReducer(ToastReducer, { items: [] });
+
+    const stateValue = { state, dispatch };
+
+    return (
+        <>
+            <ToasterContext.Provider value={stateValue}>
+                {children}
+                <Toaster />
+            </ToasterContext.Provider>
+        </>
+    )
+}
+
+export function Toast(props) {
+
+    const context = React.useContext(ToasterContext);
+
+    const handleClose = () => context.dispatch( { type: REMOVE_TOAST_AT_INDEX, index: props.index });
+
+    useEffect(() => {
+        setTimeout(() => {
+            context.dispatch( { type: DEQUEUE_TOAST });
+        }, 5000)
+    }, []);
+
+    return (
+        <>
+            <div className="toast" role="alert" aria-live="assertive" aria-atomic="true" style={ { opacity: 1 }}>
+                <div className="toast-header">
+                    <strong className="mr-auto text-dark lead">{props.item.heading}</strong>
+                    <a href="#" onClick={event => event.preventDefault() & handleClose()}className="text-dark h3 mb-0">
+                        <i className="bi bi-x"></i>
+                    </a>
+                </div>
+                <div className="toast-body">
+                    {props.item.body}
+                </div>
+            </div>
+        </>
     )
 }

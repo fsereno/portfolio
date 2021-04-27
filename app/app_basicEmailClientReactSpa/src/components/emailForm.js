@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { SUBMIT, OUTBOX, MY_ADDRESS, REPLY } from '../constants';
 import { EmailContext, EmailClientContext, EmailModalContext} from '../contexts';
-import { ENQUEUE_TOAST, ToasterContext } from '../../../js/modules/react/toaster';
+import { ENQUEUE_TOAST, ToasterContext } from '../../../js/modules/react/toasterComponent';
 
 export function EmailForm() {
 

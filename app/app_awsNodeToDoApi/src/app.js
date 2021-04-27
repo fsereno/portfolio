@@ -3,10 +3,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from './components/router';
-import { ToasterContextProvider } from './components/contextProviders/toasterContextProvider';
-import { Toaster } from '../../js/modules/react/toaster';
 import { LoginContextProvider } from './components/contextProviders/loginContextProvider';
 import { SpinnerContextProvider } from '../../js/modules/react/spinnerComponent';
+import { ToasterContextProvider } from '../../js/modules/react/toasterComponent';
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
       <SpinnerContextProvider>
         <LoginContextProvider>
           <Router />
-          <Toaster/>
         </LoginContextProvider>
       </SpinnerContextProvider>
     </ToasterContextProvider>

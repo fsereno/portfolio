@@ -10,6 +10,7 @@ export const SUBMIT = "submit";
 export const READ = "read";
 export const RESET_MODE = "resetMode";
 
+export const REGISTER = "/register";
 export const LOGIN = "/login";
 export const MANAGE = "/manage";
 export const LOGOUT = "/logout";
