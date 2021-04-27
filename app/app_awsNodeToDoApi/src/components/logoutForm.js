@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import { LoginContext } from '../contexts';
 import { LOGIN, POOL_DATA, SUCCESS } from '../constants';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
@@ -59,15 +60,19 @@ export function LogoutForm() {
     };
 
     return (
-        <Form noValidate onSubmit={handleSubmit}>
-            <Form.Row>
-                <Form.Group as={Col}>
-                    <Form.Label>
-                        Are you sure you want to logout ?
-                    </Form.Label>
-                    <Button className="float-right" id="submit" variant="dark" type="submit">Logout</Button>
-                </Form.Group>
-            </Form.Row>
-        </Form>
+        <Row>
+            <Col lg={4}>
+                <Form noValidate onSubmit={handleSubmit}>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Form.Label>
+                                Are you sure you want to logout ?
+                            </Form.Label>
+                            <Button className="float-right" id="submit" variant="dark" type="submit">Logout</Button>
+                        </Form.Group>
+                    </Form.Row>
+                </Form>
+            </Col>
+        </Row>
     )
 }
