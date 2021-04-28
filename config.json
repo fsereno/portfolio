@@ -25,6 +25,9 @@
         ".NET",
         "Cloud"
     ],
+    "grecaptcha": {
+        "key": "6LcP6b0aAAAAABeXkAjgpfnfTb06se0_wv49zvvK"
+    },
     "applications": [
         {
             "name": "Portfolio",

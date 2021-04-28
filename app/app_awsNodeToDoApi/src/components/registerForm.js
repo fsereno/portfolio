@@ -11,6 +11,7 @@ import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 import { Row } from 'react-bootstrap';
 import { ToasterContext, ENQUEUE_TOAST } from '../../../js/modules/react/toasterComponent';
 import { ToolTip } from './tooltip';
+import { ConfigUtil } from '../../../js/modules/utils/configUtil';
 
 export function RegisterForm() {
 
@@ -34,6 +35,17 @@ export function RegisterForm() {
             event.stopPropagation();
 
         } else {
+
+            const config = ConfigUtil.get();
+            const key = config.grecaptcha.key;
+
+            grecaptcha.ready(function() {
+                grecaptcha.execute(key, {action: 'submit'}).then(function(token) {
+                    // Add your logic to submit to your backend server here.
+
+                    console.log(token);
+                });
+            });
 
             spinnerContext.setShow(true);
 
