@@ -1,8 +1,5 @@
 "use strict;"
 
-// - site - 6LdFJsIaAAAAAGltxQjmncdNsjOtxAshDewjKCS3
-//- sec - 6LdFJsIaAAAAANksLu53O6eqJsUpjggm22Mg9pX5
-
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
