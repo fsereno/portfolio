@@ -1,5 +1,8 @@
 "use strict;"
 
+// - site - 6LdFJsIaAAAAAGltxQjmncdNsjOtxAshDewjKCS3
+//- sec - 6LdFJsIaAAAAANksLu53O6eqJsUpjggm22Mg9pX5
+
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
@@ -11,12 +14,18 @@ import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 import { Row } from 'react-bootstrap';
 import { ToasterContext, ENQUEUE_TOAST } from '../../../js/modules/react/toasterComponent';
 import { ToolTip } from './tooltip';
-import { ConfigUtil } from '../../../js/modules/utils/configUtil';
+import { ConfigContext } from '../../../js/modules/react/configContextProvider';
+import ReCAPTCHA from "react-google-recaptcha";
 
 export function RegisterForm() {
 
     const spinnerContext = React.useContext(SpinnerContext);
     const toasterContext = React.useContext(ToasterContext);
+    const configContext = React.useContext(ConfigContext);
+
+    const key = configContext.config.grecaptcha.key;
+
+    const VERIFY_ENDPOINT = `${configContext.appConfig.endpoints.base}/${configContext.appConfig.endpoints.verify}`;
 
     const history = useHistory();
 
@@ -26,6 +35,7 @@ export function RegisterForm() {
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ name, setName ] = useState("");
+    const [ recaptchaToken, setRecaptchaToken ] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -36,52 +46,74 @@ export function RegisterForm() {
 
         } else {
 
-            const config = ConfigUtil.get();
-            const key = config.grecaptcha.key;
-
-            grecaptcha.ready(function() {
-                grecaptcha.execute(key, {action: 'submit'}).then(function(token) {
-                    // Add your logic to submit to your backend server here.
-
-                    console.log(token);
-                });
-            });
-
             spinnerContext.setShow(true);
 
-            const userPool = new CognitoUserPool(POOL_DATA);
+            const payload = JSON.stringify({ token: recaptchaToken });
 
-            const attributeList = [];
+            let xhttp = new XMLHttpRequest();
 
-            const dataName = {
-                Name: "name",
-                Value: name
-            }
+            xhttp.onreadystatechange = (result) => {
 
-            const attributeName = new CognitoUserAttribute(dataName)
+                const data = result.currentTarget;
 
-            attributeList.push(attributeName);
+                if (data.status === 200 && data.readyState === 4 && data.response.length > 0) {
 
-            userPool.signUp(username, password, attributeList, null, (err, result) => {
+                    const grecaptchaResponse = JSON.parse(data.response);
 
-                if (err != null) {
-
-                    setFeedbackError(err.message);
-                    setShowFeedback(true);
-                    spinnerContext.setShow(false);
-
-                } else {
-
-                    setShowValidation(false);
-                    setShowFeedback(false);
-
-                    spinnerContext.setShow(false);
-                    toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Registration Successful!", body: `${name}, you can now login using your credentials.` } } );
-                    history.push(LOGIN)
+                    if (grecaptchaResponse.result.success) {
+                        register();
+                    } else {
+                        error();
+                    }
                 }
-            });
+            };
+
+            xhttp.open("POST", VERIFY_ENDPOINT);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(payload);
         }
     };
+
+    const error = (error = "There was an error") => {
+        setFeedbackError(error);
+        setShowFeedback(true);
+        spinnerContext.setShow(false);
+    }
+
+    const register = () => {
+
+        const userPool = new CognitoUserPool(POOL_DATA);
+
+        const attributeList = [];
+
+        const dataName = {
+            Name: "name",
+            Value: name
+        }
+
+        const attributeName = new CognitoUserAttribute(dataName)
+
+        attributeList.push(attributeName);
+
+        userPool.signUp(username, password, attributeList, null, (err, result) => {
+
+            if (err != null) {
+
+                setFeedbackError(err.message);
+                setShowFeedback(true);
+                spinnerContext.setShow(false);
+
+            } else {
+
+                setShowValidation(false);
+                setShowFeedback(false);
+
+                spinnerContext.setShow(false);
+                toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Registration Successful!", body: `${name}, you can now login using your credentials.` } } );
+                history.push(LOGIN)
+            }
+        });
+    }
 
     return (
         <Row>
@@ -136,6 +168,14 @@ export function RegisterForm() {
                             <Form.Control.Feedback type="invalid">
                                 Please enter a valid value
                             </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Form.Label>
+                                Are you a robot ?: <ToolTip message="Something" />
+                            </Form.Label>
+                            <ReCAPTCHA sitekey={key} onChange={value => setRecaptchaToken(value)} />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>

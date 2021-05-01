@@ -26,7 +26,7 @@
         "Cloud"
     ],
     "grecaptcha": {
-        "key": "6LcP6b0aAAAAABeXkAjgpfnfTb06se0_wv49zvvK"
+        "key": "6LdFJsIaAAAAAGltxQjmncdNsjOtxAshDewjKCS3"
     },
     "applications": [
         {
@@ -356,7 +356,12 @@
             "masterTemplateDir": "basicEmailClientReactSpa",
             "labels": [0,2],
             "order": 1,
-            "featured": true
+            "featured": true,
+            "endpoints": {
+                "base": "https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com",
+                "api": "todos",
+                "verify": "verify"
+            }
         }
     ]
 }
