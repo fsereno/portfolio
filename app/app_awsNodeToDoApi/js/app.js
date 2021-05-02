@@ -10454,7 +10454,7 @@ function RegisterForm() {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
-    if (isRecaptchValid()) {
+    if (recaptureIsActive && isRecaptchValid()) {
       setFeedbackError("");
       setShowFeedback(false);
     }

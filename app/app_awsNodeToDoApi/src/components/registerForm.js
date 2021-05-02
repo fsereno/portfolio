@@ -37,7 +37,7 @@ export function RegisterForm() {
 
     useLayoutEffect(() => {
 
-        if (isRecaptchValid()) {
+        if (recaptureIsActive && isRecaptchValid()) {
             setFeedbackError("");
             setShowFeedback(false);
         }
