@@ -26,6 +26,7 @@
         "Cloud"
     ],
     "grecaptcha": {
+        "active": true,
         "key": "6LdFJsIaAAAAAGltxQjmncdNsjOtxAshDewjKCS3"
     },
     "applications": [

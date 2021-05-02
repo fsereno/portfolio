@@ -29,7 +29,8 @@ export function RegisterForm() {
     const [ recaptchaToken, setRecaptchaToken ] = useState(null);
     const recaptchaRef = useRef();
 
-    const key = configContext.config.grecaptcha.key;
+    const recaptureSiteKey = configContext.config.grecaptcha.key;
+    const recaptureIsActive = configContext.config.grecaptcha.active;
     const VERIFY_ENDPOINT = `${configContext.appConfig.endpoints.base}/${configContext.appConfig.endpoints.verify}`;
     const history = useHistory();
     const isRecaptchValid = () =>  recaptchaToken !== null && recaptchaToken.length > 0;
@@ -46,10 +47,10 @@ export function RegisterForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!event.currentTarget.checkValidity() || !isRecaptchValid()) {
+        if (!event.currentTarget.checkValidity() || (recaptureIsActive && !isRecaptchValid())) {
             setShowValidation(true);
 
-            if (!isRecaptchValid()) {
+            if (recaptureIsActive && !isRecaptchValid()) {
                 error("Please complete the challenge");
             }
 
@@ -59,39 +60,44 @@ export function RegisterForm() {
 
             spinnerContext.setShow(true);
 
-            const payload = JSON.stringify({ token: recaptchaToken });
+            if (recaptureIsActive) {
 
-            const xhttp = new XMLHttpRequest();
+                const payload = JSON.stringify({ token: recaptchaToken });
 
-            xhttp.onreadystatechange = (result) => {
+                const xhttp = new XMLHttpRequest();
 
-                const data = result.currentTarget;
+                xhttp.onreadystatechange = (result) => {
 
-                if (data.status === 200 && data.readyState === 4) {
+                    const data = result.currentTarget;
 
-                    const grecaptchaResponse = JSON.parse(data.response);
+                    if (data.status === 200 && data.readyState === 4) {
 
-                    if (grecaptchaResponse.result.success) {
-                        register();
-                    } else {
-                        error();
+                        const grecaptchaResponse = JSON.parse(data.response);
 
-                        const resultError = grecaptchaResponse.result["error-codes"][0];
-                        console.error(resultError);
+                        if (grecaptchaResponse.result.success) {
+                            register();
+                        } else {
+                            error();
+                        }
                     }
-                }
-            };
+                };
 
-            xhttp.open("POST", VERIFY_ENDPOINT);
-            xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.send(payload);
+                xhttp.open("POST", VERIFY_ENDPOINT);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.send(payload);
+
+            } else {
+                register();
+            }
         }
     };
 
     const error = (error = "Sorry, there was an error!") => {
         setFeedbackError(error);
         setShowFeedback(true);
-        recaptchaRef.current.reset();
+        if (recaptureIsActive) {
+            recaptchaRef.current.reset();
+        }
         spinnerContext.setShow(false);
     }
 
@@ -183,14 +189,16 @@ export function RegisterForm() {
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Form.Row>
-                    <Form.Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>
-                                Are you a robot ? <ToolTip message="Please complete the challenge" />
-                            </Form.Label>
-                            <ReCAPTCHA ref={recaptchaRef} sitekey={key} onChange={value => setRecaptchaToken(value)} />
-                        </Form.Group>
-                    </Form.Row>
+                    {recaptureIsActive &&
+                        <Form.Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>
+                                    Are you a robot ? <ToolTip message="Please complete the challenge" />
+                                </Form.Label>
+                                <ReCAPTCHA ref={recaptchaRef} sitekey={recaptureSiteKey} onChange={value => setRecaptchaToken(value)} />
+                            </Form.Group>
+                        </Form.Row>
+                    }
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Button className="float-right" id="submit" variant="dark" type="submit">Register</Button>
