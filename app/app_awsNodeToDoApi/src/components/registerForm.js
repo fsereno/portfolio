@@ -1,6 +1,6 @@
 "use strict;"
 
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -20,25 +20,39 @@ export function RegisterForm() {
     const toasterContext = React.useContext(ToasterContext);
     const configContext = React.useContext(ConfigContext);
 
-    const key = configContext.config.grecaptcha.key;
-
-    const VERIFY_ENDPOINT = `${configContext.appConfig.endpoints.base}/${configContext.appConfig.endpoints.verify}`;
-
-    const history = useHistory();
-
     const [ showValidation, setShowValidation ] = useState(false);
     const [ showFeedback, setShowFeedback ] = useState(false);
     const [ feedbackError, setFeedbackError ] = useState("");
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ name, setName ] = useState("");
-    const [ recaptchaToken, setRecaptchaToken ] = useState("");
+    const [ recaptchaToken, setRecaptchaToken ] = useState(null);
+    const recaptchaRef = useRef();
+
+    const key = configContext.config.grecaptcha.key;
+    const VERIFY_ENDPOINT = `${configContext.appConfig.endpoints.base}/${configContext.appConfig.endpoints.verify}`;
+    const history = useHistory();
+    const isRecaptchValid = () =>  recaptchaToken !== null && recaptchaToken.length > 0;
+
+    useLayoutEffect(() => {
+
+        if (isRecaptchValid()) {
+            setFeedbackError("");
+            setShowFeedback(false);
+        }
+
+    },[recaptchaToken])
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (event.currentTarget.checkValidity() === false) {
+        if (!event.currentTarget.checkValidity() || !isRecaptchValid()) {
             setShowValidation(true);
+
+            if (!isRecaptchValid()) {
+                error("Please complete the challenge");
+            }
+
             event.stopPropagation();
 
         } else {
@@ -47,13 +61,13 @@ export function RegisterForm() {
 
             const payload = JSON.stringify({ token: recaptchaToken });
 
-            let xhttp = new XMLHttpRequest();
+            const xhttp = new XMLHttpRequest();
 
             xhttp.onreadystatechange = (result) => {
 
                 const data = result.currentTarget;
 
-                if (data.status === 200 && data.readyState === 4 && data.response.length > 0) {
+                if (data.status === 200 && data.readyState === 4) {
 
                     const grecaptchaResponse = JSON.parse(data.response);
 
@@ -61,6 +75,9 @@ export function RegisterForm() {
                         register();
                     } else {
                         error();
+
+                        const resultError = grecaptchaResponse.result["error-codes"][0];
+                        console.error(resultError);
                     }
                 }
             };
@@ -71,9 +88,10 @@ export function RegisterForm() {
         }
     };
 
-    const error = (error = "There was an error") => {
+    const error = (error = "Sorry, there was an error!") => {
         setFeedbackError(error);
         setShowFeedback(true);
+        recaptchaRef.current.reset();
         spinnerContext.setShow(false);
     }
 
@@ -88,7 +106,7 @@ export function RegisterForm() {
             Value: name
         }
 
-        const attributeName = new CognitoUserAttribute(dataName)
+        const attributeName = new CognitoUserAttribute(dataName);
 
         attributeList.push(attributeName);
 
@@ -96,9 +114,7 @@ export function RegisterForm() {
 
             if (err != null) {
 
-                setFeedbackError(err.message);
-                setShowFeedback(true);
-                spinnerContext.setShow(false);
+                error(err.message);
 
             } else {
 
@@ -107,7 +123,7 @@ export function RegisterForm() {
 
                 spinnerContext.setShow(false);
                 toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Registration Successful!", body: `${name}, you can now login using your credentials.` } } );
-                history.push(LOGIN)
+                history.push(LOGIN);
             }
         });
     }
@@ -119,7 +135,7 @@ export function RegisterForm() {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>
-                                Name: <ToolTip message="Make this fictional and not personal" />
+                                Name <ToolTip message="Make this fictional and not personal" />
                             </Form.Label>
                             <Form.Control
                                 name="name"
@@ -136,7 +152,7 @@ export function RegisterForm() {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>
-                                Username: <ToolTip message="This is case insensitive" />
+                                Username <ToolTip message="This is case insensitive" />
                             </Form.Label>
                             <Form.Control
                                 name="username"
@@ -153,7 +169,7 @@ export function RegisterForm() {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>
-                                Password: <ToolTip message="Alphanumeric and case sensitive. Use a special character!" />
+                                Password <ToolTip message="Alphanumeric and case sensitive. Use a special character!" />
                             </Form.Label>
                             <Form.Control
                                 name="password"
@@ -170,16 +186,16 @@ export function RegisterForm() {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>
-                                Are you a robot ?: <ToolTip message="Something" />
+                                Are you a robot ? <ToolTip message="Please complete the challenge" />
                             </Form.Label>
-                            <ReCAPTCHA sitekey={key} onChange={value => setRecaptchaToken(value)} />
+                            <ReCAPTCHA ref={recaptchaRef} sitekey={key} onChange={value => setRecaptchaToken(value)} />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Button className="float-right" id="submit" variant="dark" type="submit">Register</Button>
                             {showFeedback &&
-                                <div className="text-danger">
+                                <div id="errorFeedback" className="text-danger">
                                     {feedbackError}
                                 </div>
                             }
