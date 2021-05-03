@@ -10501,6 +10501,8 @@ function RegisterForm() {
             } else {
               showErrors();
             }
+          } else if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_8__.XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
+            showErrors();
           }
         };
 
@@ -10850,7 +10852,7 @@ var TOKEN = 'token';
 var USERNAME = 'username';
 var SUCCESS = "SUCCESS";
 var USER = "cognitoUser";
-var STANDARD_ERROR = "Sorry, there was an error!";
+var STANDARD_ERROR = "Sorry, there was an error. Please try again.";
 var COMPLETE_CHALLENGE_ERROR = "Please complete the challenge";
 
 /***/ }),
@@ -11204,6 +11206,13 @@ var XmlHttpRequestUtil = /*#__PURE__*/function () {
       var status = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var readyState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       return status === 200 && readyState === 4;
+    }
+  }, {
+    key: "isFail",
+    value: function isFail() {
+      var status = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var readyState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      return status !== 200 && readyState === 4;
     }
   }]);
 

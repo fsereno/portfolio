@@ -18,4 +18,18 @@ describe("xmlHttpRequestUtil", () => {
             expect(result).to.equal(false);
         });
     });
+    describe("isFail", () => {
+        it("Should return true when status not 200 and readyState is 4", () => {
+            const result = XmlHttpRequestUtil.isFail(0, 4);
+            expect(result).to.equal(true);
+        });
+        it("Should return false when status is 200 and readyState is 4", () => {
+            const result = XmlHttpRequestUtil.isFail(200, 4);
+            expect(result).to.equal(false);
+        });
+        it("Should return false when status is not 200 but readyState not 4", () => {
+            const result = XmlHttpRequestUtil.isFail(400, 0);
+            expect(result).to.equal(false);
+        });
+    });
 });

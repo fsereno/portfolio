@@ -79,6 +79,8 @@ export function RegisterForm() {
                         } else {
                             showErrors();
                         }
+                    } else if (XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
+                        showErrors();
                     }
                 };
 

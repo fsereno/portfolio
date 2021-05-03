@@ -33,5 +33,5 @@ export const USERNAME = 'username';
 export const SUCCESS = "SUCCESS";
 export const USER = "cognitoUser";
 
-export const STANDARD_ERROR = "Sorry, there was an error!";
+export const STANDARD_ERROR = "Sorry, there was an error. Please try again.";
 export const COMPLETE_CHALLENGE_ERROR = "Please complete the challenge";
