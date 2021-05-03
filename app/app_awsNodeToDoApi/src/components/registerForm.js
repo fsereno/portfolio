@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { LOGIN, POOL_DATA } from '../constants';
+import { COMPLETE_CHALLENGE_ERROR, LOGIN, POOL_DATA, STANDARD_ERROR } from '../constants';
 import { CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 import { Row } from 'react-bootstrap';
@@ -13,6 +13,7 @@ import { ToasterContext, ENQUEUE_TOAST } from '../../../js/modules/react/toaster
 import { ToolTip } from './tooltip';
 import { ConfigContext } from '../../../js/modules/react/configContextProvider';
 import ReCAPTCHA from "react-google-recaptcha";
+import { XmlHttpRequestUtil } from '../../../js/modules/utils/XMLHttpRequestUtil';
 
 export function RegisterForm() {
 
@@ -51,7 +52,7 @@ export function RegisterForm() {
             setShowValidation(true);
 
             if (recaptureIsActive && !isRecaptchValid()) {
-                error("Please complete the challenge");
+                error(COMPLETE_CHALLENGE_ERROR);
             }
 
             event.stopPropagation();
@@ -70,7 +71,7 @@ export function RegisterForm() {
 
                     const data = result.currentTarget;
 
-                    if (data.status === 200 && data.readyState === 4) {
+                    if (XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
 
                         const grecaptchaResponse = JSON.parse(data.response);
 
@@ -92,12 +93,16 @@ export function RegisterForm() {
         }
     };
 
-    const error = (error = "Sorry, there was an error!") => {
+    const error = (error = STANDARD_ERROR) => {
+
         setFeedbackError(error);
         setShowFeedback(true);
+
         if (recaptureIsActive) {
+            setRecaptchaToken(null);
             recaptchaRef.current.reset();
         }
+
         spinnerContext.setShow(false);
     }
 
@@ -105,16 +110,12 @@ export function RegisterForm() {
 
         const userPool = new CognitoUserPool(POOL_DATA);
 
-        const attributeList = [];
-
-        const dataName = {
-            Name: "name",
-            Value: name
-        }
-
-        const attributeName = new CognitoUserAttribute(dataName);
-
-        attributeList.push(attributeName);
+        const attributeList = [
+            new CognitoUserAttribute({
+                Name: "name",
+                Value: name
+            })
+        ];
 
         userPool.signUp(username, password, attributeList, null, (err, result) => {
 

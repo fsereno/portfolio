@@ -255,8 +255,7 @@ gulp.task("test-func", (done) => {
 gulp.task("test", (done) => {
   testTask("services");
   testTask("utils");
-  // this needs fixing for when there a no test files
-  //config.applications.map(testAllAppsTasks);
+  config.applications.map(testAllAppsTasks);
   done();
 });
 

@@ -10364,18 +10364,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RegisterForm": () => (/* binding */ RegisterForm)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
 /* harmony import */ var amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! amazon-cognito-identity-js */ "../../node_modules/amazon-cognito-identity-js/es/index.js");
 /* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
 /* harmony import */ var _js_modules_react_toasterComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../js/modules/react/toasterComponent */ "../js/modules/react/toasterComponent.js");
 /* harmony import */ var _tooltip__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tooltip */ "./src/components/tooltip.js");
 /* harmony import */ var _js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../js/modules/react/configContextProvider */ "../js/modules/react/configContextProvider.js");
 /* harmony import */ var react_google_recaptcha__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-google-recaptcha */ "../../node_modules/react-google-recaptcha/lib/esm/index.js");
+/* harmony import */ var _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../js/modules/utils/XMLHttpRequestUtil */ "../js/modules/utils/XMLHttpRequestUtil.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -10389,6 +10390,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -10447,7 +10449,7 @@ function RegisterForm() {
   var recaptureSiteKey = configContext.config.grecaptcha.key;
   var recaptureIsActive = configContext.config.grecaptcha.active;
   var VERIFY_ENDPOINT = "".concat(configContext.appConfig.endpoints.base, "/").concat(configContext.appConfig.endpoints.verify);
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useHistory)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useHistory)();
 
   var isRecaptchValid = function isRecaptchValid() {
     return recaptchaToken !== null && recaptchaToken.length > 0;
@@ -10467,7 +10469,7 @@ function RegisterForm() {
       setShowValidation(true);
 
       if (recaptureIsActive && !isRecaptchValid()) {
-        error("Please complete the challenge");
+        error(_constants__WEBPACK_IMPORTED_MODULE_1__.COMPLETE_CHALLENGE_ERROR);
       }
 
       event.stopPropagation();
@@ -10483,7 +10485,7 @@ function RegisterForm() {
         xhttp.onreadystatechange = function (result) {
           var data = result.currentTarget;
 
-          if (data.status === 200 && data.readyState === 4) {
+          if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_8__.XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
             var grecaptchaResponse = JSON.parse(data.response);
 
             if (grecaptchaResponse.result.success) {
@@ -10504,11 +10506,12 @@ function RegisterForm() {
   };
 
   var error = function error() {
-    var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Sorry, there was an error!";
+    var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _constants__WEBPACK_IMPORTED_MODULE_1__.STANDARD_ERROR;
     setFeedbackError(error);
     setShowFeedback(true);
 
     if (recaptureIsActive) {
+      setRecaptchaToken(null);
       recaptchaRef.current.reset();
     }
 
@@ -10517,13 +10520,10 @@ function RegisterForm() {
 
   var register = function register() {
     var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_1__.POOL_DATA);
-    var attributeList = [];
-    var dataName = {
+    var attributeList = [new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUserAttribute({
       Name: "name",
       Value: name
-    };
-    var attributeName = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUserAttribute(dataName);
-    attributeList.push(attributeName);
+    })];
     userPool.signUp(username, password, attributeList, null, function (err, result) {
       if (err != null) {
         error(err.message);
@@ -10543,17 +10543,17 @@ function RegisterForm() {
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default, {
     lg: 4
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default, {
     noValidate: true,
     validated: showValidation,
     onSubmit: handleSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Label, null, "Name ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Label, null, "Name ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
     message: "Make this fictional and not personal"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control, {
     name: "name",
     id: "name",
     type: "name",
@@ -10561,13 +10561,13 @@ function RegisterForm() {
       return setName(event.target.value);
     },
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control.Feedback, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control.Feedback, {
     type: "invalid"
-  }, "Please enter a valid value"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Label, null, "Username ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
+  }, "Please enter a valid value"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Label, null, "Username ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
     message: "This is case insensitive"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control, {
     name: "username",
     id: "username",
     type: "text",
@@ -10575,13 +10575,13 @@ function RegisterForm() {
       return setUsername(event.target.value);
     },
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control.Feedback, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control.Feedback, {
     type: "invalid"
-  }, "Please enter a valid value"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Label, null, "Password ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
+  }, "Please enter a valid value"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Label, null, "Password ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
     message: "Alphanumeric and case sensitive. Use a special character!"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control, {
     name: "password",
     id: "password",
     type: "password",
@@ -10589,11 +10589,11 @@ function RegisterForm() {
       return setPassword(event.target.value);
     },
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control.Feedback, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control.Feedback, {
     type: "invalid"
-  }, "Please enter a valid value"))), recaptureIsActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Label, null, "Are you a robot ? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
+  }, "Please enter a valid value"))), recaptureIsActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Label, null, "Are you a robot ? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
     message: "Please complete the challenge"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_google_recaptcha__WEBPACK_IMPORTED_MODULE_7__.default, {
     ref: recaptchaRef,
@@ -10601,9 +10601,9 @@ function RegisterForm() {
     onChange: function onChange(value) {
       return setRecaptchaToken(value);
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_12__.default, {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_13__.default, {
     className: "float-right",
     id: "submit",
     variant: "dark",
@@ -10788,7 +10788,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TOKEN": () => (/* binding */ TOKEN),
 /* harmony export */   "USERNAME": () => (/* binding */ USERNAME),
 /* harmony export */   "SUCCESS": () => (/* binding */ SUCCESS),
-/* harmony export */   "USER": () => (/* binding */ USER)
+/* harmony export */   "USER": () => (/* binding */ USER),
+/* harmony export */   "STANDARD_ERROR": () => (/* binding */ STANDARD_ERROR),
+/* harmony export */   "COMPLETE_CHALLENGE_ERROR": () => (/* binding */ COMPLETE_CHALLENGE_ERROR)
 /* harmony export */ });
 "use strict;";
 
@@ -10820,6 +10822,8 @@ var TOKEN = 'token';
 var USERNAME = 'username';
 var SUCCESS = "SUCCESS";
 var USER = "cognitoUser";
+var STANDARD_ERROR = "Sorry, there was an error!";
+var COMPLETE_CHALLENGE_ERROR = "Please complete the challenge";
 
 /***/ }),
 
@@ -11139,6 +11143,44 @@ function Toast(props) {
     className: "toast-body"
   }, props.item.body)));
 }
+
+/***/ }),
+
+/***/ "../js/modules/utils/XMLHttpRequestUtil.js":
+/*!*************************************************!*\
+  !*** ../js/modules/utils/XMLHttpRequestUtil.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "XmlHttpRequestUtil": () => (/* binding */ XmlHttpRequestUtil)
+/* harmony export */ });
+"use strict;";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var XmlHttpRequestUtil = /*#__PURE__*/function () {
+  function XmlHttpRequestUtil() {
+    _classCallCheck(this, XmlHttpRequestUtil);
+  }
+
+  _createClass(XmlHttpRequestUtil, null, [{
+    key: "isDone",
+    value: function isDone() {
+      var status = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var readyState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      return status === 200 && readyState === 4;
+    }
+  }]);
+
+  return XmlHttpRequestUtil;
+}();
 
 /***/ }),
 
