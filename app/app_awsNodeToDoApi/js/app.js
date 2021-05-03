@@ -10794,27 +10794,11 @@ var ToolTip = function ToolTip(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SELECT": () => (/* binding */ SELECT),
-/* harmony export */   "DESELECT": () => (/* binding */ DESELECT),
-/* harmony export */   "DESELECT_THREAD": () => (/* binding */ DESELECT_THREAD),
-/* harmony export */   "REPLY_MESSAGE": () => (/* binding */ REPLY_MESSAGE),
-/* harmony export */   "NEW_MESSAGE": () => (/* binding */ NEW_MESSAGE),
-/* harmony export */   "REPLY": () => (/* binding */ REPLY),
-/* harmony export */   "SUBMIT": () => (/* binding */ SUBMIT),
-/* harmony export */   "READ": () => (/* binding */ READ),
-/* harmony export */   "RESET_MODE": () => (/* binding */ RESET_MODE),
+/* harmony export */   "POOL_DATA": () => (/* binding */ POOL_DATA),
 /* harmony export */   "REGISTER": () => (/* binding */ REGISTER),
 /* harmony export */   "LOGIN": () => (/* binding */ LOGIN),
 /* harmony export */   "MANAGE": () => (/* binding */ MANAGE),
 /* harmony export */   "LOGOUT": () => (/* binding */ LOGOUT),
-/* harmony export */   "HOME": () => (/* binding */ HOME),
-/* harmony export */   "INBOX": () => (/* binding */ INBOX),
-/* harmony export */   "OUTBOX": () => (/* binding */ OUTBOX),
-/* harmony export */   "NEW": () => (/* binding */ NEW),
-/* harmony export */   "MY_ADDRESS": () => (/* binding */ MY_ADDRESS),
-/* harmony export */   "MIN_VIEWPORT_WIDTH": () => (/* binding */ MIN_VIEWPORT_WIDTH),
-/* harmony export */   "INITIAL_NUMBER_OF_MESSAGES": () => (/* binding */ INITIAL_NUMBER_OF_MESSAGES),
-/* harmony export */   "POOL_DATA": () => (/* binding */ POOL_DATA),
 /* harmony export */   "TOKEN": () => (/* binding */ TOKEN),
 /* harmony export */   "USERNAME": () => (/* binding */ USERNAME),
 /* harmony export */   "SUCCESS": () => (/* binding */ SUCCESS),
@@ -10824,30 +10808,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 "use strict;";
 
-var SELECT = "select";
-var DESELECT = "deselect";
-var DESELECT_THREAD = "deselectThread";
-var REPLY_MESSAGE = "replyMessage";
-var NEW_MESSAGE = "newMessage";
-var REPLY = "reply";
-var SUBMIT = "submit";
-var READ = "read";
-var RESET_MODE = "resetMode";
-var REGISTER = "/register";
-var LOGIN = "/login";
-var MANAGE = "/manage";
-var LOGOUT = "/logout";
-var HOME = "/home";
-var INBOX = "/inbox";
-var OUTBOX = "/outbox";
-var NEW = "/new";
-var MY_ADDRESS = "me@portfolio.co.uk";
-var MIN_VIEWPORT_WIDTH = 768;
-var INITIAL_NUMBER_OF_MESSAGES = 10;
 var POOL_DATA = {
   UserPoolId: 'eu-west-2_s4syVYS6n',
   ClientId: '60jvm1avgd6t55k4uc15dgu6iq'
 };
+var REGISTER = "/register";
+var LOGIN = "/login";
+var MANAGE = "/manage";
+var LOGOUT = "/logout";
 var TOKEN = 'token';
 var USERNAME = 'username';
 var SUCCESS = "SUCCESS";
