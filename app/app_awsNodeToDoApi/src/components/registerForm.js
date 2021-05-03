@@ -23,7 +23,7 @@ export function RegisterForm() {
 
     const [ showValidation, setShowValidation ] = useState(false);
     const [ showFeedback, setShowFeedback ] = useState(false);
-    const [ feedbackError, setFeedbackError ] = useState("");
+    const [ feedbackErrors, setFeedbackErrors ] = useState([]);
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ name, setName ] = useState("");
@@ -39,8 +39,7 @@ export function RegisterForm() {
     useLayoutEffect(() => {
 
         if (recaptureIsActive && isRecaptchValid()) {
-            setFeedbackError("");
-            setShowFeedback(false);
+            hideErrors();
         }
 
     },[recaptchaToken])
@@ -52,7 +51,7 @@ export function RegisterForm() {
             setShowValidation(true);
 
             if (recaptureIsActive && !isRecaptchValid()) {
-                error(COMPLETE_CHALLENGE_ERROR);
+                showErrors(COMPLETE_CHALLENGE_ERROR);
             }
 
             event.stopPropagation();
@@ -78,7 +77,7 @@ export function RegisterForm() {
                         if (grecaptchaResponse.result.success) {
                             register();
                         } else {
-                            error();
+                            showErrors();
                         }
                     }
                 };
@@ -93,9 +92,15 @@ export function RegisterForm() {
         }
     };
 
-    const error = (error = STANDARD_ERROR) => {
+    const showErrors = (error = STANDARD_ERROR) => {
 
-        setFeedbackError(error);
+        const errors = [...feedbackErrors];
+
+        if (errors.indexOf(error) === -1) {
+            errors.push(error);
+        }
+
+        setFeedbackErrors(errors);
         setShowFeedback(true);
 
         if (recaptureIsActive) {
@@ -104,6 +109,11 @@ export function RegisterForm() {
         }
 
         spinnerContext.setShow(false);
+    }
+
+    const hideErrors =  () => {
+        setShowFeedback(false);
+        setFeedbackErrors([]);
     }
 
     const register = () => {
@@ -121,12 +131,12 @@ export function RegisterForm() {
 
             if (err != null) {
 
-                error(err.message);
+                showErrors(err.message);
 
             } else {
 
                 setShowValidation(false);
-                setShowFeedback(false);
+                hideErrors();
 
                 spinnerContext.setShow(false);
                 toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Registration Successful!", body: `${name}, you can now login using your credentials.` } } );
@@ -203,10 +213,17 @@ export function RegisterForm() {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Button className="float-right" id="submit" variant="dark" type="submit">Register</Button>
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col}>
                             {showFeedback &&
-                                <div id="errorFeedback" className="text-danger">
-                                    {feedbackError}
-                                </div>
+                                <>
+                                    <h5 className="text-danger">There were errors</h5>
+                                    <ul id="errorFeedback" className="text-danger">
+                                        {feedbackErrors.map((error, index) => <li key={index}><small>{error}</small></li>)}
+                                    </ul>
+                                </>
                             }
                         </Form.Group>
                     </Form.Row>

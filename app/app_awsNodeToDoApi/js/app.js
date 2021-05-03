@@ -10346,7 +10346,8 @@ __webpack_require__.r(__webpack_exports__);
 
 function Register() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_1__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_content__WEBPACK_IMPORTED_MODULE_2__.Content, {
-    title: "Register"
+    title: "Create a user",
+    content: "You must create a user to log in and access the API"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_registerForm__WEBPACK_IMPORTED_MODULE_3__.RegisterForm, null));
 }
 
@@ -10378,6 +10379,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_google_recaptcha__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-google-recaptcha */ "../../node_modules/react-google-recaptcha/lib/esm/index.js");
 /* harmony import */ var _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../js/modules/utils/XMLHttpRequestUtil */ "../js/modules/utils/XMLHttpRequestUtil.js");
 "use strict;";
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -10420,10 +10429,10 @@ function RegisterForm() {
       showFeedback = _useState4[0],
       setShowFeedback = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      feedbackError = _useState6[0],
-      setFeedbackError = _useState6[1];
+      feedbackErrors = _useState6[0],
+      setFeedbackErrors = _useState6[1];
 
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState8 = _slicedToArray(_useState7, 2),
@@ -10457,8 +10466,7 @@ function RegisterForm() {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
     if (recaptureIsActive && isRecaptchValid()) {
-      setFeedbackError("");
-      setShowFeedback(false);
+      hideErrors();
     }
   }, [recaptchaToken]);
 
@@ -10469,7 +10477,7 @@ function RegisterForm() {
       setShowValidation(true);
 
       if (recaptureIsActive && !isRecaptchValid()) {
-        error(_constants__WEBPACK_IMPORTED_MODULE_1__.COMPLETE_CHALLENGE_ERROR);
+        showErrors(_constants__WEBPACK_IMPORTED_MODULE_1__.COMPLETE_CHALLENGE_ERROR);
       }
 
       event.stopPropagation();
@@ -10491,7 +10499,7 @@ function RegisterForm() {
             if (grecaptchaResponse.result.success) {
               register();
             } else {
-              error();
+              showErrors();
             }
           }
         };
@@ -10505,9 +10513,16 @@ function RegisterForm() {
     }
   };
 
-  var error = function error() {
+  var showErrors = function showErrors() {
     var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _constants__WEBPACK_IMPORTED_MODULE_1__.STANDARD_ERROR;
-    setFeedbackError(error);
+
+    var errors = _toConsumableArray(feedbackErrors);
+
+    if (errors.indexOf(error) === -1) {
+      errors.push(error);
+    }
+
+    setFeedbackErrors(errors);
     setShowFeedback(true);
 
     if (recaptureIsActive) {
@@ -10518,6 +10533,11 @@ function RegisterForm() {
     spinnerContext.setShow(false);
   };
 
+  var hideErrors = function hideErrors() {
+    setShowFeedback(false);
+    setFeedbackErrors([]);
+  };
+
   var register = function register() {
     var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_1__.POOL_DATA);
     var attributeList = [new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUserAttribute({
@@ -10526,10 +10546,10 @@ function RegisterForm() {
     })];
     userPool.signUp(username, password, attributeList, null, function (err, result) {
       if (err != null) {
-        error(err.message);
+        showErrors(err.message);
       } else {
         setShowValidation(false);
-        setShowFeedback(false);
+        hideErrors();
         spinnerContext.setShow(false);
         toasterContext.dispatch({
           type: _js_modules_react_toasterComponent__WEBPACK_IMPORTED_MODULE_4__.ENQUEUE_TOAST,
@@ -10608,10 +10628,18 @@ function RegisterForm() {
     id: "submit",
     variant: "dark",
     type: "submit"
-  }, "Register"), showFeedback && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, "Register"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
+  }, showFeedback && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+    className: "text-danger"
+  }, "There were errors"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     id: "errorFeedback",
     className: "text-danger"
-  }, feedbackError))))));
+  }, feedbackErrors.map(function (error, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("small", null, error));
+  }))))))));
 }
 
 /***/ }),
@@ -10667,7 +10695,7 @@ var Router = function Router() {
     activeClassName: "active",
     className: "nav-link pb-3 pt-1 px-3",
     to: _constants__WEBPACK_IMPORTED_MODULE_1__.REGISTER
-  }, "Register")), loginContext.authenticated && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+  }, "Create a user")), loginContext.authenticated && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
     activeClassName: "active",
     className: "nav-link pb-3 pt-1 px-3",
     to: _constants__WEBPACK_IMPORTED_MODULE_1__.MANAGE

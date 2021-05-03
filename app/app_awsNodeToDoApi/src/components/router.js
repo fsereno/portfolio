@@ -22,7 +22,7 @@ export const Router = () => {
                     {!loginContext.authenticated &&
                         <>
                             <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={LOGIN}>Login</NavLink>
-                            <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={REGISTER}>Register</NavLink>
+                            <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={REGISTER}>Create a user</NavLink>
                         </>
                     }
                     {loginContext.authenticated &&

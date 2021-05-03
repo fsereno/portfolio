@@ -8,7 +8,7 @@ import { RegisterForm } from '../registerForm';
 export function Register() {
   return (
     <ContentContainer>
-      <Content title="Register" />
+      <Content title="Create a user" content="You must create a user to log in and access the API" />
       <RegisterForm />
     </ContentContainer>
   )
