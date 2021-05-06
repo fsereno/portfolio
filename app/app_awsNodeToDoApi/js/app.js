@@ -8,7 +8,7 @@
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"prefix":"app_","entry":"home","index":"index.html","masterTemplateDir":"master","developmentDir":"app","publishDir":"docs","folderRoot":"/tree/master/app/","repoRootUrl":"https://github.com/fsereno/portfolio","linkedInUrl":"https://www.linkedin.com/in/fabio-sereno-6a97b986/","gitHubUrl":"https://github.com/fsereno","title":"Portfolio","author":"Fabio Sereno","role":"Software developer","description":"Portfolio website for Fabio Sereno - Software Developer.","thumbnail":"PortfolioThumbnail.png","labels":[{"name":"JavaScript","class":"warning"},{"name":"C#","class":"info"},{"name":"Cloud","class":"danger"}],"quickSearch":["React","TypeScript",".NET","Cloud"],"grecaptcha":{"active":true,"key":"6LdFJsIaAAAAAGltxQjmncdNsjOtxAshDewjKCS3"},"applications":[{"name":"Portfolio","subHeading":"By Fabio Sereno","description":"Highly experienced, highly self-motivated, enthusiastic, professional Full Stack Web Developer.","folder":"home","active":true,"include":false,"folderRoot":"/","useWebpack":true,"useRoot":true,"isLandingPage":true},{"name":"Application master template","subHeading":"","description":"The template application.","folder":"master","active":true,"include":false},{"name":"MIT Licence","subHeading":"MIT Licence for this repository.","description":"","folder":"licence","active":true,"include":false},{"name":"To-Do List (Basic)","subHeading":"A basic list builder written using TypeScript and JQuery","description":"Using Babel for compilation and Require to manage dependencies.","searchTerms":"JavaScript,TypeScript,Babel,Require JS,JQuery,PUG,HTML,CSS,SASS","folder":"babelTs","active":true,"include":true,"useRequire":true,"labels":[0]},{"name":"To-Do List (React)","subHeading":"A basic list builder using React","description":"Using React, with Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"toDoReact","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"To-Do List (React Redux)","subHeading":"A basic list builder using React and Redux","description":"Using Redux with React to manage application state, implementing Undo and Redo functionality.","searchTerms":"JavaScript,React,Redux,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"reactRedux","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"To-Do List (Vue)","subHeading":"A basic list builder using Vue","description":"Experimenting with Vue, Babel and Webpack.","searchTerms":"JavaScript,Vue,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"toDoVue","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Tic-Tac-Toe (React)","subHeading":"A Tic-Tac-Toe game built using React","description":"Experimenting with more complex aspects of React, Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"ticTacToeReact","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Find and Replace","subHeading":"A simple multiple Find and Replace method written with TypeScript","description":"TypeScript, Sass and Pug. Find all occurrences and replacing.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"findReplace","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Azure Functions .NET Core Unique Data Entry","subHeading":"Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries, with a React UI","description":"Using Azure Functions serverless compute and .NET Core, with a React user interface.","searchTerms":"Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"AzureDotNetCoreUniqueDataEntryApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://app-azure-dotnetcore-unique-data-entry-api.azurewebsites.net/api","canItemBeAddedAsync":"canItemBeAddedAsync"},"labels":[0,1,2],"featured":true},{"name":"Azure Functions .NET Core Data Structures","subHeading":"First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET Core, with a React UI","description":"Using Azure Functions serverless compute and .NET Core, with a React user interface.","searchTerms":"Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"AzureDotNetCoreDataStructuresApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://app-azure-dotnetcore-data-structures-api.azurewebsites.net/api","addQueueItem":"addQueueItemAsync","removeQueueItem":"removeQueueItemAsync","addStackItem":"addStackItemAsync","removeStackItem":"removeStackItemAsync"},"labels":[0,1,2],"featured":true},{"name":"AWS .NET Core Complex Entity Sorting Algorithm","subHeading":"A sorting mechanism, implementing IComparable and IComparer to sort complex types, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreEntitySortApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees","sortSalaryAsc":"sort/salary/asc","sortSalaryDesc":"sort/salary/desc"},"labels":[0,1,2],"featured":true},{"name":"AWS .NET Core Natural Sorting Algorithm","subHeading":"A natural string sorting algorithm, implementing IComparer in .NET Core, passing in a custom comparer, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreStringSortApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values","sort":"sort"},"labels":[0,1,2],"featured":true},{"name":"AWS .NET Core Shopping Basket List Builder","subHeading":"A basic shopping basket application, with data processing handled by a Serverless .NET Core RESTful API, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreShoppingCart","active":true,"include":true,"useWebpack":true,"endpoints":{"api":"https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket","get":"get","add":"add","delete":"delete","update":"update"},"labels":[0,1,2],"order":2},{"name":"AWS .NET Core Asynchronous Coffee Maker","subHeading":"Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET Core, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreAsyncCoffeeMachine","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://ro5qqsplje.execute-api.eu-west-2.amazonaws.com/Prod/api/values","run":"run","runAsync":"runasync"},"labels":[0,1,2],"order":3,"featured":true},{"name":"Three JS Scene (Basic)","subHeading":"A basic THREE JS scene","description":"An interactive Three JS scene, using Babel and Webpack.","searchTerms":"JavaScript,Three JS,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"threeJSScene","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"AFrame React (Basic)","subHeading":"An AFrame Hello World application with React","description":"Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.","searchTerms":"JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality","folder":"aframe","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"AFrame React (Complex)","subHeading":"A slightly more complex AFrame application with React, allowing user input","description":"Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.","searchTerms":"JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality","folder":"aframeComplex","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Percentage Calculator","subHeading":"A simple percentage calculator method written with TypeScript","description":"TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"percentageCalculator","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Scrabble Game, Can you beat the Un-Scrabbler?","subHeading":"A simple Scrabble Word Game written using TypeScript","description":"TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"unscrabbler","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Random String Generator","subHeading":"A simple random string generator written with TypeScript","description":"Generating a random string of A-B, 0-9 and a given length. TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"randomGenerator","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Dictionary Word Finder","subHeading":"A simple dictionary word lookup tool written using TypeScript","description":"A large indexing lookup search. TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"dictionaryFinder","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Knockout + TypeScript, Table of Users","subHeading":"An example of Knockout, enhanced by TypeScript","description":"Written with Knockout, TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,Knockout,PUG,HTML,CSS,SASS","folder":"koTypeScript","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"JS Coding Standards","subHeading":"A JavaScript Code Style Guide","description":"By Fabio Sereno","searchTerms":"JavaScript,SOLID Principles,YAGNI,DRY,KISS","folder":"jsCodingStandards","active":false,"include":false,"labels":[0]},{"name":"Basic React Email Client (SPA)","subHeading":"An SPA using React, React Router, React Context and useReducer to handle application state","description":"Using React, Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"basicEmailClientReactSpa","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"basicSpaReact","labels":[0],"order":1},{"name":"AWS, B2C To-Do List API (SPA)","subHeading":"Authenticated with Cognito, data stored using Dynamo DB, driven by Lambda Functions and with a React UI","description":"Built with Node JS, The AWS Serverless Framework and managed by an HTTP API Gateway.","searchTerms":"Cloud,AWS,Amazon Web Services,Serverless Framework,Node JS,Cognito,Dynamo DB,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsNodeToDoApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"basicEmailClientReactSpa","labels":[0,2],"order":1,"featured":true,"endpoints":{"base":"https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com","api":"todos","verify":"verify"}}]}');
+module.exports = JSON.parse('{"prefix":"app_","entry":"home","index":"index.html","masterTemplateDir":"master","developmentDir":"app","publishDir":"docs","folderRoot":"/tree/master/app/","repoRootUrl":"https://github.com/fsereno/portfolio","linkedInUrl":"https://www.linkedin.com/in/fabio-sereno-6a97b986/","gitHubUrl":"https://github.com/fsereno","title":"Portfolio","author":"Fabio Sereno","role":"Software developer","description":"Portfolio website for Fabio Sereno - Software Developer.","thumbnail":"PortfolioThumbnail.png","labels":[{"name":"JavaScript","class":"warning"},{"name":"C#","class":"info"},{"name":"Cloud","class":"danger"}],"quickSearch":["React","TypeScript",".NET","Cloud"],"grecaptcha":{"active":true,"key":"6LdFJsIaAAAAAGltxQjmncdNsjOtxAshDewjKCS3","endpoints":{"base":"https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com","verify":"verify"}},"applications":[{"name":"Portfolio","subHeading":"By Fabio Sereno","description":"Highly experienced, highly self-motivated, enthusiastic, professional Full Stack Web Developer.","folder":"home","active":true,"include":false,"folderRoot":"/","useWebpack":true,"useRoot":true,"isLandingPage":true},{"name":"Application master template","subHeading":"","description":"The template application.","folder":"master","active":true,"include":false},{"name":"MIT Licence","subHeading":"MIT Licence for this repository.","description":"","folder":"licence","active":true,"include":false},{"name":"To-Do List (Basic)","subHeading":"A basic list builder written using TypeScript and JQuery","description":"Using Babel for compilation and Require to manage dependencies.","searchTerms":"JavaScript,TypeScript,Babel,Require JS,JQuery,PUG,HTML,CSS,SASS","folder":"babelTs","active":true,"include":true,"useRequire":true,"labels":[0]},{"name":"To-Do List (React)","subHeading":"A basic list builder using React","description":"Using React, with Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"toDoReact","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"To-Do List (React Redux)","subHeading":"A basic list builder using React and Redux","description":"Using Redux with React to manage application state, implementing Undo and Redo functionality.","searchTerms":"JavaScript,React,Redux,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"reactRedux","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"To-Do List (Vue)","subHeading":"A basic list builder using Vue","description":"Experimenting with Vue, Babel and Webpack.","searchTerms":"JavaScript,Vue,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"toDoVue","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Tic-Tac-Toe (React)","subHeading":"A Tic-Tac-Toe game built using React","description":"Experimenting with more complex aspects of React, Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"ticTacToeReact","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Find and Replace","subHeading":"A simple multiple Find and Replace method written with TypeScript","description":"TypeScript, Sass and Pug. Find all occurrences and replacing.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"findReplace","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Azure Functions .NET Core Unique Data Entry","subHeading":"Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries, with a React UI","description":"Using Azure Functions serverless compute and .NET Core, with a React user interface.","searchTerms":"Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"AzureDotNetCoreUniqueDataEntryApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://app-azure-dotnetcore-unique-data-entry-api.azurewebsites.net/api","canItemBeAddedAsync":"canItemBeAddedAsync"},"labels":[0,1,2],"featured":true},{"name":"Azure Functions .NET Core Data Structures","subHeading":"First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET Core, with a React UI","description":"Using Azure Functions serverless compute and .NET Core, with a React user interface.","searchTerms":"Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"AzureDotNetCoreDataStructuresApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://app-azure-dotnetcore-data-structures-api.azurewebsites.net/api","addQueueItem":"addQueueItemAsync","removeQueueItem":"removeQueueItemAsync","addStackItem":"addStackItemAsync","removeStackItem":"removeStackItemAsync"},"labels":[0,1,2],"featured":true},{"name":"AWS .NET Core Complex Entity Sorting Algorithm","subHeading":"A sorting mechanism, implementing IComparable and IComparer to sort complex types, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreEntitySortApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees","sortSalaryAsc":"sort/salary/asc","sortSalaryDesc":"sort/salary/desc"},"labels":[0,1,2],"featured":true},{"name":"AWS .NET Core Natural Sorting Algorithm","subHeading":"A natural string sorting algorithm, implementing IComparer in .NET Core, passing in a custom comparer, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreStringSortApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values","sort":"sort"},"labels":[0,1,2],"featured":true},{"name":"AWS .NET Core Shopping Basket List Builder","subHeading":"A basic shopping basket application, with data processing handled by a Serverless .NET Core RESTful API, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreShoppingCart","active":true,"include":true,"useWebpack":true,"endpoints":{"api":"https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket","get":"get","add":"add","delete":"delete","update":"update"},"labels":[0,1,2],"order":2},{"name":"AWS .NET Core Asynchronous Coffee Maker","subHeading":"Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET Core, with a React UI","description":"AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.","searchTerms":"Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsDotNetCoreAsyncCoffeeMachine","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"master_react","endpoints":{"api":"https://ro5qqsplje.execute-api.eu-west-2.amazonaws.com/Prod/api/values","run":"run","runAsync":"runasync"},"labels":[0,1,2],"order":3,"featured":true},{"name":"Three JS Scene (Basic)","subHeading":"A basic THREE JS scene","description":"An interactive Three JS scene, using Babel and Webpack.","searchTerms":"JavaScript,Three JS,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"threeJSScene","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"AFrame React (Basic)","subHeading":"An AFrame Hello World application with React","description":"Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.","searchTerms":"JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality","folder":"aframe","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"AFrame React (Complex)","subHeading":"A slightly more complex AFrame application with React, allowing user input","description":"Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.","searchTerms":"JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality","folder":"aframeComplex","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Percentage Calculator","subHeading":"A simple percentage calculator method written with TypeScript","description":"TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"percentageCalculator","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Scrabble Game, Can you beat the Un-Scrabbler?","subHeading":"A simple Scrabble Word Game written using TypeScript","description":"TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"unscrabbler","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Random String Generator","subHeading":"A simple random string generator written with TypeScript","description":"Generating a random string of A-B, 0-9 and a given length. TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"randomGenerator","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"TypeScript Dictionary Word Finder","subHeading":"A simple dictionary word lookup tool written using TypeScript","description":"A large indexing lookup search. TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,PUG,HTML,CSS,SASS","folder":"dictionaryFinder","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"Knockout + TypeScript, Table of Users","subHeading":"An example of Knockout, enhanced by TypeScript","description":"Written with Knockout, TypeScript, Sass and Pug. Compiled using Webpack.","searchTerms":"JavaScript,TypeScript,Knockout,PUG,HTML,CSS,SASS","folder":"koTypeScript","active":true,"include":true,"useWebpack":true,"labels":[0]},{"name":"JS Coding Standards","subHeading":"A JavaScript Code Style Guide","description":"By Fabio Sereno","searchTerms":"JavaScript,SOLID Principles,YAGNI,DRY,KISS","folder":"jsCodingStandards","active":false,"include":false,"labels":[0]},{"name":"Basic React Email Client (SPA)","subHeading":"An SPA using React, React Router, React Context and useReducer to handle application state","description":"Using React, Babel and Webpack.","searchTerms":"JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"basicEmailClientReactSpa","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"basicSpaReact","labels":[0],"order":1},{"name":"AWS, B2C To-Do List API (SPA)","subHeading":"Authenticated with Cognito, data stored using Dynamo DB, driven by Lambda Functions and with a React UI","description":"Built with Node JS, The AWS Serverless Framework and managed by an HTTP API Gateway.","searchTerms":"Cloud,AWS,Amazon Web Services,Serverless Framework,Node JS,Cognito,Dynamo DB,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS","folder":"awsNodeToDoApi","active":true,"include":true,"useWebpack":true,"masterTemplateDir":"basicEmailClientReactSpa","labels":[0,2],"order":1,"featured":true,"endpoints":{"base":"https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com","api":"todos"}}]}');
 
 /***/ }),
 
@@ -10338,7 +10338,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contentContainer */ "./src/components/contentContainer.js");
 /* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../content */ "./src/components/content.js");
 /* harmony import */ var _registerForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../registerForm */ "./src/components/registerForm.js");
+/* harmony import */ var _js_modules_react_recaptchaContextProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../js/modules/react/recaptchaContextProvider */ "../js/modules/react/recaptchaContextProvider.js");
 "use strict;";
+
 
 
 
@@ -10348,7 +10350,7 @@ function Register() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_1__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_content__WEBPACK_IMPORTED_MODULE_2__.Content, {
     title: "Create a user",
     content: "You must create a user to log in and access the API"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_registerForm__WEBPACK_IMPORTED_MODULE_3__.RegisterForm, null));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_js_modules_react_recaptchaContextProvider__WEBPACK_IMPORTED_MODULE_4__.RecaptchaContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_registerForm__WEBPACK_IMPORTED_MODULE_3__.RegisterForm, null)));
 }
 
 /***/ }),
@@ -10365,19 +10367,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RegisterForm": () => (/* binding */ RegisterForm)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
 /* harmony import */ var amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! amazon-cognito-identity-js */ "../../node_modules/amazon-cognito-identity-js/es/index.js");
 /* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
 /* harmony import */ var _js_modules_react_toasterComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../js/modules/react/toasterComponent */ "../js/modules/react/toasterComponent.js");
 /* harmony import */ var _tooltip__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tooltip */ "./src/components/tooltip.js");
-/* harmony import */ var _js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../js/modules/react/configContextProvider */ "../js/modules/react/configContextProvider.js");
-/* harmony import */ var react_google_recaptcha__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-google-recaptcha */ "../../node_modules/react-google-recaptcha/lib/esm/index.js");
-/* harmony import */ var _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../js/modules/utils/XMLHttpRequestUtil */ "../js/modules/utils/XMLHttpRequestUtil.js");
+/* harmony import */ var react_google_recaptcha__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-google-recaptcha */ "../../node_modules/react-google-recaptcha/lib/esm/index.js");
+/* harmony import */ var _js_modules_react_recaptchaContextProvider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../js/modules/react/recaptchaContextProvider */ "../js/modules/react/recaptchaContextProvider.js");
 "use strict;";
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -10413,11 +10414,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 function RegisterForm() {
   var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_3__.SpinnerContext);
   var toasterContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_toasterComponent__WEBPACK_IMPORTED_MODULE_4__.ToasterContext);
-  var configContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_6__.ConfigContext);
+  var recaptchaContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_recaptchaContextProvider__WEBPACK_IMPORTED_MODULE_7__.RecaptchaContext);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -10449,34 +10449,20 @@ function RegisterForm() {
       name = _useState12[0],
       setName = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState14 = _slicedToArray(_useState13, 2),
-      recaptchaToken = _useState14[0],
-      setRecaptchaToken = _useState14[1];
-
-  var recaptchaRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-  var recaptureSiteKey = configContext.config.grecaptcha.key;
-  var recaptureIsActive = configContext.config.grecaptcha.active;
-  var VERIFY_ENDPOINT = "".concat(configContext.appConfig.endpoints.base, "/").concat(configContext.appConfig.endpoints.verify);
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useHistory)();
-
-  var isRecaptchValid = function isRecaptchValid() {
-    return recaptchaToken !== null && recaptchaToken.length > 0;
-  };
-
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useHistory)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
-    if (recaptureIsActive && isRecaptchValid()) {
+    if (recaptchaContext.recaptureIsActive && recaptchaContext.isRecaptchValid()) {
       hideErrors();
     }
-  }, [recaptchaToken]);
+  }, [recaptchaContext.recaptchaToken]);
 
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
 
-    if (!event.currentTarget.checkValidity() || recaptureIsActive && !isRecaptchValid()) {
+    if (!event.currentTarget.checkValidity() || recaptchaContext.recaptureIsActive && !recaptchaContext.isRecaptchValid()) {
       setShowValidation(true);
 
-      if (recaptureIsActive && !isRecaptchValid()) {
+      if (recaptchaContext.recaptureIsActive && !recaptchaContext.isRecaptchValid()) {
         showErrors(_constants__WEBPACK_IMPORTED_MODULE_1__.COMPLETE_CHALLENGE_ERROR);
       }
 
@@ -10484,31 +10470,8 @@ function RegisterForm() {
     } else {
       spinnerContext.setShow(true);
 
-      if (recaptureIsActive) {
-        var payload = JSON.stringify({
-          token: recaptchaToken
-        });
-        var xhttp = new XMLHttpRequest();
-
-        xhttp.onreadystatechange = function (result) {
-          var data = result.currentTarget;
-
-          if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_8__.XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
-            var grecaptchaResponse = JSON.parse(data.response);
-
-            if (grecaptchaResponse.result.success) {
-              register();
-            } else {
-              showErrors();
-            }
-          } else if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_8__.XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
-            showErrors();
-          }
-        };
-
-        xhttp.open("POST", VERIFY_ENDPOINT);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(payload);
+      if (recaptchaContext.recaptureIsActive) {
+        recaptchaContext.verify(register, showErrors);
       } else {
         register();
       }
@@ -10527,9 +10490,9 @@ function RegisterForm() {
     setFeedbackErrors(errors);
     setShowFeedback(true);
 
-    if (recaptureIsActive) {
-      setRecaptchaToken(null);
-      recaptchaRef.current.reset();
+    if (recaptchaContext.recaptureIsActive) {
+      recaptchaContext.setRecaptchaToken(null);
+      recaptchaContext.recaptchaRef.current.reset();
     }
 
     spinnerContext.setShow(false);
@@ -10565,17 +10528,17 @@ function RegisterForm() {
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default, {
     lg: 4
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default, {
     noValidate: true,
     validated: showValidation,
     onSubmit: handleSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Label, null, "Name ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Label, null, "Name ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
     message: "Make this fictional and not personal"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control, {
     name: "name",
     id: "name",
     type: "name",
@@ -10583,13 +10546,13 @@ function RegisterForm() {
       return setName(event.target.value);
     },
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control.Feedback, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control.Feedback, {
     type: "invalid"
-  }, "Please enter a valid value"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Label, null, "Username ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
+  }, "Please enter a valid value"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Label, null, "Username ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
     message: "This is case insensitive"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control, {
     name: "username",
     id: "username",
     type: "text",
@@ -10597,13 +10560,13 @@ function RegisterForm() {
       return setUsername(event.target.value);
     },
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control.Feedback, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control.Feedback, {
     type: "invalid"
-  }, "Please enter a valid value"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Label, null, "Password ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
+  }, "Please enter a valid value"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Label, null, "Password ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
     message: "Alphanumeric and case sensitive. Use a special character!"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control, {
     name: "password",
     id: "password",
     type: "password",
@@ -10611,27 +10574,25 @@ function RegisterForm() {
       return setPassword(event.target.value);
     },
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Control.Feedback, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Control.Feedback, {
     type: "invalid"
-  }, "Please enter a valid value"))), recaptureIsActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Label, null, "Are you a robot ? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
+  }, "Please enter a valid value"))), recaptchaContext.recaptureIsActive && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Label, null, "Are you a robot ? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tooltip__WEBPACK_IMPORTED_MODULE_5__.ToolTip, {
     message: "Please complete the challenge"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_google_recaptcha__WEBPACK_IMPORTED_MODULE_7__.default, {
-    ref: recaptchaRef,
-    sitekey: recaptureSiteKey,
-    onChange: function onChange(value) {
-      return setRecaptchaToken(value);
-    }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_13__.default, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_google_recaptcha__WEBPACK_IMPORTED_MODULE_6__.default, {
+    ref: recaptchaContext.recaptchaRef,
+    sitekey: recaptchaContext.recaptureSiteKey,
+    onChange: recaptchaContext.onChange
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_12__.default, {
     className: "float-right",
     id: "submit",
     variant: "dark",
     type: "submit"
-  }, "Register"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_12__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_11__.default
+  }, "Register"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_11__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_10__.default
   }, showFeedback && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
     className: "text-danger"
   }, "There were errors"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
@@ -10873,6 +10834,111 @@ function ConfigContextProvider(_ref) {
     appConfig: appConfig
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(ConfigContext.Provider, {
+    value: context
+  }, children);
+}
+
+/***/ }),
+
+/***/ "../js/modules/react/recaptchaContextProvider.js":
+/*!*******************************************************!*\
+  !*** ../js/modules/react/recaptchaContextProvider.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RecaptchaContext": () => (/* binding */ RecaptchaContext),
+/* harmony export */   "RecaptchaContextProvider": () => (/* binding */ RecaptchaContextProvider)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var _utils_configUtil__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/configUtil */ "../js/modules/utils/configUtil.js");
+/* harmony import */ var _utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/XMLHttpRequestUtil */ "../js/modules/utils/XMLHttpRequestUtil.js");
+"use strict;";
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+var RecaptchaContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
+function RecaptchaContextProvider(_ref) {
+  var children = _ref.children;
+  var config = _utils_configUtil__WEBPACK_IMPORTED_MODULE_1__.ConfigUtil.get();
+  var recaptureSiteKey = config.grecaptcha.key;
+  var recaptureIsActive = config.grecaptcha.active;
+  var VERIFY_ENDPOINT = "".concat(config.grecaptcha.endpoints.base, "/").concat(config.grecaptcha.endpoints.verify);
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      recaptchaToken = _useState2[0],
+      setRecaptchaToken = _useState2[1];
+
+  var recaptchaRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+
+  var isRecaptchValid = function isRecaptchValid() {
+    return recaptchaToken !== null && recaptchaToken.length > 0;
+  };
+
+  var onChange = function onChange(value) {
+    return setRecaptchaToken(value);
+  };
+
+  var verify = function verify(doneCallback, failCallback) {
+    var payload = JSON.stringify({
+      token: recaptchaToken
+    });
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function (result) {
+      var data = result.currentTarget;
+
+      if (_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
+        var grecaptchaResponse = JSON.parse(data.response);
+
+        if (grecaptchaResponse.result.success) {
+          if (typeof doneCallback === "function") {
+            doneCallback();
+          }
+        } else {
+          if (typeof failCallback === "function") {
+            failCallback();
+          }
+        }
+      } else if (_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
+        if (typeof failCallback === "function") {
+          failCallback();
+        }
+      }
+    };
+
+    xhttp.open("POST", VERIFY_ENDPOINT);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(payload);
+  };
+
+  var context = {
+    recaptchaToken: recaptchaToken,
+    setRecaptchaToken: setRecaptchaToken,
+    recaptchaRef: recaptchaRef,
+    recaptureSiteKey: recaptureSiteKey,
+    recaptureIsActive: recaptureIsActive,
+    isRecaptchValid: isRecaptchValid,
+    verify: verify,
+    onChange: onChange
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(RecaptchaContext.Provider, {
     value: context
   }, children);
 }

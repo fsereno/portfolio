@@ -1,6 +1,6 @@
 "use strict;"
 
-import React, { useState, useLayoutEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -11,15 +11,14 @@ import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 import { Row } from 'react-bootstrap';
 import { ToasterContext, ENQUEUE_TOAST } from '../../../js/modules/react/toasterComponent';
 import { ToolTip } from './tooltip';
-import { ConfigContext } from '../../../js/modules/react/configContextProvider';
 import ReCAPTCHA from "react-google-recaptcha";
-import { XmlHttpRequestUtil } from '../../../js/modules/utils/XMLHttpRequestUtil';
+import { RecaptchaContext } from '../../../js/modules/react/recaptchaContextProvider';
 
 export function RegisterForm() {
 
     const spinnerContext = React.useContext(SpinnerContext);
     const toasterContext = React.useContext(ToasterContext);
-    const configContext = React.useContext(ConfigContext);
+    const recaptchaContext = React.useContext(RecaptchaContext);
 
     const [ showValidation, setShowValidation ] = useState(false);
     const [ showFeedback, setShowFeedback ] = useState(false);
@@ -27,30 +26,23 @@ export function RegisterForm() {
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ name, setName ] = useState("");
-    const [ recaptchaToken, setRecaptchaToken ] = useState(null);
-    const recaptchaRef = useRef();
-
-    const recaptureSiteKey = configContext.config.grecaptcha.key;
-    const recaptureIsActive = configContext.config.grecaptcha.active;
-    const VERIFY_ENDPOINT = `${configContext.appConfig.endpoints.base}/${configContext.appConfig.endpoints.verify}`;
     const history = useHistory();
-    const isRecaptchValid = () =>  recaptchaToken !== null && recaptchaToken.length > 0;
 
     useLayoutEffect(() => {
 
-        if (recaptureIsActive && isRecaptchValid()) {
+        if (recaptchaContext.recaptureIsActive && recaptchaContext.isRecaptchValid()) {
             hideErrors();
         }
 
-    },[recaptchaToken])
+    },[recaptchaContext.recaptchaToken])
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!event.currentTarget.checkValidity() || (recaptureIsActive && !isRecaptchValid())) {
+        if (!event.currentTarget.checkValidity() || (recaptchaContext.recaptureIsActive && !recaptchaContext.isRecaptchValid())) {
             setShowValidation(true);
 
-            if (recaptureIsActive && !isRecaptchValid()) {
+            if (recaptchaContext.recaptureIsActive && !recaptchaContext.isRecaptchValid()) {
                 showErrors(COMPLETE_CHALLENGE_ERROR);
             }
 
@@ -60,33 +52,9 @@ export function RegisterForm() {
 
             spinnerContext.setShow(true);
 
-            if (recaptureIsActive) {
+            if (recaptchaContext.recaptureIsActive) {
 
-                const payload = JSON.stringify({ token: recaptchaToken });
-
-                const xhttp = new XMLHttpRequest();
-
-                xhttp.onreadystatechange = (result) => {
-
-                    const data = result.currentTarget;
-
-                    if (XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
-
-                        const grecaptchaResponse = JSON.parse(data.response);
-
-                        if (grecaptchaResponse.result.success) {
-                            register();
-                        } else {
-                            showErrors();
-                        }
-                    } else if (XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
-                        showErrors();
-                    }
-                };
-
-                xhttp.open("POST", VERIFY_ENDPOINT);
-                xhttp.setRequestHeader("Content-type", "application/json");
-                xhttp.send(payload);
+                recaptchaContext.verify(register, showErrors);
 
             } else {
                 register();
@@ -105,9 +73,9 @@ export function RegisterForm() {
         setFeedbackErrors(errors);
         setShowFeedback(true);
 
-        if (recaptureIsActive) {
-            setRecaptchaToken(null);
-            recaptchaRef.current.reset();
+        if (recaptchaContext.recaptureIsActive) {
+            recaptchaContext.setRecaptchaToken(null);
+            recaptchaContext.recaptchaRef.current.reset();
         }
 
         spinnerContext.setShow(false);
@@ -202,13 +170,13 @@ export function RegisterForm() {
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Form.Row>
-                    {recaptureIsActive &&
+                    {recaptchaContext.recaptureIsActive &&
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>
                                     Are you a robot ? <ToolTip message="Please complete the challenge" />
                                 </Form.Label>
-                                <ReCAPTCHA ref={recaptchaRef} sitekey={recaptureSiteKey} onChange={value => setRecaptchaToken(value)} />
+                                <ReCAPTCHA ref={recaptchaContext.recaptchaRef} sitekey={recaptchaContext.recaptureSiteKey} onChange={recaptchaContext.onChange} />
                             </Form.Group>
                         </Form.Row>
                     }

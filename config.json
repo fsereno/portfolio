@@ -27,7 +27,11 @@
     ],
     "grecaptcha": {
         "active": true,
-        "key": "6LdFJsIaAAAAAGltxQjmncdNsjOtxAshDewjKCS3"
+        "key": "6LdFJsIaAAAAAGltxQjmncdNsjOtxAshDewjKCS3",
+        "endpoints": {
+            "base": "https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com",
+            "verify": "verify"
+        }
     },
     "applications": [
         {
@@ -360,8 +364,7 @@
             "featured": true,
             "endpoints": {
                 "base": "https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com",
-                "api": "todos",
-                "verify": "verify"
+                "api": "todos"
             }
         }
     ]
