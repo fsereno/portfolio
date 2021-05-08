@@ -7,6 +7,7 @@ import { LoginContextProvider } from './components/contextProviders/loginContext
 import { SpinnerContextProvider } from '../../js/modules/react/spinnerComponent';
 import { ToasterContextProvider } from '../../js/modules/react/toasterComponent';
 import { ConfigContextProvider } from '../../js/modules/react/configContextProvider';
+import { ItemsContextProvider } from './components/contextProviders/itemsContextProvider';
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
       <ToasterContextProvider>
         <SpinnerContextProvider>
           <LoginContextProvider>
-            <Router />
+            <ItemsContextProvider>
+              <Router />
+            </ItemsContextProvider>
           </LoginContextProvider>
         </SpinnerContextProvider>
       </ToasterContextProvider>
