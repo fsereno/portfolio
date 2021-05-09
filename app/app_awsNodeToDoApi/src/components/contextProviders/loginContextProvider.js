@@ -11,7 +11,9 @@ export function LoginContextProvider({children}) {
 
     const userPool = new CognitoUserPool(POOL_DATA);
 
-    useLayoutEffect(() => {
+    const setAuthenticatedTrue = () => setAuthenticated(true);
+
+    const getCurrentUser = (doneCallback, failCallback) => {
 
         const currentUser = userPool.getCurrentUser();
 
@@ -21,24 +23,32 @@ export function LoginContextProvider({children}) {
 
                 if (err != null && currentUser.signInUserSession != null ) {
 
+                    if (typeof failCallback === "function") {
+                        failCallback();
+                    }
                     console.error(err.message);
 
                 } else {
 
-                    setAuthenticated(true);
-
+                    if (typeof doneCallback === "function") {
+                        doneCallback(currentUser);
+                    }
                 }
             });
         }
+    }
+
+    useLayoutEffect(() => {
+
+        getCurrentUser(setAuthenticatedTrue);
+
     },[]);
 
-    const context = { authenticated, setAuthenticated, userPool };
+    const context = { authenticated, setAuthenticated, userPool, getCurrentUser };
 
     return (
-        <>
-            <LoginContext.Provider value={context}>
-                {children}
-            </LoginContext.Provider>
-        </>
+        <LoginContext.Provider value={context}>
+            {children}
+        </LoginContext.Provider>
     )
 }
