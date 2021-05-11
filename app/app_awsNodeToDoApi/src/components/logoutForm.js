@@ -42,6 +42,7 @@ export function LogoutForm() {
                             if (result === SUCCESS) {
 
                                 loginContext.setAuthenticated(false);
+                                loginContext.token.current = undefined;
                                 spinnerContext.setShow(false);
                                 history.push(LOGIN);
 

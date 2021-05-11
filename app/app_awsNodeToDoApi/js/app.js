@@ -9949,6 +9949,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
 /* harmony import */ var _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../js/modules/utils/XMLHttpRequestUtil */ "../js/modules/utils/XMLHttpRequestUtil.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
+/* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../contentContainer */ "./src/components/contentContainer.js");
 "use strict;";
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -9976,6 +9977,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 function ItemsContextProvider(_ref) {
   var children = _ref.children;
   var configContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_1__.ConfigContext);
@@ -9984,138 +9987,115 @@ function ItemsContextProvider(_ref) {
   var endpoints = configContext.appConfig.endpoints;
   var API_ENDPOINT = "".concat(endpoints.base, "/").concat(endpoints.api);
   var selectedId = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-  var selected = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(); // as a performance update, consider moving state to another context,
-  // this could be a handler context
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       items = _useState2[0],
       setItems = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      item = _useState4[0],
-      setItem = _useState4[1];
+      hasError = _useState4[0],
+      setHasError = _useState4[1];
 
   var hasNoItems = function hasNoItems() {
     return items.length === 0;
   };
 
-  var getItems = function getItems() {
-    return loginContext.getCurrentUser(_getItems);
-  };
+  var XMLHttpRequestHandler = function XMLHttpRequestHandler(_ref2) {
+    var type = _ref2.type,
+        request = _ref2.request,
+        paylod = _ref2.paylod,
+        doneCallback = _ref2.doneCallback;
+    setHasError(false);
+    spinnerContext.setShow(true);
+    var idToken = loginContext.token.current;
+    var xhttp = new XMLHttpRequest();
 
-  var getItem = function getItem() {
-    return loginContext.getCurrentUser(_getItem);
+    xhttp.onreadystatechange = function (result) {
+      var data = result.currentTarget;
+
+      if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__.XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
+        var response;
+
+        try {
+          response = JSON.parse(data.response);
+        } catch (error) {
+          response = {};
+        }
+
+        if (typeof doneCallback === "function") {
+          doneCallback(response);
+        }
+
+        spinnerContext.setShow(false);
+      } else if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__.XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
+        failCallback();
+        spinnerContext.setShow(false);
+      }
+    };
+
+    xhttp.open(type, request);
+    xhttp.setRequestHeader("Authorization", idToken);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(paylod);
   };
 
   var deleteItem = function deleteItem() {
-    return loginContext.getCurrentUser(_deleteItem);
+    XMLHttpRequestHandler({
+      type: "DELETE",
+      request: "".concat(API_ENDPOINT, "/").concat(selectedId.current),
+      doneCallback: deleteDoneCallback
+    });
   };
 
-  var _deleteItem = function _deleteItem(currentUser) {
-    spinnerContext.setShow(true);
-    var idToken = currentUser.signInUserSession.idToken.jwtToken;
-    var xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function (result) {
-      var data = result.currentTarget;
-
-      if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__.XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
-        console.log(data.response); // this needs to return better
-
-        var currentItems = _toConsumableArray(items);
-
-        var updatedItems = currentItems.filter(function (x) {
-          return x.id !== selectedId.current;
-        });
-        setItems(updatedItems);
-        spinnerContext.setShow(false);
-      } else if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__.XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
-        spinnerContext.setShow(false);
-      }
-    };
-
-    xhttp.open("DELETE", "".concat(API_ENDPOINT, "/").concat(selectedId.current));
-    xhttp.setRequestHeader("Authorization", idToken);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send();
+  var getItems = function getItems() {
+    XMLHttpRequestHandler({
+      type: "GET",
+      request: API_ENDPOINT,
+      doneCallback: getItemsDoneCallback
+    });
   };
 
-  var _getItems = function _getItems(currentUser) {
-    spinnerContext.setShow(true);
-    var idToken = currentUser.signInUserSession.idToken.jwtToken;
-    var xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function (result) {
-      var data = result.currentTarget;
-
-      if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__.XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
-        var _items = JSON.parse(data.response);
-
-        setItems(_items);
-        spinnerContext.setShow(false);
-      } else if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__.XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
-        spinnerContext.setShow(false);
-      }
-    };
-
-    xhttp.open("GET", API_ENDPOINT);
-    xhttp.setRequestHeader("Authorization", idToken);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send();
+  var getItem = function getItem(doneCallback) {
+    XMLHttpRequestHandler({
+      type: "GET",
+      request: "".concat(API_ENDPOINT, "/").concat(selectedId.current),
+      doneCallback: doneCallback
+    });
   };
 
-  var _getItem = function _getItem(currentUser) {
-    spinnerContext.setShow(true);
-    var idToken = currentUser.signInUserSession.idToken.jwtToken;
-    var xhttp = new XMLHttpRequest();
+  var deleteDoneCallback = function deleteDoneCallback() {
+    // needs unit testing
+    var currentItems = _toConsumableArray(items);
 
-    xhttp.onreadystatechange = function (result) {
-      var data = result.currentTarget;
+    var updatedItems = currentItems.filter(function (x) {
+      return x.id !== selectedId.current;
+    });
+    setItems(updatedItems);
+  };
 
-      if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__.XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
-        console.log(data.response);
+  var getItemsDoneCallback = function getItemsDoneCallback(response) {
+    return setItems(response);
+  };
 
-        var _item = JSON.parse(data.response);
-
-        selected.current = _item;
-        /*
-            {
-                "username":"fabiosereno",
-                "description":"Next neweest item",
-                "id":"3158740552853623",
-                "done":false,
-                "targetDate":"2021-03-16T15:03:03.201Z"
-            }
-        */
-
-        spinnerContext.setShow(false);
-      } else if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__.XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
-        // what to do here ?
-        spinnerContext.setShow(false);
-      }
-    };
-
-    xhttp.open("GET", "".concat(API_ENDPOINT, "/").concat(selectedId.current));
-    xhttp.setRequestHeader("Authorization", idToken);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send();
+  var failCallback = function failCallback() {
+    setHasError(true);
   };
 
   var context = {
     items: items,
-    item: item,
     hasNoItems: hasNoItems,
     getItems: getItems,
     deleteItem: deleteItem,
     getItem: getItem,
-    selectedId: selectedId,
-    selected: selected
+    selectedId: selectedId
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_4__.ItemsContext.Provider, {
     value: context
-  }, children);
+  }, children, hasError && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_5__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+    className: "text-danger"
+  }, "Sorry, there was an error. Please try again.")));
 }
 
 /***/ }),
@@ -10162,9 +10142,11 @@ function LoginContextProvider(_ref) {
       setAuthenticated = _useState2[1];
 
   var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_2__.POOL_DATA);
+  var token = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
-  var setAuthenticatedTrue = function setAuthenticatedTrue() {
-    return setAuthenticated(true);
+  var getCurrentUserDoneCallback = function getCurrentUserDoneCallback(currentUser) {
+    token.current = currentUser.signInUserSession.idToken.jwtToken;
+    setAuthenticated(true);
   };
 
   var getCurrentUser = function getCurrentUser(doneCallback, failCallback) {
@@ -10188,13 +10170,14 @@ function LoginContextProvider(_ref) {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
-    getCurrentUser(setAuthenticatedTrue);
+    getCurrentUser(getCurrentUserDoneCallback);
   }, []);
   var context = {
     authenticated: authenticated,
     setAuthenticated: setAuthenticated,
     userPool: userPool,
-    getCurrentUser: getCurrentUser
+    getCurrentUser: getCurrentUser,
+    token: token
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_3__.LoginContext.Provider, {
     value: context
@@ -10219,17 +10202,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
 "use strict;";
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
 var EditForm = function EditForm() {
   var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_1__.ItemsContext);
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      selected = _useState2[0],
+      setSelected = _useState2[1];
+
+  var getItemDoneCallback = function getItemDoneCallback(item) {
+    console.log(item);
+    setSelected(item);
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (itemsContext.selectedId.current) {
-      itemsContext.getItem();
+      itemsContext.getItem(getItemDoneCallback);
     }
   }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "some form"), itemsContext.selected && itemsContext.selected.current && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, itemsContext.selected.current.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, itemsContext.selected.current.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, itemsContext.selected.current.done), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, itemsContext.selected.current.targetDate)));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "some form"), selected && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, selected.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, selected.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, selected.done), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, selected.targetDate)));
 };
 
 /***/ }),
@@ -10305,8 +10311,7 @@ var ListItems = function ListItems() {
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useHistory)();
 
   var onEditClick = function onEditClick(id) {
-    itemsContext.selectedId.current = id; // itemsContext.getItem();
-
+    itemsContext.selectedId.current = id;
     history.push(_constants__WEBPACK_IMPORTED_MODULE_3__.EDIT);
   };
 
@@ -10543,6 +10548,7 @@ function LogoutForm() {
             onSuccess: function onSuccess(result) {
               if (result === _constants__WEBPACK_IMPORTED_MODULE_2__.SUCCESS) {
                 loginContext.setAuthenticated(false);
+                loginContext.token.current = undefined;
                 spinnerContext.setShow(false);
                 history.push(_constants__WEBPACK_IMPORTED_MODULE_2__.LOGIN);
               }

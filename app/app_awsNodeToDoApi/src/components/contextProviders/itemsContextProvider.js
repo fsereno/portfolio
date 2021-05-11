@@ -5,8 +5,9 @@ import { ConfigContext } from '../../../../js/modules/react/configContextProvide
 import { SpinnerContext } from '../../../../js/modules/react/spinnerComponent';
 import { XmlHttpRequestUtil } from '../../../../js/modules/utils/XMLHttpRequestUtil';
 import { ItemsContext, LoginContext } from '../../contexts';
+import { ContentContainer } from '../contentContainer';
 
-export function ItemsContextProvider({children}) {
+export function ItemsContextProvider({ children }) {
 
     const configContext = React.useContext(ConfigContext);
     const spinnerContext = React.useContext(SpinnerContext);
@@ -16,27 +17,20 @@ export function ItemsContextProvider({children}) {
     const API_ENDPOINT = `${endpoints.base}/${endpoints.api}`;
 
     const selectedId = useRef();
-    const selected = useRef();
 
+    const [items, setItems] = useState([]);
 
-    // as a performance update, consider moving state to another context,
-    // this could be a handler context
-    const [ items, setItems ] = useState([]);
-    const [ item, setItem ] = useState({});
+    const [hasError, setHasError] = useState(false);
 
     const hasNoItems = () => items.length === 0;
 
-    const getItems = () => loginContext.getCurrentUser(_getItems);
+    const XMLHttpRequestHandler = ({ type, request, paylod, doneCallback }) => {
 
-    const getItem = () => loginContext.getCurrentUser(_getItem);
-
-    const deleteItem = () => loginContext.getCurrentUser(_deleteItem);
-
-    const _deleteItem = (currentUser) => {
+        setHasError(false);
 
         spinnerContext.setShow(true);
 
-        const idToken = currentUser.signInUserSession.idToken.jwtToken;
+        const idToken = loginContext.token.current;
 
         const xhttp = new XMLHttpRequest();
 
@@ -46,106 +40,83 @@ export function ItemsContextProvider({children}) {
 
             if (XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
 
-                console.log(data.response); // this needs to return better
+                let response;
 
-                const currentItems = [...items];
+                try {
+                    response = JSON.parse(data.response);
+                } catch (error) {
+                    response = {};
+                }
 
-                const updatedItems = currentItems.filter(x => x.id !== selectedId.current);
-
-                setItems(updatedItems);
-
+                if (typeof doneCallback === "function") {
+                    doneCallback(response);
+                }
                 spinnerContext.setShow(false);
             } else if (XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
+
+                failCallback();
                 spinnerContext.setShow(false);
             }
         }
 
-        xhttp.open("DELETE", `${API_ENDPOINT}/${selectedId.current}`);
+        xhttp.open(type, request);
         xhttp.setRequestHeader("Authorization", idToken);
         xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send();
+        xhttp.send(paylod);
     }
 
-    const _getItems = (currentUser) => {
+    const deleteItem = () => {
 
-        spinnerContext.setShow(true);
-
-        const idToken = currentUser.signInUserSession.idToken.jwtToken;
-
-        const xhttp = new XMLHttpRequest();
-
-        xhttp.onreadystatechange = (result) => {
-
-            const data = result.currentTarget;
-
-            if (XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
-                const items = JSON.parse(data.response);
-
-                setItems(items);
-                spinnerContext.setShow(false);
-
-            } else if (XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
-                spinnerContext.setShow(false);
-            }
-        }
-
-        xhttp.open("GET", API_ENDPOINT);
-        xhttp.setRequestHeader("Authorization", idToken);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send();
+        XMLHttpRequestHandler({
+            type: "DELETE",
+            request: `${API_ENDPOINT}/${selectedId.current}`,
+            doneCallback: deleteDoneCallback
+        });
     }
 
-    const _getItem = (currentUser) => {
+    const getItems = () => {
 
-        spinnerContext.setShow(true);
-
-        const idToken = currentUser.signInUserSession.idToken.jwtToken;
-
-        const xhttp = new XMLHttpRequest();
-
-        xhttp.onreadystatechange = (result) => {
-
-            const data = result.currentTarget;
-
-            if (XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
-
-                console.log(data.response);
-
-                const item = JSON.parse(data.response);
-
-                selected.current = item;
-
-                
-
-                    /*
-                        {
-                            "username":"fabiosereno",
-                            "description":"Next neweest item",
-                            "id":"3158740552853623",
-                            "done":false,
-                            "targetDate":"2021-03-16T15:03:03.201Z"
-                        }
-                    */
-
-                spinnerContext.setShow(false);
-            } else if (XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
-                
-                // what to do here ?
-                spinnerContext.setShow(false);
-            }
-        }
-
-        xhttp.open("GET", `${API_ENDPOINT}/${selectedId.current}`);
-        xhttp.setRequestHeader("Authorization", idToken);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send();
+        XMLHttpRequestHandler({
+            type: "GET",
+            request: API_ENDPOINT,
+            doneCallback: getItemsDoneCallback
+        });
     }
 
-    const context = { items, item, hasNoItems, getItems, deleteItem, getItem, selectedId, selected };
+    const getItem = (doneCallback) => {
+
+        XMLHttpRequestHandler({
+            type: "GET",
+            request: `${API_ENDPOINT}/${selectedId.current}`,
+            doneCallback
+        });
+    }
+
+    const deleteDoneCallback = () => {
+
+        // needs unit testing
+        const currentItems = [...items];
+        const updatedItems = currentItems.filter(x => x.id !== selectedId.current);
+
+        setItems(updatedItems);
+    }
+
+    const getItemsDoneCallback = (response) => setItems(response);
+
+    const failCallback = () => {
+        setHasError(true);
+    }
+
+    const context = { items, hasNoItems, getItems, deleteItem, getItem, selectedId };
 
     return (
         <ItemsContext.Provider value={context}>
             {children}
+            {hasError &&
+                <ContentContainer>
+                    <h4 className="text-danger">Sorry, there was an error. Please try again.</h4>
+                </ContentContainer>
+            }
         </ItemsContext.Provider>
     )
 }

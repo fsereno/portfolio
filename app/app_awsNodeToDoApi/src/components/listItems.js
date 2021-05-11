@@ -14,8 +14,7 @@ export const ListItems = () => {
 
     const onEditClick = (id) => {
         itemsContext.selectedId.current = id;
-       // itemsContext.getItem();
-       history.push(EDIT);
+        history.push(EDIT);
     }
 
     const onDeleteClick = (id) => {

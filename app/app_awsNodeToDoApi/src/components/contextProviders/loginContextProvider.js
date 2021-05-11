@@ -1,6 +1,6 @@
 "use strict;"
 
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { CognitoUserPool } from 'amazon-cognito-identity-js';
 import { POOL_DATA } from '../../constants';
 import { LoginContext } from '../../contexts';
@@ -11,7 +11,12 @@ export function LoginContextProvider({children}) {
 
     const userPool = new CognitoUserPool(POOL_DATA);
 
-    const setAuthenticatedTrue = () => setAuthenticated(true);
+    const token = useRef();
+
+    const getCurrentUserDoneCallback = (currentUser) => {
+        token.current = currentUser.signInUserSession.idToken.jwtToken;
+        setAuthenticated(true);
+    }
 
     const getCurrentUser = (doneCallback, failCallback) => {
 
@@ -40,11 +45,11 @@ export function LoginContextProvider({children}) {
 
     useLayoutEffect(() => {
 
-        getCurrentUser(setAuthenticatedTrue);
+        getCurrentUser(getCurrentUserDoneCallback);
 
     },[]);
 
-    const context = { authenticated, setAuthenticated, userPool, getCurrentUser };
+    const context = { authenticated, setAuthenticated, userPool, getCurrentUser, token };
 
     return (
         <LoginContext.Provider value={context}>
