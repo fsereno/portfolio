@@ -16,17 +16,21 @@ export function ItemsContextProvider({children}) {
     const API_ENDPOINT = `${endpoints.base}/${endpoints.api}`;
 
     const selectedId = useRef();
+    const selected = useRef();
 
+
+    // as a performance update, consider moving state to another context,
+    // this could be a handler context
     const [ items, setItems ] = useState([]);
+    const [ item, setItem ] = useState({});
 
     const hasNoItems = () => items.length === 0;
 
     const getItems = () => loginContext.getCurrentUser(_getItems);
 
-    const deleteItem = (id) => {
-        selectedId.current = id;
-        loginContext.getCurrentUser(_deleteItem);
-    }
+    const getItem = () => loginContext.getCurrentUser(_getItem);
+
+    const deleteItem = () => loginContext.getCurrentUser(_deleteItem);
 
     const _deleteItem = (currentUser) => {
 
@@ -91,7 +95,53 @@ export function ItemsContextProvider({children}) {
         xhttp.send();
     }
 
-    const context = { items, setItems, hasNoItems, getItems, deleteItem };
+    const _getItem = (currentUser) => {
+
+        spinnerContext.setShow(true);
+
+        const idToken = currentUser.signInUserSession.idToken.jwtToken;
+
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = (result) => {
+
+            const data = result.currentTarget;
+
+            if (XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
+
+                console.log(data.response);
+
+                const item = JSON.parse(data.response);
+
+                selected.current = item;
+
+                
+
+                    /*
+                        {
+                            "username":"fabiosereno",
+                            "description":"Next neweest item",
+                            "id":"3158740552853623",
+                            "done":false,
+                            "targetDate":"2021-03-16T15:03:03.201Z"
+                        }
+                    */
+
+                spinnerContext.setShow(false);
+            } else if (XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
+                
+                // what to do here ?
+                spinnerContext.setShow(false);
+            }
+        }
+
+        xhttp.open("GET", `${API_ENDPOINT}/${selectedId.current}`);
+        xhttp.setRequestHeader("Authorization", idToken);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send();
+    }
+
+    const context = { items, item, hasNoItems, getItems, deleteItem, getItem, selectedId, selected };
 
     return (
         <ItemsContext.Provider value={context}>

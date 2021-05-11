@@ -4,12 +4,13 @@ import React from 'react';
 import { HashRouter, Switch, Route, NavLink, Redirect } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { LOGIN, MANAGE, LOGOUT, REGISTER } from '../constants';
+import { LOGIN, MANAGE, LOGOUT, REGISTER, CREATE, EDIT } from '../constants';
 import { Login } from './pages/login';
 import { Manage } from './pages/manage';
 import { LoginContext } from '../contexts';
 import { Logout } from './pages/logout';
 import { Register } from './pages/register';
+import { Edit } from './pages/edit';
 
 export const Router = () => {
 
@@ -45,6 +46,12 @@ export const Router = () => {
                 </Route>
                 <Route path={MANAGE}>
                     <Manage />
+                </Route>
+                <Route path={EDIT}>
+                    <Edit/>
+                </Route>
+                <Route path={CREATE}>
+                    <Edit/>
                 </Route>
                 <Route path={LOGOUT}>
                     <Logout />
