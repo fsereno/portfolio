@@ -10301,7 +10301,7 @@ var ItemForm = function ItemForm() {
     type: "text",
     value: item.description,
     onChange: function onChange(event) {
-      return setSelected(_objectSpread(_objectSpread({}, item), {}, {
+      return setItem(_objectSpread(_objectSpread({}, item), {}, {
         description: event.target.value
       }));
     },

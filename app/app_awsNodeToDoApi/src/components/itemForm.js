@@ -43,7 +43,7 @@ export const ItemForm = () => {
                                 id="description"
                                 type="text"
                                 value={item.description}
-                                onChange={event => setSelected({...item, description: event.target.value })}
+                                onChange={event => setItem({...item, description: event.target.value })}
                                 required
                             />
                             <Form.Control.Feedback type="invalid">
