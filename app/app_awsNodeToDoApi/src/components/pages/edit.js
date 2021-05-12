@@ -8,7 +8,7 @@ import { EditForm } from '../editForm';
 export function Edit() {
   return (
     <ContentContainer>
-      <Content title="Create / Edit" />
+      <Content title="Edit" />
       <EditForm />
     </ContentContainer>
   )
