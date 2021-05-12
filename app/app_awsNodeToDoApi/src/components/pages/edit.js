@@ -3,13 +3,13 @@
 import React from 'react';
 import { ContentContainer } from '../contentContainer';
 import { Content } from '../content';
-import { EditForm } from '../editForm';
+import { ItemForm } from '../itemForm';
 
 export function Edit() {
   return (
     <ContentContainer>
       <Content title="Edit" />
-      <EditForm />
+      <ItemForm />
     </ContentContainer>
   )
 }
