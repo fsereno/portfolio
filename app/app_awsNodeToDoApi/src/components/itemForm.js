@@ -12,13 +12,11 @@ export const ItemForm = () => {
 
     const history = useHistory();
 
-    const [ item, setItem ] = useState({
-        description: ""
-    });
+    const [ description, setDescription ] = useState("");
 
     const populateItem = (item) => {
         console.log(item);
-        setItem(item);
+        setDescription(item.description);
     }
 
     useEffect( () => {
@@ -42,8 +40,8 @@ export const ItemForm = () => {
                                 name="description"
                                 id="description"
                                 type="text"
-                                value={item.description}
-                                onChange={event => setItem({...item, description: event.target.value })}
+                                value={description}
+                                onChange={event => setDescription(event.target.value)}
                                 required
                             />
                             <Form.Control.Feedback type="invalid">
