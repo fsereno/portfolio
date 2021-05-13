@@ -1,34 +1,15 @@
 "use strict;"
 
-import React, { useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { ItemsContext } from '../contexts';
-import { EDIT, MANAGE } from '../constants';
+import { DESCRIPTION } from '../constants';
 
-export const ItemForm = () => {
-
-    const itemsContext = React.useContext(ItemsContext);
-
-    const history = useHistory();
-
-    const [ description, setDescription ] = useState("");
-
-    const populateItem = (item) => {
-        console.log(item);
-        setDescription(item.description);
-    }
-
-    useEffect( () => {
-        if (itemsContext.selectedId.current && history.location.pathname === EDIT) {
-            itemsContext.getItem(populateItem);
-        } else if (history.location.pathname === EDIT) {
-            history.push(MANAGE);
-        }
-    },[]);
-
+export const ItemForm = ({state, handler}) => {
     return (
         <Row>
+            <Col lg={4}>
+                {state.description}
+            </Col>
             <Col lg={4}>
                 <Form>
                     <Form.Row>
@@ -40,8 +21,8 @@ export const ItemForm = () => {
                                 name="description"
                                 id="description"
                                 type="text"
-                                value={description}
-                                onChange={event => setDescription(event.target.value)}
+                                value={state.description}
+                                onChange={event => handler({ type: DESCRIPTION, value: event.target.value })}
                                 required
                             />
                             <Form.Control.Feedback type="invalid">

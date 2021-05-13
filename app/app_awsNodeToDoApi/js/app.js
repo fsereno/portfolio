@@ -10237,66 +10237,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ItemForm": () => (/* binding */ ItemForm)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Form.js");
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Form.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
 "use strict;";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
-
-var ItemForm = function ItemForm() {
-  var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_1__.ItemsContext);
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useHistory)();
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-      _useState2 = _slicedToArray(_useState, 2),
-      description = _useState2[0],
-      setDescription = _useState2[1];
-
-  var populateItem = function populateItem(item) {
-    console.log(item);
-    setDescription(item.description);
-  };
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (itemsContext.selectedId.current && history.location.pathname === _constants__WEBPACK_IMPORTED_MODULE_2__.EDIT) {
-      itemsContext.getItem(populateItem);
-    } else if (history.location.pathname === _constants__WEBPACK_IMPORTED_MODULE_2__.EDIT) {
-      history.push(_constants__WEBPACK_IMPORTED_MODULE_2__.MANAGE);
-    }
-  }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
+var ItemForm = function ItemForm(_ref) {
+  var state = _ref.state,
+      handler = _ref.handler;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
     lg: 4
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Group, {
-    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Label, null, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Control, {
+  }, state.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+    lg: 4
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Group, {
+    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Label, null, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Control, {
     name: "description",
     id: "description",
     type: "text",
-    value: description,
+    value: state.description,
     onChange: function onChange(event) {
-      return setDescription(event.target.value);
+      return handler({
+        type: _constants__WEBPACK_IMPORTED_MODULE_1__.DESCRIPTION,
+        value: event.target.value
+      });
     },
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Control.Feedback, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Control.Feedback, {
     type: "invalid"
   }, "Please enter a value."))))));
 };
@@ -10618,16 +10589,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contentContainer */ "./src/components/contentContainer.js");
 /* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../content */ "./src/components/content.js");
 /* harmony import */ var _itemForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../itemForm */ "./src/components/itemForm.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
+/* harmony import */ var _reducers_itemReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../reducers/itemReducer */ "./src/reducers/itemReducer.js");
 "use strict;";
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
 
 
 
 
 
 function Edit() {
+  var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_4__.ItemsContext);
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
+
+  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_itemReducer__WEBPACK_IMPORTED_MODULE_6__.itemReducer, _constants__WEBPACK_IMPORTED_MODULE_5__.ITEM),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      state = _useReducer2[0],
+      dispatch = _useReducer2[1];
+
+  var populateItem = function populateItem(item) {
+    console.log(item);
+    dispatch({
+      type: _constants__WEBPACK_IMPORTED_MODULE_5__.COPY,
+      value: item
+    });
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (itemsContext.selectedId.current) {
+      itemsContext.getItem(populateItem);
+    } else {
+      history.push(_constants__WEBPACK_IMPORTED_MODULE_5__.MANAGE);
+    }
+  }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_1__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_content__WEBPACK_IMPORTED_MODULE_2__.Content, {
     title: "Edit"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_itemForm__WEBPACK_IMPORTED_MODULE_3__.ItemForm, null));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_itemForm__WEBPACK_IMPORTED_MODULE_3__.ItemForm, {
+    state: state,
+    handler: dispatch
+  }));
 }
 
 /***/ }),
@@ -11158,6 +11175,9 @@ var ToolTip = function ToolTip(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "POOL_DATA": () => (/* binding */ POOL_DATA),
+/* harmony export */   "ITEM": () => (/* binding */ ITEM),
+/* harmony export */   "COPY": () => (/* binding */ COPY),
+/* harmony export */   "DESCRIPTION": () => (/* binding */ DESCRIPTION),
 /* harmony export */   "REGISTER": () => (/* binding */ REGISTER),
 /* harmony export */   "LOGIN": () => (/* binding */ LOGIN),
 /* harmony export */   "MANAGE": () => (/* binding */ MANAGE),
@@ -11177,6 +11197,14 @@ var POOL_DATA = {
   UserPoolId: 'eu-west-2_s4syVYS6n',
   ClientId: '60jvm1avgd6t55k4uc15dgu6iq'
 };
+var ITEM = {
+  id: -1,
+  description: "",
+  done: false,
+  targetDate: ""
+};
+var COPY = "copy";
+var DESCRIPTION = "description";
 var REGISTER = "/register";
 var LOGIN = "/login";
 var MANAGE = "/manage";
@@ -11214,6 +11242,44 @@ var LoginContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext
 var ItemsContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
 var EditContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
 var SelectedContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
+
+/***/ }),
+
+/***/ "./src/reducers/itemReducer.js":
+/*!*************************************!*\
+  !*** ./src/reducers/itemReducer.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "itemReducer": () => (/* binding */ itemReducer)
+/* harmony export */ });
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
+"use strict;";
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+function itemReducer(state, action) {
+  switch (action.type) {
+    case _constants__WEBPACK_IMPORTED_MODULE_0__.DESCRIPTION:
+      return _objectSpread(_objectSpread({}, state), {}, {
+        description: action.value
+      });
+
+    case _constants__WEBPACK_IMPORTED_MODULE_0__.COPY:
+      return _objectSpread({}, action.value);
+
+    default:
+      break;
+  }
+}
 
 /***/ }),
 

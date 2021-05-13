@@ -5,6 +5,16 @@ export const POOL_DATA = {
     ClientId: '60jvm1avgd6t55k4uc15dgu6iq'
 };
 
+export const ITEM = {
+    id: -1,
+    description: "",
+    done: false,
+    targetDate: ""
+}
+
+export const COPY = "copy";
+export const DESCRIPTION = "description";
+
 export const REGISTER = "/register";
 export const LOGIN = "/login";
 export const MANAGE = "/manage";
