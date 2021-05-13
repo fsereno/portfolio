@@ -32,7 +32,7 @@ export function Edit() {
 
   return (
     <ContentContainer>
-      <Content title="Edit" />
+      <Content title="Edit item" />
       <ItemForm state={state} handler={dispatch} />
     </ContentContainer>
   )

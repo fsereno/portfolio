@@ -54,7 +54,7 @@ export function ItemsContextProvider({ children }) {
                 spinnerContext.setShow(false);
             } else if (XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
 
-                failCallback();
+                failCallback(data);
                 spinnerContext.setShow(false);
             }
         }
@@ -103,7 +103,8 @@ export function ItemsContextProvider({ children }) {
 
     const getItemsDoneCallback = (response) => setItems(response);
 
-    const failCallback = () => {
+    const failCallback = (data) => {
+        console.log(data)
         setHasError(true);
     }
 

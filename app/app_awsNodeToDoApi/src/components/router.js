@@ -11,6 +11,7 @@ import { LoginContext } from '../contexts';
 import { Logout } from './pages/logout';
 import { Register } from './pages/register';
 import { Edit } from './pages/edit';
+import { Create } from './pages/create';
 
 export const Router = () => {
 
@@ -29,6 +30,7 @@ export const Router = () => {
                     {loginContext.authenticated &&
                         <>
                             <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={MANAGE}>Manage</NavLink>
+                            <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={CREATE}>Create</NavLink>
                             <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={LOGOUT}>Logout</NavLink>
                         </>
                     }
@@ -51,7 +53,7 @@ export const Router = () => {
                     <Edit/>
                 </Route>
                 <Route path={CREATE}>
-                    <Edit/>
+                    <Create />
                 </Route>
                 <Route path={LOGOUT}>
                     <Logout />
