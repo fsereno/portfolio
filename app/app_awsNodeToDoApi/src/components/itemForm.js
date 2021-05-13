@@ -1,17 +1,35 @@
 "use strict;"
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { DESCRIPTION } from '../constants';
 
 export const ItemForm = ({state, handler}) => {
+
+    const [ showValidation, setShowValidation ] = useState(false);
+    const [ showFeedback, setShowFeedback ] = useState(false);
+    const [ feedbackError, setFeedbackError ] = useState("");
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        if (event.currentTarget.checkValidity() === false) {
+            setShowValidation(true);
+            event.stopPropagation();
+
+        } else {
+            console.log("do something");
+            setShowValidation(false);
+        }
+    }
+
     return (
         <Row>
             <Col lg={4}>
                 {state.description}
             </Col>
             <Col lg={4}>
-                <Form>
+                <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>
@@ -28,6 +46,16 @@ export const ItemForm = ({state, handler}) => {
                             <Form.Control.Feedback type="invalid">
                                 Please enter a value.
                             </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Button className="float-right" id="submit" variant="dark" type="submit">Submit</Button>
+                            {showFeedback &&
+                                <div className="text-danger">
+                                    {feedbackError}
+                                </div>
+                            }
                         </Form.Group>
                     </Form.Row>
                 </Form>
