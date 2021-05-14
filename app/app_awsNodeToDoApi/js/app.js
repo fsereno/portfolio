@@ -10225,7 +10225,7 @@ var Item = function Item(_ref) {
     onClick: function onClick() {
       return onEditClick(item.id);
     }
-  }, "Update"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.default, {
+  }, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.default, {
     variant: "danger",
     size: "sm",
     onClick: function onClick() {
