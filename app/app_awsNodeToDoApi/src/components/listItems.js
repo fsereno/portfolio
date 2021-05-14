@@ -24,9 +24,9 @@ export const ListItems = () => {
 
     useEffect(() => {
 
-        if (itemsContext.hasNoItems()) {
+        //if (itemsContext.hasNoItems()) {
             itemsContext.getItems();
-        }
+        //}
 
     }, []);
 

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { DESCRIPTION } from '../constants';
 
-export const ItemForm = ({state, handler}) => {
+export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
 
     const [ showValidation, setShowValidation ] = useState(false);
     const [ showFeedback, setShowFeedback ] = useState(false);
@@ -19,6 +19,11 @@ export const ItemForm = ({state, handler}) => {
 
         } else {
             console.log("do something");
+
+            if (typeof submitHandler === "function") {
+                submitHandler(state, doneCallback);
+            }
+
             setShowValidation(false);
         }
     }
@@ -43,7 +48,7 @@ export const ItemForm = ({state, handler}) => {
                                     id="description"
                                     type="text"
                                     value={state.description}
-                                    onChange={event => handler({ type: DESCRIPTION, value: event.target.value })}
+                                    onChange={event => dispatch({ type: DESCRIPTION, value: event.target.value })}
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">

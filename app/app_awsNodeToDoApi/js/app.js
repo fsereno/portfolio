@@ -10004,7 +10004,7 @@ function ItemsContextProvider(_ref) {
   var XMLHttpRequestHandler = function XMLHttpRequestHandler(_ref2) {
     var type = _ref2.type,
         request = _ref2.request,
-        paylod = _ref2.paylod,
+        payload = _ref2.payload,
         doneCallback = _ref2.doneCallback;
     setHasError(false);
     spinnerContext.setShow(true);
@@ -10037,7 +10037,7 @@ function ItemsContextProvider(_ref) {
     xhttp.open(type, request);
     xhttp.setRequestHeader("Authorization", idToken);
     xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(paylod);
+    xhttp.send(payload);
   };
 
   var deleteItem = function deleteItem() {
@@ -10078,6 +10078,15 @@ function ItemsContextProvider(_ref) {
     return setItems(response);
   };
 
+  var updateItem = function updateItem(item, doneCallback) {
+    XMLHttpRequestHandler({
+      type: "PUT",
+      request: "".concat(API_ENDPOINT, "/").concat(selectedId.current),
+      payload: JSON.stringify(item),
+      doneCallback: doneCallback
+    });
+  };
+
   var failCallback = function failCallback(data) {
     console.log(data);
     setHasError(true);
@@ -10089,7 +10098,8 @@ function ItemsContextProvider(_ref) {
     getItems: getItems,
     deleteItem: deleteItem,
     getItem: getItem,
-    selectedId: selectedId
+    selectedId: selectedId,
+    updateItem: updateItem
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_4__.ItemsContext.Provider, {
     value: context
@@ -10262,7 +10272,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ItemForm = function ItemForm(_ref) {
   var state = _ref.state,
-      handler = _ref.handler;
+      dispatch = _ref.dispatch,
+      submitHandler = _ref.submitHandler,
+      doneCallback = _ref.doneCallback;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -10287,6 +10299,11 @@ var ItemForm = function ItemForm(_ref) {
       event.stopPropagation();
     } else {
       console.log("do something");
+
+      if (typeof submitHandler === "function") {
+        submitHandler(state, doneCallback);
+      }
+
       setShowValidation(false);
     }
   };
@@ -10307,7 +10324,7 @@ var ItemForm = function ItemForm(_ref) {
     type: "text",
     value: state.description,
     onChange: function onChange(event) {
-      return handler({
+      return dispatch({
         type: _constants__WEBPACK_IMPORTED_MODULE_1__.DESCRIPTION,
         value: event.target.value
       });
@@ -10370,9 +10387,8 @@ var ListItems = function ListItems() {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (itemsContext.hasNoItems()) {
-      itemsContext.getItems();
-    }
+    //if (itemsContext.hasNoItems()) {
+    itemsContext.getItems(); //}
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
     lg: 6
@@ -10740,6 +10756,11 @@ function Edit() {
     });
   };
 
+  var doneCallback = function doneCallback(response) {
+    console.log(response);
+    history.push(_constants__WEBPACK_IMPORTED_MODULE_5__.MANAGE);
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (itemsContext.selectedId.current) {
       itemsContext.getItem(populateItem);
@@ -10751,7 +10772,9 @@ function Edit() {
     title: "Edit item"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_itemForm__WEBPACK_IMPORTED_MODULE_3__.ItemForm, {
     state: state,
-    handler: dispatch
+    dispatch: dispatch,
+    submitHandler: itemsContext.updateItem,
+    doneCallback: doneCallback
   }));
 }
 
@@ -11324,7 +11347,7 @@ var REGISTER = "/register";
 var LOGIN = "/login";
 var MANAGE = "/manage";
 var EDIT = "/edit";
-var CREATE = "/edit";
+var CREATE = "/create";
 var LOGOUT = "/logout";
 var TOKEN = 'token';
 var USERNAME = 'username';

@@ -22,6 +22,11 @@ export function Edit() {
       dispatch({ type: COPY, value: item });
   }
 
+  const doneCallback = (response) => {
+    console.log(response);
+    history.push(MANAGE);
+  }
+
   useEffect( () => {
       if (itemsContext.selectedId.current) {
           itemsContext.getItem(populateItem);
@@ -33,7 +38,7 @@ export function Edit() {
   return (
     <ContentContainer>
       <Content title="Edit item" />
-      <ItemForm state={state} handler={dispatch} />
+      <ItemForm state={state} dispatch={dispatch} submitHandler={itemsContext.updateItem} doneCallback={doneCallback} />
     </ContentContainer>
   )
 }

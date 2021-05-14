@@ -24,7 +24,7 @@ export function ItemsContextProvider({ children }) {
 
     const hasNoItems = () => items.length === 0;
 
-    const XMLHttpRequestHandler = ({ type, request, paylod, doneCallback }) => {
+    const XMLHttpRequestHandler = ({ type, request, payload, doneCallback }) => {
 
         setHasError(false);
 
@@ -62,7 +62,7 @@ export function ItemsContextProvider({ children }) {
         xhttp.open(type, request);
         xhttp.setRequestHeader("Authorization", idToken);
         xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(paylod);
+        xhttp.send(payload);
     }
 
     const deleteItem = () => {
@@ -103,12 +103,30 @@ export function ItemsContextProvider({ children }) {
 
     const getItemsDoneCallback = (response) => setItems(response);
 
+    const updateItem = (item, doneCallback) => {
+
+        XMLHttpRequestHandler({
+            type: "PUT",
+            request: `${API_ENDPOINT}/${selectedId.current}`,
+            payload: JSON.stringify(item),
+            doneCallback
+        });
+    }
+
     const failCallback = (data) => {
         console.log(data)
         setHasError(true);
     }
 
-    const context = { items, hasNoItems, getItems, deleteItem, getItem, selectedId };
+    const context = {
+        items,
+        hasNoItems,
+        getItems,
+        deleteItem,
+        getItem,
+        selectedId,
+        updateItem
+    };
 
     return (
         <ItemsContext.Provider value={context}>
