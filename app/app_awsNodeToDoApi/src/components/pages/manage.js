@@ -8,7 +8,7 @@ import { ListItems } from '../listItems';
 export function Manage() {
   return (
     <ContentContainer>
-      <Content title="Manage" />
+      <Content title="Manage" centre={true} />
       <ListItems />
     </ContentContainer>
   )

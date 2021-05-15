@@ -338,7 +338,7 @@
         },
         {
             "name": "Basic React Email Client (SPA)",
-            "subHeading": "An SPA using React and React Router. React Context and useReducer handling state. Performance optimised with useCallback, useMemo and React.memo",
+            "subHeading": "An SPA using React and React Router. React.Context and useReducer handling state. Optimised with useCallback, useMemo and React.memo",
             "description": "Using React, Babel and Webpack.",
             "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "basicEmailClientReactSpa",

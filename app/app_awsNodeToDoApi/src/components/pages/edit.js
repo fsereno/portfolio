@@ -37,7 +37,7 @@ export function Edit() {
 
   return (
     <ContentContainer>
-      <Content title="Edit item" />
+      <Content title="Edit item"/>
       <ItemForm state={state} dispatch={dispatch} submitHandler={itemsContext.updateItem} doneCallback={doneCallback} />
     </ContentContainer>
   )

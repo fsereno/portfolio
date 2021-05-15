@@ -65,12 +65,12 @@ export function ItemsContextProvider({ children }) {
         xhttp.send(payload);
     }
 
-    const deleteItem = () => {
+    const deleteItem = (successCallback) => {
 
         XMLHttpRequestHandler({
             type: "DELETE",
             request: `${API_ENDPOINT}/${selectedId.current}`,
-            doneCallback: deleteDoneCallback
+            doneCallback: successCallback
         });
     }
 
@@ -92,15 +92,6 @@ export function ItemsContextProvider({ children }) {
         });
     }
 
-    const deleteDoneCallback = () => {
-
-        // needs unit testing
-        const currentItems = [...items];
-        const updatedItems = currentItems.filter(x => x.id !== selectedId.current);
-
-        setItems(updatedItems);
-    }
-
     const getItemsDoneCallback = (response) => setItems(response);
 
     const updateItem = (item, doneCallback) => {
@@ -111,6 +102,12 @@ export function ItemsContextProvider({ children }) {
             payload: JSON.stringify(item),
             doneCallback
         });
+    }
+
+    const itemDone = (successCallback) => {
+        const item = items.filter( x => x.id === selectedId.current)[0];
+        item.done = true;
+        updateItem(item, successCallback);
     }
 
     const failCallback = (data) => {
@@ -125,7 +122,8 @@ export function ItemsContextProvider({ children }) {
         deleteItem,
         getItem,
         selectedId,
-        updateItem
+        updateItem,
+        itemDone
     };
 
     return (

@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-export function Content({title, content}) {
+export function Content({title, content, centre}) {
     return (
       <>
-        <h1>{title}</h1>
+        <h1 className={`${ centre ? "text-center" : "" }`}>{title}</h1>
         <p>
           {content}
         </p>
