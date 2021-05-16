@@ -5,15 +5,23 @@ import { useHistory } from 'react-router-dom';
 import { ItemsContext } from '../contexts';
 import { Item } from './item';
 import { Col, Row } from 'react-bootstrap';
-import { EDIT, MANAGE } from '../constants';
+import { EDIT } from '../constants';
 
 export const ListItems = () => {
+
+    const initialCompleteState = { show: false, text: "Hide", class: "bi-dash-square" };
 
     const itemsContext = React.useContext(ItemsContext);
 
     const [ version, setVersion ] = useState(0);
+    const [ hideComplete, setHideComplete ] = useState(initialCompleteState);
 
     const history = useHistory();
+
+    const onHideCompleteClick = (event) => {
+        event.preventDefault();
+        !hideComplete.show ? setHideComplete({ show: true, text: "Show", class: "bi-plus-square" }) : setHideComplete(initialCompleteState);
+    }
 
     const onEditClick = (id) => {
         itemsContext.selectedId.current = id;
@@ -42,19 +50,36 @@ export const ListItems = () => {
     const doneItems = itemsContext.items.filter( x => x.done);
 
     return (
-        <Row className="justify-content-md-center">
-            <Col lg={10}>
-                <ul className="list-group">
-                    {items.map( x => <Item key={x.id} item={x} onDoneClick={onDoneClick} onDeleteClick={onDeleteClick} onEditClick={onEditClick}/> )}
-                </ul>
-            </Col>
-            {doneItems.length > 0 &&
-                <Col className="mt-3" lg={10}>
-                    <ul className="list-group">
-                        {doneItems.map( x => <Item key={x.id} item={x} onDeleteClick={onDeleteClick} onEditClick={onEditClick}/> )}
-                    </ul>
-                </Col>
+        <>
+            {items.length === 0 &&
+                <Row className="justify-content-md-center">
+                    <Col lg={10}>
+                        <h4>You have no items</h4>
+                    </Col>
+                </Row>
             }
-        </Row>
+            {items.length > 0 &&
+                <Row className="justify-content-md-center">
+                    <Col lg={10}>
+                        <h4>Remaining items</h4>
+                        <ul className="list-group">
+                            {items.map( x => <Item key={x.id} item={x} onDoneClick={onDoneClick} onDeleteClick={onDeleteClick} onEditClick={onEditClick}/> )}
+                        </ul>
+                    </Col>
+                </Row>
+            }
+            {doneItems.length > 0 &&
+                <Row className="justify-content-md-center mt-3">
+                    <Col lg={10}>
+                        <h4>Completed items <a className="float-right text-dark" href="#" onClick={onHideCompleteClick}>{hideComplete.text}<i className={`bi ${hideComplete.class} mx-2`}></i></a></h4>
+                        {!hideComplete.show &&
+                            <ul className="list-group">
+                                {doneItems.map( x => <Item key={x.id} item={x} onDeleteClick={onDeleteClick} onEditClick={onEditClick}/> )}
+                            </ul>
+                        }
+                    </Col>
+                </Row>
+            }
+        </>
     );
 }
