@@ -110,6 +110,19 @@ export function ItemsContextProvider({ children }) {
         updateItem(item, successCallback);
     }
 
+    const createItem = (item, doneCallback) => {
+
+        item.username = loginContext.username.current;
+        delete item.id;
+
+        XMLHttpRequestHandler({
+            type: "POST",
+            request: `${API_ENDPOINT}`,
+            payload: JSON.stringify(item),
+            doneCallback
+        });
+    }
+
     const failCallback = (data) => {
         console.log(data)
         setHasError(true);
@@ -123,7 +136,8 @@ export function ItemsContextProvider({ children }) {
         getItem,
         selectedId,
         updateItem,
-        itemDone
+        itemDone,
+        createItem
     };
 
     return (

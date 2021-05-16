@@ -12,9 +12,11 @@ export function LoginContextProvider({children}) {
     const userPool = new CognitoUserPool(POOL_DATA);
 
     const token = useRef();
+    const username = useRef();
 
     const getCurrentUserDoneCallback = (currentUser) => {
         token.current = currentUser.signInUserSession.idToken.jwtToken;
+        username.current = currentUser.username;
         setAuthenticated(true);
     }
 
@@ -49,7 +51,7 @@ export function LoginContextProvider({children}) {
 
     },[]);
 
-    const context = { authenticated, setAuthenticated, userPool, getCurrentUser, token };
+    const context = { authenticated, setAuthenticated, userPool, getCurrentUser, token, username };
 
     return (
         <LoginContext.Provider value={context}>

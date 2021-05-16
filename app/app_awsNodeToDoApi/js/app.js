@@ -10080,6 +10080,17 @@ function ItemsContextProvider(_ref) {
     updateItem(item, successCallback);
   };
 
+  var createItem = function createItem(item, doneCallback) {
+    item.username = loginContext.username.current;
+    delete item.id;
+    XMLHttpRequestHandler({
+      type: "POST",
+      request: "".concat(API_ENDPOINT),
+      payload: JSON.stringify(item),
+      doneCallback: doneCallback
+    });
+  };
+
   var failCallback = function failCallback(data) {
     console.log(data);
     setHasError(true);
@@ -10093,7 +10104,8 @@ function ItemsContextProvider(_ref) {
     getItem: getItem,
     selectedId: selectedId,
     updateItem: updateItem,
-    itemDone: itemDone
+    itemDone: itemDone,
+    createItem: createItem
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_4__.ItemsContext.Provider, {
     value: context
@@ -10147,9 +10159,11 @@ function LoginContextProvider(_ref) {
 
   var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_2__.POOL_DATA);
   var token = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  var username = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
   var getCurrentUserDoneCallback = function getCurrentUserDoneCallback(currentUser) {
     token.current = currentUser.signInUserSession.idToken.jwtToken;
+    username.current = currentUser.username;
     setAuthenticated(true);
   };
 
@@ -10181,7 +10195,8 @@ function LoginContextProvider(_ref) {
     setAuthenticated: setAuthenticated,
     userPool: userPool,
     getCurrentUser: getCurrentUser,
-    token: token
+    token: token,
+    username: username
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_3__.LoginContext.Provider, {
     value: context
@@ -10785,11 +10800,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Create": () => (/* binding */ Create)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contentContainer */ "./src/components/contentContainer.js");
 /* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../content */ "./src/components/content.js");
 /* harmony import */ var _itemForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../itemForm */ "./src/components/itemForm.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
 /* harmony import */ var _reducers_itemReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../reducers/itemReducer */ "./src/reducers/itemReducer.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -10810,17 +10827,29 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 function Create() {
+  var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_6__.ItemsContext);
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
+
   var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_itemReducer__WEBPACK_IMPORTED_MODULE_5__.itemReducer, _constants__WEBPACK_IMPORTED_MODULE_4__.ITEM),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       state = _useReducer2[0],
       dispatch = _useReducer2[1];
 
+  var doneCallback = function doneCallback(response) {
+    console.log(response);
+    history.push(_constants__WEBPACK_IMPORTED_MODULE_4__.MANAGE);
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_1__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_content__WEBPACK_IMPORTED_MODULE_2__.Content, {
     title: "Create an item"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_itemForm__WEBPACK_IMPORTED_MODULE_3__.ItemForm, {
     state: state,
-    handler: dispatch
+    dispatch: dispatch,
+    submitHandler: itemsContext.createItem,
+    doneCallback: doneCallback
   }));
 }
 
