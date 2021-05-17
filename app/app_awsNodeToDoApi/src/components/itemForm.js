@@ -29,46 +29,39 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
     }
 
     return (
-        <>
-            <Row>
-                <Col lg={4}>
-                    {JSON.stringify(state)}
-                </Col>
-            </Row>
-            <Row>
-                <Col lg={4}>
-                    <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
-                        <Form.Row>
-                            <Form.Group as={Col}>
-                                <Form.Label>
-                                    Description:
-                                </Form.Label>
-                                <Form.Control
-                                    name="description"
-                                    id="description"
-                                    type="text"
-                                    value={state.description}
-                                    onChange={event => dispatch({ type: DESCRIPTION, value: event.target.value })}
-                                    required
-                                />
-                                <Form.Control.Feedback type="invalid">
-                                    Please enter a value.
-                                </Form.Control.Feedback>
-                            </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
-                            <Form.Group as={Col}>
-                                <Button className="float-right" id="submit" variant="dark" type="submit">Submit</Button>
-                                {showFeedback &&
-                                    <div className="text-danger">
-                                        {feedbackError}
-                                    </div>
-                                }
-                            </Form.Group>
-                        </Form.Row>
-                    </Form>
-                </Col>
-            </Row>
-        </>
+        <Row>
+            <Col lg={4}>
+                <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Form.Label>
+                                Description:
+                            </Form.Label>
+                            <Form.Control
+                                name="description"
+                                id="description"
+                                type="text"
+                                value={state.description}
+                                onChange={event => dispatch({ type: DESCRIPTION, value: event.target.value })}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please enter a value.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Button className="float-right" id="submit" variant="dark" type="submit">Submit</Button>
+                            {showFeedback &&
+                                <div className="text-danger">
+                                    {feedbackError}
+                                </div>
+                            }
+                        </Form.Group>
+                    </Form.Row>
+                </Form>
+            </Col>
+        </Row>
     );
 }

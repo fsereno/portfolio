@@ -49,8 +49,13 @@ export function LoginForm() {
 
             const cognitoUser = new CognitoUser(userData);
 
+            console.log(authenticationDetails);
+            console.log(cognitoUser);
+
             cognitoUser.authenticateUser(authenticationDetails, {
                 onSuccess: function(result) {
+
+                    console.log(result);
 
                     setShowValidation(false);
                     setShowFeedback(false);
