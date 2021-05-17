@@ -46,22 +46,18 @@ export const Router = () => {
                 <Route path={REGISTER}>
                     <Register />
                 </Route>
-                {loginContext.authenticated &&
-                    <>
-                        <Route path={MANAGE}>
-                            <Manage />
-                        </Route>
-                        <Route path={EDIT}>
-                            <Edit/>
-                        </Route>
-                        <Route path={CREATE}>
-                            <Create />
-                        </Route>
-                        <Route path={LOGOUT}>
-                            <Logout />
-                        </Route>
-                    </>
-                }
+                <Route path={MANAGE}>
+                    <Manage />
+                </Route>
+                <Route path={EDIT}>
+                    <Edit/>
+                </Route>
+                <Route path={CREATE}>
+                    <Create />
+                </Route>
+                <Route path={LOGOUT}>
+                    <Logout />
+                </Route>
             </Switch>
         </HashRouter>
     )

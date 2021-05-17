@@ -10662,6 +10662,7 @@ function LoginForm() {
       console.log(cognitoUser);
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function onSuccess(result) {
+          console.log(result);
           setShowValidation(false);
           setShowFeedback(false);
           spinnerContext.setShow(false);
@@ -11403,7 +11404,7 @@ var Router = function Router() {
     path: _constants__WEBPACK_IMPORTED_MODULE_1__.LOGIN
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_login__WEBPACK_IMPORTED_MODULE_2__.Login, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
     path: _constants__WEBPACK_IMPORTED_MODULE_1__.REGISTER
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_register__WEBPACK_IMPORTED_MODULE_6__.Register, null)), loginContext.authenticated && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_register__WEBPACK_IMPORTED_MODULE_6__.Register, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
     path: _constants__WEBPACK_IMPORTED_MODULE_1__.MANAGE
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_manage__WEBPACK_IMPORTED_MODULE_3__.Manage, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
     path: _constants__WEBPACK_IMPORTED_MODULE_1__.EDIT
@@ -11411,7 +11412,7 @@ var Router = function Router() {
     path: _constants__WEBPACK_IMPORTED_MODULE_1__.CREATE
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_create__WEBPACK_IMPORTED_MODULE_8__.Create, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
     path: _constants__WEBPACK_IMPORTED_MODULE_1__.LOGOUT
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_logout__WEBPACK_IMPORTED_MODULE_5__.Logout, null)))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pages_logout__WEBPACK_IMPORTED_MODULE_5__.Logout, null))));
 };
 
 /***/ }),
