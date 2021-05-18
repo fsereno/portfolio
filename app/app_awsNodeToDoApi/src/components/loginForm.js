@@ -6,8 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LoginContext } from '../contexts';
-import { MANAGE, POOL_DATA } from '../constants';
-import { CognitoUser, AuthenticationDetails, CognitoUserPool } from 'amazon-cognito-identity-js';
+import { MANAGE } from '../constants';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 import { Row } from 'react-bootstrap';
 

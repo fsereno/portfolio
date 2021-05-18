@@ -5,7 +5,7 @@ import { CognitoUser, AuthenticationDetails, CognitoUserPool } from 'amazon-cogn
 import { POOL_DATA } from '../../constants';
 import { LoginContext } from '../../contexts';
 
-export function LoginContextProvider({children}) {
+export const LoginContextProvider = ({children}) => {
 
     const [ authenticated, setAuthenticated ] = useState(false);
 

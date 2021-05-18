@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Button, ButtonGroup, ListGroup } from 'react-bootstrap';
 import { CHECKED_SQUARE, EMPTY_SQUARE } from '../constants';
 
-export const Item = ({item, onDeleteClick, onEditClick, onDoneClick}) => {
+export const Item = React.memo(({item, onDeleteClick, onEditClick, onDoneClick}) => {
 
     const [ doneClass, setDoneClass ] = useState(EMPTY_SQUARE);
 
@@ -33,4 +33,4 @@ export const Item = ({item, onDeleteClick, onEditClick, onDoneClick}) => {
                 }
             </ListGroup.Item>
     );
-}
+}, (prev, next) => prev.item.done === next.item.done && prev.item.description === next.item.description);
