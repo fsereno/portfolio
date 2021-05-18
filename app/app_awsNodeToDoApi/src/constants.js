@@ -12,6 +12,12 @@ export const ITEM = {
     targetDate: ""
 }
 
+export const COLLAPSE_STATE = {
+    show: true,
+    text: "Show",
+    class: "bi-plus-square"
+};
+
 export const CHECKED_SQUARE = "bi-check2-square";
 export const EMPTY_SQUARE = "bi-square";
 

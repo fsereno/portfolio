@@ -5,21 +5,19 @@ import { useHistory } from 'react-router-dom';
 import { ItemsContext } from '../contexts';
 import { Item } from './item';
 import { Col, Row } from 'react-bootstrap';
-import { EDIT, HIDE, SHOW } from '../constants';
+import { EDIT, HIDE, SHOW, COLLAPSE_STATE } from '../constants';
 import { collapseReducer } from '../reducers/collapseReducer';
 
 export const ListItems = () => {
 
     const history = useHistory();
 
-    const initialCompleteState = { show: true, text: "Show", class: "bi-plus-square" };
-
     const itemsContext = React.useContext(ItemsContext);
 
     const [ version, setVersion ] = useState(0);
 
-    const [ collapseRemaining, collapseRemainingDistpach ] = useReducer(collapseReducer, initialCompleteState);
-    const [ collapseDone, collapseDoneDistpach ] = useReducer(collapseReducer, initialCompleteState);
+    const [ collapseRemaining, collapseRemainingDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE);
+    const [ collapseDone, collapseDoneDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE);
 
     const onHideRemainingClick = (event) => {
         event.preventDefault();

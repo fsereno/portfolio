@@ -23,7 +23,6 @@ export function Edit() {
 
   useEffect( () => {
       if (itemsContext.selectedId.current) {
-          console.log("get item")
           itemsContext.getItem(populateItem);
       } else {
           history.push(MANAGE);

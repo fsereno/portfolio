@@ -10485,11 +10485,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var ListItems = function ListItems() {
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useHistory)();
-  var initialCompleteState = {
-    show: true,
-    text: "Show",
-    "class": "bi-plus-square"
-  };
   var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_1__.ItemsContext);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
@@ -10497,12 +10492,12 @@ var ListItems = function ListItems() {
       version = _useState2[0],
       setVersion = _useState2[1];
 
-  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__.collapseReducer, initialCompleteState),
+  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__.collapseReducer, _constants__WEBPACK_IMPORTED_MODULE_3__.COLLAPSE_STATE),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       collapseRemaining = _useReducer2[0],
       collapseRemainingDistpach = _useReducer2[1];
 
-  var _useReducer3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__.collapseReducer, initialCompleteState),
+  var _useReducer3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__.collapseReducer, _constants__WEBPACK_IMPORTED_MODULE_3__.COLLAPSE_STATE),
       _useReducer4 = _slicedToArray(_useReducer3, 2),
       collapseDone = _useReducer4[0],
       collapseDoneDistpach = _useReducer4[1];
@@ -10950,7 +10945,6 @@ function Edit() {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (itemsContext.selectedId.current) {
-      console.log("get item");
       itemsContext.getItem(populateItem);
     } else {
       history.push(_constants__WEBPACK_IMPORTED_MODULE_5__.MANAGE);
@@ -11048,6 +11042,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Manage() {
+  //const [ version, setVersion ] = useState(0);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_1__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_content__WEBPACK_IMPORTED_MODULE_2__.Content, {
     title: "Manage",
     centre: true
@@ -11502,6 +11497,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "POOL_DATA": () => (/* binding */ POOL_DATA),
 /* harmony export */   "ITEM": () => (/* binding */ ITEM),
+/* harmony export */   "COLLAPSE_STATE": () => (/* binding */ COLLAPSE_STATE),
 /* harmony export */   "CHECKED_SQUARE": () => (/* binding */ CHECKED_SQUARE),
 /* harmony export */   "EMPTY_SQUARE": () => (/* binding */ EMPTY_SQUARE),
 /* harmony export */   "HIDE": () => (/* binding */ HIDE),
@@ -11532,6 +11528,11 @@ var ITEM = {
   description: "",
   done: false,
   targetDate: ""
+};
+var COLLAPSE_STATE = {
+  show: true,
+  text: "Show",
+  "class": "bi-plus-square"
 };
 var CHECKED_SQUARE = "bi-check2-square";
 var EMPTY_SQUARE = "bi-square";
