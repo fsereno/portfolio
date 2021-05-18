@@ -10170,7 +10170,6 @@ function LoginContextProvider(_ref) {
   var username = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
   var getCurrentUserDoneCallback = function getCurrentUserDoneCallback(currentUser) {
-    console.log("getCurrentUserDoneCallback");
     token.current = currentUser.signInUserSession.idToken.jwtToken;
     username.current = currentUser.username;
     setAuthenticated(true);
@@ -10196,7 +10195,8 @@ function LoginContextProvider(_ref) {
     }
   };
 
-  var logoutUser = function logoutUser(doneCallback, failCallback) {// needs working on
+  var logoutUser = function logoutUser(logoutCallback) {
+    getCurrentUser(logoutCallback);
   };
 
   var loginUser = function loginUser(username, password, loginDoneCallback, loginFailCallback) {
@@ -10235,8 +10235,6 @@ function LoginContextProvider(_ref) {
     setAuthenticated: setAuthenticated,
     loginUser: loginUser,
     logoutUser: logoutUser,
-    userPool: userPool,
-    getCurrentUser: getCurrentUser,
     token: token,
     username: username
   };
@@ -10765,17 +10763,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "LogoutForm": () => (/* binding */ LogoutForm)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
-/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap/Col */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap/Button */ "../../node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap/Form */ "../../node_modules/react-bootstrap/esm/Form.js");
+/* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Row */ "../../node_modules/react-bootstrap/esm/Row.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
 /* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
-/* harmony import */ var amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! amazon-cognito-identity-js */ "../../node_modules/amazon-cognito-identity-js/es/index.js");
 "use strict;";
-
 
 
 
@@ -10789,57 +10785,40 @@ __webpack_require__.r(__webpack_exports__);
 function LogoutForm() {
   var loginContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_1__.LoginContext);
   var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_3__.SpinnerContext);
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useHistory)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useHistory)();
 
-  var logoutDoneCallback = function logoutDoneCallback() {
-    spinnerContext.setShow(false);
-    history.push(_constants__WEBPACK_IMPORTED_MODULE_2__.LOGIN);
-  };
-
-  var logoutFailCallback = function logoutFailCallback(err) {
-    spinnerContext.setShow(false);
-    console.error(err.message);
-  };
-
-  var handleSubmit = function handleSubmit(event) {
-    event.preventDefault();
-    spinnerContext.setShow(true); //loginContext.logoutUser(logoutDoneCallback, logoutFailCallback);
-
-    var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_4__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_2__.POOL_DATA);
-    var currentUser = userPool.getCurrentUser();
-
-    if (currentUser != null) {
-      currentUser.getSession(function (err) {
-        if (err != null) {
+  var logoutCallback = function logoutCallback(currentUser) {
+    if (currentUser) {
+      currentUser.globalSignOut({
+        onSuccess: function onSuccess(result) {
+          if (result === _constants__WEBPACK_IMPORTED_MODULE_2__.SUCCESS) {
+            loginContext.setAuthenticated(false);
+            spinnerContext.setShow(false);
+            history.push(_constants__WEBPACK_IMPORTED_MODULE_2__.LOGIN);
+          }
+        },
+        onFailure: function onFailure(err) {
+          spinnerContext.setShow(false);
           console.error(err.message);
-        } else {
-          currentUser.globalSignOut({
-            onSuccess: function onSuccess(result) {
-              if (result === _constants__WEBPACK_IMPORTED_MODULE_2__.SUCCESS) {
-                loginContext.setAuthenticated(false);
-                loginContext.token.current = undefined;
-                spinnerContext.setShow(false);
-                history.push(_constants__WEBPACK_IMPORTED_MODULE_2__.LOGIN);
-              }
-            },
-            onFailure: function onFailure(err) {
-              spinnerContext.setShow(false);
-              console.error(err.message);
-            }
-          });
         }
       });
     }
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_6__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_7__.default, {
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    spinnerContext.setShow(true);
+    loginContext.logoutUser(logoutCallback);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_5__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_6__.default, {
     lg: 4
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_8__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7__.default, {
     noValidate: true,
     onSubmit: handleSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_8__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_8__.default.Group, {
-    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_7__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_8__.default.Label, null, "Are you sure you want to logout ?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_9__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7__.default.Group, {
+    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_6__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_7__.default.Label, null, "Are you sure you want to logout ?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_8__.default, {
     className: "float-right",
     id: "submit",
     variant: "dark",

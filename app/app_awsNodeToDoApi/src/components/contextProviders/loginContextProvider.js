@@ -16,8 +16,6 @@ export function LoginContextProvider({children}) {
     const username = useRef();
 
     const getCurrentUserDoneCallback = (currentUser) => {
-        console.log("getCurrentUserDoneCallback")
-        
         token.current = currentUser.signInUserSession.idToken.jwtToken;
         username.current = currentUser.username;
         setAuthenticated(true);
@@ -49,10 +47,8 @@ export function LoginContextProvider({children}) {
         }
     }
 
-    const logoutUser = (doneCallback, failCallback) => {
-
-
-        // needs working on
+    const logoutUser = (logoutCallback) => {
+        getCurrentUser(logoutCallback);
     }
 
     const loginUser = (username, password, loginDoneCallback, loginFailCallback) => {
@@ -93,7 +89,7 @@ export function LoginContextProvider({children}) {
         getCurrentUser(getCurrentUserDoneCallback);
     },[loginSuccess]);
 
-    const context = { authenticated, setAuthenticated, loginUser, logoutUser, userPool, getCurrentUser, token, username };
+    const context = { authenticated, setAuthenticated, loginUser, logoutUser, token, username };
 
     return (
         <LoginContext.Provider value={context}>

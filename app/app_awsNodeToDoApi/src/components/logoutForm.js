@@ -7,9 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { LoginContext } from '../contexts';
-import { LOGIN, POOL_DATA, SUCCESS } from '../constants';
+import { LOGIN, SUCCESS } from '../constants';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
-import { CognitoUserPool } from 'amazon-cognito-identity-js';
 
 export function LogoutForm() {
 
@@ -18,58 +17,33 @@ export function LogoutForm() {
 
     const history = useHistory();
 
-    const logoutDoneCallback = () => {
-        spinnerContext.setShow(false);
-        history.push(LOGIN);
-    }
+    const logoutCallback = (currentUser) => {
+        if(currentUser) {
+            currentUser.globalSignOut({
+                onSuccess: function (result) {
 
-    const logoutFailCallback = (err) => {
-        spinnerContext.setShow(false);
-        console.error(err.message)
+                    if (result === SUCCESS) {
+
+                        loginContext.setAuthenticated(false);
+                        spinnerContext.setShow(false);
+                        history.push(LOGIN);
+                    }
+                },
+                onFailure: function (err) {
+
+                    spinnerContext.setShow(false);
+                    console.error(err.message)
+
+                },
+            });
+        }
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         spinnerContext.setShow(true);
-
-        //loginContext.logoutUser(logoutDoneCallback, logoutFailCallback);
-
-        const userPool = new CognitoUserPool(POOL_DATA);
-
-        const currentUser = userPool.getCurrentUser();
-
-        if (currentUser != null ) {
-
-            currentUser.getSession(err => {
-
-                if (err != null ) {
-
-                    console.error(err.message);
-
-                } else {
-                    currentUser.globalSignOut({
-                        onSuccess: function (result) {
-
-                            if (result === SUCCESS) {
-
-                                loginContext.setAuthenticated(false);
-                                loginContext.token.current = undefined;
-                                spinnerContext.setShow(false);
-                                history.push(LOGIN);
-
-                            }
-                        },
-                        onFailure: function (err) {
-
-                            spinnerContext.setShow(false);
-                            console.error(err.message)
-
-                        },
-                    });
-                }
-            });
-        }
+        loginContext.logoutUser(logoutCallback);
     };
 
     return (
