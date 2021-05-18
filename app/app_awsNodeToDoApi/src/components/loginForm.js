@@ -24,6 +24,21 @@ export function LoginForm() {
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
 
+    const loginDoneCallback = () => {
+        //console.log(result);
+        setShowValidation(false);
+        setShowFeedback(false);
+        spinnerContext.setShow(false);
+        //loginContext.setAuthenticated(true);
+        history.push(MANAGE);
+    }
+
+    const loginFailCallback = (err) => {
+        setFeedbackError(err.message);
+        setShowFeedback(true);
+        spinnerContext.setShow(false);
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -34,42 +49,7 @@ export function LoginForm() {
         } else {
 
             spinnerContext.setShow(true);
-
-            const authenticationData = {
-                Username: username,
-                Password: password,
-            };
-
-            const authenticationDetails = new AuthenticationDetails(authenticationData);
-
-            const userData = {
-                Username: username,
-                Pool: new CognitoUserPool(POOL_DATA),
-            };
-
-            const cognitoUser = new CognitoUser(userData);
-
-            console.log(authenticationDetails);
-            console.log(cognitoUser);
-
-            cognitoUser.authenticateUser(authenticationDetails, {
-                onSuccess: function(result) {
-
-                    console.log(result);
-
-                    setShowValidation(false);
-                    setShowFeedback(false);
-
-                    spinnerContext.setShow(false);
-                    loginContext.setAuthenticated(true);
-                    history.push(MANAGE)
-                },
-                onFailure: function(err) {
-                    setFeedbackError(err.message);
-                    setShowFeedback(true);
-                    spinnerContext.setShow(false);
-                },
-            });
+            loginContext.loginUser(username, password, loginDoneCallback, loginFailCallback);
         }
     };
 

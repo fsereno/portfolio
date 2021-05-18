@@ -10029,6 +10029,9 @@ function ItemsContextProvider(_ref) {
       }
     };
 
+    console.log("idToken" + idToken);
+    console.log("request" + request);
+    console.log("payload" + payload);
     xhttp.open(type, request);
     xhttp.setRequestHeader("Authorization", idToken);
     xhttp.setRequestHeader("Content-type", "application/json");
@@ -10157,6 +10160,11 @@ function LoginContextProvider(_ref) {
       authenticated = _useState2[0],
       setAuthenticated = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      loginSuccess = _useState4[0],
+      setLoginSuccess = _useState4[1];
+
   var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_2__.POOL_DATA);
   var token = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   var username = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
@@ -10164,7 +10172,7 @@ function LoginContextProvider(_ref) {
   var getCurrentUserDoneCallback = function getCurrentUserDoneCallback(currentUser) {
     token.current = currentUser.signInUserSession.idToken.jwtToken;
     username.current = currentUser.username;
-    setAuthenticated(true);
+    token.current && username.current ? setAuthenticated(true) : setAuthenticated(false);
   };
 
   var getCurrentUser = function getCurrentUser(doneCallback, failCallback) {
@@ -10187,12 +10195,44 @@ function LoginContextProvider(_ref) {
     }
   };
 
+  var loginUser = function loginUser(username, password, loginDoneCallback, loginFailCallback) {
+    var authenticationData = {
+      Username: username,
+      Password: password
+    };
+    var authenticationDetails = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.AuthenticationDetails(authenticationData);
+    var userData = {
+      Username: username,
+      Pool: new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_2__.POOL_DATA)
+    };
+    var cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUser(userData);
+    console.log(authenticationDetails);
+    console.log(cognitoUser);
+    cognitoUser.authenticateUser(authenticationDetails, {
+      onSuccess: function onSuccess(result) {
+        console.log(result);
+        setLoginSuccess(true);
+
+        if (typeof loginDoneCallback === "function") {
+          loginDoneCallback();
+        }
+      },
+      onFailure: function onFailure(err) {
+        if (typeof loginFailCallback === "function") {
+          loginFailCallback(err);
+        }
+      }
+    });
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
+    console.log("either mounted or loginSuccess has triggered");
     getCurrentUser(getCurrentUserDoneCallback);
-  }, []);
+  }, [loginSuccess]);
   var context = {
     authenticated: authenticated,
     setAuthenticated: setAuthenticated,
+    loginUser: loginUser,
     userPool: userPool,
     getCurrentUser: getCurrentUser,
     token: token,
@@ -10640,6 +10680,21 @@ function LoginForm() {
       password = _useState10[0],
       setPassword = _useState10[1];
 
+  var loginDoneCallback = function loginDoneCallback() {
+    //console.log(result);
+    setShowValidation(false);
+    setShowFeedback(false);
+    spinnerContext.setShow(false); //loginContext.setAuthenticated(true);
+
+    history.push(_constants__WEBPACK_IMPORTED_MODULE_2__.MANAGE);
+  };
+
+  var loginFailCallback = function loginFailCallback(err) {
+    setFeedbackError(err.message);
+    setShowFeedback(true);
+    spinnerContext.setShow(false);
+  };
+
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
 
@@ -10648,33 +10703,34 @@ function LoginForm() {
       event.stopPropagation();
     } else {
       spinnerContext.setShow(true);
-      var authenticationData = {
-        Username: username,
-        Password: password
+      loginContext.loginUser(username, password, loginDoneCallback, loginFailCallback);
+      /*const authenticationData = {
+          Username: username,
+          Password: password,
       };
-      var authenticationDetails = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_3__.AuthenticationDetails(authenticationData);
-      var userData = {
-        Username: username,
-        Pool: new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_3__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_2__.POOL_DATA)
+       const authenticationDetails = new AuthenticationDetails(authenticationData);
+       const userData = {
+          Username: username,
+          Pool: new CognitoUserPool(POOL_DATA),
       };
-      var cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_3__.CognitoUser(userData);
-      console.log(authenticationDetails);
+       const cognitoUser = new CognitoUser(userData);
+       console.log(authenticationDetails);
       console.log(cognitoUser);
-      cognitoUser.authenticateUser(authenticationDetails, {
-        onSuccess: function onSuccess(result) {
-          console.log(result);
-          setShowValidation(false);
-          setShowFeedback(false);
-          spinnerContext.setShow(false);
-          loginContext.setAuthenticated(true);
-          history.push(_constants__WEBPACK_IMPORTED_MODULE_2__.MANAGE);
-        },
-        onFailure: function onFailure(err) {
-          setFeedbackError(err.message);
-          setShowFeedback(true);
-          spinnerContext.setShow(false);
-        }
-      });
+       cognitoUser.authenticateUser(authenticationDetails, {
+          onSuccess: function(result) {
+               console.log(result);
+               setShowValidation(false);
+              setShowFeedback(false);
+               spinnerContext.setShow(false);
+              loginContext.setAuthenticated(true);
+              history.push(MANAGE)
+          },
+          onFailure: function(err) {
+              setFeedbackError(err.message);
+              setShowFeedback(true);
+              spinnerContext.setShow(false);
+          },
+      });*/
     }
   };
 

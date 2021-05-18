@@ -59,6 +59,10 @@ export function ItemsContextProvider({ children }) {
             }
         }
 
+        console.log("idToken" + idToken)
+        console.log("request" + request)
+        console.log("payload" + payload)
+
         xhttp.open(type, request);
         xhttp.setRequestHeader("Authorization", idToken);
         xhttp.setRequestHeader("Content-type", "application/json");
