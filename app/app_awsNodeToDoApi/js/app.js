@@ -10085,7 +10085,6 @@ function ItemsContextProvider(_ref) {
 
   var createItem = function createItem(item, doneCallback) {
     item.username = loginContext.username.current;
-    delete item.id;
     XMLHttpRequestHandler({
       type: "POST",
       request: "".concat(API_ENDPOINT),
@@ -10158,21 +10157,22 @@ function LoginContextProvider(_ref) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       authenticated = _useState2[0],
-      setAuthenticated = _useState2[1];
+      setAuthenticated = _useState2[1]; //const [ loginSuccess, setLoginSuccess ] = useState(false);
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      loginSuccess = _useState4[0],
-      setLoginSuccess = _useState4[1];
 
   var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_2__.POOL_DATA);
   var token = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   var username = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
   var getCurrentUserDoneCallback = function getCurrentUserDoneCallback(currentUser) {
+    console.log("getCurrentUserDoneCallback");
     token.current = currentUser.signInUserSession.idToken.jwtToken;
     username.current = currentUser.username;
-    setAuthenticated(true);
+
+    if (!authenticated) {
+      console.log("getCurrentUserDoneCallback setAuth");
+      setAuthenticated(true);
+    }
   };
 
   var getCurrentUser = function getCurrentUser(doneCallback, failCallback) {
@@ -10185,7 +10185,7 @@ function LoginContextProvider(_ref) {
             failCallback();
           }
 
-          console.error(err.message); //setAuthenticated(false);
+          console.error(err.message);
         } else {
           if (typeof doneCallback === "function") {
             doneCallback(currentUser);
@@ -10196,7 +10196,7 @@ function LoginContextProvider(_ref) {
   };
 
   var logoutUser = function logoutUser(logoutCallback) {
-    getCurrentUser(logoutCallback);
+    return getCurrentUser(logoutCallback);
   };
 
   var loginUser = function loginUser(username, password, loginDoneCallback, loginFailCallback) {
@@ -10212,7 +10212,7 @@ function LoginContextProvider(_ref) {
     var cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUser(userData);
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function onSuccess(result) {
-        setLoginSuccess(true);
+        setAuthenticated(true);
 
         if (typeof loginDoneCallback === "function") {
           loginDoneCallback();
@@ -10229,7 +10229,7 @@ function LoginContextProvider(_ref) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
     console.log("either mounted or loginSuccess has triggered");
     getCurrentUser(getCurrentUserDoneCallback);
-  }, [loginSuccess]);
+  }, [authenticated]);
   var context = {
     authenticated: authenticated,
     setAuthenticated: setAuthenticated,
@@ -11537,7 +11537,6 @@ var POOL_DATA = {
   ClientId: '60jvm1avgd6t55k4uc15dgu6iq'
 };
 var ITEM = {
-  id: -1,
   username: "",
   description: "",
   done: false,

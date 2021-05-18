@@ -117,7 +117,6 @@ export function ItemsContextProvider({ children }) {
     const createItem = (item, doneCallback) => {
 
         item.username = loginContext.username.current;
-        delete item.id;
 
         XMLHttpRequestHandler({
             type: "POST",

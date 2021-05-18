@@ -6,7 +6,6 @@ export const POOL_DATA = {
 };
 
 export const ITEM = {
-    id: -1,
     username: "",
     description: "",
     done: false,

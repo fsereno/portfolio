@@ -2,13 +2,12 @@
 
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import { CognitoUser, AuthenticationDetails, CognitoUserPool } from 'amazon-cognito-identity-js';
-import { POOL_DATA, SUCCESS } from '../../constants';
+import { POOL_DATA } from '../../constants';
 import { LoginContext } from '../../contexts';
 
 export function LoginContextProvider({children}) {
 
     const [ authenticated, setAuthenticated ] = useState(false);
-    const [ loginSuccess, setLoginSuccess ] = useState(false);
 
     const userPool = new CognitoUserPool(POOL_DATA);
 
@@ -16,9 +15,13 @@ export function LoginContextProvider({children}) {
     const username = useRef();
 
     const getCurrentUserDoneCallback = (currentUser) => {
+        console.log("getCurrentUserDoneCallback")
         token.current = currentUser.signInUserSession.idToken.jwtToken;
         username.current = currentUser.username;
-        setAuthenticated(true);
+        if(!authenticated) {
+            console.log("getCurrentUserDoneCallback setAuth")
+            setAuthenticated(true);
+        }
     }
 
     const getCurrentUser = (doneCallback, failCallback) => {
@@ -35,7 +38,6 @@ export function LoginContextProvider({children}) {
                         failCallback();
                     }
                     console.error(err.message);
-                    //setAuthenticated(false);
 
                 } else {
 
@@ -47,9 +49,7 @@ export function LoginContextProvider({children}) {
         }
     }
 
-    const logoutUser = (logoutCallback) => {
-        getCurrentUser(logoutCallback);
-    }
+    const logoutUser = (logoutCallback) => getCurrentUser(logoutCallback);
 
     const loginUser = (username, password, loginDoneCallback, loginFailCallback) => {
 
@@ -70,7 +70,7 @@ export function LoginContextProvider({children}) {
         cognitoUser.authenticateUser(authenticationDetails, {
             onSuccess: function(result) {
 
-                setLoginSuccess(true);
+                setAuthenticated(true);
 
                 if(typeof loginDoneCallback === "function") {
                     loginDoneCallback();
@@ -87,7 +87,7 @@ export function LoginContextProvider({children}) {
     useLayoutEffect(() => {
         console.log("either mounted or loginSuccess has triggered")
         getCurrentUser(getCurrentUserDoneCallback);
-    },[loginSuccess]);
+    },[authenticated]);
 
     const context = { authenticated, setAuthenticated, loginUser, logoutUser, token, username };
 

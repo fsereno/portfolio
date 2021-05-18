@@ -25,11 +25,9 @@ export function LoginForm() {
     const [ password, setPassword ] = useState("");
 
     const loginDoneCallback = () => {
-        //console.log(result);
         setShowValidation(false);
         setShowFeedback(false);
         spinnerContext.setShow(false);
-        //loginContext.setAuthenticated(true);
         history.push(MANAGE);
     }
 

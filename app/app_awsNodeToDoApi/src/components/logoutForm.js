@@ -30,10 +30,8 @@ export function LogoutForm() {
                     }
                 },
                 onFailure: function (err) {
-
                     spinnerContext.setShow(false);
                     console.error(err.message)
-
                 },
             });
         }
