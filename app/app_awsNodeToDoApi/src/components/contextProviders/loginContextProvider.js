@@ -18,7 +18,7 @@ export function LoginContextProvider({children}) {
         console.log("getCurrentUserDoneCallback")
         token.current = currentUser.signInUserSession.idToken.jwtToken;
         username.current = currentUser.username;
-        if(!authenticated) {
+       if(!authenticated) {
             console.log("getCurrentUserDoneCallback setAuth")
             setAuthenticated(true);
         }

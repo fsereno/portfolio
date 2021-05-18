@@ -10157,8 +10157,7 @@ function LoginContextProvider(_ref) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       authenticated = _useState2[0],
-      setAuthenticated = _useState2[1]; //const [ loginSuccess, setLoginSuccess ] = useState(false);
-
+      setAuthenticated = _useState2[1];
 
   var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_2__.POOL_DATA);
   var token = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
@@ -10681,11 +10680,9 @@ function LoginForm() {
       setPassword = _useState10[1];
 
   var loginDoneCallback = function loginDoneCallback() {
-    //console.log(result);
     setShowValidation(false);
     setShowFeedback(false);
-    spinnerContext.setShow(false); //loginContext.setAuthenticated(true);
-
+    spinnerContext.setShow(false);
     history.push(_constants__WEBPACK_IMPORTED_MODULE_2__.MANAGE);
   };
 
