@@ -17,18 +17,13 @@ export function Edit() {
 
   const [ state, dispatch ] = useReducer(itemReducer, ITEM);
 
-  const populateItem = (item) => {
-      console.log(item);
-      dispatch({ type: COPY, value: item });
-  }
+  const populateItem = (item) => dispatch({ type: COPY, value: item });
 
-  const doneCallback = (response) => {
-    console.log(response);
-    history.push(MANAGE);
-  }
+  const doneCallback = () => history.push(MANAGE);
 
   useEffect( () => {
       if (itemsContext.selectedId.current) {
+          console.log("get item")
           itemsContext.getItem(populateItem);
       } else {
           history.push(MANAGE);

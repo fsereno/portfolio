@@ -22,8 +22,6 @@ export function ItemsContextProvider({ children }) {
 
     const [hasError, setHasError] = useState(false);
 
-    const hasNoItems = () => items.length === 0;
-
     const XMLHttpRequestHandler = ({ type, request, payload, doneCallback }) => {
 
         setHasError(false);
@@ -133,7 +131,6 @@ export function ItemsContextProvider({ children }) {
 
     const context = {
         items,
-        hasNoItems,
         getItems,
         deleteItem,
         getItem,

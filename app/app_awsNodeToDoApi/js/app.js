@@ -9992,10 +9992,6 @@ function ItemsContextProvider(_ref) {
       hasError = _useState4[0],
       setHasError = _useState4[1];
 
-  var hasNoItems = function hasNoItems() {
-    return items.length === 0;
-  };
-
   var XMLHttpRequestHandler = function XMLHttpRequestHandler(_ref2) {
     var type = _ref2.type,
         request = _ref2.request,
@@ -10100,7 +10096,6 @@ function ItemsContextProvider(_ref) {
 
   var context = {
     items: items,
-    hasNoItems: hasNoItems,
     getItems: getItems,
     deleteItem: deleteItem,
     getItem: getItem,
@@ -10943,20 +10938,19 @@ function Edit() {
       dispatch = _useReducer2[1];
 
   var populateItem = function populateItem(item) {
-    console.log(item);
-    dispatch({
+    return dispatch({
       type: _constants__WEBPACK_IMPORTED_MODULE_5__.COPY,
       value: item
     });
   };
 
-  var doneCallback = function doneCallback(response) {
-    console.log(response);
-    history.push(_constants__WEBPACK_IMPORTED_MODULE_5__.MANAGE);
+  var doneCallback = function doneCallback() {
+    return history.push(_constants__WEBPACK_IMPORTED_MODULE_5__.MANAGE);
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (itemsContext.selectedId.current) {
+      console.log("get item");
       itemsContext.getItem(populateItem);
     } else {
       history.push(_constants__WEBPACK_IMPORTED_MODULE_5__.MANAGE);
