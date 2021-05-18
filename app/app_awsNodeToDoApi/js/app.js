@@ -10170,9 +10170,10 @@ function LoginContextProvider(_ref) {
   var username = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
   var getCurrentUserDoneCallback = function getCurrentUserDoneCallback(currentUser) {
+    console.log("getCurrentUserDoneCallback");
     token.current = currentUser.signInUserSession.idToken.jwtToken;
     username.current = currentUser.username;
-    token.current && username.current ? setAuthenticated(true) : setAuthenticated(false);
+    setAuthenticated(true);
   };
 
   var getCurrentUser = function getCurrentUser(doneCallback, failCallback) {
@@ -10185,7 +10186,7 @@ function LoginContextProvider(_ref) {
             failCallback();
           }
 
-          console.error(err.message);
+          console.error(err.message); //setAuthenticated(false);
         } else {
           if (typeof doneCallback === "function") {
             doneCallback(currentUser);
@@ -10193,6 +10194,9 @@ function LoginContextProvider(_ref) {
         }
       });
     }
+  };
+
+  var logoutUser = function logoutUser(doneCallback, failCallback) {// needs working on
   };
 
   var loginUser = function loginUser(username, password, loginDoneCallback, loginFailCallback) {
@@ -10206,11 +10210,8 @@ function LoginContextProvider(_ref) {
       Pool: new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_2__.POOL_DATA)
     };
     var cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUser(userData);
-    console.log(authenticationDetails);
-    console.log(cognitoUser);
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function onSuccess(result) {
-        console.log(result);
         setLoginSuccess(true);
 
         if (typeof loginDoneCallback === "function") {
@@ -10233,6 +10234,7 @@ function LoginContextProvider(_ref) {
     authenticated: authenticated,
     setAuthenticated: setAuthenticated,
     loginUser: loginUser,
+    logoutUser: logoutUser,
     userPool: userPool,
     getCurrentUser: getCurrentUser,
     token: token,
@@ -10704,33 +10706,6 @@ function LoginForm() {
     } else {
       spinnerContext.setShow(true);
       loginContext.loginUser(username, password, loginDoneCallback, loginFailCallback);
-      /*const authenticationData = {
-          Username: username,
-          Password: password,
-      };
-       const authenticationDetails = new AuthenticationDetails(authenticationData);
-       const userData = {
-          Username: username,
-          Pool: new CognitoUserPool(POOL_DATA),
-      };
-       const cognitoUser = new CognitoUser(userData);
-       console.log(authenticationDetails);
-      console.log(cognitoUser);
-       cognitoUser.authenticateUser(authenticationDetails, {
-          onSuccess: function(result) {
-               console.log(result);
-               setShowValidation(false);
-              setShowFeedback(false);
-               spinnerContext.setShow(false);
-              loginContext.setAuthenticated(true);
-              history.push(MANAGE)
-          },
-          onFailure: function(err) {
-              setFeedbackError(err.message);
-              setShowFeedback(true);
-              spinnerContext.setShow(false);
-          },
-      });*/
     }
   };
 
@@ -10816,9 +10791,20 @@ function LogoutForm() {
   var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_3__.SpinnerContext);
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useHistory)();
 
+  var logoutDoneCallback = function logoutDoneCallback() {
+    spinnerContext.setShow(false);
+    history.push(_constants__WEBPACK_IMPORTED_MODULE_2__.LOGIN);
+  };
+
+  var logoutFailCallback = function logoutFailCallback(err) {
+    spinnerContext.setShow(false);
+    console.error(err.message);
+  };
+
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
-    spinnerContext.setShow(true);
+    spinnerContext.setShow(true); //loginContext.logoutUser(logoutDoneCallback, logoutFailCallback);
+
     var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_4__.CognitoUserPool(_constants__WEBPACK_IMPORTED_MODULE_2__.POOL_DATA);
     var currentUser = userPool.getCurrentUser();
 

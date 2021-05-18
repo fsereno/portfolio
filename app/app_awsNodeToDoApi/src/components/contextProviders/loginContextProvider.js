@@ -2,7 +2,7 @@
 
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import { CognitoUser, AuthenticationDetails, CognitoUserPool } from 'amazon-cognito-identity-js';
-import { POOL_DATA } from '../../constants';
+import { POOL_DATA, SUCCESS } from '../../constants';
 import { LoginContext } from '../../contexts';
 
 export function LoginContextProvider({children}) {
@@ -16,9 +16,11 @@ export function LoginContextProvider({children}) {
     const username = useRef();
 
     const getCurrentUserDoneCallback = (currentUser) => {
+        console.log("getCurrentUserDoneCallback")
+        
         token.current = currentUser.signInUserSession.idToken.jwtToken;
         username.current = currentUser.username;
-        token.current && username.current ? setAuthenticated(true) : setAuthenticated(false);
+        setAuthenticated(true);
     }
 
     const getCurrentUser = (doneCallback, failCallback) => {
@@ -35,6 +37,7 @@ export function LoginContextProvider({children}) {
                         failCallback();
                     }
                     console.error(err.message);
+                    //setAuthenticated(false);
 
                 } else {
 
@@ -44,6 +47,12 @@ export function LoginContextProvider({children}) {
                 }
             });
         }
+    }
+
+    const logoutUser = (doneCallback, failCallback) => {
+
+
+        // needs working on
     }
 
     const loginUser = (username, password, loginDoneCallback, loginFailCallback) => {
@@ -62,13 +71,8 @@ export function LoginContextProvider({children}) {
 
         const cognitoUser = new CognitoUser(userData);
 
-        console.log(authenticationDetails);
-        console.log(cognitoUser);
-
         cognitoUser.authenticateUser(authenticationDetails, {
             onSuccess: function(result) {
-
-                console.log(result);
 
                 setLoginSuccess(true);
 
@@ -89,7 +93,7 @@ export function LoginContextProvider({children}) {
         getCurrentUser(getCurrentUserDoneCallback);
     },[loginSuccess]);
 
-    const context = { authenticated, setAuthenticated, loginUser, userPool, getCurrentUser, token, username };
+    const context = { authenticated, setAuthenticated, loginUser, logoutUser, userPool, getCurrentUser, token, username };
 
     return (
         <LoginContext.Provider value={context}>

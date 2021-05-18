@@ -18,10 +18,22 @@ export function LogoutForm() {
 
     const history = useHistory();
 
+    const logoutDoneCallback = () => {
+        spinnerContext.setShow(false);
+        history.push(LOGIN);
+    }
+
+    const logoutFailCallback = (err) => {
+        spinnerContext.setShow(false);
+        console.error(err.message)
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
         spinnerContext.setShow(true);
+
+        //loginContext.logoutUser(logoutDoneCallback, logoutFailCallback);
 
         const userPool = new CognitoUserPool(POOL_DATA);
 
