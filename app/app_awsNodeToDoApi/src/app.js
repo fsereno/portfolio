@@ -13,16 +13,16 @@ function App() {
   return (
     <ConfigContextProvider app="awsNodeToDoApi">
       <ToasterContextProvider>
-        <SpinnerContextProvider>
-          <LoginContextProvider>
+        <LoginContextProvider>
+          <SpinnerContextProvider>
             <ItemsContextProvider>
               <Router />
             </ItemsContextProvider>
-          </LoginContextProvider>
-        </SpinnerContextProvider>
+          </SpinnerContextProvider>
+        </LoginContextProvider>
       </ToasterContextProvider>
     </ConfigContextProvider>
   );
 }
 
-ReactDOM.render(<App />,document.getElementById('result'));
+ReactDOM.render(<App />, document.getElementById('result'));
