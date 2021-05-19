@@ -2,13 +2,21 @@
 
 import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 import { DESCRIPTION } from '../constants';
+import { ContainerContext } from '../contexts';
+import { ContentContainer } from './contentContainer';
 
 export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
 
     const [ showValidation, setShowValidation ] = useState(false);
     const [ showFeedback, setShowFeedback ] = useState(false);
-    const [ feedbackError, setFeedbackError ] = useState("");
+    const spinnerContext = React.useContext(SpinnerContext);
+
+    const failCallback = () => {
+        spinnerContext.hideSpinner();
+        setShowFeedback(true);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -18,10 +26,9 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
             event.stopPropagation();
 
         } else {
-            console.log("do something");
 
             if (typeof submitHandler === "function") {
-                submitHandler(state, doneCallback);
+                submitHandler(state, spinnerContext.showSpinner, doneCallback, failCallback);
             }
 
             setShowValidation(false);
@@ -54,9 +61,9 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
                         <Form.Group as={Col}>
                             <Button className="float-right" id="submit" variant="dark" type="submit">Submit</Button>
                             {showFeedback &&
-                                <div className="text-danger">
-                                    {feedbackError}
-                                </div>
+                                <ContentContainer>
+                                    <h4 className="text-danger">Sorry, there was an error. Please try again.</h4>
+                                </ContentContainer>
                             }
                         </Form.Group>
                     </Form.Row>

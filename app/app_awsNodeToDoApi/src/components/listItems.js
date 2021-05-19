@@ -7,15 +7,16 @@ import { Item } from './item';
 import { Col, Row } from 'react-bootstrap';
 import { EDIT, HIDE, SHOW, COLLAPSE_STATE } from '../constants';
 import { collapseReducer } from '../reducers/collapseReducer';
+import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 
 export const ListItems = () => {
 
     const history = useHistory();
 
     const itemsContext = React.useContext(ItemsContext);
+    const spinnerContext = React.useContext(SpinnerContext);
 
     const [ version, setVersion ] = useState(0);
-
     const [ collapseRemaining, collapseRemainingDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE);
     const [ collapseDone, collapseDoneDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE);
 
@@ -34,22 +35,27 @@ export const ListItems = () => {
         history.push(EDIT);
     }
 
-    const onDoneClick = (id) => {
-        itemsContext.selectedId.current = id;
-        itemsContext.itemDone(successCallback);
-    }
+    const onDoneClick = (id) => itemsContext.itemDone(id, spinnerContext.showSpinner, successCallback, failCallback);
 
-    const onDeleteClick = (id) => {
-        itemsContext.selectedId.current = id;
-        itemsContext.deleteItem(successCallback);
-    }
+    const onDeleteClick = (id) => itemsContext.deleteItem(id, spinnerContext.showSpinner, successCallback, failCallback);
 
-    const successCallback = () => {
+    const successCallback = () => { 
+        spinnerContext.hideSpinner();
         setVersion(version + 1);
     }
 
+    const failCallback = () => {
+        spinnerContext.hideSpinner();
+        itemsContext.setShowFeedback(true);
+    }
+
+    const getItmesDoneCallback = (response) => {
+        spinnerContext.hideSpinner();
+        itemsContext.setItems(response);
+    }
+
     useEffect(() => {
-        itemsContext.getItems();
+        itemsContext.getItems(spinnerContext.showSpinner, getItmesDoneCallback, failCallback);
     }, [version]);
 
     const items = itemsContext.items.filter( x => !x.done);

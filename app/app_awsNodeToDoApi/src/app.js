@@ -14,11 +14,11 @@ function App() {
     <ConfigContextProvider app="awsNodeToDoApi">
       <ToasterContextProvider>
         <LoginContextProvider>
-          <SpinnerContextProvider>
-            <ItemsContextProvider>
+          <ItemsContextProvider>
+            <SpinnerContextProvider>
               <Router />
-            </ItemsContextProvider>
-          </SpinnerContextProvider>
+            </SpinnerContextProvider>
+          </ItemsContextProvider>
         </LoginContextProvider>
       </ToasterContextProvider>
     </ConfigContextProvider>

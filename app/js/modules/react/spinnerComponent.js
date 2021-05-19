@@ -29,7 +29,11 @@ export function SpinnerContextProvider({children}) {
 
     const [ show, setShow ] = useState(false);
 
-    const context = { show, setShow }
+    const showSpinner = () => setShow(true);
+
+    const hideSpinner = () => setShow(false);
+
+    const context = { show, setShow, showSpinner, hideSpinner}
 
     return (
         <SpinnerContext.Provider value={context}>

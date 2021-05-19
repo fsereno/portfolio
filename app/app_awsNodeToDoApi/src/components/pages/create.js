@@ -17,10 +17,7 @@ export function Create() {
 
   const [ state, dispatch ] = useReducer(itemReducer, ITEM);
 
-  const doneCallback = (response) => {
-    console.log(response);
-    history.push(MANAGE);
-  }
+  const doneCallback = () => history.push(MANAGE);
 
   return (
     <ContentContainer>

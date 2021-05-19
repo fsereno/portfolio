@@ -9949,10 +9949,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var _js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../js/modules/react/configContextProvider */ "../js/modules/react/configContextProvider.js");
-/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
-/* harmony import */ var _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../js/modules/utils/XMLHttpRequestUtil */ "../js/modules/utils/XMLHttpRequestUtil.js");
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
-/* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../contentContainer */ "./src/components/contentContainer.js");
+/* harmony import */ var _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../js/modules/utils/XMLHttpRequestUtil */ "../js/modules/utils/XMLHttpRequestUtil.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
+/* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contentContainer */ "./src/components/contentContainer.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -9972,12 +9971,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 function ItemsContextProvider(_ref) {
   var children = _ref.children;
   var configContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_1__.ConfigContext);
-  var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_2__.SpinnerContext);
-  var loginContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_4__.LoginContext);
+  var loginContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__.LoginContext);
   var endpoints = configContext.appConfig.endpoints;
   var API_ENDPOINT = "".concat(endpoints.base, "/").concat(endpoints.api);
   var selectedId = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
@@ -9989,124 +9986,105 @@ function ItemsContextProvider(_ref) {
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      hasError = _useState4[0],
-      setHasError = _useState4[1];
+      showFeedback = _useState4[0],
+      setShowFeedback = _useState4[1];
 
-  var XMLHttpRequestHandler = function XMLHttpRequestHandler(_ref2) {
-    var type = _ref2.type,
-        request = _ref2.request,
-        payload = _ref2.payload,
-        doneCallback = _ref2.doneCallback;
-    setHasError(false);
-    spinnerContext.setShow(true);
-    var idToken = loginContext.token.current;
-    var xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function (result) {
-      var data = result.currentTarget;
-
-      if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__.XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
-        var response;
-
-        try {
-          response = JSON.parse(data.response);
-        } catch (error) {
-          response = {};
-        }
-
-        if (typeof doneCallback === "function") {
-          doneCallback(response);
-        }
-
-        spinnerContext.setShow(false);
-      } else if (_js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_3__.XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
-        failCallback(data);
-        spinnerContext.setShow(false);
-      }
-    };
-
-    console.log("idToken" + idToken);
-    console.log("request" + request);
-    console.log("payload" + payload);
-    xhttp.open(type, request);
-    xhttp.setRequestHeader("Authorization", idToken);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(payload);
-  };
-
-  var deleteItem = function deleteItem(successCallback) {
-    XMLHttpRequestHandler({
-      type: "DELETE",
-      request: "".concat(API_ENDPOINT, "/").concat(selectedId.current),
-      doneCallback: successCallback
-    });
-  };
-
-  var getItems = function getItems() {
-    XMLHttpRequestHandler({
+  var getItems = function getItems(beforeCallback, doneCallback, failCallback) {
+    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "GET",
       request: API_ENDPOINT,
-      doneCallback: getItemsDoneCallback
+      beforeCallback: beforeCallback,
+      doneCallback: doneCallback,
+      failCallback: failCallback,
+      headers: [{
+        key: "Authorization",
+        value: loginContext.token.current
+      }]
     });
   };
 
-  var getItem = function getItem(doneCallback) {
-    XMLHttpRequestHandler({
+  var getItem = function getItem(beforeCallback, doneCallback, failCallback) {
+    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "GET",
       request: "".concat(API_ENDPOINT, "/").concat(selectedId.current),
-      doneCallback: doneCallback
+      beforeCallback: beforeCallback,
+      doneCallback: doneCallback,
+      failCallback: failCallback,
+      headers: [{
+        key: "Authorization",
+        value: loginContext.token.current
+      }]
     });
   };
 
-  var getItemsDoneCallback = function getItemsDoneCallback(response) {
-    return setItems(response);
+  var deleteItem = function deleteItem(id, beforeCallback, doneCallback, failCallback) {
+    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
+      type: "DELETE",
+      request: "".concat(API_ENDPOINT, "/").concat(id),
+      beforeCallback: beforeCallback,
+      doneCallback: doneCallback,
+      failCallback: failCallback,
+      headers: [{
+        key: "Authorization",
+        value: loginContext.token.current
+      }]
+    });
   };
 
-  var updateItem = function updateItem(item, doneCallback) {
-    XMLHttpRequestHandler({
+  var updateItem = function updateItem(item, beforeCallback, doneCallback, failCallback) {
+    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "PUT",
       request: "".concat(API_ENDPOINT, "/").concat(selectedId.current),
       payload: JSON.stringify(item),
-      doneCallback: doneCallback
+      beforeCallback: beforeCallback,
+      doneCallback: doneCallback,
+      failCallback: failCallback,
+      headers: [{
+        key: "Authorization",
+        value: loginContext.token.current
+      }]
     });
   };
 
-  var itemDone = function itemDone(successCallback) {
+  var itemDone = function itemDone(id, beforeCallback, doneCallback, failCallback) {
     var item = items.filter(function (x) {
-      return x.id === selectedId.current;
+      return x.id === id;
     })[0];
     item.done = true;
-    updateItem(item, successCallback);
+    updateItem(item, beforeCallback, doneCallback, failCallback);
   };
 
-  var createItem = function createItem(item, doneCallback) {
+  var createItem = function createItem(item, beforeCallback, doneCallback, failCallback) {
     item.username = loginContext.username.current;
-    XMLHttpRequestHandler({
+    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "POST",
       request: "".concat(API_ENDPOINT),
       payload: JSON.stringify(item),
-      doneCallback: doneCallback
+      beforeCallback: beforeCallback,
+      doneCallback: doneCallback,
+      failCallback: failCallback,
+      headers: [{
+        key: "Authorization",
+        value: loginContext.token.current
+      }]
     });
-  };
-
-  var failCallback = function failCallback(data) {
-    console.log(data);
-    setHasError(true);
   };
 
   var context = {
     items: items,
+    setItems: setItems,
     getItems: getItems,
     deleteItem: deleteItem,
     getItem: getItem,
     selectedId: selectedId,
     updateItem: updateItem,
     itemDone: itemDone,
-    createItem: createItem
+    createItem: createItem,
+    setShowFeedback: setShowFeedback
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_4__.ItemsContext.Provider, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_3__.ItemsContext.Provider, {
     value: context
-  }, children, hasError && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_5__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+  }, children, showFeedback && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_4__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
     className: "text-danger"
   }, "Sorry, there was an error. Please try again.")));
 }
@@ -10347,11 +10325,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ItemForm": () => (/* binding */ ItemForm)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Form.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Form.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
+/* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contentContainer */ "./src/components/contentContainer.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -10365,6 +10346,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 
 
@@ -10385,10 +10369,12 @@ var ItemForm = function ItemForm(_ref) {
       showFeedback = _useState4[0],
       setShowFeedback = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
-      _useState6 = _slicedToArray(_useState5, 2),
-      feedbackError = _useState6[0],
-      setFeedbackError = _useState6[1];
+  var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_1__.SpinnerContext);
+
+  var failCallback = function failCallback() {
+    spinnerContext.hideSpinner();
+    setShowFeedback(true);
+  };
 
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
@@ -10397,48 +10383,46 @@ var ItemForm = function ItemForm(_ref) {
       setShowValidation(true);
       event.stopPropagation();
     } else {
-      console.log("do something");
-
       if (typeof submitHandler === "function") {
-        submitHandler(state, doneCallback);
+        submitHandler(state, spinnerContext.showSpinner, doneCallback, failCallback);
       }
 
       setShowValidation(false);
     }
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
     lg: 4
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
     noValidate: true,
     validated: showValidation,
     onSubmit: handleSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Group, {
-    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Label, null, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Control, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Group, {
+    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Label, null, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Control, {
     name: "description",
     id: "description",
     type: "text",
     value: state.description,
     onChange: function onChange(event) {
       return dispatch({
-        type: _constants__WEBPACK_IMPORTED_MODULE_1__.DESCRIPTION,
+        type: _constants__WEBPACK_IMPORTED_MODULE_2__.DESCRIPTION,
         value: event.target.value
       });
     },
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Control.Feedback, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Control.Feedback, {
     type: "invalid"
-  }, "Please enter a value."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Group, {
-    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
+  }, "Please enter a value."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Group, {
+    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     className: "float-right",
     id: "submit",
     variant: "dark",
     type: "submit"
-  }, "Submit"), showFeedback && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, "Submit"), showFeedback && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_4__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
     className: "text-danger"
-  }, feedbackError))))));
+  }, "Sorry, there was an error. Please try again.")))))));
 };
 
 /***/ }),
@@ -10455,13 +10439,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ListItems": () => (/* binding */ ListItems)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
 /* harmony import */ var _item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./item */ "./src/components/item.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
 /* harmony import */ var _reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/collapseReducer */ "./src/reducers/collapseReducer.js");
+/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -10483,9 +10468,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var ListItems = function ListItems() {
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useHistory)();
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useHistory)();
   var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_1__.ItemsContext);
+  var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_5__.SpinnerContext);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
@@ -10526,21 +10513,30 @@ var ListItems = function ListItems() {
   };
 
   var onDoneClick = function onDoneClick(id) {
-    itemsContext.selectedId.current = id;
-    itemsContext.itemDone(successCallback);
+    return itemsContext.itemDone(id, spinnerContext.showSpinner, successCallback, failCallback);
   };
 
   var onDeleteClick = function onDeleteClick(id) {
-    itemsContext.selectedId.current = id;
-    itemsContext.deleteItem(successCallback);
+    return itemsContext.deleteItem(id, spinnerContext.showSpinner, successCallback, failCallback);
   };
 
   var successCallback = function successCallback() {
+    spinnerContext.hideSpinner();
     setVersion(version + 1);
   };
 
+  var failCallback = function failCallback() {
+    spinnerContext.hideSpinner();
+    itemsContext.setShowFeedback(true);
+  };
+
+  var getItmesDoneCallback = function getItmesDoneCallback(response) {
+    spinnerContext.hideSpinner();
+    itemsContext.setItems(response);
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    itemsContext.getItems();
+    itemsContext.getItems(spinnerContext.showSpinner, getItmesDoneCallback, failCallback);
   }, [version]);
   var items = itemsContext.items.filter(function (x) {
     return !x.done;
@@ -10548,13 +10544,13 @@ var ListItems = function ListItems() {
   var doneItems = itemsContext.items.filter(function (x) {
     return x.done;
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, items.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, items.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
     className: "justify-content-md-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     lg: 10
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "You have no items"))), items.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "You have no items"))), items.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
     className: "justify-content-md-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     lg: 10
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Remaining items ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     className: "float-right text-dark",
@@ -10572,9 +10568,9 @@ var ListItems = function ListItems() {
       onDeleteClick: onDeleteClick,
       onEditClick: onEditClick
     });
-  })))), doneItems.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
+  })))), doneItems.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
     className: "justify-content-md-center mt-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     lg: 10
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Completed items ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     className: "float-right text-dark",
@@ -10865,9 +10861,8 @@ function Create() {
       state = _useReducer2[0],
       dispatch = _useReducer2[1];
 
-  var doneCallback = function doneCallback(response) {
-    console.log(response);
-    history.push(_constants__WEBPACK_IMPORTED_MODULE_4__.MANAGE);
+  var doneCallback = function doneCallback() {
+    return history.push(_constants__WEBPACK_IMPORTED_MODULE_4__.MANAGE);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_1__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_content__WEBPACK_IMPORTED_MODULE_2__.Content, {
@@ -10897,10 +10892,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contentContainer */ "./src/components/contentContainer.js");
 /* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../content */ "./src/components/content.js");
 /* harmony import */ var _itemForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../itemForm */ "./src/components/itemForm.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
 /* harmony import */ var _reducers_itemReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../reducers/itemReducer */ "./src/reducers/itemReducer.js");
+/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -10923,9 +10919,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function Edit() {
   var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_4__.ItemsContext);
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
+  var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_7__.SpinnerContext);
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useHistory)();
 
   var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_itemReducer__WEBPACK_IMPORTED_MODULE_6__.itemReducer, _constants__WEBPACK_IMPORTED_MODULE_5__.ITEM),
       _useReducer2 = _slicedToArray(_useReducer, 2),
@@ -10933,7 +10931,8 @@ function Edit() {
       dispatch = _useReducer2[1];
 
   var populateItem = function populateItem(item) {
-    return dispatch({
+    spinnerContext.hideSpinner();
+    dispatch({
       type: _constants__WEBPACK_IMPORTED_MODULE_5__.COPY,
       value: item
     });
@@ -10943,9 +10942,13 @@ function Edit() {
     return history.push(_constants__WEBPACK_IMPORTED_MODULE_5__.MANAGE);
   };
 
+  var failCallback = function failCallback() {
+    return spinnerContext.hideSpinner();
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (itemsContext.selectedId.current) {
-      itemsContext.getItem(populateItem);
+      itemsContext.getItem(spinnerContext.showSpinner, populateItem, failCallback);
     } else {
       history.push(_constants__WEBPACK_IMPORTED_MODULE_5__.MANAGE);
     }
@@ -11754,7 +11757,7 @@ function RecaptchaContextProvider(_ref) {
     xhttp.onreadystatechange = function (result) {
       var data = result.currentTarget;
 
-      if (_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
+      if (_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.isDone(data.status, data.readyState)) {
         var grecaptchaResponse = JSON.parse(data.response);
 
         if (grecaptchaResponse.result.success) {
@@ -11766,7 +11769,7 @@ function RecaptchaContextProvider(_ref) {
             failCallback();
           }
         }
-      } else if (_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
+      } else if (_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.isFail(data.status, data.readyState)) {
         if (typeof failCallback === "function") {
           failCallback();
         }
@@ -11855,9 +11858,19 @@ function SpinnerContextProvider(_ref) {
       show = _useState2[0],
       setShow = _useState2[1];
 
+  var showSpinner = function showSpinner() {
+    return setShow(true);
+  };
+
+  var hideSpinner = function hideSpinner() {
+    return setShow(false);
+  };
+
   var context = {
     show: show,
-    setShow: setShow
+    setShow: setShow,
+    showSpinner: showSpinner,
+    hideSpinner: hideSpinner
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(SpinnerContext.Provider, {
     value: context
@@ -12069,7 +12082,7 @@ function Toast(props) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "XmlHttpRequestUtil": () => (/* binding */ XmlHttpRequestUtil)
+/* harmony export */   "XMLHttpRequestUtil": () => (/* binding */ XMLHttpRequestUtil)
 /* harmony export */ });
 "use strict;";
 
@@ -12079,12 +12092,12 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var XmlHttpRequestUtil = /*#__PURE__*/function () {
-  function XmlHttpRequestUtil() {
-    _classCallCheck(this, XmlHttpRequestUtil);
+var XMLHttpRequestUtil = /*#__PURE__*/function () {
+  function XMLHttpRequestUtil() {
+    _classCallCheck(this, XMLHttpRequestUtil);
   }
 
-  _createClass(XmlHttpRequestUtil, null, [{
+  _createClass(XMLHttpRequestUtil, null, [{
     key: "isDone",
     value: function isDone() {
       var status = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
@@ -12098,9 +12111,61 @@ var XmlHttpRequestUtil = /*#__PURE__*/function () {
       var readyState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       return status !== 200 && readyState === 4;
     }
+  }, {
+    key: "request",
+    value: function request(_ref) {
+      var _this = this;
+
+      var type = _ref.type,
+          _request = _ref.request,
+          payload = _ref.payload,
+          beforeCallback = _ref.beforeCallback,
+          doneCallback = _ref.doneCallback,
+          failCallback = _ref.failCallback,
+          headers = _ref.headers;
+
+      if (typeof beforeCallback === "function") {
+        beforeCallback();
+      }
+
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function (result) {
+        var data = result.currentTarget;
+
+        if (_this.isDone(data.status, data.readyState)) {
+          var response;
+
+          try {
+            response = JSON.parse(data.response);
+          } catch (error) {
+            response = {};
+          }
+
+          if (typeof doneCallback === "function") {
+            doneCallback(response);
+          }
+        } else if (_this.isFail(data.status, data.readyState)) {
+          if (typeof failCallback === "function") {
+            failCallback(data);
+          }
+        }
+      };
+
+      xhttp.open(type, _request);
+
+      if (headers.length > 0) {
+        for (var i = 0; i < headers.length; i++) {
+          xhttp.setRequestHeader(headers[i].key, headers[i].value);
+        }
+      }
+
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(payload);
+    }
   }]);
 
-  return XmlHttpRequestUtil;
+  return XMLHttpRequestUtil;
 }();
 
 /***/ }),
@@ -53047,7 +53112,7 @@ __webpack_require__.r(__webpack_exports__);
 function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_6__.ConfigContextProvider, {
     app: "awsNodeToDoApi"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_js_modules_react_toasterComponent__WEBPACK_IMPORTED_MODULE_5__.ToasterContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_contextProviders_loginContextProvider__WEBPACK_IMPORTED_MODULE_3__.LoginContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_4__.SpinnerContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_contextProviders_itemsContextProvider__WEBPACK_IMPORTED_MODULE_7__.ItemsContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__.Router, null))))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_js_modules_react_toasterComponent__WEBPACK_IMPORTED_MODULE_5__.ToasterContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_contextProviders_loginContextProvider__WEBPACK_IMPORTED_MODULE_3__.LoginContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_contextProviders_itemsContextProvider__WEBPACK_IMPORTED_MODULE_7__.ItemsContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_4__.SpinnerContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__.Router, null))))));
 }
 
 react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(App, null), document.getElementById('result'));

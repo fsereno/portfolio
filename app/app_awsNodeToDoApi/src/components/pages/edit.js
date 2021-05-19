@@ -8,22 +8,29 @@ import { useHistory } from 'react-router-dom';
 import { ItemsContext } from '../../contexts';
 import { COPY, ITEM, MANAGE } from '../../constants';
 import { itemReducer } from '../../reducers/itemReducer';
+import { SpinnerContext } from '../../../../js/modules/react/spinnerComponent';
 
 export function Edit() {
 
   const itemsContext = React.useContext(ItemsContext);
+  const spinnerContext = React.useContext(SpinnerContext);
 
   const history = useHistory();
 
   const [ state, dispatch ] = useReducer(itemReducer, ITEM);
 
-  const populateItem = (item) => dispatch({ type: COPY, value: item });
+  const populateItem = (item) => {
+    spinnerContext.hideSpinner();
+    dispatch({ type: COPY, value: item })
+  };
 
   const doneCallback = () => history.push(MANAGE);
 
+  const failCallback = () => spinnerContext.hideSpinner();
+
   useEffect( () => {
       if (itemsContext.selectedId.current) {
-          itemsContext.getItem(populateItem);
+          itemsContext.getItem(spinnerContext.showSpinner, populateItem, failCallback);
       } else {
           history.push(MANAGE);
       }

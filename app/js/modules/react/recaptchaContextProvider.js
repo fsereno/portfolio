@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { ConfigUtil } from '../utils/configUtil';
-import { XmlHttpRequestUtil } from '../utils/XMLHttpRequestUtil';
+import { XMLHttpRequestUtil } from '../utils/XMLHttpRequestUtil';
 
 export const RecaptchaContext = React.createContext();
 
@@ -30,7 +30,7 @@ export function RecaptchaContextProvider({children}) {
 
             const data = result.currentTarget;
 
-            if (XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
+            if (XMLHttpRequestUtil.isDone(data.status, data.readyState)) {
 
                 const grecaptchaResponse = JSON.parse(data.response);
 
@@ -43,7 +43,7 @@ export function RecaptchaContextProvider({children}) {
                         failCallback();
                     }
                 }
-            } else if (XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
+            } else if (XMLHttpRequestUtil.isFail(data.status, data.readyState)) {
                 if (typeof failCallback === "function") {
                     failCallback();
                 }

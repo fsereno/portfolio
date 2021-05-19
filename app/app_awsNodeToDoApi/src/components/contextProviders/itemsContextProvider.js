@@ -2,15 +2,13 @@
 
 import React, { useState, useRef } from 'react';
 import { ConfigContext } from '../../../../js/modules/react/configContextProvider';
-import { SpinnerContext } from '../../../../js/modules/react/spinnerComponent';
-import { XmlHttpRequestUtil } from '../../../../js/modules/utils/XMLHttpRequestUtil';
+import { XMLHttpRequestUtil } from '../../../../js/modules/utils/XMLHttpRequestUtil';
 import { ItemsContext, LoginContext } from '../../contexts';
 import { ContentContainer } from '../contentContainer';
 
 export function ItemsContextProvider({ children }) {
 
     const configContext = React.useContext(ConfigContext);
-    const spinnerContext = React.useContext(SpinnerContext);
     const loginContext = React.useContext(LoginContext);
 
     const endpoints = configContext.appConfig.endpoints;
@@ -19,131 +17,95 @@ export function ItemsContextProvider({ children }) {
     const selectedId = useRef();
 
     const [items, setItems] = useState([]);
+    const [showFeedback, setShowFeedback] = useState(false);
 
-    const [hasError, setHasError] = useState(false);
+    const getItems = (beforeCallback, doneCallback, failCallback) => {
 
-    const XMLHttpRequestHandler = ({ type, request, payload, doneCallback }) => {
-
-        setHasError(false);
-
-        spinnerContext.setShow(true);
-
-        const idToken = loginContext.token.current;
-
-        const xhttp = new XMLHttpRequest();
-
-        xhttp.onreadystatechange = (result) => {
-
-            const data = result.currentTarget;
-
-            if (XmlHttpRequestUtil.isDone(data.status, data.readyState)) {
-
-                let response;
-
-                try {
-                    response = JSON.parse(data.response);
-                } catch (error) {
-                    response = {};
-                }
-
-                if (typeof doneCallback === "function") {
-                    doneCallback(response);
-                }
-                spinnerContext.setShow(false);
-            } else if (XmlHttpRequestUtil.isFail(data.status, data.readyState)) {
-
-                failCallback(data);
-                spinnerContext.setShow(false);
-            }
-        }
-
-        console.log("idToken" + idToken)
-        console.log("request" + request)
-        console.log("payload" + payload)
-
-        xhttp.open(type, request);
-        xhttp.setRequestHeader("Authorization", idToken);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(payload);
-    }
-
-    const deleteItem = (successCallback) => {
-
-        XMLHttpRequestHandler({
-            type: "DELETE",
-            request: `${API_ENDPOINT}/${selectedId.current}`,
-            doneCallback: successCallback
-        });
-    }
-
-    const getItems = () => {
-
-        XMLHttpRequestHandler({
+        XMLHttpRequestUtil.request({
             type: "GET",
             request: API_ENDPOINT,
-            doneCallback: getItemsDoneCallback
+            beforeCallback,
+            doneCallback,
+            failCallback,
+            headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
     }
 
-    const getItem = (doneCallback) => {
+    const getItem = (beforeCallback, doneCallback, failCallback) => {
 
-        XMLHttpRequestHandler({
+        XMLHttpRequestUtil.request({
             type: "GET",
             request: `${API_ENDPOINT}/${selectedId.current}`,
-            doneCallback
+            beforeCallback,
+            doneCallback,
+            failCallback,
+            headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
     }
 
-    const getItemsDoneCallback = (response) => setItems(response);
+    const deleteItem = (id, beforeCallback, doneCallback, failCallback) => {
 
-    const updateItem = (item, doneCallback) => {
+        XMLHttpRequestUtil.request({
+            type: "DELETE",
+            request: `${API_ENDPOINT}/${id}`,
+            beforeCallback,
+            doneCallback,
+            failCallback,
+            headers: [{ key: "Authorization", value: loginContext.token.current }]
+        });
+    }
 
-        XMLHttpRequestHandler({
+    const updateItem = (item, beforeCallback, doneCallback, failCallback) => {
+
+        XMLHttpRequestUtil.request({
             type: "PUT",
             request: `${API_ENDPOINT}/${selectedId.current}`,
             payload: JSON.stringify(item),
-            doneCallback
+            beforeCallback,
+            doneCallback,
+            failCallback,
+            headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
     }
 
-    const itemDone = (successCallback) => {
-        const item = items.filter( x => x.id === selectedId.current)[0];
+    const itemDone = (id, beforeCallback, doneCallback, failCallback) => {
+        const item = items.filter( x => x.id === id)[0];
         item.done = true;
-        updateItem(item, successCallback);
+        updateItem(item, beforeCallback, doneCallback, failCallback);
     }
 
-    const createItem = (item, doneCallback) => {
+    const createItem = (item, beforeCallback, doneCallback, failCallback) => {
 
         item.username = loginContext.username.current;
 
-        XMLHttpRequestHandler({
+        XMLHttpRequestUtil.request({
             type: "POST",
             request: `${API_ENDPOINT}`,
             payload: JSON.stringify(item),
-            doneCallback
+            beforeCallback,
+            doneCallback,
+            failCallback,
+            headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
-    }
-
-    const failCallback = (data) => {
-        console.log(data)
-        setHasError(true);
     }
 
     const context = {
         items,
+        setItems,
         getItems,
         deleteItem,
         getItem,
         selectedId,
         updateItem,
         itemDone,
-        createItem
+        createItem,
+        setShowFeedback
     };
 
     return (
         <ItemsContext.Provider value={context}>
             {children}
-            {hasError &&
+            {showFeedback &&
                 <ContentContainer>
                     <h4 className="text-danger">Sorry, there was an error. Please try again.</h4>
                 </ContentContainer>
