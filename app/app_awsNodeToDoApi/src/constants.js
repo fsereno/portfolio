@@ -12,8 +12,14 @@ export const ITEM = {
     targetDate: ""
 }
 
-export const COLLAPSE_STATE = {
+export const COLLAPSE_STATE_SHOW = {
     show: true,
+    text: "Hide",
+    class: "bi-dash-square"
+};
+
+export const COLLAPSE_STATE_HIDE = {
+    show: false,
     text: "Show",
     class: "bi-plus-square"
 };

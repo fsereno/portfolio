@@ -1,6 +1,6 @@
 "use strict;"
 
-import React, { useState } from 'react';
+import React from 'react';
 import { ContentContainer } from '../contentContainer';
 import { Content } from '../content';
 import { ListItems } from '../listItems';

@@ -9954,6 +9954,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../contentContainer */ "./src/components/contentContainer.js");
 "use strict;";
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -9989,85 +9995,75 @@ function ItemsContextProvider(_ref) {
       showFeedback = _useState4[0],
       setShowFeedback = _useState4[1];
 
-  var getItems = function getItems(beforeCallback, doneCallback, failCallback) {
-    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
+  var getItems = function getItems(requestObject) {
+    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request(_objectSpread(_objectSpread({}, requestObject), {}, {
       type: "GET",
       request: API_ENDPOINT,
-      beforeCallback: beforeCallback,
-      doneCallback: doneCallback,
-      failCallback: failCallback,
       headers: [{
         key: "Authorization",
         value: loginContext.token.current
       }]
-    });
+    }));
   };
 
-  var getItem = function getItem(beforeCallback, doneCallback, failCallback) {
-    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
+  var getItem = function getItem(requestObject) {
+    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request(_objectSpread(_objectSpread({}, requestObject), {}, {
       type: "GET",
       request: "".concat(API_ENDPOINT, "/").concat(selectedId.current),
-      beforeCallback: beforeCallback,
-      doneCallback: doneCallback,
-      failCallback: failCallback,
       headers: [{
         key: "Authorization",
         value: loginContext.token.current
       }]
-    });
+    }));
   };
 
-  var deleteItem = function deleteItem(id, beforeCallback, doneCallback, failCallback) {
-    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
+  var deleteItem = function deleteItem(requestObject) {
+    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request(_objectSpread(_objectSpread({}, requestObject), {}, {
       type: "DELETE",
-      request: "".concat(API_ENDPOINT, "/").concat(id),
-      beforeCallback: beforeCallback,
-      doneCallback: doneCallback,
-      failCallback: failCallback,
+      request: "".concat(API_ENDPOINT, "/").concat(requestObject.id),
       headers: [{
         key: "Authorization",
         value: loginContext.token.current
       }]
-    });
+    }));
   };
 
-  var updateItem = function updateItem(item, beforeCallback, doneCallback, failCallback) {
-    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
+  var itemDone = function itemDone(requestObject) {
+    var item = items.filter(function (x) {
+      return x.id === requestObject.id;
+    })[0];
+
+    var doneItem = _objectSpread({}, item);
+
+    doneItem.done = true;
+    updateItem(doneItem, requestObject);
+  };
+
+  var updateItem = function updateItem(item, requestObject) {
+    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request(_objectSpread(_objectSpread({}, requestObject), {}, {
       type: "PUT",
       request: "".concat(API_ENDPOINT, "/").concat(selectedId.current),
       payload: JSON.stringify(item),
-      beforeCallback: beforeCallback,
-      doneCallback: doneCallback,
-      failCallback: failCallback,
       headers: [{
         key: "Authorization",
         value: loginContext.token.current
       }]
-    });
+    }));
   };
 
-  var itemDone = function itemDone(id, beforeCallback, doneCallback, failCallback) {
-    var item = items.filter(function (x) {
-      return x.id === id;
-    })[0];
-    item.done = true;
-    updateItem(item, beforeCallback, doneCallback, failCallback);
-  };
+  var createItem = function createItem(item, requestObject) {
+    var newItem = _objectSpread({}, item);
 
-  var createItem = function createItem(item, beforeCallback, doneCallback, failCallback) {
-    item.username = loginContext.username.current;
-    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
+    newItem.username = loginContext.username.current;
+    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request(_objectSpread(_objectSpread({}, requestObject), {}, {
       type: "POST",
-      request: "".concat(API_ENDPOINT),
-      payload: JSON.stringify(item),
-      beforeCallback: beforeCallback,
-      doneCallback: doneCallback,
-      failCallback: failCallback,
+      request: API_ENDPOINT,
+      payload: JSON.stringify(newItem),
       headers: [{
         key: "Authorization",
         value: loginContext.token.current
       }]
-    });
+    }));
   };
 
   var context = {
@@ -10325,14 +10321,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ItemForm": () => (/* binding */ ItemForm)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Form.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Form.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Button.js");
 /* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
-/* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contentContainer */ "./src/components/contentContainer.js");
+/* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contentContainer */ "./src/components/contentContainer.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -10346,7 +10341,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -10384,22 +10378,26 @@ var ItemForm = function ItemForm(_ref) {
       event.stopPropagation();
     } else {
       if (typeof submitHandler === "function") {
-        submitHandler(state, spinnerContext.showSpinner, doneCallback, failCallback);
+        submitHandler(state, {
+          beforeCallback: spinnerContext.showSpinner,
+          doneCallback: doneCallback,
+          failCallback: failCallback
+        });
       }
 
       setShowValidation(false);
     }
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
     lg: 4
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
     noValidate: true,
     validated: showValidation,
     onSubmit: handleSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Group, {
-    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Label, null, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Control, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Group, {
+    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Label, null, "Description:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Control, {
     name: "description",
     id: "description",
     type: "text",
@@ -10411,16 +10409,16 @@ var ItemForm = function ItemForm(_ref) {
       });
     },
     required: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Control.Feedback, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Control.Feedback, {
     type: "invalid"
-  }, "Please enter a value."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Group, {
-    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
+  }, "Please enter a value."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Group, {
+    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
     className: "float-right",
     id: "submit",
     variant: "dark",
     type: "submit"
-  }, "Submit"), showFeedback && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_4__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+  }, "Submit"), showFeedback && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_3__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
     className: "text-danger"
   }, "Sorry, there was an error. Please try again.")))))));
 };
@@ -10479,12 +10477,12 @@ var ListItems = function ListItems() {
       version = _useState2[0],
       setVersion = _useState2[1];
 
-  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__.collapseReducer, _constants__WEBPACK_IMPORTED_MODULE_3__.COLLAPSE_STATE),
+  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__.collapseReducer, _constants__WEBPACK_IMPORTED_MODULE_3__.COLLAPSE_STATE_SHOW),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       collapseRemaining = _useReducer2[0],
       collapseRemainingDistpach = _useReducer2[1];
 
-  var _useReducer3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__.collapseReducer, _constants__WEBPACK_IMPORTED_MODULE_3__.COLLAPSE_STATE),
+  var _useReducer3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__.collapseReducer, _constants__WEBPACK_IMPORTED_MODULE_3__.COLLAPSE_STATE_HIDE),
       _useReducer4 = _slicedToArray(_useReducer3, 2),
       collapseDone = _useReducer4[0],
       collapseDoneDistpach = _useReducer4[1];
@@ -10513,14 +10511,24 @@ var ListItems = function ListItems() {
   };
 
   var onDoneClick = function onDoneClick(id) {
-    return itemsContext.itemDone(id, spinnerContext.showSpinner, successCallback, failCallback);
+    return itemsContext.itemDone({
+      id: id,
+      beforeCallback: spinnerContext.showSpinner,
+      doneCallback: doneCallback,
+      failCallback: failCallback
+    });
   };
 
   var onDeleteClick = function onDeleteClick(id) {
-    return itemsContext.deleteItem(id, spinnerContext.showSpinner, successCallback, failCallback);
+    return itemsContext.deleteItem({
+      id: id,
+      beforeCallback: spinnerContext.showSpinner,
+      doneCallback: doneCallback,
+      failCallback: failCallback
+    });
   };
 
-  var successCallback = function successCallback() {
+  var doneCallback = function doneCallback() {
     spinnerContext.hideSpinner();
     setVersion(version + 1);
   };
@@ -10536,7 +10544,11 @@ var ListItems = function ListItems() {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    itemsContext.getItems(spinnerContext.showSpinner, getItmesDoneCallback, failCallback);
+    itemsContext.getItems({
+      beforeCallback: spinnerContext.showSpinner,
+      doneCallback: getItmesDoneCallback,
+      failCallback: failCallback
+    });
   }, [version]);
   var items = itemsContext.items.filter(function (x) {
     return !x.done;
@@ -10558,7 +10570,9 @@ var ListItems = function ListItems() {
     onClick: onHideRemainingClick
   }, collapseRemaining.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "bi ".concat(collapseRemaining["class"], " mx-2")
-  }))), collapseRemaining.show && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", {
+    className: "border-dark"
+  }), collapseRemaining.show && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     className: "list-group"
   }, items.map(function (x) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_item__WEBPACK_IMPORTED_MODULE_2__.Item, {
@@ -10578,7 +10592,9 @@ var ListItems = function ListItems() {
     onClick: onHideDoneClick
   }, collapseDone.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "bi ".concat(collapseDone["class"], " mx-2")
-  }))), collapseDone.show && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", {
+    className: "border-dark"
+  }), collapseDone.show && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     className: "list-group"
   }, doneItems.map(function (x) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_item__WEBPACK_IMPORTED_MODULE_2__.Item, {
@@ -10948,7 +10964,11 @@ function Edit() {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (itemsContext.selectedId.current) {
-      itemsContext.getItem(spinnerContext.showSpinner, populateItem, failCallback);
+      itemsContext.getItem({
+        beforeCallback: spinnerContext.showSpinner,
+        doneCallback: populateItem,
+        failCallback: failCallback
+      });
     } else {
       history.push(_constants__WEBPACK_IMPORTED_MODULE_5__.MANAGE);
     }
@@ -11499,7 +11519,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "POOL_DATA": () => (/* binding */ POOL_DATA),
 /* harmony export */   "ITEM": () => (/* binding */ ITEM),
-/* harmony export */   "COLLAPSE_STATE": () => (/* binding */ COLLAPSE_STATE),
+/* harmony export */   "COLLAPSE_STATE_SHOW": () => (/* binding */ COLLAPSE_STATE_SHOW),
+/* harmony export */   "COLLAPSE_STATE_HIDE": () => (/* binding */ COLLAPSE_STATE_HIDE),
 /* harmony export */   "CHECKED_SQUARE": () => (/* binding */ CHECKED_SQUARE),
 /* harmony export */   "EMPTY_SQUARE": () => (/* binding */ EMPTY_SQUARE),
 /* harmony export */   "HIDE": () => (/* binding */ HIDE),
@@ -11531,8 +11552,13 @@ var ITEM = {
   done: false,
   targetDate: ""
 };
-var COLLAPSE_STATE = {
+var COLLAPSE_STATE_SHOW = {
   show: true,
+  text: "Hide",
+  "class": "bi-dash-square"
+};
+var COLLAPSE_STATE_HIDE = {
+  show: false,
   text: "Show",
   "class": "bi-plus-square"
 };
@@ -11600,18 +11626,10 @@ __webpack_require__.r(__webpack_exports__);
 function collapseReducer(state, action) {
   switch (action.type) {
     case _constants__WEBPACK_IMPORTED_MODULE_0__.SHOW:
-      return {
-        show: true,
-        text: "Show",
-        "class": "bi-plus-square"
-      };
+      return _constants__WEBPACK_IMPORTED_MODULE_0__.COLLAPSE_STATE_SHOW;
 
     case _constants__WEBPACK_IMPORTED_MODULE_0__.HIDE:
-      return {
-        show: false,
-        text: "Hide",
-        "class": "bi-dash-square"
-      };
+      return _constants__WEBPACK_IMPORTED_MODULE_0__.COLLAPSE_STATE_HIDE;
 
     default:
       break;

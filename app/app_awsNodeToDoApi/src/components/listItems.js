@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { ItemsContext } from '../contexts';
 import { Item } from './item';
 import { Col, Row } from 'react-bootstrap';
-import { EDIT, HIDE, SHOW, COLLAPSE_STATE } from '../constants';
+import { EDIT, HIDE, SHOW, COLLAPSE_STATE_SHOW, COLLAPSE_STATE_HIDE } from '../constants';
 import { collapseReducer } from '../reducers/collapseReducer';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 
@@ -17,8 +17,8 @@ export const ListItems = () => {
     const spinnerContext = React.useContext(SpinnerContext);
 
     const [ version, setVersion ] = useState(0);
-    const [ collapseRemaining, collapseRemainingDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE);
-    const [ collapseDone, collapseDoneDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE);
+    const [ collapseRemaining, collapseRemainingDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_SHOW);
+    const [ collapseDone, collapseDoneDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_HIDE);
 
     const onHideRemainingClick = (event) => {
         event.preventDefault();
@@ -35,11 +35,21 @@ export const ListItems = () => {
         history.push(EDIT);
     }
 
-    const onDoneClick = (id) => itemsContext.itemDone(id, spinnerContext.showSpinner, successCallback, failCallback);
+    const onDoneClick = (id) => itemsContext.itemDone({
+        id,
+        beforeCallback: spinnerContext.showSpinner,
+        doneCallback,
+        failCallback
+    });
 
-    const onDeleteClick = (id) => itemsContext.deleteItem(id, spinnerContext.showSpinner, successCallback, failCallback);
+    const onDeleteClick = (id) => itemsContext.deleteItem({
+        id,
+        beforeCallback: spinnerContext.showSpinner,
+        doneCallback,
+        failCallback
+    });
 
-    const successCallback = () => { 
+    const doneCallback = () => {
         spinnerContext.hideSpinner();
         setVersion(version + 1);
     }
@@ -55,7 +65,11 @@ export const ListItems = () => {
     }
 
     useEffect(() => {
-        itemsContext.getItems(spinnerContext.showSpinner, getItmesDoneCallback, failCallback);
+        itemsContext.getItems({
+            beforeCallback: spinnerContext.showSpinner,
+            doneCallback: getItmesDoneCallback,
+            failCallback
+        });
     }, [version]);
 
     const items = itemsContext.items.filter( x => !x.done);
@@ -74,6 +88,7 @@ export const ListItems = () => {
                 <Row className="justify-content-md-center">
                     <Col lg={10}>
                         <h4>Remaining items <a className="float-right text-dark" href="#" onClick={onHideRemainingClick}>{collapseRemaining.text}<i className={`bi ${collapseRemaining.class} mx-2`}></i></a></h4>
+                        <hr className="border-dark" />
                         {collapseRemaining.show &&
                             <ul className="list-group">
                                 {items.map( x => <Item key={x.id} item={x} onDoneClick={onDoneClick} onDeleteClick={onDeleteClick} onEditClick={onEditClick}/> )}
@@ -86,6 +101,7 @@ export const ListItems = () => {
                 <Row className="justify-content-md-center mt-3">
                     <Col lg={10}>
                         <h4>Completed items <a className="float-right text-dark" href="#" onClick={onHideDoneClick}>{collapseDone.text}<i className={`bi ${collapseDone.class} mx-2`}></i></a></h4>
+                        <hr className="border-dark" />
                         {collapseDone.show &&
                             <ul className="list-group">
                                 {doneItems.map( x => <Item key={x.id} item={x} onDeleteClick={onDeleteClick} onEditClick={onEditClick}/> )}

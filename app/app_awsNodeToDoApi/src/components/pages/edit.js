@@ -30,7 +30,11 @@ export function Edit() {
 
   useEffect( () => {
       if (itemsContext.selectedId.current) {
-          itemsContext.getItem(spinnerContext.showSpinner, populateItem, failCallback);
+          itemsContext.getItem({
+            beforeCallback: spinnerContext.showSpinner,
+            doneCallback: populateItem,
+            failCallback
+          });
       } else {
           history.push(MANAGE);
       }

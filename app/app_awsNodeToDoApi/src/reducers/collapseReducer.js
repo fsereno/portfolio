@@ -1,21 +1,13 @@
 "use strict;"
 
-import { HIDE, SHOW } from "../constants";
+import { COLLAPSE_STATE_HIDE, COLLAPSE_STATE_SHOW, HIDE, SHOW } from "../constants";
 
 export function collapseReducer(state, action) {
     switch (action.type) {
         case SHOW:
-            return {
-                show: true,
-                text: "Show",
-                class: "bi-plus-square"
-            }
+            return COLLAPSE_STATE_SHOW
         case HIDE:
-            return {
-                show: false,
-                text: "Hide",
-                class: "bi-dash-square"
-            }
+            return COLLAPSE_STATE_HIDE
         default:
             break;
     }

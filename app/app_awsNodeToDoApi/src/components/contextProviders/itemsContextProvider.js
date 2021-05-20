@@ -19,72 +19,61 @@ export function ItemsContextProvider({ children }) {
     const [items, setItems] = useState([]);
     const [showFeedback, setShowFeedback] = useState(false);
 
-    const getItems = (beforeCallback, doneCallback, failCallback) => {
-
+    const getItems = (requestObject) => {
         XMLHttpRequestUtil.request({
+            ...requestObject,
             type: "GET",
             request: API_ENDPOINT,
-            beforeCallback,
-            doneCallback,
-            failCallback,
             headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
     }
 
-    const getItem = (beforeCallback, doneCallback, failCallback) => {
-
+    const getItem = (requestObject) => {
         XMLHttpRequestUtil.request({
+            ...requestObject,
             type: "GET",
             request: `${API_ENDPOINT}/${selectedId.current}`,
-            beforeCallback,
-            doneCallback,
-            failCallback,
             headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
     }
 
-    const deleteItem = (id, beforeCallback, doneCallback, failCallback) => {
-
+    const deleteItem = (requestObject) => {
         XMLHttpRequestUtil.request({
+            ...requestObject,
             type: "DELETE",
-            request: `${API_ENDPOINT}/${id}`,
-            beforeCallback,
-            doneCallback,
-            failCallback,
+            request: `${API_ENDPOINT}/${requestObject.id}`,
             headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
     }
 
-    const updateItem = (item, beforeCallback, doneCallback, failCallback) => {
+    const itemDone = (requestObject) => {
+        const item = items.filter( x => x.id === requestObject.id)[0];
+        const doneItem = {...item};
+        doneItem.done = true;
+        updateItem(doneItem, requestObject);
+    }
 
+    const updateItem = (item, requestObject) => {
         XMLHttpRequestUtil.request({
+            ...requestObject,
             type: "PUT",
             request: `${API_ENDPOINT}/${selectedId.current}`,
             payload: JSON.stringify(item),
-            beforeCallback,
-            doneCallback,
-            failCallback,
             headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
     }
 
-    const itemDone = (id, beforeCallback, doneCallback, failCallback) => {
-        const item = items.filter( x => x.id === id)[0];
-        item.done = true;
-        updateItem(item, beforeCallback, doneCallback, failCallback);
-    }
+    const createItem = (item, requestObject) => {
 
-    const createItem = (item, beforeCallback, doneCallback, failCallback) => {
+        const newItem = {...item};
 
-        item.username = loginContext.username.current;
+        newItem.username = loginContext.username.current;
 
         XMLHttpRequestUtil.request({
+            ...requestObject,
             type: "POST",
-            request: `${API_ENDPOINT}`,
-            payload: JSON.stringify(item),
-            beforeCallback,
-            doneCallback,
-            failCallback,
+            request: API_ENDPOINT,
+            payload: JSON.stringify(newItem),
             headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
     }

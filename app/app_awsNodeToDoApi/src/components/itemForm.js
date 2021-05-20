@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 import { DESCRIPTION } from '../constants';
-import { ContainerContext } from '../contexts';
 import { ContentContainer } from './contentContainer';
 
 export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
@@ -28,7 +27,11 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
         } else {
 
             if (typeof submitHandler === "function") {
-                submitHandler(state, spinnerContext.showSpinner, doneCallback, failCallback);
+                submitHandler(state, {
+                    beforeCallback: spinnerContext.showSpinner,
+                    doneCallback,
+                    failCallback
+                });
             }
 
             setShowValidation(false);
