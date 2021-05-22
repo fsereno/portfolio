@@ -17,8 +17,8 @@ var canIAffordThisLoan = new Promise(
     }
 );
 
-var askBank = () => {
-    canIAffordThisLoan
+var askBank = async () => {
+    await canIAffordThisLoan
         .then((fulfilled) => {
             console.log(fulfilled);
         })

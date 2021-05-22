@@ -17,31 +17,21 @@ export function LogoutForm() {
 
     const history = useHistory();
 
-    const logoutCallback = (currentUser) => {
-        if(currentUser) {
-            currentUser.globalSignOut({
-                onSuccess: function (result) {
+    const doneCallback = () => {
+        spinnerContext.setShow(false);
+        history.push(LOGIN);
+    }
 
-                    if (result === SUCCESS) {
-
-                        loginContext.setAuthenticated(false);
-                        spinnerContext.setShow(false);
-                        history.push(LOGIN);
-                    }
-                },
-                onFailure: function (err) {
-                    spinnerContext.setShow(false);
-                    console.error(err.message)
-                },
-            });
-        }
+    const failCallback = (err) => {
+        spinnerContext.setShow(false);
+        console.error(err.message)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         spinnerContext.setShow(true);
-        loginContext.logoutUser(logoutCallback);
+        loginContext.logoutUserAsync(doneCallback, failCallback);
     };
 
     return (

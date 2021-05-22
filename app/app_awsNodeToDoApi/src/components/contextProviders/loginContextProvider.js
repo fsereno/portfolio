@@ -1,30 +1,21 @@
 "use strict;"
 
+import "regenerator-runtime/runtime";
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import { CognitoUser, AuthenticationDetails, CognitoUserPool } from 'amazon-cognito-identity-js';
-import { POOL_DATA } from '../../constants';
 import { LoginContext } from '../../contexts';
+import { SUCCESS } from "../../constants";
 
-export const LoginContextProvider = ({children}) => {
+export const LoginContextProvider = ({children, poolData}) => {
 
     const [ authenticated, setAuthenticated ] = useState(false);
 
-    const userPool = new CognitoUserPool(POOL_DATA);
+    const userPool = new CognitoUserPool(poolData);
 
     const token = useRef();
     const username = useRef();
 
-    const getCurrentUserDoneCallback = (currentUser) => {
-        console.log("getCurrentUserDoneCallback")
-        token.current = currentUser.signInUserSession.idToken.jwtToken;
-        username.current = currentUser.username;
-       if(!authenticated) {
-            console.log("getCurrentUserDoneCallback setAuth")
-            setAuthenticated(true);
-        }
-    }
-
-    const getCurrentUser = (doneCallback, failCallback) => {
+    const getCurrentUser = () => new Promise((resolve, reject) => {
 
         const currentUser = userPool.getCurrentUser();
 
@@ -33,23 +24,41 @@ export const LoginContextProvider = ({children}) => {
             currentUser.getSession(err => {
 
                 if (err != null && currentUser.signInUserSession != null ) {
-
-                    if (typeof failCallback === "function") {
-                        failCallback();
-                    }
+                    reject(undefined);
                     console.error(err.message);
 
                 } else {
-
-                    if (typeof doneCallback === "function") {
-                        doneCallback(currentUser);
-                    }
+                    resolve(currentUser);
                 }
             });
         }
-    }
+    })
 
-    const logoutUser = (logoutCallback) => getCurrentUser(logoutCallback);
+    const logoutUserAsync = async (doneCallback, failedCallback) => {
+        const currentUser = await getCurrentUser();
+        if (currentUser) {
+            currentUser.globalSignOut({
+                onSuccess: function (result) {
+
+                    if(result === SUCCESS) {
+
+                        if(typeof doneCallback === "function") {
+                            setAuthenticated(false);
+                            doneCallback();
+                        }
+
+                    }
+                },
+                onFailure: function (err) {
+
+                    if(typeof failedCallback === "function") {
+                        failedCallback(err);
+                    }
+
+                },
+            });
+        }
+    }
 
     const loginUser = (username, password, loginDoneCallback, loginFailCallback) => {
 
@@ -62,7 +71,7 @@ export const LoginContextProvider = ({children}) => {
 
         const userData = {
             Username: username,
-            Pool: new CognitoUserPool(POOL_DATA),
+            Pool: new CognitoUserPool(poolData),
         };
 
         const cognitoUser = new CognitoUser(userData);
@@ -85,11 +94,30 @@ export const LoginContextProvider = ({children}) => {
     }
 
     useLayoutEffect(() => {
-        console.log("either mounted or loginSuccess has triggered")
-        getCurrentUser(getCurrentUserDoneCallback);
+        async function _getCurrentUser () {
+            const currentUser = await getCurrentUser();
+
+            if (currentUser) {
+
+                token.current = currentUser.signInUserSession.idToken.jwtToken;
+                username.current = currentUser.username;
+
+                if(!authenticated) {
+                    setAuthenticated(true);
+                }
+            }
+        }
+        _getCurrentUser();
     },[authenticated]);
 
-    const context = { authenticated, setAuthenticated, loginUser, logoutUser, token, username };
+    const context = {
+        authenticated,
+        setAuthenticated,
+        loginUser,
+        logoutUserAsync,
+        token,
+        username
+    };
 
     return (
         <LoginContext.Provider value={context}>

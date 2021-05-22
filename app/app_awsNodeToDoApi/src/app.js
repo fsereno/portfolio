@@ -8,12 +8,13 @@ import { SpinnerContextProvider } from '../../js/modules/react/spinnerComponent'
 import { ToasterContextProvider } from '../../js/modules/react/toasterComponent';
 import { ConfigContextProvider } from '../../js/modules/react/configContextProvider';
 import { ItemsContextProvider } from './components/contextProviders/itemsContextProvider';
+import { POOL_DATA } from './constants';
 
 function App() {
   return (
     <ConfigContextProvider app="awsNodeToDoApi">
       <ToasterContextProvider>
-        <LoginContextProvider>
+        <LoginContextProvider poolData={POOL_DATA}>
           <ItemsContextProvider>
             <SpinnerContextProvider>
               <Router />
