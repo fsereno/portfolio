@@ -10106,10 +10106,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
 "use strict;";
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -10157,121 +10153,84 @@ var LoginContextProvider = function LoginContextProvider(_ref) {
     });
   };
 
-  var logoutUserAsync = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(doneCallback, failedCallback) {
-      var currentUser;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return getCurrentUser();
-
-            case 2:
-              currentUser = _context.sent;
-
-              if (currentUser) {
-                currentUser.globalSignOut({
-                  onSuccess: function onSuccess(result) {
-                    if (result === _constants__WEBPACK_IMPORTED_MODULE_4__.SUCCESS) {
-                      if (typeof doneCallback === "function") {
-                        setAuthenticated(false);
-                        doneCallback();
-                      }
-                    }
-                  },
-                  onFailure: function onFailure(err) {
-                    if (typeof failedCallback === "function") {
-                      failedCallback(err);
-                    }
-                  }
+  var logoutUser = function logoutUser() {
+    return new Promise(function (resolve, reject) {
+      getCurrentUser().then(function (currentUser) {
+        if (currentUser) {
+          currentUser.globalSignOut({
+            onSuccess: function onSuccess(result) {
+              if (result === _constants__WEBPACK_IMPORTED_MODULE_4__.SUCCESS) {
+                setAuthenticated(false);
+                resolve({
+                  success: true
                 });
               }
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
+            },
+            onFailure: function onFailure(error) {
+              reject({
+                success: false,
+                error: error
+              });
+            }
+          });
         }
-      }, _callee);
-    }));
+      })["catch"](function (error) {
+        reject({
+          success: false,
+          error: error
+        });
+      });
+    });
+  };
 
-    return function logoutUserAsync(_x, _x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  var loginUser = function loginUser(username, password, loginDoneCallback, loginFailCallback) {
-    var authenticationData = {
-      Username: username,
-      Password: password
-    };
-    var authenticationDetails = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.AuthenticationDetails(authenticationData);
-    var userData = {
-      Username: username,
-      Pool: new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUserPool(poolData)
-    };
-    var cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUser(userData);
-    cognitoUser.authenticateUser(authenticationDetails, {
-      onSuccess: function onSuccess(result) {
-        setAuthenticated(true);
-
-        if (typeof loginDoneCallback === "function") {
-          loginDoneCallback();
+  var loginUser = function loginUser(username, password) {
+    return new Promise(function (resolve, reject) {
+      var authenticationData = {
+        Username: username,
+        Password: password
+      };
+      var authenticationDetails = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.AuthenticationDetails(authenticationData);
+      var userData = {
+        Username: username,
+        Pool: new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUserPool(poolData)
+      };
+      var cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUser(userData);
+      cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: function onSuccess(result) {
+          setAuthenticated(true);
+          resolve({
+            success: true
+          });
+        },
+        onFailure: function onFailure(error) {
+          reject({
+            success: false,
+            error: error
+          });
         }
-      },
-      onFailure: function onFailure(err) {
-        if (typeof loginFailCallback === "function") {
-          loginFailCallback(err);
-        }
-      }
+      });
     });
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)(function () {
-    function _getCurrentUser() {
-      return _getCurrentUser2.apply(this, arguments);
-    }
+    getCurrentUser().then(function (currentUser) {
+      if (currentUser) {
+        token.current = currentUser.signInUserSession.idToken.jwtToken;
+        username.current = currentUser.username;
 
-    function _getCurrentUser2() {
-      _getCurrentUser2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-        var currentUser;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return getCurrentUser();
-
-              case 2:
-                currentUser = _context2.sent;
-
-                if (currentUser) {
-                  token.current = currentUser.signInUserSession.idToken.jwtToken;
-                  username.current = currentUser.username;
-
-                  if (!authenticated) {
-                    setAuthenticated(true);
-                  }
-                }
-
-              case 4:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-      return _getCurrentUser2.apply(this, arguments);
-    }
-
-    _getCurrentUser();
+        if (!authenticated) {
+          setAuthenticated(true);
+        }
+      }
+    })["catch"](function () {
+      return setAuthenticated(false);
+    });
   }, [authenticated]);
   var context = {
     authenticated: authenticated,
     setAuthenticated: setAuthenticated,
     loginUser: loginUser,
-    logoutUserAsync: logoutUserAsync,
+    logoutUser: logoutUser,
     token: token,
     username: username
   };
@@ -10699,6 +10658,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
 "use strict;";
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -10763,17 +10726,40 @@ function LoginForm() {
     spinnerContext.setShow(false);
   };
 
-  var handleSubmit = function handleSubmit(event) {
-    event.preventDefault();
+  var handleSubmit = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event.preventDefault();
 
-    if (event.currentTarget.checkValidity() === false) {
-      setShowValidation(true);
-      event.stopPropagation();
-    } else {
-      spinnerContext.setShow(true);
-      loginContext.loginUser(username, password, loginDoneCallback, loginFailCallback);
-    }
-  };
+              if (event.currentTarget.checkValidity() === false) {
+                setShowValidation(true);
+                event.stopPropagation();
+              } else {
+                spinnerContext.setShow(true);
+                loginContext.loginUser(username, password).then(function (result) {
+                  return result.success ? loginDoneCallback() : loginFailCallback({
+                    message: "Login failed!"
+                  });
+                })["catch"](function (result) {
+                  return loginFailCallback(result.error);
+                });
+              }
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handleSubmit(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_6__.default, {
     lg: 4
@@ -10868,7 +10854,11 @@ function LogoutForm() {
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
     spinnerContext.setShow(true);
-    loginContext.logoutUserAsync(doneCallback, failCallback);
+    loginContext.logoutUser().then(function (result) {
+      return result.success ? doneCallback() : failCallback();
+    })["catch"](function (error) {
+      return failCallback(error);
+    });
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_5__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_6__.default, {

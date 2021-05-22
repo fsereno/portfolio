@@ -36,7 +36,7 @@ export function LoginForm() {
         spinnerContext.setShow(false);
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (event.currentTarget.checkValidity() === false) {
@@ -46,7 +46,10 @@ export function LoginForm() {
         } else {
 
             spinnerContext.setShow(true);
-            loginContext.loginUser(username, password, loginDoneCallback, loginFailCallback);
+
+            loginContext.loginUser(username, password)
+                .then(result => result.success ? loginDoneCallback() : loginFailCallback({ message: "Login failed!"}))
+                .catch(result => loginFailCallback(result.error));
         }
     };
 

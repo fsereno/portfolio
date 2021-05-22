@@ -31,7 +31,9 @@ export function LogoutForm() {
         event.preventDefault();
 
         spinnerContext.setShow(true);
-        loginContext.logoutUserAsync(doneCallback, failCallback);
+        loginContext.logoutUser()
+            .then(result => result.success ? doneCallback() : failCallback())
+            .catch( error => failCallback(error));
     };
 
     return (

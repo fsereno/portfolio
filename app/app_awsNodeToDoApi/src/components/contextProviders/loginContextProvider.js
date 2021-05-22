@@ -32,35 +32,30 @@ export const LoginContextProvider = ({children, poolData}) => {
                 }
             });
         }
-    })
+    });
 
-    const logoutUserAsync = async (doneCallback, failedCallback) => {
-        const currentUser = await getCurrentUser();
-        if (currentUser) {
-            currentUser.globalSignOut({
-                onSuccess: function (result) {
-
-                    if(result === SUCCESS) {
-
-                        if(typeof doneCallback === "function") {
+    const logoutUser = () => new Promise((resolve, reject) => {
+        getCurrentUser().then(currentUser => {
+            if (currentUser) {
+                currentUser.globalSignOut({
+                    onSuccess: function (result) {
+                        if(result === SUCCESS) {
                             setAuthenticated(false);
-                            doneCallback();
+                            resolve({ success: true });
                         }
+                    },
+                    onFailure: function (error) {
+                        reject({ success: false, error });
+                    },
+                });
+            }
 
-                    }
-                },
-                onFailure: function (err) {
+        }).catch((error) => {
+            reject({ success: false, error});
+        });
+    });
 
-                    if(typeof failedCallback === "function") {
-                        failedCallback(err);
-                    }
-
-                },
-            });
-        }
-    }
-
-    const loginUser = (username, password, loginDoneCallback, loginFailCallback) => {
+    const loginUser = (username, password) => new Promise((resolve, reject) => {
 
         const authenticationData = {
             Username: username,
@@ -80,41 +75,35 @@ export const LoginContextProvider = ({children, poolData}) => {
             onSuccess: function(result) {
 
                 setAuthenticated(true);
-
-                if(typeof loginDoneCallback === "function") {
-                    loginDoneCallback();
-                }
+                resolve({success: true});
             },
-            onFailure: function(err) {
-                if(typeof loginFailCallback === "function") {
-                    loginFailCallback(err);
-                }
+            onFailure: function(error) {
+                reject({success: false, error});
             },
         });
-    }
+    });
 
     useLayoutEffect(() => {
-        async function _getCurrentUser () {
-            const currentUser = await getCurrentUser();
+        getCurrentUser()
+            .then(currentUser => {
+                if (currentUser) {
 
-            if (currentUser) {
+                    token.current = currentUser.signInUserSession.idToken.jwtToken;
+                    username.current = currentUser.username;
 
-                token.current = currentUser.signInUserSession.idToken.jwtToken;
-                username.current = currentUser.username;
-
-                if(!authenticated) {
-                    setAuthenticated(true);
+                    if(!authenticated) {
+                        setAuthenticated(true);
+                    }
                 }
-            }
-        }
-        _getCurrentUser();
+            })
+            .catch(() => setAuthenticated(false));
     },[authenticated]);
 
     const context = {
         authenticated,
         setAuthenticated,
         loginUser,
-        logoutUserAsync,
+        logoutUser,
         token,
         username
     };
