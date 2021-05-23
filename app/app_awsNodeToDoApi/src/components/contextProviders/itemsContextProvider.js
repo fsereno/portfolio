@@ -20,7 +20,7 @@ export function ItemsContextProvider({ children }) {
     const [showFeedback, setShowFeedback] = useState(false);
 
     const getItems = () => {
-        return XMLHttpRequestUtil.requestPromise({
+        return XMLHttpRequestUtil.request({
             type: "GET",
             request: API_ENDPOINT,
             headers: [{ key: "Authorization", value: loginContext.token.current }]
@@ -28,31 +28,33 @@ export function ItemsContextProvider({ children }) {
     }
 
     const getItem = () => {
-        return XMLHttpRequestUtil.requestPromise({
+        return XMLHttpRequestUtil.request({
             type: "GET",
             request: `${API_ENDPOINT}/${selectedId.current}`,
             headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
     }
 
-    const deleteItem = (requestObject) => {
-        XMLHttpRequestUtil.request({
-            ...requestObject,
+    const deleteItem = (id) => {
+        return XMLHttpRequestUtil.request({
             type: "DELETE",
-            request: `${API_ENDPOINT}/${requestObject.id}`,
+            request: `${API_ENDPOINT}/${id}`,
             headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
     }
 
-    const itemDone = (requestObject) => {
-        const item = items.filter( x => x.id === requestObject.id)[0];
+    const itemDone = (id) => {
+
+        const item = items.filter( x => x.id === id)[0];
         const doneItem = {...item};
+
         doneItem.done = true;
-        updateItem(doneItem, requestObject);
+
+        return updateItem(doneItem);
     }
 
     const updateItem = (item) => {
-        return XMLHttpRequestUtil.requestPromise({
+        return XMLHttpRequestUtil.request({
             type: "PUT",
             request: `${API_ENDPOINT}/${selectedId.current}`,
             payload: JSON.stringify(item),
@@ -60,14 +62,13 @@ export function ItemsContextProvider({ children }) {
         });
     }
 
-    const createItem = (item, requestObject) => {
+    const createItem = (item) => {
 
         const newItem = {...item};
 
         newItem.username = loginContext.username.current;
 
-        XMLHttpRequestUtil.request({
-            ...requestObject,
+        return XMLHttpRequestUtil.request({
             type: "POST",
             request: API_ENDPOINT,
             payload: JSON.stringify(newItem),

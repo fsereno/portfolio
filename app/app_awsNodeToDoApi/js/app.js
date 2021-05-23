@@ -9996,7 +9996,7 @@ function ItemsContextProvider(_ref) {
       setShowFeedback = _useState4[1];
 
   var getItems = function getItems() {
-    return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.requestPromise({
+    return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "GET",
       request: API_ENDPOINT,
       headers: [{
@@ -10007,7 +10007,7 @@ function ItemsContextProvider(_ref) {
   };
 
   var getItem = function getItem() {
-    return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.requestPromise({
+    return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "GET",
       request: "".concat(API_ENDPOINT, "/").concat(selectedId.current),
       headers: [{
@@ -10017,30 +10017,30 @@ function ItemsContextProvider(_ref) {
     });
   };
 
-  var deleteItem = function deleteItem(requestObject) {
-    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request(_objectSpread(_objectSpread({}, requestObject), {}, {
+  var deleteItem = function deleteItem(id) {
+    return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "DELETE",
-      request: "".concat(API_ENDPOINT, "/").concat(requestObject.id),
+      request: "".concat(API_ENDPOINT, "/").concat(id),
       headers: [{
         key: "Authorization",
         value: loginContext.token.current
       }]
-    }));
+    });
   };
 
-  var itemDone = function itemDone(requestObject) {
+  var itemDone = function itemDone(id) {
     var item = items.filter(function (x) {
-      return x.id === requestObject.id;
+      return x.id === id;
     })[0];
 
     var doneItem = _objectSpread({}, item);
 
     doneItem.done = true;
-    updateItem(doneItem, requestObject);
+    return updateItem(doneItem);
   };
 
   var updateItem = function updateItem(item) {
-    return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.requestPromise({
+    return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "PUT",
       request: "".concat(API_ENDPOINT, "/").concat(selectedId.current),
       payload: JSON.stringify(item),
@@ -10051,11 +10051,11 @@ function ItemsContextProvider(_ref) {
     });
   };
 
-  var createItem = function createItem(item, requestObject) {
+  var createItem = function createItem(item) {
     var newItem = _objectSpread({}, item);
 
     newItem.username = loginContext.username.current;
-    _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request(_objectSpread(_objectSpread({}, requestObject), {}, {
+    return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "POST",
       request: API_ENDPOINT,
       payload: JSON.stringify(newItem),
@@ -10063,7 +10063,7 @@ function ItemsContextProvider(_ref) {
         key: "Authorization",
         value: loginContext.token.current
       }]
-    }));
+    });
   };
 
   var context = {
@@ -10098,12 +10098,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LoginContextProvider": () => (/* binding */ LoginContextProvider)
 /* harmony export */ });
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime/runtime */ "../../node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! amazon-cognito-identity-js */ "../../node_modules/amazon-cognito-identity-js/es/index.js");
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! amazon-cognito-identity-js */ "../../node_modules/amazon-cognito-identity-js/es/index.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -10122,19 +10120,18 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var LoginContextProvider = function LoginContextProvider(_ref) {
   var children = _ref.children,
       poolData = _ref.poolData;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
       authenticated = _useState2[0],
       setAuthenticated = _useState2[1];
 
-  var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUserPool(poolData);
-  var token = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
-  var username = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)();
+  var userPool = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUserPool(poolData);
+  var token = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  var username = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
 
   var getCurrentUser = function getCurrentUser() {
     return new Promise(function (resolve, reject) {
@@ -10159,7 +10156,7 @@ var LoginContextProvider = function LoginContextProvider(_ref) {
         if (currentUser) {
           currentUser.globalSignOut({
             onSuccess: function onSuccess(result) {
-              if (result === _constants__WEBPACK_IMPORTED_MODULE_4__.SUCCESS) {
+              if (result === _constants__WEBPACK_IMPORTED_MODULE_3__.SUCCESS) {
                 setAuthenticated(false);
                 resolve({
                   success: true
@@ -10189,12 +10186,12 @@ var LoginContextProvider = function LoginContextProvider(_ref) {
         Username: username,
         Password: password
       };
-      var authenticationDetails = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.AuthenticationDetails(authenticationData);
+      var authenticationDetails = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.AuthenticationDetails(authenticationData);
       var userData = {
         Username: username,
-        Pool: new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUserPool(poolData)
+        Pool: new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUserPool(poolData)
       };
-      var cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_2__.CognitoUser(userData);
+      var cognitoUser = new amazon_cognito_identity_js__WEBPACK_IMPORTED_MODULE_1__.CognitoUser(userData);
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function onSuccess(result) {
           setAuthenticated(true);
@@ -10212,7 +10209,7 @@ var LoginContextProvider = function LoginContextProvider(_ref) {
     });
   };
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
     getCurrentUser().then(function (currentUser) {
       if (currentUser) {
         token.current = currentUser.signInUserSession.idToken.jwtToken;
@@ -10234,7 +10231,7 @@ var LoginContextProvider = function LoginContextProvider(_ref) {
     token: token,
     username: username
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_3__.LoginContext.Provider, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_2__.LoginContext.Provider, {
     value: context
   }, children);
 };
@@ -10465,17 +10462,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ListItems": () => (/* binding */ ListItems)
 /* harmony export */ });
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime/runtime */ "../../node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
-/* harmony import */ var _item__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./item */ "./src/components/item.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
-/* harmony import */ var _reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reducers/collapseReducer */ "./src/reducers/collapseReducer.js");
-/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
+/* harmony import */ var _item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./item */ "./src/components/item.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
+/* harmony import */ var _reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../reducers/collapseReducer */ "./src/reducers/collapseReducer.js");
+/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -10498,23 +10493,23 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var ListItems = function ListItems() {
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
-  var itemsContext = react__WEBPACK_IMPORTED_MODULE_1__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_2__.ItemsContext);
-  var spinnerContext = react__WEBPACK_IMPORTED_MODULE_1__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_6__.SpinnerContext);
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useHistory)();
+  var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_1__.ItemsContext);
+  var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_5__.SpinnerContext);
+  var ver = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(0);
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(ver.current),
       _useState2 = _slicedToArray(_useState, 2),
       version = _useState2[0],
       setVersion = _useState2[1];
 
-  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_1__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_5__.collapseReducer, _constants__WEBPACK_IMPORTED_MODULE_4__.COLLAPSE_STATE_SHOW),
+  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__.collapseReducer, _constants__WEBPACK_IMPORTED_MODULE_3__.COLLAPSE_STATE_SHOW),
       _useReducer2 = _slicedToArray(_useReducer, 2),
       collapseRemaining = _useReducer2[0],
       collapseRemainingDistpach = _useReducer2[1];
 
-  var _useReducer3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_5__.collapseReducer, _constants__WEBPACK_IMPORTED_MODULE_4__.COLLAPSE_STATE_HIDE),
+  var _useReducer3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_4__.collapseReducer, _constants__WEBPACK_IMPORTED_MODULE_3__.COLLAPSE_STATE_HIDE),
       _useReducer4 = _slicedToArray(_useReducer3, 2),
       collapseDone = _useReducer4[0],
       collapseDoneDistpach = _useReducer4[1];
@@ -10522,47 +10517,48 @@ var ListItems = function ListItems() {
   var onHideRemainingClick = function onHideRemainingClick(event) {
     event.preventDefault();
     collapseRemaining.show ? collapseRemainingDistpach({
-      type: _constants__WEBPACK_IMPORTED_MODULE_4__.HIDE
+      type: _constants__WEBPACK_IMPORTED_MODULE_3__.HIDE
     }) : collapseRemainingDistpach({
-      type: _constants__WEBPACK_IMPORTED_MODULE_4__.SHOW
+      type: _constants__WEBPACK_IMPORTED_MODULE_3__.SHOW
     });
   };
 
   var onHideDoneClick = function onHideDoneClick(event) {
     event.preventDefault();
     collapseDone.show ? collapseDoneDistpach({
-      type: _constants__WEBPACK_IMPORTED_MODULE_4__.HIDE
+      type: _constants__WEBPACK_IMPORTED_MODULE_3__.HIDE
     }) : collapseDoneDistpach({
-      type: _constants__WEBPACK_IMPORTED_MODULE_4__.SHOW
+      type: _constants__WEBPACK_IMPORTED_MODULE_3__.SHOW
     });
   };
 
   var onEditClick = function onEditClick(id) {
     itemsContext.selectedId.current = id;
-    history.push(_constants__WEBPACK_IMPORTED_MODULE_4__.EDIT);
+    history.push(_constants__WEBPACK_IMPORTED_MODULE_3__.EDIT);
   };
 
   var onDoneClick = function onDoneClick(id) {
-    return itemsContext.itemDone({
-      id: id,
-      beforeCallback: spinnerContext.showSpinner,
-      doneCallback: doneCallback,
-      failCallback: failCallback
+    spinnerContext.showSpinner();
+    itemsContext.itemDone(id).then(function () {
+      return doneCallback();
+    })["catch"](function () {
+      return failCallback();
     });
   };
 
   var onDeleteClick = function onDeleteClick(id) {
-    return itemsContext.deleteItem({
-      id: id,
-      beforeCallback: spinnerContext.showSpinner,
-      doneCallback: doneCallback,
-      failCallback: failCallback
+    spinnerContext.showSpinner();
+    itemsContext.deleteItem(id).then(function () {
+      return doneCallback();
+    })["catch"](function () {
+      return failCallback();
     });
   };
 
   var doneCallback = function doneCallback() {
     spinnerContext.hideSpinner();
-    setVersion(version + 1);
+    ver.current = ver.current + 1;
+    setVersion(ver.current);
   };
 
   var failCallback = function failCallback() {
@@ -10570,7 +10566,7 @@ var ListItems = function ListItems() {
     itemsContext.setShowFeedback(true);
   };
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     spinnerContext.showSpinner();
     itemsContext.getItems().then(function (response) {
       spinnerContext.hideSpinner();
@@ -10585,48 +10581,48 @@ var ListItems = function ListItems() {
   var doneItems = itemsContext.items.filter(function (x) {
     return x.done;
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, items.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, items.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
     className: "justify-content-md-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     lg: 10
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", null, "You have no items"))), items.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "You have no items"))), items.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
     className: "justify-content-md-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     lg: 10
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", null, "Remaining items ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("a", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Remaining items ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     className: "float-right text-dark",
     href: "#",
     onClick: onHideRemainingClick
-  }, collapseRemaining.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("i", {
+  }, collapseRemaining.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "bi ".concat(collapseRemaining["class"], " mx-2")
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("hr", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", {
     className: "border-dark"
-  }), collapseRemaining.show && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("ul", {
+  }), collapseRemaining.show && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     className: "list-group"
   }, items.map(function (x) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_item__WEBPACK_IMPORTED_MODULE_3__.Item, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_item__WEBPACK_IMPORTED_MODULE_2__.Item, {
       key: x.id,
       item: x,
       onDoneClick: onDoneClick,
       onDeleteClick: onDeleteClick,
       onEditClick: onEditClick
     });
-  })))), doneItems.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
+  })))), doneItems.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
     className: "justify-content-md-center mt-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     lg: 10
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h4", null, "Completed items ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("a", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Completed items ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     className: "float-right text-dark",
     href: "#",
     onClick: onHideDoneClick
-  }, collapseDone.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("i", {
+  }, collapseDone.text, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "bi ".concat(collapseDone["class"], " mx-2")
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("hr", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", {
     className: "border-dark"
-  }), collapseDone.show && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("ul", {
+  }), collapseDone.show && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     className: "list-group"
   }, doneItems.map(function (x) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_item__WEBPACK_IMPORTED_MODULE_3__.Item, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_item__WEBPACK_IMPORTED_MODULE_2__.Item, {
       key: x.id,
       item: x,
       onDeleteClick: onDeleteClick,
@@ -12186,66 +12182,14 @@ var XMLHttpRequestUtil = /*#__PURE__*/function () {
       var type = _ref.type,
           _request = _ref.request,
           payload = _ref.payload,
-          beforeCallback = _ref.beforeCallback,
-          doneCallback = _ref.doneCallback,
-          failCallback = _ref.failCallback,
           headers = _ref.headers;
-
-      if (typeof beforeCallback === "function") {
-        beforeCallback();
-      }
-
-      var xhttp = new XMLHttpRequest();
-
-      xhttp.onreadystatechange = function (result) {
-        var data = result.currentTarget;
-
-        if (_this.isDone(data.status, data.readyState)) {
-          var response;
-
-          try {
-            response = JSON.parse(data.response);
-          } catch (error) {
-            response = {};
-          }
-
-          if (typeof doneCallback === "function") {
-            doneCallback(response);
-          }
-        } else if (_this.isFail(data.status, data.readyState)) {
-          if (typeof failCallback === "function") {
-            failCallback(data);
-          }
-        }
-      };
-
-      xhttp.open(type, _request);
-
-      if (headers.length > 0) {
-        for (var i = 0; i < headers.length; i++) {
-          xhttp.setRequestHeader(headers[i].key, headers[i].value);
-        }
-      }
-
-      xhttp.setRequestHeader("Content-type", "application/json");
-      xhttp.send(payload);
-    }
-  }, {
-    key: "requestPromise",
-    value: function requestPromise(_ref2) {
-      var _this2 = this;
-
-      var type = _ref2.type,
-          request = _ref2.request,
-          payload = _ref2.payload,
-          headers = _ref2.headers;
       return new Promise(function (resolve, reject) {
         var xhttp = new XMLHttpRequest();
 
         xhttp.onreadystatechange = function (result) {
           var data = result.currentTarget;
 
-          if (_this2.isDone(data.status, data.readyState)) {
+          if (_this.isDone(data.status, data.readyState)) {
             var response;
 
             try {
@@ -12258,7 +12202,7 @@ var XMLHttpRequestUtil = /*#__PURE__*/function () {
               success: true,
               data: response
             });
-          } else if (_this2.isFail(data.status, data.readyState)) {
+          } else if (_this.isFail(data.status, data.readyState)) {
             reject({
               success: false,
               data: data
@@ -12266,7 +12210,7 @@ var XMLHttpRequestUtil = /*#__PURE__*/function () {
           }
         };
 
-        xhttp.open(type, request);
+        xhttp.open(type, _request);
 
         if (headers.length > 0) {
           for (var i = 0; i < headers.length; i++) {
@@ -53942,15 +53886,17 @@ var __webpack_exports__ = {};
   !*** ./src/app.js ***!
   \********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "../../node_modules/react-dom/index.js");
-/* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
-/* harmony import */ var _components_contextProviders_loginContextProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/contextProviders/loginContextProvider */ "./src/components/contextProviders/loginContextProvider.js");
-/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
-/* harmony import */ var _js_modules_react_toasterComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/modules/react/toasterComponent */ "../js/modules/react/toasterComponent.js");
-/* harmony import */ var _js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../js/modules/react/configContextProvider */ "../js/modules/react/configContextProvider.js");
-/* harmony import */ var _components_contextProviders_itemsContextProvider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/contextProviders/itemsContextProvider */ "./src/components/contextProviders/itemsContextProvider.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./constants */ "./src/constants.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime/runtime */ "../../node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "../../node_modules/react-dom/index.js");
+/* harmony import */ var _components_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/router */ "./src/components/router.js");
+/* harmony import */ var _components_contextProviders_loginContextProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/contextProviders/loginContextProvider */ "./src/components/contextProviders/loginContextProvider.js");
+/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
+/* harmony import */ var _js_modules_react_toasterComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../js/modules/react/toasterComponent */ "../js/modules/react/toasterComponent.js");
+/* harmony import */ var _js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../js/modules/react/configContextProvider */ "../js/modules/react/configContextProvider.js");
+/* harmony import */ var _components_contextProviders_itemsContextProvider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/contextProviders/itemsContextProvider */ "./src/components/contextProviders/itemsContextProvider.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./constants */ "./src/constants.js");
 "use strict;";
 
 
@@ -53963,15 +53909,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_6__.ConfigContextProvider, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_7__.ConfigContextProvider, {
     app: "awsNodeToDoApi"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_js_modules_react_toasterComponent__WEBPACK_IMPORTED_MODULE_5__.ToasterContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_contextProviders_loginContextProvider__WEBPACK_IMPORTED_MODULE_3__.LoginContextProvider, {
-    poolData: _constants__WEBPACK_IMPORTED_MODULE_8__.POOL_DATA
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_contextProviders_itemsContextProvider__WEBPACK_IMPORTED_MODULE_7__.ItemsContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_4__.SpinnerContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_router__WEBPACK_IMPORTED_MODULE_2__.Router, null))))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_js_modules_react_toasterComponent__WEBPACK_IMPORTED_MODULE_6__.ToasterContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_contextProviders_loginContextProvider__WEBPACK_IMPORTED_MODULE_4__.LoginContextProvider, {
+    poolData: _constants__WEBPACK_IMPORTED_MODULE_9__.POOL_DATA
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_contextProviders_itemsContextProvider__WEBPACK_IMPORTED_MODULE_8__.ItemsContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_5__.SpinnerContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_router__WEBPACK_IMPORTED_MODULE_3__.Router, null))))));
 }
 
-react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(App, null), document.getElementById('result'));
+react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(App, null), document.getElementById('result'));
 })();
 
 /******/ })()

@@ -1,6 +1,5 @@
 "use strict;"
 
-import "regenerator-runtime/runtime";
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import { CognitoUser, AuthenticationDetails, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { LoginContext } from '../../contexts';

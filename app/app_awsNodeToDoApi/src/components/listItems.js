@@ -1,7 +1,6 @@
 "use strict;"
 
-import "regenerator-runtime/runtime";
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useState, useReducer, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ItemsContext } from '../contexts';
 import { Item } from './item';
@@ -17,7 +16,9 @@ export const ListItems = () => {
     const itemsContext = React.useContext(ItemsContext);
     const spinnerContext = React.useContext(SpinnerContext);
 
-    const [ version, setVersion ] = useState(0);
+    const ver = useRef(0);
+
+    const [ version, setVersion ] = useState(ver.current);
     const [ collapseRemaining, collapseRemainingDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_SHOW);
     const [ collapseDone, collapseDoneDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_HIDE);
 
@@ -36,23 +37,24 @@ export const ListItems = () => {
         history.push(EDIT);
     }
 
-    const onDoneClick = (id) => itemsContext.itemDone({
-        id,
-        beforeCallback: spinnerContext.showSpinner,
-        doneCallback,
-        failCallback
-    });
+    const onDoneClick = (id) => {
+        spinnerContext.showSpinner();
+        itemsContext.itemDone(id)
+            .then(() => doneCallback())
+            .catch(() => failCallback());
+    }
 
-    const onDeleteClick = (id) => itemsContext.deleteItem({
-        id,
-        beforeCallback: spinnerContext.showSpinner,
-        doneCallback,
-        failCallback
-    });
+    const onDeleteClick = (id) => {
+        spinnerContext.showSpinner();
+        itemsContext.deleteItem(id)
+            .then(() => doneCallback())
+            .catch(() => failCallback());
+    }
 
     const doneCallback = () => {
         spinnerContext.hideSpinner();
-        setVersion(version + 1);
+        ver.current = ver.current + 1;
+        setVersion(ver.current);
     }
 
     const failCallback = () => {
@@ -77,7 +79,7 @@ export const ListItems = () => {
             {items.length === 0 &&
                 <Row className="justify-content-md-center">
                     <Col lg={10}>
-                        <h4>You have no items</h4>
+                        <h4>You have no items to complete</h4>
                     </Col>
                 </Row>
             }
