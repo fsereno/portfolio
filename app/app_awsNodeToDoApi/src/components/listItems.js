@@ -1,5 +1,6 @@
 "use strict;"
 
+import "regenerator-runtime/runtime";
 import React, { useEffect, useState, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ItemsContext } from '../contexts';
@@ -59,17 +60,13 @@ export const ListItems = () => {
         itemsContext.setShowFeedback(true);
     }
 
-    const getItmesDoneCallback = (response) => {
-        spinnerContext.hideSpinner();
-        itemsContext.setItems(response);
-    }
-
     useEffect(() => {
-        itemsContext.getItems({
-            beforeCallback: spinnerContext.showSpinner,
-            doneCallback: getItmesDoneCallback,
-            failCallback
-        });
+        spinnerContext.showSpinner();
+        itemsContext.getItems()
+            .then(response => {
+                spinnerContext.hideSpinner();
+                itemsContext.setItems(response.data);
+            }).catch(() => failCallback());
     }, [version]);
 
     const items = itemsContext.items.filter( x => !x.done);

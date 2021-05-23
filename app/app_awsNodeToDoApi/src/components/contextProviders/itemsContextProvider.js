@@ -19,18 +19,16 @@ export function ItemsContextProvider({ children }) {
     const [items, setItems] = useState([]);
     const [showFeedback, setShowFeedback] = useState(false);
 
-    const getItems = (requestObject) => {
-        XMLHttpRequestUtil.request({
-            ...requestObject,
+    const getItems = () => {
+        return XMLHttpRequestUtil.requestPromise({
             type: "GET",
             request: API_ENDPOINT,
             headers: [{ key: "Authorization", value: loginContext.token.current }]
         });
     }
 
-    const getItem = (requestObject) => {
-        XMLHttpRequestUtil.request({
-            ...requestObject,
+    const getItem = () => {
+        return XMLHttpRequestUtil.requestPromise({
             type: "GET",
             request: `${API_ENDPOINT}/${selectedId.current}`,
             headers: [{ key: "Authorization", value: loginContext.token.current }]
@@ -53,9 +51,8 @@ export function ItemsContextProvider({ children }) {
         updateItem(doneItem, requestObject);
     }
 
-    const updateItem = (item, requestObject) => {
-        XMLHttpRequestUtil.request({
-            ...requestObject,
+    const updateItem = (item) => {
+        return XMLHttpRequestUtil.requestPromise({
             type: "PUT",
             request: `${API_ENDPOINT}/${selectedId.current}`,
             payload: JSON.stringify(item),

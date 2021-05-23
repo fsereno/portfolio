@@ -27,11 +27,10 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
         } else {
 
             if (typeof submitHandler === "function") {
-                submitHandler(state, {
-                    beforeCallback: spinnerContext.showSpinner,
-                    doneCallback,
-                    failCallback
-                });
+                spinnerContext.showSpinner();
+                submitHandler(state)
+                    .then(() => doneCallback())
+                    .catch(() => failCallback());
             }
 
             setShowValidation(false);

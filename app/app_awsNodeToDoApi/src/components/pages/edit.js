@@ -17,32 +17,28 @@ export function Edit() {
 
   const history = useHistory();
 
-  const [ state, dispatch ] = useReducer(itemReducer, ITEM);
-
-  const populateItem = (item) => {
-    spinnerContext.hideSpinner();
-    dispatch({ type: COPY, value: item })
-  };
+  const [state, dispatch] = useReducer(itemReducer, ITEM);
 
   const doneCallback = () => history.push(MANAGE);
 
   const failCallback = () => spinnerContext.hideSpinner();
 
-  useEffect( () => {
-      if (itemsContext.selectedId.current) {
-          itemsContext.getItem({
-            beforeCallback: spinnerContext.showSpinner,
-            doneCallback: populateItem,
-            failCallback
-          });
-      } else {
-          history.push(MANAGE);
-      }
-  },[]);
+  useEffect(() => {
+    if (itemsContext.selectedId.current) {
+      spinnerContext.showSpinner();
+      itemsContext.getItem()
+        .then(response => {
+          spinnerContext.hideSpinner();
+          dispatch({ type: COPY, value: response.data });
+        }).catch(() => failCallback());
+    } else {
+      history.push(MANAGE);
+    }
+  }, []);
 
   return (
     <ContentContainer>
-      <Content title="Edit item"/>
+      <Content title="Edit item" />
       <ItemForm state={state} dispatch={dispatch} submitHandler={itemsContext.updateItem} doneCallback={doneCallback} />
     </ContentContainer>
   )
