@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { ConfigContext } from '../../../../js/modules/react/configContextProvider';
 import { XMLHttpRequestUtil } from '../../../../js/modules/utils/XMLHttpRequestUtil';
+import { STANDARD_ERROR } from '../../constants';
 import { ItemsContext, LoginContext } from '../../contexts';
 import { ContentContainer } from '../contentContainer';
 
@@ -94,7 +95,7 @@ export function ItemsContextProvider({ children }) {
             {children}
             {showFeedback &&
                 <ContentContainer>
-                    <h4 className="text-danger">Sorry, there was an error. Please try again.</h4>
+                    <h4 className="text-danger">{STANDARD_ERROR}</h4>
                 </ContentContainer>
             }
         </ItemsContext.Provider>

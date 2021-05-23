@@ -64,7 +64,7 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
                             <Button className="float-right" id="submit" variant="dark" type="submit">Submit</Button>
                             {showFeedback &&
                                 <ContentContainer>
-                                    <h4 className="text-danger">Sorry, there was an error. Please try again.</h4>
+                                    <h4 className="text-danger">, there was an error. Please try again.</h4>
                                 </ContentContainer>
                             }
                         </Form.Group>

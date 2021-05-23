@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { LoginContext } from '../contexts';
-import { LOGIN, SUCCESS } from '../constants';
+import { LOGIN } from '../constants';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 
 export function LogoutForm() {
