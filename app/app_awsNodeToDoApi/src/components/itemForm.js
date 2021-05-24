@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
-import { DESCRIPTION } from '../constants';
-import { ContentContainer } from './contentContainer';
+import { DESCRIPTION, STANDARD_ERROR } from '../constants';
 
 export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
 
@@ -62,13 +61,15 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Button className="float-right" id="submit" variant="dark" type="submit">Submit</Button>
-                            {showFeedback &&
-                                <ContentContainer>
-                                    <h4 className="text-danger">, there was an error. Please try again.</h4>
-                                </ContentContainer>
-                            }
                         </Form.Group>
                     </Form.Row>
+                        {showFeedback &&
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <h5 className="text-danger edit">{STANDARD_ERROR}</h5>
+                                </Form.Group>
+                            </Form.Row>
+                        }
                 </Form>
             </Col>
         </Row>

@@ -5,9 +5,10 @@ import { useHistory } from 'react-router-dom';
 import { ItemsContext } from '../contexts';
 import { Item } from './item';
 import { Col, Row } from 'react-bootstrap';
-import { EDIT, HIDE, SHOW, COLLAPSE_STATE_SHOW, COLLAPSE_STATE_HIDE } from '../constants';
+import { EDIT, HIDE, SHOW, COLLAPSE_STATE_SHOW, COLLAPSE_STATE_HIDE, STANDARD_ERROR } from '../constants';
 import { collapseReducer } from '../reducers/collapseReducer';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
+import { ContentContainer } from './contentContainer';
 
 export const ListItems = () => {
 
@@ -19,6 +20,7 @@ export const ListItems = () => {
     const ver = useRef(0);
 
     const [ version, setVersion ] = useState(ver.current);
+    const [ showFeedback, setShowFeedback ] = useState(false);
     const [ collapseRemaining, collapseRemainingDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_SHOW);
     const [ collapseDone, collapseDoneDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_HIDE);
 
@@ -54,12 +56,13 @@ export const ListItems = () => {
     const doneCallback = () => {
         spinnerContext.hideSpinner();
         ver.current = ver.current + 1;
+        setShowFeedback(false);
         setVersion(ver.current);
     }
 
     const failCallback = () => {
         spinnerContext.hideSpinner();
-        itemsContext.setShowFeedback(true);
+        setShowFeedback(true);
     }
 
     useEffect(() => {
@@ -67,12 +70,12 @@ export const ListItems = () => {
         itemsContext.getItems()
             .then(response => {
                 spinnerContext.hideSpinner();
-                itemsContext.setItems(response.data);
+                itemsContext.setItems(response.data || []);
             }).catch(() => failCallback());
     }, [version]);
 
-    const items = itemsContext.items.filter( x => !x.done);
-    const doneItems = itemsContext.items.filter( x => x.done);
+    const items = itemsContext.getRemainingItems();
+    const doneItems = itemsContext.getDoneItems();
 
     return (
         <>
@@ -108,6 +111,11 @@ export const ListItems = () => {
                         }
                     </Col>
                 </Row>
+            }
+            {showFeedback &&
+                <ContentContainer>
+                    <h5 className="text-danger items">{STANDARD_ERROR}</h5>
+                </ContentContainer>
             }
         </>
     );

@@ -18,7 +18,6 @@ export function ItemsContextProvider({ children }) {
     const selectedId = useRef();
 
     const [items, setItems] = useState([]);
-    const [showFeedback, setShowFeedback] = useState(false);
 
     const getItems = () => {
         return XMLHttpRequestUtil.request({
@@ -77,6 +76,10 @@ export function ItemsContextProvider({ children }) {
         });
     }
 
+    const getRemainingItems = () => Array.isArray(items) ? items.filter( x => !x.done) : [];
+
+    const getDoneItems = () => Array.isArray(items) ? items.filter( x => x.done) : [];
+
     const context = {
         items,
         setItems,
@@ -87,17 +90,13 @@ export function ItemsContextProvider({ children }) {
         updateItem,
         itemDone,
         createItem,
-        setShowFeedback
+        getRemainingItems,
+        getDoneItems
     };
 
     return (
         <ItemsContext.Provider value={context}>
             {children}
-            {showFeedback &&
-                <ContentContainer>
-                    <h4 className="text-danger">{STANDARD_ERROR}</h4>
-                </ContentContainer>
-            }
         </ItemsContext.Provider>
     )
 }
