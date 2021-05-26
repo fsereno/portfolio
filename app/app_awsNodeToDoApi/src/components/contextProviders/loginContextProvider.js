@@ -30,6 +30,8 @@ export const LoginContextProvider = ({children, poolData}) => {
                     resolve(currentUser);
                 }
             });
+        } else {
+            reject(undefined);
         }
     });
 
