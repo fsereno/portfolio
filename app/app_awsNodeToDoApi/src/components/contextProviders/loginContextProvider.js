@@ -5,9 +5,9 @@ import { CognitoUser, AuthenticationDetails, CognitoUserPool } from 'amazon-cogn
 import { LoginContext } from '../../contexts';
 import { SUCCESS } from "../../constants";
 
-export const LoginContextProvider = ({children, poolData}) => {
+export const LoginContextProvider = ({ children, poolData }) => {
 
-    const [ authenticated, setAuthenticated ] = useState(false);
+    const [authenticated, setAuthenticated] = useState(false);
 
     const userPool = new CognitoUserPool(poolData);
 
@@ -18,14 +18,13 @@ export const LoginContextProvider = ({children, poolData}) => {
 
         const currentUser = userPool.getCurrentUser();
 
-        if (currentUser != null ) {
+        if (currentUser != null) {
 
             currentUser.getSession(err => {
 
-                if (err != null && currentUser.signInUserSession != null ) {
+                if (err != null && currentUser.signInUserSession != null) {
                     reject(undefined);
                     console.error(err.message);
-
                 } else {
                     resolve(currentUser);
                 }
@@ -40,7 +39,7 @@ export const LoginContextProvider = ({children, poolData}) => {
             if (currentUser) {
                 currentUser.globalSignOut({
                     onSuccess: function (result) {
-                        if(result === SUCCESS) {
+                        if (result === SUCCESS) {
                             setAuthenticated(false);
                             resolve({ success: true });
                         }
@@ -52,7 +51,7 @@ export const LoginContextProvider = ({children, poolData}) => {
             }
 
         }).catch((error) => {
-            reject({ success: false, error});
+            reject({ success: false, error });
         });
     });
 
@@ -73,13 +72,12 @@ export const LoginContextProvider = ({children, poolData}) => {
         const cognitoUser = new CognitoUser(userData);
 
         cognitoUser.authenticateUser(authenticationDetails, {
-            onSuccess: function(result) {
-
+            onSuccess: function (result) {
                 setAuthenticated(true);
-                resolve({success: true});
+                resolve({ success: true });
             },
-            onFailure: function(error) {
-                reject({success: false, error});
+            onFailure: function (error) {
+                reject({ success: false, error });
             },
         });
     });
@@ -92,13 +90,13 @@ export const LoginContextProvider = ({children, poolData}) => {
                     token.current = currentUser.signInUserSession.idToken.jwtToken;
                     username.current = currentUser.username;
 
-                    if(!authenticated) {
+                    if (!authenticated) {
                         setAuthenticated(true);
                     }
                 }
             })
             .catch(() => setAuthenticated(false));
-    },[authenticated]);
+    }, []);
 
     const context = {
         authenticated,
@@ -106,8 +104,7 @@ export const LoginContextProvider = ({children, poolData}) => {
         loginUser,
         logoutUser,
         token,
-        username,
-        getCurrentUser
+        username
     };
 
     return (

@@ -10232,15 +10232,14 @@ var LoginContextProvider = function LoginContextProvider(_ref) {
     })["catch"](function () {
       return setAuthenticated(false);
     });
-  }, [authenticated]);
+  }, []);
   var context = {
     authenticated: authenticated,
     setAuthenticated: setAuthenticated,
     loginUser: loginUser,
     logoutUser: logoutUser,
     token: token,
-    username: username,
-    getCurrentUser: getCurrentUser
+    username: username
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_2__.LoginContext.Provider, {
     value: context
