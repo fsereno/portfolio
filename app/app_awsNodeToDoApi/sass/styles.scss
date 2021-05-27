@@ -7,10 +7,5 @@ body {
         a.active {
             border-bottom: 1px solid $white;
         }
-        .navbar-nav {
-            @media screen and (max-width: $small) {
-                margin: auto;
-            }
-        }
     }
 }

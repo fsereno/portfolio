@@ -106,7 +106,8 @@ export const LoginContextProvider = ({children, poolData}) => {
         loginUser,
         logoutUser,
         token,
-        username
+        username,
+        getCurrentUser
     };
 
     return (

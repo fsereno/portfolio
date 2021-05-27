@@ -12,6 +12,7 @@ import { Logout } from './pages/logout';
 import { Register } from './pages/register';
 import { Edit } from './pages/edit';
 import { Create } from './pages/create';
+import { ProtectedRoute } from './protectedRoute';
 
 export const Router = () => {
 
@@ -47,16 +48,16 @@ export const Router = () => {
                     <Register />
                 </Route>
                 <Route path={MANAGE}>
-                    <Manage />
+                    <ProtectedRoute Component={Manage}/>
                 </Route>
                 <Route path={EDIT}>
-                    <Edit/>
+                    <ProtectedRoute Component={Edit}/>
                 </Route>
                 <Route path={CREATE}>
-                    <Create />
+                    <ProtectedRoute Component={Create} />
                 </Route>
                 <Route path={LOGOUT}>
-                    <Logout />
+                    <ProtectedRoute Component={Logout} />
                 </Route>
             </Switch>
         </HashRouter>
