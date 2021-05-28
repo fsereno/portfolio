@@ -11,15 +11,15 @@ export function Unauthorised() {
 
   const history = useHistory();
 
+  const onLoginClick = (e) => { e.preventDefault(); history.push(LOGIN)}
+
+  const onRegisterClick = (e) => { e.preventDefault(); history.push(REGISTER)}
+
   return (
     <ContentContainer>
       <Content title="Unauthorised!"/>
-      <p>You must first log in to access this route.</p>
-      <p>Please create a new user, or log in with an existing user.</p>
-      <div className="mt-4">
-        <Button className="mr-3" variant="dark" type="button" onClick={() => history.push(LOGIN)}>Login</Button>
-        <Button variant="dark" type="button" onClick={() => history.push(REGISTER)}>Create a user</Button>
-      </div>
+      <p>You must first <a href="#" onClick={onLoginClick}>Log in</a> to access this route.</p>
+      <p>Please <a href="#" onClick={onRegisterClick}>Create a new user</a>, or log in with an existing user.</p>
     </ContentContainer>
   )
 }

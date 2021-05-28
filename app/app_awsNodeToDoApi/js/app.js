@@ -11181,7 +11181,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contentContainer */ "./src/components/contentContainer.js");
 /* harmony import */ var _content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../content */ "./src/components/content.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Button.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
 "use strict;";
 
@@ -11193,24 +11192,26 @@ __webpack_require__.r(__webpack_exports__);
 
 function Unauthorised() {
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useHistory)();
+
+  var onLoginClick = function onLoginClick(e) {
+    e.preventDefault();
+    history.push(_constants__WEBPACK_IMPORTED_MODULE_3__.LOGIN);
+  };
+
+  var onRegisterClick = function onRegisterClick(e) {
+    e.preventDefault();
+    history.push(_constants__WEBPACK_IMPORTED_MODULE_3__.REGISTER);
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_1__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_content__WEBPACK_IMPORTED_MODULE_2__.Content, {
     title: "Unauthorised!"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "You must first log in to access this route."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Please create a new user, or log in with an existing user."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "mt-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
-    className: "mr-3",
-    variant: "dark",
-    type: "button",
-    onClick: function onClick() {
-      return history.push(_constants__WEBPACK_IMPORTED_MODULE_3__.LOGIN);
-    }
-  }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
-    variant: "dark",
-    type: "button",
-    onClick: function onClick() {
-      return history.push(_constants__WEBPACK_IMPORTED_MODULE_3__.REGISTER);
-    }
-  }, "Create a user")));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "You must first ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "#",
+    onClick: onLoginClick
+  }, "Log in"), " to access this route."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Please ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "#",
+    onClick: onRegisterClick
+  }, "Create a new user"), ", or log in with an existing user."));
 }
 
 /***/ }),
