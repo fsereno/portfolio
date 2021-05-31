@@ -1,28 +1,23 @@
 "use strict;"
 
-import React, { useEffect, useState, useReducer, useRef } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ItemsContext } from '../contexts';
 import { Item } from './item';
 import { Col, Row } from 'react-bootstrap';
 import { EDIT, HIDE, SHOW, COLLAPSE_STATE_SHOW, COLLAPSE_STATE_HIDE, STANDARD_ERROR } from '../constants';
 import { collapseReducer } from '../reducers/collapseReducer';
-import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
-import { ContentContainer } from './contentContainer';
 
-export const ListItems = () => {
+export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCallback, failCallback}) => {
 
     const history = useHistory();
 
     const itemsContext = React.useContext(ItemsContext);
-    const spinnerContext = React.useContext(SpinnerContext);
-
-    const ver = useRef(0);
-
-    const [ version, setVersion ] = useState(ver.current);
-    const [ showFeedback, setShowFeedback ] = useState(false);
     const [ collapseRemaining, collapseRemainingDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_SHOW);
     const [ collapseDone, collapseDoneDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_HIDE);
+
+    const items = itemsContext.getRemainingItems();
+    const doneItems = itemsContext.getDoneItems();
 
     const onHideRemainingClick = (event) => {
         event.preventDefault();
@@ -40,42 +35,27 @@ export const ListItems = () => {
     }
 
     const onDoneClick = (id) => {
-        spinnerContext.showSpinner();
+        showSpinner();
         itemsContext.itemDone(id)
             .then(() => doneCallback())
             .catch(() => failCallback());
     }
 
     const onDeleteClick = (id) => {
-        spinnerContext.showSpinner();
+        showSpinner();
         itemsContext.deleteItem(id)
             .then(() => doneCallback())
             .catch(() => failCallback());
     }
 
-    const doneCallback = () => {
-        spinnerContext.hideSpinner();
-        ver.current = ver.current + 1;
-        setShowFeedback(false);
-        setVersion(ver.current);
-    }
-
-    const failCallback = () => {
-        spinnerContext.hideSpinner();
-        setShowFeedback(true);
-    }
-
     useEffect(() => {
-        spinnerContext.showSpinner();
+        showSpinner();
         itemsContext.getItems()
             .then(response => {
-                spinnerContext.hideSpinner();
+                hideSpinner();
                 itemsContext.setItems(response.data || []);
             }).catch(() => failCallback());
     }, [version]);
-
-    const items = itemsContext.getRemainingItems();
-    const doneItems = itemsContext.getDoneItems();
 
     return (
         <>
@@ -112,11 +92,6 @@ export const ListItems = () => {
                     </Col>
                 </Row>
             }
-            {showFeedback &&
-                <ContentContainer>
-                    <h5 className="text-danger items">{STANDARD_ERROR}</h5>
-                </ContentContainer>
-            }
         </>
     );
-}
+}, (prev, next) => prev.version === next.version);
