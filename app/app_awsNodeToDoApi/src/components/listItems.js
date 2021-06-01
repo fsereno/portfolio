@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { ItemsContext } from '../contexts';
 import { Item } from './item';
 import { Col, Row } from 'react-bootstrap';
-import { EDIT, HIDE, SHOW, COLLAPSE_STATE_SHOW, COLLAPSE_STATE_HIDE, STANDARD_ERROR } from '../constants';
+import { EDIT, HIDE, SHOW, COLLAPSE_STATE_SHOW, COLLAPSE_STATE_HIDE } from '../constants';
 import { collapseReducer } from '../reducers/collapseReducer';
 
 export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCallback, failCallback}) => {

@@ -10052,6 +10052,7 @@ function ItemsContextProvider(_ref) {
     var newItem = _objectSpread({}, item);
 
     newItem.username = loginContext.username.current;
+    newItem.modifiedOn = new Date().getTime();
     return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "POST",
       request: API_ENDPOINT,

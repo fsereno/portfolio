@@ -68,6 +68,8 @@ export function ItemsContextProvider({ children }) {
 
         newItem.username = loginContext.username.current;
 
+        newItem.modifiedOn = new Date().getTime();
+
         return XMLHttpRequestUtil.request({
             type: "POST",
             request: API_ENDPOINT,
