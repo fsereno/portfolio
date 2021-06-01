@@ -96,7 +96,7 @@ export const LoginContextProvider = ({ children, poolData }) => {
                 }
             })
             .catch(() => setAuthenticated(false));
-    }, []);
+    }, [authenticated]);
 
     const context = {
         authenticated,

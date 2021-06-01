@@ -10233,7 +10233,7 @@ var LoginContextProvider = function LoginContextProvider(_ref) {
     })["catch"](function () {
       return setAuthenticated(false);
     });
-  }, []);
+  }, [authenticated]);
   var context = {
     authenticated: authenticated,
     setAuthenticated: setAuthenticated,
