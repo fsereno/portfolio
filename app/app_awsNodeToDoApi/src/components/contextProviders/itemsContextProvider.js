@@ -3,9 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { ConfigContext } from '../../../../js/modules/react/configContextProvider';
 import { XMLHttpRequestUtil } from '../../../../js/modules/utils/XMLHttpRequestUtil';
-import { STANDARD_ERROR } from '../../constants';
 import { ItemsContext, LoginContext } from '../../contexts';
-import { ContentContainer } from '../contentContainer';
 
 export function ItemsContextProvider({ children }) {
 
@@ -18,6 +16,8 @@ export function ItemsContextProvider({ children }) {
     const selectedId = useRef();
 
     const [items, setItems] = useState([]);
+
+    const _getModifiedOnTime = () => new Date().getTime();
 
     const getItems = () => {
         return XMLHttpRequestUtil.request({
@@ -54,6 +54,9 @@ export function ItemsContextProvider({ children }) {
     }
 
     const updateItem = (item) => {
+
+        item.modifiedOn = _getModifiedOnTime();
+
         return XMLHttpRequestUtil.request({
             type: "PUT",
             request: `${API_ENDPOINT}/${selectedId.current}`,
@@ -67,8 +70,7 @@ export function ItemsContextProvider({ children }) {
         const newItem = {...item};
 
         newItem.username = loginContext.username.current;
-
-        newItem.modifiedOn = new Date().getTime();
+        newItem.modifiedOn = _getModifiedOnTime();
 
         return XMLHttpRequestUtil.request({
             type: "POST",

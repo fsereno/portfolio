@@ -9,7 +9,8 @@ export const ITEM = {
     username: "",
     description: "",
     done: false,
-    targetDate: ""
+    targetDate: "",
+    modifiedOn: 0
 }
 
 export const COLLAPSE_STATE_SHOW = {

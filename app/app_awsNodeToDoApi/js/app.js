@@ -9950,9 +9950,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var _js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../js/modules/react/configContextProvider */ "../js/modules/react/configContextProvider.js");
 /* harmony import */ var _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../js/modules/utils/XMLHttpRequestUtil */ "../js/modules/utils/XMLHttpRequestUtil.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
-/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
-/* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../contentContainer */ "./src/components/contentContainer.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
 "use strict;";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -9977,12 +9975,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
 function ItemsContextProvider(_ref) {
   var children = _ref.children;
   var configContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_configContextProvider__WEBPACK_IMPORTED_MODULE_1__.ConfigContext);
-  var loginContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_4__.LoginContext);
+  var loginContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__.LoginContext);
   var endpoints = configContext.appConfig.endpoints;
   var API_ENDPOINT = "".concat(endpoints.base, "/").concat(endpoints.api);
   var selectedId = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
@@ -9991,6 +9987,10 @@ function ItemsContextProvider(_ref) {
       _useState2 = _slicedToArray(_useState, 2),
       items = _useState2[0],
       setItems = _useState2[1];
+
+  var _getModifiedOnTime = function _getModifiedOnTime() {
+    return new Date().getTime();
+  };
 
   var getItems = function getItems() {
     return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
@@ -10037,6 +10037,7 @@ function ItemsContextProvider(_ref) {
   };
 
   var updateItem = function updateItem(item) {
+    item.modifiedOn = _getModifiedOnTime();
     return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "PUT",
       request: "".concat(API_ENDPOINT, "/").concat(selectedId.current),
@@ -10052,7 +10053,7 @@ function ItemsContextProvider(_ref) {
     var newItem = _objectSpread({}, item);
 
     newItem.username = loginContext.username.current;
-    newItem.modifiedOn = new Date().getTime();
+    newItem.modifiedOn = _getModifiedOnTime();
     return _js_modules_utils_XMLHttpRequestUtil__WEBPACK_IMPORTED_MODULE_2__.XMLHttpRequestUtil.request({
       type: "POST",
       request: API_ENDPOINT,
@@ -10089,7 +10090,7 @@ function ItemsContextProvider(_ref) {
     getRemainingItems: getRemainingItems,
     getDoneItems: getDoneItems
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_4__.ItemsContext.Provider, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_3__.ItemsContext.Provider, {
     value: context
   }, children);
 }
@@ -11728,7 +11729,8 @@ var ITEM = {
   username: "",
   description: "",
   done: false,
-  targetDate: ""
+  targetDate: "",
+  modifiedOn: 0
 };
 var COLLAPSE_STATE_SHOW = {
   show: true,
