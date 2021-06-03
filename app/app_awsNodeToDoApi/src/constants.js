@@ -25,9 +25,6 @@ export const COLLAPSE_STATE_HIDE = {
     class: "bi-plus-square"
 };
 
-export const CHECKED_SQUARE = "bi-check2-square";
-export const EMPTY_SQUARE = "bi-square";
-
 export const HIDE = "hide";
 export const SHOW = "show";
 export const COPY = "copy";

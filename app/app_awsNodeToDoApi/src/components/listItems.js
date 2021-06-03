@@ -16,9 +16,7 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
     const itemsContext = React.useContext(ItemsContext);
     const [ collapseRemaining, collapseRemainingDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_SHOW);
     const [ collapseDone, collapseDoneDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_HIDE);
-
-
-    const [ hide, setHide ] = useState(true);
+    const [ hideItems, setHideItems ] = useState(true);
 
     const items = itemsContext.getRemainingItems();
     const doneItems = itemsContext.getDoneItems();
@@ -62,7 +60,7 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
 
                 itemsContext.setItems(items);
                 hideSpinner();
-                setHide(false);
+                setHideItems(false);
             }).catch(() => failCallback());
     }, [version]);
 
@@ -76,7 +74,7 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
                 </Row>
             }
             {items.length > 0 &&
-                <Row className={`justify-content-md-center ${hide ? "d-none" : ""}`}>
+                <Row className={`justify-content-md-center ${hideItems ? "d-none" : ""}`}>
                     <Col lg={10}>
                         <h4>Remaining items <a className="float-right text-dark" href="#" onClick={onHideRemainingClick}>{collapseRemaining.text}<i className={`bi ${collapseRemaining.class} mx-2`}></i></a></h4>
                         <hr className="border-dark" />
@@ -89,7 +87,7 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
                 </Row>
             }
             {doneItems.length > 0 &&
-                <Row className={`justify-content-md-center mt-3 ${hide ? "d-none" : ""}`}>
+                <Row className={`justify-content-md-center mt-3 ${hideItems ? "d-none" : ""}`}>
                     <Col lg={10}>
                         <h4>Completed items <a className="float-right text-dark" href="#" onClick={onHideDoneClick}>{collapseDone.text}<i className={`bi ${collapseDone.class} mx-2`}></i></a></h4>
                         <hr className="border-dark" />

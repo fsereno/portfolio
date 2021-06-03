@@ -10268,18 +10268,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
 "use strict;";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -10288,11 +10276,6 @@ var Item = function Item(_ref) {
       onDeleteClick = _ref.onDeleteClick,
       onEditClick = _ref.onEditClick,
       onDoneClick = _ref.onDoneClick;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(_constants__WEBPACK_IMPORTED_MODULE_1__.EMPTY_SQUARE),
-      _useState2 = _slicedToArray(_useState, 2),
-      doneClass = _useState2[0],
-      setDoneClass = _useState2[1];
 
   var _doneOnClick = function _doneOnClick() {
     return onDoneClick(item.id);
@@ -10306,19 +10289,13 @@ var Item = function Item(_ref) {
   }, item.description), !item.done && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
     "aria-label": "Basic example"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
-    className: "bg-dark btn btn-sm px-1 py-0 text-white border-0",
+    className: "bg-dark btn btn-sm px-1 text-white border-0",
     size: "sm",
-    onClick: _doneOnClick,
-    onMouseOver: function onMouseOver() {
-      return setDoneClass(_constants__WEBPACK_IMPORTED_MODULE_1__.CHECKED_SQUARE);
-    },
-    onMouseOut: function onMouseOut() {
-      return setDoneClass(_constants__WEBPACK_IMPORTED_MODULE_1__.EMPTY_SQUARE);
-    }
+    onClick: _doneOnClick
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-    className: "bi ".concat(doneClass)
+    className: "bi-check2"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
-    className: "bg-dark btn btn-sm px-1 py-0 text-white border-0",
+    className: "bg-dark btn btn-sm px-1 text-white border-0",
     size: "sm",
     onClick: function onClick() {
       return onEditClick(item.id);
@@ -10326,7 +10303,7 @@ var Item = function Item(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "bi bi-pencil-square"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
-    className: "bg-dark btn btn-sm px-1 py-0 text-white border-0",
+    className: "bg-dark btn btn-sm px-1 text-white border-0",
     size: "sm",
     onClick: function onClick() {
       return onDeleteClick(item.id);
@@ -10334,11 +10311,11 @@ var Item = function Item(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "bi bi-trash"
   }))), item.done && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
-    className: "bg-dark btn btn-sm px-1 py-0 text-white border-0",
+    className: "bg-dark btn btn-sm px-1 text-white border-0",
     size: "sm",
     disabled: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-    className: "bi bi-check2-square"
+    className: "bi bi-check2"
   })));
 };
 
@@ -10524,8 +10501,8 @@ var ListItems = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(function (_
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
       _useState2 = _slicedToArray(_useState, 2),
-      hide = _useState2[0],
-      setHide = _useState2[1];
+      hideItems = _useState2[0],
+      setHideItems = _useState2[1];
 
   var items = itemsContext.getRemainingItems();
   var doneItems = itemsContext.getDoneItems();
@@ -10578,7 +10555,7 @@ var ListItems = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(function (_
       items.sort(_utils_modifiedOnComparerDesc__WEBPACK_IMPORTED_MODULE_5__.modifiedOnComparerDesc);
       itemsContext.setItems(items);
       hideSpinner();
-      setHide(false);
+      setHideItems(false);
     })["catch"](function () {
       return failCallback();
     });
@@ -10588,7 +10565,7 @@ var ListItems = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(function (_
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     lg: 10
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "You have no items to complete"))), items.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
-    className: "justify-content-md-center ".concat(hide ? "d-none" : "")
+    className: "justify-content-md-center ".concat(hideItems ? "d-none" : "")
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     lg: 10
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Remaining items ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -10610,7 +10587,7 @@ var ListItems = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(function (_
       onEditClick: onEditClick
     });
   })))), doneItems.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
-    className: "justify-content-md-center mt-3 ".concat(hide ? "d-none" : "")
+    className: "justify-content-md-center mt-3 ".concat(hideItems ? "d-none" : "")
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     lg: 10
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Completed items ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -11710,8 +11687,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ITEM": () => (/* binding */ ITEM),
 /* harmony export */   "COLLAPSE_STATE_SHOW": () => (/* binding */ COLLAPSE_STATE_SHOW),
 /* harmony export */   "COLLAPSE_STATE_HIDE": () => (/* binding */ COLLAPSE_STATE_HIDE),
-/* harmony export */   "CHECKED_SQUARE": () => (/* binding */ CHECKED_SQUARE),
-/* harmony export */   "EMPTY_SQUARE": () => (/* binding */ EMPTY_SQUARE),
 /* harmony export */   "HIDE": () => (/* binding */ HIDE),
 /* harmony export */   "SHOW": () => (/* binding */ SHOW),
 /* harmony export */   "COPY": () => (/* binding */ COPY),
@@ -11752,8 +11727,6 @@ var COLLAPSE_STATE_HIDE = {
   text: "Show",
   "class": "bi-plus-square"
 };
-var CHECKED_SQUARE = "bi-check2-square";
-var EMPTY_SQUARE = "bi-square";
 var HIDE = "hide";
 var SHOW = "show";
 var COPY = "copy";
