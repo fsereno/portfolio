@@ -1,12 +1,13 @@
 "use strict;"
 
-import React, { useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ItemsContext } from '../contexts';
 import { Item } from './item';
 import { Col, Row } from 'react-bootstrap';
 import { EDIT, HIDE, SHOW, COLLAPSE_STATE_SHOW, COLLAPSE_STATE_HIDE } from '../constants';
 import { collapseReducer } from '../reducers/collapseReducer';
+import { modifiedOnComparerDesc } from '../utils/modifiedOnComparerDesc';
 
 export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCallback, failCallback}) => {
 
@@ -15,6 +16,9 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
     const itemsContext = React.useContext(ItemsContext);
     const [ collapseRemaining, collapseRemainingDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_SHOW);
     const [ collapseDone, collapseDoneDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_HIDE);
+
+
+    const [ hide, setHide ] = useState(true);
 
     const items = itemsContext.getRemainingItems();
     const doneItems = itemsContext.getDoneItems();
@@ -52,8 +56,13 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
         showSpinner();
         itemsContext.getItems()
             .then(response => {
+
+                const items = response.data || [];
+                items.sort(modifiedOnComparerDesc);
+
+                itemsContext.setItems(items);
                 hideSpinner();
-                itemsContext.setItems(response.data || []);
+                setHide(false);
             }).catch(() => failCallback());
     }, [version]);
 
@@ -67,7 +76,7 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
                 </Row>
             }
             {items.length > 0 &&
-                <Row className="justify-content-md-center">
+                <Row className={`justify-content-md-center ${hide ? "d-none" : ""}`}>
                     <Col lg={10}>
                         <h4>Remaining items <a className="float-right text-dark" href="#" onClick={onHideRemainingClick}>{collapseRemaining.text}<i className={`bi ${collapseRemaining.class} mx-2`}></i></a></h4>
                         <hr className="border-dark" />
@@ -80,7 +89,7 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
                 </Row>
             }
             {doneItems.length > 0 &&
-                <Row className="justify-content-md-center mt-3">
+                <Row className={`justify-content-md-center mt-3 ${hide ? "d-none" : ""}`}>
                     <Col lg={10}>
                         <h4>Completed items <a className="float-right text-dark" href="#" onClick={onHideDoneClick}>{collapseDone.text}<i className={`bi ${collapseDone.class} mx-2`}></i></a></h4>
                         <hr className="border-dark" />
