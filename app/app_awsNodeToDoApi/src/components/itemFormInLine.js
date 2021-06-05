@@ -31,8 +31,7 @@ export const ItemFormInLine = ({state, dispatch, submitHandler, doneCallback}) =
                     .then(() => doneCallback())
                     .catch(() => failCallback());
             }
-
-            dispatch({ type: DESCRIPTION, value: "" });
+            
             setShowValidation(false);
         }
     }
@@ -43,7 +42,7 @@ export const ItemFormInLine = ({state, dispatch, submitHandler, doneCallback}) =
                 <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
                     <Form.Row>
                         <Form.Label>
-                            Add a new task to do:
+                            Describe a task to do:
                         </Form.Label>
                         <InputGroup>
                             <Form.Control

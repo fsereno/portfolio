@@ -5,9 +5,9 @@ import { ContentContainer } from '../contentContainer';
 import { Content } from '../content';
 import { ListItems } from '../listItems';
 import { SpinnerContext } from '../../../../js/modules/react/spinnerComponent';
-import { ITEM, STANDARD_ERROR } from '../../constants';
+import { ITEM, STANDARD_ERROR, DESCRIPTION } from '../../constants';
 import { itemReducer } from '../../reducers/itemReducer';
-import { ItemFormInLine } from '../ItemFormInLine';
+import { TaskItemForm } from '../taskItemForm';
 import { ItemsContext } from '../../contexts';
 
 export function Manage() {
@@ -32,6 +32,7 @@ export function Manage() {
     spinnerContext.hideSpinner();
     incrementVersion();
     setShowError(false);
+    dispatch({ type: DESCRIPTION, value: "" });
   }
 
   const failCallback = () => {
@@ -42,7 +43,7 @@ export function Manage() {
   return (
     <ContentContainer>
       <Content title="Manage" centre={true} />
-      <ItemFormInLine state={state} dispatch={dispatch} submitHandler={itemsContext.createItem} doneCallback={doneCallback} />
+      <TaskItemForm state={state} dispatch={dispatch} submitHandler={itemsContext.createItem} doneCallback={doneCallback} />
       <ListItems
         showSpinner={spinnerContext.showSpinner}
         hideSpinner={spinnerContext.hideSpinner}
