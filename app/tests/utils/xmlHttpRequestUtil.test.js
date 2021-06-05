@@ -3,7 +3,7 @@
 import { expect } from 'chai';
 import { XMLHttpRequestUtil } from '../../js/modules/utils/xmlHttpRequestUtil';
 
-describe("xmlHttpRequestUtil", () => {
+describe("XMLHttpRequestUtil", () => {
     describe("isDone", () => {
         it("Should return true when status is 200 and readyState is 4", () => {
             const result = XMLHttpRequestUtil.isDone(200, 4);
