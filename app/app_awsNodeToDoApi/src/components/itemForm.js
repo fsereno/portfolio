@@ -5,7 +5,7 @@ import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 import { DESCRIPTION, STANDARD_ERROR } from '../constants';
 
-export const ItemFormInLine = ({state, dispatch, submitHandler, doneCallback}) => {
+export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
 
     const [ showValidation, setShowValidation ] = useState(false);
     const [ showFeedback, setShowFeedback ] = useState(false);
@@ -31,7 +31,7 @@ export const ItemFormInLine = ({state, dispatch, submitHandler, doneCallback}) =
                     .then(() => doneCallback())
                     .catch(() => failCallback());
             }
-            
+
             setShowValidation(false);
         }
     }
@@ -55,7 +55,7 @@ export const ItemFormInLine = ({state, dispatch, submitHandler, doneCallback}) =
                                 required
                             />
                             <InputGroup.Append className="shadow-lg">
-                                <Button className="rounded-right" id="submit" variant="dark" type="submit">Add</Button>
+                                <Button className="rounded-right" id="submit" variant="dark" type="submit">Submit</Button>
                             </InputGroup.Append>
                             <Form.Control.Feedback type="invalid">
                                 Please enter a value.

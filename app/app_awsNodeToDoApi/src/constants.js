@@ -34,7 +34,6 @@ export const REGISTER = "/register";
 export const LOGIN = "/login";
 export const MANAGE = "/manage";
 export const EDIT = "/edit";
-export const CREATE = "/create";
 export const LOGOUT = "/logout";
 export const TOKEN = 'token';
 export const USERNAME = 'username';

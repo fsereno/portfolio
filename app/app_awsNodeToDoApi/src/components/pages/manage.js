@@ -7,7 +7,7 @@ import { ListItems } from '../listItems';
 import { SpinnerContext } from '../../../../js/modules/react/spinnerComponent';
 import { ITEM, STANDARD_ERROR, DESCRIPTION } from '../../constants';
 import { itemReducer } from '../../reducers/itemReducer';
-import { TaskItemForm } from '../taskItemForm';
+import { ItemForm } from '../itemForm';
 import { ItemsContext } from '../../contexts';
 
 export function Manage() {
@@ -43,7 +43,7 @@ export function Manage() {
   return (
     <ContentContainer>
       <Content title="Manage" centre={true} />
-      <TaskItemForm state={state} dispatch={dispatch} submitHandler={itemsContext.createItem} doneCallback={doneCallback} />
+      <ItemForm state={state} dispatch={dispatch} submitHandler={itemsContext.createItem} doneCallback={doneCallback} />
       <ListItems
         showSpinner={spinnerContext.showSpinner}
         hideSpinner={spinnerContext.hideSpinner}
