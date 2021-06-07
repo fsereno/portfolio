@@ -1,7 +1,7 @@
 "use strict;"
 
 import React, { useState } from 'react';
-import { Button, ButtonGroup, ListGroup } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 
 export const Item = ({item, onDeleteClick, onEditClick, onDoneClick}) => {
 
@@ -11,6 +11,16 @@ export const Item = ({item, onDeleteClick, onEditClick, onDoneClick}) => {
         event.preventDefault();
         setChecked(true);
         onDoneClick(item.id);
+    }
+
+    const _onDeleteClick = event => {
+        event.preventDefault();
+        onDeleteClick(item.id);
+    }
+
+    const _onEditClick = event => {
+        event.preventDefault();
+        onEditClick(item.id);
     }
 
     return (
@@ -24,14 +34,14 @@ export const Item = ({item, onDeleteClick, onEditClick, onDoneClick}) => {
                     :   <>
                             <input type="checkbox" checked={checked} onChange={_doneOnClick} />
                             <a href="#" className="lead flex-fill ml-3 my-0" onClick={_doneOnClick}>{item.description}</a>
-                            <ButtonGroup aria-label="Basic example">
-                                <Button className="bg-dark btn btn-sm px-1 text-white border-0" size="sm" onClick={() => onEditClick(item.id)}>
+                            <div>
+                                <a herf="#" className="bg-dark btn btn-sm px-2 mr-2 text-white border-0" size="sm" onClick={_onEditClick}>
                                     <i className="bi bi-pencil-square"></i>
-                                </Button>
-                                <Button className="bg-dark btn btn-sm px-1 text-white border-0" size="sm" onClick={() => onDeleteClick(item.id)}>
-                                    <i className="bi bi-trash"></i>
-                                </Button>
-                            </ButtonGroup>
+                                </a>
+                                <a href="#" className="bg-dark btn btn-sm px-2 mr-2 text-white border-0" size="sm" onClick={_onDeleteClick}>
+                                    <i className="bi bi-x-square"></i>
+                                </a>
+                            </div>
                         </>
                 }
             </ListGroup.Item>

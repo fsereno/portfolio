@@ -10263,8 +10263,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/ListGroup.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/ButtonGroup.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Button.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -10298,6 +10296,16 @@ var Item = function Item(_ref) {
     onDoneClick(item.id);
   };
 
+  var _onDeleteClick = function _onDeleteClick(event) {
+    event.preventDefault();
+    onDeleteClick(item.id);
+  };
+
+  var _onEditClick = function _onEditClick(event) {
+    event.preventDefault();
+    onEditClick(item.id);
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.default.Item, {
     variant: item.done ? "dark" : "",
     className: "d-flex justify-content-between align-items-center"
@@ -10315,24 +10323,20 @@ var Item = function Item(_ref) {
     href: "#",
     className: "lead flex-fill ml-3 my-0",
     onClick: _doneOnClick
-  }, item.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default, {
-    "aria-label": "Basic example"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
-    className: "bg-dark btn btn-sm px-1 text-white border-0",
+  }, item.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    herf: "#",
+    className: "bg-dark btn btn-sm px-2 mr-2 text-white border-0",
     size: "sm",
-    onClick: function onClick() {
-      return onEditClick(item.id);
-    }
+    onClick: _onEditClick
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "bi bi-pencil-square"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
-    className: "bg-dark btn btn-sm px-1 text-white border-0",
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "#",
+    className: "bg-dark btn btn-sm px-2 mr-2 text-white border-0",
     size: "sm",
-    onClick: function onClick() {
-      return onDeleteClick(item.id);
-    }
+    onClick: _onDeleteClick
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-    className: "bi bi-trash"
+    className: "bi bi-x-square"
   })))));
 };
 
@@ -11731,9 +11735,7 @@ var COMPLETE_CHALLENGE_ERROR = "Please complete the challenge.";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LoginContext": () => (/* binding */ LoginContext),
-/* harmony export */   "ItemsContext": () => (/* binding */ ItemsContext),
-/* harmony export */   "EditContext": () => (/* binding */ EditContext),
-/* harmony export */   "SelectedContext": () => (/* binding */ SelectedContext)
+/* harmony export */   "ItemsContext": () => (/* binding */ ItemsContext)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 "use strict;";
@@ -11741,8 +11743,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var LoginContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
 var ItemsContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
-var EditContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
-var SelectedContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
 
 /***/ }),
 
@@ -17562,57 +17562,6 @@ var Button = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.forwardRef(function
 Button.displayName = 'Button';
 Button.defaultProps = defaultProps;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Button);
-
-/***/ }),
-
-/***/ "../../node_modules/react-bootstrap/esm/ButtonGroup.js":
-/*!*************************************************************!*\
-  !*** ../../node_modules/react-bootstrap/esm/ButtonGroup.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "../../node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "../../node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "../../node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ThemeProvider */ "../../node_modules/react-bootstrap/esm/ThemeProvider.js");
-
-
-
-
-
-var defaultProps = {
-  vertical: false,
-  toggle: false,
-  role: 'group'
-};
-var ButtonGroup = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.forwardRef(function (_ref, ref) {
-  var bsPrefix = _ref.bsPrefix,
-      size = _ref.size,
-      toggle = _ref.toggle,
-      vertical = _ref.vertical,
-      className = _ref.className,
-      _ref$as = _ref.as,
-      Component = _ref$as === void 0 ? 'div' : _ref$as,
-      rest = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__.default)(_ref, ["bsPrefix", "size", "toggle", "vertical", "className", "as"]);
-
-  var prefix = (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_4__.useBootstrapPrefix)(bsPrefix, 'btn-group');
-  var baseClass = prefix;
-  if (vertical) baseClass = prefix + "-vertical";
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__.default)({}, rest, {
-    ref: ref,
-    className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, baseClass, size && prefix + "-" + size, toggle && prefix + "-toggle")
-  }));
-});
-ButtonGroup.displayName = 'ButtonGroup';
-ButtonGroup.defaultProps = defaultProps;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ButtonGroup);
 
 /***/ }),
 
