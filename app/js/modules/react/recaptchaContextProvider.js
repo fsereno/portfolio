@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { ConfigUtil } from '../utils/configUtil';
-import { XMLHttpRequestUtil } from '../utils/XMLHttpRequestUtil';
+import { XMLHttpRequestUtil } from '../utils/xmlHttpRequestUtil';
 
 export const RecaptchaContext = React.createContext();
 

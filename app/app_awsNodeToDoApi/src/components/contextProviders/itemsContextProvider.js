@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { ConfigContext } from '../../../../js/modules/react/configContextProvider';
-import { XMLHttpRequestUtil } from '../../../../js/modules/utils/XMLHttpRequestUtil';
+import { XMLHttpRequestUtil } from '../../../../js/modules/utils/xmlHttpRequestUtil';
 import { ItemsContext, LoginContext } from '../../contexts';
 
 export function ItemsContextProvider({ children }) {
