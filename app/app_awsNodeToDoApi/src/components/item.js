@@ -9,7 +9,7 @@ export const Item = React.memo(({item, onDeleteClick, onEditClick, onDoneClick})
 
     const _doneOnClick = event => {
         event.preventDefault();
-        setChecked(true);
+        //setChecked(true);
         onDoneClick(item.id);
     }
 
@@ -32,8 +32,15 @@ export const Item = React.memo(({item, onDeleteClick, onEditClick, onDoneClick})
                             <p className="lead flex-fill ml-3 my-0"><del>{item.description}</del></p>
                         </>
                     :   <>
-                            <input type="checkbox" checked={checked} onChange={_doneOnClick} />
-                            <a href="#" className="lead flex-fill ml-3 my-0" onClick={_doneOnClick}>{item.description}</a>
+                            <a href="#" className="lead flex-fill my-0" 
+                                onClick={_doneOnClick} 
+                                onMouseEnter={() => setChecked(true)}
+                                onTouchStart={() => setChecked(true)}
+                                onTouchEnd={() => setChecked(false)} 
+                                onMouseLeave={() => setChecked(false)}>
+                                <input className="mr-2" type="checkbox" checked={checked} onChange={_doneOnClick} />
+                                {item.description}
+                            </a>
                             <div>
                                 <a herf="#" className="bg-dark btn btn-sm px-2 mr-2 text-white border-0" size="sm" onClick={_onEditClick}>
                                     <i className="bi bi-pencil-square"></i>
