@@ -10500,7 +10500,7 @@ var ListContainer = function ListContainer(_ref) {
     className: "justify-content-md-center mt-3 ".concat(hideItems ? "d-none" : "")
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
     lg: 10
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, title, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, title, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     className: "float-right text-dark",
     href: "#",
     onClick: onHideClick
@@ -10651,7 +10651,7 @@ var ListItems = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(function (_
     lg: 10
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "You have no items to complete"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_listContainer__WEBPACK_IMPORTED_MODULE_5__.ListContainer, {
     items: items,
-    title: "Remaining item",
+    title: "Remaining items",
     hideItems: hideItems,
     onHideClick: onHideRemainingClick,
     collapse: collapseRemaining,

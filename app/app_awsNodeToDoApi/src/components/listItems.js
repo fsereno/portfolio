@@ -73,17 +73,23 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
                     </Col>
                 </Row>
             }
-            <ListContainer 
-                items={items} 
-                title="Remaining item" 
-                hideItems={hideItems} 
-                onHideClick={onHideRemainingClick} 
+            <ListContainer
+                items={items}
+                title="Remaining items"
+                hideItems={hideItems}
+                onHideClick={onHideRemainingClick}
                 collapse={collapseRemaining}
                 onEditClick={onEditClick}
                 onDoneClick={onDoneClick}
                 onDeleteClick={onDeleteClick}
             />
-            <ListContainer items={doneItems} title="Completed items" hideItems={hideItems} onHideClick={onHideDoneClick} collapse={collapseDone}/>
+            <ListContainer
+                items={doneItems}
+                title="Completed items"
+                hideItems={hideItems}
+                onHideClick={onHideDoneClick}
+                collapse={collapseDone}
+            />
         </>
     );
 }, (prev, next) => prev.version === next.version);
