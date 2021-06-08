@@ -3,11 +3,11 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ItemsContext } from '../contexts';
-import { Item } from './item';
 import { Col, Row } from 'react-bootstrap';
 import { EDIT, HIDE, SHOW, COLLAPSE_STATE_SHOW, COLLAPSE_STATE_HIDE } from '../constants';
 import { collapseReducer } from '../reducers/collapseReducer';
 import { modifiedOnComparerDesc } from '../utils/modifiedOnComparerDesc';
+import { ListContainer } from './listContainer';
 
 export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCallback, failCallback}) => {
 
@@ -73,32 +73,17 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
                     </Col>
                 </Row>
             }
-            {items.length > 0 &&
-                <Row className={`justify-content-md-center ${hideItems ? "d-none" : ""}`}>
-                    <Col lg={10}>
-                        <h4>Remaining items <a className="float-right text-dark" href="#" onClick={onHideRemainingClick}>{collapseRemaining.text}<i className={`bi ${collapseRemaining.class} mx-2`}></i></a></h4>
-                        <hr className="border-dark" />
-                        {collapseRemaining.show &&
-                            <ul className="list-group">
-                                {items.map( x => <Item key={x.id} item={x} onDoneClick={onDoneClick} onDeleteClick={onDeleteClick} onEditClick={onEditClick}/> )}
-                            </ul>
-                        }
-                    </Col>
-                </Row>
-            }
-            {doneItems.length > 0 &&
-                <Row className={`justify-content-md-center mt-3 ${hideItems ? "d-none" : ""}`}>
-                    <Col lg={10}>
-                        <h4>Completed items <a className="float-right text-dark" href="#" onClick={onHideDoneClick}>{collapseDone.text}<i className={`bi ${collapseDone.class} mx-2`}></i></a></h4>
-                        <hr className="border-dark" />
-                        {collapseDone.show &&
-                            <ul className="list-group">
-                                {doneItems.map( x => <Item key={x.id} item={x} onDeleteClick={onDeleteClick} onEditClick={onEditClick}/> )}
-                            </ul>
-                        }
-                    </Col>
-                </Row>
-            }
+            <ListContainer 
+                items={items} 
+                title="Remaining item" 
+                hideItems={hideItems} 
+                onHideClick={onHideRemainingClick} 
+                collapse={collapseRemaining}
+                onEditClick={onEditClick}
+                onDoneClick={onDoneClick}
+                onDeleteClick={onDeleteClick}
+            />
+            <ListContainer items={doneItems} title="Completed items" hideItems={hideItems} onHideClick={onHideDoneClick} collapse={collapseDone}/>
         </>
     );
 }, (prev, next) => prev.version === next.version);

@@ -1,9 +1,9 @@
 "use strict;"
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-export const Item = ({item, onDeleteClick, onEditClick, onDoneClick}) => {
+export const Item = React.memo(({item, onDeleteClick, onEditClick, onDoneClick}) => {
 
     const [checked, setChecked] = useState(false);
 
@@ -46,4 +46,13 @@ export const Item = ({item, onDeleteClick, onEditClick, onDoneClick}) => {
                 }
             </ListGroup.Item>
     );
-}
+},(prev, next) => {
+    if(prev.item.done === next.item.done
+    && prev.item.description === next.item.description
+    && prev.item.targetDate === next.item.targetDate
+    && prev.item.modifiedOn === next.item.modifiedOn) {
+        return true;
+    }
+
+    return false;
+});
