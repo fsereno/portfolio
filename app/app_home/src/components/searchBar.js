@@ -65,7 +65,7 @@ export function SearchBar() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div id="searchBar" className="input-group mb-3">
+            <div id="searchBar" className="input-group mb-3 shadow">
                 <div className="input-group-prepend">
                     <span className="input-group-text">
                         <i className="fa fa-search"></i>
