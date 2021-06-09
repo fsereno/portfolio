@@ -10250,6 +10250,34 @@ var LoginContextProvider = function LoginContextProvider(_ref) {
 
 /***/ }),
 
+/***/ "./src/components/doneItem.js":
+/*!************************************!*\
+  !*** ./src/components/doneItem.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DoneItem": () => (/* binding */ DoneItem)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+"use strict;";
+
+
+var DoneItem = function DoneItem(_ref) {
+  var item = _ref.item;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, item.done && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    type: "checkbox",
+    checked: true,
+    disabled: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "lead flex-fill ml-3 my-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("del", null, item.description))));
+};
+
+/***/ }),
+
 /***/ "./src/components/item.js":
 /*!********************************!*\
   !*** ./src/components/item.js ***!
@@ -10262,20 +10290,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Item": () => (/* binding */ Item)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/ListGroup.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/ListGroup.js");
+/* harmony import */ var _doneItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./doneItem */ "./src/components/doneItem.js");
+/* harmony import */ var _itemToDo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./itemToDo */ "./src/components/itemToDo.js");
 "use strict;";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -10284,73 +10304,17 @@ var Item = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(function (_ref) 
       onDeleteClick = _ref.onDeleteClick,
       onEditClick = _ref.onEditClick,
       onDoneClick = _ref.onDoneClick;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      checked = _useState2[0],
-      setChecked = _useState2[1];
-
-  var _doneOnClick = function _doneOnClick(event) {
-    event.preventDefault(); //setChecked(true);
-
-    onDoneClick(item.id);
-  };
-
-  var _onDeleteClick = function _onDeleteClick(event) {
-    event.preventDefault();
-    onDeleteClick(item.id);
-  };
-
-  var _onEditClick = function _onEditClick(event) {
-    event.preventDefault();
-    onEditClick(item.id);
-  };
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.default.Item, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Item, {
     variant: item.done ? "dark" : "",
     className: "d-flex justify-content-between align-items-center"
-  }, item.done ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    type: "checkbox",
-    checked: true,
-    disabled: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-    className: "lead flex-fill ml-3 my-0"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("del", null, item.description))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#",
-    className: "lead flex-fill my-0",
-    onClick: _doneOnClick,
-    onMouseEnter: function onMouseEnter() {
-      return setChecked(true);
-    },
-    onTouchStart: function onTouchStart() {
-      return setChecked(true);
-    },
-    onTouchEnd: function onTouchEnd() {
-      return setChecked(false);
-    },
-    onMouseLeave: function onMouseLeave() {
-      return setChecked(false);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    className: "mr-2",
-    type: "checkbox",
-    checked: checked,
-    onChange: _doneOnClick
-  }), item.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    herf: "#",
-    className: "bg-dark btn btn-sm px-2 mr-2 text-white border-0",
-    size: "sm",
-    onClick: _onEditClick
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-    className: "bi bi-pencil-square"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#",
-    className: "bg-dark btn btn-sm px-2 mr-2 text-white border-0",
-    size: "sm",
-    onClick: _onDeleteClick
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-    className: "bi bi-x-square"
-  })))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_doneItem__WEBPACK_IMPORTED_MODULE_1__.DoneItem, {
+    item: item
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_itemToDo__WEBPACK_IMPORTED_MODULE_2__.ItemToDo, {
+    item: item,
+    onDeleteClick: onDeleteClick,
+    onEditClick: onEditClick,
+    onDoneClick: onDoneClick
+  }));
 }, function (prev, next) {
   if (prev.item.done === next.item.done && prev.item.description === next.item.description && prev.item.targetDate === next.item.targetDate && prev.item.modifiedOn === next.item.modifiedOn) {
     return true;
@@ -10476,6 +10440,99 @@ var ItemForm = function ItemForm(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
     className: "text-danger edit"
   }, _constants__WEBPACK_IMPORTED_MODULE_2__.STANDARD_ERROR))))));
+};
+
+/***/ }),
+
+/***/ "./src/components/itemToDo.js":
+/*!************************************!*\
+  !*** ./src/components/itemToDo.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ItemToDo": () => (/* binding */ ItemToDo)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+"use strict;";
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+var ItemToDo = function ItemToDo(_ref) {
+  var item = _ref.item,
+      onDeleteClick = _ref.onDeleteClick,
+      onEditClick = _ref.onEditClick,
+      onDoneClick = _ref.onDoneClick;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      checked = _useState2[0],
+      setChecked = _useState2[1];
+
+  var _doneOnClick = function _doneOnClick(event) {
+    event.preventDefault();
+    onDoneClick(item.id);
+  };
+
+  var _onDeleteClick = function _onDeleteClick(event) {
+    event.preventDefault();
+    onDeleteClick(item.id);
+  };
+
+  var _onEditClick = function _onEditClick(event) {
+    event.preventDefault();
+    onEditClick(item.id);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, !item.done && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "#",
+    className: "lead flex-fill my-0",
+    onClick: _doneOnClick,
+    onMouseEnter: function onMouseEnter() {
+      return setChecked(true);
+    },
+    onTouchStart: function onTouchStart() {
+      return setChecked(true);
+    },
+    onTouchEnd: function onTouchEnd() {
+      return setChecked(false);
+    },
+    onMouseLeave: function onMouseLeave() {
+      return setChecked(false);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    className: "mr-2",
+    type: "checkbox",
+    checked: checked,
+    onChange: _doneOnClick
+  }), item.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    herf: "#",
+    className: "bg-dark btn btn-sm px-2 mr-2 text-white border-0",
+    size: "sm",
+    onClick: _onEditClick
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+    className: "bi bi-pencil-square"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "#",
+    className: "bg-dark btn btn-sm px-2 mr-2 text-white border-0",
+    size: "sm",
+    onClick: _onDeleteClick
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+    className: "bi bi-x-square"
+  })))));
 };
 
 /***/ }),
