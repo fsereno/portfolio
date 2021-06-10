@@ -39,7 +39,7 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
     return (
         <Row className="justify-content-md-center mb-5">
             <Col lg={10}>
-                <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
+                <Form id="itemForm" noValidate validated={showValidation} onSubmit={handleSubmit}>
                     <Form.Row>
                         <Form.Label>
                             Describe a task to do:
