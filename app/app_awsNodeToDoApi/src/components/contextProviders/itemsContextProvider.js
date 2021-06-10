@@ -15,7 +15,16 @@ export function ItemsContextProvider({ children }) {
 
     const selectedId = useRef();
 
+    const ver = useRef(0);
+
+    const [ version, setVersion ] = useState(ver.current);
+
     const [items, setItems] = useState([]);
+
+    const incrementVersion = () => {
+        ver.current = ver.current + 1;
+        setVersion(ver.current);
+    }
 
     const _getModifiedOnTime = () => new Date().getTime();
 
@@ -86,6 +95,7 @@ export function ItemsContextProvider({ children }) {
 
     const context = {
         items,
+        version,
         setItems,
         getItems,
         deleteItem,
@@ -95,7 +105,8 @@ export function ItemsContextProvider({ children }) {
         itemDone,
         createItem,
         getRemainingItems,
-        getDoneItems
+        getDoneItems,
+        incrementVersion
     };
 
     return (

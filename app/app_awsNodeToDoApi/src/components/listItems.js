@@ -2,18 +2,22 @@
 
 import React, { useState, useEffect, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ItemsContext } from '../contexts';
+import { ItemsContext, ManageContext } from '../contexts';
 import { Col, Row } from 'react-bootstrap';
 import { EDIT, HIDE, SHOW, COLLAPSE_STATE_SHOW, COLLAPSE_STATE_HIDE } from '../constants';
 import { collapseReducer } from '../reducers/collapseReducer';
 import { modifiedOnComparerDesc } from '../utils/modifiedOnComparerDesc';
 import { ListContainer } from './listContainer';
+import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 
-export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCallback, failCallback}) => {
+export const ListItems = React.memo(({version}) => {
 
     const history = useHistory();
 
     const itemsContext = React.useContext(ItemsContext);
+    const spinnerContext = React.useContext(SpinnerContext);
+    const manageContext = React.useContext(ManageContext);
+
     const [ collapseRemaining, collapseRemainingDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_SHOW);
     const [ collapseDone, collapseDoneDistpach ] = useReducer(collapseReducer, COLLAPSE_STATE_HIDE);
     const [ hideItems, setHideItems ] = useState(true);
@@ -37,21 +41,21 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
     }
 
     const onDoneClick = (id) => {
-        showSpinner();
+        spinnerContext.showSpinner();
         itemsContext.itemDone(id)
-            .then(() => doneCallback())
-            .catch(() => failCallback());
+            .then(() => manageContext.doneCallback())
+            .catch(() => manageContext.failCallback());
     }
 
     const onDeleteClick = (id) => {
-        showSpinner();
+        spinnerContext.showSpinner();
         itemsContext.deleteItem(id)
-            .then(() => doneCallback())
-            .catch(() => failCallback());
+            .then(() => manageContext.doneCallback())
+            .catch(() => manageContext.failCallback());
     }
 
     useEffect(() => {
-        showSpinner();
+        spinnerContext.showSpinner();
         itemsContext.getItems()
             .then(response => {
 
@@ -59,9 +63,9 @@ export const ListItems = React.memo(({showSpinner, hideSpinner, version, doneCal
                 items.sort(modifiedOnComparerDesc);
 
                 itemsContext.setItems(items);
-                hideSpinner();
+                spinnerContext.hideSpinner();
                 setHideItems(false);
-            }).catch(() => failCallback());
+            }).catch(() => manageContext.failCallback());
     }, [version]);
 
     return (

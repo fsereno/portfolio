@@ -9982,11 +9982,22 @@ function ItemsContextProvider(_ref) {
   var endpoints = configContext.appConfig.endpoints;
   var API_ENDPOINT = "".concat(endpoints.base, "/").concat(endpoints.api);
   var selectedId = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  var ver = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(0);
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(ver.current),
       _useState2 = _slicedToArray(_useState, 2),
-      items = _useState2[0],
-      setItems = _useState2[1];
+      version = _useState2[0],
+      setVersion = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      items = _useState4[0],
+      setItems = _useState4[1];
+
+  var incrementVersion = function incrementVersion() {
+    ver.current = ver.current + 1;
+    setVersion(ver.current);
+  };
 
   var _getModifiedOnTime = function _getModifiedOnTime() {
     return new Date().getTime();
@@ -10079,6 +10090,7 @@ function ItemsContextProvider(_ref) {
 
   var context = {
     items: items,
+    version: version,
     setItems: setItems,
     getItems: getItems,
     deleteItem: deleteItem,
@@ -10088,7 +10100,8 @@ function ItemsContextProvider(_ref) {
     itemDone: itemDone,
     createItem: createItem,
     getRemainingItems: getRemainingItems,
-    getDoneItems: getDoneItems
+    getDoneItems: getDoneItems,
+    incrementVersion: incrementVersion
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_3__.ItemsContext.Provider, {
     value: context
@@ -10244,6 +10257,85 @@ var LoginContextProvider = function LoginContextProvider(_ref) {
     username: username
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_2__.LoginContext.Provider, {
+    value: context
+  }, children);
+};
+
+/***/ }),
+
+/***/ "./src/components/contextProviders/manageContextProvider.js":
+/*!******************************************************************!*\
+  !*** ./src/components/contextProviders/manageContextProvider.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ManageContextProvider": () => (/* binding */ ManageContextProvider)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../constants */ "./src/constants.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
+/* harmony import */ var _reducers_itemReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/itemReducer */ "./src/reducers/itemReducer.js");
+"use strict;";
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var ManageContextProvider = function ManageContextProvider(_ref) {
+  var children = _ref.children;
+  var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_1__.SpinnerContext);
+  var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__.ItemsContext);
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      showError = _useState2[0],
+      setShowError = _useState2[1];
+
+  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_itemReducer__WEBPACK_IMPORTED_MODULE_4__.itemReducer, _constants__WEBPACK_IMPORTED_MODULE_2__.ITEM),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      state = _useReducer2[0],
+      dispatch = _useReducer2[1];
+
+  var doneCallback = function doneCallback() {
+    spinnerContext.hideSpinner();
+    itemsContext.incrementVersion();
+    setShowError(false);
+    dispatch({
+      type: _constants__WEBPACK_IMPORTED_MODULE_2__.DESCRIPTION,
+      value: ""
+    });
+  };
+
+  var failCallback = function failCallback() {
+    spinnerContext.hideSpinner();
+    setShowError(true);
+  };
+
+  var context = {
+    doneCallback: doneCallback,
+    failCallback: failCallback,
+    showError: showError,
+    state: state,
+    dispatch: dispatch
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contexts__WEBPACK_IMPORTED_MODULE_3__.ManageContext.Provider, {
     value: context
   }, children);
 };
@@ -10605,14 +10697,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ListItems": () => (/* binding */ ListItems)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "../../node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap */ "../../node_modules/react-bootstrap/esm/Col.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
 /* harmony import */ var _reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/collapseReducer */ "./src/reducers/collapseReducer.js");
 /* harmony import */ var _utils_modifiedOnComparerDesc__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/modifiedOnComparerDesc */ "./src/utils/modifiedOnComparerDesc.js");
 /* harmony import */ var _listContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./listContainer */ "./src/components/listContainer.js");
+/* harmony import */ var _js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../js/modules/react/spinnerComponent */ "../js/modules/react/spinnerComponent.js");
 "use strict;";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -10635,14 +10728,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var ListItems = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(function (_ref) {
-  var showSpinner = _ref.showSpinner,
-      hideSpinner = _ref.hideSpinner,
-      version = _ref.version,
-      doneCallback = _ref.doneCallback,
-      failCallback = _ref.failCallback;
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useHistory)();
+  var version = _ref.version;
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useHistory)();
   var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_1__.ItemsContext);
+  var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_6__.SpinnerContext);
+  var manageContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_1__.ManageContext);
 
   var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_collapseReducer__WEBPACK_IMPORTED_MODULE_3__.collapseReducer, _constants__WEBPACK_IMPORTED_MODULE_2__.COLLAPSE_STATE_SHOW),
       _useReducer2 = _slicedToArray(_useReducer, 2),
@@ -10686,38 +10778,38 @@ var ListItems = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(function (_
   };
 
   var onDoneClick = function onDoneClick(id) {
-    showSpinner();
+    spinnerContext.showSpinner();
     itemsContext.itemDone(id).then(function () {
-      return doneCallback();
+      return manageContext.doneCallback();
     })["catch"](function () {
-      return failCallback();
+      return manageContext.failCallback();
     });
   };
 
   var onDeleteClick = function onDeleteClick(id) {
-    showSpinner();
+    spinnerContext.showSpinner();
     itemsContext.deleteItem(id).then(function () {
-      return doneCallback();
+      return manageContext.doneCallback();
     })["catch"](function () {
-      return failCallback();
+      return manageContext.failCallback();
     });
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    showSpinner();
+    spinnerContext.showSpinner();
     itemsContext.getItems().then(function (response) {
       var items = response.data || [];
       items.sort(_utils_modifiedOnComparerDesc__WEBPACK_IMPORTED_MODULE_4__.modifiedOnComparerDesc);
       itemsContext.setItems(items);
-      hideSpinner();
+      spinnerContext.hideSpinner();
       setHideItems(false);
     })["catch"](function () {
-      return failCallback();
+      return manageContext.failCallback();
     });
   }, [version]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, items.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, items.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     className: "justify-content-md-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__.default, {
     lg: 10
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "You have no items to complete"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_listContainer__WEBPACK_IMPORTED_MODULE_5__.ListContainer, {
     items: items,
@@ -10983,6 +11075,48 @@ function LogoutForm() {
 
 /***/ }),
 
+/***/ "./src/components/manageContainer.js":
+/*!*******************************************!*\
+  !*** ./src/components/manageContainer.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ManageContainer": () => (/* binding */ ManageContainer)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../constants */ "./src/constants.js");
+/* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../contexts */ "./src/contexts.js");
+/* harmony import */ var _contentContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./contentContainer */ "./src/components/contentContainer.js");
+/* harmony import */ var _itemForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./itemForm */ "./src/components/itemForm.js");
+/* harmony import */ var _listItems__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./listItems */ "./src/components/listItems.js");
+"use strict;";
+
+
+
+
+
+
+
+var ManageContainer = function ManageContainer() {
+  var manageContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_2__.ManageContext);
+  var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_2__.ItemsContext);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_itemForm__WEBPACK_IMPORTED_MODULE_4__.ItemForm, {
+    state: manageContext.state,
+    dispatch: manageContext.dispatch,
+    submitHandler: itemsContext.createItem,
+    doneCallback: manageContext.doneCallback
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_listItems__WEBPACK_IMPORTED_MODULE_5__.ListItems, {
+    version: itemsContext.version
+  }), manageContext.showError && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_3__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
+    className: "text-danger items"
+  }, _constants__WEBPACK_IMPORTED_MODULE_1__.STANDARD_ERROR)));
+};
+
+/***/ }),
+
 /***/ "./src/components/pages/edit.js":
 /*!**************************************!*\
   !*** ./src/components/pages/edit.js ***!
@@ -11163,19 +11297,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_itemReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../reducers/itemReducer */ "./src/reducers/itemReducer.js");
 /* harmony import */ var _itemForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../itemForm */ "./src/components/itemForm.js");
 /* harmony import */ var _contexts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../contexts */ "./src/contexts.js");
+/* harmony import */ var _contextProviders_manageContextProvider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../contextProviders/manageContextProvider */ "./src/components/contextProviders/manageContextProvider.js");
+/* harmony import */ var _manageContainer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../manageContainer */ "./src/components/manageContainer.js");
 "use strict;";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -11187,62 +11313,26 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Manage() {
-  var spinnerContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_js_modules_react_spinnerComponent__WEBPACK_IMPORTED_MODULE_4__.SpinnerContext);
-  var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_8__.ItemsContext);
-  var ver = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(0);
+  //const spinnerContext = React.useContext(SpinnerContext);
+  //const itemsContext = React.useContext(ItemsContext);
+  //  const manageContext = React.useContext(ManageContext);
+  //const [ showError, setShowError ] = useState(false);
+  //const [ state, dispatch ] = useReducer(itemReducer, ITEM);
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(ver.current),
-      _useState2 = _slicedToArray(_useState, 2),
-      version = _useState2[0],
-      setVersion = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      showError = _useState4[0],
-      setShowError = _useState4[1];
-
-  var _useReducer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(_reducers_itemReducer__WEBPACK_IMPORTED_MODULE_6__.itemReducer, _constants__WEBPACK_IMPORTED_MODULE_5__.ITEM),
-      _useReducer2 = _slicedToArray(_useReducer, 2),
-      state = _useReducer2[0],
-      dispatch = _useReducer2[1];
-
-  var incrementVersion = function incrementVersion() {
-    ver.current = ver.current + 1;
-    setVersion(ver.current);
-  };
-
-  var doneCallback = function doneCallback() {
+  /*const doneCallback = () => {
     spinnerContext.hideSpinner();
-    incrementVersion();
+    itemsContext.incrementVersion();
     setShowError(false);
-    dispatch({
-      type: _constants__WEBPACK_IMPORTED_MODULE_5__.DESCRIPTION,
-      value: ""
-    });
-  };
-
-  var failCallback = function failCallback() {
+    dispatch({ type: DESCRIPTION, value: "" });
+  }
+   const failCallback = () => {
     spinnerContext.hideSpinner();
     setShowError(true);
-  };
-
+  }*/
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_1__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_content__WEBPACK_IMPORTED_MODULE_2__.Content, {
     title: "Manage",
     centre: true
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_itemForm__WEBPACK_IMPORTED_MODULE_7__.ItemForm, {
-    state: state,
-    dispatch: dispatch,
-    submitHandler: itemsContext.createItem,
-    doneCallback: doneCallback
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_listItems__WEBPACK_IMPORTED_MODULE_3__.ListItems, {
-    showSpinner: spinnerContext.showSpinner,
-    hideSpinner: spinnerContext.hideSpinner,
-    version: version,
-    doneCallback: doneCallback,
-    failCallback: failCallback
-  }), showError && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contentContainer__WEBPACK_IMPORTED_MODULE_1__.ContentContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
-    className: "text-danger items"
-  }, _constants__WEBPACK_IMPORTED_MODULE_5__.STANDARD_ERROR)));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_contextProviders_manageContextProvider__WEBPACK_IMPORTED_MODULE_9__.ManageContextProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_manageContainer__WEBPACK_IMPORTED_MODULE_10__.ManageContainer, null)));
 }
 
 /***/ }),
@@ -11839,7 +11929,8 @@ var COMPLETE_CHALLENGE_ERROR = "Please complete the challenge.";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LoginContext": () => (/* binding */ LoginContext),
-/* harmony export */   "ItemsContext": () => (/* binding */ ItemsContext)
+/* harmony export */   "ItemsContext": () => (/* binding */ ItemsContext),
+/* harmony export */   "ManageContext": () => (/* binding */ ManageContext)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../node_modules/react/index.js");
 "use strict;";
@@ -11847,6 +11938,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var LoginContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
 var ItemsContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
+var ManageContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext();
 
 /***/ }),
 

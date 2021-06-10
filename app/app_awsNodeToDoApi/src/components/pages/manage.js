@@ -1,61 +1,18 @@
 "use strict;"
 
-import React, {useRef, useState, useReducer} from 'react';
+import React from 'react';
 import { ContentContainer } from '../contentContainer';
 import { Content } from '../content';
-import { ListItems } from '../listItems';
-import { SpinnerContext } from '../../../../js/modules/react/spinnerComponent';
-import { ITEM, STANDARD_ERROR, DESCRIPTION } from '../../constants';
-import { itemReducer } from '../../reducers/itemReducer';
-import { ItemForm } from '../itemForm';
-import { ItemsContext } from '../../contexts';
+import { ManageContextProvider } from '../contextProviders/manageContextProvider';
+import { ManageContainer } from '../manageContainer';
 
 export function Manage() {
-
-  const spinnerContext = React.useContext(SpinnerContext);
-  const itemsContext = React.useContext(ItemsContext);
-
-  const ver = useRef(0);
-
-  const [ version, setVersion ] = useState(ver.current);
-
-  const [ showError, setShowError ] = useState(false);
-
-  const [ state, dispatch ] = useReducer(itemReducer, ITEM);
-
-  const incrementVersion = () => {
-    ver.current = ver.current + 1;
-    setVersion(ver.current);
-  }
-
-  const doneCallback = () => {
-    spinnerContext.hideSpinner();
-    incrementVersion();
-    setShowError(false);
-    dispatch({ type: DESCRIPTION, value: "" });
-  }
-
-  const failCallback = () => {
-    spinnerContext.hideSpinner();
-    setShowError(true);
-  }
-
   return (
     <ContentContainer>
       <Content title="Manage" centre={true} />
-      <ItemForm state={state} dispatch={dispatch} submitHandler={itemsContext.createItem} doneCallback={doneCallback} />
-      <ListItems
-        showSpinner={spinnerContext.showSpinner}
-        hideSpinner={spinnerContext.hideSpinner}
-        version={version}
-        doneCallback={doneCallback}
-        failCallback={failCallback}
-      />
-      {showError &&
-        <ContentContainer>
-            <h5 className="text-danger items">{STANDARD_ERROR}</h5>
-        </ContentContainer>
-      }
+      <ManageContextProvider>
+        <ManageContainer/>
+      </ManageContextProvider>
     </ContentContainer>
   )
 }
