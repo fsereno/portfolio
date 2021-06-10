@@ -10565,7 +10565,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var ItemToDo = function ItemToDo(_ref) {
+var ItemToDo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(function (_ref) {
   var item = _ref.item;
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useHistory)();
   var itemsContext = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_contexts__WEBPACK_IMPORTED_MODULE_3__.ItemsContext);
@@ -10639,7 +10639,13 @@ var ItemToDo = function ItemToDo(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
     className: "bi bi-x-square"
   })))));
-};
+}, function (prev, next) {
+  if (prev.item.done === next.item.done && prev.item.description === next.item.description && prev.item.targetDate === next.item.targetDate && prev.item.modifiedOn === next.item.modifiedOn) {
+    return true;
+  }
+
+  return false;
+});
 
 /***/ }),
 
