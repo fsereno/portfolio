@@ -4,7 +4,7 @@ import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Item } from './item';
 
-export const ListContainer = ({items, title, hideItems, onHideClick, collapse, onEditClick, onDoneClick, onDeleteClick}) => {
+export const ListContainer = ({items, title, hideItems, onHideClick, collapse}) => {
     return(
         <>
             {items.length > 0 &&
@@ -19,18 +19,12 @@ export const ListContainer = ({items, title, hideItems, onHideClick, collapse, o
                         <hr className="border-dark" />
                         {collapse.show &&
                             <ul className="list-group">
-                                {items.map( x => <Item
-                                                    key={x.id}
-                                                    item={x}
-                                                    onDoneClick={onDoneClick}
-                                                    onDeleteClick={onDeleteClick}
-                                                    onEditClick={onEditClick}/>
-                                )}
+                                {items.map( x => <Item key={x.id} item={x}/>)}
                             </ul>
                         }
                     </Col>
                 </Row>
             }
         </>
-    )
+    );
 }

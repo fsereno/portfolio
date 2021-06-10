@@ -47,5 +47,5 @@ export function Edit() {
           <Button variant="dark" onClick={onBackClick}>Back</Button>
       </Row>
     </ContentContainer>
-  )
+  );
 }

@@ -21,5 +21,5 @@ export function Unauthorised() {
       <p>You must first <a href="#" onClick={onLoginClick}>Log in</a> to access this route.</p>
       <p>Please <a href="#" onClick={onRegisterClick}>Create a new user</a>, or log in with an existing user.</p>
     </ContentContainer>
-  )
+  );
 }

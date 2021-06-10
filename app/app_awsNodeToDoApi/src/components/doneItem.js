@@ -12,5 +12,5 @@ export const DoneItem = ({item}) => {
                 </>
             }
         </>
-    )
+    );
 }

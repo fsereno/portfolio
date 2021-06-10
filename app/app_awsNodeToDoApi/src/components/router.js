@@ -56,5 +56,5 @@ export const Router = () => {
                 </Route>
             </Switch>
         </HashRouter>
-    )
+    );
 }

@@ -11,5 +11,5 @@ export function Logout() {
       <Content title="Logout" />
       <LogoutForm />
     </ContentContainer>
-  )
+  );
 }

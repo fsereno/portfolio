@@ -11,5 +11,5 @@ export function Login() {
       <Content title="Login" />
       <LoginForm />
     </ContentContainer>
-  )
+  );
 }

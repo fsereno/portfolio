@@ -200,5 +200,5 @@ export function RegisterForm() {
                 </Form>
             </Col>
         </Row>
-    )
+    );
 }

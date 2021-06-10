@@ -8,5 +8,5 @@ export function ContentContainer({ children }) {
       <Container fluid className="py-4">
         {children}
       </Container>
-  )
+  );
 }

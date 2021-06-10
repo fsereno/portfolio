@@ -14,5 +14,5 @@ export function Manage() {
         <ManageContainer/>
       </ManageContextProvider>
     </ContentContainer>
-  )
+  );
 }

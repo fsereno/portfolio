@@ -5,13 +5,12 @@ import { ListGroup } from 'react-bootstrap';
 import { DoneItem } from './doneItem';
 import { ItemToDo } from './itemToDo';
 
-export const Item = React.memo(({item, onDeleteClick, onEditClick, onDoneClick}) => {
-
+export const Item = React.memo(({item}) => {
     return (
-            <ListGroup.Item variant={item.done ? "dark" : "" } className="d-flex justify-content-between align-items-center">
-                <DoneItem item={item} />
-                <ItemToDo item={item} onDeleteClick={onDeleteClick} onEditClick={onEditClick} onDoneClick={onDoneClick} />
-            </ListGroup.Item>
+        <ListGroup.Item variant={item.done ? "dark" : "" } className="d-flex justify-content-between align-items-center">
+            <DoneItem item={item} />
+            <ItemToDo item={item} />
+        </ListGroup.Item>
     );
 },(prev, next) => {
     if(prev.item.done === next.item.done

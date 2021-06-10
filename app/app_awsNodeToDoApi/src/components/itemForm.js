@@ -65,7 +65,7 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
                     {showFeedback &&
                         <Form.Row>
                             <Form.Group as={Col}>
-                                <h5 className="text-danger edit">{STANDARD_ERROR}</h5>
+                                <h5 className="edit mt-2 text-danger">{STANDARD_ERROR}</h5>
                             </Form.Group>
                         </Form.Row>
                     }

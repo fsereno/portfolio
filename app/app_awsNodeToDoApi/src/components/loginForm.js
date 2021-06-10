@@ -104,5 +104,5 @@ export function LoginForm() {
                 </Form>
             </Col>
         </Row>
-    )
+    );
 }

@@ -27,7 +27,13 @@ export const ManageContextProvider = ({ children }) => {
         setShowError(true);
     }
 
-    const context = { doneCallback, failCallback, showError, state, dispatch }
+    const context = {
+        doneCallback,
+        failCallback,
+        showError,
+        state,
+        dispatch
+    }
 
     return (
         <ManageContext.Provider value={context}>

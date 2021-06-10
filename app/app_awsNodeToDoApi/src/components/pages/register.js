@@ -14,5 +14,5 @@ export function Register() {
         <RegisterForm />
       </RecaptchaContextProvider>
     </ContentContainer>
-  )
+  );
 }

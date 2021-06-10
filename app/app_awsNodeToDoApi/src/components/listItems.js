@@ -1,18 +1,15 @@
 "use strict;"
 
 import React, { useState, useEffect, useReducer } from 'react';
-import { useHistory } from 'react-router-dom';
 import { ItemsContext, ManageContext } from '../contexts';
 import { Col, Row } from 'react-bootstrap';
-import { EDIT, HIDE, SHOW, COLLAPSE_STATE_SHOW, COLLAPSE_STATE_HIDE } from '../constants';
+import { HIDE, SHOW, COLLAPSE_STATE_SHOW, COLLAPSE_STATE_HIDE } from '../constants';
 import { collapseReducer } from '../reducers/collapseReducer';
 import { modifiedOnComparerDesc } from '../utils/modifiedOnComparerDesc';
 import { ListContainer } from './listContainer';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 
 export const ListItems = React.memo(({version}) => {
-
-    const history = useHistory();
 
     const itemsContext = React.useContext(ItemsContext);
     const spinnerContext = React.useContext(SpinnerContext);
@@ -33,25 +30,6 @@ export const ListItems = React.memo(({version}) => {
     const onHideDoneClick = (event) => {
         event.preventDefault();
         collapseDone.show ? collapseDoneDistpach({type: HIDE }) : collapseDoneDistpach({type: SHOW});
-    }
-
-    const onEditClick = (id) => {
-        itemsContext.selectedId.current = id;
-        history.push(EDIT);
-    }
-
-    const onDoneClick = (id) => {
-        spinnerContext.showSpinner();
-        itemsContext.itemDone(id)
-            .then(() => manageContext.doneCallback())
-            .catch(() => manageContext.failCallback());
-    }
-
-    const onDeleteClick = (id) => {
-        spinnerContext.showSpinner();
-        itemsContext.deleteItem(id)
-            .then(() => manageContext.doneCallback())
-            .catch(() => manageContext.failCallback());
     }
 
     useEffect(() => {
@@ -83,9 +61,6 @@ export const ListItems = React.memo(({version}) => {
                 hideItems={hideItems}
                 onHideClick={onHideRemainingClick}
                 collapse={collapseRemaining}
-                onEditClick={onEditClick}
-                onDoneClick={onDoneClick}
-                onDeleteClick={onDeleteClick}
             />
             <ListContainer
                 items={doneItems}

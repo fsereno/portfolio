@@ -10,5 +10,5 @@ export function Content({title, content, centre}) {
           {content}
         </p>
       </>
-    )
+    );
 }

@@ -51,5 +51,5 @@ export function LogoutForm() {
                 </Form>
             </Col>
         </Row>
-    )
+    );
 }
