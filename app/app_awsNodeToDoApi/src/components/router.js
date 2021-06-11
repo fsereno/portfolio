@@ -30,7 +30,7 @@ export const Router = () => {
                     {loginContext.authenticated &&
                         <>
                             <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={MANAGE}>Manage</NavLink>
-                            <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={LOGOUT}>Logout</NavLink>
+                            <NavLink id="logoutNavLink" activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={LOGOUT}>Logout</NavLink>
                         </>
                     }
                 </Nav>
@@ -40,7 +40,7 @@ export const Router = () => {
                     <Redirect to={LOGIN}></Redirect>
                 </Route>
                 <Route path={LOGIN}>
-                    <Login />
+                    {loginContext.authenticated ? <Redirect to={MANAGE} /> : <Login />}
                 </Route>
                 <Route path={REGISTER}>
                     <Register />
