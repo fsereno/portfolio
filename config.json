@@ -235,8 +235,7 @@
                 "runAsync": "runasync"
             },
             "labels": [0, 1, 2],
-            "order": 3,
-            "featured": true
+            "order": 3
         },
         {
             "name": "Three JS Scene (Basic)",
@@ -347,7 +346,8 @@
             "useWebpack": true,
             "masterTemplateDir": "basicSpaReact",
             "labels": [0],
-            "order": 1
+            "order": 2,
+            "featured": true
         },
         {
             "name": "AWS Node.js, B2C API, To-Do List SPA",
