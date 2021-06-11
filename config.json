@@ -129,9 +129,9 @@
             "labels": [0]
         },
         {
-            "name": "Azure Functions .NET Core Unique Data Entry",
+            "name": "Azure Functions .NET, Unique Data Entry",
             "subHeading": "Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries, with a React UI",
-            "description": "Using Azure Functions serverless compute and .NET Core, with a React user interface.",
+            "description": "Using Azure Functions serverless compute and .NET, with a React user interface.",
             "searchTerms": "Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "AzureDotNetCoreUniqueDataEntryApi",
             "active": true,
@@ -146,9 +146,9 @@
             "featured": true
         },
         {
-            "name": "Azure Functions .NET Core Data Structures",
-            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET Core, with a React UI",
-            "description": "Using Azure Functions serverless compute and .NET Core, with a React user interface.",
+            "name": "Azure Functions .NET, Data Structures",
+            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET, with a React UI",
+            "description": "Using Azure Functions serverless compute and .NET, with a React user interface.",
             "searchTerms": "Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "AzureDotNetCoreDataStructuresApi",
             "active": true,
@@ -166,9 +166,9 @@
             "featured": true
         },
         {
-            "name": "AWS .NET Core Complex Entity Sorting Algorithm",
+            "name": "AWS .NET, Complex Entity Sorting Algorithm",
             "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types, with a React UI",
-            "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
+            "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
             "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreEntitySortApi",
             "active": true,
@@ -184,9 +184,9 @@
             "featured": true
         },
         {
-            "name": "AWS .NET Core Natural Sorting Algorithm",
-            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET Core, passing in a custom comparer, with a React UI",
-            "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
+            "name": "AWS .NET, Natural Sorting Algorithm",
+            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET, passing in a custom comparer, with a React UI",
+            "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
             "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreStringSortApi",
             "active": true,
@@ -201,9 +201,9 @@
             "featured": true
         },
         {
-            "name": "AWS .NET Core Shopping Basket List Builder",
-            "subHeading": "A basic shopping basket application, with data processing handled by a Serverless .NET Core RESTful API, with a React UI",
-            "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
+            "name": "AWS .NET, Shopping Basket List Builder",
+            "subHeading": "A basic shopping basket application, with data processing handled by a Serverless .NET RESTful API, with a React UI",
+            "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
             "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreShoppingCart",
             "active": true,
@@ -220,9 +220,9 @@
             "order": 2
         },
         {
-            "name": "AWS .NET Core Asynchronous Coffee Maker",
-            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET Core, with a React UI",
-            "description": "AWS Lambda serverless application (SAM), using .NET Core along with an AWS RESTful Gateway API.",
+            "name": "AWS .NET, Asynchronous Coffee Maker",
+            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET, with a React UI",
+            "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
             "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "awsDotNetCoreAsyncCoffeeMachine",
             "active": true,
@@ -350,7 +350,7 @@
             "order": 1
         },
         {
-            "name": "AWS driven, B2C API, To-Do List SPA",
+            "name": "AWS Node.js, B2C API, To-Do List SPA",
             "subHeading": "Authenticated with Cognito, data stored using Dynamo DB, driven by Lambda Functions and with a React UI",
             "description": "Built with Node JS, The AWS Serverless Framework and managed by an HTTP API Gateway.",
             "searchTerms": "Cloud,AWS,Amazon Web Services,Serverless Framework,Node JS,Cognito,Dynamo DB,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",

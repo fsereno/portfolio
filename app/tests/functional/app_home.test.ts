@@ -28,13 +28,13 @@ describe(application, () => {
             }
             return test(url).should.eventually.equal(true)
         });
-        it(`Should return at least 10 or more when TypeScript and .NET Core are passed`, function() {
+        it(`Should return at least 10 or more when TypeScript and .NET are passed`, function() {
             this.timeout(0);
             let test = async (url) => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(1500)
-                .type('#searchInput', 'TypeScript .NET Core')
+                .type('#searchInput', 'TypeScript .NET')
                 .end()
                 .evaluate(() => {
                     return jQuery("#applicationsContainer").children().length > 0;
@@ -61,7 +61,7 @@ describe(application, () => {
             }
             return test(url).should.eventually.equal(true)
         });
-        it(`Should return at least 10 or more when TypeScript and .NET Core are passed from Quick Search`, function() {
+        it(`Should return at least 10 or more when TypeScript and .NET are passed from Quick Search`, function() {
             this.timeout(0);
             let test = async (url) => {
                 return new Nightmare({show:false})
@@ -69,7 +69,7 @@ describe(application, () => {
                 .wait(1500)
                 .click("#openFilterBtn")
                 .click("button[value='TypeScript']")
-                .click("button[value='.NET Core']")
+                .click("button[value='.NET']")
                 .end()
                 .evaluate(() => {
                     return jQuery("#applicationsContainer").children().length > 0;
