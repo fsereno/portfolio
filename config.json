@@ -336,8 +336,8 @@
             "labels": [0]
         },
         {
-            "name": "Basic React Email Client SPA",
-            "subHeading": "An SPA using React and React Router. React.Context and useReducer handling state. Optimised with useCallback, useMemo and React.memo",
+            "name": "Basic React Email Client",
+            "subHeading": "An SPA using React and React Router. React Context and useReducer handle state. Optimised with useCallback, useMemo and React.memo",
             "description": "Using React, Babel and Webpack.",
             "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "basicEmailClientReactSpa",
@@ -350,7 +350,7 @@
             "featured": true
         },
         {
-            "name": "AWS Node.js, B2C API, To-Do List SPA",
+            "name": "AWS Node.js, B2C API, To-Do List",
             "subHeading": "Authenticated with Cognito, data stored using Dynamo DB, driven by Lambda Functions and with a React UI",
             "description": "Built with Node.js, the AWS Serverless Framework and managed by an HTTP API Gateway.",
             "searchTerms": "Cloud,AWS,Amazon Web Services,Serverless Framework,Node.js,Cognito,Dynamo DB,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",

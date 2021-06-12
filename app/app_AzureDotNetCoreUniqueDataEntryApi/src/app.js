@@ -190,10 +190,10 @@ class UniqueDataEntryApp extends React.Component {
               <table className="table" id="itemTable">
                 <thead className="bg-dark text-white">
                   <tr>
-                    <th>First Name</th>
-                    <th>Second Name</th>
+                    <th>First name</th>
+                    <th>Second name</th>
                     <th>Contact</th>
-                    <th>PostCode</th>
+                    <th>Postcode</th>
                     <th>Action</th>
                   </tr>
                 </thead>
