@@ -350,7 +350,7 @@
             "featured": true
         },
         {
-            "name": "AWS Node.js, B2C API, To-Do List",
+            "name": "AWS Node.js, B2C API, To-Do List ",
             "subHeading": "Authenticated with Cognito, data stored using Dynamo DB, driven by Lambda Functions and with a React UI",
             "description": "Built with Node.js, the AWS Serverless Framework and managed by an HTTP API Gateway.",
             "searchTerms": "Cloud,AWS,Amazon Web Services,Serverless Framework,Node.js,Cognito,Dynamo DB,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
