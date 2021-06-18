@@ -2,13 +2,15 @@ FROM node:12.22.1
 
 WORKDIR /usr/src/app
 
-COPY package.json /usr/src/app
-COPY package-lock.json /usr/src/app
+COPY package.json ./
+COPY package-lock.json ./
 
-RUN npm install
+RUN npm install -g gulp && npm install
 
-COPY ./app /usr/src/app
+COPY . .
 
-EXPOSE 3000
+EXPOSE 8080
+
+HEALTHCHECK CMD gulp --version || exit 1
 
 CMD ["gulp"]
