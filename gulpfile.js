@@ -153,7 +153,8 @@ let startServerTask = () => {
     try {
       connect.server({
         root: ["./", ".", "./"+config.developmentDir],
-        livereload: true
+        livereload: true,
+        host: '0.0.0.0' // try with setting the host to here, the container was pointing here
       }, () => resolve())
     }
     catch(err) {
