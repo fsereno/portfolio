@@ -5,10 +5,10 @@ services:
         image: 'fabiosereno/portfolio:1.10.0'
         ports:
             - '8080:8080'
-        #volumes:
-         #   - $(pwd)/app:/usr/src/app/app
-         #   - $(pwd)/*.js:/usr/src/app/*.js
-         #   - $(pwd)/*.json:/usr/src/app/*.js
+        volumes:
+            - './app:/usr/src/app/app'
+           # issue with pattern matching, need to be specifc ?
 
 # docker container run -d --name port -p 8080:8080 -v $(pwd)/app:/usr/src/app/app
 # -v $(pwd)/gulpfile.js:/usr/src/app/gulpfile.js fabiosereno/portfolio:1.10.0
+# may want to mount docs ? 
