@@ -15,6 +15,8 @@ HEALTHCHECK --interval=12s --timeout=12s --start-period=30s \
 
 CMD ["gulp"]
 
-# docker container run -d --name port -p 8080:8080 -v $(pwd)/app:/usr/src/app/app fabiosereno/portfolio:1.10.0
-# but this only binds the app directory, problem is if there is a need to change the node build resources
-# eg a gulp taks etc
+# docker container run -d --name port -p 8080:8080 -v $(pwd)/app:/usr/src/app/app
+# -v $(pwd)/gulpfile.js:/usr/src/app/gulpfile.js fabiosereno/portfolio:1.10.0
+
+# now with example of binding to both hot reload dir and dev build resources,
+# both reflect well with instant update.

@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+    server:
+        image: 'fabiosereno/portfolio:1.10.0'
+        ports:
+            - '8080:8080'
+        #volumes:
+         #   - $(pwd)/app:/usr/src/app/app
+         #   - $(pwd)/*.js:/usr/src/app/*.js
+         #   - $(pwd)/*.json:/usr/src/app/*.js
+
+# docker container run -d --name port -p 8080:8080 -v $(pwd)/app:/usr/src/app/app
+# -v $(pwd)/gulpfile.js:/usr/src/app/gulpfile.js fabiosereno/portfolio:1.10.0
