@@ -218,6 +218,8 @@ let testTask = (directory) => gulpUtil.testTask(`${config.developmentDir}/tests/
 
 let testAllAppsTask = (application) => gulpUtil.testTask(`${config.developmentDir}/${config.prefix}${application.folder}/tests`);
 
+const stopTasks = async () => await endServerTask();
+
 gulp.task("images", (done) => {
   imagesCopyTask();
   done();
@@ -283,3 +285,8 @@ gulp.task("default", gulp.series(["connect", "watch"], (done) => {
   config.applications.map(defaultTasks);
   done();
 }));
+
+gulp.task("stop", (done) => {
+  stopTasks();
+  done();
+});
