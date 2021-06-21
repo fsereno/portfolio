@@ -15,10 +15,12 @@ services:
             - './webpackUtil.js:/usr/src/app/webpackUtil.js'
             - './gulpfile.js:/usr/src/app/gulpfile.js'
             - './gulpUtil.js:/usr/src/app/gulpUtil.js'
-            - './docs:/usr/src/app/docs'
 
 
-           # issue with pattern matching, need to be specifc ?
+# issue with pattern matching, need to be specifc ?
+
+# Publish task has a 100% CPU out of memory exception, it takes too long to complete. 
+# Needs to be more clever, only build what we need to...
 
 # docker container run -d --name port -p 8080:8080 -v $(pwd)/app:/usr/src/app/app
 # -v $(pwd)/gulpfile.js:/usr/src/app/gulpfile.js fabiosereno/portfolio:1.10.0
