@@ -7,6 +7,17 @@ services:
             - '8080:8080'
         volumes:
             - './app:/usr/src/app/app'
+            - './config.json:/usr/src/app/config.json'
+            - './package.json:/usr/src/app/package.json'
+            - './package-lock.json:/usr/src/app/package-lock.json'
+            - './babel.config.json:/usr/src/app/babel.config.json'
+            - './webpack.config.js:/usr/src/app/webpack.config.js'
+            - './webpackUtil.js:/usr/src/app/webpackUtil.js'
+            - './gulpfile.js:/usr/src/app/gulpfile.js'
+            - './gulpUtil.js:/usr/src/app/gulpUtil.js'
+            - './docs:/usr/src/app/docs'
+
+
            # issue with pattern matching, need to be specifc ?
 
 # docker container run -d --name port -p 8080:8080 -v $(pwd)/app:/usr/src/app/app
