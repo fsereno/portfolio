@@ -16,6 +16,7 @@ services:
             - './webpackUtil.js:/usr/src/app/webpackUtil.js'
             - './gulpfile.js:/usr/src/app/gulpfile.js'
             - './gulpUtil.js:/usr/src/app/gulpUtil.js'
+            - './docs:/usr/src/app/docs'
 
 
 # issue with pattern matching, need to be specifc ?

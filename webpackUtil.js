@@ -3,7 +3,19 @@ module.exports = {
 
   getDirectory: (config, application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
 
-  getEntry: (directory, entry) => `${directory}/${entry.replace("./", "")}`,
+  getEntry: (directory, entry) => {
+
+    console.log("GET ENTRY")
+    console.log(directory)
+    console.log(entry)
+
+    let result = `${directory}/${entry.replace("./", "")}`;
+
+    console.log(result)
+
+    return result;
+
+  },
 
   getPublicPath: (config, application, path = "", env) => {
 
@@ -20,22 +32,28 @@ module.exports = {
     let webpackConfigs = [];
 
     config.applications.forEach(application => {
+
       if (application.useWebpack) {
-        let directory = module.exports.getDirectory(config, application);
-        let webpackConfig;
+
+        const directory = module.exports.getDirectory(config, application);
 
         try {
 
-          webpackConfig = require(`${directory}/webpack.config`);
+          const webpackConfig = require(`${directory}/webpack.config`);
 
-          webpackConfig.mode = env.production ? "production" : "development";
-          webpackConfig.entry = module.exports.getEntry(directory, webpackConfig.entry);
-          webpackConfig.output.path = env.production
+          const modifiedWebpackConfig = {...webpackConfig};
+
+          modifiedWebpackConfig.mode = env.production ? "production" : "development";
+
+          modifiedWebpackConfig.entry = module.exports.getEntry(directory, webpackConfig.entry);
+
+          modifiedWebpackConfig.output.path = env.production
             ? webpackConfig.output.path.replace("app", "docs")
             : webpackConfig.output.path;
-          webpackConfig.output.publicPath = module.exports.getPublicPath(config, application, webpackConfig.output.publicPath, env);
 
-          webpackConfigs.push(webpackConfig);
+            modifiedWebpackConfig.output.publicPath = module.exports.getPublicPath(config, application, webpackConfig.output.publicPath, env);
+
+          webpackConfigs.push(modifiedWebpackConfig);
 
         } catch (exception) {
 
