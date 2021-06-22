@@ -5,5 +5,7 @@ module.exports = env => {
 
     let webpackConfigs = webpackUtil.collectWebPackConfigs(config, env);
 
+    console.log("BUILD")
+
     return webpackConfigs
 };

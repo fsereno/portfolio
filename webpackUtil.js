@@ -5,13 +5,7 @@ module.exports = {
 
   getEntry: (directory, entry) => {
 
-    console.log("GET ENTRY")
-    console.log(directory)
-    console.log(entry)
-
-    let result = `${directory}/${entry.replace("./", "")}`;
-
-    console.log(result)
+    const result = `${directory}/${entry.replace("./", "")}`;
 
     return result;
 
@@ -51,7 +45,7 @@ module.exports = {
             ? webpackConfig.output.path.replace("app", "docs")
             : webpackConfig.output.path;
 
-            modifiedWebpackConfig.output.publicPath = module.exports.getPublicPath(config, application, webpackConfig.output.publicPath, env);
+          modifiedWebpackConfig.output.publicPath = module.exports.getPublicPath(config, application, webpackConfig.output.publicPath, env);
 
           webpackConfigs.push(modifiedWebpackConfig);
 
