@@ -553,7 +553,7 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(\"./node_
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		__webpack_require__.p = "/js/";
+/******/ 		__webpack_require__.p = "../js/";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */

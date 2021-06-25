@@ -41,7 +41,7 @@ module.exports = {
 
           modifiedWebpackConfig.mode = env.production ? "production" : "development";
 
-          modifiedWebpackConfig.entry = module.exports.getEntry(directory, webpackConfig.entry);
+          //modifiedWebpackConfig.entry = module.exports.getEntry(directory, webpackConfig.entry);
 
           modifiedWebpackConfig.output.path = env.production
             ? webpackConfig.output.path.replace("app", "docs")
@@ -60,61 +60,69 @@ module.exports = {
     });
     return webpackConfigs;
   },
+  _build: (application, applications) => {
+
+    if (application.useWebpack) {
+
+      const directory = module.exports.getDirectory(application);
+
+      try {
+
+          const webpackConfig = require(`${directory}/webpack.config`);
+          const compiler = webpack(webpackConfig);
+
+          console.log("Building: " + directory);
+
+          compiler.run( (err, stats) => {
+
+              if (err) {
+                  console.error(err);
+              }
+
+              compiler.close(closeErr => {
+
+                  if (closeErr) {
+                      console.error(err);
+                  } else {
+                      console.log("Finished: " + directory);
+                  }
+
+              });
+          });
+
+        } catch (exception) {
+
+          console.error(exception);
+
+        }
+    }
+
+  },
 
   build: () => {
 
-    const application1 = config.applications.filter(app => app.folder === "toDoReact")[0];
+   /*const application1 = config.applications.filter(app => app.folder === "toDoReact")[0];
     const application2 = config.applications.filter(app => app.folder === "AzureDotNetCoreDataStructuresApi")[0];
     const application3 = config.applications.filter(app => app.folder === "basicEmailClientReactSpa")[0];
     const application4 = config.applications.filter(app => app.folder === "aframe")[0];
     const application5 = config.applications.filter(app => app.folder === "aframeComplex")[0];
+    const application6 = config.applications.filter(app => app.folder === "dictionaryFinder")[0];
 
     const applications = [
       application1,
       application2,
       application3,
       application4,
-      application5
-    ];
+      application5,
+      application6
+    ];*/
+
+    const applications = [...config.applications];
 
     applications.forEach(application => {
-
-        if (application.useWebpack) {
-
-            const directory = module.exports.getDirectory(application);
-
-            try {
-
-                const webpackConfig = require(`${directory}/webpack.config`);
-                const compiler = webpack(webpackConfig);
-
-                compiler.run( (err, stats) => {
-
-                    if (err) {
-                        console.error(err);
-                    } else {
-                        console.log("Building: " + directory);
-                    }
-
-                    compiler.close(closeErr => {
-
-                        if (closeErr) {
-                            console.error(err);
-                        } else {
-                            console.log("Finished: " + directory);
-                        }
-
-                    });
-                });
-
-              } catch (exception) {
-
-                console.error(exception);
-
-              }
-        }
+      module.exports._build(application);
     });
 
-    console.log("Starting build")
+    console.log("Starting build(s)...")
   }
 }
