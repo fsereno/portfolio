@@ -7,7 +7,6 @@
     "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./app/**/*.test.ts",
     "check-types": "tsc",
     "build": "node -e 'require(\"./webpackUtil\").build()'"
-
   },
   "repository": {
     "type": "git",
@@ -44,6 +43,7 @@
     "browserify": "^16.5.2",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
+    "chalk": "^4.1.1",
     "check-files-exist": "^1.0.1",
     "directory-exists": "^2.0.1",
     "gulp": "^4.0.2",

@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const config = require("./config.json");
+const chalk = require('chalk');
 
 module.exports = {
 
@@ -60,44 +61,45 @@ module.exports = {
     });
     return webpackConfigs;
   },
+
   _build: (applications) => {
 
     if (applications.length === 0) {
-      console.log("All builds complete");
+      console.log(chalk.green("All builds complete"));
       process.exit(0);
     }
 
     if (applications.length > 0) {
-      console.log(`Building: ${applications.length} applications...`);
+      console.log(chalk.blue(`Building: ${applications.length} applications...`));
     }
 
     const application = applications.pop();
 
-    if (application.useWebpack) {
+    const directory = module.exports.getDirectory(application);
 
-      const directory = module.exports.getDirectory(application);
+    if (application.useWebpack) {
 
       try {
 
           const webpackConfig = require(`${directory}/webpack.config`);
           const compiler = webpack(webpackConfig);
 
-          console.log("Starting: " + directory);
+          console.log(chalk.yellow("Starting: " + directory));
 
           compiler.run( (err, stats) => {
 
               if (err) {
-                  console.error(err);
+                  console.error(chalk.red(err));
                   process.exit(1);
               }
 
               compiler.close(closeErr => {
 
                   if (closeErr) {
-                      console.error(err);
+                      console.error(chalk.red(closeErr));
                       process.exit(1);
                   } else {
-                      console.log("Finished: " + directory);
+                      console.log(chalk.green("Finished: " + directory));
                       module.exports._build(applications);
                   }
 
@@ -111,6 +113,7 @@ module.exports = {
         }
 
     } else {
+      console.log(chalk.yellow(`skipping: ${directory}`));
       module.exports._build(applications);
     }
 
@@ -119,7 +122,7 @@ module.exports = {
   build: () => {
 
     const applications = [...config.applications];
-
     module.exports._build(applications);
+
   }
 }
