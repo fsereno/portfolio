@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./app/**/*.test.ts",
-    "check-types": "tsc"
+    "check-types": "tsc",
+    "build": "node build.js"
   },
   "repository": {
     "type": "git",
