@@ -60,7 +60,18 @@ module.exports = {
     });
     return webpackConfigs;
   },
-  _build: (application, applications) => {
+  _build: (applications) => {
+
+    if (applications.length === 0) {
+      console.log("All builds complete");
+      process.exit(0);
+    }
+
+    if (applications.length > 0) {
+      console.log(`Building: ${applications.length} applications...`);
+    }
+
+    const application = applications.pop();
 
     if (application.useWebpack) {
 
@@ -71,20 +82,23 @@ module.exports = {
           const webpackConfig = require(`${directory}/webpack.config`);
           const compiler = webpack(webpackConfig);
 
-          console.log("Building: " + directory);
+          console.log("Starting: " + directory);
 
           compiler.run( (err, stats) => {
 
               if (err) {
                   console.error(err);
+                  process.exit(1);
               }
 
               compiler.close(closeErr => {
 
                   if (closeErr) {
                       console.error(err);
+                      process.exit(1);
                   } else {
                       console.log("Finished: " + directory);
+                      module.exports._build(applications);
                   }
 
               });
@@ -95,34 +109,17 @@ module.exports = {
           console.error(exception);
 
         }
+
+    } else {
+      module.exports._build(applications);
     }
 
   },
 
   build: () => {
 
-   /*const application1 = config.applications.filter(app => app.folder === "toDoReact")[0];
-    const application2 = config.applications.filter(app => app.folder === "AzureDotNetCoreDataStructuresApi")[0];
-    const application3 = config.applications.filter(app => app.folder === "basicEmailClientReactSpa")[0];
-    const application4 = config.applications.filter(app => app.folder === "aframe")[0];
-    const application5 = config.applications.filter(app => app.folder === "aframeComplex")[0];
-    const application6 = config.applications.filter(app => app.folder === "dictionaryFinder")[0];
-
-    const applications = [
-      application1,
-      application2,
-      application3,
-      application4,
-      application5,
-      application6
-    ];*/
-
     const applications = [...config.applications];
 
-    applications.forEach(application => {
-      module.exports._build(application);
-    });
-
-    console.log("Starting build(s)...")
+    module.exports._build(applications);
   }
 }
