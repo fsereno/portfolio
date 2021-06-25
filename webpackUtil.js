@@ -1,7 +1,9 @@
+const webpack = require('webpack');
+const config = require("./config.json");
 
 module.exports = {
 
-  getDirectory: (config, application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
+  getDirectory: (application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
 
   getEntry: (directory, entry) => {
 
@@ -11,7 +13,7 @@ module.exports = {
 
   },
 
-  getPublicPath: (config, application, path = "", env) => {
+  getPublicPath: (application, path = "", env) => {
 
     let publicPath = path.replace("..", "");
 
@@ -21,7 +23,7 @@ module.exports = {
       return publicPath;
   },
 
-  collectWebPackConfigs: (config, env = { production: false }) => {
+  collectWebPackConfigs: (env = { production: false }) => {
 
     let webpackConfigs = [];
 
@@ -29,7 +31,7 @@ module.exports = {
 
       if (application.useWebpack) {
 
-        const directory = module.exports.getDirectory(config, application);
+        const directory = module.exports.getDirectory(application);
 
         try {
 
@@ -45,7 +47,7 @@ module.exports = {
             ? webpackConfig.output.path.replace("app", "docs")
             : webpackConfig.output.path;
 
-          modifiedWebpackConfig.output.publicPath = module.exports.getPublicPath(config, application, webpackConfig.output.publicPath, env);
+          modifiedWebpackConfig.output.publicPath = module.exports.getPublicPath(application, webpackConfig.output.publicPath, env);
 
           webpackConfigs.push(modifiedWebpackConfig);
 
@@ -57,5 +59,62 @@ module.exports = {
       }
     });
     return webpackConfigs;
+  },
+
+  build: () => {
+
+    const application1 = config.applications.filter(app => app.folder === "toDoReact")[0];
+    const application2 = config.applications.filter(app => app.folder === "AzureDotNetCoreDataStructuresApi")[0];
+    const application3 = config.applications.filter(app => app.folder === "basicEmailClientReactSpa")[0];
+    const application4 = config.applications.filter(app => app.folder === "aframe")[0];
+    const application5 = config.applications.filter(app => app.folder === "aframeComplex")[0];
+
+    const applications = [
+      application1,
+      application2,
+      application3,
+      application4,
+      application5
+    ];
+
+    applications.forEach(application => {
+
+        if (application.useWebpack) {
+
+            const directory = module.exports.getDirectory(application);
+
+            try {
+
+                const webpackConfig = require(`${directory}/webpack.config`);
+                const compiler = webpack(webpackConfig);
+
+                compiler.run( (err, stats) => {
+
+                    if (err) {
+                        console.error(err);
+                    } else {
+                        console.log("Building: " + directory);
+                    }
+
+                    compiler.close(closeErr => {
+
+                        if (closeErr) {
+                            console.error(err);
+                        } else {
+                            console.log("Finished: " + directory);
+                        }
+
+                    });
+                });
+
+              } catch (exception) {
+
+                console.error(exception);
+
+              }
+        }
+    });
+
+    console.log("Starting build")
   }
 }
