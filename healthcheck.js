@@ -1,19 +1,38 @@
 "use strict;"
 
-var http = require("http");
+const http = require("http");
+const host = 'localhost';
+const port = 3000;
 
-var options = {
-    host : "localhost",
-    port : "8080",
-    timeout : 2000
-};
-
-var request = http.request(options, res => res.statusCode == 200
-    ? process.exit(0)
-    : process.exit(1));
-
-request.on('error', function(err) {
-    process.exit(1);
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World');
 });
 
-request.end();
+server.listen(port, host, () => {
+
+    var options = {
+        host,
+        port,
+        timeout : 2000
+    };
+
+    var request = http.request(options, res => {
+
+        if (res.statusCode == 200) {
+            process.exit(0)
+        } else {
+            process.exit(1);
+        }
+
+    });
+
+    request.on('error', function(err) {
+        process.exit(1);
+    });
+
+    request.end();
+});
+
+server.close();
