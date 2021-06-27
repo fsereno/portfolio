@@ -6,6 +6,7 @@ module.exports = {
 
   getDirectory: (application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
 
+  // is this needed
   getEntry: (directory, entry) => {
 
     const result = `${directory}/${entry.replace("./", "")}`;
@@ -14,55 +15,19 @@ module.exports = {
 
   },
 
-  getPublicPath: (application, path = "", env) => {
+  // is this needed - YES
+  getPublicPath: (application, path = "", isProduction) => {
 
     let publicPath = path.replace("..", "");
 
-    publicPath = env.production
+    publicPath = isProduction
       ? !application.useRoot ? `${config.prefix}${application.folder}/js/` : "js/"
       : publicPath;
+
       return publicPath;
   },
 
-  collectWebPackConfigs: (env = { production: false }) => {
-
-    let webpackConfigs = [];
-
-    config.applications.forEach(application => {
-
-      if (application.useWebpack) {
-
-        const directory = module.exports.getDirectory(application);
-
-        try {
-
-          const webpackConfig = require(`${directory}/webpack.config`);
-
-          const modifiedWebpackConfig = {...webpackConfig};
-
-          modifiedWebpackConfig.mode = env.production ? "production" : "development";
-
-          //modifiedWebpackConfig.entry = module.exports.getEntry(directory, webpackConfig.entry);
-
-          modifiedWebpackConfig.output.path = env.production
-            ? webpackConfig.output.path.replace("app", "docs")
-            : webpackConfig.output.path;
-
-          modifiedWebpackConfig.output.publicPath = module.exports.getPublicPath(application, webpackConfig.output.publicPath, env);
-
-          webpackConfigs.push(modifiedWebpackConfig);
-
-        } catch (exception) {
-
-          console.error(exception);
-
-        }
-      }
-    });
-    return webpackConfigs;
-  },
-
-  _build: (applications) => {
+  _build: (applications, isProduction) => {
 
     if (applications.length === 0) {
       console.log(chalk.green("All builds complete"));
@@ -82,7 +47,16 @@ module.exports = {
       try {
 
           const webpackConfig = require(`${directory}/webpack.config`);
-          const compiler = webpack(webpackConfig);
+
+          const modifiedWebpackConfig = {...webpackConfig};
+
+          if (isProduction) {
+            modifiedWebpackConfig.mode = "production";
+            modifiedWebpackConfig.output.path = webpackConfig.output.path.replace("/app/app/", "/app/docs/");
+            modifiedWebpackConfig.output.publicPath = module.exports.getPublicPath(application, webpackConfig.output.publicPath, isProduction);
+          }
+
+          const compiler = webpack(modifiedWebpackConfig);
 
           console.log(chalk.yellow("Starting: " + directory));
 
@@ -100,7 +74,7 @@ module.exports = {
                       process.exit(1);
                   } else {
                       console.log(chalk.green("Finished: " + directory));
-                      module.exports._build(applications);
+                      module.exports._build(applications, isProduction);
                   }
 
               });
@@ -113,16 +87,22 @@ module.exports = {
         }
 
     } else {
+
       console.log(chalk.yellow(`skipping: ${directory}`));
-      module.exports._build(applications);
+      module.exports._build(applications, isProduction);
+
     }
 
   },
 
+  isProduction: argv => argv.some(x => x === "production"),
+
   build: () => {
 
+    const isProduction = module.exports.isProduction(process.argv);
     const applications = [...config.applications];
-    module.exports._build(applications);
+
+    module.exports._build(applications, isProduction);
 
   }
 }
