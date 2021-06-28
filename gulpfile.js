@@ -262,21 +262,23 @@ gulp.task("test", (done) => {
   done();
 });
 
-gulp.task('webpack', run("npx webpack"));
+gulp
 
-gulp.task('webpack-prod', run("npx webpack --env.production"));
+gulp.task('webpack', run("npm run build"));
+
+gulp.task('webpack-prod', run("npm run build -- e production"));
 
 gulp.task("create", (done) => {
   config.applications.map(createTasks);
   done();
 });
 
-gulp.task("publish", gulp.series(["test", "images", "fonts", "favicon"], (done) => {
+gulp.task("publish", gulp.series(["test", "images", "fonts", "favicon", "webpack-prod"], (done) => {
   config.applications.map(publishTasks);
   done();
 }));
 
-gulp.task("build", gulp.series(["test"], (done) => {
+gulp.task("build", gulp.series(["test", "webpack"], (done) => {
   config.applications.map(defaultTasks);
   done();
 }));
