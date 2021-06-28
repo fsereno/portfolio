@@ -96,16 +96,17 @@ module.exports = {
   },
 
   isProduction: argv =>  {
-    const env = argv.indexOf("e");
+    const ePassed = argv.indexOf("e");
     const production = argv.indexOf("production");
-    const isProduction = env > 0 && production > 0 && env + 1 === production;
+    const isProduction = ePassed > 0 && production > 0 && ePassed + 1 === production;
     return isProduction;
   },
 
   hasDirectory: argv =>  {
-    const dir = argv.indexOf("d");
-    const hasDirectory = dir > 0 && dir + 1 <= argv.length - 1;
-    return hasDirectory;
+    const dPassed = argv.indexOf("d");
+    const hasDirectory = dPassed > 0 && dPassed + 1 <= argv.length - 1;
+    const dir = argv[dPassed + 1].replace(config.prefix, "");
+    return [ hasDirectory, dir ];
   },
 
   /// Accepted arguments
@@ -116,10 +117,16 @@ module.exports = {
   build: () => {
 
     const isProduction = module.exports.isProduction(process.argv);
-    const hasDirectory = module.exports.hasDirectory(process.argv);
-    const applications = [...config.applications];
+    const [ hasDirectory, directory] = module.exports.hasDirectory(process.argv);
+    let applications = [];
 
-    module.exports._build(applications, isProduction);
+    if (hasDirectory) {
+      applications = [...config.applications.filter(x => x.folder === directory)];
+    } else {
+      applications = [...config.applications];
+    }
+
+   module.exports._build(applications, isProduction);
 
   }
 }
