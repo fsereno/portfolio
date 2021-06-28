@@ -51,6 +51,7 @@ module.exports = {
           const modifiedWebpackConfig = {...webpackConfig};
 
           if (isProduction) {
+            delete modifiedWebpackConfig.devtool;
             modifiedWebpackConfig.mode = "production";
             modifiedWebpackConfig.output.path = webpackConfig.output.path.replace("/app/app/", "/app/docs/");
             modifiedWebpackConfig.output.publicPath = module.exports.getPublicPath(application, webpackConfig.output.publicPath, isProduction);
@@ -111,8 +112,8 @@ module.exports = {
 
   /// Accepted arguments
   // -- (everything after -- is an argument)
-  // e production
-  // d app_home
+  // e production (to run production builds)
+  // d app_home (to run single builds)
   ///
   build: () => {
 
