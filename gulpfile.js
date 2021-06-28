@@ -271,12 +271,12 @@ gulp.task("create", (done) => {
   done();
 });
 
-gulp.task("publish", gulp.series(["test", "images", "fonts", "favicon", "webpack-prod"], (done) => {
+gulp.task("publish", gulp.series(["test", "images", "fonts", "favicon"], (done) => {
   config.applications.map(publishTasks);
   done();
 }));
 
-gulp.task("build", gulp.series(["test", "webpack"], (done) => {
+gulp.task("build", gulp.series(["test"], (done) => {
   config.applications.map(defaultTasks);
   done();
 }));

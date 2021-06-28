@@ -95,11 +95,28 @@ module.exports = {
 
   },
 
-  isProduction: argv => argv.some(x => x === "production"),
+  isProduction: argv =>  {
+    const env = argv.indexOf("e");
+    const production = argv.indexOf("production");
+    const isProduction = env > 0 && production > 0 && env + 1 === production;
+    return isProduction;
+  },
 
+  hasDirectory: argv =>  {
+    const dir = argv.indexOf("d");
+    const hasDirectory = dir > 0 && dir + 1 <= argv.length - 1;
+    return hasDirectory;
+  },
+
+  /// Accepted arguments
+  // -- (everything after -- is an argument)
+  // e production
+  // d app_home
+  ///
   build: () => {
 
     const isProduction = module.exports.isProduction(process.argv);
+    const hasDirectory = module.exports.hasDirectory(process.argv);
     const applications = [...config.applications];
 
     module.exports._build(applications, isProduction);
