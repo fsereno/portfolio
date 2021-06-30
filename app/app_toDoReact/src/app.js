@@ -4,6 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
 import { FormComponent } from './formComponent';
+
+import "../sass/styles.scss";
 class ToDoListForm extends React.Component {
   constructor(props) {
     super(props);

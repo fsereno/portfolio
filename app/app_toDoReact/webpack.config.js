@@ -1,4 +1,6 @@
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -7,6 +9,7 @@ module.exports = {
     filename: 'app.js',
     path: path.resolve(__dirname, 'js'),
   },
+  plugins: [ new MiniCssExtractPlugin() ],
   module: {
     rules: [
       {
@@ -15,7 +18,26 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          MiniCssExtractPlugin.loader,
+          // Translates CSS into CommonJS
+          "css-loader",
+          // Compiles Sass to CSS
+          "sass-loader",
+        ]
       }
     ]
+  },
+  optimization: {
+    minimizer: [
+      // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+      // `...`,
+      new CssMinimizerPlugin(),
+    ],
+    minimize: true
   }
 };
