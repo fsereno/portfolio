@@ -2,11 +2,9 @@ FROM node:12.22.1
 
 WORKDIR /usr/src/app
 
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json healthcheck.js ./
 
 RUN npm install -g gulp && npm install
-
-COPY . .
 
 EXPOSE 8080
 

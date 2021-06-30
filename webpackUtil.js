@@ -89,7 +89,7 @@ module.exports = {
 
     } else {
 
-      console.log(chalk.yellow(`skipping: ${directory}`));
+      console.log(chalk.magenta(`skipping: ${directory}`));
       module.exports._build(applications, isProduction);
 
     }
