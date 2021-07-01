@@ -9,7 +9,9 @@ module.exports = {
     filename: 'app.js',
     path: path.resolve(__dirname, 'js'),
   },
-  plugins: [ new MiniCssExtractPlugin() ],
+  plugins: [ new MiniCssExtractPlugin({
+    linkType: 'text/css',
+  }) ],
   module: {
     rules: [
       {
@@ -24,10 +26,23 @@ module.exports = {
         use: [
           // Creates `style` nodes from JS strings
           MiniCssExtractPlugin.loader,
+          //"style-loader",
           // Translates CSS into CommonJS
           "css-loader",
           // Compiles Sass to CSS
           "sass-loader",
+        ]
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
+            }
+          }
         ]
       }
     ]

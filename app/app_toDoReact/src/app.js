@@ -1,11 +1,12 @@
 "use strict;"
 
+import "../../sass/includes/styleDeps.scss";
+import "../sass/styles.scss";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
 import { FormComponent } from './formComponent';
-
-import "../sass/styles.scss";
 class ToDoListForm extends React.Component {
   constructor(props) {
     super(props);
@@ -51,6 +52,7 @@ class ToDoListForm extends React.Component {
   render() {
     return (
       <div>
+        <i className="bi bi-arrow-90deg-left"></i>
         <div className="row splitter">
           <div className="col-lg-4">
             <h3>Result:</h3>
