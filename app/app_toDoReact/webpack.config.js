@@ -9,9 +9,7 @@ module.exports = {
     filename: 'app.js',
     path: path.resolve(__dirname, 'js'),
   },
-  plugins: [ new MiniCssExtractPlugin({
-    linkType: 'text/css',
-  }) ],
+  plugins: [ new MiniCssExtractPlugin() ],
   module: {
     rules: [
       {
