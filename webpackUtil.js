@@ -105,9 +105,8 @@ module.exports = {
   },
 
   /// Accepted arguments
-  // -- (everything after -- is an argument)
-  // e production (to run production builds)
-  // d app_home (to run single builds)
+  // --env=production (eg, to run production builds)
+  // --dir=toDoReact (eg, to run single builds)
   ///
   build: () => {
 
@@ -115,22 +114,12 @@ module.exports = {
     const [ hasDirectory, directory] = module.exports.hasDirectory(process.env.npm_config_dir);
     let applications = [];
 
-    //console.log(isProduction)
-    //console.log(hasDirectory)
-    //console.log(directory)
-
-    //console.log(process.env.npm_config_env)
-    //console.log(process.env.npm_config_dir)
-
     if (hasDirectory) {
       applications = [...config.applications.filter(x => x.folder === directory)];
     } else {
       applications = [...config.applications];
     }
 
-    //console.log(applications)
-
     module.exports._build(applications, isProduction);
-
   }
 }
