@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const webpackUtil = require('../../webpackUtil');
 
 module.exports = {
   mode: 'development',
@@ -37,8 +38,11 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/'
+              name: webpackUtil.isProduction(process.env.npm_config_env)
+                ? '[contenthash].[ext]'
+                : '[name].[ext]',
+              outputPath: 'fonts/',
+              publicPath: 'fonts/',
             }
           }
         ]
@@ -47,8 +51,7 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
-      // `...`,
+      `...`,
       new CssMinimizerPlugin(),
     ],
     minimize: true
