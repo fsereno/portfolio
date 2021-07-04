@@ -63,17 +63,6 @@
             "include": false
         },
         {
-            "name": "To-Do List (Basic)",
-            "subHeading": "A basic list builder written using TypeScript and JQuery",
-            "description": "Using Babel for compilation and Require to manage dependencies.",
-            "searchTerms": "JavaScript,TypeScript,Babel,Require JS,JQuery,PUG,HTML,CSS,SASS",
-            "folder": "babelTs",
-            "active": true,
-            "include": true,
-            "useRequire": true,
-            "labels": [0]
-        },
-        {
             "name": "To-Do List (React)",
             "subHeading": "A basic list builder using React",
             "description": "Using React, with Babel and Webpack.",
@@ -112,17 +101,6 @@
             "description": "Experimenting with more complex aspects of React, Babel and Webpack.",
             "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "ticTacToeReact",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "labels": [0]
-        },
-        {
-            "name": "TypeScript Find and Replace",
-            "subHeading": "A simple multiple Find and Replace method written with TypeScript",
-            "description": "TypeScript, Sass and Pug. Find all occurrences and replacing.",
-            "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
-            "folder": "findReplace",
             "active": true,
             "include": true,
             "useWebpack": true,
@@ -265,61 +243,6 @@
             "description": "Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.",
             "searchTerms": "JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality",
             "folder": "aframeComplex",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "labels": [0]
-        },
-        {
-            "name": "TypeScript Percentage Calculator",
-            "subHeading": "A simple percentage calculator method written with TypeScript",
-            "description": "TypeScript, Sass and Pug. Compiled using Webpack.",
-            "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
-            "folder": "percentageCalculator",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "labels": [0]
-        },
-        {
-            "name": "Scrabble Game, Can you beat the Un-Scrabbler?",
-            "subHeading": "A simple Scrabble Word Game written using TypeScript",
-            "description": "TypeScript, Sass and Pug. Compiled using Webpack.",
-            "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
-            "folder": "unscrabbler",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "labels": [0]
-        },
-        {
-            "name": "TypeScript Random String Generator",
-            "subHeading": "A simple random string generator written with TypeScript",
-            "description": "Generating a random string of A-B, 0-9 and a given length. TypeScript, Sass and Pug. Compiled using Webpack.",
-            "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
-            "folder": "randomGenerator",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "labels": [0]
-        },
-        {
-            "name": "TypeScript Dictionary Word Finder",
-            "subHeading": "A simple dictionary word lookup tool written using TypeScript",
-            "description": "A large indexing lookup search. TypeScript, Sass and Pug. Compiled using Webpack.",
-            "searchTerms": "JavaScript,TypeScript,PUG,HTML,CSS,SASS",
-            "folder": "dictionaryFinder",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "labels": [0]
-        },
-        {
-            "name": "Knockout + TypeScript, Table of Users",
-            "subHeading": "An example of Knockout, enhanced by TypeScript",
-            "description": "Written with Knockout, TypeScript, Sass and Pug. Compiled using Webpack.",
-            "searchTerms": "JavaScript,TypeScript,Knockout,PUG,HTML,CSS,SASS",
-            "folder": "koTypeScript",
             "active": true,
             "include": true,
             "useWebpack": true,
