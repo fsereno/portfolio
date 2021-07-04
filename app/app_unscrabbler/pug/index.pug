@@ -1,59 +1,53 @@
-extends ../../pug/layouts/main.pug
+extends ../../pug/layouts/main2.pug
 
 block styles
-  // build:css css/styles.css
-  link(rel="stylesheet" href="css/styles.css")
-  // endbuild
+  link(rel="stylesheet" href="js/main.css")
 
 block content
       .row.splitter
         .col-lg-12
-          h3 Result:  
+          h3 Result:
             span#result.result
           h3 Description:
             span#resultDescription.result
       hr
       .row.splitter
         .col-lg-12
-          h3 Your Results:  
+          h3 Your Results:
             div#yourResults.result
       .row.splitter
         .col-lg-12
-          h3 Unscrabbler Results:  
+          h3 Unscrabbler Results:
             div#unscrabblerResults.result
       hr
       .row.splitter
         .col-lg-12
-          h3 Winner:  
+          h3 Winner:
             span#winnerResults.result
       hr
       form#unscrabblerForm
-        .row  
+        .row
           .col-lg-4
             .form-group
               label(for="scrabbleInput") Find words in this
               input#scrabbleInput.form-control(
-                name="scrabbleInput", 
-                type="text", 
+                name="scrabbleInput",
+                type="text",
                 placeholder="Scrabble...",
                 readonly)
           .col-lg-4
             .form-group
                 label(for="findInput") Enter a word to see if it can be found
                 input#findInput.form-control(
-                  name="findInput", 
-                  type="text", 
-                  placeholder="What can you find ?", 
-                  required)    
-          .col-lg-4 
+                  name="findInput",
+                  type="text",
+                  placeholder="What can you find ?",
+                  required)
+          .col-lg-4
               label Actions
               .form-group
                 button#submit.btn.btn-dark(type="submit") Submit
                 button#unscrabbleAllBtn.btn.btn-light(type="button") Unscrabble All
                 button#resetBtn.btn.btn-light(type="button") Reset
 block scripts
-  // build:js js/app.js
   script(src="js/app.js")
-  // endbuild
-  // build:js js/vendor.js
-  // endbuild

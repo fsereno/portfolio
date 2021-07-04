@@ -1,4 +1,10 @@
 "use strict;"
+
+import '../../js/includes/jsDeps.js';
+import "../../sass/includes/styleDeps.scss";
+import "../sass/styles.scss";
+import 'jquery';
+
 import { Component } from './components/component';
 import { StringService } from "../../typeScript/Services/StringService";
 import { ValidatorService } from "../../typeScript/Services/ValidatorService";

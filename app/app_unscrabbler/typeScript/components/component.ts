@@ -35,20 +35,20 @@ export class Component {
         this.unscrabbleService = unscrabbleService;
         this.randomGeneratorService = randomGeneratorService;
         this.stringService = stringService;
-        this.scrabbleInput = jQuery("#scrabbleInput");
-        this.yourResults = jQuery("#yourResults");
-        this.unscrabblerResults = jQuery("#unscrabblerResults");
-        this.result = jQuery("#result");
-        this.winnerResults = jQuery("#winnerResults");
-        this.resetBtn = jQuery("#resetBtn");
-        this.unscrabbleAllBtn = jQuery("#unscrabbleAllBtn");
-        this.findInput = jQuery("#findInput");
-        this.resultDescription = jQuery("#resultDescription");
+        this.scrabbleInput = $("#scrabbleInput");
+        this.yourResults = $("#yourResults");
+        this.unscrabblerResults = $("#unscrabblerResults");
+        this.result = $("#result");
+        this.winnerResults = $("#winnerResults");
+        this.resetBtn = $("#resetBtn");
+        this.unscrabbleAllBtn = $("#unscrabbleAllBtn");
+        this.findInput = $("#findInput");
+        this.resultDescription = $("#resultDescription");
         this.formId = "unscrabblerForm";
     }
 
     init() {
-        jQuery(() => {
+        $(() => {
             let randomString = this.generateRandomString();
             this.scrabbleInput.val(randomString);
             this.validateForm();
@@ -99,7 +99,7 @@ export class Component {
     validateForm(){
         let validateFormOptions = {
             submitHandler: (form: HTMLElement) => {
-                let valid = jQuery(form).valid();
+                let valid = $(form).valid();
                 let findThis = this.findInput.val().toString();
                 let inThis = this.scrabbleInput.val().toString();
                 let yourResults = this.yourResults.text();
