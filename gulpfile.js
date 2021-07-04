@@ -92,23 +92,23 @@ let userefTask = (application) => {
   .pipe(gulp.dest(directories.destinationDirectory));
 };
 
-let copyJsTask = (application) => {
-  let directories = gulpUtil.getApplicationDirectories(application);
-  if (application.useRequire) {
-    return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/js/**/*.js")
-      .pipe(logger(gulpUtil.populateLoggerOptions(
-        "Copy JS task started...",
-        "Copy JS task complete!",
-        ".js",
-        false,
-        "../../"+directories.destinationDirectory+"/js/",
-        "Compiled to: ",
-        " " + logSymbols.success
-      )))
-      .pipe(gulp.dest(directories.destinationDirectory+"/js/"));
-  }
-  return false;
-}
+// let copyJsTask = (application) => {
+//   let directories = gulpUtil.getApplicationDirectories(application);
+//   if (application.useRequire) {
+//     return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/js/**/*.js")
+//       .pipe(logger(gulpUtil.populateLoggerOptions(
+//         "Copy JS task started...",
+//         "Copy JS task complete!",
+//         ".js",
+//         false,
+//         "../../"+directories.destinationDirectory+"/js/",
+//         "Compiled to: ",
+//         " " + logSymbols.success
+//       )))
+//       .pipe(gulp.dest(directories.destinationDirectory+"/js/"));
+//   }
+//   return false;
+// }
 
 let createTask = (application) => {
   return directoryExists(config.developmentDir+"/"+config.prefix+application.folder)
@@ -137,7 +137,7 @@ let defaultTasks = (application) => {
 
 let publishTasks = (application) => {
   gulpUtil.runThis(application, userefTask);
-  gulpUtil.runThis(application, copyJsTask);
+  //gulpUtil.runThis(application, copyJsTask);
 }
 
 let createTasks = (application) => {
@@ -194,15 +194,15 @@ let frontendTestTasks = async () => {
   await endServerTask();
 }
 
-let fontsCopyTask = () => {
-  return gulp.src(config.developmentDir+"/fonts/**/*")
-    .pipe(gulp.dest(config.publishDir+"/fonts"));
-}
+// let fontsCopyTask = () => {
+//   return gulp.src(config.developmentDir+"/fonts/**/*")
+//     .pipe(gulp.dest(config.publishDir+"/fonts"));
+// }
 
-let cssFontsCopyTask = () => {
-  return gulp.src(config.developmentDir+"/css/fonts/**/*")
-    .pipe(gulp.dest(config.publishDir+"/css/fonts"));
-}
+// let cssFontsCopyTask = () => {
+//   return gulp.src(config.developmentDir+"/css/fonts/**/*")
+//     .pipe(gulp.dest(config.publishDir+"/css/fonts"));
+// }
 
 let imagesCopyTask = () => {
   return gulp.src(config.developmentDir+"/images/**/*")
@@ -225,11 +225,11 @@ gulp.task("images", (done) => {
   done();
 });
 
-gulp.task("fonts", (done) => {
+/*gulp.task("fonts", (done) => {
   fontsCopyTask();
   cssFontsCopyTask();
   done();
-});
+});*/
 
 gulp.task('favicon', (done) => {
   faviconCopyTask();
@@ -262,23 +262,21 @@ gulp.task("test", (done) => {
   done();
 });
 
-gulp
+//gulp.task('webpack', run("npm run build"));
 
-gulp.task('webpack', run("npm run build"));
-
-gulp.task('webpack-prod', run("npm run build -- e production"));
+//gulp.task('webpack-prod', run("npm run build --env=production"));
 
 gulp.task("create", (done) => {
   config.applications.map(createTasks);
   done();
 });
 
-gulp.task("publish", gulp.series(["test", "images", "fonts", "favicon"], (done) => {
+gulp.task("publish", gulp.series([/*"test",*/"images", "favicon"], (done) => {
   config.applications.map(publishTasks);
   done();
 }));
 
-gulp.task("build", gulp.series(["test", "webpack"], (done) => {
+gulp.task("build", gulp.series(["test"], (done) => {
   config.applications.map(defaultTasks);
   done();
 }));
