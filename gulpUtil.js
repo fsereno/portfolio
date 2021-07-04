@@ -66,17 +66,17 @@ module.exports = {
 
   getApplicationDirectories: (application) => {
 
-    let applicationDirectory = application.useRoot
+    const applicationDirectory = application.useRoot
       ? config.developmentDir
       : config.developmentDir+"/"+config.prefix+application.folder;
 
-      let destinationDirectory = application.useRoot
+    const destinationDirectory = application.useRoot
       ? config.publishDir
       : config.publishDir+"/"+config.prefix+application.folder;
 
     return {
-      applicationDirectory: applicationDirectory,
-      destinationDirectory: destinationDirectory
+      applicationDirectory,
+      destinationDirectory
     }
   },
 

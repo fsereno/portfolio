@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+  head
+    include ../includes/_metaAuthor.pug
+    block styles
+  body
+    include ../includes/_navigation.pug
+    #mainContainer
+      block content
+      block footer
+    include ../includes/_footer.pug
+    // build:js js/vendor.js
+    include ../includes/_jsDeps.pug
+    // endbuild
+    block scripts

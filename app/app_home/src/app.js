@@ -2,6 +2,9 @@
 
 import "regenerator-runtime/runtime";
 
+import "../../sass/includes/styleDeps.scss";
+import "../sass/styles.scss";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApplicationsContextProvider } from './components/contextProviders/applicationsContextProvider';

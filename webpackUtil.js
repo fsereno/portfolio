@@ -114,6 +114,8 @@ module.exports = {
     const [ hasDirectory, directory] = module.exports.hasDirectory(process.env.npm_config_dir);
     let applications = [];
 
+    console.log(applications)
+
     if (hasDirectory) {
       applications = [...config.applications.filter(x => x.folder === directory)];
     } else {
