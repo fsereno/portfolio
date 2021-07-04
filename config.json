@@ -2,7 +2,7 @@
     "prefix": "app_",
     "entry": "home",
     "index": "index.html",
-    "masterTemplateDir": "master",
+    "masterTemplateDir": "master_react",
     "developmentDir": "app",
     "publishDir": "docs",
     "folderRoot": "/tree/master/app/",
