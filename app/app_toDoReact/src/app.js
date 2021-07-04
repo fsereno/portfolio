@@ -1,5 +1,6 @@
 "use strict;"
 
+import '../../js/includes/jsDeps.js';
 import "../../sass/includes/styleDeps.scss";
 import "../sass/styles.scss";
 
@@ -52,7 +53,6 @@ class ToDoListForm extends React.Component {
   render() {
     return (
       <div>
-        <i className="bi bi-arrow-90deg-left"></i>
         <div className="row splitter">
           <div className="col-lg-4">
             <h3>Result:</h3>

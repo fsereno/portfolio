@@ -25,7 +25,6 @@ module.exports = {
         use: [
           // Creates `style` nodes from JS strings
           MiniCssExtractPlugin.loader,
-          //"style-loader",
           // Translates CSS into CommonJS
           "css-loader",
           // Compiles Sass to CSS
@@ -53,7 +52,6 @@ module.exports = {
     minimizer: [
       `...`,
       new CssMinimizerPlugin(),
-    ],
-    minimize: true
+    ]
   }
 };

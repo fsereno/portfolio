@@ -54,7 +54,6 @@ module.exports = {
             delete modifiedWebpackConfig.devtool;
             modifiedWebpackConfig.mode = "production";
             modifiedWebpackConfig.output.path = webpackConfig.output.path.replace("/app/app/", "/app/docs/");
-            modifiedWebpackConfig.output.publicPath = module.exports.getPublicPath(application, webpackConfig.output.publicPath, isProduction);
           }
 
           const compiler = webpack(modifiedWebpackConfig);
