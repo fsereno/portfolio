@@ -1,5 +1,11 @@
 "use strict;"
 
+import 'aframe';
+
+import '../../js/includes/jsDeps.js';
+import "../../sass/includes/styleDeps.scss";
+import "../sass/styles.scss";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -9,12 +15,15 @@ class Scene extends React.Component {
     this.state = {
       cubes: [
         {
+          id: "1",
           position: "-1 0.5 -3",
           color: "#4CC3D9"
         },{
+          id: "2",
           position: "0 0.5 -5",
           color: "#4CC3D9"
         },{
+          id: "3",
           position: "1 0.5 -3",
           color: "#4CC3D9"
         }
@@ -42,7 +51,7 @@ class Scene extends React.Component {
       <a-scene cursor="rayOrigin: mouse">
         {this.state.cubes.map((cube, i) => {
           return(
-            <a-box onClick={() => this.handleColourChangeClick(i)} position={cube.position} rotation="0 45 0" color={cube.color}></a-box>
+            <a-box key={cube.id} onClick={() => this.handleColourChangeClick(i)} position={cube.position} rotation="0 45 0" color={cube.color}></a-box>
           );
         })}
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
@@ -65,7 +74,4 @@ class Scene extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <Scene />,
-  document.getElementById('body')
-);
+ReactDOM.render(<Scene />,document.getElementById('result'));

@@ -1,5 +1,11 @@
 "use strict;"
 
+import 'aframe';
+
+import '../../js/includes/jsDeps.js';
+import "../../sass/includes/styleDeps.scss";
+import "../sass/styles.scss";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -25,7 +31,4 @@ class Scene extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <Scene />,
-  document.getElementById('body')
-);
+ReactDOM.render(<Scene />, document.getElementById('result'));

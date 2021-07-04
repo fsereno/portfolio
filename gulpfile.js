@@ -131,7 +131,7 @@ let createTask = (application) => {
 }
 
 let defaultTasks = (application) => {
-  gulpUtil.runThis(application, cssTask);
+  //gulpUtil.runThis(application, cssTask);
   gulpUtil.runThis(application, htmlTask);
 }
 

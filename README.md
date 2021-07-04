@@ -137,7 +137,7 @@ $ gulp create
 ##### This will:
 - Update the config.json file with additional applications.
 - Then run this command to build applications based on the config.json file.
-- New applications are built based on the app_master template application.
+- New applications are built based on the 'masterTemplateDir' template application, as indicated in the config.json file.
 - If all applications already exist, nothing will be overwritten.
 ---
 
