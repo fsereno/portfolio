@@ -1,9 +1,7 @@
-extends ../../pug/layouts/main.pug
+extends ../../pug/layouts/main2.pug
 
 block styles
-  // build:css css/styles.css
-  link(rel="stylesheet" href="css/styles.css")
-  // endbuild
+  link(rel="stylesheet" href="js/main.css")
 
 block content
   div
@@ -12,7 +10,7 @@ block content
       | Typically tasks are carried out while the kettle is boiling.
       | Why wait for a process to complete, when it could be run as a background task ?
     h2 How ?
-    p 
+    p
       | Technically, when calling the Sync method, a series of actions are run in order of
       | execution, synchronously. With each action completing before the next is run.
       | When calling the Async method, however async / await are being used, spawning

@@ -39,7 +39,7 @@ const gulpUtil = require("./gulpUtil");
 const flatmap = require("gulp-flatmap");
 const run = require('gulp-run-command').default;
 
-let cssTask = (application) => {
+/*let cssTask = (application) => {
   let directories = gulpUtil.getApplicationDirectories(application);
   return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/sass/styles.scss")
   .pipe(logger(gulpUtil.populateLoggerOptions(
@@ -54,7 +54,7 @@ let cssTask = (application) => {
     .pipe(sass({outputStyle: 'compressed'}).on("error", sass.logError))
     .pipe(gulp.dest(directories.applicationDirectory+"/css"))
     .pipe(connect.reload());
-}
+}*/
 
 let htmlTask = (application) => {
   let directories = gulpUtil.getApplicationDirectories(application);
@@ -237,11 +237,11 @@ gulp.task('favicon', (done) => {
 })
 
 gulp.task("watch", (done) => {
-  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask);
+  //gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/sass/*.scss"), "sass", cssTask);
   gulpUtil.watchThis(gulp.watch(config.developmentDir+"/**/pug/*.pug"), "pug", htmlTask);
-  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null);
-  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null);
-  gulpUtil.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null);
+  //gulpUtil.watchThis(gulp.watch(config.developmentDir+"/sass/**/*.scss"), "/", null);
+  //gulpUtil.watchThis(gulp.watch(config.developmentDir+"/pug/**/*.pug"), "/", null);
+  //gulpUtil.watchThis(gulp.watch(config.developmentDir+"/typeScript/**/*.ts"), "/", null);
   done();
 });
 

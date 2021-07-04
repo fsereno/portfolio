@@ -1,5 +1,7 @@
 "use strict;"
 
+import * as $ from 'jquery';
+
 export class jQueryAjaxUtil {
 
     static handleAjax(request, condition, conditionMetDeligate, requestFailedDeligate, conditionFailedDeligate) {
