@@ -1,5 +1,9 @@
 "use strict;"
 
+import '../../js/includes/jsDeps.js';
+import '../../sass/includes/styleDeps.scss'
+import '../sass/styles.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -119,7 +123,7 @@ class Game extends React.Component {
 
 ReactDOM.render(
   <Game />,
-  document.getElementById('root')
+  document.getElementById('result')
 );
 
 function calculateWinner(squares) {
