@@ -27,7 +27,7 @@ module.exports = {
       return publicPath;
   },
 
-  _build: (applications, isProduction) => {
+  _build: (applications, isProduction, hasDirectory) => {
 
     if (applications.length === 0) {
       console.log(chalk.green("All builds complete"));
@@ -35,7 +35,7 @@ module.exports = {
     }
 
     if (applications.length > 0) {
-      console.log(chalk.blue(`Building: ${applications.length} applications...`));
+      console.log(`${chalk.blue("Building:")} ${applications.length} applications...`);
     }
 
     const application = applications.pop();
@@ -58,9 +58,22 @@ module.exports = {
 
           const compiler = webpack(modifiedWebpackConfig);
 
-          console.log(chalk.yellow("Starting: " + directory));
+          if (hasDirectory) {
 
-          compiler.run( (err, stats) => {
+            compiler.watch({
+              aggregateTimeout: 300,
+              poll: undefined,
+              ignored: /node_modules/
+            }, (err, stats) => {
+              module.exports.logCompiled(directory, stats.compilation.endTime);
+              console.log(chalk.magentaBright("Watching: ") + directory)
+            });
+
+          } else {
+
+            console.log(chalk.yellow("Starting: ") + directory);
+
+            compiler.run( (err, stats) => {
 
               if (err) {
                   console.error(chalk.red(err));
@@ -73,12 +86,12 @@ module.exports = {
                       console.error(chalk.red(closeErr));
                       process.exit(1);
                   } else {
-                      console.log(chalk.green("Finished: " + directory));
+                      module.exports.logCompiled(directory);
                       module.exports._build(applications, isProduction);
                   }
-
               });
-          });
+            });
+          }
 
         } catch (exception) {
 
@@ -88,10 +101,22 @@ module.exports = {
 
     } else {
 
-      console.log(chalk.magenta(`skipping: ${directory}`));
+      console.log(chalk.magenta("Skipping: ") + directory);
       module.exports._build(applications, isProduction);
 
     }
+
+  },
+
+  logCompiled: (directory, stamp) => {
+
+    let message = `${chalk.green("Compiled:")} ${directory}`;
+
+    if (stamp) {
+      message += ` ${stamp}`;
+    }
+
+    console.log(message);
 
   },
 
@@ -121,6 +146,6 @@ module.exports = {
       applications = [...config.applications];
     }
 
-    module.exports._build(applications, isProduction);
+    module.exports._build(applications, isProduction, hasDirectory);
   }
 }
