@@ -13,16 +13,3 @@ Using Generics in .NET I have implemented an interface, which acts as the contra
 - Stack in .NET (https://docs.microsoft.com/en-us/dotnet/api/system.collections.stack?view=net-5.0)
 
 - Generics (https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/)
-
-### Project commands ###
-
-Build JavaScript by running the default Gulp task from witin this directory
-```
-    gulp
-```
-
-Run the application from within the route directory, using the master Gulp file and the default Gulp task.
-```
-    cd ../../
-    gulp
-```
