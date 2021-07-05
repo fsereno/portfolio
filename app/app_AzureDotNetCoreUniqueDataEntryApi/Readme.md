@@ -7,16 +7,3 @@ Whilst this functionality could be achieved with JavaScript alone, I wanted to d
 - Azure Functions Repository (https://github.com/fsereno/app_AzureDotNetCoreUniqueDataEntryApi)
 
 - IEqualityComparer (https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.iequalitycomparer-1?view=net-5.0)
-
-### Project comands ###
-
-Build JavaScript by running the default Gulp task from witin this directory
-```
-    gulp
-```
-
-Run the application from within the route directory, using the master Gulp file and the default Gulp task.
-```
-    cd ../../
-    gulp
-```
