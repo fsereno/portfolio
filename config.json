@@ -288,6 +288,7 @@
             "description": "Description",
             "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "master_react",
+            "masterTemplateDir": "toDoReact",
             "active": true,
             "include": false,
             "useWebpack": true,
