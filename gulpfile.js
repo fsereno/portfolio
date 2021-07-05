@@ -26,8 +26,6 @@ Usage...
 */
 
 const gulp = require("gulp");
-const useref = require("gulp-useref");
-const sass = require("gulp-sass");
 const pug = require("gulp-pug-3");
 const mocha = require("gulp-mocha");
 const connect = require("gulp-connect");
@@ -37,6 +35,11 @@ const directoryExists = require("directory-exists");
 const config = require("./config.json");
 const gulpUtil = require("./gulpUtil");
 const flatmap = require("gulp-flatmap");
+
+
+// these can be uninstalled eventually
+const useref = require("gulp-useref");
+const sass = require("gulp-sass");
 const run = require('gulp-run-command').default;
 
 /*let cssTask = (application) => {
@@ -56,8 +59,7 @@ const run = require('gulp-run-command').default;
     .pipe(connect.reload());
 }*/
 
-let htmlTask = (application) => {
-  let directories = gulpUtil.getApplicationDirectories(application);
+const _htmlTask = (application, outputDir) => {
   return gulp.src(config.developmentDir+"/"+config.prefix+application.folder+"/pug/*.pug")
   .pipe(logger(gulpUtil.populateLoggerOptions(
     "HTML task started...",
@@ -72,11 +74,21 @@ let htmlTask = (application) => {
     pretty: true,
     locals:{config: config, application: application}
   }))
-  .pipe(gulp.dest(directories.applicationDirectory))
+  .pipe(gulp.dest(outputDir))
   .pipe(connect.reload());
+}
+
+const htmlTask = (application) => {
+  const directories = gulpUtil.getApplicationDirectories(application);
+  return _htmlTask(application, directories.applicationDirectory);
 };
 
-let userefTask = (application) => {
+const htmlTaskProd = (application) => {
+  const directories = gulpUtil.getApplicationDirectories(application);
+  return _htmlTask(application, directories.destinationDirectory);
+};
+
+/*let userefTask = (application) => {
   let directories = gulpUtil.getApplicationDirectories(application);
   return gulp.src(directories.applicationDirectory+"/*.html")
   .pipe(logger(gulpUtil.populateLoggerOptions(
@@ -90,7 +102,7 @@ let userefTask = (application) => {
   )))
   .pipe(useref())
   .pipe(gulp.dest(directories.destinationDirectory));
-};
+};*/
 
 // let copyJsTask = (application) => {
 //   let directories = gulpUtil.getApplicationDirectories(application);
@@ -136,7 +148,8 @@ let defaultTasks = (application) => {
 }
 
 let publishTasks = (application) => {
-  gulpUtil.runThis(application, userefTask);
+  gulpUtil.runThis(application, htmlTaskProd);
+  //gulpUtil.runThis(application, userefTask);
   //gulpUtil.runThis(application, copyJsTask);
 }
 
