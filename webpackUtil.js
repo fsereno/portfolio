@@ -130,15 +130,13 @@ module.exports = {
 
   /// Accepted arguments
   // --env=production (eg, to run production builds)
-  // --dir=toDoReact (eg, to run single builds)
+  // --dir=toDoReact (eg, to run single builds with watching by default)
   ///
   build: () => {
 
     const isProduction = module.exports.isProduction(process.env.npm_config_env);
     const [ hasDirectory, directory] = module.exports.hasDirectory(process.env.npm_config_dir);
     let applications = [];
-
-    console.log(applications)
 
     if (hasDirectory) {
       applications = [...config.applications.filter(x => x.folder === directory)];
