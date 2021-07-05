@@ -47,14 +47,6 @@
             "isLandingPage": true
         },
         {
-            "name": "Application master template",
-            "subHeading": "",
-            "description": "The template application.",
-            "folder": "master",
-            "active": true,
-            "include": false
-        },
-        {
             "name": "MIT Licence",
             "subHeading": "MIT Licence for this repository.",
             "description": "",
@@ -289,6 +281,17 @@
                 "base": "https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com",
                 "api": "todos"
             }
+        },
+        {
+            "name": "Master React Template",
+            "subHeading": "Subheading",
+            "description": "Description",
+            "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "master_react",
+            "active": true,
+            "include": false,
+            "useWebpack": true,
+            "labels": [0]
         }
     ]
 }
