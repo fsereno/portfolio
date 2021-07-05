@@ -19,20 +19,3 @@ The frontend is using React with React Router, state is manage by a combination 
 ### Explanation ###
 
 The interest in this application has come from a great deal of research and the need to demonstrate a full, end to end application, covering frontend, authentication, backend business logic and data store.
-
-### Project comands ###
-
-Build JavaScript by running the default Gulp task from witin this directory
-```
-    gulp
-```
-Run project specific tests with
-```
-    gulp test
-```
-
-Run the application from within the route directory, using the master Gulp file and the default Gulp task.
-```
-    cd ../../
-    gulp
-```
