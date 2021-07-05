@@ -1,5 +1,9 @@
 "use strict;"
 
+import '../../js/includes/jsDeps.js';
+import '../../sass/includes/styleDeps.scss'
+import '../sass/styles.scss';
+
 import Vue from 'vue';
 
 new Vue({
