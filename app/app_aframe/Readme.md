@@ -11,16 +11,3 @@ The interest in this application is to explore WebXR prototyping using AFrame, w
 This application is intended for use in any modern WebXR enabled web browser or headset.
 
 This is one in a series of applications experimenting with WebXR. Currently only supporting 3 degrees of freedom and no controller input.
-
-### Project commands ###
-
-Build JavaScript by running the default Gulp task from within this directory
-```
-    gulp
-```
-
-Run the application from within the route directory, using the master Gulp file and the default Gulp task
-```
-    cd ../../
-    gulp
-```
