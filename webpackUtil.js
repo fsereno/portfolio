@@ -7,27 +7,6 @@ module.exports = {
 
   getDirectory: (application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
 
-  // is this needed
-  getEntry: (directory, entry) => {
-
-    const result = `${directory}/${entry.replace("./", "")}`;
-
-    return result;
-
-  },
-
-  // is this needed - YES
-  getPublicPath: (application, path = "", isProduction) => {
-
-    let publicPath = path.replace("..", "");
-
-    publicPath = isProduction
-      ? !application.useRoot ? `${config.prefix}${application.folder}/js/` : "js/"
-      : publicPath;
-
-      return publicPath;
-  },
-
   _build: (applications, isProduction, hasDirectory) => {
 
     if (applications.length === 0) {
@@ -61,19 +40,19 @@ module.exports = {
 
           const combinedWebpackConfigInstance = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
 
-          //console.log(combinedWebpackConfigInstance);
-
           const compiler = webpack(combinedWebpackConfigInstance);
 
-          if (hasDirectory) {
+          if (hasDirectory && !isProduction) {
 
             compiler.watch({
               aggregateTimeout: 300,
               poll: undefined,
               ignored: /node_modules/
             }, (err, stats) => {
+
               module.exports.logCompiled(directory, stats.compilation.endTime);
               console.log(chalk.magentaBright("Watching: ") + directory)
+
             });
 
           } else {
