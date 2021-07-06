@@ -10,7 +10,7 @@ services:
             - './app:/usr/src/app/app'
             - './config.json:/usr/src/app/config.json'
             - './babel.config.json:/usr/src/app/babel.config.json'
-            - './webpack.config.js:/usr/src/app/webpack.config.js'
+            - './webpack.config.master.js:/usr/src/app/webpack.config.master.js'
             - './webpackUtil.js:/usr/src/app/webpackUtil.js'
             - './gulpfile.js:/usr/src/app/gulpfile.js'
             - './gulpUtil.js:/usr/src/app/gulpUtil.js'

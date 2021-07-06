@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const config = require("./config.json");
 const chalk = require('chalk');
+const masterWebpackConfig = require("./webpack.config.master");
 
 module.exports = {
 
@@ -46,17 +47,23 @@ module.exports = {
 
       try {
 
-          const webpackConfig = require(`${directory}/webpack.config`);
+          const applicationWebpackConfig = require(`${directory}/webpack.config`);
 
-          const modifiedWebpackConfig = {...webpackConfig};
+          const applicationWebpackConfigInstance = {...applicationWebpackConfig};
+          const masterWebpackConfigInstance = {...masterWebpackConfig};
 
           if (isProduction) {
-            delete modifiedWebpackConfig.devtool;
-            modifiedWebpackConfig.mode = "production";
-            modifiedWebpackConfig.output.path = webpackConfig.output.path.replace("/app/app/", "/app/docs/");
+            masterWebpackConfigInstance.mode = "production";
+            delete applicationWebpackConfigInstance.devtool;
+            // this line will break on a local machine, structure is not the same for all OS
+            applicationWebpackConfigInstance.output.path = applicationWebpackConfig.output.path.replace("/app/app/", "/app/docs/");
           }
 
-          const compiler = webpack(modifiedWebpackConfig);
+          const combinedWebpackConfigInstance = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
+
+          //console.log(combinedWebpackConfigInstance);
+
+          const compiler = webpack(combinedWebpackConfigInstance);
 
           if (hasDirectory) {
 
@@ -117,7 +124,6 @@ module.exports = {
     }
 
     console.log(message);
-
   },
 
   isProduction: env => env && env === "production",
