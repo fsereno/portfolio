@@ -26,72 +26,74 @@ module.exports = {
 
     const directory = module.exports.getDirectory(application);
 
+    let outputDirectory = config.developmentDir;
+
     if (application.useWebpack) {
 
       try {
 
-          const applicationWebpackConfig = require(`${directory}/webpack.config`);
+        const applicationWebpackConfig = require(`${directory}/webpack.config`);
 
-          applicationWebpackConfigInstance = {...applicationWebpackConfig};
+        applicationWebpackConfigInstance = {...applicationWebpackConfig};
 
-        } catch (exception) {
+      } catch (exception) {
 
-          console.log(chalk.yellow("Using master config."));
+        console.log(chalk.yellow("Using master config."));
 
-        }
+      }
 
-        if (isProduction) {
-          masterWebpackConfigInstance.mode = "production";
-          delete applicationWebpackConfigInstance.devtool;
-        }
+      if (isProduction) {
+        outputDirectory = config.publishDir;
+        masterWebpackConfigInstance.mode = "production";
+        delete applicationWebpackConfigInstance.devtool;
+      }
 
-        const outputDirectory = isProduction ? config.publishDir : config.developmentDir;
-        const outputPath = path.resolve(__dirname, outputDirectory, `${config.prefix}${application.folder}`, 'js');
-        const entryPath = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
+      const outputPath = path.resolve(__dirname, outputDirectory, `${config.prefix}${application.folder}`, 'js');
+      const entryPath = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
 
-        masterWebpackConfigInstance.entry = entryPath;
-        masterWebpackConfigInstance.output.path = outputPath;
+      masterWebpackConfigInstance.entry = entryPath;
+      masterWebpackConfigInstance.output.path = outputPath;
 
-        const combinedWebpackConfigInstance = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
+      const combinedWebpackConfigInstance = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
 
-        const compiler = webpack(combinedWebpackConfigInstance);
+      const compiler = webpack(combinedWebpackConfigInstance);
 
-        if (hasDirectory && !isProduction) {
+      if (hasDirectory && !isProduction) {
 
-          compiler.watch({
-            aggregateTimeout: 300,
-            poll: undefined,
-            ignored: /node_modules/
-          }, (err, stats) => {
+        compiler.watch({
+          aggregateTimeout: 300,
+          poll: undefined,
+          ignored: /node_modules/
+        }, (err, stats) => {
 
-            module.exports.logCompiled(directory, stats.compilation.endTime);
-            console.log(chalk.magentaBright("Watching: ") + directory)
+          module.exports.logCompiled(directory, stats.compilation.endTime);
+          console.log(chalk.magentaBright("Watching: ") + directory)
 
+        });
+
+      } else {
+
+        console.log(chalk.yellow("Starting: ") + directory);
+
+        compiler.run( (err, stats) => {
+
+          if (err) {
+              console.error(chalk.red(err));
+              process.exit(1);
+          }
+
+          compiler.close(closeErr => {
+
+              if (closeErr) {
+                  console.error(chalk.red(closeErr));
+                  process.exit(1);
+              } else {
+                  module.exports.logCompiled(directory);
+                  module.exports._build(applications, isProduction);
+              }
           });
-
-        } else {
-
-          console.log(chalk.yellow("Starting: ") + directory);
-
-          compiler.run( (err, stats) => {
-
-            if (err) {
-                console.error(chalk.red(err));
-                process.exit(1);
-            }
-
-            compiler.close(closeErr => {
-
-                if (closeErr) {
-                    console.error(chalk.red(closeErr));
-                    process.exit(1);
-                } else {
-                    module.exports.logCompiled(directory);
-                    module.exports._build(applications, isProduction);
-                }
-            });
-          });
-        }
+        });
+      }
 
     } else {
 
