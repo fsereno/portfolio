@@ -89,7 +89,7 @@ module.exports = {
                   process.exit(1);
               } else {
                   module.exports.logCompiled(directory);
-                  module.exports._build(applications, isProduction);
+                  //module.exports._build(applications, isProduction);
               }
           });
         });
@@ -139,6 +139,8 @@ module.exports = {
       applications = [...config.applications];
     }
 
-    module.exports._build(applications, isProduction, hasDirectory);
+    while (applications.length > 0) {
+      module.exports._build(applications, isProduction, hasDirectory);
+    }
   }
 }
