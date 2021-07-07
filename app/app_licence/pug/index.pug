@@ -1,9 +1,7 @@
-extends ../../pug/layouts/main.pug
+extends ../../pug/layouts/main2.pug
 
 block styles
-  // build:css css/styles.css
-  link(rel="stylesheet" href="css/styles.css")
-  // endbuild
+  link(rel="stylesheet" href="js/main.css")
 
 block content
       p Copyright 2018: FS Website Solutions Ltd
@@ -27,8 +25,4 @@ block content
         | THE SOFTWARE.
 
 block scripts
-  // build:js js/app.js
-  script(src="js/app.js")
-  // endbuild
-  // build:js js/vendor.js
-  // endbuild
+  script(src="js/main.js")

@@ -51,6 +51,7 @@
             "subHeading": "MIT Licence for this repository.",
             "description": "",
             "folder": "licence",
+            "useWebpack": true,
             "active": true,
             "include": false
         },
