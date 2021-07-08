@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./app/**/*.test.ts",
     "check-types": "tsc",
-    "build": "node -e 'require(\"./webpackUtil\").build()'"
+    "build": "node -e 'require(\"./webpackBuilder\").build()'"
   },
   "repository": {
     "type": "git",

@@ -3,7 +3,7 @@ version: '3.9'
 services:
     server:
         tty: true
-        image: 'fabiosereno/portfolio:1.19.0'
+        image: 'fabiosereno/portfolio:1.20.0'
         ports:
             - '8080:8080'
         volumes:
@@ -11,7 +11,10 @@ services:
             - './config.json:/usr/src/app/config.json'
             - './babel.config.json:/usr/src/app/babel.config.json'
             - './webpack.config.master.js:/usr/src/app/webpack.config.master.js'
-            - './webpackUtil.js:/usr/src/app/webpackUtil.js'
+            - './webpack.config.deps.js:/usr/src/app/webpack.config.deps.js'
+            - './webpack.config.fonts.rule.js:/usr/src/app/webpack.config.fonts.rule.js'
+            - './webpackBuilder.js:/usr/src/app/webpackBuilder.js'
+            - './webpackHelper.js:/usr/src/app/webpackHelper.js'
             - './gulpfile.js:/usr/src/app/gulpfile.js'
             - './gulpUtil.js:/usr/src/app/gulpUtil.js'
             - './docs:/usr/src/app/docs'
