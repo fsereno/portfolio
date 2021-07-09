@@ -1,3 +1,4 @@
+const path = require('path');
 const webpackHelper = require("./webpackHelper");
 const config = require('./config');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");

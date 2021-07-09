@@ -12,6 +12,7 @@ services:
             - './babel.config.json:/usr/src/app/babel.config.json'
             - './webpack.config.master.js:/usr/src/app/webpack.config.master.js'
             - './webpack.config.vendor.js:/usr/src/app/webpack.config.vendor.js'
+            - './webpack.config.js:/usr/src/app/webpack.config.js'
             - './webpackBuilder.js:/usr/src/app/webpackBuilder.js'
             - './webpackHelper.js:/usr/src/app/webpackHelper.js'
             - './gulpfile.js:/usr/src/app/gulpfile.js'
