@@ -5,6 +5,7 @@ const webpackHelper = require("./webpackHelper");
 const masterWebpackConfig = require("./webpack.config.master")();
 const webpackConfigFontsRule = require("./webpack.config.fonts.rule")();
 const depsWebpackConfig = require("./webpack.config.deps")();
+const vendorWebpackConfig = require("./webpack.config.vendor")();
 
 module.exports = {
 
@@ -22,14 +23,11 @@ module.exports = {
     }
 
     const application = applications.pop();
-
     const masterWebpackConfigInstance = {...masterWebpackConfig};
+    const directory = webpackHelper.getDirectory(application);
+    const outputDirectory = webpackHelper.getOutputDirectory();
 
     let applicationWebpackConfigInstance = {};
-
-    const directory = webpackHelper.getDirectory(application);
-
-    let outputDirectory = webpackHelper.getOutputDirectory();
 
     if (application.useWebpack) {
 
@@ -46,7 +44,7 @@ module.exports = {
       }
 
       if (isProduction) {
-        masterWebpackConfigInstance.mode = "production";
+       // masterWebpackConfigInstance.mode = "production";
         delete applicationWebpackConfigInstance.devtool;
       }
 
@@ -73,7 +71,6 @@ module.exports = {
     } else {
 
       console.log(chalk.magenta("Skipping: ") + directory);
-      module.exports._build(applications, isProduction);
 
     }
 
@@ -143,20 +140,24 @@ module.exports = {
       applications = [...config.applications];
     }
 
-    const masterWebpackConfigInstance = {...masterWebpackConfig};
+    /*const masterWebpackConfigInstance = {...masterWebpackConfig};
     const depswebackConfigInstance = {...depsWebpackConfig};
-    const combinedWebpackConfigInstance = {...masterWebpackConfigInstance, ...depswebackConfigInstance};
+    const combinedWebpackConfigInstance = {...masterWebpackConfigInstance, ...depswebackConfigInstance};*/
     const depsOutputDirectory = webpackHelper.getOutputDirectory();
 
-    combinedWebpackConfigInstance.module.rules.push(webpackConfigFontsRule);
+    //combinedWebpackConfigInstance.module.rules.push(webpackConfigFontsRule);
 
-    if (isProduction) {
+    /*if (isProduction) {
       combinedWebpackConfigInstance.mode = "production";
-    }
+    }*/
 
-    const depsCompiler = webpack(combinedWebpackConfigInstance);
+    //const depsCompiler = webpack(combinedWebpackConfigInstance);
 
-    module.exports.compile(depsCompiler, `${depsOutputDirectory}/js`);
+    console.log(vendorWebpackConfig);
+
+    const vendorCompiler = webpack(vendorWebpackConfig);
+
+    module.exports.compile(vendorCompiler, "vendor directories");
 
     while (applications.length > 0) {
       module.exports._build(applications, isProduction, hasDirectory);

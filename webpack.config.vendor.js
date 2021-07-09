@@ -1,17 +1,21 @@
 const webpackHelper = require("./webpackHelper");
+const config = require('./config');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = () => {
 
+  const outputDirectory = webpackHelper.getOutputDirectory();
+  const isProduction = webpackHelper.isProduction();
   const mode = webpackHelper.getMode();
 
   return {
-
     mode: mode,
-    entry: "",
+    entry: {
+      vendor: path.resolve(__dirname, config.developmentDir, 'js', 'includes', 'deps.js')
+    },
     output: {
-      path: ""
+        path: path.resolve(__dirname, outputDirectory, 'js')
     },
     plugins: [ new MiniCssExtractPlugin() ],
     module: {
@@ -34,6 +38,19 @@ module.exports = () => {
             "sass-loader",
           ]
         },
+        {
+          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: isProduction ? '[contenthash].[ext]' : '[name].[ext]',
+                outputPath: '../fonts/',
+                publicPath: '../fonts/',
+              }
+            }
+          ]
+        }
       ]
     },
     optimization: {

@@ -10,4 +10,5 @@ module.exports = {
     },
     getOutputDirectory: () => module.exports.isProduction() ? config.publishDir : config.developmentDir,
     getDirectory: (application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
+    getMode: () => module.exports.isProduction() ? 'production' : 'development'
 }
