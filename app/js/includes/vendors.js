@@ -1,2 +1,2 @@
-import './jsDeps.js';
+import 'bootstrap';
 import "../../sass/includes/styleDeps.scss";

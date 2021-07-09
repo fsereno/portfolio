@@ -12,7 +12,7 @@ module.exports = () => {
   return {
     mode: mode,
     entry: {
-      vendor: path.resolve(__dirname, config.developmentDir, 'js', 'includes', 'deps.js')
+      vendor: path.resolve(__dirname, config.developmentDir, 'js', 'includes', 'vendors.js')
     },
     output: {
         path: path.resolve(__dirname, outputDirectory, 'js')

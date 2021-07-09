@@ -9,25 +9,14 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./app/js/includes/deps.js":
-/*!*********************************!*\
-  !*** ./app/js/includes/deps.js ***!
-  \*********************************/
+/***/ "./app/js/includes/vendors.js":
+/*!************************************!*\
+  !*** ./app/js/includes/vendors.js ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _jsDeps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./jsDeps.js */ \"./app/js/includes/jsDeps.js\");\n/* harmony import */ var _sass_includes_styleDeps_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../sass/includes/styleDeps.scss */ \"./app/sass/includes/styleDeps.scss\");\n\n\n\n//# sourceURL=webpack://portfolio/./app/js/includes/deps.js?");
-
-/***/ }),
-
-/***/ "./app/js/includes/jsDeps.js":
-/*!***********************************!*\
-  !*** ./app/js/includes/jsDeps.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ \"./node_modules/bootstrap/dist/js/bootstrap.js\");\n/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_0__);\n\n\n//# sourceURL=webpack://portfolio/./app/js/includes/jsDeps.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap */ \"./node_modules/bootstrap/dist/js/bootstrap.js\");\n/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _sass_includes_styleDeps_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../sass/includes/styleDeps.scss */ \"./app/sass/includes/styleDeps.scss\");\n\n\n\n//# sourceURL=webpack://portfolio/./app/js/includes/vendors.js?");
 
 /***/ }),
 
@@ -157,7 +146,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./app/js/includes/deps.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./app/js/includes/vendors.js");
 /******/ 	
 /******/ })()
 ;
