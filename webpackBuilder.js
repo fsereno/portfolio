@@ -9,14 +9,13 @@ module.exports = {
 
   _build: (applications) => {
 
-    const isProduction = webpackHelper.isProduction();
-    const [ hasDirectory ] = webpackHelper.hasDirectory();
-
     if (applications.length === 0) {
       console.log(chalk.green("All builds complete"));
       process.exit(0);
     }
 
+    const isProduction = webpackHelper.isProduction();
+    const [ hasDirectory ] = webpackHelper.hasDirectory();
     const application = applications.pop();
     const masterWebpackConfigInstance = {...masterWebpackConfig};
     const fullDirectoryPath = webpackHelper.getFullDirectoryPath(application);
