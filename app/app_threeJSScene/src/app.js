@@ -1,8 +1,7 @@
 "use strict;"
 
-import '../../js/includes/jsDeps.js';
-import '../../sass/includes/styleDeps.scss'
 import '../sass/styles.scss';
+
 import * as THREE from 'three';
 
 import {TimelineMax, TweenMax, CSSPlugin, ScrollToPlugin, Draggable, Elastic, Expo} from "gsap/all";
