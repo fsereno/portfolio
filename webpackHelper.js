@@ -9,6 +9,20 @@ module.exports = {
         return [ hasDirectory, directory ];
     },
     getOutputDirectory: () => module.exports.isProduction() ? config.publishDir : config.developmentDir,
-    getDirectory: (application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
-    getMode: () => module.exports.isProduction() ? 'production' : 'development'
+    getFullDirectoryPath: (application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
+    getMode: () => module.exports.isProduction() ? 'production' : 'development',
+    getApplications: () => {
+
+        const [ hasDirectory, directory] = module.exports.hasDirectory(process.env.npm_config_dir);
+
+        let applications = [];
+
+        if (hasDirectory) {
+            applications = [...config.applications.filter(x => x.folder === directory)];
+        } else {
+            applications = [...config.applications];
+        }
+
+        return applications;
+    }
 }

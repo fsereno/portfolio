@@ -3,28 +3,23 @@ const config = require("./config.json");
 const chalk = require('chalk');
 const webpackHelper = require("./webpackHelper");
 const masterWebpackConfig = require("./webpack.config.master")();
-const webpackConfigFontsRule = require("./webpack.config.fonts.rule")();
-const depsWebpackConfig = require("./webpack.config.deps")();
 const vendorWebpackConfig = require("./webpack.config.vendor")();
 
 module.exports = {
 
-  _build: (applications, hasDirectory) => {
+  _build: (applications) => {
 
     const isProduction = webpackHelper.isProduction();
+    const [ hasDirectory ] = webpackHelper.hasDirectory();
 
     if (applications.length === 0) {
       console.log(chalk.green("All builds complete"));
       process.exit(0);
     }
 
-    if (applications.length > 0) {
-      console.log(`${chalk.blue("Building:")} ${applications.length} applications...`);
-    }
-
     const application = applications.pop();
     const masterWebpackConfigInstance = {...masterWebpackConfig};
-    const directory = webpackHelper.getDirectory(application);
+    const fullDirectoryPath = webpackHelper.getFullDirectoryPath(application);
     const outputDirectory = webpackHelper.getOutputDirectory();
 
     let applicationWebpackConfigInstance = {};
@@ -33,7 +28,7 @@ module.exports = {
 
       try {
 
-        const applicationWebpackConfig = require(`${directory}/webpack.config`);
+        const applicationWebpackConfig = require(`${fullDirectoryPath}/webpack.config`);
 
         applicationWebpackConfigInstance = {...applicationWebpackConfig};
 
@@ -44,7 +39,6 @@ module.exports = {
       }
 
       if (isProduction) {
-       // masterWebpackConfigInstance.mode = "production";
         delete applicationWebpackConfigInstance.devtool;
       }
 
@@ -60,17 +54,17 @@ module.exports = {
 
       if (hasDirectory && !isProduction) {
 
-        module.exports.watch(compiler, directory);
+        module.exports.watch(compiler, fullDirectoryPath);
 
       } else {
 
-        module.exports.compile(compiler, directory);
+        module.exports.compile(compiler, fullDirectoryPath);
 
       }
 
     } else {
 
-      console.log(chalk.magenta("Skipping: ") + directory);
+      console.log(chalk.magenta("Skipping: ") + fullDirectoryPath);
 
     }
 
@@ -129,38 +123,17 @@ module.exports = {
   ///
   build: () => {
 
-    const isProduction = webpackHelper.isProduction();
-    const [ hasDirectory, directory] = webpackHelper.hasDirectory(process.env.npm_config_dir);
-
-    let applications = [];
-
-    if (hasDirectory) {
-      applications = [...config.applications.filter(x => x.folder === directory)];
-    } else {
-      applications = [...config.applications];
-    }
-
-    /*const masterWebpackConfigInstance = {...masterWebpackConfig};
-    const depswebackConfigInstance = {...depsWebpackConfig};
-    const combinedWebpackConfigInstance = {...masterWebpackConfigInstance, ...depswebackConfigInstance};*/
-    const depsOutputDirectory = webpackHelper.getOutputDirectory();
-
-    //combinedWebpackConfigInstance.module.rules.push(webpackConfigFontsRule);
-
-    /*if (isProduction) {
-      combinedWebpackConfigInstance.mode = "production";
-    }*/
-
-    //const depsCompiler = webpack(combinedWebpackConfigInstance);
-
-    console.log(vendorWebpackConfig);
-
+    const applications = webpackHelper.getApplications();
     const vendorCompiler = webpack(vendorWebpackConfig);
 
     module.exports.compile(vendorCompiler, "vendor directories");
 
+    if (applications.length > 0) {
+      console.log(`${chalk.blue("Building:")} ${applications.length} applications...`);
+    }
+
     while (applications.length > 0) {
-      module.exports._build(applications, isProduction, hasDirectory);
+      module.exports._build(applications);
     }
   }
 }
