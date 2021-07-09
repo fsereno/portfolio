@@ -1,4 +1,5 @@
 const config = require("./config.json");
+const chalk = require('chalk');
 
 module.exports = {
     isProduction: () => process.env.npm_config_production,
@@ -14,15 +15,22 @@ module.exports = {
     getApplications: () => {
 
         const [ hasDirectory, directory] = module.exports.hasDirectory(process.env.npm_config_dir);
-
-        let applications = [];
+        let applications = config.applications.filter(x => x.useWebpack);
 
         if (hasDirectory) {
-            applications = [...config.applications.filter(x => x.folder === directory)];
-        } else {
-            applications = [...config.applications];
+            applications = applications.filter(x => x.folder === directory);
         }
 
         return applications;
-    }
+    },
+    logCompiled: (directory, stamp) => {
+
+        let message = `${chalk.green("Compiled:")} ${directory}`;
+    
+        if (stamp) {
+          message += ` ${stamp}`;
+        }
+    
+        console.log(message);
+      }
 }

@@ -7,69 +7,68 @@ const vendorWebpackConfig = require("./webpack.config.vendor")();
 
 module.exports = {
 
-  _build: (applications) => {
+  buildWebpackConfig: (application) => {
 
-    if (applications.length === 0) {
-      console.log(chalk.green("All builds complete"));
-      process.exit(0);
+    //const application = applications.pop();
+    const masterWebpackConfigInstance = {...masterWebpackConfig};
+    const publicDir = webpackHelper.getFullDirectoryPath(application);
+    const outputDirectory = webpackHelper.getOutputDirectory();
+    let applicationWebpackConfigInstance;
+
+    try {
+
+      const applicationWebpackConfig = require(`${publicDir}/webpack.config`);
+
+      applicationWebpackConfigInstance = {...applicationWebpackConfig};
+
+    } catch (exception) {
+
+      applicationWebpackConfigInstance = {}
+
     }
 
-    const isProduction = webpackHelper.isProduction();
+    const entryPath = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
+    const outputPath = path.resolve(__dirname, outputDirectory, `${config.prefix}${application.folder}`, 'js');
+
+    masterWebpackConfigInstance.entry = entryPath;
+    masterWebpackConfigInstance.output.path = outputPath;
+
+    const webpackConfig = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
+
+    return {
+      webpackConfig,
+      publicDir
+    };
+  },
+
+  development: (config, publicDir) => {
+
+    const compiler = webpack(config);
+
     const [ hasDirectory ] = webpackHelper.hasDirectory();
-    const application = applications.pop();
-    const masterWebpackConfigInstance = {...masterWebpackConfig};
-    const fullDirectoryPath = webpackHelper.getFullDirectoryPath(application);
-    const outputDirectory = webpackHelper.getOutputDirectory();
 
-    let applicationWebpackConfigInstance = {};
+    if (hasDirectory) {
 
-    if (application.useWebpack) {
-
-      try {
-
-        const applicationWebpackConfig = require(`${fullDirectoryPath}/webpack.config`);
-
-        applicationWebpackConfigInstance = {...applicationWebpackConfig};
-
-      } catch (exception) {
-
-        console.log(chalk.yellow("Using master config."));
-
-      }
-
-      if (isProduction) {
-        delete applicationWebpackConfigInstance.devtool;
-      }
-
-      const entryPath = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
-      const outputPath = path.resolve(__dirname, outputDirectory, `${config.prefix}${application.folder}`, 'js');
-
-      masterWebpackConfigInstance.entry = entryPath;
-      masterWebpackConfigInstance.output.path = outputPath;
-
-      const combinedWebpackConfigInstance = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
-
-      const compiler = webpack(combinedWebpackConfigInstance);
-
-      if (hasDirectory && !isProduction) {
-
-        module.exports.watch(compiler, fullDirectoryPath);
-
-      } else {
-
-        module.exports.compile(compiler, fullDirectoryPath);
-
-      }
+      module.exports.watch(compiler, publicDir);
 
     } else {
 
-      console.log(chalk.magenta("Skipping: ") + fullDirectoryPath);
+      module.exports.run(compiler, publicDir);
 
     }
-
   },
 
-  compile: (compiler, directory) => {
+  production: (config, publicDir) => {
+    const compiler = webpack(config);
+    module.exports.run(compiler, publicDir);
+  },
+
+  vendor: () => {
+    const vendorCompiler = webpack(vendorWebpackConfig);
+    module.exports.run(vendorCompiler, "vendor directories");
+  },
+
+  run: (compiler, directory) => {
 
     console.log(chalk.yellow("Compiling: ") + directory);
 
@@ -86,34 +85,24 @@ module.exports = {
               console.error(chalk.red(closeErr));
               process.exit(1);
           } else {
-              module.exports.logCompiled(directory);
+              webpackHelper.logCompiled(directory);
           }
       });
     });
   },
 
   watch: (compiler, directory) => {
+
     compiler.watch({
       aggregateTimeout: 300,
       poll: undefined,
       ignored: /node_modules/
     }, (err, stats) => {
 
-      module.exports.logCompiled(directory, stats.compilation.endTime);
+      webpackHelper.logCompiled(directory, stats.compilation.endTime);
       console.log(chalk.magentaBright("Watching: ") + directory)
 
     });
-  },
-
-  logCompiled: (directory, stamp) => {
-
-    let message = `${chalk.green("Compiled:")} ${directory}`;
-
-    if (stamp) {
-      message += ` ${stamp}`;
-    }
-
-    console.log(message);
   },
 
   /// Accepted arguments
@@ -123,16 +112,43 @@ module.exports = {
   build: () => {
 
     const applications = webpackHelper.getApplications();
-    const vendorCompiler = webpack(vendorWebpackConfig);
+    const isProduction = webpackHelper.isProduction();
 
-    module.exports.compile(vendorCompiler, "vendor directories");
+    module.exports.vendor();
 
     if (applications.length > 0) {
-      console.log(`${chalk.blue("Building:")} ${applications.length} applications...`);
-    }
 
-    while (applications.length > 0) {
-      module.exports._build(applications);
+      console.log(`${chalk.blue("Building:")} ${applications.length} applications...`);
+
+      applications.forEach(application => {
+
+        const { webpackConfig, publicDir } = module.exports.buildWebpackConfig(application);
+
+        if (isProduction) {
+          module.exports.production(webpackConfig, publicDir);
+        } else {
+          module.exports.development(webpackConfig, publicDir);
+        }
+
+      });
+
+    } else {
+      console.log(chalk.red("No applictions found!"));
     }
+  },
+  getAllConfig: () => {
+
+    const applications = webpackHelper.getApplications();
+    const configs = [];
+
+    applications.forEach(application => {
+
+      const { webpackConfig } = module.exports.buildWebpackConfig(application);
+
+      configs.push(webpackConfig);
+
+    });
+
+    return configs;
   }
 }
