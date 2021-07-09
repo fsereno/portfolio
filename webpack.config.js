@@ -4,5 +4,7 @@ const vendorsWebpack = require('./webpack.config.vendor')();
 module.exports = (env) => {
   const webpacks = webpackBuilder.getAllConfig();
   webpacks.push(vendorsWebpack);
+
+  //console.log(webpacks)
   return webpacks;
 }

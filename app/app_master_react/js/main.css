@@ -1,3 +1,6 @@
+/*!********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/app_master_react/sass/styles.scss ***!
+  \********************************************************************************************************************************/
 @media screen and (max-width: 991px) {
   .navbar.fixed-top .dropdown-menu {
     max-height: 50vh !important; }
@@ -268,5 +271,5 @@ h1, h2, h3, h4, h5 {
   visibility: visible; }
 
 body h1 {
-  color: #000000; }
+  color: red; }
 

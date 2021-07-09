@@ -10,8 +10,6 @@ module.exports = {
 
   buildWebpackConfig: (application) => {
 
-    //const application = applications.pop();
-    const masterWebpackConfigInstance = {...masterWebpackConfig};
     const publicDir = webpackHelper.getFullDirectoryPath(application);
     const outputDirectory = webpackHelper.getOutputDirectory();
     let applicationWebpackConfigInstance;
@@ -31,9 +29,7 @@ module.exports = {
     const entryPath = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
     const outputPath = path.resolve(__dirname, outputDirectory, `${config.prefix}${application.folder}`, 'js');
 
-    masterWebpackConfigInstance.entry = entryPath;
-    masterWebpackConfigInstance.output.path = outputPath;
-
+    const masterWebpackConfigInstance = {...masterWebpackConfig, ...{ entry: entryPath, output: { path: outputPath} } };
     const webpackConfig = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
 
     return {
@@ -140,13 +136,13 @@ module.exports = {
   getAllConfig: () => {
 
     const applications = webpackHelper.getApplications();
-    const configs = [];
+    let configs = [];
 
     applications.forEach(application => {
 
       const { webpackConfig } = module.exports.buildWebpackConfig(application);
 
-      configs.push(webpackConfig);
+      configs = [...configs, webpackConfig]
 
     });
 

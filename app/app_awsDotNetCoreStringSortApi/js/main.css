@@ -1,3 +1,6 @@
+/*!**********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/app_awsDotNetCoreStringSortApi/sass/styles.scss ***!
+  \**********************************************************************************************************************************************/
 @media screen and (max-width: 991px) {
   .navbar.fixed-top .dropdown-menu {
     max-height: 50vh !important; }
