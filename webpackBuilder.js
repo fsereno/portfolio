@@ -26,10 +26,19 @@ module.exports = {
 
     }
 
+    const devServerConfig = {
+      contentBase: path.join(__dirname, 'app'),
+      publicPath: `/${config.prefix}${application.folder}/js/`,
+      port: 8080,
+      host: '0.0.0.0',
+      open: true,
+      watchContentBase: true
+    }
+
     const entryPath = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
     const outputPath = path.resolve(__dirname, outputDirectory, `${config.prefix}${application.folder}`, 'js');
 
-    const masterWebpackConfigInstance = {...masterWebpackConfig, ...{ entry: entryPath, output: { path: outputPath} } };
+    const masterWebpackConfigInstance = {...masterWebpackConfig, ...{ entry: entryPath, output: { path: outputPath}, devServer:  devServerConfig} };
     const webpackConfig = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
 
     return {

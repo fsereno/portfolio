@@ -27,7 +27,7 @@ export function IntroContainer() {
             <h4 className="display-4 sub-heading lead text-white">{context.config.role}</h4>
           </div>
           <div id="btnContainer" className="text-center element pt-2">
-            <button type="button" className="btn btn-outline-light" onClick={handleScrollBtnClick}>View Portfolio new test</button>
+            <button type="button" className="btn btn-outline-light" onClick={handleScrollBtnClick}>View Portfolio Testing 1</button>
           </div>
         </div>
       </div>

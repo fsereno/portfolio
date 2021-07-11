@@ -1,5 +1,6 @@
-const webpackHelper = require("./webpackHelper");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const webpackHelper = require('./webpackHelper');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = () => {
@@ -41,12 +42,14 @@ module.exports = () => {
         `...`,
         new CssMinimizerPlugin(),
       ]
-    },
-    devServer: {
-      contentBase: 'app',
-      publicPath: './app',
+    }
+    /*devServer: {
+      contentBase: path.join(__dirname, 'app'),
+      publicPath: '/js/',
       port: 8080,
-      host: '0.0.0.0'
-    },
+      host: '0.0.0.0',
+      open: true,
+      watchContentBase: true
+    },*/
   }
 };

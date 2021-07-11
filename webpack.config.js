@@ -5,6 +5,6 @@ module.exports = (env) => {
   const webpacks = webpackBuilder.getAllConfig();
   webpacks.push(vendorsWebpack);
 
-  //console.log(webpacks)
-  return webpacks;
+  console.log(webpacks[2])
+  return [ webpacks[2] ];
 }
