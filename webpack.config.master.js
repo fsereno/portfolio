@@ -1,15 +1,10 @@
 const path = require('path');
-const webpackHelper = require('./webpackHelper');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = () => {
 
-  const mode = webpackHelper.getMode();
-
   return {
-
-    mode: mode,
     entry: "",
     output: {
       path: ""

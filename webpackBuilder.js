@@ -8,10 +8,11 @@ const vendorWebpackConfig = require("./webpack.config.vendor")();
 
 module.exports = {
 
-  buildWebpackConfig: (application) => {
+  buildWebpackConfig: (application, env) => {
 
     const publicDir = webpackHelper.getFullDirectoryPath(application);
-    const outputDirectory = webpackHelper.getOutputDirectory();
+    const outputDirectory = webpackHelper.getOutputDirectory(env);
+    const [ hasDirectory ] = webpackHelper.hasDirectory(env);
     let applicationWebpackConfigInstance;
 
     try {
@@ -26,20 +27,32 @@ module.exports = {
 
     }
 
-    const devServerConfig = {
-      contentBase: path.join(__dirname, 'app'),
-      publicPath: `/${config.prefix}${application.folder}/js/`,
-      port: 8080,
-      host: '0.0.0.0',
-      open: true,
-      watchContentBase: true
+    const devServer = {
+        contentBase: path.join(__dirname, 'app'),
+        publicPath: `/${config.prefix}${application.folder}/js/`,
+        port: 8080,
+        host: '0.0.0.0',
+        open: true,
+        watchContentBase: true
     }
 
     const entryPath = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
     const outputPath = path.resolve(__dirname, outputDirectory, `${config.prefix}${application.folder}`, 'js');
+    const mode = webpackHelper.getMode(env);
 
-    const masterWebpackConfigInstance = {...masterWebpackConfig, ...{ entry: entryPath, output: { path: outputPath}, devServer:  devServerConfig} };
-    const webpackConfig = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
+    const masterWebpackConfigInstance = {...masterWebpackConfig, ...{
+      mode,
+      entry: entryPath,
+      output: {
+        path: outputPath
+      }
+    } };
+
+    let webpackConfig = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
+
+    if (hasDirectory) {
+      webpackConfig = {...webpackConfig, ...{ devServer } }
+    }
 
     return {
       webpackConfig,
@@ -142,14 +155,15 @@ module.exports = {
       console.log(chalk.red("No applictions found!"));
     }
   },
-  getAllConfig: () => {
+  getAllConfig: (env) => {
 
-    const applications = webpackHelper.getApplications();
+    const applications = webpackHelper.getApplications(env);
+
     let configs = [];
 
     applications.forEach(application => {
 
-      const { webpackConfig } = module.exports.buildWebpackConfig(application);
+      const { webpackConfig } = module.exports.buildWebpackConfig(application, env);
 
       configs = [...configs, webpackConfig]
 

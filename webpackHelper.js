@@ -2,19 +2,20 @@ const config = require("./config.json");
 const chalk = require('chalk');
 
 module.exports = {
-    isProduction: () => process.env.npm_config_production,
-    hasDirectory: () =>  {
-        const dir = process.env.npm_config_dir;
+    isProduction: (env) => env ? env.production : process.env.npm_config_production,
+    hasDirectory: (env) =>  {
+        const dir = env ? env.dir : process.env.npm_config_dir;
         const hasDirectory = dir && dir.length > 0;
         const directory = hasDirectory ? dir.replace(config.prefix, "") : "";
         return [ hasDirectory, directory ];
     },
-    getOutputDirectory: () => module.exports.isProduction() ? config.publishDir : config.developmentDir,
+    getOutputDirectory: (env) => module.exports.isProduction(env) ? config.publishDir : config.developmentDir,
     getFullDirectoryPath: (application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
-    getMode: () => module.exports.isProduction() ? 'production' : 'development',
-    getApplications: () => {
+    getMode: (env) => module.exports.isProduction(env) ? 'production' : 'development',
+    getApplications: (env) => {
 
-        const [ hasDirectory, directory] = module.exports.hasDirectory(process.env.npm_config_dir);
+        const [ hasDirectory, directory] = module.exports.hasDirectory(env);
+
         let applications = config.applications.filter(x => x.useWebpack);
 
         if (hasDirectory) {
@@ -26,11 +27,11 @@ module.exports = {
     logCompiled: (directory, stamp) => {
 
         let message = `${chalk.green("Compiled:")} ${directory}`;
-    
+
         if (stamp) {
           message += ` ${stamp}`;
         }
-    
+
         console.log(message);
       }
 }
