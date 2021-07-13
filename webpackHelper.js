@@ -33,5 +33,6 @@ module.exports = {
         }
 
         console.log(message);
-      }
+    },
+    isServe: (env) => env.WEBPACK_SERVE
 }

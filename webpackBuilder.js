@@ -12,7 +12,7 @@ module.exports = {
 
     const publicDir = webpackHelper.getFullDirectoryPath(application);
     const outputDirectory = webpackHelper.getOutputDirectory(env);
-    const [ hasDirectory ] = webpackHelper.hasDirectory(env);
+    const isServe = webpackHelper.isServe(env);
     let applicationWebpackConfigInstance;
 
     try {
@@ -25,15 +25,6 @@ module.exports = {
 
       applicationWebpackConfigInstance = {}
 
-    }
-
-    const devServer = {
-        contentBase: path.join(__dirname, 'app'),
-        publicPath: `/${config.prefix}${application.folder}/js/`,
-        port: 8080,
-        host: '0.0.0.0',
-        open: true,
-        watchContentBase: true
     }
 
     const entryPath = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
@@ -50,7 +41,17 @@ module.exports = {
 
     let webpackConfig = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
 
-    if (hasDirectory) {
+    if (isServe) {
+
+      const devServer = {
+        contentBase: path.join(__dirname, 'app'),
+        publicPath: `/${config.prefix}${application.folder}/js/`,
+        port: 8080,
+        host: '0.0.0.0',
+        open: true,
+        watchContentBase: true
+      }
+
       webpackConfig = {...webpackConfig, ...{ devServer } }
     }
 
