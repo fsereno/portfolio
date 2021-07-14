@@ -8,7 +8,7 @@ module.exports = (env) => {
   // npx webpack serve --env dir=toDoReact
 
   const webpacks = webpackBuilder.getAllConfig(env);
-  //PUT THIS BACK IN webpacks.push(vendorsWebpack) PUT THIS BACK IN!;
+  //webpacks.push(vendorsWebpack); this breaks the hot reload
 
   console.log(webpacks)
 
