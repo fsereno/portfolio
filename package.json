@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./app/**/*.test.ts",
     "check-types": "tsc",
-    "build": "webpack",
+    "build": "webpack --env dir=$dir",
     "dev": "webpack serve --env dir=$dir",
     "release": "webpack --progress --env production"
   },
