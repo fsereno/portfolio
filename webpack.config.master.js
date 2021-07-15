@@ -38,13 +38,5 @@ module.exports = () => {
         new CssMinimizerPlugin(),
       ]
     }
-    /*devServer: {
-      contentBase: path.join(__dirname, 'app'),
-      publicPath: '/js/',
-      port: 8080,
-      host: '0.0.0.0',
-      open: true,
-      watchContentBase: true
-    },*/
   }
 };

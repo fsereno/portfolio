@@ -20,6 +20,8 @@ module.exports = {
 
         if (hasDirectory) {
             applications = applications.filter(x => x.folder === directory);
+        } else if (!hasDirectory && module.exports.isServe(env)) {
+            applications = applications.filter(x => x.folder === config.entry);
         }
 
         return applications;
@@ -34,5 +36,14 @@ module.exports = {
 
         console.log(message);
     },
-    isServe: (env) => env.WEBPACK_SERVE
+    logNumberOfCompilingConfigs: (webpacks) => {
+        console.log(chalk.blueBright("Compiling ") + webpacks.length + " applications...");
+    },
+    logAllCompiling: (webpacks) => {
+        webpacks.forEach(config => {
+            console.log(chalk.yellow("Compiling: ") + config.entry);
+        });
+    },
+    isServe: (env) => env && env.WEBPACK_SERVE,
+    isBuild: (env) => env && env.WEBPACK_BUILD
 }
