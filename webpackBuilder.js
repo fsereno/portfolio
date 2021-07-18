@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const config = require("./config.json");
 const chalk = require('chalk');
 const webpackHelper = require("./webpackHelper");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const masterWebpackConfig = require("./webpack.config.master")();
 const vendorWebpackConfig = require("./webpack.config.vendor")();
 
@@ -54,6 +55,22 @@ module.exports = {
 
       webpackConfig = {...webpackConfig, ...{ devServer } }
     }
+
+    const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', 'index.pug')
+    });
+
+    webpackConfig.plugins.push(htmlWebpackPluginConfig)
+
+    webpackConfig.module.rules.push(
+      {
+        test: /\.pug$/,
+        loader: "pug-loader",
+        options: {
+          locals: { config, application }
+        }
+      }
+    )
 
     return {
       webpackConfig,
