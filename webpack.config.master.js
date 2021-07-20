@@ -1,17 +1,19 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = () => {
 
   return {
-    entry: "",
+    entry: {
+      main: "",
+      vendor: ['bootstrap', './app/sass/includes/styleDeps.scss']
+    },
     output: {
       path: ""
     },
-    plugins: [ 
-      new MiniCssExtractPlugin(),
+    plugins: [
+      new MiniCssExtractPlugin()
     ],
     module: {
       rules: [
@@ -31,6 +33,19 @@ module.exports = () => {
             "css-loader",
             // Compiles Sass to CSS
             "sass-loader",
+          ]
+        },
+        {
+          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: '../../fonts/',
+                publicPath: '../../fonts/',
+              }
+            }
           ]
         }
       ]

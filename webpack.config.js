@@ -13,7 +13,7 @@ module.exports = (env) => {
   const isBuild = webpackHelper.isBuild(env);
 
   if (isBuild) {
-    webpacks.push(vendorsWebpack);
+    //webpacks.push(vendorsWebpack);
   }
 
   webpackHelper.logNumberOfCompilingConfigs(webpacks);

@@ -34,7 +34,7 @@ module.exports = {
 
     const masterWebpackConfigInstance = {...masterWebpackConfig, ...{
       mode,
-      entry: entryPath,
+      entry: {...masterWebpackConfig.entry, main: entryPath },
       output: {
         path: outputPath
       }
@@ -56,8 +56,13 @@ module.exports = {
       webpackConfig = {...webpackConfig, ...{ devServer } }
     }
 
+    const htmlFilename = application.useRoot
+      ? `${path.resolve(__dirname, outputDirectory)}/index.html`
+      : `${path.resolve(__dirname, outputDirectory, `${config.prefix}${application.folder}`)}/index.html`
+
     const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', 'index.pug')
+      template: path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', 'index.pug'),
+      filename: htmlFilename//`${path.resolve(__dirname, outputDirectory)}/index.html`
     });
 
     webpackConfig.plugins.push(htmlWebpackPluginConfig)
@@ -66,9 +71,6 @@ module.exports = {
       {
         test: /\.pug$/,
         loader: "pug-loader",
-        options: {
-          locals: { config, application }
-        }
       }
     )
 
