@@ -7,7 +7,7 @@ module.exports = () => {
   return {
     entry: {
       main: "",
-      vendor: ['bootstrap', './app/sass/includes/styleDeps.scss']
+      '../../vendor/vendor': ['bootstrap', './app/sass/includes/styleDeps.scss']
     },
     output: {
       path: ""
@@ -43,7 +43,7 @@ module.exports = () => {
               options: {
                 name: '[name].[ext]',
                 outputPath: '../../fonts/',
-                publicPath: '../../fonts/',
+                publicPath: '../fonts/',
               }
             }
           ]
