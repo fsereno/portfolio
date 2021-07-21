@@ -1,7 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
 const config = require("./config.json");
-const chalk = require('chalk');
 const webpackHelper = require("./webpackHelper");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const masterWebpackConfig = require("./webpack.config.master")();
@@ -30,15 +28,21 @@ module.exports = {
     const outputPath = path.resolve(__dirname, 'dist', `${config.prefix}${application.folder}`, 'js');
     const mode = webpackHelper.getMode(env);
 
-    const masterWebpackConfigInstance = {...masterWebpackConfig, ...{
-      mode,
-      entry: {...masterWebpackConfig.entry, main: entryPath },
-      output: {...masterWebpackConfig.output,
-        path: outputPath
+    const masterWebpackConfigInstance = {
+      ...masterWebpackConfig,
+      ...{
+        mode,
+        entry: {...masterWebpackConfig.entry, main: entryPath },
+        output: {...masterWebpackConfig.output,
+          path: outputPath
+        }
       }
-    } };
+    };
 
-    let webpackConfig = {...masterWebpackConfigInstance, ...applicationWebpackConfigInstance};
+    let webpackConfig = {
+      ...masterWebpackConfigInstance,
+      ...applicationWebpackConfigInstance
+    };
 
     if (isServe) {
 
@@ -60,93 +64,38 @@ module.exports = {
 
     const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
       template: "!!pug-loader!" + path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', 'index.pug'),
-      filename: htmlFilename,//`${path.resolve(__dirname, 'dist')}/index.html`,
+      filename: htmlFilename,
       locals: { config: config, application: application }
     });
 
-    webpackConfig = {...webpackConfig, plugins: [...webpackConfig.plugins, htmlWebpackPluginConfig ] }
-
-    return {
-      webpackConfig,
-      publicDir
-    };
-  },
-
-  development: (config, publicDir) => {
-
-    const compiler = webpack(config);
-
-    const [ hasDirectory ] = webpackHelper.hasDirectory();
-
-    if (hasDirectory) {
-
-      module.exports.watch(compiler, publicDir);
-
-    } else {
-
-      module.exports.run(compiler, publicDir);
-
+    webpackConfig = {
+      ...webpackConfig,
+      plugins: [
+        ...webpackConfig.plugins,
+        htmlWebpackPluginConfig
+      ]
     }
-  },
 
-  production: (config, publicDir) => {
-    const compiler = webpack(config);
-    module.exports.run(compiler, publicDir);
-  },
-
-  run: (compiler, directory) => {
-
-    console.log(chalk.yellow("Compiling: ") + directory);
-
-    compiler.run( (err, stats) => {
-
-      if (err) {
-          console.error(chalk.red(err));
-          process.exit(1);
-      }
-
-      compiler.close(closeErr => {
-
-          if (closeErr) {
-              console.error(chalk.red(closeErr));
-              process.exit(1);
-          } else {
-              webpackHelper.logCompiled(directory);
-          }
-      });
-    });
-  },
-
-  watch: (compiler, directory) => {
-
-    compiler.watch({
-      aggregateTimeout: 300,
-      poll: undefined,
-      ignored: /node_modules/
-    }, (err, stats) => {
-
-      webpackHelper.logCompiled(directory, stats.compilation.endTime);
-      console.log(chalk.magentaBright("Watching: ") + directory)
-
-    });
+    return webpackConfig;
   },
 
   getAllConfig: (env) => {
 
-    const applications = webpackHelper.getApplications(env);
+    //const applications = webpackHelper.getApplications(env);
 
-    /*const testApps = webpackHelper.getApplications(env);
+    const testApps = webpackHelper.getApplications(env);
 
     const app1 = testApps.find(x => x.folder === "toDoReact")
     const app2 = testApps.find(x => x.folder === "ticTacToeReact")
+    const app3 = testApps.find(x => x.folder === "home")
 
-    const applications = [ app1, app2 ];*/
+    const applications = [ app1, app2, app3 ];
 
     let configs = [];
 
     applications.forEach(application => {
 
-      const { webpackConfig } = module.exports.buildWebpackConfig(application, env);
+      const webpackConfig = module.exports.buildWebpackConfig(application, env);
 
       configs = [...configs, webpackConfig]
 

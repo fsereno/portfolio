@@ -8,7 +8,5 @@ module.exports = (env) => {
   webpackHelper.logNumberOfCompilingConfigs(webpacks);
   webpackHelper.logAllCompiling(webpacks);
 
-  //console.log(JSON.stringify(webpacks))
-
   return webpacks;
 }
