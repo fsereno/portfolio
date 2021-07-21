@@ -12,7 +12,7 @@ class ToDoListForm extends React.Component {
     this.state = {
       value: '',
       list: [],
-      counterLimit: 1,
+      counterLimit: 2,
       counter: 0,
       selectedIndex: 0
     };
@@ -51,6 +51,7 @@ class ToDoListForm extends React.Component {
   render() {
     return (
       <div>
+        <i className="bi bi-arrow-90deg-left"></i>
         <div className="row splitter">
           <div className="col-lg-4">
             <h3>Result:</h3>
