@@ -60,7 +60,7 @@ module.exports = {
 
     const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
       template: "!!pug-loader!" + path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', 'index.pug'),
-      filename: htmlFilename, //`${path.resolve(__dirname, outputDirectory)}/index.html`
+      filename: htmlFilename,//`${path.resolve(__dirname, 'dist')}/index.html`,
       locals: { config: config, application: application }
     });
 
