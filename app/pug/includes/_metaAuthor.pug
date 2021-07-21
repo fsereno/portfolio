@@ -1,8 +1,8 @@
-- var directory = locals.application.useRoot ? "./" : "../";
-title= locals.config.title
+- var directory = htmlWebpackPlugin.options.locals.application.useRoot ? "./" : "../";
+title=htmlWebpackPlugin.options.locals.config.title
 meta(charset="utf-8")
-meta(name="description" content= locals.config.description)
+meta(name="description" content=htmlWebpackPlugin.options.locals.config.description)
 meta(name='viewport', content='width=device-width, initial-scale=1, minimal-ui, user-scalable=no')
-meta(name="author" content=locals.config.author)
-meta(property="og:image" content=directory+"images/"+locals.config.thumbnail)
+meta(name="author" content=htmlWebpackPlugin.options.locals.config.author)
+meta(property="og:image" content=directory+"images/"+htmlWebpackPlugin.options.locals.config.thumbnail)
 link(rel='icon' href=directory+'favicon.ico' type='image/x-icon')

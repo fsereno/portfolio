@@ -5,7 +5,6 @@ const chalk = require('chalk');
 const webpackHelper = require("./webpackHelper");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const masterWebpackConfig = require("./webpack.config.master")();
-///const vendorWebpackConfig = require("./webpack.config.vendor")();
 
 module.exports = {
 
@@ -60,18 +59,12 @@ module.exports = {
       : `${path.resolve(__dirname, 'dist', `${config.prefix}${application.folder}`)}/index.html`
 
     const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', 'index.pug'),
-      filename: htmlFilename //`${path.resolve(__dirname, outputDirectory)}/index.html`
+      template: "!!pug-loader!" + path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', 'index.pug'),
+      filename: htmlFilename, //`${path.resolve(__dirname, outputDirectory)}/index.html`
+      locals: { config: config, application: application }
     });
 
     webpackConfig.plugins.push(htmlWebpackPluginConfig)
-
-    webpackConfig.module.rules.push(
-      {
-        test: /\.pug$/,
-        loader: "pug-loader",
-      }
-    )
 
     return {
       webpackConfig,
@@ -99,11 +92,6 @@ module.exports = {
   production: (config, publicDir) => {
     const compiler = webpack(config);
     module.exports.run(compiler, publicDir);
-  },
-
-  vendor: () => {
-    const vendorCompiler = webpack(vendorWebpackConfig);
-    module.exports.run(vendorCompiler, "vendor directories");
   },
 
   run: (compiler, directory) => {
@@ -143,37 +131,6 @@ module.exports = {
     });
   },
 
-  /// Accepted arguments
-  // --production (eg, to run production builds)
-  // --dir=toDoReact (eg, to run single builds with watching by default)
-  ///
-  build: () => {
-
-    const applications = webpackHelper.getApplications();
-    const isProduction = webpackHelper.isProduction();
-
-    module.exports.vendor();
-
-    if (applications.length > 0) {
-
-      console.log(`${chalk.blue("Building:")} ${applications.length} applications...`);
-
-      applications.forEach(application => {
-
-        const { webpackConfig, publicDir } = module.exports.buildWebpackConfig(application);
-
-        if (isProduction) {
-          module.exports.production(webpackConfig, publicDir);
-        } else {
-          module.exports.development(webpackConfig, publicDir);
-        }
-
-      });
-
-    } else {
-      console.log(chalk.red("No applictions found!"));
-    }
-  },
   getAllConfig: (env) => {
 
     const applications = webpackHelper.getApplications(env);

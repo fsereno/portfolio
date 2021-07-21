@@ -1,9 +1,6 @@
-- var directory = locals.application.useRoot ? "../" : "../../";
-
 doctype html
 html(lang="en")
   head
-    include ../includes/_vendor.css.pug
     include ../includes/_metaAuthor.pug
     block styles
   body
@@ -11,14 +8,13 @@ html(lang="en")
     #mainContainer.container-fluid.pt-4.mt-5
       .row
         .col-lg-12
-          h2#pageHeading.display-4= locals.application.name
+          h2#pageHeading.display-4=htmlWebpackPlugin.options.locals.application.name
       .row
         .col-lg-12
-          p#pageSubHeading=locals.application.subHeading
-          p#pageDescription.text-muted= locals.application.description
+          p#pageSubHeading=htmlWebpackPlugin.options.locals.application.subHeading
+          p#pageDescription.text-muted=htmlWebpackPlugin.options.locals.application.description
           hr
       block content
       block footer
     include ../includes/_footer.pug
-    include ../includes/_vendor.js.pug
     block scripts

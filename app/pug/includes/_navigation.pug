@@ -1,10 +1,10 @@
-- var directory = locals.application.useRoot ? "" : "../";
+- var directory = htmlWebpackPlugin.options.locals.application.useRoot ? "" : "../";
 nav#navBar.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
   a.navbar-brand(
       href=directory+"index.html")
     img#navbarImage(src=directory+"images/FSLogo.png", alt="Fabio Sereno logo image").pull-left
-    h2.display-4.m-0.p-0#titleHeading.d-flex= locals.config.author
-    p.lead.m-0.p-0#titleSubHeading.sub-heading.d-flex.text-white= locals.config.role
+    h2.display-4.m-0.p-0#titleHeading.d-flex= htmlWebpackPlugin.options.locals.config.author
+    p.lead.m-0.p-0#titleSubHeading.sub-heading.d-flex.text-white= htmlWebpackPlugin.options.locals.config.role
   button.navbar-toggler(
       id="navbarNavDropdownBtn"
       type='button'
@@ -32,27 +32,27 @@ nav#navBar.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
                 aria-expanded='false')
                 | Applications
             .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdownMenuLink')
-                each application, index in locals.config.applications
+                each application, index in htmlWebpackPlugin.options.locals.config.applications
                     if (application.active !== false && application.include !== false)
-                        a(class=(locals.application.folder === application.folder
+                        a(class=(htmlWebpackPlugin.options.locals.application.folder === application.folder
                         ? "active"
                         : "") + " dropdown-item",
-                        href=directory+locals.config.prefix+application.folder+"/index.html")= application.name
+                        href=directory+htmlWebpackPlugin.options.locals.config.prefix+application.folder+"/index.html")= application.name
                 .dropdown-divider
-                a(class=(locals.config.entry === application.folder
+                a(class=(htmlWebpackPlugin.options.locals.config.entry === htmlWebpackPlugin.options.locals.application.folder
                 ? "active"
                 : "") + " dropdown-item",
                 href=directory+"index.html")
                     | Home
                     i.fa.fa-home.ml-2
         li.nav-item
-            a.nav-link(href=(locals.application.folderRoot !== undefined
-                ? locals.config.repoRootUrl+locals.application.folderRoot
-                : locals.config.repoRootUrl+locals.config.folderRoot+locals.config.prefix+locals.application.folder),
+            a.nav-link(href=(htmlWebpackPlugin.options.locals.application.folderRoot !== undefined
+                ? htmlWebpackPlugin.options.locals.config.repoRootUrl+htmlWebpackPlugin.options.locals.application.folderRoot
+                : htmlWebpackPlugin.options.locals.config.repoRootUrl+htmlWebpackPlugin.options.locals.config.folderRoot+htmlWebpackPlugin.options.locals.config.prefix+htmlWebpackPlugin.options.locals.application.folder),
                 target="_blank")
                 | View on Github
                 i.fa.fa-github.ml-2
         li.nav-item
-            a.nav-link(href=locals.config.linkedInUrl, target="_blank")
+            a.nav-link(href=htmlWebpackPlugin.options.locals.config.linkedInUrl, target="_blank")
                 | Linkedin
                 i.fa.fa-linkedin.ml-2
