@@ -9,7 +9,8 @@ module.exports = {
         const directory = hasDirectory ? dir.replace(config.prefix, "") : "";
         return [ hasDirectory, directory ];
     },
-    getOutputDirectory: (env) => module.exports.isProduction(env) ? config.publishDir : config.developmentDir,
+    // is this used anymore ?
+    // getOutputDirectory: (env) => module.exports.isProduction(env) ? config.publishDir : config.developmentDir,
     getFullDirectoryPath: (application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
     getMode: (env) => module.exports.isProduction(env) ? 'production' : 'development',
     getApplications: (env) => {

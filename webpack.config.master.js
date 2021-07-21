@@ -5,12 +5,14 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 module.exports = () => {
 
   return {
+    //devtool: 'source-map',
     entry: {
       main: "",
       '../../vendor/vendor': ['bootstrap', './app/sass/includes/styleDeps.scss']
     },
     output: {
-      path: ""
+      filename: '[name].js',
+      clean: true,
     },
     plugins: [
       new MiniCssExtractPlugin()

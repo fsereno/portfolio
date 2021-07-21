@@ -12,7 +12,6 @@ module.exports = {
   buildWebpackConfig: (application, env) => {
 
     const publicDir = webpackHelper.getFullDirectoryPath(application);
-    const outputDirectory = webpackHelper.getOutputDirectory(env);
     const isServe = webpackHelper.isServe(env);
     let applicationWebpackConfigInstance;
 
@@ -29,13 +28,13 @@ module.exports = {
     }
 
     const entryPath = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
-    const outputPath = path.resolve(__dirname, outputDirectory, `${config.prefix}${application.folder}`, 'js');
+    const outputPath = path.resolve(__dirname, 'dist', `${config.prefix}${application.folder}`, 'js');
     const mode = webpackHelper.getMode(env);
 
     const masterWebpackConfigInstance = {...masterWebpackConfig, ...{
       mode,
       entry: {...masterWebpackConfig.entry, main: entryPath },
-      output: {
+      output: {...masterWebpackConfig.output,
         path: outputPath
       }
     } };
@@ -45,20 +44,23 @@ module.exports = {
     if (isServe) {
 
       const devServer = {
-        contentBase: path.join(__dirname, 'app'),
+        contentBase: path.join(__dirname, 'dist'),
         publicPath: `/${config.prefix}${application.folder}/js/`,
         port: 8080,
         host: '0.0.0.0',
         open: true,
-        watchContentBase: true
+        watchContentBase: true,
+        headers: {
+          'Cache-Control': 'no-store',
+        }
       }
 
       webpackConfig = {...webpackConfig, ...{ devServer } }
     }
 
     const htmlFilename = application.useRoot
-      ? `${path.resolve(__dirname, outputDirectory)}/index.html`
-      : `${path.resolve(__dirname, outputDirectory, `${config.prefix}${application.folder}`)}/index.html`
+      ? `${path.resolve(__dirname, 'dist')}/index.html`
+      : `${path.resolve(__dirname, 'dist', `${config.prefix}${application.folder}`)}/index.html`
 
     const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
       template: path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', 'index.pug'),
