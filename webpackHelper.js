@@ -42,7 +42,7 @@ module.exports = {
     },
     logAllCompiling: (webpacks) => {
         webpacks.forEach(config => {
-            console.log(chalk.yellow("Compiling: ") + config.entry);
+            console.log(chalk.yellow("Compiling: ") + config.entry.main);
         });
     },
     isServe: (env) => env && env.WEBPACK_SERVE,

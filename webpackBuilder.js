@@ -64,7 +64,7 @@ module.exports = {
       locals: { config: config, application: application }
     });
 
-    webpackConfig.plugins.push(htmlWebpackPluginConfig)
+    webpackConfig = {...webpackConfig, plugins: [...webpackConfig.plugins, htmlWebpackPluginConfig ] }
 
     return {
       webpackConfig,
@@ -134,6 +134,13 @@ module.exports = {
   getAllConfig: (env) => {
 
     const applications = webpackHelper.getApplications(env);
+
+    /*const testApps = webpackHelper.getApplications(env);
+
+    const app1 = testApps.find(x => x.folder === "toDoReact")
+    const app2 = testApps.find(x => x.folder === "ticTacToeReact")
+
+    const applications = [ app1, app2 ];*/
 
     let configs = [];
 
