@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const webpackHelper = require("./webpackHelper");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const masterWebpackConfig = require("./webpack.config.master")();
-const vendorWebpackConfig = require("./webpack.config.vendor")();
+///const vendorWebpackConfig = require("./webpack.config.vendor")();
 
 module.exports = {
 
@@ -49,10 +49,7 @@ module.exports = {
         port: 8080,
         host: '0.0.0.0',
         open: true,
-        watchContentBase: true,
-        headers: {
-          'Cache-Control': 'no-store',
-        }
+        watchContentBase: true
       }
 
       webpackConfig = {...webpackConfig, ...{ devServer } }

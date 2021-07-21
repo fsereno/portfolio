@@ -1,6 +1,6 @@
 const webpackBuilder = require('./webpackBuilder');
 const webpackHelper = require('./webpackHelper');
-const vendorsWebpack = require('./webpack.config.vendor')();
+//const vendorsWebpack = require('./webpack.config.vendor')();
 
 module.exports = (env) => {
 
