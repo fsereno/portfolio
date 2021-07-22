@@ -20,5 +20,5 @@ steps:
 
 - script: |
     npm install
-    gulp build --gulpfile gulpfile.js
+    npm run build
   displayName: 'npm install, gulp tasks, dotnet project build and tests.'
