@@ -40,15 +40,17 @@ let createTask = (application) => {
       let templateDirectory = typeof application.masterTemplateDir !== "undefined" && application.masterTemplateDir.length > 0 ? application.masterTemplateDir : config.masterTemplateDir;
       if(result === false) {
         gulp.src(`${config.developmentDir}/${config.prefix}${templateDirectory}/**/*`)
-        .pipe(logger(gulpUtil.populateLoggerOptions(
-            "Create task started...",
-            "Crete task complete!",
-            null,
-            false,
-            "../../"+config.prefix+application.folder,
-            "Created: ",
-            " " + logSymbols.success
-        )))
+        .pipe(logger(
+          {
+            before: "Create task started...",
+            after: "Crete task complete!",
+            extname: null,
+            showChange: false,
+            dest: "../../"+config.prefix+application.folder,
+            beforeEach: "Created: ",
+            afterEach: " " + logSymbols.success
+          }
+        ))
         .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder));
       }
     });
@@ -118,10 +120,9 @@ gulp.task("test-func", (done) => {
 });
 
 gulp.task("test", (done) => {
-  testTask("services");
   testTask("utils");
   config.applications.map(testAllAppsTasks);
-  done();
+  done();x
 });
 
 gulp.task("create", (done) => {
