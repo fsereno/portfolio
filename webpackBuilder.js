@@ -68,16 +68,16 @@ module.exports = {
 
   getAllConfig: (env) => {
 
-    const applications = webpackHelper.getApplications(env);
+    //const applications = webpackHelper.getApplications(env);
 
-    /*const testApps = webpackHelper.getApplications(env);
+    const testApps = webpackHelper.getApplications(env);
 
     const app1 = testApps.find(x => x.folder === "toDoReact")
     const app2 = testApps.find(x => x.folder === "ticTacToeReact")
     const app3 = testApps.find(x => x.folder === "home")
     const app4 = testApps.find(x => x.folder === "aframe")
 
-    const applications = [ app1, app2, app3, app4 ];*/
+    const applications = [ app1, app2, app3, app4 ];
 
     let configs = [];
 

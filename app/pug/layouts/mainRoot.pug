@@ -2,9 +2,6 @@ doctype html
 html(lang="en")
   head
     include ../includes/_metaAuthor.pug
-    // build:css css/vendor.css
-    include ../includes/_styleDeps.pug
-    // endbuild
     block styles
   body
     include ../includes/_navigation.pug
@@ -12,7 +9,4 @@ html(lang="en")
       block content
       block footer
     include ../includes/_footer.pug
-    // build:js js/vendor.js
-    include ../includes/_jsDeps.pug
-    // endbuild
     block scripts
