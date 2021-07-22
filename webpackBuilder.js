@@ -1,7 +1,6 @@
 const path = require('path');
 const config = require("./config.json");
 const webpackHelper = require("./webpackHelper");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const masterWebpackConfig = require("./webpack.config.master")();
 
 module.exports = {
@@ -15,14 +14,11 @@ module.exports = {
     try {
 
       const applicationWebpackConfig = require(`${publicDir}/webpack.config`);
-
       applicationWebpackConfigInstance = {...applicationWebpackConfig};
 
     } catch (exception) {
-
       applicationWebpackConfigInstance = {}
-
-    }
+    };
 
     const entryPath = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
     const outputPath = path.resolve(__dirname, 'dist', `${config.prefix}${application.folder}`, 'js');
@@ -54,27 +50,18 @@ module.exports = {
         open: true,
         watchContentBase: true
       }
-
       webpackConfig = {...webpackConfig, ...{ devServer } }
-    }
+    };
 
-    const htmlFilename = application.useRoot
-      ? `${path.resolve(__dirname, 'dist')}/index.html`
-      : `${path.resolve(__dirname, 'dist', `${config.prefix}${application.folder}`)}/index.html`
-
-    const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
-      template: "!!pug-loader!" + path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', 'index.pug'),
-      filename: htmlFilename,
-      locals: { config: config, application: application }
-    });
+    const htmlWebpackPluginConfigs = webpackHelper.getHtmlWebpackPluginObjects(application);
 
     webpackConfig = {
       ...webpackConfig,
       plugins: [
         ...webpackConfig.plugins,
-        htmlWebpackPluginConfig
+        ...htmlWebpackPluginConfigs
       ]
-    }
+    };
 
     return webpackConfig;
   },
@@ -88,8 +75,9 @@ module.exports = {
     const app1 = testApps.find(x => x.folder === "toDoReact")
     const app2 = testApps.find(x => x.folder === "ticTacToeReact")
     const app3 = testApps.find(x => x.folder === "home")
+    const app4 = testApps.find(x => x.folder === "aframe")
 
-    const applications = [ app1, app2, app3 ];
+    const applications = [ app1, app2, app3, app4 ];
 
     let configs = [];
 

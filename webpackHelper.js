@@ -1,5 +1,8 @@
+const path = require('path');
+const fs = require('fs');
 const config = require("./config.json");
 const chalk = require('chalk');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     isProduction: (env) => env ? env.production : process.env.npm_config_production,
@@ -9,8 +12,6 @@ module.exports = {
         const directory = hasDirectory ? dir.replace(config.prefix, "") : "";
         return [ hasDirectory, directory ];
     },
-    // is this used anymore ?
-    // getOutputDirectory: (env) => module.exports.isProduction(env) ? config.publishDir : config.developmentDir,
     getFullDirectoryPath: (application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
     getMode: (env) => module.exports.isProduction(env) ? 'production' : 'development',
     getApplications: (env) => {
@@ -27,16 +28,6 @@ module.exports = {
 
         return applications;
     },
-    logCompiled: (directory, stamp) => {
-
-        let message = `${chalk.green("Compiled:")} ${directory}`;
-
-        if (stamp) {
-          message += ` ${stamp}`;
-        }
-
-        console.log(message);
-    },
     logNumberOfCompilingConfigs: (webpacks) => {
         console.log(chalk.blueBright("Compiling ") + webpacks.length + " applications...");
     },
@@ -46,5 +37,33 @@ module.exports = {
         });
     },
     isServe: (env) => env && env.WEBPACK_SERVE,
-    isBuild: (env) => env && env.WEBPACK_BUILD
+    isBuild: (env) => env && env.WEBPACK_BUILD,
+    getTemplateFiles: (application) => {
+        const dir = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug');
+        const templateFiles = fs.readdirSync(dir);
+        return templateFiles;
+    },
+    applicationIsRoot: (application) => application.useRoot,
+    getTemplateFilename: (file) => file.split('.')[0],
+    getTemplateFullFilePath: (application, file) => {
+        const filename = module.exports.getTemplateFilename(file);
+        const htmlFilePath = module.exports.applicationIsRoot(application)
+            ? `${path.resolve(__dirname, 'dist')}/${filename}.html`
+            : `${path.resolve(__dirname, 'dist', `${config.prefix}${application.folder}`)}/${filename}.html`
+        return htmlFilePath;
+    },
+    getHtmlWebpackPluginObjects: (application) => {
+        const templates = module.exports.getTemplateFiles(application);
+        const htmlWebpackPluginConfigs = [];
+        templates.forEach((file) => {
+            const htmlFilePath = module.exports.getTemplateFullFilePath(application, file);
+            const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
+                template: "!!pug-loader!" + path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', file),
+                filename: htmlFilePath,
+                locals: { config: config, application: application }
+            });
+            htmlWebpackPluginConfigs.push(htmlWebpackPluginConfig);
+        });
+        return htmlWebpackPluginConfigs;
+    }
 }
