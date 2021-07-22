@@ -8,7 +8,8 @@
     "check-types": "tsc",
     "build": "webpack --env dir=$dir",
     "dev": "webpack serve --env dir=$dir",
-    "release": "webpack --progress --env production"
+    "release": "webpack --progress --env production",
+    "create": "gulp create"
   },
   "repository": {
     "type": "git",
