@@ -65,6 +65,19 @@ module.exports = () => {
           ]
         },
         {
+          test: /\.ico$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: '../../',
+                publicPath: '../',
+              }
+            }
+          ]
+        },
+        {
           test: /\.pug$/,
           loader: "pug-loader",
         }
