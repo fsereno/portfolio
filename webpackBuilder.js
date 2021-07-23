@@ -41,7 +41,6 @@ module.exports = {
     };
 
     if (isServe) {
-
       const devServer = {
         contentBase: path.join(__dirname, 'dist'),
         publicPath: `/${config.prefix}${application.folder}/js/`,
