@@ -62,34 +62,15 @@ module.exports = {
         ...htmlWebpackPluginConfigs
       ]
     };
-
     return webpackConfig;
   },
-
   getAllConfig: (env) => {
-
-    //const applications = webpackHelper.getApplications(env);
-
-    const testApps = webpackHelper.getApplications(env);
-
-    const app1 = testApps.find(x => x.folder === "toDoReact")
-    const app2 = testApps.find(x => x.folder === "ticTacToeReact")
-    const app3 = testApps.find(x => x.folder === "home")
-    const app4 = testApps.find(x => x.folder === "aframe")
-    const app5 = testApps.find(x => x.folder === "toDoVue")
-
-    const applications = [ app1, app2, app3, app4, app5 ];
-
+    const applications = webpackHelper.getApplications(env);
     let configs = [];
-
     applications.forEach(application => {
-
       const webpackConfig = module.exports.buildWebpackConfig(application, env);
-
       configs = [...configs, webpackConfig]
-
     });
-
     return configs;
   }
 }

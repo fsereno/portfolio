@@ -15,17 +15,13 @@ module.exports = {
     getFullDirectoryPath: (application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
     getMode: (env) => module.exports.isProduction(env) ? 'production' : 'development',
     getApplications: (env) => {
-
         const [ hasDirectory, directory] = module.exports.hasDirectory(env);
-
         let applications = config.applications.filter(x => x.useWebpack);
-
         if (hasDirectory) {
             applications = applications.filter(x => x.folder === directory);
         } else if (!hasDirectory && module.exports.isServe(env)) {
             applications = applications.filter(x => x.folder === config.entry);
         }
-
         return applications;
     },
     logNumberOfCompilingConfigs: (webpacks) => {
@@ -33,7 +29,8 @@ module.exports = {
     },
     logAllCompiling: (webpacks) => {
         webpacks.forEach(config => {
-            console.log(chalk.yellow("Compiling: ") + config.entry.main);
+            const entry = config.entry.main || 'vendor resources';
+            console.log(chalk.yellow("Compiling: ") + entry);
         });
     },
     isServe: (env) => env && env.WEBPACK_SERVE,
@@ -65,5 +62,11 @@ module.exports = {
             htmlWebpackPluginConfigs.push(htmlWebpackPluginConfig);
         });
         return htmlWebpackPluginConfigs;
+    },
+    getVendorWebpackConfig: (env, webpacks) => {
+        if (module.exports.isBuild(env)) {
+            const vendorWebpackConfig = require('./webpack.config.vendor')(env);
+            webpacks.push(vendorWebpackConfig);
+        }
     }
 }

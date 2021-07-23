@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  height: 100vh; }
+  body h1 {
+    color: #000000; }
+
+canvas {
+  display: block; }
+
