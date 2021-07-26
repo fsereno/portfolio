@@ -1,3 +1,4 @@
+// test
 const path = require('path');
 const config = require("./config.json");
 const webpackHelper = require("./webpackHelper");
