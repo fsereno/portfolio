@@ -28,7 +28,7 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    return jQuery("#puzzleModal:visible").length === 0;
+                    return document.querySelector("#puzzleModal:visible").length === 0;
                 })
                 .end();
             }
