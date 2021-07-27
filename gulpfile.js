@@ -81,7 +81,7 @@ let startServerTask = () => {
 
 let frontendTestTask = () => {
   return new Promise((resolve, reject) => {
-      gulp.src(config.developmentDir+"/tests/functional/**/*.test.ts")
+      gulp.src(config.developmentDir+"/tests/functional/app_AzureDotNetCoreDataStructuresApi.test.ts")
         .pipe(flatmap((stream) => {
           return stream
             .pipe(mocha({
@@ -105,9 +105,9 @@ let endServerTask = () => {
 }
 
 let frontendTestTasks = async () => {
-  await startServerTask();
+  //await startServerTask();
   await frontendTestTask();
-  await endServerTask();
+  //await endServerTask();
 }
 
 let testTask = (directory) => gulpUtil.testTask(`${config.developmentDir}/tests/${directory}`);

@@ -10,11 +10,16 @@ chai.use(chaiAsPromised);
 
 const url = "http://localhost:8080/"+application+"/index.html";
 
+console.log(url)
+
 describe(application, () => {
     describe("Solve puzzle correctly", () => {
         it("Should accept the answer and close the modal when correct.", function() {
             this.timeout(0);
             let test = async (url) => {
+
+                console.log("TEST")
+
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
@@ -27,6 +32,7 @@ describe(application, () => {
                 })
                 .end();
             }
+
             return  test(url).should.eventually.equal(true)
         });
     });
@@ -55,19 +61,20 @@ describe(application, () => {
         it("Should add an item to the queue", function(){
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:false})
+                return new Nightmare({show:true})
                 .goto(url)
                 .wait(2000)
                 .type('#puzzleModal input[type=text]', '5')
                 .click('#submitPuzzle')
                 .wait(2000)
                 .type('#queueInput', '1')
+                .wait(2000)
                 .click('#queueInput_submit')
-                .wait(3000)
+                .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let queueItems = jQuery("#queueList").children();
-                    return queueItems.length === 1;
+                    let queueItems = document.getElementById("queueList");
+                    return queueItems.children.length === 1;
                 })
                 .end();
             }
