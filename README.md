@@ -12,6 +12,7 @@ This project is both built and managed with Azure DevOps for continuous integrat
 
 - Azure Functions (https://azure.microsoft.com/en-gb/services/functions/)
 - AWS Lambda (https://aws.amazon.com/lambda/)
+- Docker (https://www.docker.com/)
 - Nodejs (https://nodejs.org/en/)
 - Gulp (https://gulpjs.com)
 - WebPack (https://webpack.js.org/)
@@ -45,7 +46,7 @@ This project is both built and managed with Azure DevOps for continuous integrat
 - Nodejs v ^12.14.0 (https://nodejs.org/en/)
 - Npm (https://www.npmjs.com/)
 - Gulp CLI (https://gulpjs.com/)
-- .NetCore (https://dotnet.microsoft.com)
+- Docker (https://www.docker.com/)
 ---
 
 ## Installation
@@ -71,68 +72,72 @@ $ npm install --global gulp-cli
 ```
 ---
 
-### Tasks
+### CLI Commands
 
-#### Run the initial Gulp build task (Run this first)
+#### Run the initial build (Run this first)
 
 ```shell
-$ gulp build
+$ npm run build
 ```
+#### Build a specific application
+
+```shell
+$ npm run build dir=<application>
+```
+
 ##### This will:
-- Build the initial development resources (pug, sass, ts).
-- Run Mocha Unit tests on TS Service code only
+- Build all initial development resources (pug, sass, ts, js).
 ---
 
-#### Run the default Gulp task
+#### Run the development server
 
 ```shell
-$ gulp
+$ npm run dev
+```
+#### Serve a specific application
+
+```shell
+$ npm run dev dir=<application>
 ```
 ##### This will:
-- Rebuild development resources (pug, sass, ts).
 - Start the development server.
-- Run Mocha Unit tests, both frontend and backend.
 - Watch for any changes on development resources.
 - Live Reload any changes straight to the browser.
 - Open your browser and navigate to http://localhost:8080
 ---
 
-#### Run the Gulp Publish task
+#### Build for release
 
 ```shell
-$ gulp publish
+$ npm run release
 ```
 ##### This will:
 - Build the production directory.
-- Bundle the necessary resources into “app” and “vendor” files (js, css).
-- Replace resource urls with production urls.
-- Run all Unit Tests from the ./app/tests directory using Mocha and Chai.
 ---
 
-#### Run the Gulp Test task
+#### Run all unit tests
 
 ```shell
-$ gulp test
+$ npm test
 ```
 ##### This will:
-- Run all TypeScript Service unit tests from the ./app/tests/services directory using Mocha and Chai.
+- Run all application specific and global unit tests.
 ---
 
-#### Run the Gulp Frontend Functional tests (headless browser) task
+#### Run all functional tests (using a headless browser)
 
 ```shell
-$ gulp test-func
+$ npm run test-func
 ```
 ##### This will:
-- Start the development server
-- Run all Nightmare Unit Tests from the ./app/tests/applications directory using Mocha, Chai and Nightmare.
-- Stop the development server once all tests are complete.
+- Please ensure the development server is running
+- Run all Nightmare Unit Tests from the ./app/tests/functional directory
 ---
 
-#### Run the Gulp Create task
+#### Create a new application
 
 ```shell
-$ gulp create
+$ npm run create
 ```
 ##### This will:
 - Update the config.json file with additional applications.
