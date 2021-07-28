@@ -17,9 +17,6 @@ describe(application, () => {
         it("Should accept the answer and close the modal when correct.", function() {
             this.timeout(0);
             let test = async (url) => {
-
-                console.log("TEST")
-
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(2000)
@@ -28,7 +25,7 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    return document.querySelector("#puzzleModal:visible").length === 0;
+                    return document.querySelector("#puzzleModal") === null;
                 })
                 .end();
             }
@@ -40,7 +37,7 @@ describe(application, () => {
         it("Should reject the answer and not close the modal when incorrect.", function() {
             this.timeout(0);
             let test = async (url) => {
-                return new Nightmare({show:false})
+                return new Nightmare({show:true})
                 .goto(url)
                 .wait(2000)
                 .type('#puzzleModal input[type=text]', '10')
@@ -48,8 +45,8 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let isVisible = jQuery("#puzzleModal:visible").length > 0;
-                    let hasError = jQuery("#puzzleModal .invalid-feedback:visible").length > 0
+                    let isVisible = document.querySelector("#puzzleModal") !== null;
+                    let hasError = document.querySelector("#puzzleModal .invalid-feedback").innerText.length > 0
                     return isVisible && hasError;
                 })
                 .end();
@@ -101,8 +98,8 @@ describe(application, () => {
                 .wait(3000)
                 .end()
                 .evaluate(() => {
-                    let queueItems = jQuery("#queueList").children();
-                    return queueItems.length === 1;
+                    let queueItems = document.getElementById("queueList");
+                    return queueItems.children.length === 1;
                 })
                 .end();
             }
@@ -124,8 +121,8 @@ describe(application, () => {
                 .wait(3000)
                 .end()
                 .evaluate(() => {
-                    let queueItems = jQuery("#stackList").children();
-                    return queueItems.length === 1;
+                    let queueItems = document.getElementById("stackList");
+                    return queueItems.children.length === 1;
                 })
                 .end();
             }
@@ -152,8 +149,8 @@ describe(application, () => {
                 .wait(3000)
                 .end()
                 .evaluate(() => {
-                    let queueItems = jQuery("#stackList").children();
-                    return queueItems.length === 1;
+                    let queueItems = document.getElementById("stackList");
+                    return queueItems.children.length === 1;
                 })
                 .end();
             }
