@@ -17,24 +17,24 @@ Usage...
                       Run this command and a new application will
                       be created based on app_master.
 */
-
 const gulp = require("gulp");
-const mocha = require("gulp-mocha");
-const connect = require("gulp-connect");
 const logger = require("gulp-logger");
 const logSymbols = require("log-symbols");
 const directoryExists = require("directory-exists");
 const config = require("./config.json");
-const gulpUtil = require("./gulpUtil");
-const flatmap = require("gulp-flatmap");
+
 
 // these can be uninstalled eventually
+//const gulpUtil = require("./gulpUtilX");
+const flatmap = require("gulp-flatmap");
+const mocha = require("gulp-mocha");
+const connect = require("gulp-connect");
 const useref = require("gulp-useref");
 const sass = require("gulp-sass");
 const run = require('gulp-run-command').default;
 const pug = require("gulp-pug-3");
 
-let createTask = (application) => {
+const createTask = (application) => {
   return directoryExists(config.developmentDir+"/"+config.prefix+application.folder)
     .then(result => {
       let templateDirectory = typeof application.masterTemplateDir !== "undefined" && application.masterTemplateDir.length > 0 ? application.masterTemplateDir : config.masterTemplateDir;
@@ -56,15 +56,13 @@ let createTask = (application) => {
     });
 }
 
-let createTasks = (application) => {
-  gulpUtil.runThis(application, createTask);
-}
+const createTasks = application => createTask(application);
 
-let testAllAppsTasks = (application) => {
+/*let testAllAppsTasks = (application) => {
   gulpUtil.runThis(application, testAllAppsTask);
-}
+}*/
 
-let startServerTask = () => {
+/*let startServerTask = () => {
   return new Promise((resolve, reject) => {
     try {
       connect.server({
@@ -77,9 +75,9 @@ let startServerTask = () => {
       reject(new Error(err))
     }
   });
-}
+}*/
 
-let frontendTestTask = () => {
+/*let frontendTestTask = () => {
   return new Promise((resolve, reject) => {
       gulp.src(config.developmentDir+"/tests/functional/app_AzureDotNetCoreDataStructuresApi.test.ts")
         .pipe(flatmap((stream) => {
@@ -90,9 +88,9 @@ let frontendTestTask = () => {
           }).on("error", (err) => reject(new Error(err))))
         })).on("finish", () => resolve());
     })
-}
+}*/
 
-let endServerTask = () => {
+/*let endServerTask = () => {
   return new Promise((resolve, reject) => {
     try{
       connect.serverClose();
@@ -102,28 +100,28 @@ let endServerTask = () => {
       reject(new Error(err))
     }
   });
-}
+}*/
 
-let frontendTestTasks = async () => {
+/*let frontendTestTasks = async () => {
   //await startServerTask();
   await frontendTestTask();
   //await endServerTask();
-}
+}*/
 
-let testTask = (directory) => gulpUtil.testTask(`${config.developmentDir}/tests/${directory}`);
+//let testTask = (directory) => gulpUtil.testTask(`${config.developmentDir}/tests/${directory}`);
 
-let testAllAppsTask = (application) => gulpUtil.testTask(`${config.developmentDir}/${config.prefix}${application.folder}/tests`);
+//let testAllAppsTask = (application) => gulpUtil.testTask(`${config.developmentDir}/${config.prefix}${application.folder}/tests`);
 
-gulp.task("test-func", (done) => {
+/*gulp.task("test-func", (done) => {
   frontendTestTasks();
   done();
-});
+});*/
 
-gulp.task("test", (done) => {
+/*gulp.task("test", (done) => {
   testTask("utils");
   config.applications.map(testAllAppsTasks);
   done();x
-});
+});*/
 
 gulp.task("create", (done) => {
   config.applications.map(createTasks);

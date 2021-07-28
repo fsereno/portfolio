@@ -16,6 +16,5 @@ services:
             - './webpackBuilder.js:/usr/src/app/webpackBuilder.js'
             - './webpackHelper.js:/usr/src/app/webpackHelper.js'
             - './gulpfile.js:/usr/src/app/gulpfile.js'
-            - './gulpUtil.js:/usr/src/app/gulpUtil.js'
             - './docs:/usr/src/app/docs'
             - './dist:/usr/src/app/dist'
