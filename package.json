@@ -4,7 +4,7 @@
   "description": "My Portfolio Repository",
   "main": "index.html",
   "scripts": {
-    "test-func": "./node_modules/.bin/mocha --require @babel/register --require ts-node/register ./app/tests/functional/app_awsDotNetCoreAsyncCoffeeMachine.test.ts",
+    "test-func": "./node_modules/.bin/mocha --require @babel/register --require ts-node/register ./app/tests/functional/app_awsDotNetCoreEntitySortApi.test.ts",
     "test-util": "./node_modules/.bin/mocha --require @babel/register --require ts-node/register ./app/tests/utils/*test.*",
     "test-apps": "./node_modules/.bin/mocha --require @babel/register --require ts-node/register ./app/**/tests/*test.*",
     "test": "npm run test-util && npm run test-apps",

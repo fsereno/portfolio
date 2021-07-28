@@ -23,7 +23,7 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    return jQuery("#puzzleModal:visible").length === 0;
+                    return document.querySelector("#puzzleModal") === null;
                 })
                 .end();
             }
@@ -42,8 +42,8 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let isVisible = jQuery("#puzzleModal:visible").length > 0;
-                    let hasError = jQuery("#puzzleModal .invalid-feedback:visible").length > 0
+                    let isVisible = document.querySelector("#puzzleModal") !== null;
+                    let hasError = document.querySelector("#puzzleModal .invalid-feedback").innerText.length > 0;
                     return isVisible && hasError;
                 })
                 .end();
@@ -67,9 +67,9 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let $collection = jQuery("#employeeTable tbody").children();
-                    let hasCorrectNumberOfItems = $collection.length === 2;
-                    let isExpectedItem = $collection.last().children().first().text() === "James Bond";
+                    let collection = document.querySelector("#employeeTable tbody").children;
+                    let hasCorrectNumberOfItems = collection.length === 2;
+                    let isExpectedItem = collection[1].children[0].innerHTML === "James Bond";
                     return hasCorrectNumberOfItems && isExpectedItem;
                 })
                 .end();
@@ -95,8 +95,8 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let $collection = jQuery("#employeeTable tbody").children();
-                    let isExpectedItem = $collection.last().children().eq(1).text() === "£95,000.00";
+                    let collection = document.querySelector("#employeeTable tbody").children;
+                    let isExpectedItem = collection[1].children[1].innerHTML === "£95,000.00";
                     return isExpectedItem;
                 })
                 .end();
@@ -122,9 +122,8 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let $collection = jQuery("#employeeTable tbody").children();
-                    let isExpectedItem = $collection.last().children().eq(1).text() === "£10,000.00";
-                    console.log(isExpectedItem)
+                    let collection = document.querySelector("#employeeTable tbody").children;
+                    let isExpectedItem = collection[1].children[1].innerHTML === "£10,000.00";
                     return isExpectedItem;
                 })
                 .end();
