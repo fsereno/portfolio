@@ -23,7 +23,7 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    return jQuery("#puzzleModal:visible").length === 0;
+                    return document.querySelector("#puzzleModal") === null;
                 })
                 .end();
             }
@@ -42,8 +42,8 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let isVisible = jQuery("#puzzleModal:visible").length > 0;
-                    let hasError = jQuery("#puzzleModal .invalid-feedback:visible").length > 0
+                    let isVisible = document.querySelector("#puzzleModal") !== null;
+                    let hasError = document.querySelector("#puzzleModal .invalid-feedback").innerText.length > 0;
                     return isVisible && hasError;
                 })
                 .end();
@@ -65,8 +65,8 @@ describe(application, () => {
                 .wait(9000)
                 .end()
                 .evaluate(() => {
-                    let resultOutput = jQuery("#resultOutput").children();
-                    return resultOutput.length === 17;
+                    let resultOutput = document.getElementById("resultOutput");
+                    return resultOutput.children.length === 17;
                 })
                 .end();
             }
@@ -87,8 +87,8 @@ describe(application, () => {
                 .wait(7000)
                 .end()
                 .evaluate(() => {
-                    let resultOutput = jQuery("#resultOutput").children();
-                    return resultOutput.length === 17;
+                    let resultOutput = document.getElementById("resultOutput");
+                    return resultOutput.children.length === 17;
                 })
                 .end();
             }

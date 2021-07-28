@@ -46,7 +46,7 @@ describe(application, () => {
                 .end()
                 .evaluate(() => {
                     let isVisible = document.querySelector("#puzzleModal") !== null;
-                    let hasError = document.querySelector("#puzzleModal .invalid-feedback").innerText.length > 0
+                    let hasError = document.querySelector("#puzzleModal .invalid-feedback").innerText.length > 0;
                     return isVisible && hasError;
                 })
                 .end();
