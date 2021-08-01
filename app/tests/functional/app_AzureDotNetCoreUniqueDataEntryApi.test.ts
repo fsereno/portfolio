@@ -23,7 +23,7 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    return jQuery("#puzzleModal:visible").length === 0;
+                    return document.querySelector("#puzzleModal") === null;
                 })
                 .end();
             }
@@ -42,8 +42,8 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let isVisible = jQuery("#puzzleModal:visible").length > 0;
-                    let hasError = jQuery("#puzzleModal .invalid-feedback:visible").length > 0
+                    let isVisible = document.querySelector("#puzzleModal") !== null;
+                    let hasError = document.querySelector("#puzzleModal .invalid-feedback").innerText.length > 0;
                     return isVisible && hasError;
                 })
                 .end();
@@ -69,7 +69,7 @@ describe(application, () => {
                 .wait(3000)
                 .end()
                 .evaluate(() => {
-                    let items = jQuery("#itemTable tbody").children().length;
+                    let items = document.querySelector("#itemTable tbody").children.length;
                     return items === 2;
                 })
                 .end();
@@ -95,8 +95,8 @@ describe(application, () => {
                 .wait(3000)
                 .end()
                 .evaluate(() => {
-                    let isOnlySingleItem = jQuery("#itemTable tbody").children().length === 1;
-                    let isErrorModalVisible = $("#duplicateEntryErrorModule").is(":visible");
+                    let isOnlySingleItem = document.querySelector("#itemTable tbody").children.length === 1;
+                    let isErrorModalVisible = document.getElementById("duplicateEntryErrorModule") !== null;
                     return isOnlySingleItem && isErrorModalVisible;
                 })
                 .end();
@@ -118,7 +118,7 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let items = jQuery("#itemTable tbody").children().length;
+                    let items = document.querySelector("#itemTable tbody").children.length;
                     return items === 0;
                 })
                 .end();
