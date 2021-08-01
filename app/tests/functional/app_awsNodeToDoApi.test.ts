@@ -23,9 +23,7 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-
                     const element = document.getElementById("itemForm");
-
                     return element !== null;
                 })
                 .end();
@@ -43,10 +41,8 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-
                     const element = document.getElementById("itemForm");
                     const error = document.getElementsByClassName("text-danger")[0].innerHTML;
-
                     return element === null && error.length > 0;
                 })
                 .end();
@@ -70,10 +66,8 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-
                     const username = document.getElementById("username");
                     const password = document.getElementById("password");
-
                     return username !== null && password !== null;
                 })
                 .end();
