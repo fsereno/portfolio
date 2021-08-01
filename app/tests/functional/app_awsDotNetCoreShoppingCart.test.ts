@@ -23,7 +23,7 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    return jQuery("#puzzleModal:visible").length === 0;
+                    return document.querySelector("#puzzleModal") === null;
                 })
                 .end();
             }
@@ -42,8 +42,8 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let isVisible = jQuery("#puzzleModal:visible").length > 0;
-                    let hasError = jQuery("#puzzleModal .invalid-feedback:visible").length > 0
+                    let isVisible = document.querySelector("#puzzleModal") !== null;
+                    let hasError = document.querySelector("#puzzleModal .invalid-feedback").innerText.length > 0;
                     return isVisible && hasError;
                 })
                 .end();
@@ -65,7 +65,7 @@ describe(application, () => {
                 .wait(3000)
                 .end()
                 .evaluate(() => {
-                    return jQuery("#basketItems").children().length === 2;
+                    return document.getElementById("basketItems").children.length === 2;
                 })
                 .end();
             }
@@ -87,8 +87,9 @@ describe(application, () => {
                 .wait(3000)
                 .end()
                 .evaluate(() => {
-                    let hasCorrectNumberOfItems = jQuery("#basketItems").children().length === 1;
-                    let itemIsCorrect = jQuery("#basketItems").children()[0].innerText === "Banana";
+                    const items = document.getElementById("basketItems").children;
+                    let hasCorrectNumberOfItems = items.length === 1;
+                    let itemIsCorrect = items[0].innerHTML === "Banana";
                     return hasCorrectNumberOfItems && itemIsCorrect;
                 })
                 .end();
@@ -111,8 +112,9 @@ describe(application, () => {
                 .wait(3000)
                 .end()
                 .evaluate(() => {
-                    let hasCorrectNumberOfItems = jQuery("#basketItems").children().length === 3;
-                    let addItemExists = jQuery("#basketItems").children()[2].innerText === "Bread";
+                    const items = document.getElementById("basketItems").children;
+                    let hasCorrectNumberOfItems = items.length === 3;
+                    let addItemExists = items[2].innerHTML === "Bread";
                     return hasCorrectNumberOfItems && addItemExists;
                 })
                 .end();
@@ -135,8 +137,9 @@ describe(application, () => {
                 .wait(3000)
                 .end()
                 .evaluate(() => {
-                    let hasCorrectNumberOfItems = jQuery("#basketItems").children().length === 1;
-                    let itemIsCorrect = jQuery("#basketItems").children()[0].innerText === "Apple";
+                    const items = document.getElementById("basketItems").children;
+                    let hasCorrectNumberOfItems = items.length === 1;
+                    let itemIsCorrect = items[0].innerHTML === "Apple";
                     return hasCorrectNumberOfItems && itemIsCorrect;
                 })
                 .end();
@@ -160,8 +163,9 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    let hasCorrectNumberOfItems = jQuery("#basketItems").children().length === 2;
-                    let updatedItemExists = jQuery("#basketItems").children()[1].innerText === "Wine";
+                    const items = document.getElementById("basketItems").children;
+                    let hasCorrectNumberOfItems = items.length === 2;
+                    let updatedItemExists =items[1].innerHTML === "Wine";
                     return hasCorrectNumberOfItems && updatedItemExists;
                 })
                 .end();
