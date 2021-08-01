@@ -22,10 +22,10 @@ export function ReadingPane() {
                     <div key={key}>
                         {index > 0 && <hr/>}
                         <Age age={item.age}/>
-                        <p className="mb-0"><strong>From:</strong> {item.from}</p>
-                        <p className="mb-0"><strong>To:</strong> {item.to}</p>
-                        { showSubject && <p className="mb-0"><strong>Subject:</strong> {item.subject}</p> }
-                        <div className="mt-3">
+                        <p className="mb-0"><strong>From:</strong> <span id="fromText">{item.from}</span></p>
+                        <p className="mb-0"><strong>To:</strong> <span id="toText" >{item.to}</span></p>
+                        { showSubject && <p className="mb-0"><strong>Subject:</strong> <span id="subjectText">{item.subject}</span></p> }
+                        <div id="bodyText" className="mt-3">
                             {item.body}
                         </div>
                     </div>
