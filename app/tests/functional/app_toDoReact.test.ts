@@ -21,7 +21,7 @@ describe(application, () => {
                 .click('#submit')
                 .end()
                 .evaluate(() => {
-                    return jQuery("#toDoList").children().length === 1;
+                    return document.getElementById("toDoList").children.length === 1;
                 })
                 .end();
             }
@@ -40,7 +40,7 @@ describe(application, () => {
                 .wait(2000)
                 .end()
                 .evaluate(() => {
-                    return jQuery("#toDoList").children().length === 1;
+                    return document.getElementById("toDoList").children.length === 1;
                 })
                 .end();
             }
@@ -58,7 +58,7 @@ describe(application, () => {
                 .click('a.delete')
                 .end()
                 .evaluate(() => {
-                    return jQuery("#toDoList").children().length === 0;
+                    return document.getElementById("toDoList").children.length === 0;
                 })
                 .end();
             }
