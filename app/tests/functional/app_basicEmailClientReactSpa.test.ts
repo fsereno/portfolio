@@ -11,7 +11,7 @@ chai.use(chaiAsPromised);
 const url = "http://localhost:8080/"+application+"/index.html";
 
 describe(application, () => {
-    describe("Populdate reading pane", () => {
+    describe("Populate reading pane", () => {
         it("Should populate the reading pane when item selected.", function() {
             this.timeout(0);
             let test = async (url) => {
@@ -50,7 +50,8 @@ describe(application, () => {
                 .wait(1000)
                 .end()
                 .evaluate(() => {
-                    return true;//document.getElementById("readingPane").innerText.includes("This is a reply");
+                    const bodyText = document.getElementById("bodyText").innerText;
+                    return bodyText === "This is a reply";
                 })
                 .end();
             }

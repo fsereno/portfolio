@@ -12,32 +12,32 @@ const url = "http://localhost:8080/index.html";
 
 describe(application, () => {
     describe("Search", () => {
-        it(`Should return at least 7 or more when TypeScript is passed`, function() {
+        it(`Should return at least 7 or more when React is passed`, function() {
             this.timeout(0);
             let test = async (url) => {
                 return new Nightmare()
                 .goto(url)
                 .wait(1500)
-                .type('#searchInput', 'TypeScript')
+                .type('#searchInput', 'React')
                 .wait(5000)
                 .end()
                 .evaluate(() => {
-                    return jQuery("#applicationsContainer").children().length > 0;
+                    return document.getElementById("applicationsContainer").children.length > 0;
                 })
                 .end();
             }
             return test(url).should.eventually.equal(true)
         });
-        it(`Should return at least 10 or more when TypeScript and .NET are passed`, function() {
+        it(`Should return at least 10 or more when React and .NET are passed`, function() {
             this.timeout(0);
             let test = async (url) => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(1500)
-                .type('#searchInput', 'TypeScript .NET')
+                .type('#searchInput', 'React .NET')
                 .end()
                 .evaluate(() => {
-                    return jQuery("#applicationsContainer").children().length > 0;
+                    return document.getElementById("applicationsContainer").children.length > 0;
                 })
                 .end();
             }
@@ -45,34 +45,18 @@ describe(application, () => {
         });
     });
     describe("Quick Search", () => {
-        it(`Should return at least 7 or more when TypeScript is passed from Quick Search`, function() {
+        it(`Should return at least 10 or more when Cloud and React are passed from Quick Search`, function() {
             this.timeout(0);
             let test = async (url) => {
                 return new Nightmare({show:false})
                 .goto(url)
                 .wait(1500)
                 .click("#openFilterBtn")
-                .click("button[value='TypeScript']")
+                .click("button[value='Cloud']")
+                .click("button[value='React']")
                 .end()
                 .evaluate(() => {
-                    return jQuery("#applicationsContainer").children().length > 0;
-                })
-                .end();
-            }
-            return test(url).should.eventually.equal(true)
-        });
-        it(`Should return at least 10 or more when TypeScript and .NET are passed from Quick Search`, function() {
-            this.timeout(0);
-            let test = async (url) => {
-                return new Nightmare({show:false})
-                .goto(url)
-                .wait(1500)
-                .click("#openFilterBtn")
-                .click("button[value='TypeScript']")
-                .click("button[value='.NET']")
-                .end()
-                .evaluate(() => {
-                    return jQuery("#applicationsContainer").children().length > 0;
+                    return document.getElementById("applicationsContainer").children.length > 0;
                 })
                 .end();
             }
@@ -90,8 +74,9 @@ describe(application, () => {
                 .click("#cancelBtn button")
                 .end()
                 .evaluate(() => {
-                    let hasApplications = jQuery("#applicationsContainer").children().length > 0;
-                    let hasNoSearchValue = jQuery("#searchInput").val() === "";
+                    const hasApplications = document.getElementById("applicationsContainer").children.length > 0;
+                    const searchInput = document.getElementById("searchInput") as HTMLInputElement;
+                    let hasNoSearchValue = searchInput.value === "";
                     return hasApplications && hasNoSearchValue;
                 })
                 .end();
