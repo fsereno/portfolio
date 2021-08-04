@@ -14,12 +14,12 @@ module.exports = () => {
     },
     plugins: [
       new MiniCssExtractPlugin(),
-      /*new BundleAnalyzerPlugin({
+      new BundleAnalyzerPlugin({
         generateStatsFile: true,
         analyzerMode: "server",
         analyzerHost: '0.0.0.0',
         analyzerPort: 8080
-      })*/
+      })
     ],
     module: {
       rules: [

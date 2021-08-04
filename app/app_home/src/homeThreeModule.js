@@ -1,6 +1,28 @@
 "use strict;"
 
-import * as THREE from 'three';
+import { 
+    Scene, 
+    PerspectiveCamera, 
+    Vector3, 
+    Raycaster, 
+    Object3D, 
+    WebGLRenderer,
+    PCFSoftShadowMap,
+    Points,
+    MathUtils,
+    BufferGeometry,
+    Float32BufferAttribute,
+    PointsMaterial,
+    CircleGeometry,
+    MeshPhysicalMaterial,
+    Mesh,
+    BoxGeometry,
+    MeshLambertMaterial,
+    SpotLight,
+    PlaneBufferGeometry,
+    MeshPhongMaterial,
+    DoubleSide
+} from 'three';
 import * as CANNON from 'cannon';
 
 export const HomeThreeModule = (async () => {
@@ -29,11 +51,11 @@ export const HomeThreeModule = (async () => {
 
     const initScene = () => {
         _container = document.getElementById(CONTAINER_ID);
-        _scene = new THREE.Scene();
-        _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
-        _mouse = new THREE.Vector3();
-        _raycaster = new THREE.Raycaster();
-        _fragmentGroup = new THREE.Object3D();
+        _scene = new Scene();
+        _camera = new PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
+        _mouse = new Vector3();
+        _raycaster = new Raycaster();
+        _fragmentGroup = new Object3D();
     }
 
     const setCameraPosition = () => {
@@ -44,10 +66,10 @@ export const HomeThreeModule = (async () => {
 
     const setRenderer = () => {
         let container = document.getElementById(CONTAINER_ID);
-        _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        _renderer = new WebGLRenderer({ antialias: true, alpha: true });
         _renderer.setSize(container.offsetWidth, container.offsetHeight);
         _renderer.shadowMap.enabled = true;
-        _renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        _renderer.shadowMap.type = PCFSoftShadowMap;
         container.appendChild(_renderer.domElement);
     }
 
@@ -68,7 +90,7 @@ export const HomeThreeModule = (async () => {
 
             const object = _scene.children[ i ];
 
-            if ( object instanceof THREE.Points ) {
+            if ( object instanceof Points ) {
                 object.rotation.y = time * ( i < 4 ? i + 1 : - ( i + 1 ) );
             }
         }
@@ -79,20 +101,20 @@ export const HomeThreeModule = (async () => {
         let verticies = [];
 
         for ( let i = 0; i < numberOfParticles; i++ ) {
-            const x = THREE.MathUtils.randFloatSpread( 2000 );
-            const y = THREE.MathUtils.randFloatSpread( 2000 );
-            const z = THREE.MathUtils.randFloatSpread( 3000 );
+            const x = MathUtils.randFloatSpread( 2000 );
+            const y = MathUtils.randFloatSpread( 2000 );
+            const z = MathUtils.randFloatSpread( 3000 );
             verticies.push( x, y, z);
         }
 
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute( "position", new THREE.Float32BufferAttribute( verticies, 3));
+        const geometry = new BufferGeometry();
+        geometry.setAttribute( "position", new Float32BufferAttribute( verticies, 3));
 
-        const material = new THREE.PointsMaterial( { size: 0.5 } );
+        const material = new PointsMaterial( { size: 0.5 } );
 
         for ( let i = 0; i < numberOfparticleGroups; i++ ) {
 
-            const particles = new THREE.Points( geometry, material);
+            const particles = new Points( geometry, material);
             particles.rotation.x = Math.random() * 6;
             particles.rotation.y = Math.random() * 6;
             particles.rotation.z = Math.random() * 6;
@@ -101,18 +123,18 @@ export const HomeThreeModule = (async () => {
     }
 
     const createFragments = (numberOfFragments) => {
-        let geometry = new THREE.CircleGeometry(5, 10);
-        let material = new THREE.MeshPhysicalMaterial({color:0xFFFFFF, side:THREE.DoubleSide});
+        let geometry = new CircleGeometry(5, 10);
+        let material = new MeshPhysicalMaterial({color:0xFFFFFF, side:DoubleSide});
 
         for ( let i = 0; i < numberOfFragments; i++ ) {
 
-            let scale = THREE.MathUtils.randFloat(0.01, 0.02)
-            let fragment = new THREE.Mesh(geometry, material);
+            let scale = MathUtils.randFloat(0.01, 0.02)
+            let fragment = new Mesh(geometry, material);
 
-            fragment.position.set( THREE.MathUtils.randFloat(-300, 200), THREE.MathUtils.randFloat(5, 50), THREE.MathUtils.randFloat(5, 50));
-            fragment.rotation.set( THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05));
+            fragment.position.set( MathUtils.randFloat(-300, 200), MathUtils.randFloat(5, 50), MathUtils.randFloat(5, 50));
+            fragment.rotation.set( MathUtils.randFloat(0, 0.05), MathUtils.randFloat(0, 0.05), MathUtils.randFloat(0, 0.05));
             fragment.scale.set(scale, scale, scale);
-            fragment.speedValue = THREE.MathUtils.randFloat(-0.25, 0.70)
+            fragment.speedValue = MathUtils.randFloat(-0.25, 0.70)
             _fragmentGroup.add(fragment);
         }
         _scene.add(_fragmentGroup)
@@ -135,10 +157,10 @@ export const HomeThreeModule = (async () => {
         const y = 15;
         const z = 0;
         const scale = Math.random() - Math.random() * 0.5 + 1;
-        const meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
-        const meshMaterial = new THREE.MeshLambertMaterial({ color: 0x5c6670 });
+        const meshGeometry = new BoxGeometry(scale, scale, scale);
+        const meshMaterial = new MeshLambertMaterial({ color: 0x5c6670 });
 
-        let mesh = new THREE.Mesh( meshGeometry, meshMaterial );
+        let mesh = new Mesh( meshGeometry, meshMaterial );
         mesh.position.set(x, y, z)
         mesh.updatePhysics = true;
         mesh.castShadow = true;
@@ -166,7 +188,7 @@ export const HomeThreeModule = (async () => {
     }
 
     const addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
-        let light = new THREE.SpotLight(color, intensity, distance);
+        let light = new SpotLight(color, intensity, distance);
         light.position.set(x,y,z);
         light.penumbra = 1;
         light.castShadow = true;
@@ -205,9 +227,9 @@ export const HomeThreeModule = (async () => {
     }
 
     const createPlane = () =>  {
-        const planeGeometry = new THREE.PlaneBufferGeometry( 50, 50, 1, 1 );
-        const planeMaterial = new THREE.MeshPhongMaterial( { color: 0x2e3338, shininess: 150 } );
-        const ground = new THREE.Mesh( planeGeometry, planeMaterial );
+        const planeGeometry = new PlaneBufferGeometry( 50, 50, 1, 1 );
+        const planeMaterial = new MeshPhongMaterial( { color: 0x2e3338, shininess: 150 } );
+        const ground = new Mesh( planeGeometry, planeMaterial );
         ground.rotation.x = XROTATION;
         ground.receiveShadow = true;
 
