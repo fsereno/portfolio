@@ -6,5 +6,8 @@ module.exports = (env) => {
   webpackHelper.getVendorWebpackConfig(env, webpacks);
   webpackHelper.logNumberOfCompilingConfigs(webpacks);
   webpackHelper.logAllCompiling(webpacks);
+
+  console.log(webpacks)
+
   return webpacks;
 }

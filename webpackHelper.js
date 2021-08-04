@@ -55,7 +55,7 @@ module.exports = {
         templates.forEach((file) => {
             const htmlFilePath = module.exports.getTemplateFullFilePath(application, file);
             const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
-                template: "!!pug-loader!" + path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', file),
+                template: path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', file),
                 filename: htmlFilePath,
                 locals: { config, application }
             });
