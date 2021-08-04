@@ -1,9 +1,10 @@
 "use strict;"
 
+import * as THREE from 'three';
+import * as CANNON from 'cannon';
+
 export const HomeThreeModule = (async () => {
 
-    const THREE = await import("three");
-    const CANNON = await import("cannon");
     const DAMPING = 0.9;
     const TIMESTEP = 1.0/60.0;
     const XROTATION = -Math.PI / 2;

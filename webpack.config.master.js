@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = () => {
 
@@ -12,7 +13,13 @@ module.exports = () => {
       clean: true,
     },
     plugins: [
-      new MiniCssExtractPlugin()
+      new MiniCssExtractPlugin(),
+      /*new BundleAnalyzerPlugin({
+        generateStatsFile: true,
+        analyzerMode: "server",
+        analyzerHost: '0.0.0.0',
+        analyzerPort: 8080
+      })*/
     ],
     module: {
       rules: [
@@ -65,6 +72,16 @@ module.exports = () => {
       ]
     },
     optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor',
+            chunks: 'all',
+            priority: 1
+          }
+        }
+      },
       minimizer: [
         `...`,
         new CssMinimizerPlugin(),
