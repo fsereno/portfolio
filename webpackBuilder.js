@@ -2,13 +2,13 @@ const path = require('path');
 const config = require("./config.json");
 const webpackHelper = require("./webpackHelper");
 const masterWebpackConfig = require("./webpack.config.master")();
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
 
   buildWebpackConfig: (application, env) => {
 
     const publicDir = webpackHelper.getFullDirectoryPath(application);
-    const isServe = webpackHelper.isServe(env);
     let applicationWebpackConfigInstance;
 
     try {
@@ -23,7 +23,6 @@ module.exports = {
     const entryPath = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
     const outputPath = path.resolve(__dirname, 'dist', `${config.prefix}${application.folder}`, 'js');
     const mode = webpackHelper.getMode(env);
-
     const masterWebpackConfigInstance = {
       ...masterWebpackConfig,
       ...{
@@ -40,25 +39,18 @@ module.exports = {
       ...applicationWebpackConfigInstance
     };
 
-    if (isServe) {
-      const devServer = {
-        contentBase: path.join(__dirname, 'dist'),
-        publicPath: `/${config.prefix}${application.folder}/js/`,
-        port: 8080,
-        host: '0.0.0.0',
-        open: true,
-        watchContentBase: true,
-        overlay: true
-      }
-      webpackConfig = {...webpackConfig, ...{ devServer } }
-    };
+    webpackConfig = webpackHelper.getDevServerConfig(webpackConfig, application, env);
+
+    let plugins = [...webpackConfig.plugins];
+
+    plugins = webpackHelper.getAnalysisConfig(plugins, env)
 
     const htmlWebpackPluginConfigs = webpackHelper.getHtmlWebpackPluginObjects(application);
 
     webpackConfig = {
       ...webpackConfig,
       plugins: [
-        ...webpackConfig.plugins,
+        ...plugins,
         ...htmlWebpackPluginConfigs
       ]
     };

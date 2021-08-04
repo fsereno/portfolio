@@ -3,11 +3,44 @@ const fs = require('fs');
 const config = require("./config.json");
 const chalk = require('chalk');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
-    isProduction: (env) => env ? env.production : process.env.npm_config_production,
+    isProduction: (env) => env.production,
+    isServe: (env) => env && env.WEBPACK_SERVE,
+    isBuild: (env) => env && env.WEBPACK_BUILD,
+    isAnalysis: (env) => env && env.analysis,
+    getDevServerConfig: (webpackConfig, application, env) => {
+        if (module.exports.isServe(env)) {
+            const devServer = {
+                contentBase: path.join(__dirname, 'dist'),
+                publicPath: `/${config.prefix}${application.folder}/js/`,
+                port: 8080,
+                host: '0.0.0.0',
+                open: true,
+                watchContentBase: true,
+                overlay: true
+            }
+            webpackConfig = {...webpackConfig, ...{ devServer } }
+        };
+        return webpackConfig;
+    },
+    getAnalysisConfig: (plugins, env) => {
+        if (module.exports.isAnalysis(env)) {
+            plugins = [
+                ...plugins,
+                new BundleAnalyzerPlugin({
+                    generateStatsFile: true,
+                    analyzerMode: "server",
+                    analyzerHost: '0.0.0.0',
+                    analyzerPort: 8080
+                })
+            ]
+        }
+        return plugins;
+    },
     hasDirectory: (env) =>  {
-        const dir = env ? env.dir : process.env.npm_config_dir;
+        const dir = env.dir;
         const hasDirectory = dir && dir.length > 0;
         const directory = hasDirectory ? dir.replace(config.prefix, "") : "";
         return [ hasDirectory, directory ];
@@ -33,8 +66,11 @@ module.exports = {
             console.log(chalk.yellow("Compiling: ") + entry);
         });
     },
-    isServe: (env) => env && env.WEBPACK_SERVE,
-    isBuild: (env) => env && env.WEBPACK_BUILD,
+    logAnalysis: (env) => {
+        if (module.exports.isAnalysis(env)) {
+            console.log(chalk.redBright("Running in analysis mode..."));
+        }
+    },
     getTemplateFiles: (application) => {
         const dir = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug');
         const templateFiles = fs.readdirSync(dir);

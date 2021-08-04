@@ -12,7 +12,7 @@ class ToDoListForm extends React.Component {
     this.state = {
       value: '',
       list: [],
-      counterLimit: 1,
+      counterLimit: 2,
       counter: 0,
       selectedIndex: 0
     };

@@ -1,0 +1,7 @@
+body #spaNavBar a.active {
+  border-bottom: 1px solid #F5F5F5; }
+
+@media screen and (max-width: 480px) {
+  body #spaNavBar .navbar-nav {
+    margin: auto; } }
+
