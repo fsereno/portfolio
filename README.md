@@ -103,7 +103,18 @@ $ npm run dev dir=<application>
 - Start the development server.
 - Watch for any changes on development resources.
 - Live Reload any changes straight to the browser.
-- Open your browser and navigate to http://localhost:8080
+- Open your browser and navigate to http://localhost:8080.
+---
+
+#### Run analysis on a specific application
+
+```shell
+$ npm run analysis dir=<application>
+```
+##### This will:
+- Start the analysis server.
+- Perform a dependency analysis of the application.
+- Open your browser and navigate to http://localhost:8080.
 ---
 
 #### Build for release
