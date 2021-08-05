@@ -32,7 +32,7 @@ export const AppContainer = ({ children }) => {
         } else {
             loadHandler();
         }
-    }, []);
+    },[]);
 
     return (
         <div className={fadeClass}>

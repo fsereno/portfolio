@@ -1,9 +1,9 @@
 "use strict;"
 
-import * as THREE from 'three';
-import * as CANNON from 'cannon';
-
 export const HomeThreeModule = (async () => {
+
+    const THREE  = await import('three');
+    const CANNON = await import('cannon');
 
     const DAMPING = 0.9;
     const TIMESTEP = 1.0/60.0;
@@ -45,6 +45,11 @@ export const HomeThreeModule = (async () => {
     const setRenderer = () => {
         let container = document.getElementById(CONTAINER_ID);
         _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+        console.log(container)
+        console.log(container.offsetHeight)
+        console.log(container.offsetWidth)
+
         _renderer.setSize(container.offsetWidth, container.offsetHeight);
         _renderer.shadowMap.enabled = true;
         _renderer.shadowMap.type = THREE.PCFSoftShadowMap;

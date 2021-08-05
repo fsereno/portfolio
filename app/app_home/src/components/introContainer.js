@@ -17,7 +17,7 @@ export function IntroContainer() {
   return (
     <div className="bg-dark" id="introContainer">
       <div id="introContent">
-        <div id="canvasContainer"></div>
+        <div id="canvasContainer" style={{width: '100vw',height: '100vh'}}></div>
         <div id="introContentInner">
           <div id="introImage" className="text-center element">
             <img className="img-fluid" src="images/FSLogo.png" alt="Logo" />
