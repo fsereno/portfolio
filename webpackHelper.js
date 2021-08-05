@@ -58,19 +58,29 @@ module.exports = {
         return applications;
     },
     logNumberOfCompilingConfigs: (webpacks) => {
-        console.log(chalk.blueBright("Compiling ") + webpacks.length + " applications...");
+        console.log(chalk.blueBright("Compiling ") + webpacks.length + " configurations...");
     },
     logAllCompiling: (webpacks) => {
         webpacks.forEach(config => {
-            const entry = config.entry.main || 'vendor resources';
-            console.log(chalk.yellow("Compiling: ") + entry);
+            module.exports.logSingleCompiling(config);
         });
+    },
+    getEntry: (config) => config.entry.main || 'vendor resources',
+    logSingleCompiling: (config) => {
+        console.log(chalk.yellow("Compiling: ") + module.exports.getEntry(config));
+    },
+    logSingleCompleted: (config) => {
+        console.log(chalk.green("Completed: ") + module.exports.getEntry(config));
+    },
+    logSingleError: (config) => {
+        console.log(chalk.redBright("ERROR: ") + module.exports.getEntry(config));
     },
     logAnalysis: (env) => {
         if (module.exports.isAnalysis(env)) {
             console.log(chalk.redBright("Running in analysis mode..."));
         }
     },
+    logDone: () => console.log(chalk.greenBright("All compilations complete!")),
     getTemplateFiles: (application) => {
         const dir = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug');
         const templateFiles = fs.readdirSync(dir);
