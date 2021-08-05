@@ -11,6 +11,7 @@
     "check-types": "tsc",
     "build": "webpack --env dir=$dir",
     "dev": "webpack serve --env dir=$dir",
+    "analysis": "webpack --env dir=$dir --env analysis",
     "release": "node -e 'require(\"./webpackBuilder\").build()'",
     "create": "gulp create"
   },
