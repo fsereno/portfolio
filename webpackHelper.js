@@ -13,7 +13,7 @@ module.exports = {
     getDevServerConfig: (webpackConfig, application, env) => {
         if (module.exports.isServe(env)) {
             const devServer = {
-                contentBase: path.join(__dirname, 'dist'),
+                contentBase: path.join(__dirname, config.publishDir),
                 publicPath: `/${config.prefix}${application.folder}/js/`,
                 port: 8080,
                 host: '0.0.0.0',
@@ -91,8 +91,8 @@ module.exports = {
     getTemplateFullFilePath: (application, file) => {
         const filename = module.exports.getTemplateFilename(file);
         const htmlFilePath = module.exports.applicationIsRoot(application)
-            ? `${path.resolve(__dirname, 'dist')}/${filename}.html`
-            : `${path.resolve(__dirname, 'dist', `${config.prefix}${application.folder}`)}/${filename}.html`
+            ? `${path.resolve(__dirname, config.publishDir)}/${filename}.html`
+            : `${path.resolve(__dirname, config.publishDir, `${config.prefix}${application.folder}`)}/${filename}.html`
         return htmlFilePath;
     },
     getHtmlWebpackPluginObjects: (application) => {

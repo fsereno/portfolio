@@ -116,7 +116,7 @@
                 "canItemBeAddedAsync": "canItemBeAddedAsync"
             },
             "labels": [0, 1, 2],
-            "featured": true
+            "featured": false
         },
         {
             "name": "Azure Functions .NET, Data Structures",
@@ -136,7 +136,7 @@
                 "removeStackItem": "removeStackItemAsync"
             },
             "labels": [0, 1, 2],
-            "featured": true
+            "featured": false
         },
         {
             "name": "AWS .NET, Complex Entity Sorting Algorithm",
@@ -154,7 +154,7 @@
                 "sortSalaryDesc": "sort/salary/desc"
             },
             "labels": [0, 1, 2],
-            "featured": true
+            "featured": false
         },
         {
             "name": "AWS .NET, Natural Sorting Algorithm",
@@ -171,7 +171,7 @@
                 "sort": "sort"
             },
             "labels": [0, 1, 2],
-            "featured": true
+            "featured": false
         },
         {
             "name": "AWS .NET, Shopping Basket List Builder",
@@ -265,7 +265,7 @@
             "masterTemplateDir": "basicSpaReact",
             "labels": [0],
             "order": 2,
-            "featured": true
+            "featured": false
         },
         {
             "name": "AWS Node.js, B2C API, To-Do List",
@@ -279,7 +279,7 @@
             "masterTemplateDir": "basicEmailClientReactSpa",
             "labels": [0,2],
             "order": 1,
-            "featured": true,
+            "featured": false,
             "endpoints": {
                 "base": "https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com",
                 "api": "todos"
