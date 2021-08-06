@@ -1,19 +1,20 @@
 <a href="http://fswebsitesolutions.com/"><img src="https://raw.githubusercontent.com/fsereno/portfolio/master/docs/images/FSLogo.jpeg" width="100px" title="FS Website Solutions" alt="FS Website Solutions" target="_blank"></a>
 
 # **Fabio Sereno** - Software Developer
-Highly Experienced Full Stack Web Developer. Highly self-motivated, enthusiastic, professional and a team player. Possesses strong analytical and problem solving skills, code proficiency, and an ability to follow through with projects from initiation to completion with innovation and creativity.
+Highly Experienced Full Stack Web Developer of 10+ years (6+ in the FinTech sector). Highly self-motivated, enthusiastic, professional and a team player. Possesses strong analytical and problem solving skills, code proficiency, and an ability to follow through with projects from initiation to completion with innovation and creativity. 
 
-Very keen on learning and using the latest technologies, with a real passion for software development in general. Personal interests include exciting technologies such as Artificial Intelligence, Machine Learning, Virtual Reality and Blockchain development.
+Very keen on learning and using the latest technologies, with a real passion for software development. Areas of keen interest: Fin Tech, Health Tech, Commerce, ML/AI, Blockchain, XR(VR/AR), IoT.
 
 ## My Portfolio Repository
-The purpose of this repository is to demonstrate skills in various technologies, coding principles and design patterns.
+The purpose of this repository is to demonstrate skills in various technologies, coding proficiency and knowledge.
 
-This project is both built and managed with Azure DevOps for continuous integration and deployment (CI/CD).
+This project is both built and deployed with continuous integration and deployment (CI/CD).
 
+Some of the technology used in this project and related projects:
 - Azure Functions (https://azure.microsoft.com/en-gb/services/functions/)
 - AWS Lambda (https://aws.amazon.com/lambda/)
 - Docker (https://www.docker.com/)
-- Nodejs (https://nodejs.org/en/)
+- Node JS (https://nodejs.org/en/)
 - Gulp (https://gulpjs.com)
 - WebPack (https://webpack.js.org/)
 - Pug (https://pugjs.org/api/getting-started.html)
@@ -24,47 +25,65 @@ This project is both built and managed with Azure DevOps for continuous integrat
 - Nightmare (https://github.com/segmentio/nightmare)
 - Knockout (https://knockoutjs.com/)
 - A-Frame (https://aframe.io/)
-- Dotnet Core (https://dotnet.microsoft.com)
+- .NET (https://dotnet.microsoft.com)
 - NUnit (https://nunit.org/)
-- ML Dotnet (https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet)
 - ThreeJS (https://threejs.org/)
 - React (https://reactjs.org/)
 - Vue (https://vuejs.org/)
-- SOLID (SOLID Design principles in mind, throughout)
+- SOLID principles
+- TDD - Test driven development
+- DDD - Domain driven development
 ---
 
 ## Contents
 
 - [Prerequisites](#prerequisites)
-- [Installation + Usage](#installation)
-- [CodeExamples](#codeexamples)
+- [Installation](#installation)
+- [Usage](#usage)
 - [License](#license)
 ---
 
 ## Prerequisites
-
-- Nodejs v ^12.14.0 (https://nodejs.org/en/)
-- Npm (https://www.npmjs.com/)
-- Gulp CLI (https://gulpjs.com/)
 - Docker (https://www.docker.com/)
+- Node JS v ^12.14.0 (https://nodejs.org/en/)
+- NPM (https://www.npmjs.com/)
+> Tip - Node and NPM are not needed locally if running within a container.
 ---
 
 ## Installation
 
-- Follow these steps to install this repo locally. Feel free to checkout the build process and view uncompiled code.
+- Follow these steps to install this repo locally.
 ---
 
-## Clone
+### Clone
 
 - Clone this repo to your local machine using `https://github.com/fsereno/portfolio`
 ---
 
-## Setup For Node JS Driven Applications
-- Please ensure you have the Gulp command line tools installed before running any Gulp tasks.
+### Run inside a Container using Docker
+- Please ensure you have Docker installed and running.
+- Open your preferred command line:
 
-- Open your prefered command line:
+> Launch the container
 
-> install npm packages
+```shell
+$ docker compose up
+```
+
+>Attach a Bash command line interface
+From here you will be able to run all subsequent NPM commands
+
+```shell
+$ docker exec -it portfolio_server_1 bash
+```
+> You should now have a bash cmd connected to the container
+---
+
+### Run outside a Container
+- Please ensure you have Node JS and NPM installed.
+- Open your preferred command line:
+
+> install NPM packages
 
 ```shell
 $ npm install
@@ -72,9 +91,10 @@ $ npm install --global gulp-cli
 ```
 ---
 
-### CLI Commands
+## Usage
 
-#### Run the initial build (Run this first)
+#### Run the initial build
+> Run this first to ensure all resources build successfully
 
 ```shell
 $ npm run build
