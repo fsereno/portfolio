@@ -1,6 +1,5 @@
 "use strict;"
 
-import "regenerator-runtime/runtime";
 import "../sass/styles.scss";
 
 import React from 'react';

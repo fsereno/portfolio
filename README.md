@@ -8,6 +8,9 @@ Very keen on learning and using the latest technologies, with a real passion for
 ## My Portfolio Repository
 The purpose of this repository is to demonstrate skills in various technologies, coding proficiency and knowledge.
 
+To see a fully deployed version of this project go to:
+https://fsereno.github.io/portfolio/
+
 This project is both built and deployed with continuous integration and deployment (CI/CD).
 
 Some of the technology used in this project and related projects:

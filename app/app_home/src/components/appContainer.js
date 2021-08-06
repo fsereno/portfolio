@@ -5,7 +5,7 @@ import { SpinnerContext } from "../../../js/modules/react/spinnerComponent";
 import { getElementFadeClass } from "../../../js/modules/utils/getElementFadeClass";
 import { WebGLCheckerUtil } from "../../../js/modules/utils/webGLCheckerUtil";
 import { FAUX_LOADING_TIME } from "../constants";
-import { HomeThreeModule } from "../homeThreeModule";
+import { homeThreeModule } from "../homeThreeModule";
 import { addNavbarTransScrollEventListener } from "../utils/addNavbarTransScrollEventListener";
 
 export const AppContainer = ({ children }) => {
@@ -25,10 +25,8 @@ export const AppContainer = ({ children }) => {
         spinnerContext.setShow(true);
         addNavbarTransScrollEventListener();
         if (isBrowserValid) {
-            HomeThreeModule.then((homeThreeModule) => {
-                homeThreeModule.init();
-                loadHandler();
-            });
+            homeThreeModule.init();
+            loadHandler();
         } else {
             loadHandler();
         }
