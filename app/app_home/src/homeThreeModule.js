@@ -45,11 +45,6 @@ export const homeThreeModule = (() => {
     const setRenderer = () => {
         let container = document.getElementById(CONTAINER_ID);
         _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-
-        console.log(container)
-        console.log(container.offsetHeight)
-        console.log(container.offsetWidth)
-
         _renderer.setSize(container.offsetWidth, container.offsetHeight);
         _renderer.shadowMap.enabled = true;
         _renderer.shadowMap.type = THREE.PCFSoftShadowMap;

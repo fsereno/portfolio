@@ -30,8 +30,8 @@
         }
     }
     .navbar-toggler-icon {
-        hr {
-            border-color: $white;
+        span {
+            border-bottom: solid 1px $white;
             margin: .3rem auto .5rem
         }
     }

@@ -73,7 +73,7 @@ Some of the technology used in this project and related projects:
 $ docker compose up
 ```
 
->Attach a Bash command line interface
+>Attach a Bash command line interface.
 From here you will be able to run all subsequent NPM commands
 
 ```shell
