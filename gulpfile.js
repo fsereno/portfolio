@@ -1,7 +1,6 @@
 "use strict";
 
 /*
-
   Author: Fabio Sereno.
   Description: Gulpfile.js, tasks for building individual applications.
 
@@ -16,16 +15,6 @@ const logger = require("gulp-logger");
 const logSymbols = require("log-symbols");
 const directoryExists = require("directory-exists");
 const config = require("./config.json");
-
-// these can be uninstalled eventually
-//const gulpUtil = require("./gulpUtilX");
-const flatmap = require("gulp-flatmap");
-const mocha = require("gulp-mocha");
-const connect = require("gulp-connect");
-const useref = require("gulp-useref");
-const sass = require("gulp-sass");
-const run = require('gulp-run-command').default;
-const pug = require("gulp-pug-3");
 
 const createTask = (application) => {
   return directoryExists(config.developmentDir+"/"+config.prefix+application.folder)
