@@ -20,5 +20,6 @@ steps:
 
 - script: |
     npm install
+    npm run test
     npm run build
   displayName: 'npm install, gulp tasks, dotnet project build and tests.'
