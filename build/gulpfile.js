@@ -14,14 +14,18 @@ const gulp = require("gulp");
 const logger = require("gulp-logger");
 const logSymbols = require("log-symbols");
 const directoryExists = require("directory-exists");
-const config = require("./config.json");
+const config = require("../config.json");
 
 const createTask = (application) => {
-  return directoryExists(config.developmentDir+"/"+config.prefix+application.folder)
+  const path = `../${config.developmentDir}/${config.prefix}${application.folder}`;
+  return directoryExists(path)
     .then(result => {
-      let templateDirectory = typeof application.masterTemplateDir !== "undefined" && application.masterTemplateDir.length > 0 ? application.masterTemplateDir : config.masterTemplateDir;
-      if(result === false) {
-        gulp.src(`${config.developmentDir}/${config.prefix}${templateDirectory}/**/*`)
+      const templateDirectory = typeof application.masterTemplateDir !== "undefined" 
+        && application.masterTemplateDir.length > 0
+        ? application.masterTemplateDir
+        : config.masterTemplateDir;
+      if (result === false) {
+        gulp.src(`../${config.developmentDir}/${config.prefix}${templateDirectory}/**/*`)
         .pipe(logger(
           {
             before: "Create task started...",
@@ -33,7 +37,7 @@ const createTask = (application) => {
             afterEach: " " + logSymbols.success
           }
         ))
-        .pipe(gulp.dest(config.developmentDir+"/"+config.prefix+application.folder));
+        .pipe(gulp.dest(path));
       }
     });
 }

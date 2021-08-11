@@ -1,5 +1,5 @@
 const path = require('path');
-const config = require("./config.json");
+const config = require("../config.json");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpackHelper = require('./webpackHelper');
@@ -14,7 +14,7 @@ module.exports = (env) => {
       ]
     },
     output: {
-      path: path.resolve(__dirname, config.publishDir, 'vendor'),
+      path: path.resolve(__dirname, '../', config.publishDir, 'vendor'),
       clean: true,
     },
     plugins: [

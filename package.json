@@ -9,11 +9,11 @@
     "test-apps": "./node_modules/.bin/mocha --require @babel/register --require ts-node/register ./app/**/tests/*test.*",
     "test": "npm run test-util && npm run test-apps",
     "check-types": "tsc",
-    "build": "webpack --env dir=$dir",
-    "dev": "webpack serve --env dir=$dir",
-    "analysis": "webpack --env dir=$dir --env analysis",
-    "release": "node -e 'require(\"./webpackBuilder\").build()'",
-    "create": "gulp create"
+    "build": "webpack --config ./build/webpack.config.js --env dir=$dir",
+    "dev": "webpack serve --config ./build/webpack.config.js --env dir=$dir",
+    "analysis": "webpack --config ./build/webpack.config.js --env dir=$dir --env analysis",
+    "release": "node -e 'require(\"./build/webpackBuilder\").build()'",
+    "create": "gulp create --gulpfile ./build/gulpfile.js"
   },
   "repository": {
     "type": "git",

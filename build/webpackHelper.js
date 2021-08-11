@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const config = require("./config.json");
+const config = require("../config.json");
 const chalk = require('chalk');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -13,7 +13,7 @@ module.exports = {
     getDevServerConfig: (webpackConfig, application, env) => {
         if (module.exports.isServe(env)) {
             const devServer = {
-                contentBase: path.join(__dirname, config.publishDir),
+                contentBase: path.join(__dirname, '../', config.publishDir),
                 publicPath: `/${config.prefix}${application.folder}/js/`,
                 port: 8080,
                 host: '0.0.0.0',
@@ -45,7 +45,7 @@ module.exports = {
         const directory = hasDirectory ? dir.replace(config.prefix, "") : "";
         return [ hasDirectory, directory ];
     },
-    getFullDirectoryPath: (application) => `./${config.developmentDir}/${config.prefix}${application.folder}`,
+    getFullDirectoryPath: (application) => `../${config.developmentDir}/${config.prefix}${application.folder}`,
     getMode: (env) => module.exports.isProduction(env) ? 'production' : 'development',
     getApplications: (env) => {
         const [ hasDirectory, directory] = module.exports.hasDirectory(env);
@@ -82,7 +82,7 @@ module.exports = {
     },
     logDone: () => console.log(chalk.greenBright("All compilations complete!")),
     getTemplateFiles: (application) => {
-        const dir = path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug');
+        const dir = path.resolve(__dirname, '../', config.developmentDir, `${config.prefix}${application.folder}`, 'pug');
         const templateFiles = fs.readdirSync(dir);
         return templateFiles;
     },
@@ -91,8 +91,8 @@ module.exports = {
     getTemplateFullFilePath: (application, file) => {
         const filename = module.exports.getTemplateFilename(file);
         const htmlFilePath = module.exports.applicationIsRoot(application)
-            ? `${path.resolve(__dirname, config.publishDir)}/${filename}.html`
-            : `${path.resolve(__dirname, config.publishDir, `${config.prefix}${application.folder}`)}/${filename}.html`
+            ? `${path.resolve(__dirname, '../', config.publishDir)}/${filename}.html`
+            : `${path.resolve(__dirname, '../', config.publishDir, `${config.prefix}${application.folder}`)}/${filename}.html`
         return htmlFilePath;
     },
     getHtmlWebpackPluginObjects: (application) => {
@@ -101,7 +101,7 @@ module.exports = {
         templates.forEach((file) => {
             const htmlFilePath = module.exports.getTemplateFullFilePath(application, file);
             const htmlWebpackPluginConfig = new HtmlWebpackPlugin({
-                template: path.resolve(__dirname, config.developmentDir, `${config.prefix}${application.folder}`, 'pug', file),
+                template: path.resolve(__dirname, '../', config.developmentDir, `${config.prefix}${application.folder}`, 'pug', file),
                 filename: htmlFilePath,
                 locals: { config, application }
             });
