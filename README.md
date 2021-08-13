@@ -41,7 +41,7 @@ Some of the technology used in this project and related projects:
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Usage](#usage)
-- [License](#license)
+- [Licence](#licence)
 ---
 
 ## Prerequisites
