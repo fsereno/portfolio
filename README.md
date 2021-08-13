@@ -163,7 +163,7 @@ $ npm run test-func
 ```
 ##### This will:
 - Please ensure the development server is running
-- Run all Nightmare Unit Tests from the ./app/tests/functional directory
+- Run all functional tests from the ./app/tests/functional directory
 ---
 
 #### Create a new application
