@@ -178,9 +178,7 @@ $ npm run create
 - If all applications already exist, nothing will be overwritten.
 ---
 
-## License
+## Licence
 
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
-
-- **[MIT license](https://fsereno.github.io/portfolio/app_licence/index.html)**
+- **[MIT licence](https://fsereno.github.io/portfolio/app_licence/index.html)**
 - Copyright 2021 © Fabio Sereno.
