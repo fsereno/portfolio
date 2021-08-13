@@ -182,5 +182,5 @@ $ npm run create
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-- **[MIT license](http://fswebsitesolutions.com/porfolio/app_licence/index.html)**
-- Copyright 2018 © <a href="http://fswebsitesolutions.com/" target="_blank">FS Website Solutions</a>.
+- **[MIT license](https://fsereno.github.io/portfolio/app_licence/index.html)**
+- Copyright 2021 © Fabio Sereno.
