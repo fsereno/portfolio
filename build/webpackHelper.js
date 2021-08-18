@@ -14,7 +14,7 @@ module.exports = {
         if (module.exports.isServe(env)) {
             const devServer = {
                 contentBase: path.join(__dirname, '../', config.publishDir),
-                publicPath: `/${config.prefix}${application.folder}/js/`,
+                publicPath: `/${config.prefix}${application.folder}`,
                 port: 8080,
                 host: '0.0.0.0',
                 open: true,
