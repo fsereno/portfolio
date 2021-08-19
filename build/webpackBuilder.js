@@ -48,10 +48,8 @@ module.exports = {
     let applicationWebpackConfigInstance;
 
     try {
-
       const applicationWebpackConfig = require(`${publicDir}/webpack.config`);
       applicationWebpackConfigInstance = {...applicationWebpackConfig};
-
     } catch (exception) {
       applicationWebpackConfigInstance = {}
     };
@@ -79,7 +77,7 @@ module.exports = {
 
     let plugins = [...webpackConfig.plugins];
 
-    plugins = webpackHelper.getAnalysisConfig(plugins, env)
+    plugins = webpackHelper.getAnalysisConfig(plugins, env);
 
     const htmlWebpackPluginConfigs = webpackHelper.getHtmlWebpackPluginObjects(application);
 
