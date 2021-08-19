@@ -87,12 +87,17 @@ module.exports = {
         return templateFiles;
     },
     applicationIsRoot: (application) => application.useRoot,
+    getOutputDirectory: (application) => {
+        const directory = module.exports.applicationIsRoot(application)
+            ? `${path.resolve(__dirname, '../', config.publishDir)}`
+            : `${path.resolve(__dirname, '../', config.publishDir, `${config.prefix}${application.folder}`)}`
+        return directory;
+    },
     getTemplateFilename: (file) => file.split('.')[0],
     getTemplateFullFilePath: (application, file) => {
         const filename = module.exports.getTemplateFilename(file);
-        const htmlFilePath = module.exports.applicationIsRoot(application)
-            ? `${path.resolve(__dirname, '../', config.publishDir)}/${filename}.html`
-            : `${path.resolve(__dirname, '../', config.publishDir, `${config.prefix}${application.folder}`)}/${filename}.html`
+        const directory = module.exports.getOutputDirectory(application);
+        const htmlFilePath = `${directory}/${filename}.html`
         return htmlFilePath;
     },
     getHtmlWebpackPluginObjects: (application) => {

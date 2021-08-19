@@ -57,9 +57,7 @@ module.exports = {
     };
 
     const entryPath = path.resolve(__dirname, '../', config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
-    const outputPath = webpackHelper.applicationIsRoot(application)
-      ?  path.resolve(__dirname, '../', config.publishDir)
-      :  path.resolve(__dirname, '../', config.publishDir, `${config.prefix}${application.folder}`);
+    const outputPath = webpackHelper.getOutputDirectory(application);
     const mode = webpackHelper.getMode(env);
     const masterWebpackConfigInstance = {
       ...masterWebpackConfig,
