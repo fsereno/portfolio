@@ -7,7 +7,7 @@ module.exports = () => {
       main: "",
     },
     output: {
-      clean: true,
+      //clean: true,
     },
     plugins: [
       new MiniCssExtractPlugin(),
