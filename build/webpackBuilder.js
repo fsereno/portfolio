@@ -13,6 +13,7 @@ module.exports = {
     const webpacks = module.exports.getAllConfig(env);
     webpackHelper.getVendorWebpackConfig(env, webpacks);
     webpackHelper.logNumberOfCompilingConfigs(webpacks);
+    webpackHelper.clearOutputDirectory();
     module.exports.run(webpacks);
   },
   run: (configs) => {

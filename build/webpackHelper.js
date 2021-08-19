@@ -4,6 +4,7 @@ const config = require("../config.json");
 const chalk = require('chalk');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const childProcess = require('child_process');
 
 module.exports = {
     isProduction: (env) => env.production,
@@ -119,5 +120,6 @@ module.exports = {
             const vendorWebpackConfig = require('./webpack.config.vendor')(env);
             webpacks.push(vendorWebpackConfig);
         }
-    }
+    },
+    clearOutputDirectory: () => childProcess.execSync('rm -rf ./docs/*')
 }

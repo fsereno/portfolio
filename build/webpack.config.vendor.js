@@ -14,8 +14,7 @@ module.exports = (env) => {
       ]
     },
     output: {
-      path: path.resolve(__dirname, '../', config.publishDir, 'vendor'),
-      //clean: true,
+      path: path.resolve(__dirname, '../', config.publishDir, 'vendor')
     },
     plugins: [
       new MiniCssExtractPlugin()

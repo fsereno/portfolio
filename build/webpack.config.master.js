@@ -6,9 +6,7 @@ module.exports = () => {
     entry: {
       main: "",
     },
-    output: {
-      //clean: true,
-    },
+    output: {},
     plugins: [
       new MiniCssExtractPlugin(),
     ],
