@@ -1,1 +1,7 @@
-body i.fa.fa-lg.fa-coffee{color:#343a40;font-size:7.1em}
+/*!***************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/app_awsDotNetCoreAsyncCoffeeMachine/sass/styles.scss ***!
+  \***************************************************************************************************************************************************/
+body i.fa.fa-lg.fa-coffee {
+  font-size: 7.1em;
+  color: #343a40;
+}

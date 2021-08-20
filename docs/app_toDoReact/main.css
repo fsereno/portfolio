@@ -1,1 +1,9 @@
-body h1{color:#000}body .my-test-class{background:blue}
+/*!*****************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/app_toDoReact/sass/styles.scss ***!
+  \*****************************************************************************************************************************/
+body h1 {
+  color: #000000;
+}
+body .my-test-class {
+  background: blue;
+}

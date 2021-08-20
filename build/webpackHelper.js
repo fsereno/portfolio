@@ -40,6 +40,7 @@ module.exports = {
         }
         return plugins;
     },
+    getRelativeDirectoryPath: isRoot => isRoot ? '.' : '..',
     hasDirectory: (env) =>  {
         const dir = env.dir;
         const hasDirectory = dir && dir.length > 0;

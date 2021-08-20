@@ -1,7 +1,10 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const webpackHelper = require('./webpackHelper');
 
-module.exports = () => {
+module.exports = (env, application) => {
+  const isRoot = webpackHelper.applicationIsRoot(application);
+  const directory = webpackHelper.getRelativeDirectoryPath(isRoot);
   return {
     entry: {
       main: "",
@@ -35,8 +38,8 @@ module.exports = () => {
               loader: 'file-loader',
               options: {
                 name: '[name].[ext]',
-                outputPath: '../images/',
-                publicPath: '../images/',
+                outputPath: `${directory}/images/`,
+                publicPath: `${directory}/images/`
               }
             }
           ]
@@ -48,8 +51,8 @@ module.exports = () => {
               loader: 'file-loader',
               options: {
                 name: '[name].[ext]',
-                outputPath: '../../',
-                publicPath: '../',
+                outputPath: `${directory}/`,
+                publicPath: `${directory}/`
               }
             }
           ]

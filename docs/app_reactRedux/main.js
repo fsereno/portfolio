@@ -1,1 +1,225 @@
-(()=>{"use strict";var e,t={67:(e,t,n)=>{var r=n(294),a=n(935);function o(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}var l=function(){function e(){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e)}var t,n;return t=e,n=[{key:"generate",value:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"",t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:25,n=void 0!==e?e.substring(0,t).split(" ").join(""):"";return n}}],null&&o(t.prototype,null),n&&o(t,n),e}(),i=n(287),u=n(90),c=n(754),s=n(35),f=n(86),d=n(555);function h(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}var p=function(){function e(){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e)}var t,n;return t=e,n=[{key:"isUniqueInArray",value:function(e,t){var n;return null===(n=0===(null==e?void 0:e.filter((function(e){return e===t})).length))||void 0===n||n}}],null&&h(t.prototype,null),n&&h(t,n),e}();function v(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,r=new Array(t);n<t;n++)r[n]=e[n];return r}function m(e){var t,n,a=(t=(0,r.useState)(!1),n=2,function(e){if(Array.isArray(e))return e}(t)||function(e,t){var n=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=n){var r,a,o=[],l=!0,i=!1;try{for(n=n.call(e);!(l=(r=n.next()).done)&&(o.push(r.value),!t||o.length!==t);l=!0);}catch(e){i=!0,a=e}finally{try{l||null==n.return||n.return()}finally{if(i)throw a}}return o}}(t,n)||function(e,t){if(e){if("string"==typeof e)return v(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);return"Object"===n&&e.constructor&&(n=e.constructor.name),"Map"===n||"Set"===n?Array.from(e):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?v(e,t):void 0}}(t,n)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()),o=a[0],l=a[1];return r.createElement(r.Fragment,null,r.createElement(s.Z,{noValidate:!0,validated:o,onSubmit:function(t){t.preventDefault();var n=t.currentTarget,r=new FormData(n).get("itemInput"),a=!p.isUniqueInArray(e.items,r);!1===n.checkValidity()||a?(l(!0),t.stopPropagation()):(l(!1),e.handleSubmit(t))}},r.createElement(s.Z.Row,null,r.createElement(s.Z.Group,{as:d.Z},r.createElement(s.Z.Label,null,"Item to add"),r.createElement(s.Z.Control,{name:"itemInput",id:"itemInput",type:"text",placeholder:"Add to list...",required:!0,onChange:e.onChange,value:e.value}),r.createElement(s.Z.Control.Feedback,{type:"invalid"},"Please enter a value."))),r.createElement(s.Z.Row,null,r.createElement(f.Z,{"aria-label":"Basic example"},r.createElement(c.Z,{id:"submit",variant:"dark",type:"submit"},"Add item"),r.createElement(c.Z,{id:"undo",variant:"danger",type:"button",onClick:e.handleUndo},"Undo"),r.createElement(c.Z,{id:"redo",variant:"dark",type:"button",onClick:e.handleRedo},"Redo")))))}function y(e){return(y="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function b(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}function g(e,t){return(g=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function E(e,t){if(t&&("object"===y(t)||"function"==typeof t))return t;if(void 0!==t)throw new TypeError("Derived constructors may only return object or undefined");return O(e)}function O(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function w(e){return(w=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}var S=(0,i.PH)("ADD_TODO"),k=(0,i.PH)("REMOVE_TODO"),C=(0,i.Lq)([],{ADD_TODO:function(e,t){e.push(t.payload)},REMOVE_TODO:function(e,t){e.splice(t.payload,1)}}),j=(0,u.ZP)(C),D=(0,i.xC)({reducer:j}),R=function(e){!function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&g(e,t)}(c,e);var t,n,a,o,i=(a=c,o=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],(function(){}))),!0}catch(e){return!1}}(),function(){var e,t=w(a);if(o){var n=w(this).constructor;e=Reflect.construct(t,arguments,n)}else e=t.apply(this,arguments);return E(this,e)});function c(e){var t;return function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,c),(t=i.call(this,e)).state={value:"",counterLimit:10,counter:0},t.handleChange=t.handleChange.bind(O(t)),t.handleSubmit=t.handleSubmit.bind(O(t)),t.handleDelete=t.handleDelete.bind(O(t)),t.handleUndo=t.handleUndo.bind(O(t)),t.handleRedo=t.handleRedo.bind(O(t)),t}return t=c,(n=[{key:"handleChange",value:function(e){this.setState({value:e.target.value})}},{key:"handleSubmit",value:function(e){if(e.preventDefault(),this.state.counter<this.state.counterLimit){var t=S();t=S(this.state.value),D.dispatch(t),this.setState({value:"",counter:D.getState().present.length})}}},{key:"handleDelete",value:function(e){e.preventDefault();var t=Number(e.target.dataset.index),n=k();n=k(t),D.dispatch(n),this.setState({counter:D.getState().present.length})}},{key:"handleUndo",value:function(){D.dispatch(u.zF.undo()),this.setState({counter:D.getState().present.length})}},{key:"handleRedo",value:function(){D.dispatch(u.zF.redo()),this.setState({counter:D.getState().present.length})}},{key:"render",value:function(){var e=this;return r.createElement("div",null,r.createElement("div",{className:"row splitter"},r.createElement("div",{className:"col-lg-4"},r.createElement("h3",null,"Result:"),r.createElement("ul",{id:"toDoList",className:"list-group"},D.getState().present.map((function(t,n){var a=l.generate(t);return r.createElement("li",{key:a,className:"list-group-item d-flex justify-content-between align-items-center"},t," ",r.createElement("a",{href:"#",className:"badge badge-danger delete","data-index":n,onClick:e.handleDelete},"Delete"))}))))),r.createElement("div",{className:"row splitter"},r.createElement("div",{className:"col-lg-12"},r.createElement("p",null,"Items: ",this.state.counter),r.createElement("p",null,"Item to add: ",this.state.value))),r.createElement("div",{className:"row"},r.createElement("div",{className:"col-lg-6"},r.createElement(m,{value:this.state.value,onChange:this.handleChange,handleSubmit:this.handleSubmit,items:D.getState().present,handleUndo:this.handleUndo,handleRedo:this.handleRedo}))))}}])&&b(t.prototype,n),c}(r.Component);a.render(r.createElement(R,null),document.getElementById("result"))}},n={};function r(e){var a=n[e];if(void 0!==a)return a.exports;var o=n[e]={exports:{}};return t[e](o,o.exports,r),o.exports}r.m=t,e=[],r.O=(t,n,a,o)=>{if(!n){var l=1/0;for(s=0;s<e.length;s++){for(var[n,a,o]=e[s],i=!0,u=0;u<n.length;u++)(!1&o||l>=o)&&Object.keys(r.O).every((e=>r.O[e](n[u])))?n.splice(u--,1):(i=!1,o<l&&(l=o));if(i){e.splice(s--,1);var c=a();void 0!==c&&(t=c)}}return t}o=o||0;for(var s=e.length;s>0&&e[s-1][2]>o;s--)e[s]=e[s-1];e[s]=[n,a,o]},r.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return r.d(t,{a:t}),t},r.d=(e,t)=>{for(var n in t)r.o(t,n)&&!r.o(e,n)&&Object.defineProperty(e,n,{enumerable:!0,get:t[n]})},r.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),(()=>{var e={179:0};r.O.j=t=>0===e[t];var t=(t,n)=>{var a,o,[l,i,u]=n,c=0;for(a in i)r.o(i,a)&&(r.m[a]=i[a]);if(u)var s=u(r);for(t&&t(n);c<l.length;c++)o=l[c],r.o(e,o)&&e[o]&&e[o][0](),e[l[c]]=0;return r.O(s)},n=self.webpackChunkportfolio=self.webpackChunkportfolio||[];n.forEach(t.bind(null,0)),n.push=t.bind(null,n.push.bind(n))})();var a=r.O(void 0,[736],(()=>r(67)));a=r.O(a)})();
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./app/app_reactRedux/src/app.js":
+/*!***************************************!*\
+  !*** ./app/app_reactRedux/src/app.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sass_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sass/styles.scss */ \"./app/app_reactRedux/sass/styles.scss\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var _typeScript_Utils_keyGeneratorUtil_dist_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../typeScript/Utils/keyGeneratorUtil/dist/index */ \"./app/typeScript/Utils/keyGeneratorUtil/dist/index.js\");\n/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @reduxjs/toolkit */ \"./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js\");\n/* harmony import */ var redux_undo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-undo */ \"./node_modules/redux-undo/lib/index.js\");\n/* harmony import */ var _formComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./formComponent */ \"./app/app_reactRedux/src/formComponent.js\");\n\"use strict;\";\n\nfunction _typeof(obj) { \"@babel/helpers - typeof\"; if (typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; }; } return _typeof(obj); }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function\"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }\n\nfunction _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }\n\nfunction _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }\n\nfunction _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === \"object\" || typeof call === \"function\")) { return call; } else if (call !== void 0) { throw new TypeError(\"Derived constructors may only return object or undefined\"); } return _assertThisInitialized(self); }\n\nfunction _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return self; }\n\nfunction _isNativeReflectConstruct() { if (typeof Reflect === \"undefined\" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === \"function\") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }\n\nfunction _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }\n\n\n\n\n\n\n\n\n\nvar _addToDo = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_6__.createAction)(\"ADD_TODO\");\n\nvar _removeToDo = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_6__.createAction)(\"REMOVE_TODO\");\n\nvar _todoReducer = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_6__.createReducer)([], {\n  ADD_TODO: function ADD_TODO(state, action) {\n    state.push(action.payload);\n  },\n  REMOVE_TODO: function REMOVE_TODO(state, action) {\n    state.splice(action.payload, 1);\n  }\n});\n\nvar _undoableTodoReducer = (0,redux_undo__WEBPACK_IMPORTED_MODULE_4__.default)(_todoReducer);\n\nvar _store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_6__.configureStore)({\n  reducer: _undoableTodoReducer\n});\n\nvar ToDoListForm = /*#__PURE__*/function (_React$Component) {\n  _inherits(ToDoListForm, _React$Component);\n\n  var _super = _createSuper(ToDoListForm);\n\n  function ToDoListForm(props) {\n    var _this;\n\n    _classCallCheck(this, ToDoListForm);\n\n    _this = _super.call(this, props);\n    _this.state = {\n      value: '',\n      counterLimit: 10,\n      counter: 0\n    };\n    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));\n    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));\n    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));\n    _this.handleUndo = _this.handleUndo.bind(_assertThisInitialized(_this));\n    _this.handleRedo = _this.handleRedo.bind(_assertThisInitialized(_this));\n    return _this;\n  }\n\n  _createClass(ToDoListForm, [{\n    key: \"handleChange\",\n    value: function handleChange(event) {\n      this.setState({\n        value: event.target.value\n      });\n    }\n  }, {\n    key: \"handleSubmit\",\n    value: function handleSubmit(event) {\n      event.preventDefault();\n\n      if (this.state.counter < this.state.counterLimit) {\n        var action = _addToDo();\n\n        action = _addToDo(this.state.value);\n\n        _store.dispatch(action);\n\n        this.setState({\n          value: \"\",\n          counter: _store.getState().present.length\n        });\n      }\n    }\n  }, {\n    key: \"handleDelete\",\n    value: function handleDelete(event) {\n      event.preventDefault();\n      var index = Number(event.target.dataset.index);\n\n      var action = _removeToDo();\n\n      action = _removeToDo(index);\n\n      _store.dispatch(action);\n\n      this.setState({\n        counter: _store.getState().present.length\n      });\n    }\n  }, {\n    key: \"handleUndo\",\n    value: function handleUndo() {\n      _store.dispatch(redux_undo__WEBPACK_IMPORTED_MODULE_4__.ActionCreators.undo());\n\n      this.setState({\n        counter: _store.getState().present.length\n      });\n    }\n  }, {\n    key: \"handleRedo\",\n    value: function handleRedo() {\n      _store.dispatch(redux_undo__WEBPACK_IMPORTED_MODULE_4__.ActionCreators.redo());\n\n      this.setState({\n        counter: _store.getState().present.length\n      });\n    }\n  }, {\n    key: \"render\",\n    value: function render() {\n      var _this2 = this;\n\n      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"div\", {\n        className: \"row splitter\"\n      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"div\", {\n        className: \"col-lg-4\"\n      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"h3\", null, \"Result:\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"ul\", {\n        id: \"toDoList\",\n        className: \"list-group\"\n      }, _store.getState().present.map(function (item, index) {\n        var key = _typeScript_Utils_keyGeneratorUtil_dist_index__WEBPACK_IMPORTED_MODULE_3__.KeyGeneratorUtil.generate(item);\n        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"li\", {\n          key: key,\n          className: \"list-group-item d-flex justify-content-between align-items-center\"\n        }, item, \" \", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"a\", {\n          href: \"#\",\n          className: \"badge badge-danger delete\",\n          \"data-index\": index,\n          onClick: _this2.handleDelete\n        }, \"Delete\"));\n      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"div\", {\n        className: \"row splitter\"\n      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"div\", {\n        className: \"col-lg-12\"\n      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"p\", null, \"Items: \", this.state.counter), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"p\", null, \"Item to add: \", this.state.value))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"div\", {\n        className: \"row\"\n      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"div\", {\n        className: \"col-lg-6\"\n      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_formComponent__WEBPACK_IMPORTED_MODULE_5__.FormComponent, {\n        value: this.state.value,\n        onChange: this.handleChange,\n        handleSubmit: this.handleSubmit,\n        items: _store.getState().present,\n        handleUndo: this.handleUndo,\n        handleRedo: this.handleRedo\n      }))));\n    }\n  }]);\n\n  return ToDoListForm;\n}(react__WEBPACK_IMPORTED_MODULE_1__.Component);\n\nreact_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(ToDoListForm, null), document.getElementById('result'));\n\n//# sourceURL=webpack://portfolio/./app/app_reactRedux/src/app.js?");
+
+/***/ }),
+
+/***/ "./app/app_reactRedux/src/formComponent.js":
+/*!*************************************************!*\
+  !*** ./app/app_reactRedux/src/formComponent.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"FormComponent\": () => (/* binding */ FormComponent)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap/Button */ \"./node_modules/react-bootstrap/esm/Button.js\");\n/* harmony import */ var react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap/Form */ \"./node_modules/react-bootstrap/esm/Form.js\");\n/* harmony import */ var react_bootstrap_ButtonGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/ButtonGroup */ \"./node_modules/react-bootstrap/esm/ButtonGroup.js\");\n/* harmony import */ var react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Col */ \"./node_modules/react-bootstrap/esm/Col.js\");\n/* harmony import */ var _typeScript_Utils_filterUtil_dist_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../typeScript/Utils/filterUtil/dist/index */ \"./app/typeScript/Utils/filterUtil/dist/index.js\");\n\"use strict;\";\n\nfunction _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }\n\nfunction _nonIterableRest() { throw new TypeError(\"Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\n\nfunction _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === \"string\") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === \"Object\" && o.constructor) n = o.constructor.name; if (n === \"Map\" || n === \"Set\") return Array.from(o); if (n === \"Arguments\" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }\n\nfunction _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }\n\nfunction _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== \"undefined\" && arr[Symbol.iterator] || arr[\"@@iterator\"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i[\"return\"] != null) _i[\"return\"](); } finally { if (_d) throw _e; } } return _arr; }\n\nfunction _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }\n\n\n\n\n\n\n\nfunction FormComponent(props) {\n  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),\n      _useState2 = _slicedToArray(_useState, 2),\n      validated = _useState2[0],\n      setValidated = _useState2[1];\n\n  var handleSubmit = function handleSubmit(event) {\n    event.preventDefault();\n    var form = event.currentTarget;\n    var data = new FormData(form);\n    var input = data.get(\"itemInput\");\n    var isNotUnique = !_typeScript_Utils_filterUtil_dist_index__WEBPACK_IMPORTED_MODULE_1__.FilterUtil.isUniqueInArray(props.items, input);\n\n    if (form.checkValidity() === false || isNotUnique) {\n      setValidated(true);\n      event.stopPropagation();\n    } else {\n      setValidated(false);\n      props.handleSubmit(event);\n    }\n  };\n\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__.default, {\n    noValidate: true,\n    validated: validated,\n    onSubmit: handleSubmit\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__.default.Group, {\n    as: react_bootstrap_Col__WEBPACK_IMPORTED_MODULE_3__.default\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__.default.Label, null, \"Item to add\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__.default.Control, {\n    name: \"itemInput\",\n    id: \"itemInput\",\n    type: \"text\",\n    placeholder: \"Add to list...\",\n    required: true,\n    onChange: props.onChange,\n    value: props.value\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__.default.Control.Feedback, {\n    type: \"invalid\"\n  }, \"Please enter a value.\"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Form__WEBPACK_IMPORTED_MODULE_2__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_ButtonGroup__WEBPACK_IMPORTED_MODULE_4__.default, {\n    \"aria-label\": \"Basic example\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__.default, {\n    id: \"submit\",\n    variant: \"dark\",\n    type: \"submit\"\n  }, \"Add item\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__.default, {\n    id: \"undo\",\n    variant: \"danger\",\n    type: \"button\",\n    onClick: props.handleUndo\n  }, \"Undo\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap_Button__WEBPACK_IMPORTED_MODULE_5__.default, {\n    id: \"redo\",\n    variant: \"dark\",\n    type: \"button\",\n    onClick: props.handleRedo\n  }, \"Redo\")))));\n}\n\n//# sourceURL=webpack://portfolio/./app/app_reactRedux/src/formComponent.js?");
+
+/***/ }),
+
+/***/ "./app/typeScript/Utils/filterUtil/dist/index.js":
+/*!*******************************************************!*\
+  !*** ./app/typeScript/Utils/filterUtil/dist/index.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"FilterUtil\": () => (/* binding */ FilterUtil)\n/* harmony export */ });\n\"use strict;\";\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar FilterUtil = /*#__PURE__*/function () {\n  function FilterUtil() {\n    _classCallCheck(this, FilterUtil);\n  }\n\n  _createClass(FilterUtil, null, [{\n    key: \"isUniqueInArray\",\n    value: function isUniqueInArray(collection, input) {\n      var _a;\n\n      var result = (_a = (collection === null || collection === void 0 ? void 0 : collection.filter(function (x) {\n        return x === input;\n      }).length) === 0) !== null && _a !== void 0 ? _a : true;\n      return result;\n    }\n  }]);\n\n  return FilterUtil;\n}();\n\n//# sourceURL=webpack://portfolio/./app/typeScript/Utils/filterUtil/dist/index.js?");
+
+/***/ }),
+
+/***/ "./app/typeScript/Utils/keyGeneratorUtil/dist/index.js":
+/*!*************************************************************!*\
+  !*** ./app/typeScript/Utils/keyGeneratorUtil/dist/index.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"KeyGeneratorUtil\": () => (/* binding */ KeyGeneratorUtil)\n/* harmony export */ });\n\"use strict;\";\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar KeyGeneratorUtil = /*#__PURE__*/function () {\n  function KeyGeneratorUtil() {\n    _classCallCheck(this, KeyGeneratorUtil);\n  }\n\n  _createClass(KeyGeneratorUtil, null, [{\n    key: \"generate\",\n    value: function generate() {\n      var field = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : \"\";\n      var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 25;\n      var result = typeof field !== \"undefined\" ? field.substring(0, limit).split(\" \").join(\"\") : \"\";\n      return result;\n    }\n  }]);\n\n  return KeyGeneratorUtil;\n}();\n\n//# sourceURL=webpack://portfolio/./app/typeScript/Utils/keyGeneratorUtil/dist/index.js?");
+
+/***/ }),
+
+/***/ "./app/app_reactRedux/sass/styles.scss":
+/*!*********************************************!*\
+  !*** ./app/app_reactRedux/sass/styles.scss ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://portfolio/./app/app_reactRedux/sass/styles.scss?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"main": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			for(moduleId in moreModules) {
+/******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 				}
+/******/ 			}
+/******/ 			if(runtime) var result = runtime(__webpack_require__);
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkIds[i]] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunkportfolio"] = self["webpackChunkportfolio"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendor"], () => (__webpack_require__("./app/app_reactRedux/src/app.js")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;
