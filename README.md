@@ -46,7 +46,7 @@ Some of the technology used in this project and related projects:
 
 ## Prerequisites
 - Docker (https://www.docker.com/)
-- Node JS v ^12.14.0 (https://nodejs.org/en/)
+- Node JS v ^14.17.5 (https://nodejs.org/en/)
 - NPM (https://www.npmjs.com/)
 > Tip - Node and NPM are not needed locally if running within a container.
 ---
@@ -172,10 +172,9 @@ $ npm run test-func
 $ npm run create
 ```
 ##### This will:
-- Update the config.json file with additional applications.
-- Then run this command to build applications based on the config.json file.
-- New applications are built based on the 'masterTemplateDir' template application, as indicated in the config.json file.
-- If all applications already exist, nothing will be overwritten.
+- Build applications based on the config.json file.
+- New applications are built based on the 'masterTemplateDir' property.
+- If an application already exists, nothing will be overwritten.
 ---
 
 ## Licence
