@@ -1,15 +1,23 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpackHelper = require('./webpackHelper');
+const config = require("../config.json");
+const path = require('path');
 
 module.exports = (env, application) => {
   const isRoot = webpackHelper.applicationIsRoot(application);
   const directory = webpackHelper.getRelativeDirectoryPath(isRoot);
+  const mode = webpackHelper.getMode(env);
+  const entryPath = path.resolve(__dirname, '../', config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
+  const outputPath = webpackHelper.getOutputDirectory(application);
   return {
+    mode: mode,
     entry: {
-      main: "",
+      main: entryPath,
     },
-    output: {},
+    output: {
+      path: outputPath
+    },
     plugins: [
       new MiniCssExtractPlugin(),
     ],

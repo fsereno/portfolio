@@ -1,5 +1,3 @@
-const path = require('path');
-const config = require("../config.json");
 const webpackHelper = require("./webpackHelper");
 const masterWebpackConfig = require("./webpack.config.master");
 const webpack = require('webpack');
@@ -56,22 +54,9 @@ module.exports = {
     };
 
     const master = masterWebpackConfig(env, application);
-    const entryPath = path.resolve(__dirname, '../', config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
-    const outputPath = webpackHelper.getOutputDirectory(application);
-    const mode = webpackHelper.getMode(env);
-    const masterWebpackConfigInstance = {
-      ...master,
-      ...{
-        mode,
-        entry: {...master.entry, main: entryPath },
-        output: {...master.output,
-          path: outputPath
-        }
-      }
-    };
 
     let webpackConfig = {
-      ...masterWebpackConfigInstance,
+      ...master,
       ...applicationWebpackConfigInstance
     };
 
