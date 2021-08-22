@@ -5,8 +5,9 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpackHelper = require('./webpackHelper');
 
 module.exports = (env) => {
+  const mode = webpackHelper.getMode(env);
   return {
-    mode: webpackHelper.getMode(env),
+    mode: mode,
     entry: {
       vendor: [
         'bootstrap',

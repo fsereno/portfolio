@@ -1,7 +1,1 @@
-/*!**********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/app_awsDotNetCoreEntitySortApi/sass/styles.scss ***!
-  \**********************************************************************************************************************************************/
-body table#employeeTable th {
-  height: 3.7rem;
-  line-height: 2.1rem;
-}
+body table#employeeTable th{height:3.7rem;line-height:2.1rem}

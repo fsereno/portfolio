@@ -1,14 +1,1 @@
-/*!********************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/app_threeJSScene/sass/styles.scss ***!
-  \********************************************************************************************************************************/
-body {
-  margin: 0;
-  height: 100vh;
-}
-body h1 {
-  color: #000000;
-}
-
-canvas {
-  display: block;
-}
+body{height:100vh;margin:0}body h1{color:#000}canvas{display:block}
