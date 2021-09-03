@@ -3,6 +3,7 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import Stats from 'three/examples/jsm/libs/stats.module'
 
 export const homeThreeModule = (() => {
 
@@ -21,6 +22,7 @@ export const homeThreeModule = (() => {
     let mouse;
     let fragmentGroup;
     let controls;
+    let stats;
 
     const initPhysics = () => {
         world = new CANNON.World();
@@ -36,6 +38,11 @@ export const homeThreeModule = (() => {
         mouse = new THREE.Vector3();
         raycaster = new THREE.Raycaster();
         fragmentGroup = new THREE.Object3D();
+    }
+
+    const initStats = () => {
+        stats = Stats();
+        document.body.appendChild(stats.dom)
     }
 
     const initControls = () => {
@@ -200,6 +207,7 @@ export const homeThreeModule = (() => {
             animateFragments();
             controls.update();
             renderer.render(scene, camera);
+            stats.update();
         });
     }
 
@@ -266,6 +274,7 @@ export const homeThreeModule = (() => {
         addLight(0xFFFFFF, 2, 500, 0, 10, 5);
         setMouseMoved();
         initControls();
+        initStats();
         setAnimationLoop();
     }
 
