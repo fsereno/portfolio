@@ -9,61 +9,61 @@ export const homeThreeModule = (() => {
     const DAMPING = 0.9;
     const TIMESTEP = 1.0/60.0;
     const XROTATION = -Math.PI / 2;
-    const OBJECT_LIMIT = 20;
-    const CONTAINER_ID = "canvasContainer";
+    const OBJECTLIMIT = 20;
+    const CONTAINERID = "canvasContainer";
 
-    let _container;
-    let _scene;
-    let _camera;
-    let _renderer;
-    let _world;
-    let _raycaster;
-    let _mouse;
-    let _fragmentGroup;
-    let _controls;
+    let container;
+    let scene;
+    let camera;
+    let renderer;
+    let world;
+    let raycaster;
+    let mouse;
+    let fragmentGroup;
+    let controls;
 
     const initPhysics = () => {
-        _world = new CANNON.World();
-        _world.gravity.set(0, -10, 0);
-        _world.broadphase = new CANNON.NaiveBroadphase();
-        _world.solver.iterations = 10;
+        world = new CANNON.World();
+        world.gravity.set(0, -10, 0);
+        world.broadphase = new CANNON.NaiveBroadphase();
+        world.solver.iterations = 10;
     }
 
     const initScene = () => {
-        _container = document.getElementById(CONTAINER_ID);
-        _scene = new THREE.Scene();
-        _camera = new THREE.PerspectiveCamera(75, _container.offsetWidth / _container.offsetHeight, 1, 500);
-        _mouse = new THREE.Vector3();
-        _raycaster = new THREE.Raycaster();
-        _fragmentGroup = new THREE.Object3D();
+        container = document.getElementById(CONTAINERID);
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 1, 500);
+        mouse = new THREE.Vector3();
+        raycaster = new THREE.Raycaster();
+        fragmentGroup = new THREE.Object3D();
     }
 
     const initControls = () => {
-        _controls = new OrbitControls( _camera, _renderer.domElement );
-        _controls.update();
+        controls = new OrbitControls( camera, renderer.domElement );
+        controls.update();
     }
 
     const setCameraPosition = () => {
-        _camera.position.x = 0;
-        _camera.position.y = 4;
-        _camera.position.z = 10;
+        camera.position.x = 0;
+        camera.position.y = 4;
+        camera.position.z = 10;
     }
 
     const setRenderer = () => {
-        let container = document.getElementById(CONTAINER_ID);
-        _renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        _renderer.setSize(container.offsetWidth, container.offsetHeight);
-        _renderer.shadowMap.enabled = true;
-        _renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        container.appendChild(_renderer.domElement);
+        let container = document.getElementById(CONTAINERID);
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.offsetWidth, container.offsetHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        container.appendChild(renderer.domElement);
     }
 
     const setResizeEventHandler = () => {
         window.addEventListener("resize", () => {
-            let container = document.getElementById(CONTAINER_ID);
-            _renderer.setSize(container.offsetWidth, container.offsetHeight);
-            _camera.aspect = container.offsetWidth / container.offsetHeight;
-            _camera.updateProjectionMatrix();
+            let container = document.getElementById(CONTAINERID);
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+            camera.aspect = container.offsetWidth / container.offsetHeight;
+            camera.updateProjectionMatrix();
         });
     }
 
@@ -71,10 +71,8 @@ export const homeThreeModule = (() => {
 
         const time = Date.now() * 0.000001;
 
-        for ( let i = 0; i < _scene.children.length; i ++ ) {
-
-            const object = _scene.children[ i ];
-
+        for ( let i = 0; i < scene.children.length; i ++ ) {
+            const object = scene.children[ i ];
             if ( object instanceof THREE.Points ) {
                 object.rotation.y = time * ( i < 4 ? i + 1 : - ( i + 1 ) );
             }
@@ -83,7 +81,7 @@ export const homeThreeModule = (() => {
 
     const createParticles = (numberOfParticles = 10000, numberOfparticleGroups = 5) => {
 
-        let verticies = [];
+        const verticies = [];
 
         for ( let i = 0; i < numberOfParticles; i++ ) {
             const x = THREE.MathUtils.randFloatSpread( 2000 );
@@ -98,43 +96,40 @@ export const homeThreeModule = (() => {
         const material = new THREE.PointsMaterial( { size: 0.5 } );
 
         for ( let i = 0; i < numberOfparticleGroups; i++ ) {
-
             const particles = new THREE.Points( geometry, material);
             particles.rotation.x = Math.random() * 6;
             particles.rotation.y = Math.random() * 6;
             particles.rotation.z = Math.random() * 6;
-            _scene.add(particles);
+            scene.add(particles);
         }
     }
 
     const createFragments = (numberOfFragments) => {
-        let geometry = new THREE.CircleGeometry(5, 10);
-        let material = new THREE.MeshPhysicalMaterial({color:0xFFFFFF, side:THREE.DoubleSide});
+        const geometry = new THREE.CircleGeometry(5, 10);
+        const material = new THREE.MeshPhysicalMaterial({color:0xFFFFFF, side:THREE.DoubleSide});
 
         for ( let i = 0; i < numberOfFragments; i++ ) {
-
-            let scale = THREE.MathUtils.randFloat(0.01, 0.02)
-            let fragment = new THREE.Mesh(geometry, material);
-
+            const scale = THREE.MathUtils.randFloat(0.01, 0.02)
+            const fragment = new THREE.Mesh(geometry, material);
             fragment.position.set( THREE.MathUtils.randFloat(-300, 200), THREE.MathUtils.randFloat(5, 50), THREE.MathUtils.randFloat(5, 50));
             fragment.rotation.set( THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05));
             fragment.scale.set(scale, scale, scale);
             fragment.speedValue = THREE.MathUtils.randFloat(-0.25, 0.70)
-            _fragmentGroup.add(fragment);
+            fragmentGroup.add(fragment);
         }
-        _scene.add(_fragmentGroup)
+        scene.add(fragmentGroup)
     }
 
     const animateFragments = () => {
 
-        for( let i = 0; i < _fragmentGroup.children.length; i++ ) {
-            let fragment = _fragmentGroup.children[i];
+        for( let i = 0; i < fragmentGroup.children.length; i++ ) {
+            const fragment = fragmentGroup.children[i];
             fragment.rotation.x += fragment.speedValue/10;
             fragment.rotation.y += fragment.speedValue/10;
             fragment.rotation.z += fragment.speedValue/10;
         };
 
-        _fragmentGroup.rotation.y += 0.004;
+        fragmentGroup.rotation.y += 0.004;
     }
 
     const createCube = () => {
@@ -144,8 +139,7 @@ export const homeThreeModule = (() => {
         const scale = Math.random() - Math.random() * 0.5 + 1;
         const meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
         const meshMaterial = new THREE.MeshLambertMaterial({ color: 0x5c6670 });
-
-        let mesh = new THREE.Mesh( meshGeometry, meshMaterial );
+        const mesh = new THREE.Mesh( meshGeometry, meshMaterial );
         mesh.position.set(x, y, z)
         mesh.updatePhysics = true;
         mesh.castShadow = true;
@@ -165,15 +159,15 @@ export const homeThreeModule = (() => {
     }
 
     const createCubes = () => {
-        if (_world.bodies.filter(x => x.isCube).length <=  OBJECT_LIMIT) {
-            let object = createCube();
-            _world.addBody(object.body);
-            _scene.add(object.mesh);
+        if (world.bodies.filter(x => x.isCube).length <=  OBJECTLIMIT) {
+            const object = createCube();
+            world.addBody(object.body);
+            scene.add(object.mesh);
         }
     }
 
     const addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
-        let light = new THREE.SpotLight(color, intensity, distance);
+        const light = new THREE.SpotLight(color, intensity, distance);
         light.position.set(x,y,z);
         light.penumbra = 1;
         light.castShadow = true;
@@ -182,20 +176,17 @@ export const homeThreeModule = (() => {
         light.shadow.camera.near = 0.5;
         light.shadow.camera.far = 500;
         light.shadow.focus = 1;
-        _scene.add( light );
+        scene.add( light );
     }
 
     const updatePhysics = () => {
-        _world.step(TIMESTEP);
-
-        let bodies = _world.bodies.filter(x => x.updatePhysics);
-        let meshes = _scene.children.filter(x => x.updatePhysics);
-
+        world.step(TIMESTEP);
+        const bodies = world.bodies.filter(x => x.updatePhysics);
+        const meshes = scene.children.filter(x => x.updatePhysics);
         if ( bodies.length === meshes.length) {
             for ( let i = 0; i < meshes.length; i++) {
-                let mesh = meshes[i];
-                let body = bodies[i];
-
+                const mesh = meshes[i];
+                const body = bodies[i];
                 mesh.position.copy(body.position);
                 mesh.quaternion.copy(body.quaternion);
             }
@@ -203,12 +194,12 @@ export const homeThreeModule = (() => {
     }
 
     const setAnimationLoop = () => {
-        _renderer.setAnimationLoop(function () {
+        renderer.setAnimationLoop(function () {
             animateParticles();
             updatePhysics();
             animateFragments();
-            _controls.update();
-            _renderer.render(_scene, _camera);
+            controls.update();
+            renderer.render(scene, camera);
         });
     }
 
@@ -219,45 +210,39 @@ export const homeThreeModule = (() => {
         ground.rotation.x = XROTATION;
         ground.receiveShadow = true;
 
-        _scene.add( ground );
+        scene.add( ground );
 
-        let groundShape = new CANNON.Plane();
-        let groundMaterial = new CANNON.Material();
-        let groundBody = new CANNON.Body({ mass: 0, material: groundMaterial });
+        const groundShape = new CANNON.Plane();
+        const groundMaterial = new CANNON.Material();
+        const groundBody = new CANNON.Body({ mass: 0, material: groundMaterial });
         groundBody.quaternion.setFromAxisAngle( new CANNON.Vec3(1, 0, 0), XROTATION);
-        groundBody.addShape(groundShape)
-
-        _world.add(groundBody)
+        groundBody.addShape(groundShape);
+        world.add(groundBody);
     }
 
     const objectsReact = (event) => {
         event.preventDefault();
+        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+        mouse.z = 0.5;
+        raycaster.setFromCamera(mouse, camera);
 
-        _mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-        _mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-        _mouse.z = 0.5;
-
-        _raycaster.setFromCamera(_mouse, _camera);
-
-        let intersects = _raycaster.intersectObjects(_scene.children, true);
+        const intersects = raycaster.intersectObjects(scene.children, true);
 
         if (intersects.length > 0) {
 
-            let object = intersects[0].object;
+            const object = intersects[0].object;
 
             if (object.updatePhysics) {
 
-                let matchingBody = _world.bodies.filter( x =>
+                const matchingBody = world.bodies.filter( x =>
                         x.position.x === object.position.x
                         && x.position.y === object.position.y
                         && x.position.z === object.position.z);
-
                 if (matchingBody.length > 0) {
-
-                    let body = matchingBody[0];
-                    let x = _mouse.x * 10;
-                    let y = _mouse.y * 10;
-
+                    const body = matchingBody[0];
+                    const x = mouse.x * 10;
+                    const y = mouse.y * 10;
                     body.angularVelocity.set(x, y, 0);
                 }
             }
