@@ -45,7 +45,7 @@ export const homeThreeModule = (() => {
 
     const setCameraPosition = () => {
         camera.position.x = 0;
-        camera.position.y = 4;
+        camera.position.y = 3;
         camera.position.z = 10;
     }
 
