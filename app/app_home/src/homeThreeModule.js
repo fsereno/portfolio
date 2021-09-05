@@ -47,13 +47,17 @@ export const homeThreeModule = (() => {
 
     const initControls = () => {
         controls = new OrbitControls( camera, renderer.domElement );
+        controls.enableDamping = true;
+        controls.maxDistance = 30.0;
+        controls.minDistance = 5.0;
+        controls.maxPolarAngle = 1.4
         controls.update();
     }
 
     const setCameraPosition = () => {
         camera.position.x = 0;
         camera.position.y = 3;
-        camera.position.z = 10;
+        camera.position.z = 12;
     }
 
     const setRenderer = () => {
