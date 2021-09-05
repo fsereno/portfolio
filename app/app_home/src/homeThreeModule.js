@@ -49,7 +49,7 @@ export const homeThreeModule = (() => {
         controls = new OrbitControls( camera, renderer.domElement );
         controls.enableDamping = true;
         controls.maxDistance = 30.0;
-        controls.minDistance = 5.0;
+        controls.minDistance = 7.0;
         controls.maxPolarAngle = 1.4
         controls.update();
     }
@@ -143,13 +143,16 @@ export const homeThreeModule = (() => {
         fragmentGroup.rotation.y += 0.004;
     }
 
-    const createCube = () => {
+    const createCube = (texture) => {
         const x = Math.random() * 0.3 + 1;
         const y = 15;
         const z = 0;
         const scale = Math.random() - Math.random() * 0.5 + 1;
         const meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
-        const meshMaterial = new THREE.MeshLambertMaterial({ color: 0x5c6670 });
+        const meshMaterial = new THREE.MeshLambertMaterial({ 
+            color: 0x5c6670,
+            map: texture
+        });
         const mesh = new THREE.Mesh( meshGeometry, meshMaterial );
         mesh.position.set(x, y, z)
         mesh.updatePhysics = true;
@@ -171,9 +174,12 @@ export const homeThreeModule = (() => {
 
     const createCubes = () => {
         if (world.bodies.filter(x => x.isCube).length <=  OBJECTLIMIT) {
-            const object = createCube();
-            world.addBody(object.body);
-            scene.add(object.mesh);
+            const loader = new THREE.TextureLoader();
+            loader.load('../../images/Asphalt011_1K_Roughness.jpg', texture => {
+                const object = createCube(texture);
+                world.addBody(object.body);
+                scene.add(object.mesh);
+            });
         }
     }
 
@@ -216,20 +222,29 @@ export const homeThreeModule = (() => {
     }
 
     const createPlane = () =>  {
-        const planeGeometry = new THREE.PlaneBufferGeometry( 50, 50, 1, 1 );
-        const planeMaterial = new THREE.MeshPhongMaterial( { color: 0x2e3338, shininess: 150 } );
-        const ground = new THREE.Mesh( planeGeometry, planeMaterial );
-        ground.rotation.x = XROTATION;
-        ground.receiveShadow = true;
+        const loader = new THREE.TextureLoader();
+        loader.load('../../images/Rock035_2K_Roughness.png', texture => {
+            const planeGeometry = new THREE.PlaneBufferGeometry( 50, 50, 1, 1 );
+            const planeMaterial = new THREE.MeshPhongMaterial( { 
+                color: 0x6f7070, 
+                shininess: 150,
+                map: texture
+            } );
+            const ground = new THREE.Mesh( planeGeometry, planeMaterial );
+            ground.rotation.x = XROTATION;
+            ground.receiveShadow = true;
 
-        scene.add( ground );
+            scene.add( ground );
 
-        const groundShape = new CANNON.Plane();
-        const groundMaterial = new CANNON.Material();
-        const groundBody = new CANNON.Body({ mass: 0, material: groundMaterial });
-        groundBody.quaternion.setFromAxisAngle( new CANNON.Vec3(1, 0, 0), XROTATION);
-        groundBody.addShape(groundShape);
-        world.add(groundBody);
+            const groundShape = new CANNON.Plane();
+            const groundMaterial = new CANNON.Material();
+            const groundBody = new CANNON.Body({ mass: 0, material: groundMaterial });
+            groundBody.quaternion.setFromAxisAngle( new CANNON.Vec3(1, 0, 0), XROTATION);
+            groundBody.addShape(groundShape);
+            world.add(groundBody);
+
+        });
+        
     }
 
     const objectsReact = (event) => {
