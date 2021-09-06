@@ -132,8 +132,7 @@ export const homeThreeModule = (() => {
     }
 
     const animateFragments = () => {
-
-        for( let i = 0; i < fragmentGroup.children.length; i++ ) {
+        for ( let i = 0; i < fragmentGroup.children.length; i++ ) {
             const fragment = fragmentGroup.children[i];
             fragment.rotation.x += fragment.speedValue/10;
             fragment.rotation.y += fragment.speedValue/10;
@@ -150,7 +149,7 @@ export const homeThreeModule = (() => {
         const scale = Math.random() - Math.random() * 0.5 + 1;
         const meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
         const meshMaterial = new THREE.MeshLambertMaterial({ 
-            color: 0x5c6670,
+            color: 0xffffff,
             map: texture
         });
         const mesh = new THREE.Mesh( meshGeometry, meshMaterial );
@@ -173,14 +172,16 @@ export const homeThreeModule = (() => {
     }
 
     const createCubes = () => {
-        if (world.bodies.filter(x => x.isCube).length <=  OBJECTLIMIT) {
-            const loader = new THREE.TextureLoader();
-            loader.load('../../images/Asphalt011_1K_Roughness.jpg', texture => {
-                const object = createCube(texture);
-                world.addBody(object.body);
-                scene.add(object.mesh);
-            });
-        }
+        const loader = new THREE.TextureLoader();
+        loader.load('', texture => {
+            setInterval(() => {
+                if (world.bodies.filter(x => x.isCube).length <=  OBJECTLIMIT) {
+                    const object = createCube(texture);
+                    world.addBody(object.body);
+                    scene.add(object.mesh);
+                }
+            }, 1000);
+        });
     }
 
     const addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
@@ -223,10 +224,13 @@ export const homeThreeModule = (() => {
 
     const createPlane = () =>  {
         const loader = new THREE.TextureLoader();
-        loader.load('../../images/Rock035_2K_Roughness.png', texture => {
-            const planeGeometry = new THREE.PlaneBufferGeometry( 50, 50, 1, 1 );
+        loader.load('../../images/PaintedWood005_2K_Displacement.png', texture => {
+            const planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 1, 1 );
+            texture.wrapS = THREE.RepeatWrapping;
+            texture.wrapT = THREE.RepeatWrapping;
+            texture.repeat.set(3, 2);
             const planeMaterial = new THREE.MeshPhongMaterial( { 
-                color: 0x6f7070, 
+                color: 0x999999,
                 shininess: 150,
                 map: texture
             } );
@@ -244,7 +248,6 @@ export const homeThreeModule = (() => {
             world.add(groundBody);
 
         });
-        
     }
 
     const objectsReact = (event) => {
@@ -287,7 +290,7 @@ export const homeThreeModule = (() => {
         setCameraPosition();
         setRenderer();
         setResizeEventHandler();
-        setInterval(createCubes, 1000);
+        createCubes();
         createParticles(20000, 10);
         createFragments(25);
         addLight(0xFFFFFF, 2, 500, 0, 10, 5);
