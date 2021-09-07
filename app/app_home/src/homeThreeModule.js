@@ -47,6 +47,8 @@ export const homeThreeModule = (() => {
 
     const initControls = () => {
         controls = new OrbitControls( camera, renderer.domElement );
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 1;
         controls.enableDamping = true;
         controls.maxDistance = 30.0;
         controls.minDistance = 7.0;
@@ -149,7 +151,7 @@ export const homeThreeModule = (() => {
         const scale = Math.random() - Math.random() * 0.5 + 1;
         const meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
         const meshMaterial = new THREE.MeshLambertMaterial({ 
-            color: 0xffffff,
+            color: 0x999999,
             map: texture
         });
         const mesh = new THREE.Mesh( meshGeometry, meshMaterial );
@@ -173,7 +175,7 @@ export const homeThreeModule = (() => {
 
     const createCubes = () => {
         const loader = new THREE.TextureLoader();
-        loader.load('', texture => {
+        loader.load('../../images/Asphalt011_1K_Roughness.jpg', texture => {
             setInterval(() => {
                 if (world.bodies.filter(x => x.isCube).length <=  OBJECTLIMIT) {
                     const object = createCube(texture);
@@ -224,7 +226,7 @@ export const homeThreeModule = (() => {
 
     const createPlane = () =>  {
         const loader = new THREE.TextureLoader();
-        loader.load('../../images/PaintedWood005_2K_Displacement.png', texture => {
+        loader.load('../../images/PaintedWood005_2K_Displacement.jpg', texture => {
             const planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 1, 1 );
             texture.wrapS = THREE.RepeatWrapping;
             texture.wrapT = THREE.RepeatWrapping;
