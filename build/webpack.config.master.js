@@ -10,6 +10,7 @@ module.exports = (env, application) => {
   const mode = webpackHelper.getMode(env);
   const entryPath = path.resolve(__dirname, '../', config.developmentDir, `${config.prefix}${application.folder}`, 'src', 'app.js');
   const outputPath = webpackHelper.getOutputDirectory(application);
+  const isProduction = webpackHelper.isProduction(env);
   return {
     mode: mode,
     entry: {
@@ -49,7 +50,13 @@ module.exports = (env, application) => {
                 outputPath: `${directory}/images/`,
                 publicPath: `${directory}/images/`
               }
-            }
+            },
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                disable: !isProduction
+              },
+            },
           ]
         },
         {
