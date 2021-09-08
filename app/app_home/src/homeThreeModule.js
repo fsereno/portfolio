@@ -47,8 +47,8 @@ export const homeThreeModule = (() => {
 
     const initControls = () => {
         controls = new OrbitControls( camera, renderer.domElement );
-        controls.autoRotate = true;
-        controls.autoRotateSpeed = 1;
+        //controls.autoRotate = true;
+        //controls.autoRotateSpeed = 1;
         controls.enableDamping = true;
         controls.maxDistance = 30.0;
         controls.minDistance = 7.0;
