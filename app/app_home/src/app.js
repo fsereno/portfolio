@@ -1,5 +1,6 @@
 "use strict;"
 
+import "regenerator-runtime/runtime";
 import "../sass/styles.scss";
 
 import React from 'react';
@@ -10,6 +11,7 @@ import { IntroContainer } from './components/introContainer';
 import { ConfigContextProvider } from "./components/contextProviders/configContextProvider";
 import { AppContainer } from "./components/appContainer";
 import { SpinnerContextProvider } from "../../js/modules/react/spinnerComponent";
+
 
 function App() {
   return (

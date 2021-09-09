@@ -1,11 +1,15 @@
 "use strict;"
 
-import * as THREE from 'three';
-import * as CANNON from 'cannon';
+//import * as THREE from 'three';
+//import * as CANNON from 'cannon';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import Stats from 'three/examples/jsm/libs/stats.module'
 
-export const homeThreeModule = (() => {
+
+export const homeThreeModule = (async () => {
+
+    const THREE = await import("three");
+    const CANNON = await import("cannon");
 
     const DAMPING = 0.9;
     const TIMESTEP = 1.0/60.0;
@@ -23,6 +27,8 @@ export const homeThreeModule = (() => {
     let fragmentGroup;
     let controls;
     let stats;
+    let planeTexture;
+    let cubeTexture;
 
     const initPhysics = () => {
         world = new CANNON.World();
@@ -47,8 +53,6 @@ export const homeThreeModule = (() => {
 
     const initControls = () => {
         controls = new OrbitControls( camera, renderer.domElement );
-        //controls.autoRotate = true;
-        //controls.autoRotateSpeed = 1;
         controls.enableDamping = true;
         controls.maxDistance = 30.0;
         controls.minDistance = 7.0;
@@ -150,7 +154,7 @@ export const homeThreeModule = (() => {
         const z = 0;
         const scale = Math.random() - Math.random() * 0.5 + 1;
         const meshGeometry = new THREE.BoxGeometry(scale, scale, scale);
-        const meshMaterial = new THREE.MeshLambertMaterial({ 
+        const meshMaterial = new THREE.MeshLambertMaterial({
             color: 0x999999,
             map: texture
         });
@@ -174,16 +178,16 @@ export const homeThreeModule = (() => {
     }
 
     const createCubes = () => {
-        const loader = new THREE.TextureLoader();
-        loader.load('../../images/Asphalt011_1K_Roughness.jpg', texture => {
+        //const loader = new THREE.TextureLoader();
+        //loader.load('../../images/Asphalt011_1K_Roughness.jpg', texture => {
             setInterval(() => {
                 if (world.bodies.filter(x => x.isCube).length <=  OBJECTLIMIT) {
-                    const object = createCube(texture);
+                    const object = createCube(cubeTexture);
                     world.addBody(object.body);
                     scene.add(object.mesh);
                 }
             }, 1000);
-        });
+        //});
     }
 
     const addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
@@ -225,16 +229,16 @@ export const homeThreeModule = (() => {
     }
 
     const createPlane = () =>  {
-        const loader = new THREE.TextureLoader();
-        loader.load('../../images/PaintedWood005_2K_Displacement.jpg', texture => {
+        //const loader = new THREE.TextureLoader();
+        //loader.load('../../images/PaintedWood005_2K_Displacement.jpg', texture => {
             const planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 1, 1 );
-            texture.wrapS = THREE.RepeatWrapping;
-            texture.wrapT = THREE.RepeatWrapping;
-            texture.repeat.set(3, 2);
+            //texture.wrapS = THREE.RepeatWrapping;
+            //texture.wrapT = THREE.RepeatWrapping;
+            //texture.repeat.set(3, 2);
             const planeMaterial = new THREE.MeshPhongMaterial( { 
                 color: 0x999999,
                 shininess: 150,
-                map: texture
+                map: planeTexture
             } );
             const ground = new THREE.Mesh( planeGeometry, planeMaterial );
             ground.rotation.x = XROTATION;
@@ -249,7 +253,7 @@ export const homeThreeModule = (() => {
             groundBody.addShape(groundShape);
             world.add(groundBody);
 
-        });
+        //});
     }
 
     const objectsReact = (event) => {
@@ -285,7 +289,13 @@ export const homeThreeModule = (() => {
         window.addEventListener("mousemove", objectsReact);
     }
 
-    const init = () => {
+    const init = async () => {
+        const loader = new THREE.TextureLoader();
+        planeTexture = await loader.loadAsync('../../images/PaintedWood005_2K_Displacement.jpg');
+        cubeTexture = await loader.loadAsync('../../images/Asphalt011_1K_Roughness.jpg');
+        planeTexture.wrapS = THREE.RepeatWrapping;
+        planeTexture.wrapT = THREE.RepeatWrapping;
+        planeTexture.repeat.set(3, 2);
         initScene();
         initPhysics();
         createPlane();

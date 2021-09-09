@@ -8,6 +8,7 @@ import { FAUX_LOADING_TIME } from "../constants";
 import { homeThreeModule } from "../homeThreeModule";
 import { addNavbarTransScrollEventListener } from "../utils/addNavbarTransScrollEventListener";
 
+
 export const AppContainer = ({ children }) => {
 
     const isBrowserValid = WebGLCheckerUtil.isWebGL2Available() || WebGLCheckerUtil.isWebGLAvailable();
@@ -25,8 +26,9 @@ export const AppContainer = ({ children }) => {
         spinnerContext.setShow(true);
         addNavbarTransScrollEventListener();
         if (isBrowserValid) {
-            homeThreeModule.init();
-            loadHandler();
+            homeThreeModule.then((three) => {
+                three.init().then(() => loadHandler());
+            });
         } else {
             loadHandler();
         }
