@@ -243,8 +243,8 @@ export const homeThreeModule = (async () => {
 
     const init = async () => {
         const loader = new THREE.TextureLoader();
-        planeTexture = await loader.loadAsync('../../images/PaintedWood005_2K_Displacement.jpg');
-        cubeTexture = await loader.loadAsync('../../images/Asphalt011_1K_Roughness.jpg');
+        planeTexture = await loader.loadAsync('images/PaintedWood005_2K_Displacement.jpg');
+        cubeTexture = await loader.loadAsync('images/Asphalt011_1K_Roughness.jpg');
         planeTexture.wrapS = THREE.RepeatWrapping;
         planeTexture.wrapT = THREE.RepeatWrapping;
         planeTexture.repeat.set(3, 2);
