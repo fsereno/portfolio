@@ -1,10 +1,7 @@
 "use strict;"
 
-//import * as THREE from 'three';
-//import * as CANNON from 'cannon';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import Stats from 'three/examples/jsm/libs/stats.module'
-
 
 export const homeThreeModule = (async () => {
 
@@ -178,16 +175,13 @@ export const homeThreeModule = (async () => {
     }
 
     const createCubes = () => {
-        //const loader = new THREE.TextureLoader();
-        //loader.load('../../images/Asphalt011_1K_Roughness.jpg', texture => {
-            setInterval(() => {
-                if (world.bodies.filter(x => x.isCube).length <=  OBJECTLIMIT) {
-                    const object = createCube(cubeTexture);
-                    world.addBody(object.body);
-                    scene.add(object.mesh);
-                }
-            }, 1000);
-        //});
+        setInterval(() => {
+            if (world.bodies.filter(x => x.isCube).length <=  OBJECTLIMIT) {
+                const object = createCube(cubeTexture);
+                world.addBody(object.body);
+                scene.add(object.mesh);
+            }
+        }, 1000);
     }
 
     const addLight = (color = 0xFFFFFF, intensity = 1, distance = 1000, x = 0, y = 0, z = 0) => {
@@ -229,31 +223,24 @@ export const homeThreeModule = (async () => {
     }
 
     const createPlane = () =>  {
-        //const loader = new THREE.TextureLoader();
-        //loader.load('../../images/PaintedWood005_2K_Displacement.jpg', texture => {
-            const planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 1, 1 );
-            //texture.wrapS = THREE.RepeatWrapping;
-            //texture.wrapT = THREE.RepeatWrapping;
-            //texture.repeat.set(3, 2);
-            const planeMaterial = new THREE.MeshPhongMaterial( { 
-                color: 0x999999,
-                shininess: 150,
-                map: planeTexture
-            } );
-            const ground = new THREE.Mesh( planeGeometry, planeMaterial );
-            ground.rotation.x = XROTATION;
-            ground.receiveShadow = true;
+        const planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 1, 1 ); 
+        const planeMaterial = new THREE.MeshPhongMaterial( { 
+            color: 0x999999,
+            shininess: 150,
+            map: planeTexture
+        } );
+        const ground = new THREE.Mesh( planeGeometry, planeMaterial );
+        ground.rotation.x = XROTATION;
+        ground.receiveShadow = true;
 
-            scene.add( ground );
+        scene.add( ground );
 
-            const groundShape = new CANNON.Plane();
-            const groundMaterial = new CANNON.Material();
-            const groundBody = new CANNON.Body({ mass: 0, material: groundMaterial });
-            groundBody.quaternion.setFromAxisAngle( new CANNON.Vec3(1, 0, 0), XROTATION);
-            groundBody.addShape(groundShape);
-            world.add(groundBody);
-
-        //});
+        const groundShape = new CANNON.Plane();
+        const groundMaterial = new CANNON.Material();
+        const groundBody = new CANNON.Body({ mass: 0, material: groundMaterial });
+        groundBody.quaternion.setFromAxisAngle( new CANNON.Vec3(1, 0, 0), XROTATION);
+        groundBody.addShape(groundShape);
+        world.add(groundBody);
     }
 
     const objectsReact = (event) => {
