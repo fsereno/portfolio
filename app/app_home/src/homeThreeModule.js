@@ -1,7 +1,6 @@
 "use strict;"
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import Stats from 'three/examples/jsm/libs/stats.module'
 
 export const homeThreeModule = (async () => {
 
@@ -21,7 +20,6 @@ export const homeThreeModule = (async () => {
     let world;
     let raycaster;
     let mouse;
-    let fragmentGroup;
     let controls;
     let stats;
     let planeTexture;
@@ -40,16 +38,12 @@ export const homeThreeModule = (async () => {
         camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 1, 500);
         mouse = new THREE.Vector3();
         raycaster = new THREE.Raycaster();
-        fragmentGroup = new THREE.Object3D();
-    }
-
-    const initStats = () => {
-        stats = Stats();
-        document.body.appendChild(stats.dom)
     }
 
     const initControls = () => {
         controls = new OrbitControls( camera, renderer.domElement );
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
         controls.enableDamping = true;
         controls.maxDistance = 30.0;
         controls.minDistance = 7.0;
@@ -116,33 +110,6 @@ export const homeThreeModule = (async () => {
             particles.rotation.z = Math.random() * 6;
             scene.add(particles);
         }
-    }
-
-    const createFragments = (numberOfFragments) => {
-        const geometry = new THREE.CircleGeometry(5, 10);
-        const material = new THREE.MeshPhysicalMaterial({color:0xFFFFFF, side:THREE.DoubleSide});
-
-        for ( let i = 0; i < numberOfFragments; i++ ) {
-            const scale = THREE.MathUtils.randFloat(0.01, 0.02)
-            const fragment = new THREE.Mesh(geometry, material);
-            fragment.position.set( THREE.MathUtils.randFloat(-300, 200), THREE.MathUtils.randFloat(5, 50), THREE.MathUtils.randFloat(5, 50));
-            fragment.rotation.set( THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05), THREE.MathUtils.randFloat(0, 0.05));
-            fragment.scale.set(scale, scale, scale);
-            fragment.speedValue = THREE.MathUtils.randFloat(-0.25, 0.70)
-            fragmentGroup.add(fragment);
-        }
-        scene.add(fragmentGroup)
-    }
-
-    const animateFragments = () => {
-        for ( let i = 0; i < fragmentGroup.children.length; i++ ) {
-            const fragment = fragmentGroup.children[i];
-            fragment.rotation.x += fragment.speedValue/10;
-            fragment.rotation.y += fragment.speedValue/10;
-            fragment.rotation.z += fragment.speedValue/10;
-        };
-
-        fragmentGroup.rotation.y += 0.004;
     }
 
     const createCube = (texture) => {
@@ -215,10 +182,8 @@ export const homeThreeModule = (async () => {
         renderer.setAnimationLoop(function () {
             animateParticles();
             updatePhysics();
-            animateFragments();
             controls.update();
             renderer.render(scene, camera);
-            stats.update();
         });
     }
 
@@ -291,11 +256,9 @@ export const homeThreeModule = (async () => {
         setResizeEventHandler();
         createCubes();
         createParticles(20000, 10);
-        createFragments(25);
         addLight(0xFFFFFF, 2, 500, 0, 10, 5);
         setMouseMoved();
         initControls();
-        initStats();
         setAnimationLoop();
     }
 
