@@ -76,6 +76,7 @@
         position: absolute;
         top: 20%;
         height: 100%;
+        pointer-events: none;
         #introImage {
           img {
             height: 25vh;
@@ -89,7 +90,10 @@
         #btnContainer {
           position: absolute;
           width: 100%;
-          top: 55vh; 
+          top: 55vh;
+          button {
+            pointer-events: all;
+          }
         }
       }
     }
