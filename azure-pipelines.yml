@@ -15,11 +15,11 @@ variables:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '12.x'
+    versionSpec: '14.x'
   displayName: 'Install Node.js'
 
 - script: |
     npm install
     npm run test
     npm run build
-  displayName: 'npm install, gulp tasks, dotnet project build and tests.'
+  displayName: 'Install and build assets'
