@@ -12,3 +12,4 @@ services:
             - './app:/usr/src/app/app'
             - './docs:/usr/src/app/docs'
             - './build:/usr/src/app/build'
+        container_name: node

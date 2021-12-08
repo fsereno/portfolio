@@ -75,7 +75,7 @@ $ docker compose up
 From here you will be able to run all subsequent NPM commands
 
 ```shell
-$ docker exec -it portfolio_server_1 bash
+$ docker exec -it node bash
 ```
 > You should now have a bash cmd connected to the container
 ---
