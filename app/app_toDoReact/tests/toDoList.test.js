@@ -2,29 +2,58 @@
  * @jest-environment jsdom
  */
 
- import React from "react";
- import { render, unmountComponentAtNode } from "react-dom";
- import { act } from "react-dom/test-utils";
- import ToDoList from '../src/toDoList';
+import React from "react";
+import { render, unmountComponentAtNode } from "react-dom";
+import { act } from "react-dom/test-utils";
+import ToDoList from '../src/toDoList';
 
- let container = null;
+let container = null;
+let timeout = null
 
- beforeEach(() => {
-   // setup a DOM element as a render target
-   container = document.createElement("div");
-   document.body.appendChild(container);
- });
+beforeEach(() => {
+  // setup a DOM element as a render target
+  container = document.createElement("div");
+  document.body.appendChild(container);
+});
 
- afterEach(() => {
-   // cleanup on exiting
-   unmountComponentAtNode(container);
-   container.remove();
-   container = null;
- });
+afterEach(() => {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+  timeout = null
+});
 
- it("renders", () => {
-   act(() => {
-     render(<ToDoList />, container);
-   });
-   expect(container.querySelector('#toDoList')).toBeTruthy();
- });
+it("renders", () => {
+  act(() => {
+    render(<ToDoList />, container);
+  });
+  expect(container.querySelector('#toDoList')).toBeTruthy();
+});
+
+it("can add an item", () => {
+  act(() => {
+    render(<ToDoList />, container);
+    const input = container.querySelector('#itemInput');
+    input.value = 'abc';
+    const submitBtn = container.querySelector('#submit');
+    submitBtn.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+  });
+
+  expect(container.querySelector('#toDoList').children.length === 1).toBeTruthy();
+});
+
+it("will not add duplicates", () => {
+  act(() => {
+    render(<ToDoList />, container);
+    const input = container.querySelector('#itemInput');
+    const submitBtn = container.querySelector('#submit');
+    input.value = 'abc';
+    submitBtn.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
+    // needs work
+
+  });
+
+  expect(container.querySelector('#toDoList').children.length === 1).toBeTruthy();
+});

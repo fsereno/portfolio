@@ -8,11 +8,11 @@ export default class ToDoList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: props.value || '',
-            list: props.list || [],
-            counterLimit: props.counterLimit || 10,
-            counter: props.counter || 0,
-            selectedIndex: props.selectedIndex || 0
+            value: '',
+            list: [],
+            counterLimit: 10,
+            counter: 0,
+            selectedIndex: 0
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);

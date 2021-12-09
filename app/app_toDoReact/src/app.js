@@ -7,6 +7,6 @@ import ReactDOM from 'react-dom';
 import ToDoList from './toDoList';
 
 ReactDOM.render(
-  <ToDoList list={['test']} />,
+  <ToDoList />,
   document.getElementById('result')
 );
