@@ -12,25 +12,18 @@ export function FormComponent(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const form = event.currentTarget;
     const data = new FormData(form);
     const input = data.get("itemInput");
-
     let isNotUnique = !FilterUtil.isUniqueInArray(props.items, input);
 
     if (form.checkValidity() === false || isNotUnique) {
-
       setValidated(true);
       event.stopPropagation();
-
     } else {
-
       setValidated(false);
       props.handleSubmit(event);
-
     }
-
   };
 
   return (
