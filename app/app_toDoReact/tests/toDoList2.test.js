@@ -16,17 +16,17 @@ it("renders", () => {
 
 it("will not add an item with no value", () => {
   const wrapper = mount(<ToDoList />);
-  const submitBtn = wrapper.find('button#submit');
-  submitBtn.simulate('click');
+  const form = wrapper.find('form');
+  form.simulate('submit');
   expect(wrapper.find('ul#toDoList').children()).toHaveLength(0);
 });
 
 // this needs fixing
-/*it("can add an item", () => {
+it("can add an item", () => {
   const wrapper = mount(<ToDoList />);
   const input = wrapper.find('input#itemInput');
+  const form = wrapper.find('form');
   input.simulate('change', { target: { value: 'abc'} } );
-  const submitBtn = wrapper.find('button#submit');
-  submitBtn.simulate('click');
+  form.simulate('submit');
   expect(wrapper.find('ul#toDoList').children()).toHaveLength(1);
-});*/
+});
