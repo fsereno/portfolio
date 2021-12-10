@@ -20,7 +20,6 @@ afterEach(() => {
   unmountComponentAtNode(container);
   container.remove();
   container = null;
-  timeout = null
 });
 
 it("renders", () => {
