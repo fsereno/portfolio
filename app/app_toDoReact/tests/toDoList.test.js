@@ -8,7 +8,6 @@ import { act } from "react-dom/test-utils";
 import ToDoList from '../src/toDoList';
 
 let container = null;
-let timeout = null
 
 beforeEach(() => {
   // setup a DOM element as a render target
