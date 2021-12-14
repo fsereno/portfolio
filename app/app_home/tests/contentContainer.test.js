@@ -127,3 +127,15 @@
     searchBar.simulate('change');
     expect(wrapper.find('.grid-item.card')).toHaveLength(4);
   });
+
+  it("can cancel a search", () => {
+    const wrapper = mount(<App />);
+    const searchBar = wrapper.find('input#searchInput');
+    searchBar.simulate('change', { target: { value: 'React'} } );
+    const cancelBtn = wrapper.find('#cancelBtn button');
+    cancelBtn.simulate('click');
+    const children = wrapper.find('.grid-item.card');
+    const value = searchBar.instance().value;
+    expect(value).toEqual("");
+    expect(children).toHaveLength(5);
+  });
