@@ -18,7 +18,8 @@
         "quickSearch": [
             "React",
             ".NET",
-            "Cloud"
+            "Cloud",
+            "ABC"
         ],
         "applications": [
             {
@@ -41,6 +42,39 @@
                 "active": true,
                 "include": true,
                 "labels": [0, 1, 2],
+                "featured": false
+            },
+            {
+                "name": "Test .NET application",
+                "subHeading": ".NET",
+                "description": ".NET",
+                "searchTerms": "dotnet,.net core,.netcore",
+                "folder": "NET",
+                "active": true,
+                "include": true,
+                "labels": [1, 2],
+                "featured": false
+            },
+            {
+                "name": "Test Cloud application",
+                "subHeading": "Cloud",
+                "description": "Cloud",
+                "searchTerms": "some-framework,cloud,azure",
+                "folder": "Cloud",
+                "active": true,
+                "include": true,
+                "labels": [1, 2],
+                "featured": false
+            },
+            {
+                "name": "ABC application",
+                "subHeading": "ABC",
+                "description": "ABC",
+                "searchTerms": "abc,azure",
+                "folder": "ABCFolder",
+                "active": true,
+                "include": true,
+                "labels": [1, 2],
                 "featured": false
             }
         ]
@@ -70,4 +104,26 @@
     const searchBar = wrapper.find('input#searchInput');
     searchBar.simulate('change', { target: { value: 'React'} } );
     expect(wrapper.find('.grid-item.card')).toHaveLength(2);
+  });
+
+  it("can search multiple", () => {
+    const wrapper = mount(<App />);
+    const searchBar = wrapper.find('input#searchInput');
+    searchBar.simulate('change', { target: { value: 'React .NET'} } );
+    expect(wrapper.find('.grid-item.card')).toHaveLength(3);
+  });
+
+  it("can search using multiple quicksearch", () => {
+    const wrapper = mount(<App />);
+    const searchBar = wrapper.find('input#searchInput');
+    const openFilterBtn = wrapper.find('#openFilterBtn')
+    const quickSearchCloud = wrapper.find('button[value="Cloud"]');
+    const quickSearchReact = wrapper.find('button[value="React"]');
+    const quickSearchDummy = wrapper.find('button[value="ABC"]');
+    openFilterBtn.simulate('click');
+    quickSearchCloud.simulate('click');
+    quickSearchReact.simulate('click');
+    quickSearchDummy.simulate('click');
+    searchBar.simulate('change');
+    expect(wrapper.find('.grid-item.card')).toHaveLength(4);
   });
