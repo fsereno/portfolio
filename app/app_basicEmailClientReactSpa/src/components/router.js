@@ -16,7 +16,7 @@ export const Router = () => {
             <Navbar className="pb-2 px-2 pt-3" id="spaNavBar" bg="dark" variant="dark">
                 <Nav className="mr-auto">
                     <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={HOME}>Home</NavLink>
-                    <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={INBOX}>Inbox</NavLink>
+                    <NavLink id="inboxNavLink" activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={INBOX}>Inbox</NavLink>
                     <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={OUTBOX}>Outbox</NavLink>
                     <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={NEW}>New</NavLink>
                 </Nav>

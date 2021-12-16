@@ -2,14 +2,14 @@
  * @jest-environment jsdom
  */
 
- import React from "react";
- import { mount } from 'enzyme';
- import { ContentContainer } from "../src/components/contentContainer";
- import { ConfigContextProvider } from "../src/components/contextProviders/configContextProvider";
- import { ApplicationsContextProvider } from "../src/components/contextProviders/applicationsContextProvider";
+import React from "react";
+import { mount } from 'enzyme';
+import { ContentContainer } from "../src/components/contentContainer";
+import { ConfigContextProvider } from "../src/components/contextProviders/configContextProvider";
+import { ApplicationsContextProvider } from "../src/components/contextProviders/applicationsContextProvider";
 
- jest.mock('../../../config.json', () => {
-     return {
+jest.mock('../../../config.json', () => {
+    return {
         "labels": [
             { "name": "JavaScript", "class": "warning" },
             { "name": "C#", "class": "info" },
@@ -79,41 +79,41 @@
             }
         ]
     }
- });
+});
 
- beforeEach(() => {});
- afterEach(() => {});
+beforeEach(() => { });
+afterEach(() => { });
 
- const App = () => {
-     return (
+const App = () => {
+    return (
         <ConfigContextProvider>
             <ApplicationsContextProvider>
                 <ContentContainer />
             </ApplicationsContextProvider>
         </ConfigContextProvider>
-     )
- }
+    )
+}
 
- it("can render", () => {
-   const wrapper = mount(<App />);
-   expect(wrapper.find('#contentContainer')).toBeTruthy();
- });
+it("can render", () => {
+    const wrapper = mount(<App />);
+    expect(wrapper.find('#contentContainer')).toBeTruthy();
+});
 
- it("can search", () => {
+it("can search", () => {
     const wrapper = mount(<App />);
     const searchBar = wrapper.find('input#searchInput');
-    searchBar.simulate('change', { target: { value: 'React'} } );
+    searchBar.simulate('change', { target: { value: 'React' } });
     expect(wrapper.find('.grid-item.card')).toHaveLength(2);
-  });
+});
 
-  it("can search multiple", () => {
+it("can search multiple", () => {
     const wrapper = mount(<App />);
     const searchBar = wrapper.find('input#searchInput');
-    searchBar.simulate('change', { target: { value: 'React .NET'} } );
+    searchBar.simulate('change', { target: { value: 'React .NET' } });
     expect(wrapper.find('.grid-item.card')).toHaveLength(3);
-  });
+});
 
-  it("can search using multiple quicksearch", () => {
+it("can search using multiple quicksearch", () => {
     const wrapper = mount(<App />);
     const searchBar = wrapper.find('input#searchInput');
     const openFilterBtn = wrapper.find('#openFilterBtn')
@@ -126,16 +126,16 @@
     quickSearchDummy.simulate('click');
     searchBar.simulate('change');
     expect(wrapper.find('.grid-item.card')).toHaveLength(4);
-  });
+});
 
-  it("can cancel a search", () => {
+it("can cancel a search", () => {
     const wrapper = mount(<App />);
     const searchBar = wrapper.find('input#searchInput');
-    searchBar.simulate('change', { target: { value: 'React'} } );
+    searchBar.simulate('change', { target: { value: 'React' } });
     const cancelBtn = wrapper.find('#cancelBtn button');
     cancelBtn.simulate('click');
     const children = wrapper.find('.grid-item.card');
     const value = searchBar.instance().value;
     expect(value).toEqual("");
     expect(children).toHaveLength(5);
-  });
+});
