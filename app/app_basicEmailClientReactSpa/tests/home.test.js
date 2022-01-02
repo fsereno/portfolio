@@ -8,6 +8,7 @@ import { ToasterContextProvider } from "../../js/modules/react/toasterComponent"
 import { EmailContextProvider } from "../src/components/contextProviders/emailContextProvider";
 import { ContentContainer } from '../src/components/contentContainer.js'
 import { Home } from "../src/components/pages/home";
+import { Counter } from "../src/components/counter";
 
 jest.mock('../src/data/bodies.js', () => {
     return function getBodies() {
@@ -45,6 +46,15 @@ const App = () => {
 
 it("can render", () => {
     const wrapper = mount(<App />);
-    console.log(wrapper.debug());
     expect(wrapper.find(<ContentContainer />)).toBeTruthy();
+});
+
+it("should have messages in the inbox", () => {
+    const wrapper = mount(<App/>);
+    expect(wrapper.find(<Counter count={10}/>)).toBeTruthy();
+});
+
+it("should have no messages in the outbox", () => {
+    const wrapper = mount(<App/>);
+    expect(wrapper.find(<Counter count={0}/>)).toBeTruthy();
 });
