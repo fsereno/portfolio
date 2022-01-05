@@ -57,6 +57,16 @@ it("can populate the reading pane, when article is clicked in the browser pane",
     const wrapper = mount(<App/>);
     const item = wrapper.find('#id_0');
     item.simulate('click');
-    console.log(wrapper.find('#readingPane').debug());
     expect(wrapper.find('#readingPane #bodyText').text().length).toBeGreaterThan(0);
+});
+
+//working on this
+it("can reply", () => {
+    const wrapper = mount(<App/>);
+    const item = wrapper.find('#id_0');
+    item.simulate('click');
+    const desktopReplyBtn = wrapper.find('#desktopReplyBtn');
+    desktopReplyBtn.simulate('click');
+    console.log(wrapper.debug());
+    expect(true).toBeTruthy();
 });
