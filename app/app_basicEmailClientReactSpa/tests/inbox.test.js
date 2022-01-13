@@ -8,6 +8,7 @@ import { ToasterContextProvider } from "../../js/modules/react/toasterComponent"
 import { EmailContextProvider } from "../src/components/contextProviders/emailContextProvider";
 import { ContentContainer } from '../src/components/contentContainer.js'
 import { Inbox } from "../src/components/pages/inbox";
+import { Outbox } from "../src/components/pages/outbox";
 
 jest.mock('../src/data/bodies.js', () => {
     return function getBodies() {
@@ -67,6 +68,11 @@ it("can reply", () => {
     item.simulate('click');
     const desktopReplyBtn = wrapper.find('#desktopReplyBtn');
     desktopReplyBtn.simulate('click');
+    const replyWindow = wrapper.find('textarea#body');
+    replyWindow.simulate('change', { target: { value: 'This is a reply' } } );
+    const submit = wrapper.find('button#submit');
+    submit.simulate('click');
     console.log(wrapper.debug());
+    //expect(wrapper.find('#readingPane #bodyText').text().length).toBeGreaterThan(0);
     expect(true).toBeTruthy();
 });

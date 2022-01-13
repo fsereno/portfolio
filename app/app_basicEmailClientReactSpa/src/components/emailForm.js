@@ -4,7 +4,7 @@ import React, { useState, useLayoutEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { SUBMIT, OUTBOX, MY_ADDRESS, REPLY } from '../constants';
+import { SUBMIT, OUTBOX, MY_ADDRESS, REPLY, SELECT } from '../constants';
 import { EmailContext, EmailClientContext, EmailModalContext} from '../contexts';
 import { ENQUEUE_TOAST, ToasterContext } from '../../../js/modules/react/toasterComponent';
 
@@ -59,6 +59,13 @@ export function EmailForm() {
                 emailModalContext.setShow(false);
             }
             toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Sent successfully!", body: `Your message RE: ${subject}, has now been sent.` } } );
+            emailClientContext.dispatch( {
+                type: SELECT,
+                thread: emailClientContext.state.selectedThread,
+                item: {
+                    ...emailClientContext.state.selected
+                }
+            });
         }
     };
 
