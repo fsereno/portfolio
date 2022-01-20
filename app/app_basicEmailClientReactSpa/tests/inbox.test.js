@@ -44,11 +44,6 @@ const App = () => {
     )
 }
 
-it("can render", () => {
-    const wrapper = mount(<App />);
-    expect(wrapper.find(<ContentContainer />)).toBeTruthy();
-});
-
 it("has 3 items in the browser pane", () => {
     const wrapper = mount(<App/>);
     expect(wrapper.find('#browserPane').children()).toHaveLength(3);
@@ -61,7 +56,6 @@ it("can populate the reading pane, when article is clicked in the browser pane",
     expect(wrapper.find('#readingPane #bodyText').text().length).toBeGreaterThan(0);
 });
 
-//working on this
 it("can reply", () => {
     const wrapper = mount(<App/>);
     const item = wrapper.find('#id_0');
@@ -70,9 +64,8 @@ it("can reply", () => {
     desktopReplyBtn.simulate('click');
     const replyWindow = wrapper.find('textarea#body');
     replyWindow.simulate('change', { target: { value: 'This is a reply' } } );
-    const submit = wrapper.find('button#submit');
-    submit.simulate('click');
-    console.log(wrapper.debug());
-    //expect(wrapper.find('#readingPane #bodyText').text().length).toBeGreaterThan(0);
-    expect(true).toBeTruthy();
+    const form = wrapper.find('form');
+    form.simulate('submit');
+    const toastHeader = wrapper.find('.toast-header strong');
+    expect(toastHeader.text()).toEqual('Sent successfully!')
 });
