@@ -6,7 +6,7 @@ import React from "react";
 import { mount } from 'enzyme';
 import { ToasterContextProvider } from "../../js/modules/react/toasterComponent";
 import { EmailContextProvider } from "../src/components/contextProviders/emailContextProvider";
-import { Inbox } from "../src/components/pages/inbox";
+import { New } from "../src/components/pages/new";
 
 jest.mock('../src/data/bodies.js', () => {
     return function getBodies() {
@@ -36,34 +36,17 @@ const App = () => {
     return (
         <ToasterContextProvider>
             <EmailContextProvider>
-                <Inbox />
+                <New />
             </EmailContextProvider>
         </ToasterContextProvider>
     )
 }
 
-it("has 3 items in the browser pane", () => {
+it("shows validation when there are no values", () => {
     const wrapper = mount(<App/>);
-    expect(wrapper.find('#browserPane').children()).toHaveLength(3);
-});
-
-it("can populate the reading pane, when article is clicked in the browser pane", () => {
-    const wrapper = mount(<App/>);
-    const item = wrapper.find('#id_0');
-    item.simulate('click');
-    expect(wrapper.find('#readingPane #bodyText').text().length).toBeGreaterThan(0);
-});
-
-it("can reply", () => {
-    const wrapper = mount(<App/>);
-    const item = wrapper.find('#id_0');
-    item.simulate('click');
-    const desktopReplyBtn = wrapper.find('#desktopReplyBtn');
-    desktopReplyBtn.simulate('click');
-    const replyWindow = wrapper.find('textarea#body');
-    replyWindow.simulate('change', { target: { value: 'This is a reply' } } );
     const form = wrapper.find('form');
     form.simulate('submit');
-    const toastHeader = wrapper.find('.toast-header strong');
-    expect(toastHeader.text()).toEqual('Sent successfully!')
+    const feedbackErrors = wrapper.find('.invalid-feedback');
+    console.log(feedbackErrors); // working on this
+    expect(true).toEqual(true)
 });
