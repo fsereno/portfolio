@@ -1,11 +1,11 @@
 "use strict;"
 
-import { INBOX, MY_ADDRESS } from '../constants';
+import { MY_ADDRESS } from '../constants';
 import { getRandomInt } from '../../../js/modules/utils/randomUtil';
 import getBodies from '../data/bodies';
 import getEmailAddresses from '../data/emailAddresses';
 
-export function createMessages(numberOf) {
+export function createMessages(numberOf, dir) {
 
     const result = [];
     const bodies = getBodies();
@@ -27,7 +27,7 @@ export function createMessages(numberOf) {
                 body: bodies[emailBodyRandomInt],
                 age: 0,
                 read: false,
-                dir: INBOX,
+                dir: dir,
                 time: new Date().getTime()
             },
         )

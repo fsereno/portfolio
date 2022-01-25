@@ -7,6 +7,7 @@ import { mount } from 'enzyme';
 import { ToasterContextProvider } from "../../js/modules/react/toasterComponent";
 import { EmailContextProvider } from "../src/components/contextProviders/emailContextProvider";
 import { New } from "../src/components/pages/new";
+import { INBOX } from "../src/constants";
 
 jest.mock('../src/data/bodies.js', () => {
     return function getBodies() {
@@ -35,7 +36,7 @@ afterEach(() => { });
 const App = () => {
     return (
         <ToasterContextProvider>
-            <EmailContextProvider>
+            <EmailContextProvider dir={INBOX}>
                 <New />
             </EmailContextProvider>
         </ToasterContextProvider>

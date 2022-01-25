@@ -9,6 +9,7 @@ import { EmailContextProvider } from "../src/components/contextProviders/emailCo
 import { ContentContainer } from '../src/components/contentContainer.js'
 import { Home } from "../src/components/pages/home";
 import { Counter } from "../src/components/counter";
+import { INBOX } from "../src/constants";
 
 jest.mock('../src/data/bodies.js', () => {
     return function getBodies() {
@@ -37,7 +38,7 @@ afterEach(() => { });
 const App = () => {
     return (
         <ToasterContextProvider>
-            <EmailContextProvider>
+            <EmailContextProvider dir={INBOX}>
                 <Home />
             </EmailContextProvider>
         </ToasterContextProvider>
