@@ -42,11 +42,24 @@ const App = () => {
     )
 }
 
-it("shows validation when there are no values", () => {
+it("should not show success message if not a valid submit", () => {
     const wrapper = mount(<App/>);
     const form = wrapper.find('form');
     form.simulate('submit');
-    const feedbackErrors = wrapper.find('.invalid-feedback');
-    console.log(feedbackErrors); // working on this
-    expect(true).toEqual(true)
+    const toastHeader = wrapper.find('.toast-header strong');
+    expect(toastHeader.length).toEqual(0);
+});
+
+it("should show a successful message if new message is valid", () => {
+    const wrapper = mount(<App/>);
+    const toInput = wrapper.find('input#to');
+    toInput.simulate('change', { target: { value: 'some@email.com' } } );
+    const subjectInput = wrapper.find('input#subject');
+    subjectInput.simulate('change', { target: { value: 'Some subject' } } );
+    const replyWindow = wrapper.find('textarea#body');
+    replyWindow.simulate('change', { target: { value: 'This is a reply' } } );
+    const form = wrapper.find('form');
+    form.simulate('submit');
+    const toastHeader = wrapper.find('.toast-header strong');
+    expect(toastHeader.text()).toEqual('Sent successfully!')
 });

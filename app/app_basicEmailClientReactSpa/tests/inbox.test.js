@@ -54,7 +54,7 @@ it("can populate the reading pane, when article is clicked in the browser pane",
     expect(wrapper.find('#readingPane #bodyText').text().length).toBeGreaterThan(0);
 });
 
-it("can reply", () => {
+it("should show a successful message if reply is valid", () => {
     const wrapper = mount(<App/>);
     const item = wrapper.find('#id_0');
     item.simulate('click');
