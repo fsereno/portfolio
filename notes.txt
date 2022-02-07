@@ -1,1 +1,4 @@
 npx jest ./app/app_basicEmailClientReactSpa/tests/*.test.js
+
+npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*.test.js
+
