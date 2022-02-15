@@ -5,12 +5,18 @@ import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponen
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import CoffeeMakerComponent from './coffeeMakerComponent';
+import { ConfigUtil } from "../../js/modules/utils/configUtil";
+import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 
 const PUZZLE = "3 + 1 + 1 =";
+const APP_CONFIG = ConfigUtil.get("awsDotNetCoreAsyncCoffeeMachine");
+const RUN_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.run}`;
+const RUN_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.runAsync}`;
 export default class CoffeeMakerApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      log: [],
       showSpinner: false,
       showPuzzleModal: true,
       showErrorModal: false,
@@ -22,13 +28,42 @@ export default class CoffeeMakerApp extends React.Component {
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
     this.handleBeforeAjax = this.handleBeforeAjax.bind(this);
     this.handleFailedAjax = this.handleFailedAjax.bind(this);
-    this.setShowSpinner = this.setShowSpinner.bind(this);
+    this.handleRun = this.handleRun.bind(this);
+    this.handleRunAsync = this.handleRunAsync.bind(this);
+    this.handleAjax = this.handleAjax.bind(this);
+    this.handleRequest = this.handleRequest.bind(this);
   }
 
-  setShowSpinner(value) {
-    this.setState({
-      showSpinner: value
-    })
+  handleRun() {
+    this.handleRequest(RUN_ENDPOINT);
+  }
+
+  handleRunAsync() {
+    this.handleRequest(RUN_ASYNC_ENDPOINT);
+  }
+
+  handleRequest(endpoint) {
+    let request = {
+      url: endpoint,
+      type: "GET",
+      success: (response) => {
+        this.setState({
+          log: response,
+          processHeading: "Log of tasks carried out",
+          showSpinner: false
+        });
+      }
+    }
+    this.handleAjax(request);
+  }
+
+  handleAjax(request) {
+    jQueryAjaxUtil.handleAjax(
+      request,
+      this.state.isPuzzleValid,
+      this.handleBeforeAjax,
+      this.handleFailedAjax,
+      this.handlePuzzleModalShow);
   }
 
   handleBeforeAjax() {
@@ -90,11 +125,9 @@ export default class CoffeeMakerApp extends React.Component {
           handleIsValid={this.handleIsPuzzleValid}
         />
         <CoffeeMakerComponent
-          isPuzzleValid={this.state.isPuzzleValid}
-          handleBeforeAjax={this.handleBeforeAjax}
-          handleFailedAjax={this.handleFailedAjax}
-          handlePuzzleModalShow={this.handlePuzzleModalShow}
-          setShowSpinner={this.setShowSpinner}
+          log={this.state.log}
+          handleRun={this.handleRun}
+          handleRunAsync={this.handleRunAsync}
         />
       </div>
     );
