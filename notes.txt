@@ -2,3 +2,9 @@ npx jest ./app/app_basicEmailClientReactSpa/tests/*.test.js
 
 npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*.test.js
 
+npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*pup.test.js
+
+deps needed for tests
+https://www.npmjs.com/package/puppeteer
+https://stackoverflow.com/questions/58134793/error-while-loading-shared-libraries-libnss3-so-while-running-gtlab-ci-job-to
+
