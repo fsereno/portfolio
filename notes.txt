@@ -4,7 +4,16 @@ npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*.test.js
 
 npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*pup.test.js
 
+For Docker image eventually
+npm i puppeteer --save-dev
+apt update
+apt install libnss3-dev libgdk-pixbuf2.0-dev libgtk-3-dev libxss-dev
+apt install -y libnss3
+apt install libasound2
+
 deps needed for tests
+https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#chrome-headless-doesnt-launch
 https://www.npmjs.com/package/puppeteer
 https://stackoverflow.com/questions/58134793/error-while-loading-shared-libraries-libnss3-so-while-running-gtlab-ci-job-to
+https://pptr.dev/#?product=Puppeteer&version=v13.5.0&show=api-pagewaitforselectorselector-options
 
