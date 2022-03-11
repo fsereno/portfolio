@@ -4,21 +4,25 @@
 
 import puppeteer from 'puppeteer';
 
-//create global variables to be used in the beforeAll function
 let browser
 let page
+let evaluateResult;
 
 beforeAll(async () => {
-  // launch browser
   browser = await puppeteer.launch(
     {
-      headless: true, // headless mode set to false so browser opens up with visual feedback
-      slowMo: 250, // how slow actions should be
+      headless: true,
+      slowMo: 250,
       args: ['--no-sandbox']
     }
   )
-  // creates a new page in the opened browser
-  page = await browser.newPage()
+  page = await browser.newPage();
+  evaluateResult = async (page, aHandle) => {
+    const resultHandle = await page.evaluateHandle(body => body.innerHTML, aHandle);
+    const result = await resultHandle.jsonValue();
+    await resultHandle.dispose();
+    return result;
+  }
 })
 
 describe('app_awsDotNetCoreAsyncCoffeeMachine', () => {
@@ -40,11 +44,24 @@ describe('app_awsDotNetCoreAsyncCoffeeMachine', () => {
     await page.click('#submitPuzzle');
     await page.waitForSelector('#puzzleModal', { hidden: true });
     await page.click('#runSync')
-    // hmm dont think this is hitting the outside world.
-  }, 10000);
+    await page.waitForSelector('#resultOutput li');
+    const aHandle = await page.evaluateHandle(() => document.querySelector('#resultOutput'));
+    const result = await evaluateResult(page, aHandle)
+    expect(result).not.toBe(null);;
+  }, 100000);
+  test('Should run the process asynchronously', async () => {
+    await page.goto('http://localhost:8080/app_awsDotNetCoreAsyncCoffeeMachine/index.html');
+    await page.waitForSelector('#puzzleModal');
+    await page.type('#puzzleModal input[type=text]', '5');
+    await page.click('#submitPuzzle');
+    await page.waitForSelector('#puzzleModal', { hidden: true });
+    await page.click('#runAsync')
+    await page.waitForSelector('#resultOutput li');
+    const aHandle = await page.evaluateHandle(() => document.querySelector('#resultOutput'));
+    const result = await evaluateResult(page, aHandle)
+    expect(result).not.toBe(null);;
+  }, 100000);
 });
-
-// This function occurs after the result of each tests, it closes the browser
 afterAll(() => {
   browser.close()
-})
+});
