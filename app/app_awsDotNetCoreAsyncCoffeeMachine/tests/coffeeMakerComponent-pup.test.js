@@ -59,7 +59,7 @@ describe('app_awsDotNetCoreAsyncCoffeeMachine', () => {
     await page.waitForSelector('#resultOutput li');
     const aHandle = await page.evaluateHandle(() => document.querySelector('#resultOutput'));
     const result = await evaluateResult(page, aHandle)
-    expect(result).not.toBe(null);;
+    expect(result).not.toBe(null);
   }, 100000);
 });
 afterAll(() => {
