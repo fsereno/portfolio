@@ -6,6 +6,8 @@ npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*pup.test.js
 
 npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*taiko.test.js
 
+npx jest ./app/app_awsDotNetCoreEntitySortApi/tests/*taiko.test.js
+
 For Docker image eventually
 npm i puppeteer --save-dev or npm install taiko --save-dev
 apt update

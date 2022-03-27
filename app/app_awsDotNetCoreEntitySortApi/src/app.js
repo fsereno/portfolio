@@ -239,7 +239,6 @@ class EntitySort extends React.Component {
                 </thead>
                 <tbody>
                 {this.state.employees.map((employee, index) => {
-                    //let key = KeyGeneratorUtil.generate(`${employee.name} ${employee.salary}`);
                     return (
                       <tr key={employee.key} id={employee.key}>
                         <td>{employee.name}</td>
