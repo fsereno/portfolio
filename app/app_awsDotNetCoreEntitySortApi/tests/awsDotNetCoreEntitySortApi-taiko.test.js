@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { openBrowser, goto, write, click, closeBrowser, $, into, textBox, text, tableCell } from 'taiko';
+import { openBrowser, goto, write, click, closeBrowser, $, into, textBox, tableCell, evaluate, button, waitFor } from 'taiko';
 
 beforeAll(async () => {
   await openBrowser({
@@ -16,36 +16,39 @@ describe('app_awsDotNetCoreEntitySortApi', () => {
   test('Shold sort table ascending', async () => {
     await goto("http://localhost:8080/app_awsDotNetCoreEntitySortApi/index.html");
     await write('15', into(textBox({id:'answerInput'}),{force:true}));
-    await click($('#submitPuzzle'));
-    await write('James Bond', into(textBox({id:'nameInput'}),{force:true}));
-    await write('95000', into(textBox({id:'salaryInput'}),{force:true}));
-    await click($('#addEmployee_submit'));
-    //await click($('#sortAsc'))
-    const name = await tableCell({row:1, col:1}).text();
-    const salary = await tableCell({row:1, col:2}).text();
-
-    const result = await text("James Bond").exists();
-
-    console.log(result);
-
-    expect(name).toBe("John Doe");
-    expect(salary).toBe("£10,000.00");
+    await click(button({id:'submitPuzzle'}));
+    await waitFor(2000);
+    await write('James Bond', into(textBox({id:'nameInput'})));
+    await write('95000', into(textBox({id:'salaryInput'})));
+    await click(button({id:'addEmployee_submit'}));
+    await click(button({id:'sortAsc'}));
+    const rowOneColOne = await tableCell({row:1, col:1}).text();
+    const rowOneColTwo = await tableCell({row:1, col:2}).text();
+    const rowTwoColOne = await tableCell({row:2, col:1}).text();
+    const rowTwoColTwo = await tableCell({row:2, col:2}).text();
+    expect(rowOneColOne).toBe("John Doe");
+    expect(rowOneColTwo).toBe("£10,000.00");
+    expect(rowTwoColOne).toBe("James Bond");
+    expect(rowTwoColTwo).toBe("£95,000.00");
   }, 100000);
-  /*test('Shold sort table descending', async () => {
+  test('Shold sort table ascending', async () => {
     await goto("http://localhost:8080/app_awsDotNetCoreEntitySortApi/index.html");
     await write('15', into(textBox({id:'answerInput'}),{force:true}));
-    await click($('#submitPuzzle'));
-    await write('James Bond', into(textBox({id:'nameInput'}),{force:true}));
-    await write('95000', into(textBox({id:'salaryInput'}),{force:true}));
-    await click($('#addEmployee_submit'));
-    await click($('#sortDesc'))
-    const name = await tableCell({row:2, col:1}).text();
-    const salary = await tableCell({row:2, col:2}).text();
-    console.log(name);
-    console.log(salary);
-    expect(name).toBe("James Bond");
-    expect(salary).toBe("£95,000.00");
-  }, 100000);*/
+    await click(button({id:'submitPuzzle'}));
+    await waitFor(2000);
+    await write('James Bond', into(textBox({id:'nameInput'})));
+    await write('95000', into(textBox({id:'salaryInput'})));
+    await click(button({id:'addEmployee_submit'}));
+    await click(button({id:'sortDesc'}));
+    const rowOneColOne = await tableCell({row:1, col:1}).text();
+    const rowOneColTwo = await tableCell({row:1, col:2}).text();
+    const rowTwoColOne = await tableCell({row:2, col:1}).text();
+    const rowTwoColTwo = await tableCell({row:2, col:2}).text();
+    expect(rowOneColOne).toBe("James Bond");
+    expect(rowOneColTwo).toBe("£95,000.00");
+    expect(rowTwoColOne).toBe("John Doe");
+    expect(rowTwoColTwo).toBe("£10,000.00");
+  }, 100000);
 });
 
 afterAll(() => {
