@@ -1,3 +1,10 @@
+at the end of this piece the following script will be removed from package.json:
+test-apps
+
+and replaced with:
+
+npx jest ./app/**/tests/*.test.js
+
 npx jest ./app/app_basicEmailClientReactSpa/tests/*.test.js
 
 npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*.test.js
