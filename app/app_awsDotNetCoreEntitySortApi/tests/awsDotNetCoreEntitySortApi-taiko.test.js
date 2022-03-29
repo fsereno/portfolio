@@ -4,6 +4,9 @@
 
 import { openBrowser, goto, write, click, closeBrowser, $, into, textBox, tableCell, evaluate, button, waitFor, link } from 'taiko';
 
+const APPLICATION = "app_awsDotNetCoreEntitySortApi";
+const URL = `http://localhost:8080/${APPLICATION}/index.html`;
+
 beforeAll(async () => {
   await openBrowser({
     headless: true,
@@ -12,9 +15,9 @@ beforeAll(async () => {
   });
 });
 
-describe('app_awsDotNetCoreEntitySortApi', () => {
+describe(APPLICATION, () => {
   test('Should add an item', async () => {
-    await goto("http://localhost:8080/app_awsDotNetCoreEntitySortApi/index.html");
+    await goto(URL);
     await write('15', into(textBox({id:'answerInput'}),{force:true}));
     await click(button({id:'submitPuzzle'}));
     await waitFor(2000);
@@ -31,7 +34,7 @@ describe('app_awsDotNetCoreEntitySortApi', () => {
     expect(rowTwoColTwo).toBe("£95,000.00");
   }, 100000);
   test('Should remove an item', async () => {
-    await goto("http://localhost:8080/app_awsDotNetCoreEntitySortApi/index.html");
+    await goto(URL);
     await write('15', into(textBox({id:'answerInput'}),{force:true}));
     await click(button({id:'submitPuzzle'}));
     await waitFor(2000);
@@ -40,7 +43,7 @@ describe('app_awsDotNetCoreEntitySortApi', () => {
     expect(result).toBeFalsy();
   }, 100000);
   test('Shold sort table ascending', async () => {
-    await goto("http://localhost:8080/app_awsDotNetCoreEntitySortApi/index.html");
+    await goto(URL);
     await write('15', into(textBox({id:'answerInput'}),{force:true}));
     await click(button({id:'submitPuzzle'}));
     await waitFor(2000);
@@ -58,7 +61,7 @@ describe('app_awsDotNetCoreEntitySortApi', () => {
     expect(rowTwoColTwo).toBe("£95,000.00");
   }, 100000);
   test('Shold sort table ascending', async () => {
-    await goto("http://localhost:8080/app_awsDotNetCoreEntitySortApi/index.html");
+    await goto(URL);
     await write('15', into(textBox({id:'answerInput'}),{force:true}));
     await click(button({id:'submitPuzzle'}));
     await waitFor(2000);
