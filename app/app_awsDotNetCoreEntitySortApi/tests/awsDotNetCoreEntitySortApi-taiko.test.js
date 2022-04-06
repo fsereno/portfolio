@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { openBrowser, goto, write, click, closeBrowser, $, into, textBox, tableCell, evaluate, button, waitFor, link } from 'taiko';
+import { openBrowser, goto, write, click, closeBrowser, $, into, textBox, tableCell, button, waitFor, link } from 'taiko';
 
 const APPLICATION = "app_awsDotNetCoreEntitySortApi";
 const URL = `http://localhost:8080/${APPLICATION}/index.html`;

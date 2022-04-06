@@ -14,8 +14,6 @@ export function FormComponent(props) {
     event.preventDefault();
     const form = event.currentTarget;
 
-    console.log("SUBMIT!");
-
     if (form.checkValidity() === false) {
 
       setValidated(true);
