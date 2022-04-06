@@ -12,6 +12,7 @@ import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { FormComponent } from "./formComponent";
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/index';
+import { EmployeeTableComponent } from './employeeTableComponent';
 
 const PUZZLE = "7 x 2 + 1 =";
 const APP_CONFIG = ConfigUtil.get("awsDotNetCoreEntitySortApi");
@@ -220,38 +221,12 @@ class EntitySort extends React.Component {
           handleShow={this.handlePuzzleModalShow}
           handleIsValid={this.handleIsPuzzleValid}
         />
-        <div className="row splitter">
-          <div className="col-lg-12">
-            <h3>Employees:</h3>
-            <p className="lead">Add new employees to the table, sort using the column controls</p>
-            <div className="table-responsive">
-              <table className="table" id="employeeTable">
-                <thead className="bg-dark text-white">
-                  <tr>
-                    <th>Name</th>
-                    <th>
-                        <span className="mr-2">Salary</span>
-                        <button id="sortAsc" className="btn btn-sm btn-dark mr-1 px-0" type="button" onClick={this.handleSortSalaryAsc}><i className="fa fa-fw fa-sort-amount-asc"></i></button>
-                        <button id="sortDesc" className="btn btn-sm btn-dark px-0" type="button" onClick={this.handleSortSalaryDesc}><i className="fa fa-fw fa-sort-amount-desc"></i></button>
-                    </th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {this.state.employees.map((employee, index) => {
-                    return (
-                      <tr key={employee.key} id={employee.key}>
-                        <td>{employee.name}</td>
-                        <td>{employee.displaySalary}</td>
-                        <td><a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        <EmployeeTableComponent
+          employees={this.state.employees}
+          handleDelete={this.handleDelete}
+          handleSortSalaryDesc={this.handleSortSalaryDesc}
+          handleSortSalaryAsc={this.handleSortSalaryAsc}
+        />
         <div className="row splitter">
           <div className="col-lg-12">
             <p>No. of Employees: {this.state.counter}</p>
