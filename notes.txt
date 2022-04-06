@@ -1,5 +1,7 @@
 at the end of this piece the following script will be removed from package.json:
-test-apps
+test-func
+
+All app specific tests will be run by test-apps-func, but it can be renamed to test-apps
 
 and replaced with:
 
@@ -14,6 +16,8 @@ npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*pup.test.js
 npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*taiko.test.js
 
 npx jest ./app/app_awsDotNetCoreEntitySortApi/tests/*taiko.test.js
+
+npx test ./app/app_awsDotNetCoreStringSortApi/tests/*taiko.test.js
 
 For Docker image eventually
 npm i puppeteer --save-dev or npm install taiko --save-dev
