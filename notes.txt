@@ -1,7 +1,8 @@
 at the end of this piece the following script will be removed from package.json:
 test-func
 
-All app specific tests will be run by test-apps-func, but it can be renamed to test-apps
+All app specific tests will be run by test-apps-func, but it can be renamed
+test-apps is currently the typescript tests
 
 and replaced with:
 
