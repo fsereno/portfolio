@@ -24,7 +24,7 @@
      await write('C,B,A,10,1', into(textBox({id:'valuesInput'})));
      await click(button({id:'sort_submit'}));
      const result = await evaluate($('#resultOutput'), (element) => element.innerText);
-     expect(result).toBe("1,10,A,B,C");
+     expect(result).toBe('1,10,A,B,C');
    }, 100000);
  });
 

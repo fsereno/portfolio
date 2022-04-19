@@ -18,9 +18,9 @@ export const ListContainer = ({items, title, hideItems, onHideClick, collapse}) 
                         </h4>
                         <hr className="border-dark" />
                         {collapse.show &&
-                            <ul className="list-group">
+                            <div className="list-group">
                                 {items.map( x => <Item key={x.id} item={x}/>)}
-                            </ul>
+                            </div>
                         }
                     </Col>
                 </Row>
