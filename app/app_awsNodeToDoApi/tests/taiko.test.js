@@ -44,23 +44,6 @@ describe(APPLICATION, () => {
         manageExists = await text('Describe a task to do:').exists();
         expect(manageExists).toBeFalsy();
     }, 100000);
-    test('Should be able to add and remove an item', async () => {
-        await goto(URL);
-        await write('TestUser', into(textBox({ id: 'username' })));
-        await write('Password-1', into(textBox({ id: 'password' })));
-        await click(button({ id: 'submit' }));
-        await waitFor(2000);
-        await write('A test to do item', into(textBox({id: 'description'})));
-        await click(button({ id: 'submit'}));
-        await waitFor(2000);
-        const remainingItems = await text('Remaining items').exists();
-        const remainingItemText = await evaluate($('div.list-group'), (element) => element.innerText);
-        expect(remainingItems).toBeTruthy();
-        expect(remainingItemText).toBe('A test to do item');
-        await click($('.delete-item'));
-        const emptyListState = await text('You have no items to complete').exists();
-        expect(emptyListState).toBeTruthy();
-    }, 100000);
 });
 
 afterAll(() => {
