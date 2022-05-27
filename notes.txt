@@ -29,11 +29,12 @@ npx jest ./app/app_awsDotNetCoreShoppingCart/tests/*taiko.test.js
 npx jest ./app/app_awsNodeToDoApi/tests/*taiko.test.js
 
 For Docker image eventually
-npm i puppeteer --save-dev or npm install taiko --save-dev
+npm install taiko --save-dev
 apt update
 apt install libnss3-dev libgdk-pixbuf2.0-dev libgtk-3-dev libxss-dev
 apt install -y libnss3
 apt install libasound2
+
 
 deps needed for tests
 https://docs.taiko.dev/api/reference/
