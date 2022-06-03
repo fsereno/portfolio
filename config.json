@@ -295,6 +295,18 @@
             "include": false,
             "useWebpack": true,
             "labels": [0]
+        },
+        {
+            "name": "New test app",
+            "subHeading": "Test app",
+            "description": "Test app",
+            "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "testApp",
+            "masterTemplateDir": "toDoReact",
+            "active": true,
+            "include": false,
+            "useWebpack": true,
+            "labels": [0]
         }
     ]
 }
