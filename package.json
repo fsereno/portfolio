@@ -18,7 +18,7 @@
     "dev": "webpack serve --config ./build/webpack.config.js --env dir=$dir",
     "analysis": "webpack --config ./build/webpack.config.js --env dir=$dir --env analysis",
     "release": "node -e 'require(\"./build/webpackBuilder\").build()'",
-    "create": "gulp create --gulpfile ./build/gulpfile.js"
+    "create": "node -e 'require(\"./build/create\").create()'"
   },
   "repository": {
     "type": "git",
@@ -56,13 +56,9 @@
     "chai-as-promised": "^7.1.1",
     "chalk": "^4.1.2",
     "css-minimizer-webpack-plugin": "^3.0.2",
-    "directory-exists": "^2.0.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "file-loader": "^6.2.0",
-    "gulp": "^4.0.2",
-    "gulp-cli": "^2.3.0",
-    "gulp-logger": "0.0.2",
     "html-webpack-plugin": "^5.3.2",
     "image-webpack-loader": "^7.0.1",
     "jest": "^27.4.3",
