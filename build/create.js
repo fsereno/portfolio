@@ -1,8 +1,9 @@
 'use strict;'
 
 const fs = require('fs');
-const path = require("path")
-const config = require("../config.json");
+const path = require('path');
+const chalk = require('chalk');
+const config = require('../config.json');
 
 function create(application) {
     const destination = path.resolve(__dirname, '../', config.developmentDir, `${config.prefix}${application.folder}`);
@@ -21,34 +22,27 @@ function copyRecursiveSync(src, dest) {
     const isSourceDirectory = sourceExists && sourceStats.isDirectory();
 
     if (sourceExists) {
-
         const destinationExists = fs.existsSync(dest);
-
-        if(!destinationExists) {
-
-            console.log('no exist');
-
+        if (!destinationExists) {
+            console.log(chalk.green('Copying ') + src);
             if (isSourceDirectory) {
-
-                console.log('is source dir')
-                console.log(src);
-                console.log(dest);
-
+                console.log(chalk.green('Creating ') + dest);
                 fs.mkdirSync(dest);
                 fs.readdirSync(src).forEach(function (childItemName) {
                     copyRecursiveSync(path.join(src, childItemName), path.join(dest, childItemName));
                 });
             } else {
-                console.log('is source file')
-                console.log(src);
-                console.log(dest);
                 fs.copyFileSync(src, dest);
             }
         }
     }
 };
 
-config.applications
-    .forEach(async application => {
-        create(application);
-    });
+module.exports = {
+    create: () => {
+        config.applications
+            .forEach(async application => {
+                create(application);
+            });
+    }
+}
