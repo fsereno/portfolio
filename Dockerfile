@@ -2,8 +2,6 @@ FROM node:14.17.5
 
 WORKDIR /usr/src/app
 
-COPY package.json package-lock.json healthcheck.js ./
-
 RUN apt-get update && apt-get install -y \
     fonts-liberation \
     gconf-service \
@@ -38,7 +36,9 @@ RUN apt-get update && apt-get install -y \
     libxtst6 \
     xdg-utils
 
-RUN npm install -g gulp && npm install -g jest && npm install
+COPY package.json package-lock.json healthcheck.js ./
+
+RUN npm install -g jest && npm install
 
 EXPOSE 8080
 
