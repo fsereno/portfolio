@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install -y \
     libxtst6 \
     xdg-utils
 
-RUN npm install -g gulp && npm install -g jest && npm install
+RUN npm install -g jest && npm install
 
 EXPOSE 8080
 
