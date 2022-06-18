@@ -14,13 +14,22 @@ module.exports = {
     getDevServerConfig: (webpackConfig, application, env) => {
         if (module.exports.isServe(env)) {
             const devServer = {
-                contentBase: path.join(__dirname, '../', config.publishDir),
-                publicPath: module.exports.applicationIsRoot(application) ? '/' : `/${config.prefix}${application.folder}`,
+                devMiddleware: {
+                    publicPath: module.exports.applicationIsRoot(application) ? '/' : `/${config.prefix}${application.folder}`,
+                },
+                static: {
+                    directory: path.resolve(__dirname, '../', config.publishDir),
+                    serveIndex: true,
+                    watch: true
+                },
+                hot: true,
                 port: 8080,
                 host: '0.0.0.0',
                 open: true,
-                watchContentBase: true,
-                overlay: true
+                liveReload: true,
+                client: {
+                    overlay: true
+                }
             }
             webpackConfig = {...webpackConfig, ...{ devServer } }
         };
