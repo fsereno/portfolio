@@ -3,7 +3,7 @@ version: '3.9'
 services:
     node:
         tty: true
-        image: 'fabiosereno/portfolio:2.9.1'
+        image: 'fabiosereno/portfolio:3.0.0'
         ports:
             - '8080:8080'
         volumes:
