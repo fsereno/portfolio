@@ -12,7 +12,11 @@ export function ApplicationsContextProvider({children}) {
 
     const [ applications, setApplications ] = useState(configContext.config.applications);
 
-    const context = { unmodified: configContext.config.applications, applications, setApplications }
+    const context = {
+        unmodified: configContext.config.applications,
+        applications,
+        setApplications
+    }
 
     return (
         <ApplicationsContext.Provider value={context}>

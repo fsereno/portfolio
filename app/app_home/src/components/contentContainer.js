@@ -5,10 +5,13 @@ import React from 'react';
 import { SearchBar } from './searchBar';
 import { ConfigContext } from '../contexts';
 import { CardsContainer } from './cardsContainer';
+import { TopScrollComponent } from '../../../js/modules/react/topScrollComponent/topScrollComponent';
 
 export function ContentContainer() {
 
   const context = React.useContext(ConfigContext);
+
+  const topScrollComponentThreshold = 270;
 
   return (
     <div className={`container-fluid pt-4 bg-white`} id="contentContainer">
@@ -26,6 +29,7 @@ export function ContentContainer() {
       </div>
       <SearchBar />
       <CardsContainer />
+      <TopScrollComponent threshold={topScrollComponentThreshold} />
     </div>
   );
 }
