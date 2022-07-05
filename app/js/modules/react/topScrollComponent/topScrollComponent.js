@@ -14,7 +14,6 @@ export function TopScrollComponent({threshold = 0}) {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         }
-
     },[fadeClass]);
 
     const handleOnClick = () => {
@@ -28,12 +27,16 @@ export function TopScrollComponent({threshold = 0}) {
         } else {
             setFadeClass(getElementFadeClass(false));
         }
-        console.log(scrollPosition);
     }
 
     return (
         <>
-          <button className={`btn btn-dark fade-element ${fadeClass}`} id="topScrollBtn" onClick={handleOnClick}>Scroll</button>
+            <button
+                className={`btn btn-dark fade-element ${fadeClass}`}
+                id="topScrollBtn"
+                onClick={handleOnClick}>
+                    Scroll
+            </button>
         </>
     )
 }
