@@ -2,7 +2,9 @@
 
 #topScrollBtn {
     position: fixed;
-    top: 50vh;
+    top: 90vh;
     right: 1rem;
     z-index: 1000;
+    padding: 0 .5rem;
+    min-width: auto;
 }

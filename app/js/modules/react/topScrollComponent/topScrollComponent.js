@@ -35,7 +35,7 @@ export function TopScrollComponent({threshold = 0}) {
                 className={`btn btn-dark fade-element ${fadeClass}`}
                 id="topScrollBtn"
                 onClick={handleOnClick}>
-                    Scroll
+                <i className="fa fa-3x fa-angle-up"></i>
             </button>
         </>
     )
