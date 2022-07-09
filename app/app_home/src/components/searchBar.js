@@ -89,8 +89,8 @@ export function SearchBar() {
             <div className="collapse" id="filterContainer">
                 <div className="pb-3">
                     <label className="d-flex flex-row justify-content-center">Quick search</label>
-                    <div className="btn-group d-flex flex-row justify-content-center">
-                        {configContext.config.quickSearch.map(term => <button key={term} type="button" className="btn btn-outline-dark flex-grow-0" value={term} onClick={handleQuickFilter}>{term}</button>)}
+                    <div className="quick-search-filters d-flex justify-content-center">
+                        {configContext.config.quickSearch.map(term => <button key={term} type="button" className="btn btn-outline-dark ml-2 p-0" value={term} onClick={handleQuickFilter}>{term}</button>)}
                     </div>
                 </div>
             </div>
