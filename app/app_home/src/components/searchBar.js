@@ -51,7 +51,7 @@ export function SearchBar() {
                     application.searchTerms
                 ]
 
-                application.active = application.include ? StringSearchUtil.searchCriterions(criterions, searchTerm) : false;
+                application.active = application.include ? StringSearchUtil.searchCriteria(criterions, searchTerm) : false;
 
                 return application;
             });

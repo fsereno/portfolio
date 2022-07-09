@@ -1,74 +1,75 @@
-import { expect } from "chai";
-import { StringSearchUtil } from "../../typeScript/Utils/stringSearchUtil/index";
+import { expect } from 'chai';
+import { StringSearchUtil } from '../../typeScript/Utils/stringSearchUtil/index';
 
-describe("StringSearchUtil", () => {
-    describe("searchCriterions", () => {
-        it("Should return true when search term is exists in criterions array", () => {
+describe('StringSearchUtil', () => {
+    describe('searchCriteria', () => {
+        it('Should return true when search term is exists in criterions array', () => {
             let criterions = [
-                "TypeScript",
-                "JavaScript",
-                "React",
-                ".NET Core"
+                'TypeScript',
+                'JavaScript',
+                'React',
+                '.NET Core'
             ];
-            let result = StringSearchUtil.searchCriterions(criterions, "React")
+            let result = StringSearchUtil.searchCriteria(criterions, 'React')
             expect(result).to.equal(true);
         });
-        it("Should return true when there are multiple search terms exist", () => {
+        it('Should return true when there are multiple search terms exist', () => {
             let criterions = [
-                "TypeScript",
-                "JavaScript",
-                "React",
-                ".NET Core"
+                'TypeScript',
+                'JavaScript',
+                'React',
+                '.NET Core'
             ];
-            let result = StringSearchUtil.searchCriterions(criterions, "Basic TypeScript")
+            let result = StringSearchUtil.searchCriteria(criterions, 'Basic TypeScript')
             expect(result).to.equal(true);
         });
-        it("Should return true when matching on different case", () => {
+        it('Should return true when matching on different case', () => {
             let criterions = [
-                "TypeScript",
-                "JavaScript",
-                "React",
-                ".NET Core"
+                'TypeScript',
+                'JavaScript',
+                'React',
+                '.NET Core'
             ];
-            let result = StringSearchUtil.searchCriterions(criterions, "typescript")
+            let result = StringSearchUtil.searchCriteria(criterions, 'typescript')
             expect(result).to.equal(true);
         });
-        it("Should return false when search term are empty", () => {
+        it('Should return false when search term are empty', () => {
             let criterions = [];
-            let result = StringSearchUtil.searchCriterions(criterions, "React")
+            let result = StringSearchUtil.searchCriteria(criterions, 'React')
             expect(result).to.equal(false);
         });
     });
-    describe("searchDoesNotExist", () => {
-        it("Should return false if params are empty", () => {
+    describe('searchDoesNotExist', () => {
+        it('Should return false if params are empty', () => {
             let result = StringSearchUtil.searchDoesNotExist();
             expect(result).to.equal(false);
         });
-        it("Should return false if search term already exists", () => {
-            let result = StringSearchUtil.searchDoesNotExist("React", "React");
+        it('Should return false if search term already exists', () => {
+            let result = StringSearchUtil.searchDoesNotExist('React', 'React');
             expect(result).to.equal(false);
         });
-        it("Should return true if search term does not already exist", () => {
-            let result = StringSearchUtil.searchDoesNotExist("Vue", "React");
+        it('Should return true if search term does not already exist', () => {
+            let result = StringSearchUtil.searchDoesNotExist('Vue', 'React');
             expect(result).to.equal(true);
         });
-        it("Should return false and ignore case difference", () => {
-            let result = StringSearchUtil.searchDoesNotExist("typescript", "TypeScript");
+        it('Should return false and ignore case difference', () => {
+            let result = StringSearchUtil.searchDoesNotExist('typescript', 'TypeScript');
             expect(result).to.equal(false);
         });
     })
-    describe("combineSearchTerms", () => {
-        it("Should return an empty string if params are empty", () => {
+    describe('combineSearchTerms', () => {
+        it('Should return an empty string if params are empty', () => {
             let result = StringSearchUtil.combineSearchTerms();
-            expect(result).to.equal("");
+            expect(result).to.equal('');
         });
-        it("Should return both existing and current search terms", () => {
-            let result = StringSearchUtil.combineSearchTerms("React", ".NET Core");
-            expect(result).to.equal("React .NET Core");
+        it('Should return both existing and current search terms', () => {
+            let result = StringSearchUtil.combineSearchTerms('React', '.NET Core');
+            expect(result).to.equal('React .NET Core');
         });
-        it("Should return only existing if current search term is empty", () => {
-            let result = StringSearchUtil.combineSearchTerms("React");
-            expect(result).to.equal("React");
+        it('Should return only existing if current search term is empty', () => {
+            let result = StringSearchUtil.combineSearchTerms('React');
+            expect(result).to.equal('React');
         });
     })
+    
 });
