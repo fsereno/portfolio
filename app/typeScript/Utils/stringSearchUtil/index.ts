@@ -23,8 +23,8 @@ export class StringSearchUtil {
     }
 
     public static removeSearchTerm = (existingValue: string = "", searchTerm: string = "" ) => {
-        const searchTerms = existingValue.split(' ');
-        const filter = searchTerms.filter( term => term !== searchTerm);
-        return filter.join('');
+        const searchTerms = existingValue.split(searchTerm);
+        const result = searchTerms.map(x => x.trim());
+        return result.join(' ').trim();
     }
 }

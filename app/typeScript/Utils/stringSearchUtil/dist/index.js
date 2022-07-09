@@ -17,4 +17,9 @@ StringSearchUtil.combineSearchTerms = (existingValue = "", searchTerm = "") => {
     let result = `${existingValue} ${searchTerm}`;
     return result.trim();
 };
+StringSearchUtil.removeSearchTerm = (existingValue = "", searchTerm = "") => {
+    const searchTerms = existingValue.split(searchTerm);
+    const result = searchTerms.map(x => x.trim());
+    return result.join(' ').trim();
+};
 //# sourceMappingURL=index.js.map

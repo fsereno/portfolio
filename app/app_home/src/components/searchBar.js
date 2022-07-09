@@ -37,6 +37,10 @@ export function SearchBar() {
             const combinedSearch = StringSearchUtil.combineSearchTerms(searchValue, searchTerm);
             setSearcValue(combinedSearch);
             handleSearch(combinedSearch);
+        } else {
+            const search = StringSearchUtil.removeSearchTerm(searchValue, searchTerm);
+            setSearcValue(search);
+            handleSearch(search);
         }
     }
 
