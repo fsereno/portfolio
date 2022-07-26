@@ -7,12 +7,12 @@ import { NavFilterComponent } from './navFilterComponent';
 function App() {
     return(
         <ConfigContextProvider>
-            <NavFilterComponent />
+            <NavFilterComponent path={document.location.pathname}/>
         </ConfigContextProvider>
     )
 }
 
 ReactDOM.render(
     <App />,
-    document.getElementById('navbarDropdownMenuLink')
+    document.getElementById('applicationsDropdown')
 );
