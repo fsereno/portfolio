@@ -5,8 +5,8 @@
 import React from "react";
 import { mount } from 'enzyme';
 import { ContentContainer } from "../src/components/contentContainer";
-import { ConfigContextProvider } from "../src/components/contextProviders/configContextProvider";
-import { ApplicationsContextProvider } from "../src/components/contextProviders/applicationsContextProvider";
+import { ConfigContextProvider } from "../../js/modules/react/configContextProvider";
+import { ApplicationsContextProvider } from "../../js/modules/react/applicationsContextProvider";
 
 jest.mock('../../../config.json', () => {
     return {

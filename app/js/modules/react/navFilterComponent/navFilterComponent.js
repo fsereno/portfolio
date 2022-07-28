@@ -8,9 +8,8 @@ export function NavFilterComponent({path}) {
     const context = React.useContext(ConfigContext);
     const config = context.config;
     const applications = context.config.applications;
-    const isHomeActive = path === '/index.html';
-
-    console.log(path);
+    const isHomeActive = path === '/index.html' || '/';
+    
     console.log(context.config.applications);
 
     return (

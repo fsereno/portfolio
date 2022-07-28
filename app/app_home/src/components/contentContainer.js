@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { SearchBar } from './searchBar';
-import { ConfigContext } from '../contexts';
+import { ConfigContext } from '../../../js/modules/react/configContextProvider';
 import { CardsContainer } from './cardsContainer';
 import { TopScrollComponent } from '../../../js/modules/react/topScrollComponent/topScrollComponent';
 

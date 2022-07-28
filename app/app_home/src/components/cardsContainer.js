@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ApplicationCard } from './applicationCard';
-import { ApplicationsContext } from '../contexts';
+import { ApplicationsContext } from '../../../js/modules/react/applicationsContextProvider';
 
 export function CardsContainer() {
 

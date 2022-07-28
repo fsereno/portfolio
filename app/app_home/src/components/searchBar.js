@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { StringSearchUtil } from '../../../typeScript/Utils/stringSearchUtil/dist';
-import { ApplicationsContext, ConfigContext } from '../contexts';
+import { ApplicationsContext } from '../../../js/modules/react/applicationsContextProvider';
+import { ConfigContext } from '../../../js/modules/react/configContextProvider';
 
 export function SearchBar() {
 
