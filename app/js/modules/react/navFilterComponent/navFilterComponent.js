@@ -1,19 +1,27 @@
 "use strict;"
 
 import React, { useState, useEffect } from 'react';
+import { ApplicationsContext } from '../applicationsContextProvider';
 import { ConfigContext } from '../configContextProvider';
+import { SearchBar } from '../searchBarComponent/searchBar';
 
 export function NavFilterComponent({path}) {
 
-    const context = React.useContext(ConfigContext);
-    const config = context.config;
-    const applications = context.config.applications;
+    const context = React.useContext(ApplicationsContext);
+    const configContext = React.useContext(ConfigContext);
+
+    const config = configContext.config;
+    const applications = context.applications;
     const isHomeActive = path === '/index.html' || '/';
-    
-    console.log(context.config.applications);
 
     return (
         <>
+            <SearchBar 
+                searchBarId="searchBarNav" 
+                searchInputId="searchInputNav"
+                cancelBtnId="cancelBtnNav"
+                openFilterBtnId="openFilterBtnNav"
+                filterContainerId="filterContainerNav" />
             {applications.map((application, index) => {
                 if (application.active && application.include) {
                     const appPath = `/${config.prefix}${application.folder}/index.html`;

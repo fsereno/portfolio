@@ -2,7 +2,7 @@
 "use strict;"
 
 import React from 'react';
-import { SearchBar } from './searchBar';
+import { SearchBar } from '../../../js/modules/react/searchBarComponent/searchBar';
 import { ConfigContext } from '../../../js/modules/react/configContextProvider';
 import { CardsContainer } from './cardsContainer';
 import { TopScrollComponent } from '../../../js/modules/react/topScrollComponent/topScrollComponent';
@@ -27,7 +27,13 @@ export function ContentContainer() {
           <hr />
         </div>
       </div>
-      <SearchBar />
+      <SearchBar 
+        searchBarId="searchBarNav" 
+        searchInputId="searchInputNav"
+        cancelBtnId="cancelBtnNav"
+        openFilterBtnId="openFilterBtnNav"
+        filterContainerId="filterContainerNav"
+      />
       <CardsContainer />
       <TopScrollComponent threshold={topScrollComponentThreshold} />
     </div>

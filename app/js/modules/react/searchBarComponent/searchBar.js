@@ -1,11 +1,13 @@
 "use strict;"
 
 import React, { useState } from 'react';
-import { StringSearchUtil } from '../../../typeScript/Utils/stringSearchUtil/dist';
-import { ApplicationsContext } from '../../../js/modules/react/applicationsContextProvider';
-import { ConfigContext } from '../../../js/modules/react/configContextProvider';
+import { StringSearchUtil } from '../../../../typeScript/Utils/stringSearchUtil/dist/index';
+import { ApplicationsContext } from '../applicationsContextProvider';
+import { ConfigContext } from '../configContextProvider';
 
-export function SearchBar() {
+import './searchBar.scss';
+
+export function SearchBar({searchBarId, searchInputId, cancelBtnId, openFilterBtnId, filterContainerId}) {
 
     const configContext = React.useContext(ConfigContext);
     const context = React.useContext(ApplicationsContext);
@@ -70,15 +72,15 @@ export function SearchBar() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div id="searchBar" className="input-group mb-3 shadow">
+            <div id={searchBarId} className="input-group mb-3 shadow searchBar">
                 <div className="input-group-prepend">
                     <span className="input-group-text">
                         <i className="fa fa-search"></i>
                     </span>
                 </div>
-                <input type="text" className="form-control" placeholder="Search applications..." id="searchInput" value={searchValue} onChange={onSearchHandler} />
+                <input type="text" className="form-control searchInput" placeholder="Search applications..." id={searchInputId} value={searchValue} onChange={onSearchHandler} />
                 {showClear &&
-                    <div className="input-group-append" id="cancelBtn">
+                    <div className="input-group-append cancelBtn" id={cancelBtnId}>
                         <button className="btn" type="button" onClick={resetApplications}>
                             <span className="lr">
                                 <span className="rl"></span>
@@ -86,12 +88,12 @@ export function SearchBar() {
                         </button>
                     </div>}
                 <div className="input-group-append">
-                    <button id="openFilterBtn" className="btn btn-dark" type="button" data-toggle="collapse" data-target="#filterContainer" aria-expanded="false" aria-controls="filterContainer">
+                    <button id={openFilterBtnId} className="btn btn-dark openFilterBtn" type="button" data-toggle="collapse" data-target={`#${filterContainerId}`} aria-expanded="false" aria-controls={filterContainerId}>
                         <i className="fa fa-filter"></i>
                     </button>
                 </div>
             </div>
-            <div className="collapse" id="filterContainer">
+            <div className="collapse filterContainer" id={filterContainerId}>
                 <div className="pb-3">
                     <label className="d-flex flex-row justify-content-center">Quick search</label>
                     <div className="quick-search-filters d-flex justify-content-center">

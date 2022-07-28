@@ -1,0 +1,51 @@
+@import "../../../../sass/includes/colours.scss";
+
+.searchBar {
+    .form-control {
+      border-right:none;
+      &:focus {
+        border: 1px solid $darkGrey;
+        border-right:none;
+        box-shadow: none;
+      }
+    }
+    span.input-group-text {
+      background: $darkGrey;
+      i {
+        color: $white;
+      }
+    }
+    .openFilterBtn {
+      border-left: 1px solid #fff;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    .cancelBtn {
+      button {
+        border-top: 1px solid $darkGrey;
+        border-bottom: 1px solid $darkGrey;
+        border-right: 1px solid #fff;
+        background:transparent;
+        height: 50px;
+        padding: 0 1.5rem;
+        &:focus {
+          box-shadow: none;
+        }
+        .lr {
+          height: 30px;
+          width: 1px;
+          transform: rotate(45deg);
+          display: block;
+          background: $darkGrey;
+          .rl {
+              height: 30px;
+              width: 1px;
+              transform: rotate(90deg);
+              display: block;
+              background: $darkGrey
+          }
+        }
+      }
+    }
+  }
