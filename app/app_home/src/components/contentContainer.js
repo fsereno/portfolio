@@ -27,12 +27,12 @@ export function ContentContainer() {
           <hr />
         </div>
       </div>
-      <SearchBar 
-        searchBarId="searchBarNav" 
-        searchInputId="searchInputNav"
-        cancelBtnId="cancelBtnNav"
-        openFilterBtnId="openFilterBtnNav"
-        filterContainerId="filterContainerNav"
+      <SearchBar
+        searchBarId="searchBar"
+        searchInputId="searchInput"
+        cancelBtnId="cancelBtn"
+        openFilterBtnId="openFilterBtn"
+        filterContainerId="filterContainer"
       />
       <CardsContainer />
       <TopScrollComponent threshold={topScrollComponentThreshold} />

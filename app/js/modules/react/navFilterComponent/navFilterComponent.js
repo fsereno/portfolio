@@ -9,14 +9,14 @@ export function NavFilterComponent({path}) {
 
     const context = React.useContext(ApplicationsContext);
     const configContext = React.useContext(ConfigContext);
-
     const config = configContext.config;
     const applications = context.applications;
-    const isHomeActive = path === '/index.html' || '/';
+    console.log(path);
+    const isHomeActive = path === '/index.html' || path === '/';
 
     return (
         <>
-            <SearchBar 
+            <SearchBar
                 searchBarId="searchBarNav" 
                 searchInputId="searchInputNav"
                 cancelBtnId="cancelBtnNav"
