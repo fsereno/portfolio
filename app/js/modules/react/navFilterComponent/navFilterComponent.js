@@ -1,6 +1,6 @@
 "use strict;"
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ApplicationsContext } from '../applicationsContextProvider';
 import { ConfigContext } from '../configContextProvider';
 import { SearchBar } from '../searchBarComponent/searchBar';
@@ -11,17 +11,19 @@ export function NavFilterComponent({path}) {
     const configContext = React.useContext(ConfigContext);
     const config = configContext.config;
     const applications = context.applications;
-    console.log(path);
     const isHomeActive = path === '/index.html' || path === '/';
 
     return (
         <>
-            <SearchBar
-                searchBarId="searchBarNav" 
-                searchInputId="searchInputNav"
-                cancelBtnId="cancelBtnNav"
-                openFilterBtnId="openFilterBtnNav"
-                filterContainerId="filterContainerNav" />
+            <div className='mx-2'>
+                <SearchBar
+                    searchBarId="searchBarNav"
+                    searchInputId="searchInputNav"
+                    cancelBtnId="cancelBtnNav"
+                    openFilterBtnId="openFilterBtnNav"
+                    filterContainerId="filterContainerNav"
+                    showQuickFilters={false} />
+            </div>
             {applications.map((application, index) => {
                 if (application.active && application.include) {
                     const appPath = `/${config.prefix}${application.folder}/index.html`;
@@ -41,20 +43,3 @@ export function NavFilterComponent({path}) {
         </>
     );
 }
-
-/*
-.dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdownMenuLink')
-                each application, index in htmlWebpackPlugin.options.locals.config.applications
-                    if (application.active !== false && application.include !== false)
-                        a(class=(htmlWebpackPlugin.options.locals.application.folder === application.folder
-                        ? "active"
-                        : "") + " dropdown-item",
-                        href=directory+htmlWebpackPlugin.options.locals.config.prefix+application.folder+"/index.html")= application.name
-                .dropdown-divider
-                a(class=(htmlWebpackPlugin.options.locals.config.entry === htmlWebpackPlugin.options.locals.application.folder
-                ? "active"
-                : "") + " dropdown-item",
-                href=directory+"index.html")
-                    | Home
-                    i.fa.fa-home.ml-2
-*/
