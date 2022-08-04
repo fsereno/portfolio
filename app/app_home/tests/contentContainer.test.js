@@ -8,6 +8,9 @@ import { ContentContainer } from "../src/components/contentContainer";
 import { ConfigContextProvider } from "../../js/modules/react/configContextProvider";
 import { ApplicationsContextProvider } from "../../js/modules/react/applicationsContextProvider";
 
+jest.mock('../../js/modules/react/searchBarComponent/searchBar.scss', () => '');
+jest.mock('../../js/modules/react/topScrollComponent/topScrollComponent.scss', () => '');
+
 jest.mock('../../../config.json', () => {
     return {
         "labels": [
