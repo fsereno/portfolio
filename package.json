@@ -13,7 +13,7 @@
     "test-apps-e2e": "jest ./app/**/tests/e2e/*.test.js",
     "test-apps-jest": "jest ./app/**/tests/*.test.js",
     "test-modules-jest": "jest ./app/js/modules/react/**/tests/*.test.js",
-    "test": "npm run test-util && npm run test-apps-jest",
+    "test": "npm run test-util && npm run test-apps-jest && npm run test-modules-jest",
     "check-types": "tsc",
     "build": "webpack --config ./build/webpack.config.js --env dir=$dir",
     "dev": "webpack serve --config ./build/webpack.config.js --env dir=$dir",
