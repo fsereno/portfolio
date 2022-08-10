@@ -26,7 +26,8 @@ export function NavFilterComponent({path}) {
             </div>
             {applications.map((application, index) => {
                 if (application.active && application.include) {
-                    const appPath = `/${config.prefix}${application.folder}/index.html`;
+                    const dir = isHomeActive ? '.' : '..';
+                    const appPath = `${dir}/${config.prefix}${application.folder}/index.html`;
                     const isActive = appPath === path;
                     const activeClass = isActive ? 'active' : '';
                     return (
