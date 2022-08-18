@@ -11,7 +11,7 @@ export function NavFilterComponent({path}) {
     const configContext = React.useContext(ConfigContext);
     const config = configContext.config;
     const applications = context.applications;
-    const isHomeActive = path === '/index.html' || path === '/';
+    const isHomeActive = document.head.querySelector('[name="isRoot"]') !== null;
 
     return (
         <>
@@ -28,7 +28,7 @@ export function NavFilterComponent({path}) {
                 if (application.active && application.include) {
                     const dir = isHomeActive ? '.' : '..';
                     const appPath = `${dir}/${config.prefix}${application.folder}/index.html`;
-                    const isActive = appPath === path;
+                    const isActive = appPath.includes(path) && !isHomeActive;
                     const activeClass = isActive ? 'active' : '';
                     return (
                         <a key={`${application.name}-${index}`} className={`${activeClass} dropdown-item`} href={appPath}>
