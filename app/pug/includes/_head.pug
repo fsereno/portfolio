@@ -5,6 +5,7 @@ meta(name="description" content=htmlWebpackPlugin.options.locals.config.descript
 meta(name='viewport', content='width=device-width, initial-scale=1, minimal-ui, user-scalable=no')
 meta(name="author" content=htmlWebpackPlugin.options.locals.config.author)
 meta(property="og:image" content=require("../../images/"+htmlWebpackPlugin.options.locals.config.thumbnail).default.replace("../", directory))
+block head
 link(rel='icon' href=require("../../favicon.ico").default.replace("../", directory) type='image/x-icon')
 link(href=directory+'vendor/vendor.css' rel='stylesheet')
 script(defer src=directory+'vendor/vendor.js')

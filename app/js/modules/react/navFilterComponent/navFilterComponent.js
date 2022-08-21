@@ -12,6 +12,7 @@ export function NavFilterComponent({path}) {
     const config = configContext.config;
     const applications = context.applications;
     const isHomeActive = document.head.querySelector('[name="isRoot"]') !== null;
+    const dir = isHomeActive ? '.' : '..';
 
     return (
         <>
@@ -26,9 +27,15 @@ export function NavFilterComponent({path}) {
             </div>
             {applications.map((application, index) => {
                 if (application.active && application.include) {
-                    const dir = isHomeActive ? '.' : '..';
                     const appPath = `${dir}/${config.prefix}${application.folder}/index.html`;
+                    
                     const isActive = appPath.includes(path) && !isHomeActive;
+
+                    console.log(!isHomeActive);
+                    console.log(path);
+                    console.log(appPath);
+                    console.log(isActive);
+
                     const activeClass = isActive ? 'active' : '';
                     return (
                         <a key={`${application.name}-${index}`} className={`${activeClass} dropdown-item`} href={appPath}>
@@ -38,7 +45,7 @@ export function NavFilterComponent({path}) {
                 }
             })}
             <div className='dropdown-divider'></div>
-            <a className={`${isHomeActive ? 'active' : ''} dropdown-item`} href='/index.html'>
+            <a className={`${isHomeActive ? 'active' : ''} dropdown-item`} href={`${dir}/index.html`}>
                 Home <i className='fa fa-home ml-2'></i>
             </a>
         </>
