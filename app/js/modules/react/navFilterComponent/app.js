@@ -9,7 +9,7 @@ function App() {
     return(
         <ConfigContextProvider>
              <ApplicationsContextProvider>
-                <NavFilterComponent path={document.location.pathname}/>
+                <NavFilterComponent/>
             </ApplicationsContextProvider>
         </ConfigContextProvider>
     )

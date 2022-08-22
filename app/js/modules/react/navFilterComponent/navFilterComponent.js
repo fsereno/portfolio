@@ -5,13 +5,14 @@ import { ApplicationsContext } from '../applicationsContextProvider';
 import { ConfigContext } from '../configContextProvider';
 import { SearchBar } from '../searchBarComponent/searchBar';
 
-export function NavFilterComponent({path}) {
+export function NavFilterComponent() {
 
     const context = React.useContext(ApplicationsContext);
     const configContext = React.useContext(ConfigContext);
     const config = configContext.config;
     const applications = context.applications;
     const isHomeActive = document.head.querySelector('[name="isRoot"]') !== null;
+    const folder = document.head.querySelector('[name="folder"]').content;
     const dir = isHomeActive ? '.' : '..';
 
     return (
@@ -28,14 +29,7 @@ export function NavFilterComponent({path}) {
             {applications.map((application, index) => {
                 if (application.active && application.include) {
                     const appPath = `${dir}/${config.prefix}${application.folder}/index.html`;
-                    
-                    const isActive = appPath.includes(path) && !isHomeActive;
-
-                    console.log(!isHomeActive);
-                    console.log(path);
-                    console.log(appPath);
-                    console.log(isActive);
-
+                    const isActive = folder === application.folder;
                     const activeClass = isActive ? 'active' : '';
                     return (
                         <a key={`${application.name}-${index}`} className={`${activeClass} dropdown-item`} href={appPath}>
