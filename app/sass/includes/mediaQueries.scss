@@ -2,11 +2,6 @@
 
 @media screen and (max-width: $medium) {
     .navbar {
-        &.fixed-top {
-            .dropdown-menu {
-                max-height: 50vh !important;
-            }
-        }
         .navbar-nav .nav-link {
             padding-bottom: 2rem;
             padding-top: 1.5rem;

@@ -4,6 +4,7 @@ import React from 'react';
 import { ApplicationsContext } from '../applicationsContextProvider';
 import { ConfigContext } from '../configContextProvider';
 import { SearchBar } from '../searchBarComponent/searchBar';
+import './navFilterComponent.scss';
 
 export function NavFilterComponent() {
 
@@ -17,7 +18,7 @@ export function NavFilterComponent() {
 
     return (
         <>
-            <div className='mx-2'>
+            <div className='mx-2 nav-filter-container'>
                 <SearchBar
                     searchBarId="searchBarNav"
                     searchInputId="searchInputNav"
@@ -26,22 +27,24 @@ export function NavFilterComponent() {
                     filterContainerId="filterContainerNav"
                     showQuickFilters={false} />
             </div>
-            {applications.map((application, index) => {
-                if (application.active && application.include) {
-                    const appPath = `${dir}/${config.prefix}${application.folder}/index.html`;
-                    const isActive = folder === application.folder;
-                    const activeClass = isActive ? 'active' : '';
-                    return (
-                        <a key={`${application.name}-${index}`} className={`${activeClass} dropdown-item`} href={appPath}>
-                            {application.name}
-                        </a>
-                    )
-                }
-            })}
-            <div className='dropdown-divider'></div>
-            <a className={`${isHomeActive ? 'active' : ''} dropdown-item`} href={`${dir}/index.html`}>
-                Home <i className='fa fa-home ml-2'></i>
-            </a>
+            <div className='filter-scroller'>
+                {applications.map((application, index) => {
+                    if (application.active && application.include) {
+                        const appPath = `${dir}/${config.prefix}${application.folder}/index.html`;
+                        const isActive = folder === application.folder;
+                        const activeClass = isActive ? 'active' : '';
+                        return (
+                            <a key={`${application.name}-${index}`} className={`${activeClass} dropdown-item`} href={appPath}>
+                                {application.name}
+                            </a>
+                        )
+                    }
+                })}
+                <div className='dropdown-divider'></div>
+                <a className={`${isHomeActive ? 'active' : ''} dropdown-item`} href={`${dir}/index.html`}>
+                    Home <i className='fa fa-home ml-2'></i>
+                </a>
+            </div>
         </>
     );
 }
