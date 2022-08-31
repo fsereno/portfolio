@@ -11,7 +11,8 @@ module.exports = (env) => {
     entry: {
       vendor: [
         'bootstrap',
-        './app/sass/includes/styleDeps.scss'
+        './app/sass/includes/styleDeps.scss',
+        './app/js/modules/react/navFilterComponent/app.js'
       ]
     },
     output: {

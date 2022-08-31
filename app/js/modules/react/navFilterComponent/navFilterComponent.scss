@@ -1,0 +1,14 @@
+@import "../../../../sass/includes/colours.scss";
+@import "../../../../sass//includes/constants.scss";
+
+.filter-scroller {
+    max-height: 25vh;
+    overflow-y: scroll;
+    background-color: $real-white;
+}
+
+@media screen and (min-width: $large) {
+    .filter-scroller {
+        max-height: 50vh;
+    }
+}

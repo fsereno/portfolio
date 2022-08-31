@@ -31,20 +31,7 @@ nav#navBar.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
                 aria-haspopup='true'
                 aria-expanded='false')
                 | Applications
-            .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdownMenuLink')
-                each application, index in htmlWebpackPlugin.options.locals.config.applications
-                    if (application.active !== false && application.include !== false)
-                        a(class=(htmlWebpackPlugin.options.locals.application.folder === application.folder
-                        ? "active"
-                        : "") + " dropdown-item",
-                        href=directory+htmlWebpackPlugin.options.locals.config.prefix+application.folder+"/index.html")= application.name
-                .dropdown-divider
-                a(class=(htmlWebpackPlugin.options.locals.config.entry === htmlWebpackPlugin.options.locals.application.folder
-                ? "active"
-                : "") + " dropdown-item",
-                href=directory+"index.html")
-                    | Home
-                    i.fa.fa-home.ml-2
+            .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdownMenuLink')#applicationsDropdown
         li.nav-item
             a.nav-link(href=(htmlWebpackPlugin.options.locals.application.folderRoot !== undefined
                 ? htmlWebpackPlugin.options.locals.config.repoRootUrl+htmlWebpackPlugin.options.locals.application.folderRoot

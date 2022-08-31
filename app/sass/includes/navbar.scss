@@ -6,18 +6,10 @@
 }
 .navbar {
     padding: 0 0.3em;
-    &.fixed-top {
-        .dropdown-menu {
-            max-height: 85vh;
-            overflow-y: scroll;
-        }
-    }
     .navbar-collapse {
-
        a {
             font-weight: 300;
        }
-
         .dropdown-menu {
             min-width: 380px;
             .dropdown-item {
