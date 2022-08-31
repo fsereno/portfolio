@@ -10,6 +10,7 @@ import { ApplicationsContextProvider } from '../../applicationsContextProvider';
 
 jest.mock('../../searchBarComponent/searchBar.scss', () => '');
 jest.mock('../../topScrollComponent/topScrollComponent.scss', () => '');
+jest.mock('../../navFilterComponent/navFilterComponent.scss', () => '');
 
 jest.mock('../../../../../../config.json', () => {
     return {
@@ -91,7 +92,7 @@ const App = () => {
     return (
         <ConfigContextProvider>
             <ApplicationsContextProvider>
-                <NavFilterComponent />
+                <NavFilterComponent isHomeActive={true} folder={'home'}/>
             </ApplicationsContextProvider>
         </ConfigContextProvider>
     )
