@@ -126,10 +126,8 @@ module.exports = {
         return htmlWebpackPluginConfigs;
     },
     getVendorWebpackConfig: (env, webpacks) => {
-        //if (module.exports.isBuild(env)) {
-            const vendorWebpackConfig = require('./webpack.config.vendor')(env);
-            webpacks.push(vendorWebpackConfig);
-        //}
+        const vendorWebpackConfig = require('./webpack.config.vendor')(env);
+        webpacks.push(vendorWebpackConfig);
     },
     clearOutputDirectory: () => childProcess.execSync('rm -rf ./docs/*')
 }
