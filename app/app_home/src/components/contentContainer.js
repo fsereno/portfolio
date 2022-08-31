@@ -2,13 +2,16 @@
 "use strict;"
 
 import React from 'react';
-import { SearchBar } from './searchBar';
-import { ConfigContext } from '../contexts';
+import { SearchBar } from '../../../js/modules/react/searchBarComponent/searchBar';
+import { ConfigContext } from '../../../js/modules/react/configContextProvider';
 import { CardsContainer } from './cardsContainer';
+import { TopScrollComponent } from '../../../js/modules/react/topScrollComponent/topScrollComponent';
 
 export function ContentContainer() {
 
   const context = React.useContext(ConfigContext);
+
+  const topScrollComponentThreshold = 270;
 
   return (
     <div className={`container-fluid pt-4 bg-white`} id="contentContainer">
@@ -24,8 +27,15 @@ export function ContentContainer() {
           <hr />
         </div>
       </div>
-      <SearchBar />
+      <SearchBar
+        searchBarId="searchBar"
+        searchInputId="searchInput"
+        cancelBtnId="cancelBtn"
+        openFilterBtnId="openFilterBtn"
+        filterContainerId="filterContainer"
+      />
       <CardsContainer />
+      <TopScrollComponent threshold={topScrollComponentThreshold} />
     </div>
   );
 }

@@ -12,7 +12,7 @@ export const AppContainer = ({ children }) => {
 
     const isBrowserValid = WebGLCheckerUtil.isWebGL2Available() || WebGLCheckerUtil.isWebGLAvailable();
     const spinnerContext = React.useContext(SpinnerContext);
-    const [fadeClass, setFadeClass] = useState(getElementFadeClass(false));
+    const [ fadeClass, setFadeClass ] = useState(getElementFadeClass(false));
 
     const loadHandler = () => {
         setTimeout(() => {

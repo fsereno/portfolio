@@ -2,16 +2,16 @@
  * @jest-environment jsdom
  */
 
-import React from "react";
+import React from 'react';
 import { mount } from 'enzyme';
-import { ContentContainer } from "../src/components/contentContainer";
-import { ConfigContextProvider } from "../../js/modules/react/configContextProvider";
-import { ApplicationsContextProvider } from "../../js/modules/react/applicationsContextProvider";
+import { NavFilterComponent } from '../navFilterComponent';
+import { ConfigContextProvider } from '../../configContextProvider';
+import { ApplicationsContextProvider } from '../../applicationsContextProvider';
 
-jest.mock('../../js/modules/react/searchBarComponent/searchBar.scss', () => '');
-jest.mock('../../js/modules/react/topScrollComponent/topScrollComponent.scss', () => '');
+jest.mock('../../searchBarComponent/searchBar.scss', () => '');
+jest.mock('../../topScrollComponent/topScrollComponent.scss', () => '');
 
-jest.mock('../../../config.json', () => {
+jest.mock('../../../../../../config.json', () => {
     return {
         "labels": [
             { "name": "JavaScript", "class": "warning" },
@@ -91,70 +91,41 @@ const App = () => {
     return (
         <ConfigContextProvider>
             <ApplicationsContextProvider>
-                <ContentContainer />
+                <NavFilterComponent />
             </ApplicationsContextProvider>
         </ConfigContextProvider>
     )
 }
 
-it("can render", () => {
+it('can render', () => {
     const wrapper = mount(<App />);
-    expect(wrapper.find('#contentContainer')).toBeTruthy();
+    expect(wrapper.find('#searchBarNav')).toBeTruthy();
 });
 
-it("can search", () => {
+it('can search, including Home', () => {
     const wrapper = mount(<App />);
-    const searchBar = wrapper.find('input#searchInput');
+    const searchBar = wrapper.find('input#searchInputNav');
     searchBar.simulate('change', { target: { value: 'React' } });
-    expect(wrapper.find('.grid-item.card')).toHaveLength(2);
+    const result = wrapper.find('a.dropdown-item');
+    expect(result).toHaveLength(3);
 });
 
-it("can search multiple", () => {
+it('can search multiple, including Home', () => {
     const wrapper = mount(<App />);
-    const searchBar = wrapper.find('input#searchInput');
+    const searchBar = wrapper.find('input#searchInputNav');
     searchBar.simulate('change', { target: { value: 'React .NET' } });
-    expect(wrapper.find('.grid-item.card')).toHaveLength(3);
+    const result = wrapper.find('a.dropdown-item');
+    expect(result).toHaveLength(4);
 });
 
-it("can search using multiple quicksearch", () => {
+it('can cancel a search, including Home', () => {
     const wrapper = mount(<App />);
-    const searchBar = wrapper.find('input#searchInput');
-    const openFilterBtn = wrapper.find('#openFilterBtn')
-    const quickSearchCloud = wrapper.find('button[value="Cloud"]');
-    const quickSearchReact = wrapper.find('button[value="React"]');
-    const quickSearchDummy = wrapper.find('button[value="ABC"]');
-    openFilterBtn.simulate('click');
-    quickSearchCloud.simulate('click');
-    quickSearchReact.simulate('click');
-    quickSearchDummy.simulate('click');
-    searchBar.simulate('change');
-    expect(wrapper.find('.grid-item.card')).toHaveLength(4);
-});
-
-it("can remove items from the quicksearch filter", () => {
-    const wrapper = mount(<App />);
-    const searchBar = wrapper.find('input#searchInput');
-    const openFilterBtn = wrapper.find('#openFilterBtn')
-    const quickSearchCloud = wrapper.find('button[value="Cloud"]');
-    const quickSearchReact = wrapper.find('button[value="React"]');
-    const quickSearchDummy = wrapper.find('button[value="ABC"]');
-    openFilterBtn.simulate('click');
-    quickSearchCloud.simulate('click');
-    quickSearchReact.simulate('click');
-    quickSearchDummy.simulate('click');
-    quickSearchReact.simulate('click');
-    searchBar.simulate('change');
-    expect(wrapper.find('.grid-item.card')).toHaveLength(3);
-});
-
-it("can cancel a search", () => {
-    const wrapper = mount(<App />);
-    const searchBar = wrapper.find('input#searchInput');
+    const searchBar = wrapper.find('input#searchInputNav');
     searchBar.simulate('change', { target: { value: 'React' } });
-    const cancelBtn = wrapper.find('#cancelBtn button');
+    const cancelBtn = wrapper.find('#cancelBtnNav button');
     cancelBtn.simulate('click');
-    const children = wrapper.find('.grid-item.card');
+    const result = wrapper.find('a.dropdown-item');
     const value = searchBar.instance().value;
-    expect(value).toEqual("");
-    expect(children).toHaveLength(5);
+    expect(value).toEqual('');
+    expect(result).toHaveLength(6);
 });

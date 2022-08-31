@@ -1,8 +1,10 @@
 "use strict;"
 
 import React, { useState } from 'react';
-import { ApplicationSortUtil } from "../../../../typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index";
-import { ApplicationsContext, ConfigContext } from '../../contexts';
+import { ApplicationSortUtil } from "../../../typeScript/Utils/applicationsSortUtil/dist/Utils/applicationsSortUtil/index";
+import { ConfigContext } from './configContextProvider';
+
+export const ApplicationsContext = React.createContext();
 
 export function ApplicationsContextProvider({children}) {
 
@@ -12,7 +14,11 @@ export function ApplicationsContextProvider({children}) {
 
     const [ applications, setApplications ] = useState(configContext.config.applications);
 
-    const context = { unmodified: configContext.config.applications, applications, setApplications }
+    const context = {
+        unmodified: configContext.config.applications,
+        applications,
+        setApplications
+    }
 
     return (
         <ApplicationsContext.Provider value={context}>

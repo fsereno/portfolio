@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { CONTENT_CONTAINER_ID } from '../constants';
-import { ConfigContext } from '../contexts';
+import { ConfigContext } from '../../../js/modules/react/configContextProvider';
 
 export function IntroContainer() {
 

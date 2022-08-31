@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
-import { ConfigContext } from '../contexts';
+import { ConfigContext } from '../../../js/modules/react/configContextProvider';
 
 export const ApplicationCard = React.memo(({application, condition}) => {
 
