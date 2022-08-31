@@ -6,14 +6,12 @@ import { ConfigContext } from '../configContextProvider';
 import { SearchBar } from '../searchBarComponent/searchBar';
 import './navFilterComponent.scss';
 
-export function NavFilterComponent() {
+export function NavFilterComponent({isHomeActive, folder}) {
 
     const context = React.useContext(ApplicationsContext);
     const configContext = React.useContext(ConfigContext);
     const config = configContext.config;
     const applications = context.applications;
-    const isHomeActive = document.head.querySelector('[name="isRoot"]') !== null;
-    const folder = document.head.querySelector('[name="folder"]').content;
     const dir = isHomeActive ? '.' : '..';
 
     return (
