@@ -11,4 +11,4 @@ EXPOSE 8080
 HEALTHCHECK --interval=12s --timeout=12s --start-period=30s \
  CMD node healthcheck.js
 
-CMD ["npm", "run", "dev"]
+CMD ["sh", "-c", "npm run dev dir=${dir}"]

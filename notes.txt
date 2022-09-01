@@ -1,3 +1,7 @@
+DIR=reactRedux docker compose -f docker-compose.serve.yml up
+docker compose -f docker-compose.serve.yml up
+
+
 at the end of this piece the following script will be removed from package.json:
 test-func
 
