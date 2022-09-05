@@ -1,6 +1,7 @@
 docker build -f Dockerfile.serve -t fabiosereno/portfolio.serve:0.0.4 .
 DIR=reactRedux docker compose -f docker-compose.serve.yml up
 docker compose -f docker-compose.serve.yml up
+sh hello_world
 
 
 at the end of this piece the following script will be removed from package.json:
