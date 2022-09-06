@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Analysis docker compose up script
+
+DIR=$1 docker compose -f docker-compose.analysis.yml up
