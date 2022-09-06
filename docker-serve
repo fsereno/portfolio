@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# Docker compose up script
-
-DIR=$1 docker compose -f docker-compose.serve.yml up
