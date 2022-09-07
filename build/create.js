@@ -7,7 +7,7 @@ const config = require('../config.json');
 
 function create(application) {
     const destination = path.resolve(__dirname, '../', config.developmentDir, `${config.prefix}${application.folder}`);
-    const templateDirectory = typeof application.masterTemplateDir !== "undefined"
+    const templateDirectory = typeof application.masterTemplateDir !== 'undefined'
         && application.masterTemplateDir.length > 0
         ? application.masterTemplateDir
         : config.masterTemplateDir;

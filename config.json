@@ -295,6 +295,18 @@
             "include": false,
             "useWebpack": true,
             "labels": [0]
+        },
+        {
+            "name": "Test React Template",
+            "subHeading": "Subheading",
+            "description": "Description",
+            "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "new_react",
+            "masterTemplateDir": "toDoReact",
+            "active": true,
+            "include": false,
+            "useWebpack": true,
+            "labels": [0]
         }
     ]
 }

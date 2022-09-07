@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Create docker compose up script
+
+docker compose -f docker-compose.create.yml up
