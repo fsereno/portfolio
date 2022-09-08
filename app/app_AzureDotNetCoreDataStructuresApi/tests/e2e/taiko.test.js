@@ -5,7 +5,7 @@
  import { openBrowser, goto, write, click, closeBrowser, $, into, textBox, button, waitFor, evaluate, text } from 'taiko';
 
  const APPLICATION = "app_AzureDotNetCoreDataStructuresApi";
- const URL = `http://localhost:8080/${APPLICATION}/index.html`;
+ const URL = `http://localhost/${APPLICATION}/index.html`;
 
  beforeAll(async () => {
    await openBrowser({

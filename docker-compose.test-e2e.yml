@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+    nginx:
+        image: 'fabiosereno/portfolio.nginx:0.0.3'
+        ports:
+            - '8080:80'
+        container_name: nginx
+    node:
+        image: 'fabiosereno/portfolio.test-e2e:0.0.5'
+        volumes:
+            - './config.json:/usr/src/app/config.json'
+            - './babel.config.json:/usr/src/app/babel.config.json'
+            - './setupTests.js:/usr/src/app/setupTests.js'
+            - './app:/usr/src/app/app'
+        container_name: node
