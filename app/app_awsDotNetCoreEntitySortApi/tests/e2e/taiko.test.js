@@ -3,9 +3,11 @@
  */
 
 import { openBrowser, goto, write, click, closeBrowser, $, into, textBox, tableCell, button, waitFor, link } from 'taiko';
+import { ConfigUtil } from '../../../js/modules/utils/configUtil';
 
 const APPLICATION = "app_awsDotNetCoreEntitySortApi";
-const URL = `http://localhost:8080/${APPLICATION}/index.html`;
+const CONFIG = ConfigUtil.get();
+const URL = `http://${CONFIG.dockerHost}/${APPLICATION}/index.html`;
 
 beforeAll(async () => {
   await openBrowser({

@@ -3,9 +3,11 @@
  */
 
 import { openBrowser, goto, write, click, closeBrowser, into, textBox, text, button, waitFor } from 'taiko';
+import { ConfigUtil } from '../../../js/modules/utils/configUtil';
 
 const APPLICATION = "app_awsDotNetCoreAsyncCoffeeMachine";
-const URL = `http://localhost:8080/${APPLICATION}/index.html`;
+const CONFIG = ConfigUtil.get();
+const URL = `http://${CONFIG.dockerHost}/${APPLICATION}/index.html`;
 
 beforeAll(async () => {
   await openBrowser({

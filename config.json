@@ -1,5 +1,6 @@
 {
     "host": "localhost",
+    "dockerHost": "nginx",
     "port": 8080,
     "prefix": "app_",
     "entry": "home",
