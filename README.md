@@ -18,7 +18,6 @@ Some of the technology used in this project and related projects:
 - AWS Lambda (https://aws.amazon.com/lambda/)
 - Docker (https://www.docker.com/)
 - Node JS (https://nodejs.org/en/)
-- Gulp (https://gulpjs.com)
 - Webpack (https://webpack.js.org/)
 - Pug (https://pugjs.org/api/getting-started.html)
 - TypeScript (https://www.typescriptlang.org)
@@ -87,8 +86,7 @@ $ docker exec -it node bash
 > install NPM packages
 
 ```shell
-$ npm install
-$ npm install --global gulp-cli
+$ npm install -g jest && npm install
 ```
 ---
 
