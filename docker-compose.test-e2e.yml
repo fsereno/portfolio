@@ -15,3 +15,5 @@ services:
             - './setupTests.js:/usr/src/app/setupTests.js'
             - './app:/usr/src/app/app'
         container_name: node
+        depends_on:
+            - "nginx"
