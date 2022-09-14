@@ -1,3 +1,10 @@
+Docker app:
+http://fsereno-portfolio-app.azurewebsites.net/
+
+App service docker quickstart example
+Using first the cloud shell and then the az cli from the shell
+https://docs.microsoft.com/en-us/azure/app-service/quickstart-multi-container
+
 npx jest ./app/app_AzureDotNetCoreDataStructuresApi/tests/e2e/*.test.js
 
 docker build -f Dockerfile.serve -t fabiosereno/portfolio.serve:0.0.4 .
