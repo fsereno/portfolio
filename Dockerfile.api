@@ -1,0 +1,9 @@
+FROM node:14.17.5
+
+WORKDIR /usr/src/app
+
+COPY api.js ./
+
+EXPOSE 3000
+
+CMD ["node", "api.js"]

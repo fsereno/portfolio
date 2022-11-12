@@ -16,3 +16,9 @@ services:
             - './docs:/usr/src/app/docs'
             - './build:/usr/src/app/build'
         container_name: node
+    api:
+        tty: true
+        image: 'fabiosereno/portfolio.api:0.0.5'
+        ports:
+            - "3000:3000"
+        container_name: api
