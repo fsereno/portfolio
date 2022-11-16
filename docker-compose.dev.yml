@@ -3,7 +3,7 @@ version: '3.9'
 services:
     node:
         tty: true
-        image: 'fabiosereno/portfolio.dev:0.0.1'
+        image: 'fabiosereno/portfolio.dev:0.0.2'
         environment:
             - dir=${DIR}
         ports:
