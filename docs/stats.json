@@ -1,8 +1,8 @@
 {
-  "hash": "ab18af8fe1055edaaa8e",
+  "hash": "2b50c23034886022ab41",
   "version": "5.50.0",
-  "time": 23891,
-  "builtAt": 1662499472026,
+  "time": 37517,
+  "builtAt": 1668638455240,
   "publicPath": "auto",
   "outputPath": "/usr/src/app/docs",
   "assetsByChunkName": {
@@ -19,8 +19,8 @@
       "type": "asset",
       "name": "vendor.js",
       "size": 2829263,
-      "emitted": true,
-      "comparedForEmit": false,
+      "emitted": false,
+      "comparedForEmit": true,
       "cached": false,
       "info": {
         "javascriptModule": false,
@@ -45,8 +45,8 @@
       "type": "asset",
       "name": "images/PaintedWood005_2K_Displacement.jpg",
       "size": 2140831,
-      "emitted": true,
-      "comparedForEmit": false,
+      "emitted": false,
+      "comparedForEmit": true,
       "cached": false,
       "info": {
         "sourceFilename": "app/images/PaintedWood005_2K_Displacement.jpg",
@@ -65,8 +65,8 @@
       "type": "asset",
       "name": "images/Asphalt011_1K_Roughness.jpg",
       "size": 785390,
-      "emitted": true,
-      "comparedForEmit": false,
+      "emitted": false,
+      "comparedForEmit": true,
       "cached": false,
       "info": {
         "sourceFilename": "app/images/Asphalt011_1K_Roughness.jpg",
@@ -85,8 +85,8 @@
       "type": "asset",
       "name": "images/PortfolioThumbnail.png",
       "size": 395089,
-      "emitted": true,
-      "comparedForEmit": false,
+      "emitted": false,
+      "comparedForEmit": true,
       "cached": false,
       "info": {
         "sourceFilename": "app/images/PortfolioThumbnail.png",
@@ -104,13 +104,13 @@
     {
       "type": "asset",
       "name": "main.js",
-      "size": 97828,
+      "size": 98149,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
         "javascriptModule": false,
-        "size": 97828
+        "size": 98149
       },
       "chunkNames": [
         "main"
@@ -129,8 +129,8 @@
       "type": "asset",
       "name": "images/FSLogo.png",
       "size": 17760,
-      "emitted": true,
-      "comparedForEmit": false,
+      "emitted": false,
+      "comparedForEmit": true,
       "cached": false,
       "info": {
         "sourceFilename": "app/images/FSLogo.png",
@@ -149,8 +149,8 @@
       "type": "asset",
       "name": "images/Profile.jpg",
       "size": 16677,
-      "emitted": true,
-      "comparedForEmit": false,
+      "emitted": false,
+      "comparedForEmit": true,
       "cached": false,
       "info": {
         "sourceFilename": "app/images/Profile.jpg",
@@ -169,8 +169,8 @@
       "type": "asset",
       "name": "images/FSLogo.jpeg",
       "size": 11108,
-      "emitted": true,
-      "comparedForEmit": false,
+      "emitted": false,
+      "comparedForEmit": true,
       "cached": false,
       "info": {
         "sourceFilename": "app/images/FSLogo.jpeg",
@@ -209,8 +209,8 @@
       "type": "asset",
       "name": "main.css",
       "size": 4144,
-      "emitted": true,
-      "comparedForEmit": false,
+      "emitted": false,
+      "comparedForEmit": true,
       "cached": false,
       "info": {
         "size": 4144
@@ -232,8 +232,8 @@
       "type": "asset",
       "name": "index.html",
       "size": 3032,
-      "emitted": true,
-      "comparedForEmit": false,
+      "emitted": false,
+      "comparedForEmit": true,
       "cached": false,
       "info": {
         "size": 3032
@@ -254,9 +254,9 @@
       "initial": true,
       "entry": true,
       "recorded": false,
-      "size": 65129,
+      "size": 65414,
       "sizes": {
-        "javascript": 57636,
+        "javascript": 57921,
         "css/mini-extract": 2833,
         "runtime": 4660
       },
@@ -272,7 +272,7 @@
         "main.js"
       ],
       "auxiliaryFiles": [],
-      "hash": "cbcc97301e8590c6da23",
+      "hash": "555929faa3a960ac28d8",
       "childrenByOrder": {},
       "id": "main",
       "siblings": [
@@ -843,8 +843,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_home/src/components/appContainer.js",
-          "issuerName": "./app/app_home/src/components/appContainer.js",
+          "issuer": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_home/src/components/introContainer.js",
+          "issuerName": "./app/app_home/src/components/introContainer.js",
           "issuerPath": [
             {
               "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_home/src/app.js",
@@ -852,16 +852,16 @@
               "id": "./app/app_home/src/app.js"
             },
             {
-              "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_home/src/components/appContainer.js",
-              "name": "./app/app_home/src/components/appContainer.js",
-              "id": "./app/app_home/src/components/appContainer.js"
+              "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_home/src/components/introContainer.js",
+              "name": "./app/app_home/src/components/introContainer.js",
+              "id": "./app/app_home/src/components/introContainer.js"
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": "./app/app_home/src/constants.js",
-          "issuerId": "./app/app_home/src/components/appContainer.js",
+          "issuerId": "./app/app_home/src/components/introContainer.js",
           "chunks": [
             "main"
           ],
@@ -2597,9 +2597,9 @@
           "type": "module",
           "moduleType": "json",
           "layer": null,
-          "size": 9504,
+          "size": 9789,
           "sizes": {
-            "javascript": 9504
+            "javascript": 9789
           },
           "built": true,
           "codeGenerated": true,
@@ -2694,6 +2694,7 @@
             "author",
             "description",
             "developmentDir",
+            "dockerHost",
             "entry",
             "folderRoot",
             "gitHubUrl",
@@ -14119,8 +14120,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_home/src/components/appContainer.js",
-      "issuerName": "./app/app_home/src/components/appContainer.js",
+      "issuer": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_home/src/components/introContainer.js",
+      "issuerName": "./app/app_home/src/components/introContainer.js",
       "issuerPath": [
         {
           "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_home/src/app.js",
@@ -14128,16 +14129,16 @@
           "id": "./app/app_home/src/app.js"
         },
         {
-          "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_home/src/components/appContainer.js",
-          "name": "./app/app_home/src/components/appContainer.js",
-          "id": "./app/app_home/src/components/appContainer.js"
+          "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_home/src/components/introContainer.js",
+          "name": "./app/app_home/src/components/introContainer.js",
+          "id": "./app/app_home/src/components/introContainer.js"
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": "./app/app_home/src/constants.js",
-      "issuerId": "./app/app_home/src/components/appContainer.js",
+      "issuerId": "./app/app_home/src/components/introContainer.js",
       "chunks": [
         "main"
       ],
@@ -14980,9 +14981,9 @@
       "type": "module",
       "moduleType": "json",
       "layer": null,
-      "size": 9504,
+      "size": 9789,
       "sizes": {
-        "javascript": 9504
+        "javascript": 9789
       },
       "built": true,
       "codeGenerated": true,
@@ -15076,6 +15077,7 @@
         "author",
         "description",
         "developmentDir",
+        "dockerHost",
         "entry",
         "folderRoot",
         "gitHubUrl",
@@ -19931,11 +19933,11 @@
         },
         {
           "name": "main.js",
-          "size": 97828
+          "size": 98149
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 2931235,
+      "assetsSize": 2931556,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
@@ -19962,11 +19964,11 @@
         },
         {
           "name": "main.js",
-          "size": 97828
+          "size": 98149
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 2931235,
+      "assetsSize": 2931556,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
@@ -19984,8 +19986,8 @@
       "name": "HtmlWebpackCompiler",
       "hash": "3de11035321ed266fd3c",
       "version": "5.50.0",
-      "time": 23474,
-      "builtAt": 1662499471674,
+      "time": 36855,
+      "builtAt": 1668638454710,
       "publicPath": "",
       "outputPath": "/usr/src/app/docs",
       "assetsByChunkName": {},
@@ -22929,8 +22931,8 @@
       "name": "mini-css-extract-plugin /usr/src/app/node_modules/css-loader/dist/cjs.js!/usr/src/app/node_modules/sass-loader/dist/cjs.js!/usr/src/app/app/app_home/sass/styles.scss",
       "hash": "0039c446d627f43d8e18",
       "version": "5.50.0",
-      "time": 8303,
-      "builtAt": 1662499470273,
+      "time": 12084,
+      "builtAt": 1668638452537,
       "publicPath": "__MINI_CSS_EXTRACT_PLUGIN_PUBLIC_PATH__",
       "outputPath": "/usr/src/app/docs",
       "assetsByChunkName": {},
@@ -23628,8 +23630,8 @@
       "name": "mini-css-extract-plugin /usr/src/app/node_modules/css-loader/dist/cjs.js!/usr/src/app/node_modules/sass-loader/dist/cjs.js!/usr/src/app/app/js/modules/react/searchBarComponent/searchBar.scss",
       "hash": "f2a76999763e72bcaa10",
       "version": "5.50.0",
-      "time": 6804,
-      "builtAt": 1662499470306,
+      "time": 9328,
+      "builtAt": 1668638452636,
       "publicPath": "__MINI_CSS_EXTRACT_PLUGIN_PUBLIC_PATH__",
       "outputPath": "/usr/src/app/docs",
       "assetsByChunkName": {},
@@ -24327,8 +24329,8 @@
       "name": "mini-css-extract-plugin /usr/src/app/node_modules/css-loader/dist/cjs.js!/usr/src/app/node_modules/sass-loader/dist/cjs.js!/usr/src/app/app/js/modules/react/topScrollComponent/topScrollComponent.scss",
       "hash": "561992fe4d5e477ea01b",
       "version": "5.50.0",
-      "time": 6907,
-      "builtAt": 1662499470423,
+      "time": 9301,
+      "builtAt": 1668638452618,
       "publicPath": "__MINI_CSS_EXTRACT_PLUGIN_PUBLIC_PATH__",
       "outputPath": "/usr/src/app/docs",
       "assetsByChunkName": {},

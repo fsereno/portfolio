@@ -22,3 +22,10 @@ services:
         ports:
             - "3000:3000"
         container_name: api
+    proxy:
+        image: nginx:alpine
+        ports:
+            - 80:80
+        volumes:
+            - ./default.conf.template:/etc/nginx/templates/default.conf.template
+            - './docs:/usr/share/nginx/html'
