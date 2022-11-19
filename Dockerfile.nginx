@@ -1,6 +1,7 @@
 FROM nginx:1.23.1
 
 COPY ./docs ./usr/share/nginx/html
+COPY ./default.conf.template ./etc/nginx/templates/default.conf.template
 
 HEALTHCHECK --interval=5m --timeout=3s CMD curl --fail http://localhost || exit 1
 
