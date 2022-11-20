@@ -7,13 +7,13 @@ Docker app:
 Standard
 http://fsereno-portfolio.azurewebsites.net/
 
-Free
-http://fsereno-portfolio.azurewebsites.net/
-http://fsereno-portfolio.azurewebsites.net/
-
 App service docker quickstart example
 Using first the cloud shell and then the az cli from the shell
 https://docs.microsoft.com/en-us/azure/app-service/quickstart-multi-container
+https://shell.azure.com/
+
+Create the docker app
+az webapp create --resource-group fserenoPortfolioResourceGroup --plan fserenoPortfolioServicePlan --name fsereno-portfolio --multicontainer-config-type compose --multicontainer-config-file docker-compose.yml
 
 Shell can be accessed from the link above or perhaps - https://portal.azure.com/#cloudshell/
 
