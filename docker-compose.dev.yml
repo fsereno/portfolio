@@ -22,7 +22,7 @@ services:
         ports:
             - "3000:3000"
         container_name: api
-    proxy:
-        image: fabiosereno/portfolio.nginx:0.0.5
+    nginx:
+        image: fabiosereno/portfolio.nginx:0.0.16
         ports:
             - 80:80
