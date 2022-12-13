@@ -16,13 +16,20 @@ services:
             - './docs:/usr/src/app/docs'
             - './build:/usr/src/app/build'
         container_name: node
-    api:
-        tty: true
-        image: 'fabiosereno/portfolio.api:0.0.5'
+        networks:
+            - frontend
+            - backend
+        depends_on:
+            - "backend"
+        privileged: true
+    backend:
+        image: 'fabiosereno/portfolio.api:0.0.6'
+        x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
         ports:
-            - "3000:3000"
-        container_name: api
-    nginx:
-        image: fabiosereno/portfolio.nginx:0.0.16
-        ports:
-            - 80:80
+            - '3000:3000'
+        container_name: backend
+        networks:
+            - backend
+networks:
+    frontend:
+    backend:
