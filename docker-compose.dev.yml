@@ -21,10 +21,18 @@ services:
             - backend
         depends_on:
             - "backend"
-        privileged: true
+    nginx:
+        image: 'fabiosereno/portfolio.nginx.dev:0.0.2'
+        ports:
+            - '80:80'
+        container_name: frontend
+        networks:
+            - frontend
+            - backend
+        depends_on:
+            - "backend"
     backend:
         image: 'fabiosereno/portfolio.api:0.0.6'
-        x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
         ports:
             - '3000:3000'
         container_name: backend
