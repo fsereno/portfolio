@@ -2,7 +2,7 @@ FROM node:14.17.5
 
 WORKDIR /usr/src/app
 
-COPY package.json package-lock.json healthcheck.js ./
+COPY ../../package.json ../../package-lock.json ../../healthcheck.js ./
 
 RUN apt-get update && apt-get install -y \
     fonts-liberation \
@@ -40,7 +40,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN npm install -g jest && npm install
 
-EXPOSE 8080
-
 HEALTHCHECK --interval=12s --timeout=12s --start-period=30s \
  CMD node healthcheck.js
+
+CMD ["sh", "-c", "npm run test-apps-e2e"]

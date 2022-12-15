@@ -10,10 +10,10 @@ services:
         tty: true
         image: 'fabiosereno/portfolio.test-e2e:0.0.5'
         volumes:
-            - './config.json:/usr/src/app/config.json'
-            - './babel.config.json:/usr/src/app/babel.config.json'
-            - './setupTests.js:/usr/src/app/setupTests.js'
-            - './app:/usr/src/app/app'
+            - '../../config.json:/usr/src/app/config.json'
+            - '../../babel.config.json:/usr/src/app/babel.config.json'
+            - '../../setupTests.js:/usr/src/app/setupTests.js'
+            - '../../app:/usr/src/app/app'
         container_name: node
         depends_on:
             - "nginx"
