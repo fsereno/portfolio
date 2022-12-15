@@ -2,4 +2,6 @@
 
 # Dev docker compose up script
 
-DIR=$1 docker compose -f docker-compose.dev.yml up
+cd docker/dev
+
+DIR=$1 docker compose up

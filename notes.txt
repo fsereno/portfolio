@@ -1,8 +1,10 @@
 
 https://docs.docker.com/cloud/ecs-integration/
-via load balancer
-https://eu-west-2.console.aws.amazon.com/ec2/v2/home?region=eu-west-2#TargetGroup:targetGroupArn=arn:aws:elasticloadbalancing:eu-west-2:523190279095:targetgroup/portf-Nginx-QDFI3XBH9JW/4d60904e6e80beb6
-portf-LoadB-LATV8OT7BF88-732860213.eu-west-2.elb.amazonaws.com
+
+
+AWS via ecs
+http://portf-loadb-u4cpww4ao4s2-5b64feaec4f7973b.elb.eu-west-2.amazonaws.com/
+
 
 
 The reason why Azure is costig so much is because the Quick Startk guide is using an S1 (Standard small)

@@ -2,4 +2,6 @@
 
 # Create docker compose up script
 
-docker compose -f docker-compose.create.yml up
+cd docker/create
+
+docker compose up

@@ -7,7 +7,7 @@ services:
         ports:
             - '8080:8080'
         volumes:
-            - './config.json:/usr/src/app/config.json'
-            - './app:/usr/src/app/app'
-            - './build:/usr/src/app/build'
+            - '../../config.json:/usr/src/app/config.json'
+            - '../../app:/usr/src/app/app'
+            - '../../build:/usr/src/app/build'
         container_name: node
