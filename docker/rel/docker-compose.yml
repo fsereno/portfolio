@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+    node:
+        tty: true
+        image: 'fabiosereno/portfolio.release:0.0.2'
+        ports:
+            - '8080:8080'
+        volumes:
+            - '../../config.json:/usr/src/app/config.json'
+            - '../../babel.config.json:/usr/src/app/babel.config.json'
+            - '../../setupTests.js:/usr/src/app/setupTests.js'
+            - '../../app:/usr/src/app/app'
+            - '../../docs:/usr/src/app/docs'
+            - '../../build:/usr/src/app/build'
+        container_name: node

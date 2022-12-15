@@ -2,4 +2,6 @@
 
 # Release docker compose up script
 
-docker compose -f docker-compose.release.yml up
+cd docker/rel
+
+docker compose up
