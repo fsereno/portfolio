@@ -4,4 +4,4 @@
 
 cd docker/test
 
-docker compose up
+docker-compose run --rm node

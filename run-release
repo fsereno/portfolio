@@ -4,4 +4,4 @@
 
 cd docker/rel
 
-docker compose up
+docker-compose run --rm node

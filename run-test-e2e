@@ -2,4 +2,6 @@
 
 # Test docker compose up script
 
-docker compose -f docker-compose.test-e2e.yml up
+cd docker/test-e2e
+
+docker-compose run --rm node --rm nginx

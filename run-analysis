@@ -4,4 +4,8 @@
 
 cd docker/analysis
 
-DIR=$1 docker compose up
+ARG1=$1
+
+ACTION="${ARG1:-up}"
+
+DIR=$2 docker compose $ACTION
