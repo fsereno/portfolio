@@ -22,7 +22,7 @@ services:
         depends_on:
             - "backend"
     nginx:
-        image: 'fabiosereno/portfolio.nginx.dev:0.0.2'
+        image: 'fabiosereno/portfolio.nginx.dev:0.0.3'
         ports:
             - '80:80'
         container_name: frontend
@@ -32,7 +32,7 @@ services:
         depends_on:
             - "backend"
     backend:
-        image: 'fabiosereno/portfolio.api:0.0.6'
+        image: 'fabiosereno/portfolio.dotnet.api.0.0.3'
         ports:
             - '3000:3000'
         container_name: backend

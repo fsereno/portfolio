@@ -9,8 +9,7 @@ import { TopScrollComponent } from '../../../js/modules/react/topScrollComponent
 
 export function ContentContainer() {
 
-  const res = fetch("/api");
-
+  const res = fetch("/api/test");
 
   res.then(r => { console.log(r) });
 

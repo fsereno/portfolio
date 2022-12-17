@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+    nginx:
+        image: 'fabiosereno/portfolio.nginx:0.0.21'
+        x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
+        ports:
+            - '80:80'
+        container_name: frontend
+        networks:
+            - frontend
+            - backend
+        depends_on:
+            - "backend"
+    backend:
+        image: 'fabiosereno/portfolio.api:0.0.6'
+        x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
+        ports:
+            - '3000:3000'
+        container_name: backend
+        networks:
+            - backend
+networks:
+    frontend:
+    backend:
