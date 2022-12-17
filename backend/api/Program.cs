@@ -1,5 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseUrls("http://*:3000");
+
 // Add services to the container.
 
 builder.Services.AddControllers();
