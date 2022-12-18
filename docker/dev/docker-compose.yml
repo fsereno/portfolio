@@ -35,6 +35,8 @@ services:
         image: 'fabiosereno/portfolio.dotnet.api:0.0.3'
         ports:
             - '3000:3000'
+        volumes:
+            - '../../backend/api/bin/Debug/net7.0/api.dll:/app/api.dll'
         container_name: backend
         networks:
             - backend
