@@ -1,4 +1,4 @@
-namespace api;
+namespace Portfolio.Core.Types;
 
 public class WeatherForecast
 {

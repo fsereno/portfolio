@@ -32,11 +32,9 @@ services:
         depends_on:
             - "backend"
     backend:
-        image: 'fabiosereno/portfolio.dotnet.api:0.0.3'
+        image: 'fabiosereno/portfolio.dotnet.api:0.0.5'
         ports:
             - '3000:3000'
-        volumes:
-            - '../../backend/api/bin/Debug/net7.0/api.dll:/app/api.dll'
         container_name: backend
         networks:
             - backend

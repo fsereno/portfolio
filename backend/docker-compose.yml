@@ -2,12 +2,11 @@ version: '3.9'
 
 services:
     backend:
-        image: 'fabiosereno/portfolio.dotnet.api:0.0.3'
+        image: 'fabiosereno/portfolio.dotnet.api:0.0.5'
         ports:
             - '3000:3000'
         container_name: backend
         networks:
-            - frontend
             - backend
 networks:
     frontend:
