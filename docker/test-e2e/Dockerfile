@@ -2,7 +2,7 @@ FROM node:14.17.5
 
 WORKDIR /usr/src/app
 
-COPY ../../package.json ../../package-lock.json ../../healthcheck.js ./
+COPY ./package.json ./package-lock.json ./healthcheck.js ./
 
 RUN apt-get update && apt-get install -y \
     fonts-liberation \

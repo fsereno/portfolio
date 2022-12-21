@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Docker compose script runner
+
+VERB=$1
+DIR=$2
+
+cd docker/$VERB
+
+sh start $DIR

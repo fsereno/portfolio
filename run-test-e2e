@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Test docker compose up script
-
-cd docker/test-e2e
-
-docker-compose run --rm node --rm nginx

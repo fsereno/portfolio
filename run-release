@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Release docker compose up script
-
-cd docker/rel
-
-docker-compose run --rm node

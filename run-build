@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Docker image build script runner
+
+VERB=$1
+TAG=$2
+
+docker image build -f "docker/$VERB/Dockerfile" -t $TAG .

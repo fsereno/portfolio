@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Docker compose script runner
+
+VERB=$1
+
+cd docker/$VERB
+
+sh stop
