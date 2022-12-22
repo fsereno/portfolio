@@ -2,9 +2,9 @@
 
 # Docker compose script runner
 
-VERB=$1
+DOCKER_DIR=$1
 DIR=$2
 
-cd docker/$VERB
+cd docker/$DOCKER_DIR
 
 sh start $DIR

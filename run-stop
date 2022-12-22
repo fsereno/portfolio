@@ -2,8 +2,8 @@
 
 # Docker compose script runner
 
-VERB=$1
+DOCKER_DIR=$1
 
-cd docker/$VERB
+cd docker/$DOCKER_DIR
 
 sh stop

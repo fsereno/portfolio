@@ -2,7 +2,7 @@
 
 # Docker image build script runner
 
-VERB=$1
+DOCKER_DIR=$1
 TAG=$2
 
-docker image build -f "docker/$VERB/Dockerfile" -t $TAG .
+docker image build -f "docker/$DOCKER_DIR/Dockerfile" -t $TAG .
