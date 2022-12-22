@@ -16,20 +16,21 @@ This project is both built and deployed with continuous integration and deployme
 Some of the technology used in this project and related projects:
 - Azure Functions (https://azure.microsoft.com/en-gb/services/functions/)
 - AWS Lambda (https://aws.amazon.com/lambda/)
+- .NET (https://dotnet.microsoft.com)
 - Docker (https://www.docker.com/)
-- Node JS (https://nodejs.org/en/)
+- Node.js (https://nodejs.org/en/)
 - Webpack (https://webpack.js.org/)
 - Pug (https://pugjs.org/api/getting-started.html)
 - TypeScript (https://www.typescriptlang.org)
-- Sass (https://sass-lang.com/)
-- Mocha (https://mochajs.org/)
-- Chai (https://www.chaijs.com/)
 - A-Frame (https://aframe.io/)
-- .NET (https://dotnet.microsoft.com)
-- NUnit (https://nunit.org/)
-- ThreeJS (https://threejs.org/)
+- Sass (https://sass-lang.com/)
+- Three.js (https://threejs.org/)
 - React (https://reactjs.org/)
 - Vue (https://vuejs.org/)
+- Mocha (https://mochajs.org/)
+- Chai (https://www.chaijs.com/)
+- Enzyme (https://enzymejs.github.io/enzyme/)
+- NUnit (https://nunit.org/)
 - SOLID principles
 - TDD - Test driven development
 - DDD - Domain driven development
@@ -44,10 +45,8 @@ Some of the technology used in this project and related projects:
 ---
 
 ## Prerequisites
+
 - Docker (https://www.docker.com/)
-- Node JS v ^14.17.5 (https://nodejs.org/en/)
-- NPM (https://www.npmjs.com/)
-> Tip - Node and NPM are not needed locally if running within a container.
 ---
 
 ## Installation
@@ -61,74 +60,52 @@ Some of the technology used in this project and related projects:
 ---
 
 ### Run inside a Container using Docker
+
 - Please ensure you have Docker installed and running.
 - Open your preferred command line:
 
-> Launch the container
+> Launch the production environment
 
 ```shell
 $ docker compose up
 ```
-
->Attach a Bash command line interface.
-From here you will be able to run all subsequent NPM commands
+> To run one of the following specific Docker tasks
+- analysis
+- create
+- dev
+- rel
+- test
+- test-e2e
 
 ```shell
-$ docker exec -it node bash
+$ sh run-start <task>
 ```
-> You should now have a bash cmd connected to the container
----
-
-### Run outside a Container
-- Please ensure you have Node JS and NPM installed.
-- Open your preferred command line:
-
-> install NPM packages
+> To stop one of the above tasks, excluding those which destroy themselves (create, test)
 
 ```shell
-$ npm install -g jest && npm install
+$ sh run-stop <task>
 ```
 ---
 
-## Usage
+### Tasks
 
-#### Run the initial build
-> Run this first to ensure all resources build successfully
-
-```shell
-$ npm run build
-```
-#### Build a specific application
+#### Serve a specific application via the development server
 
 ```shell
-$ npm run build dir=<application>
-```
-
-##### This will:
-- Build all initial development resources (pug, sass, ts, js).
----
-
-#### Run the development server
-
-```shell
-$ npm run dev
-```
-#### Serve a specific application
-
-```shell
-$ npm run dev dir=<application>
+$ sh run-start dev <application>
 ```
 ##### This will:
 - Start the development server.
 - Watch for any changes on development resources.
-- Live Reload any changes straight to the browser.
+- Hot-reload any changes straight to the browser.
+- The default application is the root application - home
 - Open your browser and navigate to http://localhost:8080.
 ---
 
 #### Run analysis on a specific application
 
 ```shell
-$ npm run analysis dir=<application>
+$ sh run-start analysis <application>
 ```
 ##### This will:
 - Start the analysis server.
@@ -139,35 +116,34 @@ $ npm run analysis dir=<application>
 #### Build for release
 
 ```shell
-$ npm run release
+$ sh run-start rel
 ```
 ##### This will:
-- Build the production directory.
+- Build the production static assets directory.
 ---
 
 #### Run all unit tests
 
 ```shell
-$ npm test
+$ sh run-start test
 ```
 ##### This will:
 - Run all application specific and global unit tests.
 ---
 
-#### Run all functional tests (using a headless browser)
+#### Run all functional end-to-end tests
 
 ```shell
-$ npm run test-func
+$ sh run-start test-e2e
 ```
 ##### This will:
-- Please ensure the development server is running
 - Run all functional tests from the ./app/tests/functional directory
 ---
 
 #### Create a new application
 
 ```shell
-$ npm run create
+$ sh run-start create
 ```
 ##### This will:
 - Build applications based on the config.json file.
