@@ -9,7 +9,7 @@ import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 
 const PUZZLE = "3 + 1 + 1 =";
-const APP_CONFIG = ConfigUtil.get("awsDotNetCoreAsyncCoffeeMachine");
+const APP_CONFIG = ConfigUtil.get("coffeeMachine");
 const RUN_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.run}`;
 const RUN_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.runAsync}`;
 export default class CoffeeMakerApp extends React.Component {

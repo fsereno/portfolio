@@ -5,7 +5,7 @@
 import { openBrowser, goto, write, click, closeBrowser, into, textBox, text, button, waitFor } from 'taiko';
 import { ConfigUtil } from '../../../js/modules/utils/configUtil';
 
-const APPLICATION = "app_awsDotNetCoreAsyncCoffeeMachine";
+const APPLICATION = "app_coffeeMachine";
 const CONFIG = ConfigUtil.get();
 const URL = `http://${CONFIG.dockerHost}/${APPLICATION}/index.html`;
 
