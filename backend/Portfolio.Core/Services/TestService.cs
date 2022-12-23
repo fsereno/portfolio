@@ -6,7 +6,7 @@ public class TestService
 {
     private static readonly string[] Summaries = new[]
     {
-        "Freezing TESTING 2", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        "Freezing TESTING Core change", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
     public IEnumerable<WeatherForecast> Get()

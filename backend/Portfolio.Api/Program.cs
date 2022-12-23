@@ -1,4 +1,6 @@
 using Portfolio.Core.Services;
+using Portfolio.CoffeeMachine.Interfaces;
+using Portfolio.CoffeeMachine.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<TestService, TestService>();
+
+// CoffeeMachine
+builder.Services.AddScoped<ITaskRunner, CoffeeMakerUtil>();
 
 var app = builder.Build();
 

@@ -32,7 +32,7 @@ services:
         depends_on:
             - "backend"
     backend:
-        image: 'fabiosereno/portfolio.dotnet.api:0.0.5'
+        image: 'fabiosereno/portfolio.dotnet.api:0.0.6'
         ports:
             - '3000:3000'
         container_name: backend

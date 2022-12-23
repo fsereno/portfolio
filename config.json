@@ -193,19 +193,18 @@
             "order": 2
         },
         {
-            "name": "AWS .NET, Asynchronous Coffee Maker",
+            "name": "Asynchronous Coffee Machine",
             "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET, with a React UI",
             "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
             "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "awsDotNetCoreAsyncCoffeeMachine",
+            "folder": "coffeeMachine",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "api": "https://ro5qqsplje.execute-api.eu-west-2.amazonaws.com/Prod/api/values",
-                "run": "run",
-                "runAsync": "runasync"
+                "run": "/api/coffeeMachine/run",
+                "runAsync": "/api/coffeeMachine/runasync"
             },
             "labels": [0, 1, 2],
             "order": 3
