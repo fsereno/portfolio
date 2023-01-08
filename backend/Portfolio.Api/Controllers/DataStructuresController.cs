@@ -25,35 +25,120 @@ public class DataStructuresController : ControllerBase
         _coffeeMakerUtil = coffeeMakerUtil;
     }
 
-    [HttpGet("RunAsync")]
-    public async Task<List<LogItem>> RunAsync()
+    [HttpGet("AddQueueItemAsync")]
+    public async Task<IActionResult> AddQueueItemAsync()
     {
-        Log log;
+        log.LogInformation("AddQueueItemAsync endpoint hit");
 
-        try
+        AddRequestBody data;
+        string result = string.Empty;
+
+        using (StreamReader streamReader = new StreamReader(req.Body))
         {
-            log = await _coffeeMakerUtil.RunAsync();
+            var request = await streamReader.ReadToEndAsync();
+            data = JsonConvert.DeserializeObject<AddRequestBody>(request);
         }
-        catch (Exception exception)
-        {
-            throw new Exception("Unable to run process: " + exception.Message);
+
+        if (data != null) {
+
+            log.LogInformation("Adding item to the queue");
+
+            var queue = _queueUtil.Create(data.Collection);
+            _queueUtil.Add(queue, data.Item);
+
+            result = JsonConvert.SerializeObject(queue);
+
+            log.LogInformation("Added item to the queue");
         }
-        return log?.Get();
+
+        return new OkObjectResult(result);
     }
 
-    [HttpGet("Run")]
-    public List<LogItem> Run()
+    [HttpGet("RemoveQueueItemAsync")]
+    public Task<IActionResult> RemoveQueueItemAsync()
     {
-        Log log;
+        log.LogInformation("RemoveQueueItemAsync endpoint hit");
 
-        try
+        AddRequestBody data;
+        string result = string.Empty;
+
+        using (StreamReader streamReader = new StreamReader(req.Body))
         {
-            log = _coffeeMakerUtil.Run();
+            var request = await streamReader.ReadToEndAsync();
+            data = JsonConvert.DeserializeObject<AddRequestBody>(request);
         }
-        catch (Exception exception)
+
+        if (data != null) {
+
+            log.LogInformation("Removing item to the queue");
+
+            var queue = _queueUtil.Create(data.Collection);
+            _queueUtil.Remove(queue);
+
+            result = JsonConvert.SerializeObject(queue);
+
+            log.LogInformation("Removed item to the queue");
+        }
+
+        return new OkObjectResult(result);
+    }
+
+    [HttpGet("AddStackItemAsync")]
+    public async Task<IActionResult> AddStackItemAsync()
+    {
+        log.LogInformation("AddStackItemAsync endpoint hit");
+
+        AddRequestBody data;
+        string result = string.Empty;
+
+        using (StreamReader streamReader = new StreamReader(req.Body))
         {
-            throw new Exception("Unable to run process: " + exception.Message);
+            var request = await streamReader.ReadToEndAsync();
+            data = JsonConvert.DeserializeObject<AddRequestBody>(request);
         }
-        return log?.Get();
+
+        if (data != null) {
+
+            log.LogInformation("Adding item to the stack");
+
+            var stack = _stackUtil.Create(data.Collection);
+            _stackUtil.Add(stack, data.Item);
+
+            result = JsonConvert.SerializeObject(stack);
+
+            log.LogInformation("Added item to the stack");
+        }
+
+        return new OkObjectResult(result);
+    }
+
+    [HttpGet("RemoveStackItemAsync")]
+    public Task<IActionResult> RemoveStackItemAsync()
+    {
+        log.LogInformation("RemoveStackItemAsync endpoint hit");
+
+        AddRequestBody data;
+        string result = string.Empty;
+
+        using (StreamReader streamReader = new StreamReader(req.Body))
+        {
+            var request = await streamReader.ReadToEndAsync();
+            data = JsonConvert.DeserializeObject<AddRequestBody>(request);
+        }
+
+        if (data != null) {
+
+            log.LogInformation("Removing item to the stack");
+
+            var stack = _stackUtil.Create(data.Collection);
+            _stackUtil.Remove(stack);
+
+            result = JsonConvert.SerializeObject(stack);
+
+            log.LogInformation("Removed item to the stack");
+        }
+
+        return new OkObjectResult(result);
+        }
     }
 }
