@@ -18,6 +18,11 @@ builder.Services.AddTransient<TestService, TestService>();
 // CoffeeMachine
 builder.Services.AddScoped<ITaskRunner, CoffeeMakerUtil>();
 
+// DataStructures
+builder.Services.AddScoped<ICollectionUtil<Queue>, QueueUtil>();
+builder.Services.AddScoped<ICollectionUtil<Stack>, StackUtil>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

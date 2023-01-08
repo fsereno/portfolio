@@ -1,9 +1,13 @@
+using System;
+using System.IO;
+using System.Collections;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.Core.Types;
 using Portfolio.Core.Services;
-using Portfolio.CoffeeMachine.Interfaces;
-using Portfolio.CoffeeMachine.Utils;
-using Portfolio.CoffeeMachine.Models;
+using Portfolio.DataStructures.Interfaces;
+using Portfolio.DataStructures.Utils;
+using Portfolio.DataStructures.Models;
 
 namespace Portfolio.Api.Controllers;
 
@@ -11,134 +15,82 @@ namespace Portfolio.Api.Controllers;
 [Route("[controller]")]
 public class DataStructuresController : ControllerBase
 {
-    private readonly ILogger<TestController> _logger;
-    private readonly TestService _testService;
-    private readonly ITaskRunner _coffeeMakerUtil;
+    private readonly ILogger<DataStructuresController> _logger;
+    private readonly ICollectionUtil<Queue> _queueUtil;
+    private readonly ICollectionUtil<Stack> _stackUtil;
 
-    public DataStructuresController(
-        ILogger<TestController> logger,
-        TestService testService,
-        ITaskRunner coffeeMakerUtil)
+    public DataStructuresController(ILogger<DataStructuresController> logger, ICollectionUtil<Queue> queueUtil, ICollectionUtil<Stack> stackUtil)
     {
         _logger = logger;
-        _testService = testService;
-        _coffeeMakerUtil = coffeeMakerUtil;
+        _queueUtil = queueUtil;
+        _stackUtil = stackUtil;
     }
 
     [HttpGet("AddQueueItemAsync")]
-    public async Task<IActionResult> AddQueueItemAsync()
+    public IActionResult AddQueueItemAsync([FromBody] AddRequestBody data)
     {
-        log.LogInformation("AddQueueItemAsync endpoint hit");
+        _logger.LogInformation("AddQueueItemAsync endpoint hit");
 
-        AddRequestBody data;
         string result = string.Empty;
 
-        using (StreamReader streamReader = new StreamReader(req.Body))
-        {
-            var request = await streamReader.ReadToEndAsync();
-            data = JsonConvert.DeserializeObject<AddRequestBody>(request);
-        }
+        _logger.LogInformation("Adding item to the queue");
 
-        if (data != null) {
+        var queue = _queueUtil.Create(data.Collection);
+        _queueUtil.Add(queue, data.Item);
 
-            log.LogInformation("Adding item to the queue");
+        _logger.LogInformation("Added item to the queue");
 
-            var queue = _queueUtil.Create(data.Collection);
-            _queueUtil.Add(queue, data.Item);
-
-            result = JsonConvert.SerializeObject(queue);
-
-            log.LogInformation("Added item to the queue");
-        }
-
-        return new OkObjectResult(result);
+        return Ok(queue);
     }
 
     [HttpGet("RemoveQueueItemAsync")]
-    public Task<IActionResult> RemoveQueueItemAsync()
+    public IActionResult RemoveQueueItemAsync([FromBody] RemoveRequestBody data)
     {
-        log.LogInformation("RemoveQueueItemAsync endpoint hit");
+        _logger.LogInformation("RemoveQueueItemAsync endpoint hit");
 
-        AddRequestBody data;
         string result = string.Empty;
 
-        using (StreamReader streamReader = new StreamReader(req.Body))
-        {
-            var request = await streamReader.ReadToEndAsync();
-            data = JsonConvert.DeserializeObject<AddRequestBody>(request);
-        }
+        _logger.LogInformation("Removing item to the queue");
 
-        if (data != null) {
+        var queue = _queueUtil.Create(data.Collection);
+        _queueUtil.Remove(queue);
 
-            log.LogInformation("Removing item to the queue");
+        _logger.LogInformation("Removed item to the queue");
 
-            var queue = _queueUtil.Create(data.Collection);
-            _queueUtil.Remove(queue);
-
-            result = JsonConvert.SerializeObject(queue);
-
-            log.LogInformation("Removed item to the queue");
-        }
-
-        return new OkObjectResult(result);
+        return Ok(queue);
     }
 
     [HttpGet("AddStackItemAsync")]
-    public async Task<IActionResult> AddStackItemAsync()
+    public IActionResult AddStackItemAsync([FromBody] AddRequestBody data)
     {
-        log.LogInformation("AddStackItemAsync endpoint hit");
+        _logger.LogInformation("AddStackItemAsync endpoint hit");
 
-        AddRequestBody data;
         string result = string.Empty;
 
-        using (StreamReader streamReader = new StreamReader(req.Body))
-        {
-            var request = await streamReader.ReadToEndAsync();
-            data = JsonConvert.DeserializeObject<AddRequestBody>(request);
-        }
+        _logger.LogInformation("Adding item to the stack");
 
-        if (data != null) {
+        var stack = _stackUtil.Create(data.Collection);
+        _stackUtil.Add(stack, data.Item);
 
-            log.LogInformation("Adding item to the stack");
+        _logger.LogInformation("Added item to the stack");
 
-            var stack = _stackUtil.Create(data.Collection);
-            _stackUtil.Add(stack, data.Item);
-
-            result = JsonConvert.SerializeObject(stack);
-
-            log.LogInformation("Added item to the stack");
-        }
-
-        return new OkObjectResult(result);
+        return Ok(stack);
     }
 
     [HttpGet("RemoveStackItemAsync")]
-    public Task<IActionResult> RemoveStackItemAsync()
+    public IActionResult RemoveStackItemAsync([FromBody] RemoveRequestBody data)
     {
-        log.LogInformation("RemoveStackItemAsync endpoint hit");
+        _logger.LogInformation("RemoveStackItemAsync endpoint hit");
 
-        AddRequestBody data;
         string result = string.Empty;
 
-        using (StreamReader streamReader = new StreamReader(req.Body))
-        {
-            var request = await streamReader.ReadToEndAsync();
-            data = JsonConvert.DeserializeObject<AddRequestBody>(request);
-        }
+        _logger.LogInformation("Removing item to the stack");
 
-        if (data != null) {
+        var stack = _stackUtil.Create(data.Collection);
+        _stackUtil.Remove(stack);
 
-            log.LogInformation("Removing item to the stack");
+        _logger.LogInformation("Removed item to the stack");
 
-            var stack = _stackUtil.Create(data.Collection);
-            _stackUtil.Remove(stack);
-
-            result = JsonConvert.SerializeObject(stack);
-
-            log.LogInformation("Removed item to the stack");
-        }
-
-        return new OkObjectResult(result);
-        }
+        return Ok(stack);
     }
 }

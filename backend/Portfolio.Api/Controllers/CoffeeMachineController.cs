@@ -11,12 +11,12 @@ namespace Portfolio.Api.Controllers;
 [Route("[controller]")]
 public class CoffeeMachineController : ControllerBase
 {
-    private readonly ILogger<TestController> _logger;
+    private readonly ILogger<CoffeeMachineController> _logger;
     private readonly TestService _testService;
     private readonly ITaskRunner _coffeeMakerUtil;
 
     public CoffeeMachineController(
-        ILogger<TestController> logger,
+        ILogger<CoffeeMachineController> logger,
         TestService testService,
         ITaskRunner coffeeMakerUtil)
     {
