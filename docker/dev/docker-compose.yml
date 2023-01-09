@@ -22,7 +22,7 @@ services:
         depends_on:
             - "coffeeMachine"
     nginx:
-        image: 'fabiosereno/portfolio.nginx.dev:0.0.5'
+        image: 'fabiosereno/portfolio.nginx.dev:0.0.6'
         ports:
             - '80:80'
         container_name: frontend
@@ -36,6 +36,13 @@ services:
         ports:
             - '3001:3001'
         container_name: coffeeMachine
+        networks:
+            - backend
+    dataStructures:
+        image: 'fabiosereno/portfolio.data-structures:0.0.1'
+        ports:
+            - '3002:3002'
+        container_name: dataStructures
         networks:
             - backend
 networks:

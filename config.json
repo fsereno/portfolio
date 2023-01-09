@@ -129,10 +129,10 @@
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "addQueueItem": "/api/dataStructures/addQueueItemAsync",
-                "removeQueueItem": "/api/dataStructures/removeQueueItemAsync",
-                "addStackItem": "/api/dataStructures/addStackItemAsync",
-                "removeStackItem": "/api/dataStructures/removeStackItemAsync"
+                "addQueueItem": "/backend/dataStructures/api/addQueueItemAsync",
+                "removeQueueItem": "/backend/dataStructures/api/removeQueueItemAsync",
+                "addStackItem": "/backend/dataStructures/api/addStackItemAsync",
+                "removeStackItem": "/backend/dataStructures/api/removeStackItemAsync"
             },
             "labels": [0, 1, 2],
             "featured": false
