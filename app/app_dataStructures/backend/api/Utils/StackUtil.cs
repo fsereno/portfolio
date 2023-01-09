@@ -3,24 +3,24 @@ using Portfolio.DataStructures.Interfaces;
 
 namespace Portfolio.DataStructures.Utils
 {
-    public class StackUtil : ICollectionUtil<Stack>
+    public class StackUtil : ICollectionUtil<Stack<string>>
     {
         /// </inheritdoc>
-        public void Add(Stack collection, string value)
+        public void Add(Stack<string> collection, string value)
         {
             collection?.Push(value);
         }
 
         /// </inheritdoc>
-        public void Remove(Stack collection)
+        public void Remove(Stack<string> collection)
         {
             collection?.Pop();
         }
 
         /// </inheritdoc>
-        public Stack Create(string[] array = null)
+        public Stack<string> Create(string[] array = null)
         {
-            var collection = new Stack();
+            var collection = new Stack<string>();
 
             if (array != null)
             {

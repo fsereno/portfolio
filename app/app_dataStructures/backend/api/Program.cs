@@ -1,10 +1,10 @@
 using Portfolio.Core.Services;
-using Portfolio.CoffeeMachine.Interfaces;
-using Portfolio.CoffeeMachine.Utils;
+using Portfolio.DataStructures.Interfaces;
+using Portfolio.DataStructures.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("http://*:3000");
+builder.WebHost.UseUrls("http://*:3002");
 
 // Add services to the container.
 
@@ -15,12 +15,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<TestService, TestService>();
 
-// CoffeeMachine
-builder.Services.AddScoped<ITaskRunner, CoffeeMakerUtil>();
-
-// DataStructures
-builder.Services.AddScoped<ICollectionUtil<Queue>, QueueUtil>();
-builder.Services.AddScoped<ICollectionUtil<Stack>, StackUtil>();
+// Services
+builder.Services.AddScoped<ICollectionUtil<Queue<string>>, QueueUtil>();
+builder.Services.AddScoped<ICollectionUtil<Stack<string>>, StackUtil>();
 
 
 var app = builder.Build();

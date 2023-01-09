@@ -3,24 +3,24 @@ using Portfolio.DataStructures.Interfaces;
 
 namespace Portfolio.DataStructures.Utils
 {
-    public class QueueUtil : ICollectionUtil<Queue>
+    public class QueueUtil : ICollectionUtil<Queue<string>>
     {
         /// </inheritdoc>
-        public void Add(Queue collection, string value)
+        public void Add(Queue<string> collection, string value)
         {
             collection?.Enqueue(value);
         }
 
         /// </inheritdoc>
-        public void Remove(Queue collection)
+        public void Remove(Queue<string> collection)
         {
             collection?.Dequeue();
         }
 
         /// </inheritdoc>
-        public Queue Create(string[] array = null)
+        public Queue<string> Create(string[] array = null)
         {
-            var collection = array != null ? new Queue(array) : new Queue();
+            var collection = array != null ? new Queue<string>(array) : new Queue<string>();
 
             return collection;
         }

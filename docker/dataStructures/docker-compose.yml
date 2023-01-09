@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+    dataStructures:
+        image: 'fabiosereno/portfolio.data-structures:0.0.1'
+        ports:
+            - '3002:3002'
+        container_name: dataStructures
+        networks:
+            - backend
+networks:
+    frontend:
+    backend:

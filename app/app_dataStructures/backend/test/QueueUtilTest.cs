@@ -7,8 +7,8 @@ namespace Portfolio.DataStructures.Test
 {
     public class QueueUtilTest
     {
-        private readonly Queue _queue;
-        private readonly ICollectionUtil<Queue> _queueUtil;
+        private readonly Queue<string> _queue;
+        private readonly ICollectionUtil<Queue<string>> _queueUtil;
 
         public QueueUtilTest()
         {
@@ -56,7 +56,7 @@ namespace Portfolio.DataStructures.Test
         [Fact]
         public void Create_ShouldCreateQueueWhenCollectionPassedIsNull()
         {
-            Assert.IsType<Queue>(_queue);
+            Assert.IsType<Queue<string>>(_queue);
         }
 
         [Fact]

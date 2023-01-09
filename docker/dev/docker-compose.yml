@@ -20,9 +20,9 @@ services:
             - frontend
             - backend
         depends_on:
-            - "backend"
+            - "coffeeMachine"
     nginx:
-        image: 'fabiosereno/portfolio.nginx.dev:0.0.3'
+        image: 'fabiosereno/portfolio.nginx.dev:0.0.5'
         ports:
             - '80:80'
         container_name: frontend
@@ -30,12 +30,12 @@ services:
             - frontend
             - backend
         depends_on:
-            - "backend"
-    backend:
-        image: 'fabiosereno/portfolio.dotnet.api:0.0.6'
+            - "coffeeMachine"
+    coffeeMachine:
+        image: 'fabiosereno/portfolio.coffee-machine:0.0.4'
         ports:
-            - '3000:3000'
-        container_name: backend
+            - '3001:3001'
+        container_name: coffeeMachine
         networks:
             - backend
 networks:

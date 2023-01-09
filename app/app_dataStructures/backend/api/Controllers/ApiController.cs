@@ -9,24 +9,24 @@ using Portfolio.DataStructures.Interfaces;
 using Portfolio.DataStructures.Utils;
 using Portfolio.DataStructures.Models;
 
-namespace Portfolio.Api.Controllers;
+namespace Portfolio.DataStructures.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class DataStructuresController : ControllerBase
+public class ApiController : ControllerBase
 {
-    private readonly ILogger<DataStructuresController> _logger;
-    private readonly ICollectionUtil<Queue> _queueUtil;
-    private readonly ICollectionUtil<Stack> _stackUtil;
+    private readonly ILogger<ApiController> _logger;
+    private readonly ICollectionUtil<Queue<string>> _queueUtil;
+    private readonly ICollectionUtil<Stack<string>> _stackUtil;
 
-    public DataStructuresController(ILogger<DataStructuresController> logger, ICollectionUtil<Queue> queueUtil, ICollectionUtil<Stack> stackUtil)
+    public ApiController(ILogger<ApiController> logger, ICollectionUtil<Queue<string>> queueUtil, ICollectionUtil<Stack<string>> stackUtil)
     {
         _logger = logger;
         _queueUtil = queueUtil;
         _stackUtil = stackUtil;
     }
 
-    [HttpGet("AddQueueItemAsync")]
+    [HttpPost("AddQueueItemAsync")]
     public IActionResult AddQueueItemAsync([FromBody] AddRequestBody data)
     {
         _logger.LogInformation("AddQueueItemAsync endpoint hit");
@@ -43,7 +43,7 @@ public class DataStructuresController : ControllerBase
         return Ok(queue);
     }
 
-    [HttpGet("RemoveQueueItemAsync")]
+    [HttpPost("RemoveQueueItemAsync")]
     public IActionResult RemoveQueueItemAsync([FromBody] RemoveRequestBody data)
     {
         _logger.LogInformation("RemoveQueueItemAsync endpoint hit");
@@ -60,7 +60,7 @@ public class DataStructuresController : ControllerBase
         return Ok(queue);
     }
 
-    [HttpGet("AddStackItemAsync")]
+    [HttpPost("AddStackItemAsync")]
     public IActionResult AddStackItemAsync([FromBody] AddRequestBody data)
     {
         _logger.LogInformation("AddStackItemAsync endpoint hit");
@@ -77,7 +77,7 @@ public class DataStructuresController : ControllerBase
         return Ok(stack);
     }
 
-    [HttpGet("RemoveStackItemAsync")]
+    [HttpPost("RemoveStackItemAsync")]
     public IActionResult RemoveStackItemAsync([FromBody] RemoveRequestBody data)
     {
         _logger.LogInformation("RemoveStackItemAsync endpoint hit");

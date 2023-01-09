@@ -5,18 +5,18 @@ using Portfolio.CoffeeMachine.Interfaces;
 using Portfolio.CoffeeMachine.Utils;
 using Portfolio.CoffeeMachine.Models;
 
-namespace Portfolio.Api.Controllers;
+namespace Portfolio.CoffeeMachine.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CoffeeMachineController : ControllerBase
+public class ApiController : ControllerBase
 {
-    private readonly ILogger<CoffeeMachineController> _logger;
+    private readonly ILogger<ApiController> _logger;
     private readonly TestService _testService;
     private readonly ITaskRunner _coffeeMakerUtil;
 
-    public CoffeeMachineController(
-        ILogger<CoffeeMachineController> logger,
+    public ApiController(
+        ILogger<ApiController> logger,
         TestService testService,
         ITaskRunner coffeeMakerUtil)
     {
