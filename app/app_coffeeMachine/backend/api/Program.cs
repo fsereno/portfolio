@@ -15,10 +15,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<TestService, TestService>();
 
-// CoffeeMachine
+// Services
 builder.Services.AddScoped<ITaskRunner, CoffeeMakerUtil>();
 
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
+
+app.MapHealthChecks("/healthcheck");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

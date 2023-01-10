@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
     coffeeMachine:
-        image: 'fabiosereno/portfolio.coffee-machine:0.0.4'
+        image: 'fabiosereno/portfolio.coffee-machine:0.0.15'
         ports:
             - '3001:3001'
         container_name: coffeeMachine

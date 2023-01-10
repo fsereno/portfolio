@@ -32,14 +32,14 @@ services:
         depends_on:
             - "coffeeMachine"
     coffeeMachine:
-        image: 'fabiosereno/portfolio.coffee-machine:0.0.4'
+        image: 'fabiosereno/portfolio.coffee-machine:0.0.15'
         ports:
             - '3001:3001'
         container_name: coffeeMachine
         networks:
             - backend
     dataStructures:
-        image: 'fabiosereno/portfolio.data-structures:0.0.1'
+        image: 'fabiosereno/portfolio.data-structures:0.0.5'
         ports:
             - '3002:3002'
         container_name: dataStructures

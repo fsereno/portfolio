@@ -13,14 +13,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<TestService, TestService>();
-
 // Services
 builder.Services.AddScoped<ICollectionUtil<Queue<string>>, QueueUtil>();
 builder.Services.AddScoped<ICollectionUtil<Stack<string>>, StackUtil>();
 
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
+
+app.MapHealthChecks("/healthcheck");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

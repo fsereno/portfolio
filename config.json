@@ -119,9 +119,9 @@
             "featured": false
         },
         {
-            "name": "Azure Functions .NET, Data Structures",
-            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET, with a React UI",
-            "description": "Using Azure Functions serverless compute and .NET, with a React user interface.",
+            "name": "Data Structures",
+            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET",
+            "description": ".NET Web API with a React UI",
             "searchTerms": "Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "dataStructures",
             "active": true,
@@ -192,7 +192,7 @@
             "order": 2
         },
         {
-            "name": "Asynchronous Coffee Machine",
+            "name": "Coffee Machine",
             "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine",
             "description": ".NET Web API with a React UI",
             "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
