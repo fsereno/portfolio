@@ -14,11 +14,12 @@ import { FormComponent } from './formComponent';
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 
 const PUZZLE = "3 x 2 - 1 =";
+const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("dataStructures");
-const ADD_QUEUE_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.addQueueItem}`;
-const REMOVE_QUEUE_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.removeQueueItem}`;
-const ADD_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.addStackItem}`;
-const REMOVE_STACK_ITEM_ENDPOINT = `${APP_CONFIG.endpoints.removeStackItem}`;
+const ADD_QUEUE_ITEM_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.addQueueItem}`;
+const REMOVE_QUEUE_ITEM_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.removeQueueItem}`;
+const ADD_STACK_ITEM_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.addStackItem}`;
+const REMOVE_STACK_ITEM_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.removeStackItem}`;
 class DataStructuresApp extends React.Component {
   constructor(props) {
     super(props);
