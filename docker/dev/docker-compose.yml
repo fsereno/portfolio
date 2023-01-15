@@ -31,6 +31,7 @@ services:
             - backend
         depends_on:
             - "coffeeMachine"
+            - "dataStructures"
     coffeeMachine:
         image: 'fabiosereno/portfolio.coffee-machine:0.0.15'
         ports:
