@@ -103,27 +103,26 @@
             "labels": [0]
         },
         {
-            "name": "Azure Functions .NET, Unique Data Entry",
+            "name": "Unique Data Entry Application",
             "subHeading": "Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries, with a React UI",
-            "description": "Using Azure Functions serverless compute and .NET, with a React user interface.",
-            "searchTerms": "Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "AzureDotNetCoreUniqueDataEntryApi",
+            "description": ".NET Web API with a React UI.",
+            "searchTerms": "Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "UniqueDataEntry",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "api": "https://app-azure-dotnetcore-unique-data-entry-api.azurewebsites.net/api",
-                "canItemBeAddedAsync": "canItemBeAddedAsync"
+                "canItemBeAddedAsync": "UniqueDataEntry/api/canItemBeAddedAsync"
             },
             "labels": [0, 1, 2],
             "featured": false
         },
         {
             "name": "Data Structures",
-            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET",
-            "description": ".NET Web API with a React UI",
-            "searchTerms": "C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack",
+            "description": ".NET Web API with a React UI.",
+            "searchTerms": "Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "dataStructures",
             "active": true,
             "include": true,
@@ -195,7 +194,7 @@
         {
             "name": "Coffee Machine",
             "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine",
-            "description": ".NET Web API with a React UI",
+            "description": ".NET Web API with a React UI.",
             "searchTerms": "Cloud,C#,dotnet,.net,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "coffeeMachine",
             "active": true,
