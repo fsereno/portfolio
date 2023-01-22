@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+    uniqueDataEntry:
+        image: 'fabiosereno/portfolio.unique-data-entry:0.0.2'
+        ports:
+            - '3003:3003'
+        container_name: uniqueDataEntry
+        networks:
+            - backend
+networks:
+    frontend:
+    backend:

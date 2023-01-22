@@ -107,13 +107,13 @@
             "subHeading": "Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries, with a React UI",
             "description": ".NET Web API with a React UI.",
             "searchTerms": "Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "UniqueDataEntry",
+            "folder": "uniqueDataEntry",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "canItemBeAddedAsync": "UniqueDataEntry/api/canItemBeAddedAsync"
+                "canItemBeAddedAsync": "uniqueDataEntry/api/canItemBeAddedAsync"
             },
             "labels": [0, 1, 2],
             "featured": false

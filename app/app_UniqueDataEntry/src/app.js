@@ -13,8 +13,9 @@ import { FormComponent } from './formComponent';
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 
 const PUZZLE = "4 x 4 - 2 =";
-const APP_CONFIG = ConfigUtil.get("AzureDotNetCoreUniqueDataEntryApi");
-const CAN_IT_BE_ADDED_ASYNC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.canItemBeAddedAsync}`;
+const CONFIG = ConfigUtil.get();
+const APP_CONFIG = ConfigUtil.get("uniqueDataEntry");
+const CAN_IT_BE_ADDED_ASYNC_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.canItemBeAddedAsync}`;
 const FIRST_NAME_INPUT = "firstNameInput";
 const SECOND_NAME_INPUT = "secondNameInput";
 const CONTACT_INPUT = "contactInput";
@@ -90,6 +91,7 @@ class UniqueDataEntryApp extends React.Component {
       url: CAN_IT_BE_ADDED_ASYNC_ENDPOINT,
       data: JSON.stringify(data),
       type: "POST",
+      contentType: "application/json",
       success: (response) => {
         if (response === true) {
           let items = [...this.state.items];
