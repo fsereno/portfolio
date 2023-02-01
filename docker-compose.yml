@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
     nginx:
-        image: 'fabiosereno/portfolio.nginx:0.0.25'
+        image: 'fabiosereno/portfolio.nginx:0.0.26'
         x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
         ports:
             - '80:80'
@@ -13,6 +13,7 @@ services:
         depends_on:
             - "coffeeMachine"
             - "dataStructures"
+            - "uniqueDataEntry"
     coffeeMachine:
         image: 'fabiosereno/portfolio.coffee-machine:0.0.15'
         x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
@@ -27,6 +28,14 @@ services:
         ports:
             - '3002:3002'
         container_name: dataStructures
+        networks:
+            - backend
+    uniqueDataEntry:
+        image: 'fabiosereno/portfolio.unique-data-entry:0.0.2'
+        x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
+        ports:
+            - '3003:3003'
+        container_name: uniqueDataEntry
         networks:
             - backend
 networks:
