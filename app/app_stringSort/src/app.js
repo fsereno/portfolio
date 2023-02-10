@@ -12,8 +12,9 @@ import { FormComponent } from "./formComponent";
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 
 const PUZZLE = "4 x 4 - 5 =";
-const APP_CONFIG = ConfigUtil.get("awsDotNetCoreStringSortApi");
-const SORT_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sort}`;
+const CONFIG = ConfigUtil.get();
+const APP_CONFIG = ConfigUtil.get("stringSort");
+const SORT_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.sort}`;
 
 class StringSort extends React.Component {
   constructor(props) {

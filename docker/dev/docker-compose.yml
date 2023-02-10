@@ -21,6 +21,8 @@ services:
             - backend
         depends_on:
             - "coffeeMachine"
+            - "dataStructures"
+            - "uniqueDataEntry"
     nginx:
         image: 'fabiosereno/portfolio.nginx.dev:0.0.8'
         ports:
