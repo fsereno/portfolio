@@ -1,10 +1,6 @@
 FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 
-ENV ASPNETCORE_URLS=http://+:3001
-
 WORKDIR /app
-
-EXPOSE 3001
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 

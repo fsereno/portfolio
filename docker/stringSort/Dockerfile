@@ -1,10 +1,6 @@
 FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 
-#ENV ASPNETCORE_URLS=http://+:3004 < this is not needed, commenting out as test
-
 WORKDIR /app
-
-#EXPOSE 3002 < this is not needed either ?
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 
