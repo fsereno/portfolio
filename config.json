@@ -156,18 +156,17 @@
             "featured": false
         },
         {
-            "name": "AWS .NET, Natural Sorting Algorithm",
-            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET, passing in a custom comparer, with a React UI",
-            "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
-            "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "awsDotNetCoreStringSortApi",
+            "name": "Natural Sorting Algorithm",
+            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET, passing in a custom comparer",
+            "description": ".NET Web API with a React UI.",
+            "searchTerms": "Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "stringSort",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "api": "https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values",
-                "sort": "sort"
+                "sort": "stringSort/api/sort"
             },
             "labels": [0, 1, 2],
             "featured": false
