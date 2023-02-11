@@ -23,8 +23,11 @@ services:
             - "coffeeMachine"
             - "dataStructures"
             - "uniqueDataEntry"
+            - "stringSort"
+        mem_limit: 1G
+        cpus: 0.5
     nginx:
-        image: 'fabiosereno/portfolio.nginx.dev:0.0.8'
+        image: 'fabiosereno/portfolio.nginx.dev:0.0.9'
         ports:
             - '80:80'
         container_name: frontend
@@ -34,6 +37,8 @@ services:
         depends_on:
             - "coffeeMachine"
             - "dataStructures"
+        mem_limit: 500M
+        cpus: 0.5
     coffeeMachine:
         image: 'fabiosereno/portfolio.coffee-machine:0.0.15'
         ports:
@@ -41,6 +46,8 @@ services:
         container_name: coffeeMachine
         networks:
             - backend
+        mem_limit: 1G
+        cpus: 0.5
     dataStructures:
         image: 'fabiosereno/portfolio.data-structures:0.0.5'
         ports:
@@ -48,6 +55,8 @@ services:
         container_name: dataStructures
         networks:
             - backend
+        mem_limit: 1G
+        cpus: 0.5
     uniqueDataEntry:
         image: 'fabiosereno/portfolio.unique-data-entry:0.0.2'
         ports:
@@ -55,6 +64,17 @@ services:
         container_name: uniqueDataEntry
         networks:
             - backend
+        mem_limit: 1G
+        cpus: 0.5
+    stringSort:
+        image: 'fabiosereno/portfolio.string-sort:0.0.1'
+        ports:
+            - '3004:3004'
+        container_name: stringSort
+        networks:
+            - backend
+        mem_limit: 1G
+        cpus: 0.5
 networks:
     frontend:
     backend:
