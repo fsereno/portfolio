@@ -14,6 +14,9 @@ services:
             - "coffeeMachine"
             - "dataStructures"
             - "uniqueDataEntry"
+            - "stringSort"
+        mem_limit: 500M
+        cpus: 0.2
     coffeeMachine:
         image: 'fabiosereno/portfolio.coffee-machine:0.0.15'
         x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
@@ -22,6 +25,8 @@ services:
         container_name: coffeeMachine
         networks:
             - backend
+        mem_limit: 1G
+        cpus: 0.2
     dataStructures:
         image: 'fabiosereno/portfolio.data-structures:0.0.5'
         x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
@@ -30,6 +35,8 @@ services:
         container_name: dataStructures
         networks:
             - backend
+        mem_limit: 1G
+        cpus: 0.2
     uniqueDataEntry:
         image: 'fabiosereno/portfolio.unique-data-entry:0.0.2'
         x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
@@ -38,6 +45,17 @@ services:
         container_name: uniqueDataEntry
         networks:
             - backend
+        mem_limit: 1G
+        cpus: 0.2
+    stringSort:
+        image: 'fabiosereno/portfolio.string-sort:0.0.1'
+        ports:
+            - '3004:3004'
+        container_name: stringSort
+        networks:
+            - backend
+        mem_limit: 1G
+        cpus: 0.2
 networks:
     frontend:
     backend:
