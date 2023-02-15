@@ -4,6 +4,7 @@ https://docs.docker.com/cloud/ecs-integration/
 
 AWS via ecs
 http://portf-loadb-u4cpww4ao4s2-5b64feaec4f7973b.elb.eu-west-2.amazonaws.com/
+http://portf-loadb-19hy77v87epzl-70b425fe12805756.elb.eu-west-2.amazonaws.com/
 
 
 
