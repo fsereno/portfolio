@@ -23,7 +23,7 @@ services:
             - "dataStructures"
             - "uniqueDataEntry"
             - "stringSort"
-        mem_limit: 1G
+        mem_limit: 500M
         cpus: 0.2
     nginx:
         image: 'fabiosereno/portfolio.nginx.dev:0.0.9'
@@ -45,7 +45,7 @@ services:
         container_name: coffeeMachine
         networks:
             - backend
-        mem_limit: 1G
+        mem_limit: 500M
         cpus: 0.2
     dataStructures:
         image: 'fabiosereno/portfolio.data-structures:0.0.5'
@@ -54,7 +54,7 @@ services:
         container_name: dataStructures
         networks:
             - backend
-        mem_limit: 1G
+        mem_limit: 500M
         cpus: 0.2
     uniqueDataEntry:
         image: 'fabiosereno/portfolio.unique-data-entry:0.0.2'
@@ -63,7 +63,7 @@ services:
         container_name: uniqueDataEntry
         networks:
             - backend
-        mem_limit: 1G
+        mem_limit: 500M
         cpus: 0.2
     stringSort:
         image: 'fabiosereno/portfolio.string-sort:0.0.1'
@@ -72,7 +72,7 @@ services:
         container_name: stringSort
         networks:
             - backend
-        mem_limit: 1G
+        mem_limit: 500M
         cpus: 0.2
 networks:
     frontend:
