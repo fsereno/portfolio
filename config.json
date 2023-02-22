@@ -139,18 +139,17 @@
         },
         {
             "name": "AWS .NET, Complex Entity Sorting Algorithm",
-            "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types, with a React UI",
-            "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
-            "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "awsDotNetCoreEntitySortApi",
+            "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
+            "description": ".NET Web API with a React UI.",
+            "searchTerms": "Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "entitySort",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "api": "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees",
-                "sortSalaryAsc": "sort/salary/asc",
-                "sortSalaryDesc": "sort/salary/desc"
+                "sortSalaryAsc": "entitySort/sort/salary/asc",
+                "sortSalaryDesc": "entitySort/sort/salary/desc"
             },
             "labels": [0, 1, 2],
             "featured": false

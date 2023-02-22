@@ -15,9 +15,10 @@ import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/index';
 import { EmployeeTableComponent } from './employeeTableComponent';
 
 const PUZZLE = "7 x 2 + 1 =";
-const APP_CONFIG = ConfigUtil.get("awsDotNetCoreEntitySortApi");
-const SORT_SALARY_ASC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryAsc}`;
-const SORT_SALARY_DESC_ENDPOINT = `${APP_CONFIG.endpoints.api}/${APP_CONFIG.endpoints.sortSalaryDesc}`;
+const CONFIG = ConfigUtil.get();
+const APP_CONFIG = ConfigUtil.get("entitySort");
+const SORT_SALARY_ASC_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.sortSalaryAsc}`;
+const SORT_SALARY_DESC_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.sortSalaryDesc}`;
 
 class EntitySort extends React.Component {
   constructor(props) {
