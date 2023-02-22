@@ -172,25 +172,6 @@
             "featured": false
         },
         {
-            "name": "AWS .NET, Shopping Basket List Builder",
-            "subHeading": "A basic shopping basket application, with data processing handled by a Serverless .NET RESTful API, with a React UI",
-            "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
-            "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "awsDotNetCoreShoppingCart",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "endpoints" : {
-                "api": "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket",
-                "get": "get",
-                "add": "add",
-                "delete": "delete",
-                "update": "update"
-            },
-            "labels": [0, 1, 2],
-            "order": 2
-        },
-        {
             "name": "Coffee Machine",
             "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine",
             "description": ".NET Web API with a React UI.",
