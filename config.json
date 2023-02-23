@@ -148,8 +148,8 @@
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "sortSalaryAsc": "entitySort/sort/salary/asc",
-                "sortSalaryDesc": "entitySort/sort/salary/desc"
+                "sortSalaryAsc": "entitySort/api/sort/salary/asc",
+                "sortSalaryDesc": "entitySort/api/sort/salary/desc"
             },
             "labels": [0, 1, 2],
             "featured": false

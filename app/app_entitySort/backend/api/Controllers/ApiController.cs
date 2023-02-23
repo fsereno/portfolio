@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Portfolio.EntitySort.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using Portfolio.EntitySort.Interfaces;
+using Portfolio.EntitySort.Models;
 
 namespace Portfolio.EntitySort.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class ApiController : ControllerBase
     {
         private readonly IEmployeeSortUtil _employeeSortUtil;

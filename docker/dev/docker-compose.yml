@@ -23,10 +23,11 @@ services:
             - "dataStructures"
             - "uniqueDataEntry"
             - "stringSort"
+            - "entitySort"
         mem_limit: 500M
         cpus: 0.2
     nginx:
-        image: 'fabiosereno/portfolio.nginx.dev:0.0.9'
+        image: 'fabiosereno/portfolio.nginx.dev:0.1.0'
         ports:
             - '80:80'
         container_name: frontend
@@ -36,6 +37,9 @@ services:
         depends_on:
             - "coffeeMachine"
             - "dataStructures"
+            - "uniqueDataEntry"
+            - "stringSort"
+            - "entitySort"
         mem_limit: 500M
         cpus: 0.2
     coffeeMachine:
@@ -70,6 +74,15 @@ services:
         ports:
             - '3004:3004'
         container_name: stringSort
+        networks:
+            - backend
+        mem_limit: 500M
+        cpus: 0.2
+    entitySort:
+        image: 'fabiosereno/portfolio.entity-sort:0.0.4'
+        ports:
+            - '3005:3005'
+        container_name: entitySort
         networks:
             - backend
         mem_limit: 500M

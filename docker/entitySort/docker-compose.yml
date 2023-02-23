@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
     entitySort:
-        image: 'fabiosereno/portfolio.entity-sort:0.0.1'
+        image: 'fabiosereno/portfolio.entity-sort:0.0.4'
         ports:
             - '3005:3005'
         container_name: entitySort
