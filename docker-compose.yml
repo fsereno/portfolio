@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
     nginx:
-        image: 'fabiosereno/portfolio.nginx:0.0.27'
+        image: 'fabiosereno/portfolio.nginx:0.0.28'
         x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
         ports:
             - '80:80'
@@ -15,6 +15,7 @@ services:
             - "dataStructures"
             - "uniqueDataEntry"
             - "stringSort"
+            - "entitySort"
         mem_limit: 500M
         cpus: 0.2
     coffeeMachine:
@@ -53,6 +54,16 @@ services:
         ports:
             - '3004:3004'
         container_name: stringSort
+        networks:
+            - backend
+        mem_limit: 500M
+        cpus: 0.2
+    entitySort:
+        image: 'fabiosereno/portfolio.entity-sort:0.0.4'
+        x-aws-pull_credentials: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
+        ports:
+            - '3005:3005'
+        container_name: entitySort
         networks:
             - backend
         mem_limit: 500M
