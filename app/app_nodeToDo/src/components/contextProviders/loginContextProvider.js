@@ -5,39 +5,33 @@ import { CognitoUser, AuthenticationDetails, CognitoUserPool } from 'amazon-cogn
 import { LoginContext } from '../../contexts';
 import { SUCCESS } from "../../constants";
 
-export const LoginContextProvider = ({ children, poolData }) => {
+export const LoginContextProvider = ({ children }) => {
 
     const [authenticated, setAuthenticated] = useState(false);
 
-    const userPool = new CognitoUserPool(poolData);
+    //const userPool = new CognitoUserPool(poolData);
 
     const token = useRef();
     const username = useRef();
 
     const getCurrentUser = () => new Promise((resolve, reject) => {
 
-        const currentUser = userPool.getCurrentUser();
+        const currentUser = { jwtToken: "token" }; //userPool.getCurrentUser();
 
         if (currentUser != null) {
-
-            currentUser.getSession(err => {
-
-                if (err != null && currentUser.signInUserSession != null) {
-                    reject(undefined);
-                    console.error(err.message);
-                } else {
-                    resolve(currentUser);
-                }
-            });
+            resolve(currentUser);
         } else {
             reject(undefined);
         }
     });
 
     const logoutUser = () => new Promise((resolve, reject) => {
+
         getCurrentUser().then(currentUser => {
             if (currentUser) {
-                currentUser.globalSignOut({
+                setAuthenticated(false);
+                resolve({ success: true });
+                /*currentUser.globalSignOut({
                     onSuccess: function (result) {
                         if (result === SUCCESS) {
                             setAuthenticated(false);
@@ -47,7 +41,7 @@ export const LoginContextProvider = ({ children, poolData }) => {
                     onFailure: function (error) {
                         reject({ success: false, error });
                     },
-                });
+                });*/
             }
 
         }).catch((error) => {
@@ -57,7 +51,9 @@ export const LoginContextProvider = ({ children, poolData }) => {
 
     const loginUser = (username, password) => new Promise((resolve, reject) => {
 
-        const authenticationData = {
+        setAuthenticated(true);
+        resolve({ success: true });
+        /*const authenticationData = {
             Username: username,
             Password: password,
         };
@@ -79,11 +75,11 @@ export const LoginContextProvider = ({ children, poolData }) => {
             onFailure: function (error) {
                 reject({ success: false, error });
             },
-        });
+        });*/
     });
 
     useLayoutEffect(() => {
-        getCurrentUser()
+        /*getCurrentUser()
             .then(currentUser => {
                 if (currentUser) {
 
@@ -95,7 +91,7 @@ export const LoginContextProvider = ({ children, poolData }) => {
                     }
                 }
             })
-            .catch(() => setAuthenticated(false));
+            .catch(() => setAuthenticated(false));*/
     }, [authenticated]);
 
     const context = {
