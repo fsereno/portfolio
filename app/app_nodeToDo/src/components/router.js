@@ -8,6 +8,7 @@ import { LOGIN, MANAGE, LOGOUT, REGISTER, EDIT } from '../constants';
 import { Login } from './pages/login';
 import { Manage } from './pages/manage';
 import { LoginContext } from '../contexts';
+import { ConfigContext } from '../../../js/modules/react/configContextProvider';
 import { Logout } from './pages/logout';
 import { Register } from './pages/register';
 import { Edit } from './pages/edit';
@@ -16,6 +17,7 @@ import { ProtectedRoute } from './protectedRoute';
 export const Router = () => {
 
     const loginContext = React.useContext(LoginContext);
+    const configContext = React.useContext(ConfigContext)
 
     return (
         <HashRouter>
@@ -24,6 +26,7 @@ export const Router = () => {
                     {!loginContext.authenticated &&
                         <>
                             <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={LOGIN}>Login</NavLink>
+                            { configContext.appConfig.regiesterEnabled && <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={REGISTER}>Create a user</NavLink> }
                         </>
                     }
                     {loginContext.authenticated &&

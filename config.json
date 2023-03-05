@@ -260,7 +260,8 @@
             "endpoints": {
                 "base": "https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com",
                 "api": "todos"
-            }
+            },
+            "regiesterEnabled": true
         },
         {
             "name": "Master React Template",
