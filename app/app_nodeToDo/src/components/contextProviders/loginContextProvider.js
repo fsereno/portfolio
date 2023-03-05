@@ -16,7 +16,7 @@ export const LoginContextProvider = ({ children }) => {
 
     const getCurrentUser = () => new Promise((resolve, reject) => {
 
-        const currentUser = { jwtToken: "token" }; //userPool.getCurrentUser();
+        const currentUser = { jwtToken: "token", username: "testuser" }; //userPool.getCurrentUser();
 
         if (currentUser != null) {
             resolve(currentUser);
@@ -53,6 +53,7 @@ export const LoginContextProvider = ({ children }) => {
 
         setAuthenticated(true);
         resolve({ success: true });
+
         /*const authenticationData = {
             Username: username,
             Password: password,
@@ -79,19 +80,20 @@ export const LoginContextProvider = ({ children }) => {
     });
 
     useLayoutEffect(() => {
-        /*getCurrentUser()
+        getCurrentUser()
             .then(currentUser => {
                 if (currentUser) {
 
-                    token.current = currentUser.signInUserSession.idToken.jwtToken;
+                    token.current = currentUser.jwtToken;
                     username.current = currentUser.username;
 
-                    if (!authenticated) {
+                    /*if (!authenticated) {
+                        debugger;
                         setAuthenticated(true);
-                    }
+                    }*/
                 }
             })
-            .catch(() => setAuthenticated(false));*/
+            .catch(() => setAuthenticated(false));
     }, [authenticated]);
 
     const context = {
