@@ -1,9 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-
 const secretKey = 'secret_key';
-
 const app = express();
 
 app.use(bodyParser.json());
@@ -30,6 +28,10 @@ app.post('/login', (req, res) => {
 app.post('/register', (req, res) => {
 
     const { username } = req.body;
+
+    if (users.find(u => u.username === username)) {
+        return res.status(409).json({ message: 'User already exists!' });
+    }
 
     registerUser({ username });
 
