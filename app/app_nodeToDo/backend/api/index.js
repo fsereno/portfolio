@@ -3,15 +3,16 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const secretKey = 'secret_key';
 const app = express();
+const crypto = require("crypto");
 
 app.use(bodyParser.json());
 
 // login
 app.post('/login', (req, res) => {
 
-    const { username } = req.body;
+    const { username, password } = req.body;
 
-    handleLogin(username, res);
+    handleLogin(username, password, res);
 
     const payload = {
         username: username
@@ -27,13 +28,15 @@ app.post('/login', (req, res) => {
 //register
 app.post('/register', (req, res) => {
 
-    const { username } = req.body;
+    const { username, password } = req.body;
 
     if (users.find(u => u.username === username)) {
         return res.status(409).json({ message: 'User already exists!' });
     }
 
-    registerUser({ username });
+    const hashedPassword = createHash(password);
+
+    registerUser({ username, password: hashedPassword });
 
     res.status(200).json({ message: 'User created!' });
 });
@@ -43,7 +46,7 @@ app.get('/user', (req, res) => {
 
     const { username } = handleAuthorization(req, res);
 
-    const user = getUser(username);
+    const user = getCurrentUser(username);
 
     res.send(user);
 });
@@ -109,9 +112,9 @@ app.put('/', (req, res) => {
 
     updateItem(item, username);
 
-    const itmes = getItems(username);
+    const items = getItems(username);
 
-    res.send(itmes);
+    res.send(items);
 });
 
 const PORT = process.env.PORT || 3006;
@@ -123,21 +126,26 @@ app.listen(PORT, () => {
 const handleAuthorization = (req, res) => {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        res.status(401).send('Unauthorized')
+        res.status(401).json({ message: 'Unauthorized' })
     };
 
     const bearerToken = extractBearerToken(req);
 
     return jwt.verify(bearerToken, secretKey, (err, decodedToken) => {
+
         if (err) {
             return res.status(401).json({ message: 'Invalid bearer token' });
         }
 
         const { username } = decodedToken;
 
-        const loggedInUser = getUser(username);
+        if (username === undefined) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
 
-        if (username !== loggedInUser.username) {
+        const loggedInUser = getCurrentUser(username);
+
+        if (loggedInUser === undefined || username !== loggedInUser.username) {
             return res.status(401).json({ message: 'Unauthorized!' });
         }
 
@@ -145,11 +153,23 @@ const handleAuthorization = (req, res) => {
     });
 }
 
-const handleLogin = (username, res) => {
+const handleLogin = (username, password, res) => {
     const users = getUsers();
     if (!users.find(x => x.username === username)) {
-        res.status(401).send('User not found!')
+        res.status(401).json({ message: 'User not found!' });
     };
+
+    const user = getUser(username);
+
+    if (user === undefined) {
+        res.status(401).json({ message: 'Username or password does not match.' });
+    }
+
+    const reHashedPassword = createHash(password);
+
+    if (user.password !== reHashedPassword) {
+        res.status(401).json({ message: 'Username or password does not match.' });
+    }
 }
 
 const extractBearerToken = (req) => {
@@ -163,7 +183,9 @@ const registerUser = (user) => users.push(user)
 
 const getUsers = () => users;
 
-const getUser = (username) => {
+const getUser = (username) => users.find(x => x.username === username);
+
+const getCurrentUser = (username) => {
     if (user.username === username) {
         return user;
     } else {
@@ -173,6 +195,16 @@ const getUser = (username) => {
 
 const loginUser = (username, token) => {
     user = { username, token }
+}
+
+const createHash = (password) => {
+    // Create a new Hash object with the "sha512" algorithm
+    const hash = crypto.createHash("sha512");
+    // Update the Hash object with the password
+    hash.update(password);
+    // Get the hashed password as a hexadecimal string
+    const hashedPassword = hash.digest("hex");
+    return hashedPassword;
 }
 
 const getItems = (username) => items.filter(x => x.username === username);
@@ -188,13 +220,17 @@ const deleteItem = (id, username) => {
 
 const createItem = (item, username) => {
     item.username = username;
+    item.modifiedOn = new Date();
+    item.createdOn = new Date();
     items.push(item);
 };
 
 const updateItem = (item, username) => {
     const index = items.findIndex(x => x.id === item.id, item.username === username);
     if (index !== -1 ) {
-        items.splice(index, 1, item);
+        const existing = items.find(x => x.id === item.id, item.username === username);
+        item.modifiedOn = new Date();
+        items.splice(index, 1, {...existing, ...item});
     }
 };
 
