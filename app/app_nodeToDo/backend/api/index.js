@@ -19,7 +19,7 @@ app.post('/login', (req, res) => {
 
     const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
 
-    loginUser(username);
+    loginUser(username, token);
 
     res.send(token);
 });
@@ -36,6 +36,16 @@ app.post('/register', (req, res) => {
     registerUser({ username });
 
     res.status(200).json({ message: 'User created!' });
+});
+
+// get user
+app.get('/user', (req, res) => {
+
+    const { username } = handleAuthorization(req, res);
+
+    const user = getUser(username);
+
+    res.send(user);
 });
 
 // get items
@@ -125,7 +135,7 @@ const handleAuthorization = (req, res) => {
 
         const { username } = decodedToken;
 
-        const loggedInUser = getLoggedInUser();
+        const loggedInUser = getUser(username);
 
         if (username !== loggedInUser.username) {
             return res.status(401).json({ message: 'Unauthorized!' });
@@ -153,10 +163,16 @@ const registerUser = (user) => users.push(user)
 
 const getUsers = () => users;
 
-const getLoggedInUser = () => user;
+const getUser = (username) => {
+    if (user.username === username) {
+        return user;
+    } else {
+        return undefined;
+    }
+}
 
-const loginUser = (username) => {
-    user = { username }
+const loginUser = (username, token) => {
+    user = { username, token }
 }
 
 const getItems = (username) => items.filter(x => x.username === username);
