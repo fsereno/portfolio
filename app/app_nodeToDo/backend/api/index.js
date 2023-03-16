@@ -1,26 +1,54 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const session = require('express-session');
 const secretKey = 'secret_key';
 const app = express();
 const crypto = require("crypto");
 
+const checkToken = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        res.status(401).json({ message: 'Unauthorized' })
+    };
+
+    const bearerToken = extractBearerToken(req);
+
+    if (bearerToken) {
+
+        jwt.verify(bearerToken, secretKey, (err, decodedToken) => {
+
+            if (err) {
+                return res.sendStatus(403);
+            }
+
+            // Set current user in session object
+            req.session.currentUser = decodedToken.username;
+
+            console.log("user assigned to session " + decodedToken.username)
+            next();
+        });
+    } else {
+        next();
+    }
+}
+
+app.use(session({
+    secret: secretKey,
+    resave: false,
+    saveUninitialized: true
+}));
+
 app.use(bodyParser.json());
+//app.use(checkToken);
 
 // login
 app.post('/login', (req, res) => {
 
     const { username, password } = req.body;
 
-    handleLogin(username, password, res);
-
-    const payload = {
-        username: username
-    };
-
-    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
-
-    loginUser(username, token);
+    const token = handleLogin(username, password, req, res);
 
     res.send(token);
 });
@@ -42,19 +70,17 @@ app.post('/register', (req, res) => {
 });
 
 // get user
-app.get('/user', (req, res) => {
+app.get('/user', checkToken, (req, res) => {
 
-    const { username } = handleAuthorization(req, res);
-
-    const user = getCurrentUser(username);
+    const user = getCurrentUser(req, res);
 
     res.send(user);
 });
 
 // get items
-app.get('/', (req, res) => {
+app.get('/', checkToken, (req, res) => {
 
-    const { username } = handleAuthorization(req, res);
+    const { username } = getCurrentUser(req, res);
 
     const items = getItems(username);
 
@@ -62,9 +88,9 @@ app.get('/', (req, res) => {
 });
 
 // get item
-app.get('/:id', (req, res) => {
+app.get('/:id', checkToken, (req, res) => {
 
-    const { username } = handleAuthorization(req, res);
+    const { username } = getCurrentUser(req, res);
 
     const id = req.params.id;
 
@@ -74,9 +100,9 @@ app.get('/:id', (req, res) => {
 });
 
 //delete item
-app.delete('/:id', (req, res) => {
+app.delete('/:id', checkToken, (req, res) => {
 
-    const { username } = handleAuthorization(req, res);
+    const { username } = getCurrentUser(req, res);
 
     const id = req.params.id;
 
@@ -88,9 +114,9 @@ app.delete('/:id', (req, res) => {
 });
 
 // create item
-app.post('/', (req, res) => {
+app.post('/', checkToken, (req, res) => {
 
-    const { username } = handleAuthorization(req, res);
+    const { username } = getCurrentUser(req, res);
 
     const { id, description, done } = req.body;
     const item = { id, description, done };
@@ -103,9 +129,9 @@ app.post('/', (req, res) => {
 });
 
 //update item
-app.put('/', (req, res) => {
+app.put('/', checkToken, (req, res) => {
 
-    const { username } = handleAuthorization(req, res);
+    const { username } = getCurrentUser(req, res);
 
     const { id, description, done } = req.body;
     const item = { id, description, done };
@@ -123,8 +149,21 @@ app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}.`);
 });
 
-const handleAuthorization = (req, res) => {
+const getCurrentUser = (req, res) => {
+    const currentUser = req.session.currentUser;
+    if (!currentUser) {
+        res.sendStatus(401);
+    }
+
+    const user = getUser(currentUser);
+
+    return user;
+}
+
+/*const handleAuthorization = (req, res) => {
+
     const authHeader = req.headers.authorization;
+
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         res.status(401).json({ message: 'Unauthorized' })
     };
@@ -143,18 +182,14 @@ const handleAuthorization = (req, res) => {
             return res.status(401).json({ message: 'Unauthorized' });
         }
 
-        const loggedInUser = getCurrentUser(username);
-
-        if (loggedInUser === undefined || username !== loggedInUser.username) {
-            return res.status(401).json({ message: 'Unauthorized!' });
-        }
-
         return { username };
     });
-}
+}*/
 
-const handleLogin = (username, password, res) => {
+const handleLogin = (username, password, req, res) => {
+
     const users = getUsers();
+
     if (!users.find(x => x.username === username)) {
         res.status(401).json({ message: 'User not found!' });
     };
@@ -170,11 +205,21 @@ const handleLogin = (username, password, res) => {
     if (user.password !== reHashedPassword) {
         res.status(401).json({ message: 'Username or password does not match.' });
     }
+
+    const payload = {
+        username: username
+    };
+
+    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+
+    req.session.currentUser = username;
+
+    return token;
 }
 
 const extractBearerToken = (req) => {
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-      return req.headers.authorization.split(' ')[1];
+        return req.headers.authorization.split(' ')[1];
     }
     return null;
 }
@@ -184,18 +229,6 @@ const registerUser = (user) => users.push(user)
 const getUsers = () => users;
 
 const getUser = (username) => users.find(x => x.username === username);
-
-const getCurrentUser = (username) => {
-    if (user.username === username) {
-        return user;
-    } else {
-        return undefined;
-    }
-}
-
-const loginUser = (username, token) => {
-    user = { username, token }
-}
 
 const createHash = (password) => {
     // Create a new Hash object with the "sha512" algorithm
@@ -213,7 +246,7 @@ const getItem = (id, username) => items.filter(x => x.id === id && x.username ==
 
 const deleteItem = (id, username) => {
     const index = items.findIndex(x => x.id === id && x.username === username);
-    if (index !== -1 ) {
+    if (index !== -1) {
         items.splice(index, 1);
     }
 };
@@ -227,14 +260,14 @@ const createItem = (item, username) => {
 
 const updateItem = (item, username) => {
     const index = items.findIndex(x => x.id === item.id, item.username === username);
-    if (index !== -1 ) {
+    if (index !== -1) {
         const existing = items.find(x => x.id === item.id, item.username === username);
-        item.modifiedOn = new Date();
-        items.splice(index, 1, {...existing, ...item});
+        if (existing) {
+            item.modifiedOn = new Date();
+            items.splice(index, 1, { ...existing, ...item });
+        }
     }
 };
-
-let user = {};
 
 const users = [
     {
