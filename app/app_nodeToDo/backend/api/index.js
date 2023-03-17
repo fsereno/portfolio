@@ -160,32 +160,6 @@ const getCurrentUser = (req, res) => {
     return user;
 }
 
-/*const handleAuthorization = (req, res) => {
-
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        res.status(401).json({ message: 'Unauthorized' })
-    };
-
-    const bearerToken = extractBearerToken(req);
-
-    return jwt.verify(bearerToken, secretKey, (err, decodedToken) => {
-
-        if (err) {
-            return res.status(401).json({ message: 'Invalid bearer token' });
-        }
-
-        const { username } = decodedToken;
-
-        if (username === undefined) {
-            return res.status(401).json({ message: 'Unauthorized' });
-        }
-
-        return { username };
-    });
-}*/
-
 const handleLogin = (username, password, req, res) => {
 
     const users = getUsers();
@@ -212,7 +186,15 @@ const handleLogin = (username, password, req, res) => {
 
     const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
 
-    req.session.currentUser = username;
+    req.session.regenerate((err) =>  {
+        if (err) next(err)
+
+        req.session.currentUser = username;
+
+        req.session.save((err) => {
+            if (err) return next(err)
+        })
+    })
 
     return token;
 }
