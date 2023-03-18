@@ -87,7 +87,7 @@ const registerUser = (user) => users.push(user);
 
 const getUsers =  () => users;
 
-const getUser = (username) => module.exports.users.find(x => x.username === username);
+const getUser = (username) => users.find(x => x.username === username);
 
 // private members
 const createHash = (password) => {
@@ -112,6 +112,7 @@ module.exports = {
     getCurrentUser,
     handleLogin,
     registerUser,
+    createHash,
     getUsers,
     getUser
 };

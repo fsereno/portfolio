@@ -1,38 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
 const session = require('express-session');
 const secretKey = 'secret_key';
 const app = express();
-const crypto = require("crypto");
 
-const checkToken = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        res.status(401).json({ message: 'Unauthorized' })
-    };
-
-    const bearerToken = extractBearerToken(req);
-
-    if (bearerToken) {
-
-        jwt.verify(bearerToken, secretKey, (err, decodedToken) => {
-
-            if (err) {
-                return res.sendStatus(403);
-            }
-
-            // Set current user in session object
-            req.session.currentUser = decodedToken.username;
-
-            console.log("user assigned to session " + decodedToken.username)
-            next();
-        });
-    } else {
-        next();
-    }
-}
+const {
+    isAuthenticated,
+    getCurrentUser,
+    handleLogin,
+    registerUser,
+    createHash,
+    getUsers
+} = require("./services/userService");
 
 app.use(session({
     secret: secretKey,
@@ -41,7 +20,6 @@ app.use(session({
 }));
 
 app.use(bodyParser.json());
-//app.use(checkToken);
 
 // login
 app.post('/login', (req, res) => {
@@ -58,6 +36,8 @@ app.post('/register', (req, res) => {
 
     const { username, password } = req.body;
 
+    const users = getUsers();
+
     if (users.find(u => u.username === username)) {
         return res.status(409).json({ message: 'User already exists!' });
     }
@@ -70,7 +50,7 @@ app.post('/register', (req, res) => {
 });
 
 // get user
-app.get('/user', checkToken, (req, res) => {
+app.get('/user', isAuthenticated, (req, res) => {
 
     const user = getCurrentUser(req, res);
 
@@ -78,7 +58,7 @@ app.get('/user', checkToken, (req, res) => {
 });
 
 // get items
-app.get('/', checkToken, (req, res) => {
+app.get('/', isAuthenticated, (req, res) => {
 
     const { username } = getCurrentUser(req, res);
 
@@ -88,7 +68,7 @@ app.get('/', checkToken, (req, res) => {
 });
 
 // get item
-app.get('/:id', checkToken, (req, res) => {
+app.get('/:id', isAuthenticated, (req, res) => {
 
     const { username } = getCurrentUser(req, res);
 
@@ -100,7 +80,7 @@ app.get('/:id', checkToken, (req, res) => {
 });
 
 //delete item
-app.delete('/:id', checkToken, (req, res) => {
+app.delete('/:id', isAuthenticated, (req, res) => {
 
     const { username } = getCurrentUser(req, res);
 
@@ -114,7 +94,7 @@ app.delete('/:id', checkToken, (req, res) => {
 });
 
 // create item
-app.post('/', checkToken, (req, res) => {
+app.post('/', isAuthenticated, (req, res) => {
 
     const { username } = getCurrentUser(req, res);
 
@@ -129,7 +109,7 @@ app.post('/', checkToken, (req, res) => {
 });
 
 //update item
-app.put('/', checkToken, (req, res) => {
+app.put('/', isAuthenticated, (req, res) => {
 
     const { username } = getCurrentUser(req, res);
 
@@ -148,79 +128,6 @@ const PORT = process.env.PORT || 3006;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}.`);
 });
-
-const getCurrentUser = (req, res) => {
-    const currentUser = req.session.currentUser;
-    if (!currentUser) {
-        res.sendStatus(401);
-    }
-
-    const user = getUser(currentUser);
-
-    return user;
-}
-
-const handleLogin = (username, password, req, res) => {
-
-    const users = getUsers();
-
-    if (!users.find(x => x.username === username)) {
-        res.status(401).json({ message: 'User not found!' });
-    };
-
-    const user = getUser(username);
-
-    if (user === undefined) {
-        res.status(401).json({ message: 'Username or password does not match.' });
-    }
-
-    const reHashedPassword = createHash(password);
-
-    if (user.password !== reHashedPassword) {
-        res.status(401).json({ message: 'Username or password does not match.' });
-    }
-
-    const payload = {
-        username: username
-    };
-
-    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
-
-    req.session.regenerate((err) =>  {
-        if (err) next(err)
-
-        req.session.currentUser = username;
-
-        req.session.save((err) => {
-            if (err) return next(err)
-        })
-    })
-
-    return token;
-}
-
-const extractBearerToken = (req) => {
-    if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-        return req.headers.authorization.split(' ')[1];
-    }
-    return null;
-}
-
-const registerUser = (user) => users.push(user)
-
-const getUsers = () => users;
-
-const getUser = (username) => users.find(x => x.username === username);
-
-const createHash = (password) => {
-    // Create a new Hash object with the "sha512" algorithm
-    const hash = crypto.createHash("sha512");
-    // Update the Hash object with the password
-    hash.update(password);
-    // Get the hashed password as a hexadecimal string
-    const hashedPassword = hash.digest("hex");
-    return hashedPassword;
-}
 
 const getItems = (username) => items.filter(x => x.username === username);
 
@@ -250,15 +157,6 @@ const updateItem = (item, username) => {
         }
     }
 };
-
-const users = [
-    {
-        username: "user1"
-    },
-    {
-        username: "user2"
-    }
-]
 
 const items = [
     {
