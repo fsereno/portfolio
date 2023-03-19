@@ -34,11 +34,14 @@ const isAuthenticated = (req, res, next) => {
 }
 
 const getCurrentUser = (req, res) => {
+
     const currentUser = req.session.currentUser;
+
     if (!currentUser) {
         res.sendStatus(401);
     }
 
+    // TO DO getUser should never return password
     const user = getUser(currentUser);
 
     return user;
@@ -83,7 +86,20 @@ const handleLogin = (username, password, req, res) => {
     return token;
 }
 
-const registerUser = (user) => users.push(user);
+const registerUser = (username, password, res) => { 
+
+    const users = getUsers();
+
+    if (users.find(u => u.username === username)) {
+        return res.status(409).json({ message: 'User already exists!' });
+    }
+
+    const hashedPassword = createHash(password);
+
+    const user = { username, password: hashedPassword };
+
+    users.push(user);
+};
 
 const getUsers =  () => users;
 
@@ -111,8 +127,5 @@ module.exports = {
     isAuthenticated,
     getCurrentUser,
     handleLogin,
-    registerUser,
-    createHash,
-    getUsers,
-    getUser
+    registerUser
 };
