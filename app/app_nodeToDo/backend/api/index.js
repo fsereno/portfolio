@@ -1,127 +1,62 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const secretKey = 'secret_key';
-const app = express();
+
+const { isAuthenticated } = require('./services/userService');
 
 const {
-    isAuthenticated,
-    getCurrentUser,
-    handleLogin,
-    registerUser,
-} = require('./services/userService');
+    login,
+    register,
+    getUser
+} = require('./controllers/userController');
 
 const {
-    getItems,
+    getAllItems,
     getItem,
     deleteItem,
-    createItem,
+    addItem,
     updateItem
-} = require('./services/itemsSerice');
+} = require('./controllers/itemsController');
+
+const SECRET_KEY = process.env.SECRET_KEY || 'secret_key';
+const PORT = process.env.PORT || 3006;
+
+// Middleware
+const app = express();
 
 app.use(session({
-    secret: secretKey,
+    secret: SECRET_KEY,
     resave: false,
     saveUninitialized: true
 }));
 
 app.use(bodyParser.json());
 
+// Routing
+
 // login
-app.post('/login', (req, res) => {
-
-    const { username, password } = req.body;
-
-    const token = handleLogin(username, password, req, res);
-
-    res.send(token);
-});
+app.post('/login', login);
 
 //register
-app.post('/register', (req, res) => {
-
-    const { username, password } = req.body;
-
-    registerUser(username, password, res);
-
-    res.send(username);
-});
+app.post('/register', register);
 
 // get user
-app.get('/user', isAuthenticated, (req, res) => {
-
-    const user = getCurrentUser(req, res);
-
-    res.send(user);
-});
+app.get('/user', isAuthenticated, getUser);
 
 // get items
-app.get('/', isAuthenticated, (req, res) => {
-
-    const { username } = getCurrentUser(req, res);
-
-    const items = getItems(username);
-
-    res.send(items);
-});
+app.get('/', isAuthenticated, getAllItems);
 
 // get item
-app.get('/:id', isAuthenticated, (req, res) => {
-
-    const { username } = getCurrentUser(req, res);
-
-    const id = req.params.id;
-
-    const item = getItem(id, username);
-
-    res.send(item);
-});
+app.get('/:id', isAuthenticated, getItem);
 
 //delete item
-app.delete('/:id', isAuthenticated, (req, res) => {
-
-    const { username } = getCurrentUser(req, res);
-
-    const id = req.params.id;
-
-    deleteItem(id, username);
-
-    const itmes = getItems(username);
-
-    res.send(itmes);
-});
+app.delete('/:id', isAuthenticated, deleteItem);
 
 // create item
-app.post('/', isAuthenticated, (req, res) => {
-
-    const { username } = getCurrentUser(req, res);
-
-    const { id, description, done } = req.body;
-    const item = { id, description, done };
-
-    createItem(item, username);
-
-    const itmes = getItems(username);
-
-    res.send(itmes);
-});
+app.post('/', isAuthenticated, addItem);
 
 //update item
-app.put('/', isAuthenticated, (req, res) => {
-
-    const { username } = getCurrentUser(req, res);
-
-    const { id, description, done } = req.body;
-    const item = { id, description, done };
-
-    updateItem(item, username);
-
-    const items = getItems(username);
-
-    res.send(items);
-});
-
-const PORT = process.env.PORT || 3006;
+app.put('/', isAuthenticated, updateItem);
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}.`);
