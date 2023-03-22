@@ -1,7 +1,6 @@
 const itemsService = require('../services/itemsSerice');
 const userService = require('../services/userService');
 
-
 /**
 * Retrieves all items belonging to the current user and sends them as a response
 * @param {Object} req - Express request object
