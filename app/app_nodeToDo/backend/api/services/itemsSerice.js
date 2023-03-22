@@ -40,11 +40,11 @@ const getItem = (id, username) => {
     if (!id) throw new Error("Invalid item ID provided");
     if (!username) throw new Error("Invalid username provided");
 
-    const filteredItems = items.filter(x => x.id === id && x.username === username);
+    const filteredItems = items.find(x => x.id === id && x.username === username);
 
-    if (!filteredItems || filteredItems.length === 0) throw new Error("Item not found for the given ID and username");
+    if (!filteredItems) throw new Error("Item not found for the given ID and username");
 
-    return filteredItems[0];
+    return filteredItems;
 };
 
 /**
