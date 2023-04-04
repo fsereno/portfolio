@@ -45,25 +45,20 @@ const isAuthenticated = (req, res, next) => {
  * @param {Object} res - Response object
  * @returns {Object} User object
  */
-const getCurrentUser = (req, res) => {
+const getCurrentUser = (req) => {
 
     const currentUser = req.session.currentUser;
 
     if (!currentUser) {
-        return res.sendStatus(401);
+      throw new Error('Unauthorized.');
     }
-
-    console.log("Checking user exists for " + currentUser.username)
 
     const exists = isUserExists(currentUser.username);
 
     if (!exists) {
-        console.log("No user found for " + currentUser.username)
-        return res.status(401).json({ message: 'Unauthorized' });
+      throw new Error('Unauthorized.');
     }
 
-    console.log("User found " + currentUser.username)
-    console.log(currentUser);
     return currentUser;
 };
 
@@ -75,20 +70,20 @@ const getCurrentUser = (req, res) => {
  * @param {Object} res - Response object
  * @returns {string} JWT token
  */
-const handleLogin = (username, password, req, res) => {
+const handleLogin = (username, password, req) => {
 
     const users = getUsers();
 
     const user = users.find(x => x.username === username);
 
     if (!user) {
-        return res.status(401).json({ message: 'Username or password does not match.' });
+        throw new Error('Username or password does not match.');
     }
 
     const reHashedPassword = createHash(password);
 
     if (user.password !== reHashedPassword) {
-        return res.status(401).json({ message: 'Username or password does not match.' });
+      throw new Error('Username or password does not match.');
     }
 
     const payload = {
@@ -99,14 +94,14 @@ const handleLogin = (username, password, req, res) => {
 
     req.session.regenerate((err) => {
         if (err) {
-            return res.status(500).json({ message: 'Internal server error' });
+            throw new Error('Internal server error.');
         }
 
         req.session.currentUser = { username, token };
 
         req.session.save((err) => {
             if (err) {
-                return res.status(500).json({ message: 'Internal server error' });
+              throw new Error('Internal server error.');
             }
         });
     });
@@ -115,21 +110,43 @@ const handleLogin = (username, password, req, res) => {
 };
 
 /**
+ * Handles user logout
+ * @param {Object} req - Request object
+ * @returns {string} - The hashed password.
+ */
+const handleLogout = (req) => {
+  console.log("logging out");
+
+  req.session.currentUser = {};
+
+  req.session.destroy((err) => {
+    if (err) {
+
+      throw new Error('Internal server error.');
+
+    } else {
+      console.log("logged out");
+      return true;
+
+    }
+  });
+};
+
+/**
  * Register new user
  * @param {string} username - User's username
  * @param {string} password - User's password
  * @param {Object} res - Response object
  */
-const registerUser = (username, password, res) => {
+const registerUser = (username, password) => {
 
     const users = getUsers();
 
     if (users.find(u => u.username === username)) {
-        return res.status(409).json({ message: 'User already exists!' });
+      throw new Error('User already exists.');
     }
 
     const hashedPassword = createHash(password);
-
     const user = { username, password: hashedPassword };
 
     users.push(user);
@@ -186,5 +203,6 @@ module.exports = {
     isAuthenticated,
     getCurrentUser,
     handleLogin,
+    handleLogout,
     registerUser
 };

@@ -6,6 +6,7 @@ const { isAuthenticated } = require('./services/userService');
 
 const {
     login,
+    logout,
     register,
     getUser
 } = require('./controllers/userController');
@@ -37,7 +38,10 @@ app.use(bodyParser.json());
 // login
 app.post('/login', login);
 
-//register
+// logout
+app.get('/logout', isAuthenticated, logout);
+
+// register
 app.post('/register', register);
 
 // get user
