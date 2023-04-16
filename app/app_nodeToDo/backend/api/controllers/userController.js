@@ -1,6 +1,10 @@
 const userService = require('../services/userService');
 
-// login
+/**
+ * Handles user login.
+ * @param {object} req - The HTTP request object.
+ * @param {object} res - The HTTP response object.
+ */
 const login = (req, res) => {
 
     try {
@@ -15,7 +19,11 @@ const login = (req, res) => {
     }
 };
 
-// logout
+/**
+ * Handles user logout.
+ * @param {object} req - The HTTP request object.
+ * @param {object} res - The HTTP response object.
+ */
 const logout = (req, res) => {
 
     try {
@@ -29,7 +37,11 @@ const logout = (req, res) => {
     }
 };
 
-//register
+/**
+ * Handles user registration.
+ * @param {object} req - The HTTP request object.
+ * @param {object} res - The HTTP response object.
+ */
 const register = (req, res) => {
 
     try {
@@ -44,7 +56,11 @@ const register = (req, res) => {
     }
 };
 
-// get user
+/**
+ * Gets the current user.
+ * @param {object} req - The HTTP request object.
+ * @param {object} res - The HTTP response object.
+ */
 const getUser = (req, res) => {
 
     try {
@@ -62,4 +78,4 @@ module.exports = {
     logout,
     register,
     getUser
-}
+};
