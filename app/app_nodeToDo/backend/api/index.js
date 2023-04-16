@@ -4,6 +4,8 @@ const session = require('express-session');
 
 const { isAuthenticated } = require('./services/userService');
 
+const { handleHealthcheck } = require('./controllers/healthcheckController');
+
 const {
     login,
     logout,
@@ -34,6 +36,9 @@ app.use(session({
 app.use(bodyParser.json());
 
 // Routing
+
+// healthcheck
+app.get('/healthcheck', handleHealthcheck)
 
 // login
 app.post('/login', login);
