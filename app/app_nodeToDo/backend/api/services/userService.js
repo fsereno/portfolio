@@ -5,6 +5,9 @@ const crypto = require("crypto");
 // public members
 const users = [];
 
+// private members
+const _tokenBlacklist = [];
+
 /**
  * Middleware to check if user is authenticated
  * @param {Object} req - Request object
@@ -21,6 +24,12 @@ const isAuthenticated = (req, res, next) => {
     const bearerToken = extractBearerToken(req);
 
     if (bearerToken) {
+
+        const isBlacklisted = _tokenBlacklist.some(x => x === bearerToken);
+
+        if (isBlacklisted) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
 
         jwt.verify(bearerToken, secretKey, (err, decodedToken) => {
 
@@ -115,7 +124,6 @@ const handleLogin = (username, password, req) => {
  * @returns {string} - The hashed password.
  */
 const handleLogout = (req) => {
-  console.log("logging out");
 
   req.session.currentUser = {};
 
@@ -125,9 +133,12 @@ const handleLogout = (req) => {
       throw new Error('Internal server error.');
 
     } else {
-      console.log("logged out");
-      return true;
 
+      const bearerToken = extractBearerToken(req);
+
+      _tokenBlacklist.push(bearerToken);
+
+      return true;
     }
   });
 };

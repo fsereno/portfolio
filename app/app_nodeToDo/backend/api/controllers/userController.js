@@ -19,10 +19,8 @@ const login = (req, res) => {
 const logout = (req, res) => {
 
     try {
-        console.log("trying to logout")
         userService.handleLogout(req);
 
-        console.log("all good")
         res.status(200).send();
 
     } catch (error) {

@@ -1,4 +1,4 @@
-const itemsService = require('../services/itemsSerice');
+const itemsService = require('../services/itemsService');
 const userService = require('../services/userService');
 
 /**
