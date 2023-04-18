@@ -258,8 +258,8 @@
             "order": 1,
             "featured": false,
             "endpoints": {
-                "base": "https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com",
-                "api": "todos"
+                "base": "http://localhost:3006",
+                "api": ""
             },
             "regiesterEnabled": true
         },

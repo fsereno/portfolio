@@ -10,11 +10,15 @@ const login = (req, res) => {
     try {
         const { username, password } = req.body;
 
+        console.log(username)
+        console.log(password)
+
         const token = userService.handleLogin(username, password, req);
 
         res.send(token);
 
     } catch (error) {
+        console.log(error);
         res.status(400).send({ message: error.message });
     }
 };

@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cors = require('cors');
 
 const { isAuthenticated } = require('./services/userService');
 
@@ -26,6 +27,8 @@ const PORT = process.env.PORT || 3006;
 
 // Middleware
 const app = express();
+
+app.use(cors({ origin: true }));
 
 app.use(session({
     secret: SECRET_KEY,

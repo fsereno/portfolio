@@ -13,9 +13,11 @@ import { ToasterContext, ENQUEUE_TOAST } from '../../../js/modules/react/toaster
 import { ToolTip } from './tooltip';
 import ReCAPTCHA from "react-google-recaptcha";
 import { RecaptchaContext } from '../../../js/modules/react/recaptchaContextProvider';
+import { LoginContext } from '../contexts';
 
 export function RegisterForm() {
 
+    const loginContext = React.useContext(LoginContext);
     const spinnerContext = React.useContext(SpinnerContext);
     const toasterContext = React.useContext(ToasterContext);
     const recaptchaContext = React.useContext(RecaptchaContext);
@@ -88,16 +90,30 @@ export function RegisterForm() {
 
     const register = () => {
 
-        const userPool = new CognitoUserPool(POOL_DATA);
+        //const userPool = new CognitoUserPool(POOL_DATA);
 
-        const attributeList = [
+        /*const attributeList = [
             new CognitoUserAttribute({
                 Name: "name",
                 Value: name
             })
-        ];
+        ];*/
 
-        userPool.signUp(username, password, attributeList, null, (err, result) => {
+        loginContext.registerUser(username, password).then(() => {
+
+            setShowValidation(false);
+            hideErrors();
+
+            spinnerContext.setShow(false);
+            toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Registration Successful!", body: `${name}, you can now login using your credentials.` } } );
+            history.push(LOGIN);
+
+        }).catch((err) => {
+            debugger;
+            showErrors(err.message)
+        });
+
+        /*userPool.signUp(username, password, attributeList, null, (err, result) => {
 
             if (err != null) {
 
@@ -112,7 +128,7 @@ export function RegisterForm() {
                 toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Registration Successful!", body: `${name}, you can now login using your credentials.` } } );
                 history.push(LOGIN);
             }
-        });
+        });*/
     }
 
     return (

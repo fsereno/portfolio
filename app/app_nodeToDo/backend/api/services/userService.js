@@ -103,14 +103,14 @@ const handleLogin = (username, password, req) => {
 
     req.session.regenerate((err) => {
         if (err) {
-            throw new Error('Internal server error.');
+            throw new Error('Internal server error when regenerate.');
         }
 
         req.session.currentUser = { username, token };
 
         req.session.save((err) => {
             if (err) {
-              throw new Error('Internal server error.');
+              throw new Error('Internal server error when saving.');
             }
         });
     });
