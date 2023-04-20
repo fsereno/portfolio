@@ -37,7 +37,8 @@ export const ListItems = React.memo(({version}) => {
         itemsContext.getItems()
             .then(response => {
 
-                const items = response.data || [];
+                console.log(response);
+                const items = response.data.items || [];
                 items.sort(modifiedOnComparerDesc);
 
                 itemsContext.setItems(items);

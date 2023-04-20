@@ -160,6 +160,9 @@ const registerUser = (username, password) => {
     const hashedPassword = createHash(password);
     const user = { username, password: hashedPassword };
 
+    console.log("pushing user - reg success")
+    console.log(user)
+
     users.push(user);
 };
 

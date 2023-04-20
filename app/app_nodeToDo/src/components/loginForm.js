@@ -31,6 +31,7 @@ export function LoginForm() {
     }
 
     const loginFailCallback = (err) => {
+        console.log(err);
         setFeedbackError(err.message);
         setShowFeedback(true);
         spinnerContext.setShow(false);
@@ -49,7 +50,7 @@ export function LoginForm() {
 
             loginContext.loginUser(username, password)
                 .then(result => result.success ? loginDoneCallback() : loginFailCallback({ message: "Login failed!"}))
-                .catch(result => loginFailCallback(result.error));
+                .catch(result => loginFailCallback(result));
         }
     };
 

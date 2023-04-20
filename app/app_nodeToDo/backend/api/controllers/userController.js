@@ -15,10 +15,14 @@ const login = (req, res) => {
 
         const token = userService.handleLogin(username, password, req);
 
-        res.send(token);
+        console.log("user login matched!")
+
+        console.log(token)
+
+        res.send({ token });
 
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(400).send({ message: error.message });
     }
 };
@@ -53,7 +57,7 @@ const register = (req, res) => {
 
         userService.registerUser(username, password);
 
-        res.send(username);
+        res.send({ username });
 
     } catch (error) {
         res.status(400).send({ message: error.message });
@@ -70,7 +74,11 @@ const getUser = (req, res) => {
     try {
         const user = userService.getCurrentUser(req);
 
-        res.send(user);
+        console.log("got user")
+
+        console.log("user");
+
+        res.send({ user });
 
     } catch (error) {
         res.status(400).send({ message: error.message });

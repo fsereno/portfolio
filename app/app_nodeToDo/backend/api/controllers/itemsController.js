@@ -14,7 +14,7 @@ const getAllItems = (req, res) => {
 
         const items = itemsService.getItems(username);
 
-        res.send(items);
+        res.send({ items });
     } catch (error) {
         res.status(400).send({ message: error.message });
     }
@@ -35,7 +35,7 @@ const getItem = (req, res) => {
 
         const item = itemsService.getItem(id, username);
 
-        res.send(item);
+        res.send({ item });
     } catch (error) {
         res.status(400).send({ message: error.message });
     }
@@ -58,7 +58,7 @@ const deleteItem = (req, res) => {
 
         const itmes = itemsService.getItems(username);
 
-        res.send(itmes);
+        res.send({ itmes });
     } catch (error) {
         res.status(400).send({ message: error.message });
     }
@@ -82,7 +82,7 @@ const addItem = (req, res) => {
 
         const itmes = itemsService.getItems(username);
 
-        res.send(itmes);
+        res.send({ itmes });
     } catch (error) {
         res.status(400).send({ message: error.message });
     }
@@ -106,7 +106,7 @@ const updateItem = (req, res) => {
 
         const items = itemsService.getItems(username);
 
-        res.send(items);
+        res.send({ items });
     } catch (error) {
         res.status(400).send({ message: error.message });
     }

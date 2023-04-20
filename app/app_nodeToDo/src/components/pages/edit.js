@@ -32,7 +32,7 @@ export function Edit() {
       itemsContext.getItem()
         .then(response => {
           spinnerContext.hideSpinner();
-          dispatch({ type: COPY, value: response.data });
+          dispatch({ type: COPY, value: response.data.item });
         }).catch(() => failCallback());
     } else {
       history.push(MANAGE);

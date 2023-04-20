@@ -7,6 +7,8 @@ import { ConfigContext } from '../../../../js/modules/react/configContextProvide
 import { XMLHttpRequestUtil } from '../../../../js/modules/utils/xmlHttpRequestUtil';
 import { SUCCESS } from "../../constants";
 
+const TOKEN_KEY = 'NODE_TODO_TOKEN';
+
 export const LoginContextProvider = ({ children }) => {
 
     const configContext = React.useContext(ConfigContext);
@@ -18,8 +20,8 @@ export const LoginContextProvider = ({ children }) => {
 
     //const userPool = new CognitoUserPool(poolData);
 
-    const token = useRef();
-    const username = useRef();
+    const token = useRef(sessionStorage.getItem(TOKEN_KEY));
+    //const username = useRef();
 
     const healthCheck = () => {
         return XMLHttpRequestUtil.request({
@@ -44,12 +46,14 @@ export const LoginContextProvider = ({ children }) => {
         });
     };
 
-    const getCurrentUser = () => {
+    const getCurrentUser = (_token) => {
+
+        console.log(token.current);
 
         return XMLHttpRequestUtil.request({
             type: "GET",
             request: `${API_ENDPOINT}/user`,
-            headers: [{ key: "Authorization", value: token.current }]
+            headers: [{ key: "Authorization", value: prepareToken(_token) }]
         });
 
         /*const currentUser = { jwtToken: "token", username: "testuser" }; //userPool.getCurrentUser();
@@ -61,14 +65,20 @@ export const LoginContextProvider = ({ children }) => {
         }*/
     };
 
-    const logoutUser = () => {
+    const logoutUser = () => new Promise((resolve, reject) => {
 
-        return getCurrentUser().then(currentUser => {
-            return XMLHttpRequestUtil.request({
+            XMLHttpRequestUtil.request({
                 type: "GET",
                 request: `${API_ENDPOINT}/logout`,
-                headers: [{ key: "Authorization", value: token.current }]
-            });
+                headers: [{ key: "Authorization", value: prepareToken() }]
+            }).then((response) => {
+                setAuthenticated(false)
+                sessionStorage.removeItem(TOKEN_KEY)
+                resolve(response);
+            }).catch(() => {
+                setAuthenticated(false)
+                reject();
+            } );
 
             /*currentUser.globalSignOut({
                 onSuccess: function (result) {
@@ -81,8 +91,7 @@ export const LoginContextProvider = ({ children }) => {
                     reject({ success: false, error });
                 },
             });*/
-        });
-    };
+    });
 
     //const getCurrentUser = () => new Promise((resolve, reject) => {
 
@@ -98,13 +107,16 @@ export const LoginContextProvider = ({ children }) => {
             request: `${API_ENDPOINT}/login`,
             payload: JSON.stringify(authenticationData),
             headers: []
-        }).then((token) => {
+        }).then((response) => {
             setAuthenticated(true)
-            console.log(token);
-            resolve(token);
+            console.log(response);
+
+            sessionStorage.setItem(TOKEN_KEY, response.data.token);
+
+            resolve(response);
         }).catch(() => {
             setAuthenticated(false)
-            reject(undefined);
+            reject();
         } );
 
         /*const authenticationDetails = new AuthenticationDetails(authenticationData);
@@ -133,16 +145,20 @@ export const LoginContextProvider = ({ children }) => {
             console.log("healthy")
         }).catch(() => console.log("unhealthy"));
 
-        getCurrentUser()
-            .then(currentUser => {
-                if (currentUser) {
+        const _token = sessionStorage.getItem(TOKEN_KEY);
 
-                    token.current = currentUser.token;
-                    username.current = currentUser.username;
+        getCurrentUser(_token)
+            .then(response => {
+                if (response.success) {
+                    token.current = _token;
+                    setAuthenticated(true);
                 }
             })
             .catch(() => setAuthenticated(false));
-    }, [authenticated]);
+    }, []);
+
+
+    const prepareToken = (_token) => `Bearer ${_token ? _token : token.current}`;
 
     const context = {
         authenticated,
@@ -151,8 +167,9 @@ export const LoginContextProvider = ({ children }) => {
         loginUser,
         logoutUser,
         token,
-        username,
-        healthCheck
+        //username,
+        healthCheck,
+        prepareToken
     };
 
     return (
