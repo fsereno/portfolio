@@ -9,16 +9,11 @@ export function ItemsContextProvider({ children }) {
 
     const configContext = React.useContext(ConfigContext);
     const loginContext = React.useContext(LoginContext);
-
     const endpoints = configContext.appConfig.endpoints;
-    const API_ENDPOINT = `${endpoints.base}/${endpoints.api}`;
-
+    const API_ENDPOINT = `${endpoints.base}`;
     const selectedId = useRef();
-
     const ver = useRef(0);
-
     const [ version, setVersion ] = useState(ver.current);
-
     const [items, setItems] = useState([]);
 
     const incrementVersion = () => {
@@ -29,7 +24,6 @@ export function ItemsContextProvider({ children }) {
     const _getModifiedOnTime = () => new Date().getTime();
 
     const getItems = () => {
-        console.log(loginContext.prepareToken());
         return XMLHttpRequestUtil.request({
             type: "GET",
             request: API_ENDPOINT,
@@ -69,7 +63,7 @@ export function ItemsContextProvider({ children }) {
 
         return XMLHttpRequestUtil.request({
             type: "PUT",
-            request: `${API_ENDPOINT}/${selectedId.current}`,
+            request: `${API_ENDPOINT}`,
             payload: JSON.stringify(item),
             headers: [{ key: "Authorization", value: loginContext.prepareToken() }]
         });
@@ -79,7 +73,6 @@ export function ItemsContextProvider({ children }) {
 
         const newItem = {...item};
 
-        //newItem.username = loginContext.username.current;
         newItem.modifiedOn = _getModifiedOnTime();
 
         return XMLHttpRequestUtil.request({

@@ -9,20 +9,12 @@ const login = (req, res) => {
 
     try {
         const { username, password } = req.body;
-
-        console.log(username)
-        console.log(password)
-
         const token = userService.handleLogin(username, password, req);
-
-        console.log("user login matched!")
-
-        console.log(token)
 
         res.send({ token });
 
     } catch (error) {
-        console.log(error.message);
+        console.error(error.message);
         res.status(400).send(error.message);
     }
 };
@@ -40,7 +32,7 @@ const logout = (req, res) => {
         res.status(200).send();
 
     } catch (error) {
-        console.log(error)
+        console.error(error.message);
         res.status(400).send(error.message);
     }
 };
@@ -60,6 +52,7 @@ const register = (req, res) => {
         res.send({ username });
 
     } catch (error) {
+        console.error(error.message);
         res.status(400).send(error.message);
     }
 };
@@ -74,13 +67,10 @@ const getUser = (req, res) => {
     try {
         const user = userService.getCurrentUser(req);
 
-        console.log("got user")
-
-        console.log("user");
-
         res.send({ user });
 
     } catch (error) {
+        console.error(error.message);
         res.status(400).send(error.message);
     }
 };

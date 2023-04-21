@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const secretKey = 'secret_key';
 const crypto = require("crypto");
 const { v4: uuidv4 } = require('uuid');
 
@@ -8,6 +7,7 @@ const users = [];
 
 // private members
 const _tokenBlacklist = [];
+const secretKey = process.env.SECRET_KEY || 'secret_key';
 
 /**
  * Middleware to check if user is authenticated
@@ -18,10 +18,7 @@ const _tokenBlacklist = [];
 const isAuthenticated = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
-    console.log(authHeader);
-
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        console.log("no bearer")
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
@@ -32,7 +29,6 @@ const isAuthenticated = (req, res, next) => {
         const isBlacklisted = _tokenBlacklist.some(x => x === bearerToken);
 
         if (isBlacklisted) {
-            console.log("is black listed");
             return res.status(401).json({ message: 'Unauthorized' });
         }
 
@@ -43,9 +39,9 @@ const isAuthenticated = (req, res, next) => {
             }
 
             // Set current user in session object
-            req.session.currentUser = { username: decodedToken.username, token: bearerToken };
+            //req.session.currentUser = { username: decodedToken.username, token: bearerToken };
 
-            console.log("user assigned to session " + decodedToken.username)
+            //console.log("user assigned to session " + decodedToken.username)
             next();
         });
     } else {
@@ -61,7 +57,35 @@ const isAuthenticated = (req, res, next) => {
  */
 const getCurrentUser = (req) => {
 
-    const currentUser = req.session.currentUser;
+  console.log("get current user");
+
+  const bearerToken = extractBearerToken(req);
+
+  console.log(bearerToken);
+
+  if (bearerToken) {
+
+      return jwt.verify(bearerToken, secretKey, (err, decodedToken) => {
+
+          if (err) {
+            throw new Error('No user found!');
+          }
+
+          const user = getUser(decodedToken.username);
+
+          console.log(user);
+
+          return user;
+
+          // Set current user in session object
+          //req.session.currentUser = { username: decodedToken.username, token: bearerToken };
+      });
+
+  } else {
+    throw new Error('Unauthorized.');
+  }
+
+    /*const currentUser = req.session.currentUser;
 
     if (!currentUser) {
       throw new Error('Unauthorized.');
@@ -73,7 +97,7 @@ const getCurrentUser = (req) => {
       throw new Error('Unauthorized.');
     }
 
-    return currentUser;
+    return currentUser;*/
 };
 
 /**
@@ -106,7 +130,7 @@ const handleLogin = (username, password, req) => {
 
     const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
 
-    req.session.regenerate((err) => {
+    /*req.session.regenerate((err) => {
         if (err) {
             throw new Error('Internal server error when regenerate.');
         }
@@ -118,7 +142,7 @@ const handleLogin = (username, password, req) => {
               throw new Error('Internal server error when saving.');
             }
         });
-    });
+    });*/
 
     return token;
 };
@@ -130,22 +154,11 @@ const handleLogin = (username, password, req) => {
  */
 const handleLogout = (req) => {
 
-  req.session.currentUser = {};
+    const bearerToken = extractBearerToken(req);
 
-  req.session.destroy((err) => {
-    if (err) {
+    _tokenBlacklist.push(bearerToken);
 
-      throw new Error('Internal server error.');
-
-    } else {
-
-      const bearerToken = extractBearerToken(req);
-
-      _tokenBlacklist.push(bearerToken);
-
-      return true;
-    }
-  });
+    return true;
 };
 
 /**
@@ -166,13 +179,23 @@ const registerUser = (username, password) => {
     const hashedPassword = createHash(password);
     const user = { id, username, password: hashedPassword };
 
-    console.log("pushing user - reg success")
-    console.log(user)
-
     users.push(user);
 };
 
+/**
+ * Retrieves all users.
+ * @returns {array} - Returns and array of all users
+ */
 const getUsers =  () => users;
+
+
+const getUser = (username) => {
+  if (isUserExists(username)) {
+    return users.find(x => x.username === username);
+  } else {
+    throw new Error('User not found!');
+  }
+}
 
 /**
  * Retrieves a user with the given username from the users array.

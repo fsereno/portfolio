@@ -31,7 +31,6 @@ export function LoginForm() {
     }
 
     const loginFailCallback = (err) => {
-        console.log(err);
         setFeedbackError(err.message);
         setShowFeedback(true);
         spinnerContext.setShow(false);

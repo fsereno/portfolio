@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const session = require('express-session');
+//const session = require('express-session');
 const cors = require('cors');
 
 const { isAuthenticated } = require('./services/userService');
@@ -30,11 +30,11 @@ const app = express();
 
 app.use(cors({ origin: true }));
 
-app.use(session({
+/*app.use(session({
     secret: SECRET_KEY,
     resave: false,
     saveUninitialized: true
-}));
+}));*/
 
 app.use(bodyParser.json());
 

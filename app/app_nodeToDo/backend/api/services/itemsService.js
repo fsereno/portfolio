@@ -78,16 +78,11 @@ const deleteItem = (id, username) => {
 */
 const createItem = (item, username) => {
 
-    console.log("ITEM")
-
-    item.id = uuidv4();
-
-    console.log(item);
-
     if (!item || typeof item !== 'object') throw new Error('Invalid item');
-    if (!item.id || !item.description) throw new Error('Item id and description are required');
+    if (!item.description) throw new Error('Item id and description are required');
     if (typeof item.done !== 'boolean') throw new Error('Item done must be a boolean');
 
+    item.id = uuidv4();
     item.username = username;
     item.modifiedOn = new Date();
     item.createdOn = new Date();

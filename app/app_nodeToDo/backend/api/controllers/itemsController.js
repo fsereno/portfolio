@@ -12,6 +12,9 @@ const getAllItems = (req, res) => {
     try {
         const { username } = userService.getCurrentUser(req, res);
 
+        console.log("got user got get all items");
+        console.log(username);
+
         const items = itemsService.getItems(username);
 
         res.send({ items });
@@ -84,7 +87,7 @@ const addItem = (req, res) => {
 
         res.send({ itmes });
     } catch (error) {
-        console.log(error);
+        console.error(error.message);
         res.status(400).send(error.message);
     }
 };

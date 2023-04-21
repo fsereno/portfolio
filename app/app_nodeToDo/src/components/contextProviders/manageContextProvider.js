@@ -10,9 +10,7 @@ export const ManageContextProvider = ({ children }) => {
 
     const spinnerContext = React.useContext(SpinnerContext);
     const itemsContext = React.useContext(ItemsContext);
-
     const [ showError, setShowError ] = useState(false);
-
     const [ state, dispatch ] = useReducer(itemReducer, ITEM);
 
     const doneCallback = () => {

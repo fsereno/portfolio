@@ -37,7 +37,6 @@ export const ListItems = React.memo(({version}) => {
         itemsContext.getItems()
             .then(response => {
 
-                console.log(response);
                 const items = response.data.items || [];
                 items.sort(modifiedOnComparerDesc);
 
@@ -45,7 +44,6 @@ export const ListItems = React.memo(({version}) => {
                 spinnerContext.hideSpinner();
                 setHideItems(false);
             }).catch((err) => { 
-                console.log(err);
                 manageContext.failCallback()});
     }, [version]);
 
