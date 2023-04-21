@@ -49,8 +49,8 @@ export function LoginForm() {
             spinnerContext.setShow(true);
 
             loginContext.loginUser(username, password)
-                .then(result => result.success ? loginDoneCallback() : loginFailCallback({ message: "Login failed!"}))
-                .catch(result => loginFailCallback(result));
+                .then(response => response.success ? loginDoneCallback() : loginFailCallback({ message: "Login failed!"}))
+                .catch(response => loginFailCallback({ message: response.data.response }));
         }
     };
 

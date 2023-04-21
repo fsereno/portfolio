@@ -44,7 +44,9 @@ export const ListItems = React.memo(({version}) => {
                 itemsContext.setItems(items);
                 spinnerContext.hideSpinner();
                 setHideItems(false);
-            }).catch(() => manageContext.failCallback());
+            }).catch((err) => { 
+                console.log(err);
+                manageContext.failCallback()});
     }, [version]);
 
     return (

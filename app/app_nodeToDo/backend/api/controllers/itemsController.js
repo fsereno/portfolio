@@ -16,7 +16,7 @@ const getAllItems = (req, res) => {
 
         res.send({ items });
     } catch (error) {
-        res.status(400).send({ message: error.message });
+        res.status(400).send(error.message);
     }
 };
 
@@ -37,7 +37,7 @@ const getItem = (req, res) => {
 
         res.send({ item });
     } catch (error) {
-        res.status(400).send({ message: error.message });
+        res.status(400).send(error.message);
     }
 };
 
@@ -60,7 +60,7 @@ const deleteItem = (req, res) => {
 
         res.send({ itmes });
     } catch (error) {
-        res.status(400).send({ message: error.message });
+        res.status(400).send(error.message);
     }
 };
 
@@ -84,7 +84,8 @@ const addItem = (req, res) => {
 
         res.send({ itmes });
     } catch (error) {
-        res.status(400).send({ message: error.message });
+        console.log(error);
+        res.status(400).send(error.message);
     }
 };
 
@@ -108,7 +109,7 @@ const updateItem = (req, res) => {
 
         res.send({ items });
     } catch (error) {
-        res.status(400).send({ message: error.message });
+        res.status(400).send(error.message);
     }
 };
 

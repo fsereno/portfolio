@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const secretKey = 'secret_key';
 const crypto = require("crypto");
+const { v4: uuidv4 } = require('uuid');
 
 // public members
 const users = [];
@@ -17,7 +18,10 @@ const _tokenBlacklist = [];
 const isAuthenticated = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
+    console.log(authHeader);
+
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        console.log("no bearer")
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
@@ -28,6 +32,7 @@ const isAuthenticated = (req, res, next) => {
         const isBlacklisted = _tokenBlacklist.some(x => x === bearerToken);
 
         if (isBlacklisted) {
+            console.log("is black listed");
             return res.status(401).json({ message: 'Unauthorized' });
         }
 
@@ -157,8 +162,9 @@ const registerUser = (username, password) => {
       throw new Error('User already exists.');
     }
 
+    const id = uuidv4();
     const hashedPassword = createHash(password);
-    const user = { username, password: hashedPassword };
+    const user = { id, username, password: hashedPassword };
 
     console.log("pushing user - reg success")
     console.log(user)

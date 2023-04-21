@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 /**
  * The items array
 */
@@ -75,6 +77,12 @@ const deleteItem = (id, username) => {
 * @throws {Error} If the 'username' parameter is not provided.
 */
 const createItem = (item, username) => {
+
+    console.log("ITEM")
+
+    item.id = uuidv4();
+
+    console.log(item);
 
     if (!item || typeof item !== 'object') throw new Error('Invalid item');
     if (!item.id || !item.description) throw new Error('Item id and description are required');

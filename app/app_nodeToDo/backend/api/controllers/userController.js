@@ -23,7 +23,7 @@ const login = (req, res) => {
 
     } catch (error) {
         console.log(error.message);
-        res.status(400).send({ message: error.message });
+        res.status(400).send(error.message);
     }
 };
 
@@ -41,7 +41,7 @@ const logout = (req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(400).send({ message: error.message });
+        res.status(400).send(error.message);
     }
 };
 
@@ -60,7 +60,7 @@ const register = (req, res) => {
         res.send({ username });
 
     } catch (error) {
-        res.status(400).send({ message: error.message });
+        res.status(400).send(error.message);
     }
 };
 
@@ -81,7 +81,7 @@ const getUser = (req, res) => {
         res.send({ user });
 
     } catch (error) {
-        res.status(400).send({ message: error.message });
+        res.status(400).send(error.message);
     }
 };
 

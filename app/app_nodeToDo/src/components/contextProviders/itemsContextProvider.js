@@ -29,6 +29,7 @@ export function ItemsContextProvider({ children }) {
     const _getModifiedOnTime = () => new Date().getTime();
 
     const getItems = () => {
+        console.log(loginContext.prepareToken());
         return XMLHttpRequestUtil.request({
             type: "GET",
             request: API_ENDPOINT,

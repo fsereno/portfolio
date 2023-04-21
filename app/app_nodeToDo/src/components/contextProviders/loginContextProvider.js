@@ -108,15 +108,17 @@ export const LoginContextProvider = ({ children }) => {
             payload: JSON.stringify(authenticationData),
             headers: []
         }).then((response) => {
-            setAuthenticated(true)
-            console.log(response);
 
             sessionStorage.setItem(TOKEN_KEY, response.data.token);
+            token.current = response.data.token;
+
+            setAuthenticated(true)
+            console.log(token.current);
 
             resolve(response);
-        }).catch(() => {
+        }).catch((response) => {
             setAuthenticated(false)
-            reject();
+            reject(response);
         } );
 
         /*const authenticationDetails = new AuthenticationDetails(authenticationData);
@@ -158,7 +160,11 @@ export const LoginContextProvider = ({ children }) => {
     }, []);
 
 
-    const prepareToken = (_token) => `Bearer ${_token ? _token : token.current}`;
+    const prepareToken = (_token) => { 
+        console.log(_token);
+        console.log(token.current);
+        return `Bearer ${_token ? _token : token.current}`
+    };
 
     const context = {
         authenticated,
