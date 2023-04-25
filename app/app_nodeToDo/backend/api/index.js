@@ -1,10 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-//const session = require('express-session');
 const cors = require('cors');
 
 const { isAuthenticated } = require('./services/userService');
-
 const { handleHealthcheck } = require('./controllers/healthcheckController');
 
 const {
@@ -22,24 +20,14 @@ const {
     updateItem
 } = require('./controllers/itemsController');
 
-const SECRET_KEY = process.env.SECRET_KEY || 'secret_key';
 const PORT = process.env.PORT || 3006;
 
 // Middleware
 const app = express();
-
 app.use(cors({ origin: true }));
-
-/*app.use(session({
-    secret: SECRET_KEY,
-    resave: false,
-    saveUninitialized: true
-}));*/
-
 app.use(bodyParser.json());
 
 // Routing
-
 // healthcheck
 app.get('/healthcheck', handleHealthcheck)
 

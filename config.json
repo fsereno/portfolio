@@ -246,9 +246,9 @@
         },
         {
             "name": "NodeJS To-Do List",
-            "subHeading": "A To-Do list application",
+            "subHeading": "A simple To-Do list application, with user registration and authentication",
             "description": "NodeJS Web API with a React UI.",
-            "searchTerms": "NodeJS,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "searchTerms": "NodeJS,Express,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "nodeToDo",
             "active": true,
             "include": true,
@@ -260,8 +260,7 @@
             "endpoints": {
                 "base": "http://localhost:3006",
                 "api": ""
-            },
-            "regiesterEnabled": true
+            }
         },
         {
             "name": "Master React Template",

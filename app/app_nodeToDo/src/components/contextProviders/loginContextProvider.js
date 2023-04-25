@@ -81,7 +81,8 @@ export const LoginContextProvider = ({ children }) => {
     useLayoutEffect(() => {
         const _token = sessionStorage.getItem(TOKEN_KEY);
 
-        getCurrentUser(_token)
+        if(_token) {
+            getCurrentUser(_token)
             .then(response => {
                 if (response.success) {
                     token.current = _token;
@@ -89,6 +90,7 @@ export const LoginContextProvider = ({ children }) => {
                 }
             })
             .catch(() => setAuthenticated(false));
+        }
     }, []);
 
     const prepareToken = (_token) => `Bearer ${_token ? _token : token.current}`;

@@ -11,10 +11,6 @@ const getAllItems = (req, res) => {
 
     try {
         const { username } = userService.getCurrentUser(req, res);
-
-        console.log("got user got get all items");
-        console.log(username);
-
         const items = itemsService.getItems(username);
 
         res.send({ items });
