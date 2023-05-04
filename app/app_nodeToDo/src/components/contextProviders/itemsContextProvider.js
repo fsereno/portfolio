@@ -10,7 +10,7 @@ export function ItemsContextProvider({ children }) {
     const configContext = React.useContext(ConfigContext);
     const loginContext = React.useContext(LoginContext);
     const endpoints = configContext.appConfig.endpoints;
-    const API_ENDPOINT = `${endpoints.base}`;
+    const API_ENDPOINT = `${configContext.config.apiRoot}${endpoints.base}/`;
     const selectedId = useRef();
     const ver = useRef(0);
     const [ version, setVersion ] = useState(ver.current);

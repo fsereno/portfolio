@@ -27,7 +27,7 @@ services:
         mem_limit: 500M
         cpus: 0.2
     nginx:
-        image: 'fabiosereno/portfolio.nginx.dev:0.1.0'
+        image: 'fabiosereno/portfolio.nginx.dev:0.2.0'
         ports:
             - '80:80'
         container_name: frontend
@@ -40,6 +40,7 @@ services:
             - "uniqueDataEntry"
             - "stringSort"
             - "entitySort"
+            - "nodeToDo"
         mem_limit: 500M
         cpus: 0.2
     coffeeMachine:
@@ -83,6 +84,15 @@ services:
         ports:
             - '3005:3005'
         container_name: entitySort
+        networks:
+            - backend
+        mem_limit: 500M
+        cpus: 0.2
+    nodeToDo:
+        image: 'fabiosereno/portfolio.node-to-do:0.0.1'
+        ports:
+            - '3006:3006'
+        container_name: nodeToDo
         networks:
             - backend
         mem_limit: 500M

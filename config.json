@@ -258,7 +258,7 @@
             "order": 1,
             "featured": false,
             "endpoints": {
-                "base": "http://localhost:3006",
+                "base": "nodeToDo",
                 "api": ""
             }
         },

@@ -11,7 +11,7 @@ export const LoginContextProvider = ({ children }) => {
 
     const configContext = React.useContext(ConfigContext);
     const endpoints = configContext.appConfig.endpoints;
-    const API_ENDPOINT = `${ endpoints.base }`;
+    const API_ENDPOINT = `${configContext.config.apiRoot}${endpoints.base}/`;
     const [ authenticated, setAuthenticated ] = useState(false);
     const token = useRef(sessionStorage.getItem(TOKEN_KEY));
 
