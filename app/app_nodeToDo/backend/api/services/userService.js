@@ -3,10 +3,20 @@ const crypto = require("crypto");
 const { v4: uuidv4 } = require('uuid');
 
 // public members
+/**
+ * The registered users.
+*/
 const users = [];
 
 // private members
-const _tokenBlacklist = [];
+/**
+ * JWT Whitelisted tokens. These are the logged in tokens.
+*/
+const _tokenWhitelist = [];
+
+/**
+ * The System Secret Key
+*/
 const secretKey = process.env.SECRET_KEY || 'secret_key';
 
 /**
@@ -26,9 +36,9 @@ const isAuthenticated = (req, res, next) => {
 
   if (bearerToken) {
 
-    const isBlacklisted = _tokenBlacklist.some(x => x === bearerToken);
+    const isWhitelisted = _tokenWhitelist.some(x => x === bearerToken);
 
-    if (isBlacklisted) {
+    if (!isWhitelisted) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
@@ -106,6 +116,10 @@ const handleLogin = (username, password, req) => {
 
   const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
 
+  removeDuplicateUserToken(username);
+
+  _tokenWhitelist.push(token);
+
   return token;
 };
 
@@ -118,10 +132,42 @@ const handleLogout = (req) => {
 
   const bearerToken = extractBearerToken(req);
 
-  _tokenBlacklist.push(bearerToken);
+  removeToken(bearerToken);
 
   return true;
 };
+
+/**
+ * Removes a duplicate whitelisted user token
+ * There should only be one JWT per user, per login
+ * @param {string} username - The username to check already whitelisted
+ */
+const removeDuplicateUserToken = (username) => {
+
+  _tokenWhitelist.forEach((existingToken) => {
+
+    jwt.verify(existingToken, secretKey, (err, decodedToken) => {
+      if (username === decodedToken.username) {
+        removeToken(existingToken);
+      }
+    });
+  })
+}
+
+/**
+ * Removes a token form the whitelist
+ * @param {string} token - The token to remove
+ */
+const removeToken = (token) => {
+
+  const index = _tokenWhitelist.findIndex(x => x ===  token);
+
+    if (index !== -1) {
+      _tokenWhitelist.splice(index, 1);
+    } else {
+        throw new Error("Token not found. User not logged in.");
+    }
+}
 
 /**
  * Register new user
@@ -150,7 +196,11 @@ const registerUser = (username, password) => {
  */
 const getUsers = () => users;
 
-
+/**
+ * Gets a specific user.
+ * @param {string} username - User's username
+ * @returns {} - Returns a user object
+*/
 const getUser = (username) => {
 
   if (isUserExists(username)) {
@@ -215,7 +265,6 @@ const extractBearerToken = (req) => {
     throw new Error(`Failed to extract bearer token from request: ${err.message}`);
   }
 };
-
 
 module.exports = {
   isAuthenticated,
