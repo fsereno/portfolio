@@ -14,11 +14,9 @@ https://fsereno.github.io/portfolio/
 This project is both built and deployed with continuous integration and deployment (CI/CD).
 
 Some of the technology used in this project and related projects:
-- Azure Functions (https://azure.microsoft.com/en-gb/services/functions/)
-- AWS Lambda (https://aws.amazon.com/lambda/)
 - .NET (https://dotnet.microsoft.com)
 - Docker (https://www.docker.com/)
-- Node.js (https://nodejs.org/en/)
+- NodeJS (https://nodejs.org/en/)
 - Webpack (https://webpack.js.org/)
 - Pug (https://pugjs.org/api/getting-started.html)
 - TypeScript (https://www.typescriptlang.org)

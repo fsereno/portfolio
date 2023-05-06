@@ -29,10 +29,10 @@
         "Cloud"
     ],
     "grecaptcha": {
-        "active": true,
-        "key": "6LdFJsIaAAAAAGltxQjmncdNsjOtxAshDewjKCS3",
+        "active": false,
+        "key": "",
         "endpoints": {
-            "base": "https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com",
+            "base": "",
             "verify": "verify"
         }
     },
@@ -138,7 +138,7 @@
             "featured": false
         },
         {
-            "name": "AWS .NET, Complex Entity Sorting Algorithm",
+            "name": ".NET, Complex Entity Sorting Algorithm",
             "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
             "description": ".NET Web API with a React UI.",
             "searchTerms": "Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
@@ -245,7 +245,7 @@
             "featured": false
         },
         {
-            "name": "NodeJS To-Do List",
+            "name": "NodeJS, B2C API, To-Do List SPA",
             "subHeading": "A simple To-Do list application, with user registration and authentication",
             "description": "NodeJS Web API with a React UI.",
             "searchTerms": "NodeJS,Express,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
@@ -258,8 +258,7 @@
             "order": 1,
             "featured": false,
             "endpoints": {
-                "base": "nodeToDo",
-                "api": ""
+                "base": "nodeToDo"
             }
         },
         {

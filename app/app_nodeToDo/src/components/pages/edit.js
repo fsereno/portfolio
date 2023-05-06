@@ -17,13 +17,9 @@ export function Edit() {
   const spinnerContext = React.useContext(SpinnerContext);
 
   const history = useHistory();
-
   const [state, dispatch] = useReducer(itemReducer, ITEM);
-
   const doneCallback = () => history.push(MANAGE);
-
   const failCallback = () => spinnerContext.hideSpinner();
-
   const onBackClick = () => history.goBack();
 
   useEffect(() => {
