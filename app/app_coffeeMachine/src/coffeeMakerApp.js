@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
+import { HealthCheckModalComponent } from '../../js/modules/react/healthCheckModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import CoffeeMakerComponent from './coffeeMakerComponent';
@@ -20,6 +21,7 @@ export default class CoffeeMakerApp extends React.Component {
       log: [],
       showSpinner: false,
       showPuzzleModal: true,
+      showHealthCheckModal: true,
       showErrorModal: false,
       isPuzzleValid: false
     };
@@ -117,6 +119,10 @@ export default class CoffeeMakerApp extends React.Component {
         <SpinnerComponent
           show={this.state.showSpinner}
         />
+        <HealthCheckModalComponent
+          show={this.state.showHealthCheckModal}
+        >
+        </HealthCheckModalComponent>
         <PuzzleModalComponent
           answer={5}
           puzzle={PUZZLE}
