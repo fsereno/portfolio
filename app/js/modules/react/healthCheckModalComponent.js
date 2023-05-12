@@ -1,16 +1,32 @@
-"use strict;"
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Col from 'react-bootstrap/Col';
 
-export function HealthCheckModalComponent({id, show, title}) {
+/**
+ * HealthCheckModalComponent displays a modal that checks the health of a specific endpoint.
+ * If the endpoint is not available, the modal is shown to the user.
+ *
+ * @param {string} id - The ID of the modal element.
+ * @param {string} title - The title of the modal.
+ * @param {string} endpoint - The endpoint URL to check.
+ */
+export function HealthCheckModalComponent({id, title, endpoint}) {
 
-  const [isShown, setIsShown] = useState(show);
+  const [isShown, setIsShown] = useState(false);
 
   const handleClosed = () => setIsShown(false);
+
+  useEffect(() => {
+    fetch(endpoint)
+      .then(response => {
+        if(response.status === 404) {
+          setIsShown(true);
+        }
+      })
+      .catch(() => {
+        setIsShown(true);
+      });
+  }, []);
 
   return (
     <>

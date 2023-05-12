@@ -1,7 +1,6 @@
 "use strict;"
 
 import React from 'react';
-import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
 import { HealthCheckModalComponent } from '../../js/modules/react/healthCheckModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
@@ -9,25 +8,21 @@ import CoffeeMakerComponent from './coffeeMakerComponent';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 
-const PUZZLE = "3 + 1 + 1 =";
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("coffeeMachine");
-const RUN_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.run}`;
-const RUN_ASYNC_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.runAsync}`;
+const RUN_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.base}${APP_CONFIG.endpoints.run}`;
+const RUN_ASYNC_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.base}${APP_CONFIG.endpoints.runAsync}`;
+const HEALTH_CHECK = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.base}healthcheck`;
+
 export default class CoffeeMakerApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       log: [],
       showSpinner: false,
-      showPuzzleModal: true,
       showHealthCheckModal: true,
-      showErrorModal: false,
-      isPuzzleValid: false
+      showErrorModal: false
     };
-    this.handleIsPuzzleValid = this.handleIsPuzzleValid.bind(this);
-    this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
-    this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
     this.handleBeforeAjax = this.handleBeforeAjax.bind(this);
     this.handleFailedAjax = this.handleFailedAjax.bind(this);
@@ -63,16 +58,14 @@ export default class CoffeeMakerApp extends React.Component {
   handleAjax(request) {
     jQueryAjaxUtil.handleAjax(
       request,
-      this.state.isPuzzleValid,
+      true,
       this.handleBeforeAjax,
-      this.handleFailedAjax,
-      this.handlePuzzleModalShow);
+      this.handleFailedAjax);
   }
 
   handleBeforeAjax() {
     this.setState({
-      showSpinner: true,
-      showPuzzleModal: false
+      showSpinner: true
     });
   }
 
@@ -81,25 +74,6 @@ export default class CoffeeMakerApp extends React.Component {
       showErrorModal: true,
       showSpinner: false
     });
-  }
-
-  handleIsPuzzleValid() {
-    this.setState({
-      isPuzzleValid: true,
-      showPuzzleModal: false
-    })
-  }
-
-  handlePuzzleModalClose() {
-    this.setState({
-      showPuzzleModal: false
-    })
-  }
-
-  handlePuzzleModalShow() {
-    this.setState({
-      showPuzzleModal: true
-    })
   }
 
   handleErrorModalClose() {
@@ -120,17 +94,9 @@ export default class CoffeeMakerApp extends React.Component {
           show={this.state.showSpinner}
         />
         <HealthCheckModalComponent
-          show={this.state.showHealthCheckModal}
+          endpoint={HEALTH_CHECK}
         >
         </HealthCheckModalComponent>
-        <PuzzleModalComponent
-          answer={5}
-          puzzle={PUZZLE}
-          show={this.state.showPuzzleModal}
-          handleClose={this.handlePuzzleModalClose}
-          handleShow={this.handlePuzzleModalShow}
-          handleIsValid={this.handleIsPuzzleValid}
-        />
         <CoffeeMakerComponent
           log={this.state.log}
           handleRun={this.handleRun}
