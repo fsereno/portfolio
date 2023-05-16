@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import { ConfigUtil } from '../utils/configUtil';
 import Button from 'react-bootstrap/Button';
 
 /**
@@ -12,12 +13,14 @@ import Button from 'react-bootstrap/Button';
  */
 export function HealthCheckModalComponent({id, title, endpoint}) {
 
+  const config = ConfigUtil.get();
+  const linkedInUrl = config.linkedInUrl;
+  const gitHubIssueUrl = config.gitHubIssuesUrl;
   const [isShown, setIsShown] = useState(false);
-
   const handleClosed = () => setIsShown(false);
 
   useEffect(() => {
-    fetch(endpoint)
+    fetch(endpoint+"t")
       .then(response => {
         if(response.status === 404) {
           setIsShown(true);
@@ -32,7 +35,7 @@ export function HealthCheckModalComponent({id, title, endpoint}) {
     <>
       <Modal id={id || "healthCheckModal"} show={isShown}>
         <Modal.Header>
-          <Modal.Title className="display-4">{title || "Oops! Deployment required!"}</Modal.Title>
+          <Modal.Title className="display-4">{title || "Request Deployment"}</Modal.Title>
           <Button variant="link" className="close" onClick={handleClosed}>
             <span className="lr">
                 <span className="rl"></span>
@@ -40,14 +43,14 @@ export function HealthCheckModalComponent({id, title, endpoint}) {
           </Button>
         </Modal.Header>
         <Modal.Body>
-          <p>In order to save on resources, the services for this portfolio are not always deployed.</p>
-          <p>Please request a complete deployment of this application to proceed.</p>
-          <p>This will result in spinning up a fully containerized environment in the cloud.</p>
-          <p>Upon requesting a deployment, you will receive a unique URL through which you can access a fully featured portfolio.</p>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClosed}>
-              Close
-            </Button>
+          <p>To conserve resources, the portfolio services are not always available. To proceed, please request a full deployment of the portfolio. This will create a fully containerized environment in the cloud. Once you request the deployment, you will receive a unique URL to access the complete portfolio.</p>
+          <Modal.Footer className="flex-box ">
+              <a className="btn btn-dark w-100 mb-2" href={gitHubIssueUrl} target="_blank">
+                Raise an Issue on GitHub<i className="fa fa-github ml-2"></i>
+              </a>
+              <a className="btn btn-dark w-100" href={linkedInUrl} target="_blank">
+                Make Contact on LinkedIn<i className="fa fa fa-linkedin ml-2"></i>
+              </a>
           </Modal.Footer>
           </Modal.Body>
         </Modal>
