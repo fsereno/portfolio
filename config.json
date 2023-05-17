@@ -1,6 +1,7 @@
 {
     "host": "localhost",
     "apiRoot": "/backend/",
+    "apiHealthCheck": "healthcheck",
     "dockerHost": "nginx",
     "port": 8080,
     "prefix": "app_",
@@ -130,10 +131,11 @@
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "addQueueItem": "dataStructures/api/addQueueItemAsync",
-                "removeQueueItem": "dataStructures/api/removeQueueItemAsync",
-                "addStackItem": "dataStructures/api/addStackItemAsync",
-                "removeStackItem": "dataStructures/api/removeStackItemAsync"
+                "base": "dataStructures/",
+                "addQueueItem": "api/addQueueItemAsync",
+                "removeQueueItem": "api/removeQueueItemAsync",
+                "addStackItem": "api/addStackItemAsync",
+                "removeStackItem": "api/removeStackItemAsync"
             },
             "labels": [0, 1, 2],
             "featured": false

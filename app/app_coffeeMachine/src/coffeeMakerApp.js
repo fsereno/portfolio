@@ -12,7 +12,7 @@ const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("coffeeMachine");
 const RUN_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.base}${APP_CONFIG.endpoints.run}`;
 const RUN_ASYNC_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.base}${APP_CONFIG.endpoints.runAsync}`;
-const HEALTH_CHECK = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.base}healthcheck`;
+const HEALTH_CHECK = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.base}${CONFIG.apiHealthCheck}`;
 
 export default class CoffeeMakerApp extends React.Component {
   constructor(props) {

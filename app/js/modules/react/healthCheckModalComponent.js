@@ -11,25 +11,31 @@ import Button from 'react-bootstrap/Button';
  * @param {string} title - The title of the modal.
  * @param {string} endpoint - The endpoint URL to check.
  */
-export function HealthCheckModalComponent({id, title, endpoint}) {
+export function HealthCheckModalComponent({id, title, endpoint, show, failedDeligate}) {
 
   const config = ConfigUtil.get();
   const linkedInUrl = config.linkedInUrl;
   const gitHubIssueUrl = config.gitHubIssuesUrl;
-  const [isShown, setIsShown] = useState(false);
+  const [isShown, setIsShown] = useState(show || false);
   const handleClosed = () => setIsShown(false);
 
   useEffect(() => {
-    fetch(endpoint+"t")
+    fetch(endpoint) // TODO CORRECT THIS BEFORE DEPLOYMENT
       .then(response => {
-        if(response.status === 404) {
+        if(response.status === 404 || response.status === 502) {
           setIsShown(true);
+          if (typeof failedDeligate === "function") {
+            failedDeligate();
+          }
         }
       })
       .catch(() => {
         setIsShown(true);
+        if (typeof failedDeligate === "function") {
+          failedDeligate();
+        }
       });
-  }, []);
+  }, [show]);
 
   return (
     <>
@@ -43,7 +49,7 @@ export function HealthCheckModalComponent({id, title, endpoint}) {
           </Button>
         </Modal.Header>
         <Modal.Body>
-          <p>To conserve resources, the portfolio services are not always available. To proceed, please request a full deployment of the portfolio. This will create a fully containerized environment in the cloud. Once you request the deployment, you will receive a unique URL to access the complete portfolio.</p>
+          <p>To conserve resources, services are not always available. To proceed, please request a full deployment of the portfolio. This will create a fully containerised environment in the cloud. Once you request the deployment, you will receive a unique URL to access the complete portfolio.</p>
           <Modal.Footer className="flex-box ">
               <a className="btn btn-dark w-100 mb-2" href={gitHubIssueUrl} target="_blank">
                 Raise an Issue on GitHub<i className="fa fa-github ml-2"></i>

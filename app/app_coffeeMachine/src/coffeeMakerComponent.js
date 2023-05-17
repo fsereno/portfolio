@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
+
 export default class CoffeeMakerComponent extends React.Component {
   constructor(props) {
     super(props);
