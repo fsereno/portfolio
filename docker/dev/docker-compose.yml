@@ -27,7 +27,7 @@ services:
         mem_limit: 500M
         cpus: 0.2
     nginx:
-        image: 'fabiosereno/portfolio.nginx.dev:0.2.0'
+        image: 'fabiosereno/portfolio.nginx.dev:0.2.6'
         ports:
             - '80:80'
         container_name: frontend

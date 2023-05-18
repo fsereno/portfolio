@@ -6,20 +6,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
+import { DeploymentModalComponent } from '../../js/modules/react/deploymentModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { FormComponent } from './formComponent';
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
+import { DeploymentUtil } from '../../js/modules/utils/deploymentUtil';
 
-const PUZZLE = "3 x 2 - 1 =";
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("dataStructures");
 const ADD_QUEUE_ITEM_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.addQueueItem}`;
 const REMOVE_QUEUE_ITEM_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.removeQueueItem}`;
 const ADD_STACK_ITEM_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.addStackItem}`;
 const REMOVE_STACK_ITEM_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.removeStackItem}`;
+
+console.log(DeploymentUtil.isNotCloud());
+
 class DataStructuresApp extends React.Component {
   constructor(props) {
     super(props);
@@ -27,18 +30,16 @@ class DataStructuresApp extends React.Component {
       queue: [],
       stack: [],
       showSpinner: false,
-      showPuzzleModal: true,
-      showErrorModal: false,
-      isPuzzleValid: false
+      showDeploymentModal: DeploymentUtil.isNotCloud(),
+      showErrorModal: false
     };
 
     this.handleQueueAdd = this.handleQueueAdd.bind(this);
     this.handleQueueRemove= this.handleQueueRemove.bind(this);
     this.handleStackAdd = this.handleStackAdd.bind(this);
     this.handleStackRemove = this.handleStackRemove.bind(this);
-    this.handleIsPuzzleValid = this.handleIsPuzzleValid.bind(this);
-    this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
-    this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
+    this.handleDeploymentModalClose = this.handleDeploymentModalClose.bind(this);
+    this.handleDeploymentModalShow = this.handleDeploymentModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
     this.handleBeforeAjax = this.handleBeforeAjax.bind(this);
     this.handleFailedAjax = this.handleFailedAjax.bind(this);
@@ -46,8 +47,7 @@ class DataStructuresApp extends React.Component {
 
   handleBeforeAjax() {
     this.setState({
-      showSpinner: true,
-      showPuzzleModal: false
+      showSpinner: true
     });
   }
 
@@ -59,7 +59,7 @@ class DataStructuresApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxUtil.handleAjax(request, this.state.isPuzzleValid, this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, DeploymentUtil.isCloud(), this.handleBeforeAjax, this.handleFailedAjax, this.handleDeploymentModalShow);
   }
 
   handleQueueAdd(event, item) {
@@ -178,36 +178,26 @@ class DataStructuresApp extends React.Component {
     })
   }
 
-  handleIsPuzzleValid() {
+  handleDeploymentModalClose() {
     this.setState({
-      isPuzzleValid: true,
-      showPuzzleModal: false
+      showDeploymentModal: false
     })
   }
 
-  handlePuzzleModalClose() {
+  handleDeploymentModalShow() {
     this.setState({
-      showPuzzleModal: false
-    })
-  }
-
-  handlePuzzleModalShow() {
-    this.setState({
-      showPuzzleModal: true
+      showDeploymentModal: true
     })
   }
 
   render() {
     return (
       <>
-        <PuzzleModalComponent
-          answer={5}
-          puzzle={PUZZLE}
-          show={this.state.showPuzzleModal}
-          handleClose={this.handlePuzzleModalClose}
-          handleShow={this.handlePuzzleModalShow}
-          handleIsValid={this.handleIsPuzzleValid}
-        />
+        <DeploymentModalComponent
+          show={this.state.showDeploymentModal}
+          handleClose={this.handleDeploymentModalClose}
+        >
+        </DeploymentModalComponent>
         <ErrorModalComponent
           id="errorModal"
           show={this.state.showErrorModal}

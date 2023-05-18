@@ -1,39 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { ConfigUtil } from '../utils/configUtil';
 import Button from 'react-bootstrap/Button';
 
 /**
- * HealthCheckModalComponent displays a modal that checks the health of a specific endpoint.
+ * DeploymentModalComponent displays a modal detailing how to request a deployment.
  * If the endpoint is not available, the modal is shown to the user.
  *
  * @param {string} id - The ID of the modal element.
  * @param {string} title - The title of the modal.
  * @param {string} endpoint - The endpoint URL to check.
  */
-export function HealthCheckModalComponent({id, title, show, handleClose}) {
+export function DeploymentModalComponent({id, title, show, handleClose}) {
 
   const config = ConfigUtil.get();
   const linkedInUrl = config.linkedInUrl;
   const gitHubIssueUrl = config.gitHubIssuesUrl;
-
-  /*useEffect(() => {
-    fetch(endpoint) // TODO CORRECT THIS BEFORE DEPLOYMENT
-      .then(response => {
-        if(response.status === 404 || response.status === 502) {
-          setIsShown(true);
-          if (typeof failedDeligate === "function") {
-            failedDeligate();
-          }
-        }
-      })
-      .catch(() => {
-        setIsShown(true);
-        if (typeof failedDeligate === "function") {
-          failedDeligate();
-        }
-      });
-  }, [show]);*/
 
   return (
     <>
