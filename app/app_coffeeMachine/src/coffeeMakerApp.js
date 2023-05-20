@@ -1,18 +1,18 @@
 "use strict;"
 
 import React from 'react';
-import { HealthCheckModalComponent } from '../../js/modules/react/healthCheckModalComponent.js';
+import { DeploymentModalComponent } from '../../js/modules/react/deploymentModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import CoffeeMakerComponent from './coffeeMakerComponent';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
+import { DeploymentUtil } from '../../js/modules/utils/deploymentUtil';
 
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("coffeeMachine");
-const RUN_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.base}${APP_CONFIG.endpoints.run}`;
-const RUN_ASYNC_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.base}${APP_CONFIG.endpoints.runAsync}`;
-const HEALTH_CHECK = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.base}${CONFIG.apiHealthCheck}`;
+const RUN_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.run}`;
+const RUN_ASYNC_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.runAsync}`;
 
 export default class CoffeeMakerApp extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ export default class CoffeeMakerApp extends React.Component {
     this.state = {
       log: [],
       showSpinner: false,
-      showHealthCheckModal: true,
+      showDeploymentModal: DeploymentUtil.isNotCloud(),
       showErrorModal: false
     };
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
@@ -30,6 +30,8 @@ export default class CoffeeMakerApp extends React.Component {
     this.handleRunAsync = this.handleRunAsync.bind(this);
     this.handleAjax = this.handleAjax.bind(this);
     this.handleRequest = this.handleRequest.bind(this);
+    this.handleDeploymentModalClose = this.handleDeploymentModalClose.bind(this);
+    this.handleDeploymentModalShow = this.handleDeploymentModalShow.bind(this);
   }
 
   handleRun() {
@@ -58,9 +60,10 @@ export default class CoffeeMakerApp extends React.Component {
   handleAjax(request) {
     jQueryAjaxUtil.handleAjax(
       request,
-      true,
+      DeploymentUtil.isCloud(),
       this.handleBeforeAjax,
-      this.handleFailedAjax);
+      this.handleFailedAjax,
+      this.handleDeploymentModalShow);
   }
 
   handleBeforeAjax() {
@@ -82,6 +85,18 @@ export default class CoffeeMakerApp extends React.Component {
     })
   }
 
+  handleDeploymentModalClose() {
+    this.setState({
+      showDeploymentModal: false
+    })
+  }
+
+  handleDeploymentModalShow() {
+    this.setState({
+      showDeploymentModal: true
+    })
+  }
+
   render() {
     return (
       <div>
@@ -93,10 +108,11 @@ export default class CoffeeMakerApp extends React.Component {
         <SpinnerComponent
           show={this.state.showSpinner}
         />
-        <HealthCheckModalComponent
-          endpoint={HEALTH_CHECK}
+        <DeploymentModalComponent
+          show={this.state.showDeploymentModal}
+          handleClose={this.handleDeploymentModalClose}
         >
-        </HealthCheckModalComponent>
+        </DeploymentModalComponent>
         <CoffeeMakerComponent
           log={this.state.log}
           handleRun={this.handleRun}

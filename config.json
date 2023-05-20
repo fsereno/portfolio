@@ -188,9 +188,8 @@
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "base": "coffeeMachine/",
-                "run": "api/run",
-                "runAsync": "api/runasync"
+                "run": "coffeeMachine/api/run",
+                "runAsync": "coffeeMachine/api/runasync"
             },
             "labels": [0, 1, 2],
             "order": 3

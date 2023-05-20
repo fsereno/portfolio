@@ -8,12 +8,12 @@ block content
       | Why wait for a process to complete, when it could be run as a background task ?
     h2 How ?
     p
-      | Technically, when calling the Sync method, a series of actions are run in order of
-      | execution, synchronously. With each action completing before the next is run.
-      | When calling the Async method, however async / await are being used, spawning
-      | a State Machine object, with Task acting as the interface between code and state.
-      | The threadpool is free to use new threads if needed and return execution instead
-      | of blocking execution as with a synchronous program.
+      | Technically, when calling the 'Sync' method in .NET, a series of actions is executed
+      | synchronously in the order they are called. Each action completes before the next one is
+      | executed. On the other hand, when calling the 'Async' method, the async/await
+      | keywords are used, which create a state machine object. The 'Task' type serves as the
+      | interface between the code and the state machine. The thread pool in .NET is free to use new
+      | threads if necessary and allows execution to continue without blocking, unlike in a synchronous program.
     p
       | Run the process of making a cup of coffee both synchronously and asynchronously.
       | Notice the difference in the order of tasks ?
