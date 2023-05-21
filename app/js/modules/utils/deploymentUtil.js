@@ -5,7 +5,7 @@ import { CookieUtil } from './cookieUtil';
 
 const CONFIG = ConfigUtil.get();
 const COOKIE = CONFIG.deploymentTargetCookie;
-const DEPLOYMENT_TARGET_CLOUD = CONFIG.deploymentTargets.cloud+"2";
+const DEPLOYMENT_TARGET_CLOUD = CONFIG.deploymentTargets.cloud;
 
 /**
  * Utility class for deployment-related operations.
