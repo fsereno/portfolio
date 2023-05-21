@@ -1,12 +1,12 @@
 "use strict;"
 
 import React from 'react';
-import { DeploymentModalComponent } from '../../js/modules/react/deploymentModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import CoffeeMakerComponent from './coffeeMakerComponent';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
+import { DeploymentModalComponent } from '../../js/modules/react/deploymentModalComponent.js';
 import { DeploymentUtil } from '../../js/modules/utils/deploymentUtil';
 
 const CONFIG = ConfigUtil.get();
@@ -111,8 +111,7 @@ export default class CoffeeMakerApp extends React.Component {
         <DeploymentModalComponent
           show={this.state.showDeploymentModal}
           handleClose={this.handleDeploymentModalClose}
-        >
-        </DeploymentModalComponent>
+        />
         <CoffeeMakerComponent
           log={this.state.log}
           handleRun={this.handleRun}

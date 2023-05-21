@@ -6,12 +6,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { DeploymentModalComponent } from '../../js/modules/react/deploymentModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { FormComponent } from './formComponent';
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
+import { DeploymentModalComponent } from '../../js/modules/react/deploymentModalComponent.js';
 import { DeploymentUtil } from '../../js/modules/utils/deploymentUtil';
 
 const CONFIG = ConfigUtil.get();
@@ -196,8 +196,7 @@ class DataStructuresApp extends React.Component {
         <DeploymentModalComponent
           show={this.state.showDeploymentModal}
           handleClose={this.handleDeploymentModalClose}
-        >
-        </DeploymentModalComponent>
+        />
         <ErrorModalComponent
           id="errorModal"
           show={this.state.showErrorModal}

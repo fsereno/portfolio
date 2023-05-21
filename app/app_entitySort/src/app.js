@@ -5,7 +5,6 @@ import '../sass/styles.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
-import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
@@ -13,8 +12,9 @@ import { FormComponent } from "./formComponent";
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
 import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/index';
 import { EmployeeTableComponent } from './employeeTableComponent';
+import { DeploymentModalComponent } from '../../js/modules/react/deploymentModalComponent.js';
+import { DeploymentUtil } from '../../js/modules/utils/deploymentUtil';
 
-const PUZZLE = "7 x 2 + 1 =";
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("entitySort");
 const SORT_SALARY_ASC_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.sortSalaryAsc}`;
@@ -30,9 +30,8 @@ class EntitySort extends React.Component {
       counterLimit: 10,
       counter: 1,
       showSpinner: false,
-      showPuzzleModal: true,
       showErrorModal: false,
-      isPuzzleValid: false
+      showDeploymentModal: DeploymentUtil.isNotCloud()
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -41,12 +40,11 @@ class EntitySort extends React.Component {
     this.handleDelete= this.handleDelete.bind(this);
     this.handleSortSalaryAsc = this.handleSortSalaryAsc.bind(this);
     this.handleSortSalaryDesc = this.handleSortSalaryDesc.bind(this);
-    this.handleIsPuzzleValid = this.handleIsPuzzleValid.bind(this);
-    this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
-    this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
     this.handleBeforeAjax = this.handleBeforeAjax.bind(this);
     this.handleFailedAjax = this.handleFailedAjax.bind(this);
+    this.handleDeploymentModalClose = this.handleDeploymentModalClose.bind(this);
+    this.handleDeploymentModalShow = this.handleDeploymentModalShow.bind(this);
   }
 
   formatCurrency(value) {
@@ -63,8 +61,7 @@ class EntitySort extends React.Component {
 
   handleBeforeAjax() {
     this.setState({
-      showSpinner: true,
-      showPuzzleModal: false
+      showSpinner: true
     });
   }
 
@@ -76,7 +73,7 @@ class EntitySort extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxUtil.handleAjax(request, this.state.isPuzzleValid, this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, DeploymentUtil.isCloud(), this.handleBeforeAjax, this.handleFailedAjax, this.handleDeploymentModalShow);
   }
 
   handleSortSalaryAsc() {
@@ -155,25 +152,6 @@ class EntitySort extends React.Component {
     });
   }
 
-  handleIsPuzzleValid() {
-    this.setState({
-      isPuzzleValid: true,
-      showPuzzleModal: false
-    })
-  }
-
-  handlePuzzleModalClose() {
-    this.setState({
-      showPuzzleModal: false
-    })
-  }
-
-  handlePuzzleModalShow() {
-    this.setState({
-      showPuzzleModal: true
-    })
-  }
-
   handleErrorModalClose() {
     this.setState({
       showErrorModal: false
@@ -182,6 +160,18 @@ class EntitySort extends React.Component {
 
   handleGenerateKey(employee) {
     return KeyGeneratorUtil.generate(`${employee.name}_${employee.salary}`);
+  }
+
+  handleDeploymentModalClose() {
+    this.setState({
+      showDeploymentModal: false
+    })
+  }
+
+  handleDeploymentModalShow() {
+    this.setState({
+      showDeploymentModal: true
+    })
   }
 
   componentDidMount() {
@@ -211,16 +201,12 @@ class EntitySort extends React.Component {
           show={this.state.showErrorModal}
           handleClose={this.handleErrorModalClose}
         />
+        <DeploymentModalComponent
+          show={this.state.showDeploymentModal}
+          handleClose={this.handleDeploymentModalClose}
+        />
         <SpinnerComponent
           show={this.state.showSpinner}
-        />
-        <PuzzleModalComponent
-          answer={15}
-          puzzle={PUZZLE}
-          show={this.state.showPuzzleModal}
-          handleClose={this.handlePuzzleModalClose}
-          handleShow={this.handlePuzzleModalShow}
-          handleIsValid={this.handleIsPuzzleValid}
         />
         <EmployeeTableComponent
           employees={this.state.employees}

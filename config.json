@@ -1,7 +1,6 @@
 {
     "host": "localhost",
     "apiRoot": "/backend/",
-    "apiHealthCheck": "healthcheck",
     "deploymentTargetCookie": "fs_portfolio_deployment_target",
     "deploymentTargets": {
         "cloud": "cloud",
@@ -145,7 +144,7 @@
             "featured": false
         },
         {
-            "name": ".NET, Complex Entity Sorting Algorithm",
+            "name": "Complex Entity Sorting Algorithm",
             "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
             "description": ".NET Web API with a React UI.",
             "searchTerms": "Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
