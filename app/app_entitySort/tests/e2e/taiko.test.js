@@ -2,10 +2,10 @@
  * @jest-environment jsdom
  */
 
-import { openBrowser, goto, write, click, closeBrowser, $, into, textBox, tableCell, button, waitFor, link } from 'taiko';
+import { openBrowser, goto, write, click, closeBrowser, into, textBox, tableCell, button, link } from 'taiko';
 import { ConfigUtil } from '../../../js/modules/utils/configUtil';
 
-const APPLICATION = "app_awsDotNetCoreEntitySortApi";
+const APPLICATION = "app_entitySort";
 const CONFIG = ConfigUtil.get();
 const URL = `http://${CONFIG.dockerHost}/${APPLICATION}/index.html`;
 
@@ -20,9 +20,6 @@ beforeAll(async () => {
 describe(APPLICATION, () => {
   test('Should add an item', async () => {
     await goto(URL);
-    await write('15', into(textBox({id:'answerInput'}),{force:true}));
-    await click(button({id:'submitPuzzle'}));
-    await waitFor(2000);
     await write('James Bond', into(textBox({id:'nameInput'})));
     await write('95000', into(textBox({id:'salaryInput'})));
     await click(button({id:'addEmployee_submit'}));
@@ -37,18 +34,12 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Should remove an item', async () => {
     await goto(URL);
-    await write('15', into(textBox({id:'answerInput'}),{force:true}));
-    await click(button({id:'submitPuzzle'}));
-    await waitFor(2000);
     await click(link('delete'));
     const result = await tableCell({row:1, col:1}).exists();
     expect(result).toBeFalsy();
   }, 100000);
   test('Shold sort table ascending', async () => {
     await goto(URL);
-    await write('15', into(textBox({id:'answerInput'}),{force:true}));
-    await click(button({id:'submitPuzzle'}));
-    await waitFor(2000);
     await write('James Bond', into(textBox({id:'nameInput'})));
     await write('95000', into(textBox({id:'salaryInput'})));
     await click(button({id:'addEmployee_submit'}));
@@ -64,9 +55,6 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Shold sort table ascending', async () => {
     await goto(URL);
-    await write('15', into(textBox({id:'answerInput'}),{force:true}));
-    await click(button({id:'submitPuzzle'}));
-    await waitFor(2000);
     await write('James Bond', into(textBox({id:'nameInput'})));
     await write('95000', into(textBox({id:'salaryInput'})));
     await click(button({id:'addEmployee_submit'}));

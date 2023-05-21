@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { openBrowser, goto, write, click, closeBrowser, into, textBox, text, button, waitFor } from 'taiko';
+import { openBrowser, goto, click, closeBrowser, text, button } from 'taiko';
 import { ConfigUtil } from '../../../js/modules/utils/configUtil';
 
 const APPLICATION = "app_coffeeMachine";
@@ -20,9 +20,6 @@ beforeAll(async () => {
 describe(APPLICATION, () => {
   test('Should run the process asynchronously', async () => {
     await goto(URL);
-    await write('5', into(textBox({id:'answerInput'}),{force:true}));
-    await click(button({id:'submitPuzzle'}));
-    await waitFor(2000);
     await click(button({id:'runAsync'}));
     const result = await text("Log of tasks carried out").exists();
     const item = await text("Start boiling the kettle").exists();
@@ -30,9 +27,6 @@ describe(APPLICATION, () => {
   }, 100000)
   test('Should run the process synchronously', async () => {
     await goto(URL);
-    await write('5', into(textBox({id:'answerInput'}),{force:true}));
-    await click(button({id:'submitPuzzle'}));
-    await waitFor(2000);
     await click(button({id:'runSync'}));
     const result = await text("Log of tasks carried out").exists();
     const item = await text("Start boiling the kettle").exists();
