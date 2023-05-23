@@ -4,14 +4,14 @@ import '../sass/styles.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
 import { FormComponent } from "./formComponent";
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
+import { DeploymentModalComponent } from '../../js/modules/react/deploymentModalComponent.js';
+import { DeploymentUtil } from '../../js/modules/utils/deploymentUtil';
 
-const PUZZLE = "4 x 4 - 5 =";
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("stringSort");
 const SORT_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.sort}`;
@@ -23,17 +23,16 @@ class StringSort extends React.Component {
       values: '',
       result: '',
       showSpinner: false,
-      showPuzzleModal: true,
       showErrorModal: false,
+      showDeploymentModal: DeploymentUtil.isNotCloud()
     };
     this.handleValuesChange = this.handleValuesChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleIsPuzzleValid = this.handleIsPuzzleValid.bind(this);
-    this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
-    this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
     this.handleBeforeAjax = this.handleBeforeAjax.bind(this);
     this.handleFailedAjax = this.handleFailedAjax.bind(this);
+    this.handleDeploymentModalClose = this.handleDeploymentModalClose.bind(this);
+    this.handleDeploymentModalShow = this.handleDeploymentModalShow.bind(this);
   }
 
   handleBeforeAjax() {
@@ -51,7 +50,7 @@ class StringSort extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxUtil.handleAjax(request, this.state.isPuzzleValid, this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, DeploymentUtil.isCloud(), this.handleBeforeAjax, this.handleFailedAjax, this.handleDeploymentModalShow);
   }
 
   handleValuesChange(event) {
@@ -84,22 +83,15 @@ class StringSort extends React.Component {
     }
   }
 
-  handleIsPuzzleValid() {
+  handleDeploymentModalClose() {
     this.setState({
-      isPuzzleValid: true,
-      showPuzzleModal: false
+      showDeploymentModal: false
     })
   }
 
-  handlePuzzleModalClose() {
+  handleDeploymentModalShow() {
     this.setState({
-      showPuzzleModal: false
-    })
-  }
-
-  handlePuzzleModalShow() {
-    this.setState({
-      showPuzzleModal: true
+      showDeploymentModal: true
     })
   }
 
@@ -120,13 +112,9 @@ class StringSort extends React.Component {
         <SpinnerComponent
           show={this.state.showSpinner}
         />
-        <PuzzleModalComponent
-          answer={11}
-          puzzle={PUZZLE}
-          show={this.state.showPuzzleModal}
-          handleClose={this.handlePuzzleModalClose}
-          handleShow={this.handlePuzzleModalShow}
-          handleIsValid={this.handleIsPuzzleValid}
+        <DeploymentModalComponent
+          show={this.state.showDeploymentModal}
+          handleClose={this.handleDeploymentModalClose}
         />
         <div className="row splitter">
           <div className="col-lg-12">
