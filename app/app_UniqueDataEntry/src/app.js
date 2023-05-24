@@ -5,14 +5,14 @@ import '../sass/styles.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
-import { PuzzleModalComponent } from '../../js/modules/react/puzzleModalComponent.js';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from '../../js/modules/utils/configUtil';
 import { FormComponent } from './formComponent';
 import { jQueryAjaxUtil } from '../../js/modules/utils/jQueryAjaxUtil';
+import { DeploymentModalComponent } from '../../js/modules/react/deploymentModalComponent.js';
+import { DeploymentUtil } from '../../js/modules/utils/deploymentUtil';
 
-const PUZZLE = "4 x 4 - 2 =";
 const CONFIG = ConfigUtil.get();
 const APP_CONFIG = ConfigUtil.get("uniqueDataEntry");
 const CAN_IT_BE_ADDED_ASYNC_ENDPOINT = `${CONFIG.apiRoot}${APP_CONFIG.endpoints.canItemBeAddedAsync}`;
@@ -34,20 +34,17 @@ class UniqueDataEntryApp extends React.Component {
       counterLimit: 10,
       counter: 1,
       showSpinner: false,
-      showPuzzleModal: true,
-      showErrorModal: false,
       showDuplicateErrorModal: false,
-      isPuzzleValid: false
+      showDeploymentModal: DeploymentUtil.isNotCloud()
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.handleIsPuzzleValid = this.handleIsPuzzleValid.bind(this);
-    this.handlePuzzleModalClose = this.handlePuzzleModalClose.bind(this);
-    this.handlePuzzleModalShow = this.handlePuzzleModalShow.bind(this);
     this.handleErrorModalClose = this.handleErrorModalClose.bind(this);
     this.handleDuplicateErrorModalClose = this.handleDuplicateErrorModalClose.bind(this);
     this.handleBeforeAjax = this.handleBeforeAjax.bind(this);
     this.handleFailedAjax = this.handleFailedAjax.bind(this);
+    this.handleDeploymentModalClose = this.handleDeploymentModalClose.bind(this);
+    this.handleDeploymentModalShow = this.handleDeploymentModalShow.bind(this);
   }
 
   handleBeforeAjax() {
@@ -65,7 +62,7 @@ class UniqueDataEntryApp extends React.Component {
   }
 
   handleAjax(request) {
-    jQueryAjaxUtil.handleAjax(request, this.state.isPuzzleValid, this.handleBeforeAjax, this.handleFailedAjax, this.handlePuzzleModalShow);
+    jQueryAjaxUtil.handleAjax(request, DeploymentUtil.isCloud(), this.handleBeforeAjax, this.handleFailedAjax, this.handleDeploymentModalShow);
   }
 
   handleSubmit(event) {
@@ -141,35 +138,24 @@ class UniqueDataEntryApp extends React.Component {
     })
   }
 
-  handleIsPuzzleValid() {
+  handleDeploymentModalClose() {
     this.setState({
-      isPuzzleValid: true,
-      showPuzzleModal: false
+      showDeploymentModal: false
     })
   }
 
-  handlePuzzleModalClose() {
+  handleDeploymentModalShow() {
     this.setState({
-      showPuzzleModal: false
-    })
-  }
-
-  handlePuzzleModalShow() {
-    this.setState({
-      showPuzzleModal: true
+      showDeploymentModal: true
     })
   }
 
   render() {
     return (
       <div>
-        <PuzzleModalComponent
-          answer={14}
-          puzzle={PUZZLE}
-          show={this.state.showPuzzleModal}
-          handleClose={this.handlePuzzleModalClose}
-          handleShow={this.handlePuzzleModalShow}
-          handleIsValid={this.handleIsPuzzleValid}
+        <DeploymentModalComponent
+          show={this.state.showDeploymentModal}
+          handleClose={this.handleDeploymentModalClose}
         />
         <ErrorModalComponent
           id="errorModule"
