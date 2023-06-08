@@ -43,13 +43,17 @@ export function LoginForm() {
             setShowValidation(true);
             event.stopPropagation();
 
-        } else {
+        } else if (loginContext.isCloud) {
 
             spinnerContext.setShow(true);
 
             loginContext.loginUser(username, password)
                 .then(response => response.success ? loginDoneCallback() : loginFailCallback({ message: "Login failed!"}))
                 .catch(response => loginFailCallback({ message: response.data.response }));
+        } else {
+
+            loginContext.handleDeploymentModalShow();
+
         }
     };
 

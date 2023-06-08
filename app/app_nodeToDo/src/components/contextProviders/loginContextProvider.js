@@ -4,6 +4,8 @@ import React, { useState, useLayoutEffect, useRef } from 'react';
 import { LoginContext } from '../../contexts';
 import { ConfigContext } from '../../../../js/modules/react/configContextProvider';
 import { XMLHttpRequestUtil } from '../../../../js/modules/utils/xmlHttpRequestUtil';
+import { DeploymentModalComponent } from '../../../../js/modules/react/deploymentModalComponent.js';
+import { DeploymentUtil } from '../../../../js/modules/utils/deploymentUtil';
 
 const TOKEN_KEY = 'NODE_TODO_TOKEN';
 
@@ -14,6 +16,7 @@ export const LoginContextProvider = ({ children }) => {
     const API_ENDPOINT = `${configContext.config.apiRoot}${endpoints.base}/`;
     const [ authenticated, setAuthenticated ] = useState(false);
     const token = useRef(sessionStorage.getItem(TOKEN_KEY));
+    const [ showDeploymentModal, setShowDeploymentModal ] = useState(DeploymentUtil.isNotCloud());
 
     const registerUser = (username, password) => {
 
@@ -95,6 +98,14 @@ export const LoginContextProvider = ({ children }) => {
 
     const prepareToken = (_token) => `Bearer ${_token ? _token : token.current}`;
 
+    const handleDeploymentModalClose = () => {
+        setShowDeploymentModal(false);
+    }
+
+    const handleDeploymentModalShow = () => {
+        setShowDeploymentModal(true);
+    }
+
     const context = {
         authenticated,
         setAuthenticated,
@@ -102,12 +113,21 @@ export const LoginContextProvider = ({ children }) => {
         loginUser,
         logoutUser,
         token,
-        prepareToken
+        prepareToken,
+        showDeploymentModal,
+        isCloud: DeploymentUtil.isCloud(),
+        isNotCloud: DeploymentUtil.isNotCloud(),
+        handleDeploymentModalClose,
+        handleDeploymentModalShow
     };
 
     return (
         <LoginContext.Provider value={context}>
             {children}
+            <DeploymentModalComponent
+                show={showDeploymentModal}
+                handleClose={handleDeploymentModalClose}
+            />
         </LoginContext.Provider>
     )
 }

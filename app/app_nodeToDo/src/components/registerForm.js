@@ -34,10 +34,15 @@ export function RegisterForm() {
             setShowValidation(true);
             event.stopPropagation();
 
-        } else {
+        } else if (loginContext.isCloud) {
 
             spinnerContext.setShow(true);
             register();
+
+        } else {
+
+            loginContext.handleDeploymentModalShow();
+
         }
     };
 
