@@ -23,7 +23,6 @@ export function RegisterForm() {
     const [ feedbackErrors, setFeedbackErrors ] = useState([]);
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
-    const [ name, setName ] = useState("");
     const history = useHistory();
 
     const handleSubmit = (event) => {
