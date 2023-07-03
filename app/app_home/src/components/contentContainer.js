@@ -9,15 +9,7 @@ import { TopScrollComponent } from '../../../js/modules/react/topScrollComponent
 
 export function ContentContainer() {
 
-  const res = fetch("/api/test");
-
-  res.then(r => { console.log(r) });
-
-  console.log(res)
-  console.log("test");
-
   const context = React.useContext(ConfigContext);
-
   const topScrollComponentThreshold = 270;
 
   return (
