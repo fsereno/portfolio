@@ -22,7 +22,7 @@
     "title": "Portfolio",
     "author": "Fabio Sereno",
     "role": "Software Engineer",
-    "description": "Portfolio website for Fabio Sereno - Software Developer.",
+    "description": "Portfolio website for Fabio Sereno - Software Engineer.",
     "thumbnail": "PortfolioThumbnail.png",
     "labels": [
         { "name": "JavaScript", "class": "warning" },
