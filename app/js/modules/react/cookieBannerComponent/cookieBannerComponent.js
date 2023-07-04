@@ -1,31 +1,35 @@
 "use strict;"
 
-import React, { useEffect, useState } from 'react';
-import { ConfigContext } from '../configContextProvider';
+import React, { useState, useEffect } from 'react';
 import { getElementFadeClass } from "../../utils/getElementFadeClass";
+import { DeploymentUtil } from '../../utils/deploymentUtil';
 import './cookieBannerComponent.scss';
 
-export function CookieBannerComponent({threshold}) {
+const SHOW_COOKIE_BANNER_TIMEOUT = 1700;
 
-    const configContext = React.useContext(ConfigContext);
-    const config = configContext.config;
+export function CookieBannerComponent() {
 
     const [ fadeClass, setFadeClass ] = useState(getElementFadeClass(false));
 
     useEffect(() => {
-        window.addEventListener('scroll', handleFade);
+        const timeOut = setTimeout(() => {
+
+            const shouldShow = DeploymentUtil.isCloud(); // and depending on if Accept has been clicked already - check storage
+
+            handleFade(shouldShow);
+        }, SHOW_COOKIE_BANNER_TIMEOUT);
         return () => {
-            window.removeEventListener('scroll', handleFade);
+            clearTimeout(timeOut);
         }
-    },[fadeClass]);
+    },[]);
 
     const handleOnClick = () => {
-        console.log("Accept");
+        // store value in storage or cookie
+        handleFade(false);
     }
 
-    const handleFade = () => {
-        const scrollPosition = document.documentElement.scrollTop;
-        if (scrollPosition >= threshold) {
+    const handleFade = (fadeIn = false) => {
+        if (fadeIn) {
             setFadeClass(getElementFadeClass(true));
         } else {
             setFadeClass(getElementFadeClass(false));
@@ -35,7 +39,7 @@ export function CookieBannerComponent({threshold}) {
     return (
         <>
             <div className={`cookie-banner-container fade-element ${fadeClass}`} id='cookieBannerComponent'>
-                <p>This website uses cookies to determine which services are deployed and do not store any personal data.</p>
+                <p>This application uses cookies to determine which services are deployed and do not store any personal data.</p>
                 <button type="button" className="btn btn-sm btn-dark" onClick={handleOnClick}>Accept</button>
             </div>
         </>
