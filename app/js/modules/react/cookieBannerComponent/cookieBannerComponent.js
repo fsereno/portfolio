@@ -5,34 +5,45 @@ import { getElementFadeClass } from "../../utils/getElementFadeClass";
 import { DeploymentUtil } from '../../utils/deploymentUtil';
 import './cookieBannerComponent.scss';
 
-const SHOW_COOKIE_BANNER_TIMEOUT = 1700;
+const SHOW_COOKIE_BANNER_THRESHOLD = 270;
+const COOKIE_BANNER_ACCEPTED_KEY = "Cookie_banner_message_accepted";
+const STORAGE = sessionStorage;
 
-export function CookieBannerComponent() {
+export function CookieBannerComponent({isHomeActive}) {
 
     const [ fadeClass, setFadeClass ] = useState(getElementFadeClass(false));
 
     useEffect(() => {
-        const timeOut = setTimeout(() => {
-
-            const shouldShow = DeploymentUtil.isCloud(); // and depending on if Accept has been clicked already - check storage
-
-            handleFade(shouldShow);
-        }, SHOW_COOKIE_BANNER_TIMEOUT);
-        return () => {
-            clearTimeout(timeOut);
+        if (isHomeActive) {
+            window.addEventListener('scroll', handleFade);
+        } else {
+            handleFade();
         }
-    },[]);
+        return () => window.removeEventListener('scroll', handleFade);
+    },[fadeClass]);
 
     const handleOnClick = () => {
-        // store value in storage or cookie
-        handleFade(false);
+        STORAGE.setItem(COOKIE_BANNER_ACCEPTED_KEY, true);
+        setFadeClass(getElementFadeClass(false));
     }
 
-    const handleFade = (fadeIn = false) => {
-        if (fadeIn) {
+    const handleFade = () => {
+        const scrollPosition = document.documentElement.scrollTop;
+        const shouldShow = DeploymentUtil.isCloud();
+        const alreadyAccepted = STORAGE.getItem(COOKIE_BANNER_ACCEPTED_KEY);
+
+        if (alreadyAccepted || !shouldShow) {
+            return;
+        }
+
+        if ((isHomeActive && scrollPosition >= SHOW_COOKIE_BANNER_THRESHOLD)) {
             setFadeClass(getElementFadeClass(true));
         } else {
             setFadeClass(getElementFadeClass(false));
+        }
+
+        if (!isHomeActive) {
+            setFadeClass(getElementFadeClass(true));
         }
     }
 

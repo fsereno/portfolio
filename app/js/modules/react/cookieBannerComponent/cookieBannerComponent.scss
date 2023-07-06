@@ -2,7 +2,8 @@
 @import "../../../../sass//includes/constants.scss";
 
 .cookie-banner-container {
-    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    background: transparent;
     padding: .5rem;
     position: fixed;
     bottom: 0;

@@ -4,8 +4,9 @@ import ReactDOM from 'react-dom';
 import { CookieBannerComponent } from './cookieBannerComponent';
 
 function App() {
+    const isHomeActive = document.head.querySelector('[name="isRoot"]') !== null;
     return(
-        <CookieBannerComponent />
+        <CookieBannerComponent isHomeActive={ isHomeActive } />
     )
 }
 
