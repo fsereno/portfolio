@@ -178,7 +178,7 @@
         },
         {
             "name": "Coffee Machine",
-            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine",
+            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET",
             "description": ".NET Web API with a React UI.",
             "searchTerms": "Cloud,C#,dotnet,.net,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "coffeeMachine",

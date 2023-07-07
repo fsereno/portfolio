@@ -25,6 +25,7 @@ Some of the technology used in this project and related projects:
 - Three.js (https://threejs.org/)
 - React (https://reactjs.org/)
 - Vue (https://vuejs.org/)
+- Taiko (https://www.npmjs.com/package/taiko)
 - Mocha (https://mochajs.org/)
 - Chai (https://www.chaijs.com/)
 - Enzyme (https://enzymejs.github.io/enzyme/)
@@ -76,12 +77,12 @@ $ docker compose up
 - test-e2e
 
 ```shell
-$ sh run-start <task>
+$ sh start <task>
 ```
 > To stop one of the above tasks, excluding those which destroy themselves (create, test)
 
 ```shell
-$ sh run-stop <task>
+$ sh stop <task>
 ```
 ---
 
@@ -90,7 +91,7 @@ $ sh run-stop <task>
 #### Serve a specific application via the development server
 
 ```shell
-$ sh run-start dev <application>
+$ sh start dev <application>
 ```
 ##### This will:
 - Start the development server.
@@ -103,7 +104,7 @@ $ sh run-start dev <application>
 #### Run analysis on a specific application
 
 ```shell
-$ sh run-start analysis <application>
+$ sh start analysis <application>
 ```
 ##### This will:
 - Start the analysis server.
@@ -114,7 +115,7 @@ $ sh run-start analysis <application>
 #### Build for release
 
 ```shell
-$ sh run-start rel
+$ sh start rel
 ```
 ##### This will:
 - Build the production static assets directory.
@@ -123,7 +124,7 @@ $ sh run-start rel
 #### Run all unit tests
 
 ```shell
-$ sh run-start test
+$ sh start test
 ```
 ##### This will:
 - Run all application specific and global unit tests.
@@ -132,7 +133,7 @@ $ sh run-start test
 #### Run all functional end-to-end tests
 
 ```shell
-$ sh run-start test-e2e
+$ sh start test-e2e
 ```
 ##### This will:
 - Run all functional tests from the ./app/tests/functional directory
@@ -141,7 +142,7 @@ $ sh run-start test-e2e
 #### Create a new application
 
 ```shell
-$ sh run-start create
+$ sh create
 ```
 ##### This will:
 - Build applications based on the config.json file.
