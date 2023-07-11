@@ -1,3 +1,20 @@
+Fixing the E2E tests
+
+Update to latest Node version
+
+docker run -it node
+
+and run apt-get install chromium -y (where -y is to accept Y for any prompts)
+
+There seems to be a better way of installing chromium via latest Node image - it uses Dabian and not Alpine
+
+https://serverfault.com/questions/1074688/security-debian-org-does-not-have-a-release-file-on-with-debian-docker-images
+
+RUN echo "deb http://security.debian.org/debian-security bullseye-security main contrib non-free" > /etc/apt/sources.list
+
+RUN apt-get update
+
+https://docs.taiko.dev/taiko_in_docker/
 
 https://docs.docker.com/cloud/ecs-integration/
 
