@@ -6,10 +6,17 @@ using Portfolio.UniqueDataEntry.Models;
 
 namespace Portfolio.UniqueDataEntry.Utils
 {
+    /// <summary>
+    /// Utility class for unique data entry operations.
+    /// </summary>
     public class UniqueDataEntryUtil : IUniqueDataEntryUtil
     {
         private readonly ILogger<UniqueDataEntryUtil> _logger;
 
+        /// <summary>
+        /// Initializes a new instance of the UniqueDataEntryUtil class with the specified logger.
+        /// </summary>
+        /// <param name="logger">The logger to use for logging messages.</param>
         public UniqueDataEntryUtil(ILogger<UniqueDataEntryUtil> logger)
         {
             _logger = logger;
