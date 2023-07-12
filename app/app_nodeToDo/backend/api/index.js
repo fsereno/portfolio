@@ -24,7 +24,10 @@ const PORT = process.env.PORT || 3006;
 
 // Middleware
 const app = express();
+
+// Please note that in production, only specific origins would be allowed for CORS, most likely configured through an environment variable.
 app.use(cors({ origin: true }));
+
 app.use(bodyParser.json());
 
 // Routing
@@ -55,7 +58,7 @@ app.delete('/:id', isAuthenticated, deleteItem);
 // create item
 app.post('/', isAuthenticated, addItem);
 
-//update item
+// update item
 app.put('/', isAuthenticated, updateItem);
 
 app.listen(PORT, () => {
