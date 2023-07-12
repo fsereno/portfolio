@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 
 import { openBrowser, near, link, goto, write, click, closeBrowser, $, text, into, textBox, button, waitFor, evaluate } from 'taiko';
 import { ConfigUtil } from '../../../js/modules/utils/configUtil';

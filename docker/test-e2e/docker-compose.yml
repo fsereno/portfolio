@@ -1,94 +1,15 @@
 version: '3.9'
 
 services:
-    nginx:
-        image: 'fabiosereno/portfolio.nginx.dev:0.2.6'
-        ports:
-            - '80:80'
-        container_name: frontend
-        networks:
-            - frontend
-            - backend
-        depends_on:
-            - "coffeeMachine"
-            - "dataStructures"
-            - "uniqueDataEntry"
-            - "stringSort"
-            - "entitySort"
-            - "nodeToDo"
-        mem_limit: 500M
-        cpus: 0.2
-    coffeeMachine:
-        image: 'fabiosereno/portfolio.coffee-machine:0.0.15'
-        ports:
-            - '3001:3001'
-        container_name: coffeeMachine
-        networks:
-            - backend
-        mem_limit: 500M
-        cpus: 0.2
-    dataStructures:
-        image: 'fabiosereno/portfolio.data-structures:0.0.5'
-        ports:
-            - '3002:3002'
-        container_name: dataStructures
-        networks:
-            - backend
-        mem_limit: 500M
-        cpus: 0.2
-    uniqueDataEntry:
-        image: 'fabiosereno/portfolio.unique-data-entry:0.0.2'
-        ports:
-            - '3003:3003'
-        container_name: uniqueDataEntry
-        networks:
-            - backend
-        mem_limit: 500M
-        cpus: 0.2
-    stringSort:
-        image: 'fabiosereno/portfolio.string-sort:0.0.1'
-        ports:
-            - '3004:3004'
-        container_name: stringSort
-        networks:
-            - backend
-        mem_limit: 500M
-        cpus: 0.2
-    entitySort:
-        image: 'fabiosereno/portfolio.entity-sort:0.0.4'
-        ports:
-            - '3005:3005'
-        container_name: entitySort
-        networks:
-            - backend
-        mem_limit: 500M
-        cpus: 0.2
-    nodeToDo:
-        image: 'fabiosereno/portfolio.node-to-do:0.0.1'
-        ports:
-            - '3006:3006'
-        container_name: nodeToDo
-        networks:
-            - backend
-        mem_limit: 500M
-        cpus: 0.2
     node:
         tty: true
-        image: 'fabiosereno/portfolio.test-e2e:0.0.5'
+        image: 'fabiosereno/portfolio.test-e2e:0.4.0'
         volumes:
             - '../../config.json:/usr/src/app/config.json'
             - '../../babel.config.json:/usr/src/app/babel.config.json'
             - '../../setupTests.js:/usr/src/app/setupTests.js'
             - '../../app:/usr/src/app/app'
         container_name: node
-        depends_on:
-            - "nginx"
-            - "coffeeMachine"
-            - "dataStructures"
-            - "uniqueDataEntry"
-            - "stringSort"
-            - "entitySort"
-            - "nodeToDo"
 networks:
     frontend:
     backend:
