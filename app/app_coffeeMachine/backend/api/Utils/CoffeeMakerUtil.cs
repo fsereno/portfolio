@@ -6,11 +6,18 @@ using Portfolio.CoffeeMachine.Models;
 
 namespace Portfolio.CoffeeMachine.Utils
 {
+    /// <summary>
+    /// Utility class for running coffee machine tasks.
+    /// </summary>
     public class CoffeeMakerUtil : ITaskRunner
     {
         private Log _log;
         private readonly ILogger<CoffeeMakerUtil> _logger;
 
+        /// <summary>
+        /// Initializes a new instance of the CoffeeMakerUtil class with the specified logger.
+        /// </summary>
+        /// <param name="logger">The logger to use for logging messages.</param>
         public CoffeeMakerUtil(ILogger<CoffeeMakerUtil> logger)
         {
             _logger = logger;

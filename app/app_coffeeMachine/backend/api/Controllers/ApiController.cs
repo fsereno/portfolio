@@ -7,6 +7,9 @@ using Portfolio.CoffeeMachine.Models;
 
 namespace Portfolio.CoffeeMachine.Controllers;
 
+/// <summary>
+/// API controller for Coffee Machine operations.
+/// </summary>
 [ApiController]
 [Route("[controller]")]
 public class ApiController : ControllerBase
@@ -25,6 +28,10 @@ public class ApiController : ControllerBase
         _coffeeMakerUtil = coffeeMakerUtil;
     }
 
+    /// <summary>
+    /// Executes the Coffee Maker process asynchronously and returns the log items.
+    /// </summary>
+    /// <returns>A list of log items generated during the process.</returns>
     [HttpGet("RunAsync")]
     public async Task<List<LogItem>> RunAsync()
     {
@@ -41,6 +48,10 @@ public class ApiController : ControllerBase
         return log?.Get();
     }
 
+    /// <summary>
+    /// Executes the Coffee Maker process synchronously and returns the log items.
+    /// </summary>
+    /// <returns>A list of log items generated during the process.</returns>
     [HttpGet("Run")]
     public List<LogItem> Run()
     {
