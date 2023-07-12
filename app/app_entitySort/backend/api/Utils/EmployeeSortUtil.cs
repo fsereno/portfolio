@@ -8,6 +8,11 @@ namespace Portfolio.EntitySort.Utils
     public class EmployeeSortUtil : IEmployeeSortUtil
     {
         private readonly ILogger<EmployeeSortUtil> _logger;
+
+        // <summary>
+        /// Initializes a new instance of the EmployeeSortUtil class with the specified logger.
+        /// </summary>
+        /// <param name="logger">The logger to use for logging messages.</param>
         public EmployeeSortUtil(ILogger<EmployeeSortUtil> logger)
         {
             _logger = logger;
