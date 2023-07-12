@@ -6,10 +6,17 @@ using Portfolio.StringSort.Models;
 
 namespace Portfolio.StringSort.Utils
 {
+    /// <summary>
+    /// Utility class for sorting strings.
+    /// </summary>
     public class StringSortUtil : IStringSortUtil
     {
         private readonly ILogger<StringSortUtil> _logger;
 
+        /// <summary>
+        /// Initializes a new instance of the StringSortUtil class with the specified logger.
+        /// </summary>
+        /// <param name="logger">The logger to use for logging messages.</param>
         public StringSortUtil(ILogger<StringSortUtil> logger)
         {
             _logger = logger;
@@ -82,9 +89,9 @@ namespace Portfolio.StringSort.Utils
         }
 
         /// <summary>
-        /// Calls Sort on collection, passing in IComparer for sorting logic
+        /// Sorts the items using the natural sorting logic.
         /// </summary>
-        /// <param name="itemsToSort">List of SortItems to sort</param>
+        /// <param name="itemsToSort">The list of SortItems to sort.</param>
         private void Sort(List<SortItem> itemsToSort)
         {
             _logger.LogInformation("Sort the items");

@@ -4,16 +4,36 @@ using System.Text.RegularExpressions;
 
 namespace Portfolio.StringSort.Models
 {
+    /// <summary>
+    /// Represents an item to be sorted.
+    /// </summary>
     public class SortItem
     {
+        /// <summary>
+        /// Initializes a new instance of the SortItem class with the specified value.
+        /// </summary>
+        /// <param name="value">The value of the sort item.</param>
         public SortItem(string value = "")
         {
             this.Value = value;
         }
+
+        /// <summary>
+        /// Gets or sets the value of the sort item.
+        /// </summary>
         public string Value { get; set; }
 
+        /// <summary>
+        /// Comparer for natural sorting of SortItem objects.
+        /// </summary>
         public class NaturalSorter : IComparer<SortItem>
         {
+            /// <summary>
+            /// Compares two SortItem objects using natural sorting.
+            /// </summary>
+            /// <param name="a">The first SortItem to compare.</param>
+            /// <param name="b">The second SortItem to compare.</param>
+            /// <returns>An integer indicating the relative order of the SortItem objects.</returns>
             public int Compare(SortItem a, SortItem b)
             {
                 const string _numericRegex = "([0-9]+)";
