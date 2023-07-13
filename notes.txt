@@ -14,6 +14,10 @@ RUN echo "deb http://security.debian.org/debian-security bullseye-security main 
 
 RUN apt-get update
 
+maybe we need to actually grab chromium apt-get install chromium:arm64
+
+jest ./app/app_nodeToDo/tests/e2e/*.test.js
+
 https://docs.taiko.dev/taiko_in_docker/
 
 https://docs.docker.com/cloud/ecs-integration/

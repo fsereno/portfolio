@@ -2,16 +2,32 @@
 import { openBrowser, near, link, goto, write, click, closeBrowser, $, text, into, textBox, button, waitFor, evaluate } from 'taiko';
 import { ConfigUtil } from '../../../js/modules/utils/configUtil';
 
-const APPLICATION = "app_awsNodeToDoApi";
+// This is a WIP - it appears running these tests on an ARM machine will alwasys fail - need to wait for some deps to be released.
+
+const APPLICATION = "app_nodeToDo";
 const CONFIG = ConfigUtil.get();
 const URL = `http://${CONFIG.dockerHost}/${APPLICATION}/index.html`;
+const browserPath = '/usr/bin/chromium';
 
 beforeAll(async () => {
-    await openBrowser({
-        headless: true,
-        slowMo: 250,
-        args: ['--no-sandbox']
-    });
+    try {
+        await openBrowser({
+            //executablePath: browserPath,
+            //headless: true,
+            //slowMo: 250,
+            args: [
+                //'--disable-gpu',
+                //'--disable-dev-shm-usage',
+                //'--disable-setuid-sandbox',
+                //'--no-first-run',
+                //'--no-sandbox',
+                //'--no-zygote'
+            ]
+        });
+        console.log("AFTER")
+    } catch (error) {
+        console.error(error);
+    }
 });
 
 describe(APPLICATION, () => {
