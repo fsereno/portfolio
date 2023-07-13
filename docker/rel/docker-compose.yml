@@ -4,8 +4,6 @@ services:
     node:
         tty: true
         image: 'fabiosereno/portfolio.release:0.0.2'
-        ports:
-            - '8080:8080'
         volumes:
             - '../../config.json:/usr/src/app/config.json'
             - '../../babel.config.json:/usr/src/app/babel.config.json'
