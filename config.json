@@ -22,13 +22,14 @@
     "title": "Portfolio",
     "author": "Fabio Sereno",
     "role": "Software Engineer",
-    "description": "Portfolio website for Fabio Sereno - Software Engineer.",
+    "description": "Portfolio by Fabio Sereno - Software Engineer",
     "thumbnail": "PortfolioThumbnail.png",
-    "labels": [
-        { "name": "JavaScript", "class": "warning" },
-        { "name": "C#", "class": "info" },
-        { "name": "Cloud", "class": "danger" }
-    ],
+    "labels": {
+        "JavaScript" : "warning",
+        "NodeJS": "success",
+        "C#": "info",
+        "Cloud": "danger"
+    },
     "quickSearch": [
         "React",
         ".NET",
@@ -73,7 +74,7 @@
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "To-Do List (React Redux)",
@@ -84,7 +85,7 @@
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "To-Do List (Vue)",
@@ -95,7 +96,7 @@
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "Tic-Tac-Toe (React)",
@@ -106,7 +107,7 @@
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "Unique Data Entry Application",
@@ -121,7 +122,7 @@
             "endpoints" : {
                 "canItemBeAddedAsync": "uniqueDataEntry/api/canItemBeAddedAsync"
             },
-            "labels": [0, 1, 2],
+            "labels": ["JavaScript", "C#", "Cloud"],
             "featured": false
         },
         {
@@ -140,7 +141,7 @@
                 "addStackItem": "dataStructures/api/addStackItemAsync",
                 "removeStackItem": "dataStructures/api/removeStackItemAsync"
             },
-            "labels": [0, 1, 2],
+            "labels": ["JavaScript", "C#", "Cloud"],
             "featured": false
         },
         {
@@ -157,7 +158,7 @@
                 "sortSalaryAsc": "entitySort/api/sort/salary/asc",
                 "sortSalaryDesc": "entitySort/api/sort/salary/desc"
             },
-            "labels": [0, 1, 2],
+            "labels": ["JavaScript", "C#", "Cloud"],
             "featured": false
         },
         {
@@ -173,7 +174,7 @@
             "endpoints" : {
                 "sort": "stringSort/api/sort"
             },
-            "labels": [0, 1, 2],
+            "labels": ["JavaScript", "C#", "Cloud"],
             "featured": false
         },
         {
@@ -190,7 +191,7 @@
                 "run": "coffeeMachine/api/run",
                 "runAsync": "coffeeMachine/api/runasync"
             },
-            "labels": [0, 1, 2],
+            "labels": ["JavaScript", "C#", "Cloud"],
             "order": 3
         },
         {
@@ -202,7 +203,7 @@
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "AFrame React (Basic)",
@@ -213,7 +214,7 @@
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "AFrame React (Complex)",
@@ -224,7 +225,7 @@
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "JS Coding Standards",
@@ -234,7 +235,7 @@
             "folder": "jsCodingStandards",
             "active": false,
             "include": false,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "Basic React Email Client",
@@ -246,12 +247,12 @@
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "basicSpaReact",
-            "labels": [0],
+            "labels": ["JavaScript"],
             "order": 2,
             "featured": false
         },
         {
-            "name": "NodeJS, B2C API, To-Do List SPA",
+            "name": "NodeJS, To-Do List SPA",
             "subHeading": "A simple To-Do list application, with user registration and authentication",
             "description": "NodeJS Web API with a React UI.",
             "searchTerms": "Docker,NodeJS,Express,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
@@ -260,7 +261,7 @@
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "basicEmailClientReactSpa",
-            "labels": [0,2],
+            "labels": ["JavaScript","Cloud", "NodeJS"],
             "order": 1,
             "featured": false,
             "endpoints": {
@@ -277,7 +278,7 @@
             "active": true,
             "include": false,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "Test React Template",
@@ -289,7 +290,7 @@
             "active": true,
             "include": false,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         }
     ]
 }
