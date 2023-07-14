@@ -8,7 +8,7 @@
     padding: 0 0.3em;
     .navbar-collapse {
        a {
-            font-weight: 300;
+            font-weight: 100;
        }
         .dropdown-menu {
             min-width: 380px;
@@ -43,7 +43,9 @@
         font-size: 1.5rem;
     }
     #titleSubHeading {
-        line-height: 20px;
+        line-height: 16px;
+        font-size: 1rem;
+        font-weight: 100;
     }
     #navbarImage {
         margin: 0 .25rem 0 0;
