@@ -195,17 +195,6 @@
             "order": 3
         },
         {
-            "name": "Three JS Scene (Basic)",
-            "subHeading": "A basic THREE JS scene",
-            "description": "An interactive Three JS scene, using Babel and Webpack.",
-            "searchTerms": "Docker,JavaScript,Three JS,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "threeJSScene",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "labels": ["JavaScript"]
-        },
-        {
             "name": "AFrame React (Basic)",
             "subHeading": "An AFrame Hello World application with React",
             "description": "Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.",
