@@ -99,9 +99,9 @@
             "labels": ["JavaScript"]
         },
         {
-            "name": "Tic-Tac-Toe (React)",
+            "name": "Tic-Tac-Toe",
             "subHeading": "A Tic-Tac-Toe game built using React",
-            "description": "Experimenting with more complex aspects of React, Babel and Webpack.",
+            "description": "Demonstrating React state management with immutability, allowing for 'time travel' or 'versioned' data.",
             "searchTerms": "Docker,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "ticTacToeReact",
             "active": true,
