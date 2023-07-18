@@ -195,19 +195,8 @@
             "order": 3
         },
         {
-            "name": "AFrame React (Basic)",
-            "subHeading": "An AFrame Hello World application with React",
-            "description": "Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.",
-            "searchTerms": "Docker,JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality",
-            "folder": "aframe",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "labels": ["JavaScript"]
-        },
-        {
-            "name": "AFrame React (Complex)",
-            "subHeading": "A slightly more complex AFrame application with React, allowing user input",
+            "name": "AFrame React Example",
+            "subHeading": "An example AFrame application with React, allowing for user input",
             "description": "Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.",
             "searchTerms": "Docker,JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality",
             "folder": "aframeComplex",
