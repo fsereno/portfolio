@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+    nodeToDo:
+        image: 'fabiosereno/portfolio.node-to-do:0.0.1'
+        ports:
+            - '3006:3006'
+        container_name: nodeToDo
+        networks:
+            - backend
+networks:
+    frontend:
+    backend:

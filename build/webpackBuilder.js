@@ -1,5 +1,6 @@
 const webpackHelper = require("./webpackHelper");
 const masterWebpackConfig = require("./webpack.config.master");
+const chalk = require('chalk');
 const webpack = require('webpack');
 
 module.exports = {
@@ -66,7 +67,13 @@ module.exports = {
 
     plugins = webpackHelper.getAnalysisConfig(plugins, env);
 
-    const htmlWebpackPluginConfigs = webpackHelper.getHtmlWebpackPluginObjects(application);
+    let htmlWebpackPluginConfigs = [];
+
+    try {
+      htmlWebpackPluginConfigs = webpackHelper.getHtmlWebpackPluginObjects(application);
+    } catch (error) {
+      console.log(chalk.redBright(`ERROR: unable to get plugin objects for ${application.name}`));
+    }
 
     webpackConfig = {
       ...webpackConfig,

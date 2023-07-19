@@ -1,32 +1,70 @@
+Fixing the E2E tests
+
+Update to latest Node version
+
+docker run -it node
+
+and run apt-get install chromium -y (where -y is to accept Y for any prompts)
+
+There seems to be a better way of installing chromium via latest Node image - it uses Dabian and not Alpine
+
+https://serverfault.com/questions/1074688/security-debian-org-does-not-have-a-release-file-on-with-debian-docker-images
+
+RUN echo "deb http://security.debian.org/debian-security bullseye-security main contrib non-free" > /etc/apt/sources.list
+
+RUN apt-get update
+
+maybe we need to actually grab chromium apt-get install chromium:arm64
+
+jest ./app/app_nodeToDo/tests/e2e/*.test.js
+
+https://docs.taiko.dev/taiko_in_docker/
+
+https://docs.docker.com/cloud/ecs-integration/
+
+
+AWS via ecs
+http://portf-loadb-u4cpww4ao4s2-5b64feaec4f7973b.elb.eu-west-2.amazonaws.com/
+http://portf-loadb-19hy77v87epzl-70b425fe12805756.elb.eu-west-2.amazonaws.com/
+
+
+
+The reason why Azure is costig so much is because the Quick Startk guide is using an S1 (Standard small)
+
+The pricing tiers, e.g., F1(Free), D1(Shared), B1(Basic Small), B2(Basic Medium), B3(Basic Large), S1(Standard Small), P1V2(Premium V2 Small), P1V3(Premium V3 Small), P2V3(Premium V3 Medium), P3V3(Premium V3 Large), PC2 (Premium Container Small), PC3 (Premium Container Medium), PC4 (Premium Container Large), I1 (Isolated Small), I2 (Isolated Medium), I3 (Isolated Large).
+accepted values: B1, B2, B3, D1, F1, FREE, I1, I2, I3, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, PC2, PC3, PC4, S1, S2, S3, SHARED
+
+Docker app:
+Standard
+http://fsereno-portfolio.azurewebsites.net/
+
+App service docker quickstart example
+Using first the cloud shell and then the az cli from the shell
+https://docs.microsoft.com/en-us/azure/app-service/quickstart-multi-container
+https://shell.azure.com/
+
+
+https://learn.microsoft.com/en-us/azure/app-service/tutorial-multi-container-app
+
+Create the docker app
+az webapp create --resource-group fserenoPortfolioResourceGroup --plan fserenoPortfolioServicePlan --name fsereno-portfolio --multicontainer-config-type compose --multicontainer-config-file docker-compose.yml
+
+Shell can be accessed from the link above or perhaps - https://portal.azure.com/#cloudshell/
+
+Test api can be accessed at:
+http://localhost:3000/
+
+But there is a networking CORS error when talking between containers
+
+docker build -f Dockerfile.serve -t fabiosereno/portfolio.serve:0.0.4 .
+DIR=reactRedux docker compose -f docker-compose.serve.yml up
+docker compose -f docker-compose.serve.yml up
+sh hello_world
+
+
 at the end of this piece the following script will be removed from package.json:
 test-func
 
-All app specific tests will be run by test-apps-func, but it can be renamed
-test-apps is currently the typescript tests
-
-and replaced with:
-
-npx jest ./app/**/tests/*.test.js
-
-npx jest ./app/app_basicEmailClientReactSpa/tests/*.test.js
-
-npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*.test.js
-
-npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*pup.test.js
-
-npx jest ./app/app_awsDotNetCoreAsyncCoffeeMachine/tests/*taiko.test.js
-
-npx jest ./app/app_awsDotNetCoreEntitySortApi/tests/*taiko.test.js
-
-npx jest ./app/app_awsDotNetCoreStringSortApi/tests/*taiko.test.js
-
-npx jest ./app/app_AzureDotNetCoreDataStructuresApi/tests/*taiko.test.js
-
-npx jest ./app/app_AzureDotNetCoreUniqueDataEntryApi/tests/*taiko.test.js
-
-npx jest ./app/app_awsDotNetCoreShoppingCart/tests/*taiko.test.js
-
-npx jest ./app/app_awsNodeToDoApi/tests/*taiko.test.js
 
 For Docker image eventually
 npm install taiko --save-dev

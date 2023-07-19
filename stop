@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Docker compose script runner
+
+DOCKER_DIR=$1
+
+cd docker/$DOCKER_DIR
+
+sh stop

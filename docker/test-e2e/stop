@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Test docker compose down script
+
+docker compose down

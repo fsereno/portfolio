@@ -1,47 +1,58 @@
 @import "../../sass/includes/colours.scss";
 
-.test {
-  background: orange
-}
-
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
-}
-
 .status {
   margin-bottom: 10px;
 }
 
+.border-row {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid $black;
+  border-top: none;
+  border-left: none;
+}
+
 .square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
+  background: $darkGrey;
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  flex-basis: 33.33%;
+  height: 100px;
+  border: 1px solid $white;
+  border-radius: 0;
+  border-bottom: none;
+  border-right: none;
+  outline: none;
+  box-shadow: none;
 }
 
-.square:focus {
+.square.btn-dark:focus, .square.btn-dark:hover, .square.btn-dark:active, .square.btn-dark:not(:disabled):not(.disabled):active {
   outline: none;
+  border: 1px solid $white;
+  border-bottom: none;
+  border-right: none;
+  box-shadow: none;
 }
 
 .kbd-navigation .square:focus {
   background: #ddd;
 }
 
+.outer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .game {
   display: flex;
-  flex-direction: row;
 }
 
 .game-info {
   margin-left: 20px;
+  flex: 1;
 }

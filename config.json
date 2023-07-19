@@ -1,5 +1,12 @@
 {
     "host": "localhost",
+    "apiRoot": "/backend/",
+    "deploymentTargetCookie": "fs_portfolio_deployment_target",
+    "deploymentTargets": {
+        "cloud": "cloud",
+        "static": "static"
+    },
+    "dockerHost": "nginx",
     "port": 8080,
     "prefix": "app_",
     "entry": "home",
@@ -11,26 +18,28 @@
     "repoRootUrl": "https://github.com/fsereno/portfolio",
     "linkedInUrl": "https://www.linkedin.com/in/fabio-sereno-6a97b986/",
     "gitHubUrl": "https://github.com/fsereno",
+    "gitHubIssuesUrl": "https://github.com/fsereno/portfolio/issues",
     "title": "Portfolio",
     "author": "Fabio Sereno",
-    "role": "Software developer",
-    "description": "Portfolio website for Fabio Sereno - Software Developer.",
+    "role": "Software Engineer",
+    "description": "Portfolio By Fabio Sereno - Software Engineer",
     "thumbnail": "PortfolioThumbnail.png",
-    "labels": [
-        { "name": "JavaScript", "class": "warning" },
-        { "name": "C#", "class": "info" },
-        { "name": "Cloud", "class": "danger" }
-    ],
+    "labels": {
+        "JavaScript" : "warning",
+        "NodeJS": "success",
+        "C#": "info",
+        "Cloud": "danger"
+    },
     "quickSearch": [
         "React",
         ".NET",
         "Cloud"
     ],
     "grecaptcha": {
-        "active": true,
-        "key": "6LdFJsIaAAAAAGltxQjmncdNsjOtxAshDewjKCS3",
+        "active": false,
+        "key": "",
         "endpoints": {
-            "base": "https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com",
+            "base": "",
             "verify": "verify"
         }
     },
@@ -38,7 +47,7 @@
         {
             "name": "Portfolio",
             "subHeading": "By Fabio Sereno",
-            "description": "Highly experienced, highly self-motivated, enthusiastic, professional Full Stack Web Developer.",
+            "description": "Highly experienced, highly self-motivated, enthusiastic, professional Full Stack Software Engineer.",
             "folder": "home",
             "active": true,
             "include": false,
@@ -60,241 +69,206 @@
             "name": "To-Do List (React)",
             "subHeading": "A basic list builder using React",
             "description": "Using React, with Babel and Webpack.",
-            "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "searchTerms": "Docker,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "toDoReact",
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "To-Do List (React Redux)",
             "subHeading": "A basic list builder using React and Redux",
             "description": "Using Redux with React to manage application state, implementing Undo and Redo functionality.",
-            "searchTerms": "JavaScript,React,Redux,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "searchTerms": "Docker,JavaScript,React,Redux,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "reactRedux",
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "To-Do List (Vue)",
             "subHeading": "A basic list builder using Vue",
             "description": "Experimenting with Vue, Babel and Webpack.",
-            "searchTerms": "JavaScript,Vue,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "searchTerms": "Docker,JavaScript,Vue,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "toDoVue",
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
-            "name": "Tic-Tac-Toe (React)",
+            "name": "Tic-Tac-Toe",
             "subHeading": "A Tic-Tac-Toe game built using React",
-            "description": "Experimenting with more complex aspects of React, Babel and Webpack.",
-            "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "description": "Demonstrating React state management with immutability, allowing for 'time travel' or 'versioned' data.",
+            "searchTerms": "Docker,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "ticTacToeReact",
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
-            "name": "Azure Functions .NET, Unique Data Entry",
+            "name": "Unique Data Entry Application",
             "subHeading": "Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries, with a React UI",
-            "description": "Using Azure Functions serverless compute and .NET, with a React user interface.",
-            "searchTerms": "Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "AzureDotNetCoreUniqueDataEntryApi",
+            "description": ".NET Web API with a React UI.",
+            "searchTerms": "Docker,Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "uniqueDataEntry",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "api": "https://app-azure-dotnetcore-unique-data-entry-api.azurewebsites.net/api",
-                "canItemBeAddedAsync": "canItemBeAddedAsync"
+                "canItemBeAddedAsync": "uniqueDataEntry/api/canItemBeAddedAsync"
             },
-            "labels": [0, 1, 2],
+            "labels": ["JavaScript", "C#", "Cloud"],
             "featured": false
         },
         {
-            "name": "Azure Functions .NET, Data Structures",
-            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack in .NET, with a React UI",
-            "description": "Using Azure Functions serverless compute and .NET, with a React user interface.",
-            "searchTerms": "Cloud,Azure,Azure Functions,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "AzureDotNetCoreDataStructuresApi",
+            "name": "Data Structures",
+            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack",
+            "description": ".NET Web API with a React UI.",
+            "searchTerms": "Docker,Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "dataStructures",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "api": "https://app-azure-dotnetcore-data-structures-api.azurewebsites.net/api",
-                "addQueueItem": "addQueueItemAsync",
-                "removeQueueItem": "removeQueueItemAsync",
-                "addStackItem": "addStackItemAsync",
-                "removeStackItem": "removeStackItemAsync"
+                "addQueueItem": "dataStructures/api/addQueueItemAsync",
+                "removeQueueItem": "dataStructures/api/removeQueueItemAsync",
+                "addStackItem": "dataStructures/api/addStackItemAsync",
+                "removeStackItem": "dataStructures/api/removeStackItemAsync"
             },
-            "labels": [0, 1, 2],
+            "labels": ["JavaScript", "C#", "Cloud"],
             "featured": false
         },
         {
-            "name": "AWS .NET, Complex Entity Sorting Algorithm",
-            "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types, with a React UI",
-            "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
-            "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "awsDotNetCoreEntitySortApi",
+            "name": "Complex Entity Sorting Algorithm",
+            "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
+            "description": ".NET Web API with a React UI.",
+            "searchTerms": "Docker,Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "entitySort",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "api": "https://lni2f3xvgc.execute-api.eu-west-2.amazonaws.com/Prod/api/employees",
-                "sortSalaryAsc": "sort/salary/asc",
-                "sortSalaryDesc": "sort/salary/desc"
+                "sortSalaryAsc": "entitySort/api/sort/salary/asc",
+                "sortSalaryDesc": "entitySort/api/sort/salary/desc"
             },
-            "labels": [0, 1, 2],
+            "labels": ["JavaScript", "C#", "Cloud"],
             "featured": false
         },
         {
-            "name": "AWS .NET, Natural Sorting Algorithm",
-            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET, passing in a custom comparer, with a React UI",
-            "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
-            "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "awsDotNetCoreStringSortApi",
+            "name": "Natural Sorting Algorithm",
+            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET, passing in a custom comparer",
+            "description": ".NET Web API with a React UI.",
+            "searchTerms": "Docker,Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "stringSort",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "api": "https://t8txttdaee.execute-api.eu-west-2.amazonaws.com/Prod/api/values",
-                "sort": "sort"
+                "sort": "stringSort/api/sort"
             },
-            "labels": [0, 1, 2],
+            "labels": ["JavaScript", "C#", "Cloud"],
             "featured": false
         },
         {
-            "name": "AWS .NET, Shopping Basket List Builder",
-            "subHeading": "A basic shopping basket application, with data processing handled by a Serverless .NET RESTful API, with a React UI",
-            "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
-            "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "awsDotNetCoreShoppingCart",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "endpoints" : {
-                "api": "https://6pzl3f4421.execute-api.eu-west-2.amazonaws.com/Prod/api/basket",
-                "get": "get",
-                "add": "add",
-                "delete": "delete",
-                "update": "update"
-            },
-            "labels": [0, 1, 2],
-            "order": 2
-        },
-        {
-            "name": "AWS .NET, Asynchronous Coffee Maker",
-            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET, with a React UI",
-            "description": "AWS Lambda serverless application (SAM), using .NET along with an AWS RESTful Gateway API.",
-            "searchTerms": "Cloud,AWS,Amazon Web Services,C#,dotnet,.net core,.netcore,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "awsDotNetCoreAsyncCoffeeMachine",
+            "name": "Coffee Machine",
+            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET",
+            "description": ".NET Web API with a React UI.",
+            "searchTerms": "Docker,Cloud,C#,dotnet,.net,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "coffeeMachine",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "master_react",
             "endpoints" : {
-                "api": "https://ro5qqsplje.execute-api.eu-west-2.amazonaws.com/Prod/api/values",
-                "run": "run",
-                "runAsync": "runasync"
+                "run": "coffeeMachine/api/run",
+                "runAsync": "coffeeMachine/api/runasync"
             },
-            "labels": [0, 1, 2],
+            "labels": ["JavaScript", "C#", "Cloud"],
             "order": 3
         },
         {
-            "name": "Three JS Scene (Basic)",
-            "subHeading": "A basic THREE JS scene",
-            "description": "An interactive Three JS scene, using Babel and Webpack.",
-            "searchTerms": "JavaScript,Three JS,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "threeJSScene",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "labels": [0]
-        },
-        {
-            "name": "AFrame React (Basic)",
-            "subHeading": "An AFrame Hello World application with React",
+            "name": "AFrame React Example",
+            "subHeading": "An example AFrame application with React, allowing for user input",
             "description": "Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.",
-            "searchTerms": "JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality",
-            "folder": "aframe",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "labels": [0]
-        },
-        {
-            "name": "AFrame React (Complex)",
-            "subHeading": "A slightly more complex AFrame application with React, allowing user input",
-            "description": "Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.",
-            "searchTerms": "JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality",
+            "searchTerms": "Docker,JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality",
             "folder": "aframeComplex",
             "active": true,
             "include": true,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "JS Coding Standards",
             "subHeading": "A JavaScript Code Style Guide",
             "description": "By Fabio Sereno",
-            "searchTerms": "JavaScript,SOLID Principles,YAGNI,DRY,KISS",
+            "searchTerms": "Docker,JavaScript,SOLID Principles,YAGNI,DRY,KISS",
             "folder": "jsCodingStandards",
             "active": false,
             "include": false,
-            "labels": [0]
+            "labels": ["JavaScript"]
         },
         {
             "name": "Basic React Email Client",
             "subHeading": "An SPA using React and React Router. React Context and useReducer handle state. Optimised with useCallback, useMemo and React.memo",
             "description": "Using React, Babel and Webpack.",
-            "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "searchTerms": "Docker,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "basicEmailClientReactSpa",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "basicSpaReact",
-            "labels": [0],
+            "labels": ["JavaScript"],
             "order": 2,
             "featured": false
         },
         {
-            "name": "AWS Node.js, B2C API, To-Do List",
-            "subHeading": "Authenticated with Cognito, data stored using Dynamo DB, driven by Lambda Functions and with a React UI",
-            "description": "Built with Node.js, the AWS Serverless Framework and managed by an HTTP API Gateway.",
-            "searchTerms": "Cloud,AWS,Amazon Web Services,Serverless Framework,Node.js,Cognito,Dynamo DB,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "awsNodeToDoApi",
+            "name": "NodeJS, To-Do List SPA",
+            "subHeading": "A simple To-Do list application, with user registration and authentication",
+            "description": "NodeJS Web API with a React UI.",
+            "searchTerms": "Docker,NodeJS,Express,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "nodeToDo",
             "active": true,
             "include": true,
             "useWebpack": true,
             "masterTemplateDir": "basicEmailClientReactSpa",
-            "labels": [0,2],
+            "labels": ["JavaScript","Cloud", "NodeJS"],
             "order": 1,
             "featured": false,
             "endpoints": {
-                "base": "https://7pq7bx3nt6.execute-api.eu-west-2.amazonaws.com",
-                "api": "todos"
+                "base": "nodeToDo"
             }
         },
         {
             "name": "Master React Template",
             "subHeading": "Subheading",
             "description": "Description",
-            "searchTerms": "JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "searchTerms": "Docker,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "master_react",
             "masterTemplateDir": "toDoReact",
             "active": true,
             "include": false,
             "useWebpack": true,
-            "labels": [0]
+            "labels": ["JavaScript"]
+        },
+        {
+            "name": "Test React Template",
+            "subHeading": "Subheading",
+            "description": "Description",
+            "searchTerms": "Docker,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
+            "folder": "new_react",
+            "masterTemplateDir": "toDoReact",
+            "active": true,
+            "include": false,
+            "useWebpack": true,
+            "labels": ["JavaScript"]
         }
     ]
 }
