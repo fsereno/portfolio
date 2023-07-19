@@ -1,0 +1,20 @@
+@import "../../../../sass/includes/colours.scss";
+@import "../../../../sass//includes/constants.scss";
+
+.cookie-banner-container {
+    backdrop-filter: blur(10px);
+    background: transparent;
+    padding: .5rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    border-top: $lightGrey solid;
+    p {
+        margin-bottom: 0;
+    }
+  }

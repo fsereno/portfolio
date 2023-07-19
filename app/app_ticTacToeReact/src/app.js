@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 function Square(props) {
   return (
     <button
-      className="square"
+      className="square btn btn-dark"
       onClick={props.onClick}>
         {props.value}
     </button>
@@ -26,18 +26,18 @@ class Board extends React.Component {
   }
   render() {
     return (
-      <div>
-        <div className="board-row">
+      <div className='board-container'>
+        <div className='border-row'>
           {this.renderSquare(0)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
         </div>
-        <div className="board-row">
+        <div className='border-row'>
           {this.renderSquare(3)}
           {this.renderSquare(4)}
           {this.renderSquare(5)}
         </div>
-        <div className="board-row">
+        <div className='border-row'>
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
@@ -90,7 +90,7 @@ class Game extends React.Component {
         "Go to game start";
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <a href='#' className="btn btn-sm btn-dark mb-1" onClick={() => this.jumpTo(move)}>{desc}</a>
         </li>
       );
     });
@@ -103,17 +103,20 @@ class Game extends React.Component {
     }
 
     return (
-      <div className="game">
-        <div className="game-board">
-          <Board
-            squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-          />
-        </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol>{moves}</ol>
-        </div>
+      <div className='outer mt-4'>
+        <div className='game'>
+          <div className="game-board">
+            <Board
+              squares={current.squares}
+              onClick={(i) => this.handleClick(i)}
+            />
+          </div>
+          <div className="game-info">
+            <div className='mb-3'>{status}</div>
+            <ol>{moves}</ol>
+          </div>
+      </div>
+
       </div>
     );
   }

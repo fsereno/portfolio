@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+    stringSort:
+        image: 'fabiosereno/portfolio.string-sort:0.0.1'
+        ports:
+            - '3004:3004'
+        container_name: stringSort
+        networks:
+            - backend
+networks:
+    frontend:
+    backend:
