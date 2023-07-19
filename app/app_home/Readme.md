@@ -1,9 +1,15 @@
-# To-Do React
+# Welcome
 
-With this application I have built a simple To-Do list using React to handle user input and manage state.
+## The 3D Introduction
 
-### Explanation ###
+The Home application serves as the entry point to my Portfolio. It showcases an interactive 3D scene utilising Three.js and demonstrates my understanding of programming complex 3D applications.
 
-I have used Webpack to bundle JS dependancies and Babel to transpile to the correct ES version.
+A physics engine, Connon.js, has been incorporated to enable collision detection and simulate forces like gravity.
 
-The interest in this application is to explore how React can be used for 2 way data binding between the DOM and application state. With a particular interest in Reacts use of a virtual DOM.
+I've added texture mapping and written a number of 'randomness' generators to ensure a unique experience with each load. The particles constantly evolve in the background.
+
+## The Applications
+
+Below the introduction, you will find a collection of applications available for demonstration within the Portfolio. The search bar allows you to filter through the applications. Additionally, there is a search bar in the top navigation available on every page.
+
+I hope you enjoy exploring and feel free to view the code on GitHub or contact me with any queries.
