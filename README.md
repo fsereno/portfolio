@@ -8,7 +8,7 @@ Passionate about software development and constantly eager to learn and adopt th
 ## My Portfolio Repository
 The purpose of this repository is to demonstrate skills in various technologies, coding proficiency and knowledge.
 
-To see a static version of this project go to:
+To view a static version of this project with limited functionality, please visit:
 https://fsereno.github.io/portfolio/
 
 To see a fully containerised version of this project deployed to AWS (Amazon Web Services) EC2, please either raise an issue on this GitHub repository or contact me via LinkedIn.
