@@ -63,12 +63,17 @@ Some of the technology used in this project and related projects:
 - Please ensure you have Docker installed and running.
 - Open your preferred command line:
 
-> Launch the production environment
+Launch the production environment
 
 ```shell
 $ docker compose up
 ```
-> To run one of the following specific Docker tasks
+##### This will:
+- Pull all images from Docker Hub.
+- Spin up all services in containers.
+- The application will be available at: http://localhost/
+
+To run one of the following specific Docker tasks
 - analysis
 - create
 - dev
@@ -79,7 +84,7 @@ $ docker compose up
 ```shell
 $ sh start <task>
 ```
-> To stop one of the above tasks, excluding those which destroy themselves (create, test)
+To stop one of the above tasks, excluding those which destroy themselves (create, test)
 
 ```shell
 $ sh stop <task>
@@ -137,6 +142,7 @@ $ sh start test-e2e
 ```
 ##### This will:
 - Run all functional tests from the ./app/tests/functional directory
+- Currently this feature is a work in progress (WIP) and will not work on ARM architecture
 ---
 
 #### Create a new application
