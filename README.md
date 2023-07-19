@@ -8,14 +8,20 @@ Very keen on learning and using the latest technologies, with a real passion for
 ## My Portfolio Repository
 The purpose of this repository is to demonstrate skills in various technologies, coding proficiency and knowledge.
 
-To see a fully deployed version of this project go to:
+To see a static version of this project go to:
 https://fsereno.github.io/portfolio/
+
+To see a fully containerised version of this project deployed to AWS (Amazon Web Services) EC2, please either raise an issue on this GitHub repository or contact me via LinkedIn.
+
+- Raise an issue on Github (https://github.com/fsereno/portfolio/issues)
+- Contact me on LinkedIn (https://www.linkedin.com/in/fabio-sereno-6a97b986/)
 
 This project is both built and deployed with continuous integration and deployment (CI/CD).
 
 Some of the technology used in this project and related projects:
 - .NET (https://dotnet.microsoft.com)
 - Docker (https://www.docker.com/)
+- Docker Hub (https://hub.docker.com/)
 - NodeJS (https://nodejs.org/en/)
 - Webpack (https://webpack.js.org/)
 - Pug (https://pugjs.org/api/getting-started.html)
