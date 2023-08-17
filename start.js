@@ -2,18 +2,46 @@ const { execSync } = require('child_process');
 
 const args = process.argv.slice(2);
 
-if (args.length > 2) {
-  console.error('Usage: node start.js <APP> <DIR>');
-  process.exit(1);
+console.log(args);
+
+// Constants
+const DEV = '--dev';
+const APP = '--app';
+const ENV = '--env';
+
+// Methods
+const has = (command) => !command && args.length === 0 ||  args.some(x => x === command);
+const get = (command) => args[args.indexOf(command) + 1];
+const run = (command) => {
+  execSync(command, { stdio: 'inherit' });
+  process.exit(0);
 }
 
-const app = args[0];
-const env = args[1];
+const hasProd = has();
+const hasDev = has(DEV);
+const hasApp = has(APP);
+const hasEnv = has(ENV);
 
-const command = env
-  ? `docker compose --env-file ./docker/${app}/${env}.env -f ./docker/${app}/docker-compose.yml up`
-  : `docker compose -f ./docker/${app}/docker-compose.yml up`;
+let command = 'docker compose up -d';
 
-console.log('running command:' + command);
+if (hasProd) {
+  run(command);
+}
 
-execSync(command, { stdio: 'inherit' });
+const dockerCompose = 'docker-compose';
+const composeFile = hasDev ? `${dockerCompose}.dev.yml` : `${dockerCompose}.yml`;
+
+if (hasEnv && hasApp) {
+  const env = get(ENV);
+  const app = get(APP);
+  command = `docker compose --env-file ./docker/${app}/${env}.env -f ./docker/${app}/${composeFile} up`;
+  console.log('running command:' + command);
+  //run(command);
+}
+
+if (hasApp) {
+  const app = get(APP);
+  command = `docker compose -f ./docker/${app}/${composeFile} up`;
+  console.log('running command:' + command);
+  //run(command);
+}
