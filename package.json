@@ -9,8 +9,8 @@
     ]
   },
   "scripts": {
-    "start": "node start.js",
-    "stop:debug": "node stop.js",
+    "start": "node docker/scripts/start.js",
+    "stop": "node docker/scripts/stop.js",
     "test-util": "./node_modules/.bin/mocha --require @babel/register --require ts-node/register ./app/tests/utils/*test.*",
     "test-apps-e2e": "jest ./app/**/tests/e2e/*.test.js",
     "test-apps-jest": "jest ./app/**/tests/*.test.js",
