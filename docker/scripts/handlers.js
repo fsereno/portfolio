@@ -5,6 +5,7 @@ const verbs = require('./verbs');
 
 const dockerCompose = 'docker-compose';
 const composeFile = verbs.hasDev ? `${dockerCompose}.dev.yml` : `${dockerCompose}.yml`;
+const attachmentMode = verbs.hasDev ? '' : '-d';
 
 const ifHasUnsupported = () => {
     if (helpers.args.filter(arg => arg.startsWith("--")).some(x => verbs.supported.indexOf(x) === -1)) {
@@ -31,18 +32,18 @@ const runIfHasProd = () => {
 
 const runIfHasEnvAndApp = () => {
     if (verbs.hasEnv && verbs.hasApp) {
-        const env = helpers.get(constants.ENV);
         const app = helpers.get(constants.APP);
-        const command = `docker compose --env-file ./docker/${app}/${env}.env -f ./docker/${app}/${composeFile} up -d`;
+        const env = helpers.get(constants.ENV);
+        const command = `docker compose --env-file ./docker/${app}/${env}.env -f ./docker/${app}/${composeFile} up ${attachmentMode}`;
         console.log(chalk.green('Running command: ' + command));
         helpers.run(command);
     }
 }
 
 const runIfHasApp = () => {
-    if (verbs.hasApp) {
+    if (!verbs.hasEnv && verbs.hasApp) {
         const app = helpers.get(constants.APP);
-        const command = `docker compose -f ./docker/${app}/${composeFile} up -d`;
+        const command = `docker compose --env-file ./docker/${app}/${app}.env -f ./docker/${app}/${composeFile} up ${attachmentMode}`;
         console.log(chalk.green('Running command: ' + command));
         helpers.run(command);
     }
