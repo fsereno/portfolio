@@ -52,6 +52,7 @@ Some of the technology used in this project and related projects:
 ## Prerequisites
 
 - Docker (https://www.docker.com/)
+- NodeJS (https://nodejs.org/en/)
 ---
 
 ## Installation
