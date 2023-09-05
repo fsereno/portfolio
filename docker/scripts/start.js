@@ -5,3 +5,4 @@ handlers.ifHasHelp();
 handlers.runIfHasProd();
 handlers.runIfHasEnvAndApp();
 handlers.runIfHasApp();
+handlers.runIfHasCreate();

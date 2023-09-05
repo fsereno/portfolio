@@ -67,6 +67,14 @@ const stopIfHasApp = () => {
     }
 }
 
+const runIfHasCreate = () => {
+    if (verbs.hasCreate) {
+        const command = `docker compose run -f ./docker/create/${composeFile} --rm`
+        console.log(chalk.green('Running command: ' + command));
+        //helpers.run(command);
+    }
+}
+
 module.exports = {
     ifHasUnsupported,
     ifHasHelp,
@@ -74,5 +82,6 @@ module.exports = {
     runIfHasEnvAndApp,
     runIfHasApp,
     stopIfHasProd,
-    stopIfHasApp
+    stopIfHasApp,
+    runIfHasCreate
 };
