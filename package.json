@@ -21,7 +21,7 @@
     "dev": "webpack serve --config ./build/webpack.config.js --env dir=$dir",
     "analysis": "webpack --config ./build/webpack.config.js --env dir=$dir --env analysis",
     "release": "node -e 'require(\"./build/webpackBuilder\").build()'",
-    "create:native": "node -e 'require(\"./build/create\").create()'"
+    "create": "node -e 'require(\"./build/create\").create()'"
   },
   "repository": {
     "type": "git",

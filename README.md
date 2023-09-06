@@ -1,6 +1,6 @@
 <a href="http://fswebsitesolutions.com/"><img src="https://raw.githubusercontent.com/fsereno/portfolio/master/docs/images/FSLogo.jpeg" width="100px" title="FS Website Solutions" alt="FS Website Solutions" target="_blank"></a>
 
-# **Fabio Sereno** - Software engineer
+# **Fabio Sereno** - Software Engineer
 Highly experienced Full Stack Software Engineer with over 15 years of experience (6+ years in the FinTech sector). Self-motivated, enthusiastic, and professional team player with strong analytical and problem-solving skills. Demonstrates proficiency in coding and a proven ability to successfully complete projects with innovation and creativity.
 
 Passionate about software development and constantly eager to learn and adopt the latest technologies. Keen interest in FinTech, HealthTech, Commerce, ML/AI, Blockchain, XR (VR/AR), and IoT.
@@ -73,28 +73,20 @@ Some of the technology used in this project and related projects:
 Launch the production environment
 
 ```shell
-$ docker compose up
+$ npm run start
 ```
 ##### This will:
 - Pull all images from Docker Hub.
 - Spin up all services in containers.
-- The application will be available at: http://localhost/
-
-To run one of the following specific Docker tasks
-- analysis
-- create
-- dev
-- rel
-- test
-- test-e2e
+- The application will be available at: http://localhost
 
 ```shell
-$ sh start <task>
+$ npm run start -- <options>
 ```
 To stop one of the above tasks, excluding those which destroy themselves (create, test)
 
 ```shell
-$ sh stop <task>
+$ npm run stop -- <options>
 ```
 ---
 
@@ -103,40 +95,41 @@ $ sh stop <task>
 #### Serve a specific application via the development server
 
 ```shell
-$ sh start dev <application>
+$ npm run start  -- --dev --app <application>
 ```
 ##### This will:
-- Start the development server.
+- Start the webpack development server.
+- Start the necessary backend services.
 - Watch for any changes on development resources.
 - Hot-reload any changes straight to the browser.
 - The default application is the root application - home
-- Open your browser and navigate to http://localhost:8080.
+- Open your browser and navigate to http://localhost
 ---
 
 #### Run analysis on a specific application
 
 ```shell
-$ sh start analysis <application>
+$ npm run start -- --app analysis <application> THIS NEEDS FIXING
 ```
 ##### This will:
 - Start the analysis server.
 - Perform a dependency analysis of the application.
-- Open your browser and navigate to http://localhost:8080.
+- Open your browser and navigate to http://localhost
 ---
 
 #### Build for release
 
 ```shell
-$ sh start rel
+$ npm run release
 ```
 ##### This will:
-- Build the production static assets directory.
+- Build the production static assets directory (dist or docs, depending on the configuration).
 ---
 
 #### Run all unit tests
 
 ```shell
-$ sh start test
+$ npm run test
 ```
 ##### This will:
 - Run all application specific and global unit tests.
@@ -145,7 +138,7 @@ $ sh start test
 #### Run all functional end-to-end tests
 
 ```shell
-$ sh start test-e2e
+$ npm run test-apps-e2e
 ```
 ##### This will:
 - Run all functional tests from the ./app/tests/functional directory
@@ -155,7 +148,7 @@ $ sh start test-e2e
 #### Create a new application
 
 ```shell
-$ sh create
+$ npm run create
 ```
 ##### This will:
 - Build applications based on the config.json file.
