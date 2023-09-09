@@ -1,6 +1,8 @@
-const handlers = require('./handlers');
+const handlers = require('./handlers.common');
+const appsHandlers = require('./handlers.apps');
+const verbs = require('./verbs.apps');
 
-handlers.ifHasUnsupported();
+handlers.ifHasUnsupported(verbs.supported);
 handlers.ifHasHelp();
-handlers.stopIfHasProd();
-handlers.stopIfHasApp();
+appsHandlers.stopIfHasProd();
+appsHandlers.stopIfHasApp();

@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+    create:
+        image: 'fabiosereno/portfolio.create:0.0.1'
+        volumes:
+            - '../../config.json:/usr/src/app/config.json'
+            - '../../app:/usr/src/app/app'
+            - '../../build:/usr/src/app/build'
+        container_name: create

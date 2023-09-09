@@ -1,18 +1,11 @@
 const chalk = require('chalk');
-const constants = require('./constants');
-const helpers = require('./helpers');
-const verbs = require('./verbs');
+const constants = require('./constants.apps');
+const helpers = require('./helpers.common');
+const verbs = require('./verbs.apps');
 
 const dockerCompose = 'docker-compose';
 const composeFile = verbs.hasDev ? `${dockerCompose}.dev.yml` : `${dockerCompose}.yml`;
 const attachmentMode = verbs.hasDev ? '' : '-d';
-
-const ifHasUnsupported = () => {
-    if (helpers.args.filter(arg => arg.startsWith("--")).some(x => verbs.supported.indexOf(x) === -1)) {
-        console.error(chalk.redBright('ERROR: Unsupported arguments detected.'));
-        process.exit(1);
-    }
-}
 
 const ifHasHelp = () => {
     if (verbs.hasHelp) {
@@ -21,30 +14,27 @@ const ifHasHelp = () => {
     }
 }
 
-const runIfHasProd = () => {
+const startIfHasProd = () => {
     if (verbs.hasProd) {
         const command = 'docker compose up -d';
-        console.log(chalk.yellowBright('Warning composing up for production:'));
-        console.log(chalk.green('Running command: ' + command));
+        console.log(chalk.yellowBright('Warning: composing up for production:'));
         helpers.run(command);
     }
 }
 
-const runIfHasEnvAndApp = () => {
+const startIfHasEnvAndApp = () => {
     if (verbs.hasEnv && verbs.hasApp) {
         const app = helpers.get(constants.APP);
         const env = helpers.get(constants.ENV);
         const command = `docker compose --env-file ./docker/${app}/${env}.env -f ./docker/${app}/${composeFile} up ${attachmentMode}`;
-        console.log(chalk.green('Running command: ' + command));
         helpers.run(command);
     }
 }
 
-const runIfHasApp = () => {
+const startIfHasApp = () => {
     if (!verbs.hasEnv && verbs.hasApp) {
         const app = helpers.get(constants.APP);
         const command = `docker compose --env-file ./docker/${app}/${app}.env -f ./docker/${app}/${composeFile} up ${attachmentMode}`;
-        console.log(chalk.green('Running command: ' + command));
         helpers.run(command);
     }
 }
@@ -53,7 +43,6 @@ const stopIfHasProd = () => {
     if (verbs.hasProd) {
         const command = 'docker compose down';
         console.log(chalk.yellowBright('Warning composing down for production:'));
-        console.log(chalk.green('Running command: ' + command));
         helpers.run(command);
     }
 }
@@ -62,17 +51,15 @@ const stopIfHasApp = () => {
     if (verbs.hasApp) {
         const app = helpers.get(constants.APP);
         const command = `docker compose -f ./docker/${app}/${composeFile} down`;
-        console.log(chalk.green('Running command: ' + command));
         helpers.run(command);
     }
 }
 
 module.exports = {
-    ifHasUnsupported,
     ifHasHelp,
-    runIfHasProd,
-    runIfHasEnvAndApp,
-    runIfHasApp,
+    startIfHasProd,
+    startIfHasEnvAndApp,
+    startIfHasApp,
     stopIfHasProd,
     stopIfHasApp
 };

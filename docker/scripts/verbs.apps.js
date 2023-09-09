@@ -1,5 +1,5 @@
-const constants = require('./constants');
-const helpers = require('./helpers');
+const constants = require('./constants.apps');
+const helpers = require('./helpers.common');
 
 const hasProd = helpers.has();
 const hasDev = helpers.has(constants.DEV);
