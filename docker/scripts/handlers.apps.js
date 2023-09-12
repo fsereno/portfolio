@@ -3,18 +3,18 @@ const constants = require('./constants.apps');
 const helpers = require('./helpers.common');
 const verbs = require('./verbs.apps');
 
-const attachmentMode = (verbs.hasDev || verbs.hasAnalysis) ? '' : '-d';
+const attachmentMode = ( verbs.hasDev || verbs.hasAnalysis ) ? '' : '-d';
 
 const getComposeFile = () => {
     const dockerCompose = 'docker-compose';
     let command = `${dockerCompose}.yml`;
     if (verbs.hasDev) {
         command = `${dockerCompose}.dev.yml`;
-    } else if (verbs.hasAnalysis) {
-        command = `${dockerCompose}.analysis.yml`
     }
     return command;
 }
+
+const getApp = () => verbs.hasAnalysis ? constants.analysis : helpers.get(constants.APP);
 
 const startIfHasProd = () => {
     if (verbs.hasProd) {
@@ -24,21 +24,12 @@ const startIfHasProd = () => {
     }
 }
 
-const startIfHasEnvAndApp = () => {
-    if (verbs.hasEnv && verbs.hasApp) {
-        const composeFile = getComposeFile();
-        const app = helpers.get(constants.APP);
-        const env = helpers.get(constants.ENV);
-        const command = `docker compose --env-file ./docker/${app}/${env}.env -f ./docker/${app}/${composeFile} up ${attachmentMode}`;
-        helpers.run(command);
-    }
-}
-
 const startIfHasApp = () => {
-    if (!verbs.hasEnv && verbs.hasApp) {
+    if (verbs.hasApp) {
         const composeFile = getComposeFile();
-        const app = helpers.get(constants.APP);
-        const command = `docker compose --env-file ./docker/${app}/${app}.env -f ./docker/${app}/${composeFile} up ${attachmentMode}`;
+        const app = getApp();
+        const env = helpers.get(constants.APP);
+        const command = `docker compose --env-file ./docker/${env}/.env -f ./docker/${app}/${composeFile} up ${attachmentMode}`;
         helpers.run(command);
     }
 }
@@ -54,7 +45,7 @@ const stopIfHasProd = () => {
 const stopIfHasApp = () => {
     if (verbs.hasApp) {
         const composeFile = getComposeFile();
-        const app = helpers.get(constants.APP);
+        const app = getApp();
         const command = `docker compose -f ./docker/${app}/${composeFile} down`;
         helpers.run(command);
     }
@@ -62,7 +53,6 @@ const stopIfHasApp = () => {
 
 module.exports = {
     startIfHasProd,
-    startIfHasEnvAndApp,
     startIfHasApp,
     stopIfHasProd,
     stopIfHasApp

@@ -1,8 +1,8 @@
 {
   "hash": "ada0d9f497053a8fe1b5",
   "version": "5.50.0",
-  "time": 30894,
-  "builtAt": 1694555776548,
+  "time": 30597,
+  "builtAt": 1694557576330,
   "publicPath": "auto",
   "outputPath": "/usr/src/app/docs/app_dataStructures",
   "assetsByChunkName": {
@@ -2861,8 +2861,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-          "issuerName": "./node_modules/react-bootstrap/esm/Row.js",
+          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+          "issuerName": "./node_modules/react-bootstrap/esm/Col.js",
           "issuerPath": [
             {
               "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_dataStructures/src/app.js",
@@ -2870,16 +2870,16 @@
               "id": "./app/app_dataStructures/src/app.js"
             },
             {
-              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-              "name": "./node_modules/react-bootstrap/esm/Row.js",
-              "id": "./node_modules/react-bootstrap/esm/Row.js"
+              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+              "name": "./node_modules/react-bootstrap/esm/Col.js",
+              "id": "./node_modules/react-bootstrap/esm/Col.js"
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": "./node_modules/classnames/index.js",
-          "issuerId": "./node_modules/react-bootstrap/esm/Row.js",
+          "issuerId": "./node_modules/react-bootstrap/esm/Col.js",
           "chunks": [
             "vendor"
           ],
@@ -11992,8 +11992,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-          "issuerName": "./node_modules/react-bootstrap/esm/Row.js",
+          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+          "issuerName": "./node_modules/react-bootstrap/esm/Col.js",
           "issuerPath": [
             {
               "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_dataStructures/src/app.js",
@@ -12001,16 +12001,16 @@
               "id": "./app/app_dataStructures/src/app.js"
             },
             {
-              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-              "name": "./node_modules/react-bootstrap/esm/Row.js",
-              "id": "./node_modules/react-bootstrap/esm/Row.js"
+              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+              "name": "./node_modules/react-bootstrap/esm/Col.js",
+              "id": "./node_modules/react-bootstrap/esm/Col.js"
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": "./node_modules/react-bootstrap/esm/ThemeProvider.js",
-          "issuerId": "./node_modules/react-bootstrap/esm/Row.js",
+          "issuerId": "./node_modules/react-bootstrap/esm/Col.js",
           "chunks": [
             "vendor"
           ],
@@ -13098,8 +13098,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-          "issuerName": "./node_modules/react-bootstrap/esm/Row.js",
+          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+          "issuerName": "./node_modules/react-bootstrap/esm/Col.js",
           "issuerPath": [
             {
               "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_dataStructures/src/app.js",
@@ -13107,16 +13107,16 @@
               "id": "./app/app_dataStructures/src/app.js"
             },
             {
-              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-              "name": "./node_modules/react-bootstrap/esm/Row.js",
-              "id": "./node_modules/react-bootstrap/esm/Row.js"
+              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+              "name": "./node_modules/react-bootstrap/esm/Col.js",
+              "id": "./node_modules/react-bootstrap/esm/Col.js"
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": "./node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/esm/extends.js",
-          "issuerId": "./node_modules/react-bootstrap/esm/Row.js",
+          "issuerId": "./node_modules/react-bootstrap/esm/Col.js",
           "chunks": [
             "vendor"
           ],
@@ -14086,8 +14086,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-          "issuerName": "./node_modules/react-bootstrap/esm/Row.js",
+          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+          "issuerName": "./node_modules/react-bootstrap/esm/Col.js",
           "issuerPath": [
             {
               "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_dataStructures/src/app.js",
@@ -14095,16 +14095,16 @@
               "id": "./app/app_dataStructures/src/app.js"
             },
             {
-              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-              "name": "./node_modules/react-bootstrap/esm/Row.js",
-              "id": "./node_modules/react-bootstrap/esm/Row.js"
+              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+              "name": "./node_modules/react-bootstrap/esm/Col.js",
+              "id": "./node_modules/react-bootstrap/esm/Col.js"
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": "./node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js",
-          "issuerId": "./node_modules/react-bootstrap/esm/Row.js",
+          "issuerId": "./node_modules/react-bootstrap/esm/Col.js",
           "chunks": [
             "vendor"
           ],
@@ -27129,8 +27129,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-      "issuerName": "./node_modules/react-bootstrap/esm/Row.js",
+      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+      "issuerName": "./node_modules/react-bootstrap/esm/Col.js",
       "issuerPath": [
         {
           "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_dataStructures/src/app.js",
@@ -27138,16 +27138,16 @@
           "id": "./app/app_dataStructures/src/app.js"
         },
         {
-          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-          "name": "./node_modules/react-bootstrap/esm/Row.js",
-          "id": "./node_modules/react-bootstrap/esm/Row.js"
+          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+          "name": "./node_modules/react-bootstrap/esm/Col.js",
+          "id": "./node_modules/react-bootstrap/esm/Col.js"
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": "./node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js",
-      "issuerId": "./node_modules/react-bootstrap/esm/Row.js",
+      "issuerId": "./node_modules/react-bootstrap/esm/Col.js",
       "chunks": [
         "vendor"
       ],
@@ -27799,8 +27799,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-      "issuerName": "./node_modules/react-bootstrap/esm/Row.js",
+      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+      "issuerName": "./node_modules/react-bootstrap/esm/Col.js",
       "issuerPath": [
         {
           "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_dataStructures/src/app.js",
@@ -27808,16 +27808,16 @@
           "id": "./app/app_dataStructures/src/app.js"
         },
         {
-          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-          "name": "./node_modules/react-bootstrap/esm/Row.js",
-          "id": "./node_modules/react-bootstrap/esm/Row.js"
+          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+          "name": "./node_modules/react-bootstrap/esm/Col.js",
+          "id": "./node_modules/react-bootstrap/esm/Col.js"
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": "./node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/esm/extends.js",
-      "issuerId": "./node_modules/react-bootstrap/esm/Row.js",
+      "issuerId": "./node_modules/react-bootstrap/esm/Col.js",
       "chunks": [
         "vendor"
       ],
@@ -28693,8 +28693,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-      "issuerName": "./node_modules/react-bootstrap/esm/Row.js",
+      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+      "issuerName": "./node_modules/react-bootstrap/esm/Col.js",
       "issuerPath": [
         {
           "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_dataStructures/src/app.js",
@@ -28702,16 +28702,16 @@
           "id": "./app/app_dataStructures/src/app.js"
         },
         {
-          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-          "name": "./node_modules/react-bootstrap/esm/Row.js",
-          "id": "./node_modules/react-bootstrap/esm/Row.js"
+          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+          "name": "./node_modules/react-bootstrap/esm/Col.js",
+          "id": "./node_modules/react-bootstrap/esm/Col.js"
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": "./node_modules/classnames/index.js",
-      "issuerId": "./node_modules/react-bootstrap/esm/Row.js",
+      "issuerId": "./node_modules/react-bootstrap/esm/Col.js",
       "chunks": [
         "vendor"
       ],
@@ -29434,8 +29434,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-      "issuerName": "./node_modules/react-bootstrap/esm/Row.js",
+      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+      "issuerName": "./node_modules/react-bootstrap/esm/Col.js",
       "issuerPath": [
         {
           "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_dataStructures/src/app.js",
@@ -29443,16 +29443,16 @@
           "id": "./app/app_dataStructures/src/app.js"
         },
         {
-          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Row.js",
-          "name": "./node_modules/react-bootstrap/esm/Row.js",
-          "id": "./node_modules/react-bootstrap/esm/Row.js"
+          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Col.js",
+          "name": "./node_modules/react-bootstrap/esm/Col.js",
+          "id": "./node_modules/react-bootstrap/esm/Col.js"
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": "./node_modules/react-bootstrap/esm/ThemeProvider.js",
-      "issuerId": "./node_modules/react-bootstrap/esm/Row.js",
+      "issuerId": "./node_modules/react-bootstrap/esm/Col.js",
       "chunks": [
         "vendor"
       ],
@@ -42477,8 +42477,8 @@
       "name": "HtmlWebpackCompiler",
       "hash": "d02cf40d40d02e235a70",
       "version": "5.50.0",
-      "time": 30269,
-      "builtAt": 1694555776048,
+      "time": 29984,
+      "builtAt": 1694557575836,
       "publicPath": "",
       "outputPath": "/usr/src/app/docs/app_dataStructures",
       "assetsByChunkName": {},
@@ -45664,8 +45664,8 @@
       "name": "mini-css-extract-plugin /usr/src/app/node_modules/css-loader/dist/cjs.js!/usr/src/app/node_modules/sass-loader/dist/cjs.js!/usr/src/app/app/app_dataStructures/sass/styles.scss",
       "hash": "b3a7f5ad58969643c1ea",
       "version": "5.50.0",
-      "time": 6319,
-      "builtAt": 1694555773580,
+      "time": 6331,
+      "builtAt": 1694557573331,
       "publicPath": "__MINI_CSS_EXTRACT_PLUGIN_PUBLIC_PATH__",
       "outputPath": "/usr/src/app/docs/app_dataStructures",
       "assetsByChunkName": {},

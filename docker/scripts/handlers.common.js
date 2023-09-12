@@ -10,7 +10,6 @@ const ifHasUnsupported = (supported = []) => {
 
 const ifHasHelp = (hasHelp = false, help = "") => {
     if (hasHelp) {
-        console.log('has help')
         console.log(help);
         process.exit(0);
     }
