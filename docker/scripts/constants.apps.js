@@ -4,6 +4,7 @@ const DEV = '--dev';
 const APP = '--app';
 const ENV = '--env';
 const HELP = '--help';
+const ANALYSIS = '--analysis';
 
 const help = `
 You run this script by calling node and the script name - node (start/stop).js. This is already configured as a script via npm:
@@ -29,5 +30,6 @@ module.exports = {
     APP,
     ENV,
     HELP,
+    ANALYSIS,
     help
 };
