@@ -7,13 +7,6 @@ const dockerCompose = 'docker-compose';
 const composeFile = verbs.hasDev ? `${dockerCompose}.dev.yml` : `${dockerCompose}.yml`;
 const attachmentMode = verbs.hasDev ? '' : '-d';
 
-const ifHasHelp = () => {
-    if (verbs.hasHelp) {
-        console.log(constants.help);
-        process.exit(0);
-    }
-}
-
 const startIfHasProd = () => {
     if (verbs.hasProd) {
         const command = 'docker compose up -d';
@@ -56,7 +49,6 @@ const stopIfHasApp = () => {
 }
 
 module.exports = {
-    ifHasHelp,
     startIfHasProd,
     startIfHasEnvAndApp,
     startIfHasApp,

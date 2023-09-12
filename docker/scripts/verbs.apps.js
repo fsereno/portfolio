@@ -6,6 +6,9 @@ const hasDev = helpers.has(constants.DEV);
 const hasApp = helpers.has(constants.APP);
 const hasEnv = helpers.has(constants.ENV);
 const hasHelp = helpers.has(constants.HELP);
+
+console.log(helpers.has(constants.HELP))
+
 const supported = [constants.DEV, constants.APP, constants.ENV, constants.HELP]
 
 module.exports = {

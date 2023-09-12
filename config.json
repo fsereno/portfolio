@@ -6,7 +6,7 @@
         "cloud": "cloud",
         "static": "static"
     },
-    "dockerHost": "nginx",
+    "dockerHost": "localhost",
     "port": 8080,
     "prefix": "app_",
     "entry": "home",
