@@ -14,7 +14,7 @@ const getComposeFile = () => {
     return command;
 }
 
-const getApp = () => verbs.hasAnalysis ? constants.analysis : helpers.get(constants.APP);
+const getName = () => verbs.hasAnalysis ? constants.analysis : helpers.get(constants.NAME);
 
 const startIfHasProd = () => {
     if (verbs.hasProd) {
@@ -24,12 +24,12 @@ const startIfHasProd = () => {
     }
 }
 
-const startIfHasApp = () => {
-    if (verbs.hasApp) {
+const startIfHasName = () => {
+    if (verbs.hasName) {
         const composeFile = getComposeFile();
-        const app = getApp();
-        const env = helpers.get(constants.APP);
-        const command = `docker compose --env-file ./docker/${env}/.env -f ./docker/${app}/${composeFile} up ${attachmentMode}`;
+        const name = getName();
+        const env = helpers.get(constants.NAME);
+        const command = `docker compose --env-file ./docker/${env}/.env -f ./docker/${name}/${composeFile} up ${attachmentMode}`;
         helpers.run(command);
     }
 }
@@ -42,18 +42,18 @@ const stopIfHasProd = () => {
     }
 }
 
-const stopIfHasApp = () => {
-    if (verbs.hasApp) {
+const stopIfHasName = () => {
+    if (verbs.hasName) {
         const composeFile = getComposeFile();
-        const app = getApp();
-        const command = `docker compose -f ./docker/${app}/${composeFile} down`;
+        const name = getName();
+        const command = `docker compose -f ./docker/${name}/${composeFile} down`;
         helpers.run(command);
     }
 }
 
 module.exports = {
     startIfHasProd,
-    startIfHasApp,
+    startIfHasName,
     stopIfHasProd,
-    stopIfHasApp
+    stopIfHasName
 };

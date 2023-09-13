@@ -3,15 +3,15 @@ const helpers = require('./helpers.common');
 
 const hasProd = helpers.has();
 const hasDev = helpers.has(constants.DEV);
-const hasApp = helpers.has(constants.APP);
+const hasName = helpers.has(constants.NAME);
 const hasHelp = helpers.has(constants.HELP);
 const hasAnalysis = helpers.has(constants.ANALYSIS);
-const supported = [constants.DEV, constants.APP, constants.HELP, constants.ANALYSIS]
+const supported = [constants.DEV, constants.NAME, constants.HELP, constants.ANALYSIS]
 
 module.exports = {
     hasProd,
     hasDev,
-    hasApp,
+    hasName,
     hasHelp,
     hasAnalysis,
     supported

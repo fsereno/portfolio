@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 
 const DEV = '--dev';
-const APP = '--app';
+const NAME = '--name';
 const HELP = '--help';
 const ANALYSIS = '--analysis';
 const analysis = 'analysis'
@@ -19,15 +19,15 @@ These are the available options:
 
 ${chalk.yellow(DEV)} - ${chalk.green('use this to target the development version of a container.')}
 
-${chalk.yellow(APP)} - ${chalk.green('use this followed by the name of the application you want to target.')}
+${chalk.yellow(NAME)} - ${chalk.green('use this followed by the name of the application you want to target.')}
 
-${chalk.yellow(ANALYSIS)} - ${chalk.green(`should be used in conjuction with ${APP}. Use this to compose the webpack analysis container against an application.`)}
+${chalk.yellow(ANALYSIS)} - ${chalk.green(`should be used in conjuction with ${NAME}. Use this to compose the webpack analysis container against an application.`)}
 
 ${chalk.yellow(HELP)} - ${chalk.green('This is help :-)')}`;
 
 module.exports = {
     DEV,
-    APP,
+    NAME,
     HELP,
     ANALYSIS,
     analysis,

@@ -6,4 +6,4 @@ const constants = require('./constants.apps');
 handlers.ifHasUnsupported(verbs.supported);
 handlers.ifHasHelp(verbs.hasHelp, constants.help);
 appsHandlers.stopIfHasProd();
-appsHandlers.stopIfHasApp();
+appsHandlers.stopIfHasName();
