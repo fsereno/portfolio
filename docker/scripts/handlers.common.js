@@ -15,7 +15,18 @@ const ifHasHelp = (hasHelp = false, help = "") => {
     }
 }
 
+const validate = (required = []) => {
+    const argsArray = helpers.args.filter(arg => arg.startsWith("--"))
+    var valid = required.every(item => argsArray.includes(item));
+    const missingItems = required.filter(item => !helpers.args.includes(item));
+    if (!valid) {
+        console.error(chalk.redBright(`ERROR: Missing required arguments. ${missingItems.join(',')}`));
+        process.exit(1);
+    }
+}
+
 module.exports = {
+    validate,
     ifHasUnsupported,
     ifHasHelp
 };

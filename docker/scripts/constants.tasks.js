@@ -4,7 +4,7 @@ const NAME = '--name';
 const HELP = '--help';
 
 const help = `
-Task is a single, short lived operation. Containers are disposed of when the process is complete.
+A task is a single, short lived operation. Containers are disposed of when the process is complete.
 
 You run this script by calling node and the script name - node task.js. This is already configured as a script via npm:
 
