@@ -37,7 +37,7 @@ services:
         mem_limit: 500M
         cpus: 0.2
     dataStructures:
-        image: 'fabiosereno/portfolio.data-structures.dev:0.0.1'
+        image: 'fabiosereno/portfolio.dotnet.dev:0.0.1'
         volumes:
             - '../../app/app_dataStructures/backend/api:/usr/src/app/app/app_dataStructures/backend/api'
             - '../../backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core'
