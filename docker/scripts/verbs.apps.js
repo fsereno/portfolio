@@ -6,7 +6,9 @@ const hasDev = helpers.has(constants.DEV);
 const hasName = helpers.has(constants.NAME);
 const hasHelp = helpers.has(constants.HELP);
 const hasAnalysis = helpers.has(constants.ANALYSIS);
-const supported = [constants.DEV, constants.NAME, constants.HELP, constants.ANALYSIS]
+const hasTestDotnet = helpers.has(constants.TEST_DOTNET);
+const supported = [constants.DEV, constants.NAME, constants.HELP, constants.ANALYSIS, constants.TEST_DOTNET];
+const ephemeral = [constants.TEST_DOTNET];
 
 module.exports = {
     hasProd,
@@ -14,5 +16,7 @@ module.exports = {
     hasName,
     hasHelp,
     hasAnalysis,
-    supported
+    hasTestDotnet,
+    supported,
+    ephemeral
 };

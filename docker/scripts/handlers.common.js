@@ -8,6 +8,8 @@ const ifHasUnsupported = (supported = []) => {
     }
 }
 
+const ifHasSome = (some = []) => helpers.args.filter(arg => arg.startsWith("--")).some(x => some.indexOf(x) > -1);
+
 const ifHasHelp = (hasHelp = false, help = "") => {
     if (hasHelp) {
         console.log(help);
@@ -28,5 +30,6 @@ const validate = (required = []) => {
 module.exports = {
     validate,
     ifHasUnsupported,
-    ifHasHelp
+    ifHasHelp,
+    ifHasSome
 };

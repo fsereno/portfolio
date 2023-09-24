@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 
 const NAME = '--name';
+const DIR = '--dir';
 const HELP = '--help';
 
 const help = `
@@ -16,12 +17,13 @@ Eg. > ${chalk.yellow('npm run task -- --help')}
 
 These are the available options:
 
-${chalk.yellow(NAME)} - ${chalk.green('use this followed by the name of the task you want to run.')}
+${chalk.yellow(NAME)} - ${chalk.green('This command is used by specifying the name of the task you want to run.')}
 
 ${chalk.yellow(HELP)} - ${chalk.green('This is help :-)')}`;
 
 module.exports = {
     NAME,
     HELP,
+    DIR,
     help
 };

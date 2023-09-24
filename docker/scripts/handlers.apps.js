@@ -2,17 +2,17 @@ const chalk = require('chalk');
 const constants = require('./constants.apps');
 const helpers = require('./helpers.common');
 const verbs = require('./verbs.apps');
+const handlers = require('./handlers.common');
 
-const attachmentMode = ( verbs.hasDev || verbs.hasAnalysis ) ? '' : '-d';
+const attachmentMode = ( verbs.hasDev || verbs.hasAnalysis || verbs.hasTestDotnet ) ? '' : '-d';
 
-const getComposeFile = () => {
-    const dockerCompose = 'docker-compose';
-    let command = `${dockerCompose}.yml`;
-    if (verbs.hasDev) {
-        command = `${dockerCompose}.dev.yml`;
-    }
-    return command;
-}
+const getComposeFile = () =>
+    `docker-compose${verbs.hasDev
+        ? '.dev'
+        : verbs.hasTestDotnet
+            ? `.${constants.test_dotnet}`
+            : ''
+    }.yml`;
 
 const getName = () => verbs.hasAnalysis ? constants.analysis : helpers.get(constants.NAME);
 
@@ -26,11 +26,12 @@ const startIfHasProd = () => {
 
 const startIfHasName = () => {
     if (verbs.hasName) {
-        const composeFile = getComposeFile();
         const name = getName();
+        const composeFile = `./docker/${name}/${getComposeFile()}`;
         const env = helpers.get(constants.NAME);
-        const command = `docker compose --env-file ./docker/${env}/.env -f ./docker/${name}/${composeFile} up ${attachmentMode}`;
-        helpers.run(command);
+        const detroyCallback = handlers.ifHasSome(verbs.ephemeral) ? () => helpers.run(`docker compose -f ${composeFile} down`) : undefined;
+        const command = `docker compose --env-file ./docker/${env}/.env -f ${composeFile} up ${attachmentMode}`;
+        helpers.run(command, {}, detroyCallback);
     }
 }
 

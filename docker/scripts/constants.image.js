@@ -18,11 +18,11 @@ Eg. > ${chalk.yellow('npm run image -- --help')}
 
 These are the available options:
 
-${chalk.yellow(DEV)} - ${chalk.green('use this to target the development version of a application.')}
+${chalk.yellow(DEV)} - ${chalk.green('This command is used to image the development version of an application.')}
 
-${chalk.yellow(NAME)} - ${chalk.green('use this followed by the name of the task you want to run.')}
+${chalk.yellow(NAME)} - ${chalk.green('This command should be followed by the name of the application you intend to image.')}
 
-${chalk.yellow(TAG)} - ${chalk.green('use this to tag the image.')}
+${chalk.yellow(TAG)} - ${chalk.green('This command is used to assign a tag to the image.')}
 
 ${chalk.yellow(HELP)} - ${chalk.green('This is help :-)')}`;
 
