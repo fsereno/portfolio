@@ -29,9 +29,9 @@ const startIfHasName = () => {
         const name = getName();
         const composeFile = `./docker/${name}/${getComposeFile()}`;
         const env = helpers.get(constants.NAME);
-        const detroyCallback = handlers.ifHasSome(verbs.ephemeral) ? () => helpers.run(`docker compose -f ${composeFile} down`) : undefined;
-        const command = `docker compose --env-file ./docker/${env}/.env -f ${composeFile} up ${attachmentMode}`;
-        helpers.run(command, {}, detroyCallback);
+        const destroyCallback = handlers.ifHasSome(verbs.ephemeral) ? () => helpers.run(`docker compose -f ${composeFile} down`) : undefined;
+        const command = `docker compose -f ${composeFile} up ${attachmentMode}`;
+        helpers.run(command, {}, destroyCallback);
     }
 }
 
