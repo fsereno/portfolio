@@ -3,8 +3,8 @@ const constants = require('./constants.apps');
 const helpers = require('./helpers.common');
 const verbs = require('./verbs.apps');
 const handlers = require('./handlers.common');
-
-const attachmentMode = ( verbs.hasDev || verbs.hasAnalysis || verbs.hasTestDotnet ) ? '' : '-d';
+const hasSomeEphemeral = handlers.ifHasSome(verbs.ephemeral);
+const attachmentMode = ( verbs.hasDev || verbs.hasAnalysis || verbs.hasTestDotnet || hasSomeEphemeral ) ? '' : '-d';
 
 const getComposeFile = () =>
     `docker-compose${verbs.hasDev
@@ -28,8 +28,7 @@ const startIfHasName = () => {
     if (verbs.hasName) {
         const name = getName();
         const composeFile = `./docker/${name}/${getComposeFile()}`;
-        const env = helpers.get(constants.NAME);
-        const destroyCallback = handlers.ifHasSome(verbs.ephemeral) ? () => helpers.run(`docker compose -f ${composeFile} down`) : undefined;
+        const destroyCallback = hasSomeEphemeral ? () => helpers.run(`docker compose -f ${composeFile} down`) : undefined;
         const command = `docker compose -f ${composeFile} up ${attachmentMode}`;
         helpers.run(command, {}, destroyCallback);
     }

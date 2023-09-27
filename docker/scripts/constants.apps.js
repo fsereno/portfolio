@@ -7,6 +7,7 @@ const ANALYSIS = '--analysis';
 const analysis = 'analysis'
 const TEST_DOTNET = '--test-dotnet';
 const test_dotnet = 'test-dotnet';
+const REMOVE = '--rm';
 
 const help = `
 You run this script by calling node and the script name - node (start/stop).js. This is already configured as a script via npm:
@@ -37,5 +38,6 @@ module.exports = {
     analysis,
     TEST_DOTNET,
     test_dotnet,
+    REMOVE,
     help
 };
