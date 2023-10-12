@@ -1,3 +1,10 @@
+TODO:
+
+How to run multiple scripts ?
+What if wanting to say test multiple .NET apps ?
+What if wanting to start multiple applications - with shared networking ?
+
+
 Fixing the E2E tests
 
 Update to latest Node version

@@ -17,7 +17,7 @@ services:
             file: ../dev/docker-compose.dev.yml
             service: api
         ports:
-            - '3002:3002'
+            - '3001:3001'
 networks:
     frontend:
     backend:

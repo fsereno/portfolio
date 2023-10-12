@@ -5,8 +5,8 @@ const NAME = '--name';
 const HELP = '--help';
 const ANALYSIS = '--analysis';
 const analysis = 'analysis'
-const TEST_DOTNET = '--test-dotnet';
-const test_dotnet = 'test-dotnet';
+const TEST = '--test';
+const test = 'test';
 const REMOVE = '--rm';
 
 const help = `
@@ -26,7 +26,7 @@ ${chalk.yellow(NAME)} - ${chalk.green('This command is used by specifying the na
 
 ${chalk.yellow(ANALYSIS)} - ${chalk.green(`This command should be used in conjuction with ${NAME}. Use this to compose the webpack analysis container against an application.`)}
 
-${chalk.yellow(TEST_DOTNET)} - ${chalk.green(`This command creates an ephemeral container and executes .NET tests for this application`)}
+${chalk.yellow(TEST)} - ${chalk.green(`This command creates an ephemeral container and executes tests for this application`)}
 
 ${chalk.yellow(HELP)} - ${chalk.green('This is help :-)')}`;
 
@@ -36,8 +36,8 @@ module.exports = {
     HELP,
     ANALYSIS,
     analysis,
-    TEST_DOTNET,
-    test_dotnet,
+    TEST,
+    test,
     REMOVE,
     help
 };

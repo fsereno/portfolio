@@ -4,13 +4,13 @@ const helpers = require('./helpers.common');
 const verbs = require('./verbs.apps');
 const handlers = require('./handlers.common');
 const hasSomeEphemeral = handlers.ifHasSome(verbs.ephemeral);
-const attachmentMode = ( verbs.hasDev || verbs.hasAnalysis || verbs.hasTestDotnet || hasSomeEphemeral ) ? '' : '-d';
+const attachmentMode = ( verbs.hasDev || verbs.hasAnalysis || verbs.hasTest || hasSomeEphemeral ) ? '' : '-d';
 
 const getComposeFile = () =>
     `docker-compose${verbs.hasDev
         ? '.dev'
-        : verbs.hasTestDotnet
-            ? `.${constants.test_dotnet}`
+        : verbs.hasTest
+            ? `.${constants.test}`
             : ''
     }.yml`;
 
