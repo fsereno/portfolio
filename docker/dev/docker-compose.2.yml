@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  node:
+    image: fabiosereno/portfolio.dev:0.0.2
+    environment:
+      - dir=coffeeMachine
+    ports:
+      - '8080:8080'
+    volumes:
+      - ../../config.json:/usr/src/app/config.json
+      - ../../babel.config.json:/usr/src/app/babel.config.json
+      - ../../setupTests.js:/usr/src/app/setupTests.js
+      - ../../app:/usr/src/app/app
+      - ../../docs:/usr/src/app/docs
+      - ../../build:/usr/src/app/build
+    container_name: node
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - api
+    mem_limit: 500M
+    cpus: 0.2
+  nginx:
+    image: nginx:1.23.1
+    ports:
+      - '80:80'
+    container_name: frontend
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - api
+      - node
+    mem_limit: 500M
+    cpus: 0.2
+networks:
+  frontend: null
+  backend: null

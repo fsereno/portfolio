@@ -1,10 +1,16 @@
 const chalk = require('chalk');
+const fs = require('fs');
+const yaml = require('js-yaml');
 const { execSync, exec } = require('child_process');
 const helpers = require('./helpers.common');
 const verbs = require('./verbs.apps');
 
-const build = (obj = {}) => {
-
+const compose = (obj = {}) => {
+  const compose = {
+    version: "3.9",
+    ...obj
+  }
+  return compose;
 }
 
 // these definitions could live somewhere else
@@ -38,7 +44,6 @@ const getNginx = () => ({
   cpus: 0.2
 })
 
-
 // dynamic
 // this will be used as many times as necessary for backend services in dev
 const getDevBackend = (dir) => ({
@@ -53,3 +58,25 @@ const getDevBackend = (dir) => ({
   mem_limit: '500M',
   cpus: 0.2,
 });
+
+const createYaml = (config, filePath) => {
+  try {
+    // Convert the JavaScript object to YAML
+    const yamlString = yaml.dump(config, { indent: 2 });
+
+    // Write the YAML string to the specified file
+    fs.writeFileSync(filePath, yamlString);
+
+    console.log(`Docker Compose YAML file created at: ${filePath}`);
+  } catch (error) {
+    console.error('Error converting Docker Compose configuration to YAML:', error);
+  }
+}
+
+module.exports = {
+  getNode,
+  getNginx,
+  getDevBackend,
+  compose,
+  createYaml
+}
