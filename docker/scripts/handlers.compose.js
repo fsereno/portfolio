@@ -9,12 +9,16 @@ const getComposeFile = () =>
     `docker-compose${verbs.hasDev
         ? '.dev'
         : ''
-    }.2.yml`;
+    }.yml`;
 
 const getDevPath = () => `./docker/dev`;
 
 const composeIfHasName = () => {
     if (verbs.hasName) {
+
+        const values = helpers.getAll(constants.NAME);
+
+        console.log(values);
 
         const fileName = getComposeFile();
         const devPath = getDevPath();
@@ -22,7 +26,8 @@ const composeIfHasName = () => {
         const path = `${devPath}/${fileName}`
 
         const services = {
-            node: {...helpersCompose.getNode(name), networks: ['frontend', 'backend'], depends_on: ['api']},
+            //node: {...helpersCompose.getNode(name), networks: ['frontend', 'backend'], depends_on: ['api']},
+            node: {...helpersCompose.getNode(name), networks: ['frontend', 'backend']},
             nginx: {...helpersCompose.getNginx()}
         }
 
@@ -30,8 +35,6 @@ const composeIfHasName = () => {
             frontend: null,
             backend: null
         }
-
-
 
         const compose = helpersCompose.compose({services, networks})
         console.log("build compose", name);

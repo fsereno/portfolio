@@ -29,7 +29,7 @@ const getNode = (dir) => ({
   ],
   container_name: 'node',
   networks: ['frontend', 'backend'], // dynamic
-  depends_on: ['api'], // dynamic
+  //depends_on: ['api'], // dynamic
   mem_limit: '500M',
   cpus: 0.2,
 })
@@ -39,7 +39,7 @@ const getNginx = () => ({
   ports: ['80:80'],
   container_name: 'frontend',
   networks: ['frontend', 'backend'], // dynamic
-  depends_on: ['api', 'node'], // dynamic
+  //depends_on: ['api', 'node'], // dynamic
   mem_limit: '500M',
   cpus: 0.2
 })
