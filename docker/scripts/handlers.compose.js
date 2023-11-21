@@ -13,22 +13,30 @@ const getComposeFile = () =>
 
 const getDevPath = () => `./docker/dev`;
 
-const composeIfHasName = () => {
-    if (verbs.hasName) {
-
-        const values = helpers.getAll(constants.NAME);
-
-        console.log(values);
+const compose = () => {
 
         const fileName = getComposeFile();
         const devPath = getDevPath();
-        const name = helpers.get(constants.NAME);
         const path = `${devPath}/${fileName}`
 
         const services = {
-            //node: {...helpersCompose.getNode(name), networks: ['frontend', 'backend'], depends_on: ['api']},
-            node: {...helpersCompose.getNode(name), networks: ['frontend', 'backend']},
-            nginx: {...helpersCompose.getNginx()}
+            nginx: {...helpersCompose.getDevNginx()}
+        }
+
+        if (verbs.hasDev ) {
+            let name = verbs.hasName ? helpers.get(constants.NAME) : 'home';
+            services.node = {...helpersCompose.getNode(name)}
+        }
+
+        if (verbs.hasInclude) {
+            const values = helpers.getAll(constants.INCLUDE);
+            console.log(values);
+
+            if (verbs.hasDev) {
+                values.forEach(x => {
+                    services[x] = helpersCompose.getDevService(x);
+                });
+            }
         }
 
         const networks = {
@@ -37,13 +45,12 @@ const composeIfHasName = () => {
         }
 
         const compose = helpersCompose.compose({services, networks})
-        console.log("build compose", name);
+        console.log("build compose");
         console.log(compose);
 
         helpersCompose.createYaml(compose, path);
-    }
 }
 
 module.exports = {
-    composeIfHasName
+    compose
 };

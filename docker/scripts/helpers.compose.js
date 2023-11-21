@@ -1,9 +1,6 @@
 const chalk = require('chalk');
 const fs = require('fs');
 const yaml = require('js-yaml');
-const { execSync, exec } = require('child_process');
-const helpers = require('./helpers.common');
-const verbs = require('./verbs.apps');
 
 const compose = (obj = {}) => {
   const compose = {
@@ -34,7 +31,7 @@ const getNode = (dir) => ({
   cpus: 0.2,
 })
 
-const getNginx = () => ({
+const getDevNginx = () => ({
   image: 'nginx:1.23.1',
   ports: ['80:80'],
   container_name: 'frontend',
@@ -46,7 +43,7 @@ const getNginx = () => ({
 
 // dynamic
 // this will be used as many times as necessary for backend services in dev
-const getDevBackend = (dir) => ({
+const getDevService = (dir) => ({
   image: 'fabiosereno/portfolio.dotnet.dev:0.0.1',
   volumes: [
     `../../app/app_${dir}/backend/api:/usr/src/app/app/app_${dir}/backend/api`,
@@ -75,8 +72,8 @@ const createYaml = (config, filePath) => {
 
 module.exports = {
   getNode,
-  getNginx,
-  getDevBackend,
+  getDevNginx,
+  getDevService,
   compose,
   createYaml
 }

@@ -5,4 +5,4 @@ const constants = require('./constants.compose');
 
 handlers.ifHasUnsupported(verbs.supported);
 handlers.ifHasHelp(verbs.hasHelp, constants.help);
-composeHandlers.composeIfHasName();
+composeHandlers.compose();
