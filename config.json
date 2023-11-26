@@ -192,7 +192,8 @@
                 "runAsync": "coffeeMachine/api/runasync"
             },
             "labels": ["JavaScript", "C#", "Cloud"],
-            "order": 3
+            "order": 3,
+            "services": ["coffeeMachine"]
         },
         {
             "name": "AFrame React Example",

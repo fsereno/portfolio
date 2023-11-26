@@ -9,15 +9,18 @@ const getComposeFile = () =>
     `docker-compose${verbs.hasDev
         ? '.dev'
         : ''
-    }.yml`;
+    }.debug.yml`;
 
-const getDevPath = () => `./docker/dev`;
+const getPath = () => verbs.hasDev ? `./docker/dev` : './';
 
 const compose = () => {
 
+        const configServices = helpers.getServicesConfig();
+        const config = helpers.getConfig();
+
         const fileName = getComposeFile();
-        const devPath = getDevPath();
-        const path = `${devPath}/${fileName}`
+        const root = getPath();
+        const path = `${root}/${fileName}`
 
         const services = {
             nginx: {...helpersCompose.getDevNginx()}
@@ -33,8 +36,9 @@ const compose = () => {
             console.log(values);
 
             if (verbs.hasDev) {
-                values.forEach(x => {
-                    services[x] = helpersCompose.getDevService(x);
+                values.forEach(_service => {
+                    const service = configServices.find(x => x.name === _service);
+                    services[_service] = helpersCompose.getDevService(service);
                 });
             }
         }

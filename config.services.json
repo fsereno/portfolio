@@ -1,0 +1,8 @@
+[
+    {
+        "name": "coffeeMachine",
+        "type": ".NET",
+        "ports": ["3001:3001"],
+        "networks": ["backend"]
+    }
+]

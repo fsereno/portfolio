@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const fs = require('fs');
 const yaml = require('js-yaml');
+const constants = require('./constants.common');
 
 const compose = (obj = {}) => {
   const compose = {
@@ -43,25 +44,32 @@ const getDevNginx = () => ({
 
 // dynamic
 // this will be used as many times as necessary for backend services in dev
-const getDevService = (dir) => ({
+const getDevDotNetService = ({name, ports, networks}) => ({
   image: 'fabiosereno/portfolio.dotnet.dev:0.0.1',
-  volumes: [
-    `../../app/app_${dir}/backend/api:/usr/src/app/app/app_${dir}/backend/api`,
+  volumes: [`../../app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
     '../../backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core',
   ],
-  container_name: `${dir}`,
-  command: `sh -c "dotnet build /usr/src/app/app/app_${dir}/backend/api && dotnet /usr/src/app/app/app_${dir}/backend/api/bin/Debug/net7.0/api.dll"`,
-  networks: ['backend'],
+  container_name: `${name}`,
+  command: `sh -c "dotnet build /usr/src/app/app/app_${name}/backend/api && dotnet /usr/src/app/app/app_${name}/backend/api/bin/Debug/net7.0/api.dll"`,
+  networks: networks,
+  ports: ports,
   mem_limit: '500M',
   cpus: 0.2,
 });
 
+const getDevService = (service) => {
+  switch (service.type) {
+    case constants.DOT_NET:
+      return getDevDotNetService(service);
+    default:
+      break;
+  }
+}
+
 const createYaml = (config, filePath) => {
   try {
-    // Convert the JavaScript object to YAML
     const yamlString = yaml.dump(config, { indent: 2 });
 
-    // Write the YAML string to the specified file
     fs.writeFileSync(filePath, yamlString);
 
     console.log(`Docker Compose YAML file created at: ${filePath}`);
@@ -73,7 +81,8 @@ const createYaml = (config, filePath) => {
 module.exports = {
   getNode,
   getDevNginx,
-  getDevService,
+  getDevDotNetService,
   compose,
-  createYaml
+  createYaml,
+  getDevService
 }

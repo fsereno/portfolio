@@ -1,6 +1,9 @@
 const chalk = require('chalk');
 const { execSync, exec } = require('child_process');
 const args = process.argv.slice(2);
+const fs = require('fs');
+const CONFIG_PATH = './config.json';
+const CONFIG_SERVICES_PATH = './config.services.json';
 
 const has = (command) => !command && args.length === 0 || args.some(x => x === command);
 const get = (command) => args[args.indexOf(command) + 1];
@@ -19,10 +22,24 @@ const run = (command, options, callback = () => undefined) => {
   process.exit(0);
 }
 
+const getConfig = () => getJson(CONFIG_PATH);
+const getServicesConfig = () => getJson(CONFIG_SERVICES_PATH);
+
+const getJson = (path) => {
+  try {
+    const file = fs.readFileSync(path);
+    return JSON.parse(file);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 module.exports = {
     has,
     get,
     getAll,
     run,
-    args
+    args,
+    getConfig,
+    getServicesConfig
 };
