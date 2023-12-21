@@ -3,6 +3,11 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 const constants = require('./constants.common');
 
+/**
+ * Gets the base compose definition.
+ * @param {*} obj - The compose object.
+ * @returns The full compose object with the version defined.
+ */
 const compose = (obj = {}) => {
   const compose = {
     version: "3.9",
@@ -11,8 +16,11 @@ const compose = (obj = {}) => {
   return compose;
 }
 
-// these definitions could live somewhere else
-
+/**
+ * Gets the node service definition.
+* @param {*} dir - The application directory to build the dev server against.
+ * @returns The node service definition.
+ */
 const getNode = (dir) => ({
   image: 'fabiosereno/portfolio.dev:0.0.2',
   environment: [`dir=${dir || 'home'}`],
@@ -32,18 +40,25 @@ const getNode = (dir) => ({
   cpus: 0.2,
 })
 
+/**
+ * Gets the development version of Nginx service definition.
+ * @returns The development service definition.
+ */
 const getDevNginx = () => ({
   image: 'nginx:1.23.1',
   ports: ['80:80'],
   container_name: 'frontend',
-  networks: ['frontend', 'backend'], // dynamic
+  networks: ['frontend', 'backend'],
   //depends_on: ['api', 'node'], // dynamic
   mem_limit: '500M',
   cpus: 0.2
 })
 
-// dynamic
-// this will be used as many times as necessary for backend services in dev
+/**
+ * The development version of the .NET service definition.
+ * @param {service} - The deconstructed service object.
+ * @returns - The development service definition.
+ */
 const getDevDotNetService = ({name, ports, networks}) => ({
   image: 'fabiosereno/portfolio.dotnet.dev:0.0.1',
   volumes: [`../../app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
@@ -57,6 +72,21 @@ const getDevDotNetService = ({name, ports, networks}) => ({
   cpus: 0.2,
 });
 
+/**
+ * Gets the service definition.
+ * @param {*} service - The service object.
+ * @param {*} isDev - Determines to get the development version or poduction version.
+ * @returns Returns the necessary service definition.
+ */
+const getService = (service, isDev) => {
+  return isDev ? getDevService(service) : undefined;
+}
+
+/**
+ * Gets the development version of a service.
+ * @param {*} service - The service object.
+ * @returns Returns the necessary service definition.
+ */
 const getDevService = (service) => {
   switch (service.type) {
     case constants.DOT_NET:
@@ -66,6 +96,11 @@ const getDevService = (service) => {
   }
 }
 
+/**
+ * Creates the yaml file and writes it to disk.
+ * @param {*} config - The config for the dump method.
+ * @param {*} filePath - The file path to write the file to.
+ */
 const createYaml = (config, filePath) => {
   try {
     const yamlString = yaml.dump(config, { indent: 2 });
@@ -84,5 +119,5 @@ module.exports = {
   getDevDotNetService,
   compose,
   createYaml,
-  getDevService
+  getService
 }

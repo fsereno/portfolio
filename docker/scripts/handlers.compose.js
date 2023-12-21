@@ -9,13 +9,13 @@ const getComposeFile = () =>
     `docker-compose${verbs.hasDev
         ? '.dev'
         : ''
-    }.debug.yml`;
+    }.yml`;
 
 const getPath = () => verbs.hasDev ? `./docker/dev` : './';
 
 const compose = () => {
 
-        const configServices = helpers.getServicesConfig();
+        const serviceConfigs = helpers.getServicesConfig();
         const config = helpers.getConfig();
 
         const fileName = getComposeFile();
@@ -26,21 +26,31 @@ const compose = () => {
             nginx: {...helpersCompose.getDevNginx()}
         }
 
-        if (verbs.hasDev ) {
+        if (verbs.hasDev) {
             let name = verbs.hasName ? helpers.get(constants.NAME) : 'home';
             services.node = {...helpersCompose.getNode(name)}
         }
 
         if (verbs.hasInclude) {
-            const values = helpers.getAll(constants.INCLUDE);
-            console.log(values);
+            const includes = helpers.getAll(constants.INCLUDE);
 
-            if (verbs.hasDev) {
-                values.forEach(_service => {
-                    const service = configServices.find(x => x.name === _service);
-                    services[_service] = helpersCompose.getDevService(service);
-                });
-            }
+            includes.forEach(_service => {
+                const service = serviceConfigs.find(x => x.name === _service);
+                services[_service] = helpersCompose.getService(service, verbs.hasDev);
+            });
+        }
+
+        if (verbs.hasAll) {
+            config.applications.forEach(_application => {
+                const applicationServices = _application.services;
+
+                if (applicationServices) {
+                    applicationServices.forEach(_service => {
+                        const service = serviceConfigs.find(x => x.name === _service);
+                        services[_service] = helpersCompose.getService(service, verbs.hasDev);
+                    });
+                }
+            });
         }
 
         const networks = {

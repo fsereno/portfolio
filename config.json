@@ -175,7 +175,8 @@
                 "sort": "stringSort/api/sort"
             },
             "labels": ["JavaScript", "C#", "Cloud"],
-            "featured": false
+            "featured": false,
+            "services": ["stringSort"]
         },
         {
             "name": "Coffee Machine",

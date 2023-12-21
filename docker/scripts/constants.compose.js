@@ -2,8 +2,10 @@ const chalk = require('chalk');
 
 const DEV = '--dev';
 const NAME = '--name';
-const INCLUDE = '--include'
+const INCLUDE = '--include';
+const ALL = '--all';
 const HELP = '--help';
+
 
 const help = `
 You run this script by calling node and the script name - node (start/stop).js. This is already configured as a script via npm:
@@ -22,12 +24,15 @@ ${chalk.yellow(NAME)} - ${chalk.green('This command is used by specifying the na
 
 ${chalk.yellow(INCLUDE)} - ${chalk.green('This command is used once, followed by the service definitions to include in the compose file.')}
 
+${chalk.yellow(ALL)} - ${chalk.green('This command is used to include all defined services in the compose file.')}
+
 ${chalk.yellow(HELP)} - ${chalk.green('This is help :-)')}`;
 
 module.exports = {
     DEV,
     NAME,
     INCLUDE,
+    ALL,
     HELP,
     help,
 };
