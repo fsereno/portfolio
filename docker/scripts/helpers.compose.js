@@ -6,7 +6,7 @@ const constants = require('./constants.common');
 /**
  * Gets the base compose definition.
  * @param {*} obj - The compose object.
- * @returns The full compose object with the version defined.
+ * @returns - The full compose object with the version defined.
  */
 const compose = (obj = {}) => {
   const compose = {
@@ -19,7 +19,7 @@ const compose = (obj = {}) => {
 /**
  * Gets the node service definition.
 * @param {*} dir - The application directory to build the dev server against.
- * @returns The node service definition.
+ * @returns - The node service definition.
  */
 const getNode = (dir) => ({
   image: 'fabiosereno/portfolio.dev:0.0.2',
@@ -34,8 +34,7 @@ const getNode = (dir) => ({
     '../../build:/usr/src/app/build',
   ],
   container_name: 'node',
-  networks: ['frontend', 'backend'], // dynamic
-  //depends_on: ['api'], // dynamic
+  networks: ['frontend', 'backend'],
   mem_limit: '500M',
   cpus: 0.2,
 })
@@ -49,14 +48,13 @@ const getDevNginx = () => ({
   ports: ['80:80'],
   container_name: 'frontend',
   networks: ['frontend', 'backend'],
-  //depends_on: ['api', 'node'], // dynamic
   mem_limit: '500M',
   cpus: 0.2
 })
 
 /**
  * The development version of the .NET service definition.
- * @param {service} - The deconstructed service object.
+ * @param {*} - The deconstructed service object.
  * @returns - The development service definition.
  */
 const getDevDotNetService = ({name, ports, networks}) => ({
@@ -76,7 +74,7 @@ const getDevDotNetService = ({name, ports, networks}) => ({
  * Gets the service definition.
  * @param {*} service - The service object.
  * @param {*} isDev - Determines to get the development version or poduction version.
- * @returns Returns the necessary service definition.
+ * @returns - The necessary service definition.
  */
 const getService = (service, isDev) => {
   return isDev ? getDevService(service) : undefined;
@@ -85,7 +83,7 @@ const getService = (service, isDev) => {
 /**
  * Gets the development version of a service.
  * @param {*} service - The service object.
- * @returns Returns the necessary service definition.
+ * @returns - The necessary service definition.
  */
 const getDevService = (service) => {
   switch (service.type) {
@@ -113,11 +111,21 @@ const createYaml = (config, filePath) => {
   }
 }
 
+/**
+ * Builds the depends_on definition.
+ * @param {*} dependsOn - The array of dependants
+ * @returns - The fully formed depends on object.
+ */
+const getDependsOn = (dependsOn = []) => ({
+  depends_on: [...dependsOn]
+});
+
 module.exports = {
   getNode,
   getDevNginx,
   getDevDotNetService,
   compose,
   createYaml,
-  getService
+  getService,
+  getDependsOn
 }

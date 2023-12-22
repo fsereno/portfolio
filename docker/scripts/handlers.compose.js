@@ -22,14 +22,7 @@ const compose = () => {
         const root = getPath();
         const path = `${root}/${fileName}`
 
-        const services = {
-            nginx: {...helpersCompose.getDevNginx()}
-        }
-
-        if (verbs.hasDev) {
-            let name = verbs.hasName ? helpers.get(constants.NAME) : 'home';
-            services.node = {...helpersCompose.getNode(name)}
-        }
+        const services = {}
 
         if (verbs.hasInclude) {
             const includes = helpers.getAll(constants.INCLUDE);
@@ -51,6 +44,18 @@ const compose = () => {
                     });
                 }
             });
+        }
+
+        const dependsOn = [];
+        Object.keys(services).forEach(key => dependsOn.push(key));
+
+        console.log(dependsOn)
+
+        services.nginx = {...helpersCompose.getDevNginx(), ...helpersCompose.getDependsOn(dependsOn)}
+
+        if (verbs.hasDev) {
+            let name = verbs.hasName ? helpers.get(constants.NAME) : 'home';
+            services.node = {...helpersCompose.getNode(name), ...helpersCompose.getDependsOn(dependsOn)}
         }
 
         const networks = {
