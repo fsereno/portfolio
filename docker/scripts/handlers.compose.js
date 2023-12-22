@@ -21,7 +21,6 @@ const compose = () => {
         const fileName = getComposeFile();
         const root = getPath();
         const path = `${root}/${fileName}`
-
         const services = {}
 
         if (verbs.hasInclude) {
@@ -48,8 +47,6 @@ const compose = () => {
 
         const dependsOn = [];
         Object.keys(services).forEach(key => dependsOn.push(key));
-
-        console.log(dependsOn)
 
         services.nginx = {...helpersCompose.getDevNginx(), ...helpersCompose.getDependsOn(dependsOn)}
 
