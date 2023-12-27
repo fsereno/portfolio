@@ -57,7 +57,7 @@ const getDevNginx = () => ({
  * @param {*} - The deconstructed service object.
  * @returns - The development service definition.
  */
-const getDevDotNetService = ({name, ports, networks}) => ({
+const getDevDotNetService = ({name, ports, networks, dependsOn}) => ({
   image: 'fabiosereno/portfolio.dotnet.dev:0.0.1',
   volumes: [`../../app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
     '../../backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core',
@@ -68,7 +68,9 @@ const getDevDotNetService = ({name, ports, networks}) => ({
   ports: ports,
   mem_limit: '500M',
   cpus: 0.2,
-});
+  ...getDependsOn(dependsOn)
+
+}); // maybe return also the necessary nginx config as string - not just the service. We have the ports, name and network here already!
 
 /**
  * Gets the service definition.
@@ -119,6 +121,31 @@ const createYaml = (config, filePath) => {
 const getDependsOn = (dependsOn = []) => ({
   depends_on: [...dependsOn]
 });
+
+// example config file as string could work, one big string ?
+const buildNginxConfig = () =>  {
+
+  const config = `
+  server {
+      listen 80;
+      server_name frontend;
+
+      location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-NginX-Proxy true;
+        proxy_pass http://node:8080;
+        proxy_ssl_session_reuse off;
+        proxy_set_header Host $http_host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_redirect off;
+        add_header Set-Cookie fs_portfolio_deployment_target=cloud;
+      }
+  }
+  `;
+
+  fs.writeFileSync('/', config);
+}
 
 module.exports = {
   getNode,

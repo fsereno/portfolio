@@ -16,6 +16,8 @@ services:
       - '3004:3004'
     mem_limit: 500M
     cpus: 0.2
+    depends_on:
+      - nginx
   coffeeMachine:
     image: fabiosereno/portfolio.dotnet.dev:0.0.1
     volumes:
@@ -33,6 +35,8 @@ services:
       - '3001:3001'
     mem_limit: 500M
     cpus: 0.2
+    depends_on:
+      - nginx
   nginx:
     image: nginx:1.23.1
     ports:

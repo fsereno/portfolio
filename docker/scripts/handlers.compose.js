@@ -22,13 +22,17 @@ const compose = () => {
         const root = getPath();
         const path = `${root}/${fileName}`
         const services = {}
+        let dependsOn = [];
 
         if (verbs.hasInclude) {
             const includes = helpers.getAll(constants.INCLUDE);
 
             includes.forEach(_service => {
                 const service = serviceConfigs.find(x => x.name === _service);
-                services[_service] = helpersCompose.getService(service, verbs.hasDev);
+                const doesNotexist = !services[_service];
+                if (doesNotexist) {
+                    services[_service] = helpersCompose.getService(service, verbs.hasDev);
+                }
             });
         }
 
@@ -39,14 +43,21 @@ const compose = () => {
                 if (applicationServices) {
                     applicationServices.forEach(_service => {
                         const service = serviceConfigs.find(x => x.name === _service);
-                        services[_service] = helpersCompose.getService(service, verbs.hasDev);
+                        const doesNotexist = !services[_service];
+                        if (doesNotexist) {
+                            services[_service] = helpersCompose.getService(service, verbs.hasDev);
+                        }
                     });
                 }
             });
         }
 
-        const dependsOn = [];
-        Object.keys(services).forEach(key => dependsOn.push(key));
+        Object.keys(services).forEach(key => {
+            const doesNotexist = !dependsOn.some(x => x === key);
+            if (doesNotexist) {
+                dependsOn.push(key)
+            }
+        });
 
         services.nginx = {...helpersCompose.getDevNginx(), ...helpersCompose.getDependsOn(dependsOn)}
 
