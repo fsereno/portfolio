@@ -31,7 +31,9 @@ const compose = () => {
                 const service = serviceConfigs.find(x => x.name === _service);
                 const doesNotexist = !services[_service];
                 if (doesNotexist) {
-                    services[_service] = helpersCompose.getService(service, verbs.hasDev);
+                    const serviceConfig = helpersCompose.getService(service, verbs.hasDev)
+                    console.log(serviceConfig.server)
+                    services[_service] = serviceConfig.service;
                 }
             });
         }
@@ -45,7 +47,9 @@ const compose = () => {
                         const service = serviceConfigs.find(x => x.name === _service);
                         const doesNotexist = !services[_service];
                         if (doesNotexist) {
-                            services[_service] = helpersCompose.getService(service, verbs.hasDev);
+                            const serviceConfig = helpersCompose.getService(service, verbs.hasDev);
+                            console.log(serviceConfig.server)
+                            services[_service] = serviceConfig.service;
                         }
                     });
                 }
