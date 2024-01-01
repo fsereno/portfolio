@@ -1,5 +1,9 @@
 TODO:
 
+Currently it can start like this now:
+npm run compose -- --all --dev
+npm run start -- --name dev --dev
+
 How to run multiple scripts ?
 What if wanting to say test multiple .NET apps ?
 What if wanting to start multiple applications - with shared networking ?

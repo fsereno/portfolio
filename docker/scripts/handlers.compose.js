@@ -5,11 +5,17 @@ const helpersCompose = require('./helpers.compose');
 const verbs = require('./verbs.compose');
 const handlers = require('./handlers.common');
 
-const getComposeFile = () =>
+const getComposeFilename = () =>
     `docker-compose${verbs.hasDev
         ? '.dev'
         : ''
     }.yml`;
+
+const getNginxFilename = () =>
+    `nginx${verbs.hasDev
+        ? '.dev'
+        : ''
+    }.conf`;
 
 const getPath = () => verbs.hasDev ? `./docker/dev` : './';
 
@@ -17,44 +23,57 @@ const compose = () => {
 
         const serviceConfigs = helpers.getServicesConfig();
         const config = helpers.getConfig();
-
-        const fileName = getComposeFile();
-        const root = getPath();
-        const path = `${root}/${fileName}`
+        const yamlFilename = getComposeFilename();
+        const yamlRoot = getPath();
+        const yamlPath = `${yamlRoot}/${yamlFilename}`
+        const nginxFilename = getNginxFilename();
         const services = {}
-        let dependsOn = [];
+        const dependsOn = [];
+        let nginxConfig = helpersCompose.getNginxOpen();
+
+        if (verbs.hasDev) {
+            console.log(chalk.blue('mode:'), chalk.yellow('Dev'));
+        }
+
+        if (verbs.hasProd) {
+            console.log(chalk.blue('Mode:'), chalk.yellow('Production'));
+        }
 
         if (verbs.hasInclude) {
+            console.log(chalk.blue('Includes detected'))
             const includes = helpers.getAll(constants.INCLUDE);
 
             includes.forEach(_service => {
                 const service = serviceConfigs.find(x => x.name === _service);
                 const doesNotexist = !services[_service];
+
                 if (doesNotexist) {
+                    console.log(chalk.yellow(`including service: ${_service}`));
                     const serviceConfig = helpersCompose.getService(service, verbs.hasDev)
-                    console.log(serviceConfig.server)
                     services[_service] = serviceConfig.service;
                 }
             });
         }
 
-        if (verbs.hasAll) {
-            config.applications.forEach(_application => {
-                const applicationServices = _application.services;
+        config.applications.forEach(_application => {
+            const applicationServices = _application.services;
 
-                if (applicationServices) {
-                    applicationServices.forEach(_service => {
-                        const service = serviceConfigs.find(x => x.name === _service);
-                        const doesNotexist = !services[_service];
-                        if (doesNotexist) {
-                            const serviceConfig = helpersCompose.getService(service, verbs.hasDev);
-                            console.log(serviceConfig.server)
-                            services[_service] = serviceConfig.service;
-                        }
-                    });
-                }
-            });
-        }
+            if (applicationServices) {
+                applicationServices.forEach(_service => {
+                    const service = serviceConfigs.find(x => x.name === _service);
+                    const serviceConfig = helpersCompose.getService(service, verbs.hasDev);
+                    const doesNotexist = !services[_service];
+
+                    if (doesNotexist && verbs.hasAll) {
+                        console.log(chalk.blue(`adding service:`), chalk.yellow(`${_service}`));
+                        services[_service] = serviceConfig.service;
+                    }
+
+                    console.log(chalk.blue(`adding nginx config for:`), chalk.yellow(`${_service}`));
+                    nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, serviceConfig.config);
+                });
+            }
+        });
 
         Object.keys(services).forEach(key => {
             const doesNotexist = !dependsOn.some(x => x === key);
@@ -66,8 +85,10 @@ const compose = () => {
         services.nginx = {...helpersCompose.getDevNginx(), ...helpersCompose.getDependsOn(dependsOn)}
 
         if (verbs.hasDev) {
-            let name = verbs.hasName ? helpers.get(constants.NAME) : 'home';
-            services.node = {...helpersCompose.getNode(name), ...helpersCompose.getDependsOn(dependsOn)}
+            const name = verbs.hasName ? helpers.get(constants.NAME) : 'home';
+            const node = helpersCompose.getNode(name);
+            services.node = {...node.service, ...helpersCompose.getDependsOn(dependsOn)}
+            nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, node.config);
         }
 
         const networks = {
@@ -75,11 +96,17 @@ const compose = () => {
             backend: null
         }
 
-        const compose = helpersCompose.compose({services, networks})
-        console.log("build compose");
-        console.log(compose);
+        const compose = helpersCompose.compose({services, networks});
 
-        helpersCompose.createYaml(compose, path);
+        nginxConfig = helpersCompose.getNginxEnd(nginxConfig);
+
+        // debug
+        //console.log(compose);
+        //console.log(nginxConfig);
+        // debug
+
+        helpersCompose.createYaml(compose, yamlPath);
+        helpersCompose.createNginxConfig(nginxConfig, nginxFilename);
 }
 
 module.exports = {

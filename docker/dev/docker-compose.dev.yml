@@ -16,8 +16,7 @@ services:
       - '3004:3004'
     mem_limit: 500M
     cpus: 0.2
-    depends_on:
-      - nginx
+    depends_on: []
   coffeeMachine:
     image: fabiosereno/portfolio.dotnet.dev:0.0.1
     volumes:
@@ -35,13 +34,14 @@ services:
       - '3001:3001'
     mem_limit: 500M
     cpus: 0.2
-    depends_on:
-      - nginx
+    depends_on: []
   nginx:
     image: nginx:1.23.1
     ports:
       - '80:80'
     container_name: frontend
+    volumes:
+      - ../../nginx.dev.conf:/etc/nginx/conf.d/default.conf
     networks:
       - frontend
       - backend

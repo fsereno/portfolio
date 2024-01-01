@@ -3,14 +3,12 @@
         "name": "coffeeMachine",
         "type": ".NET",
         "ports": ["3001:3001"],
-        "networks": ["backend"],
-        "dependsOn": ["nginx"]
+        "networks": ["backend"]
     },
     {
         "name": "stringSort",
         "type": ".NET",
         "ports": ["3004:3004"],
-        "networks": ["backend"],
-        "dependsOn": ["nginx"]
+        "networks": ["backend"]
     }
 ]
