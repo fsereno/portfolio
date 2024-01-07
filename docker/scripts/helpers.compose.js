@@ -113,7 +113,7 @@ const getDevDotNetService = ({name, ports, networks, dependsOn}) => {
  * @returns - The necessary service definition.
  */
 const getService = (service, isDev) => {
-  return isDev ? getDevService(service) : undefined;
+  return isDev ? getDevService(service) : undefined; // TODO undefined will become prod version of the service definition
 }
 
 /**

@@ -1,7 +1,0 @@
-version: '3.9'
-
-services:
-    dataStructures:
-        extends:
-            file: ../test-dotnet/docker-compose.yml
-            service: test-dotnet

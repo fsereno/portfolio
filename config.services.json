@@ -6,9 +6,27 @@
         "networks": ["backend"]
     },
     {
+        "name": "dataStructures",
+        "type": ".NET",
+        "ports": ["3002:3002"],
+        "networks": ["backend"]
+    },
+    {
+        "name": "uniqueDataEntry",
+        "type": ".NET",
+        "ports": ["3003:3003"],
+        "networks": ["backend"]
+    },
+    {
         "name": "stringSort",
         "type": ".NET",
         "ports": ["3004:3004"],
+        "networks": ["backend"]
+    },
+    {
+        "name": "entitySort",
+        "type": ".NET",
+        "ports": ["3005:3005"],
         "networks": ["backend"]
     }
 ]
