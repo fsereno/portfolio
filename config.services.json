@@ -3,30 +3,42 @@
         "name": "coffeeMachine",
         "type": ".NET",
         "ports": ["3001:3001"],
-        "networks": ["backend"]
+        "networks": ["backend"],
+        "image": "portfolio.coffee-machine:0.0.15"
     },
     {
         "name": "dataStructures",
         "type": ".NET",
         "ports": ["3002:3002"],
-        "networks": ["backend"]
+        "networks": ["backend"],
+        "image": "portfolio.data-structures:0.0.5"
     },
     {
         "name": "uniqueDataEntry",
         "type": ".NET",
         "ports": ["3003:3003"],
-        "networks": ["backend"]
+        "networks": ["backend"],
+        "image": "portfolio.unique-data-entry:0.0.2"
     },
     {
         "name": "stringSort",
         "type": ".NET",
         "ports": ["3004:3004"],
-        "networks": ["backend"]
+        "networks": ["backend"],
+        "image": "portfolio.string-sort:0.0.1"
     },
     {
         "name": "entitySort",
         "type": ".NET",
         "ports": ["3005:3005"],
-        "networks": ["backend"]
+        "networks": ["backend"],
+        "image": "portfolio.entity-sort:0.0.4"
+    },
+    {
+        "name": "nginx",
+        "type": "host",
+        "ports": ["80:80"],
+        "networks": ["frontend, backend"],
+        "image": "portfolio.nginx:0.5.0"
     }
 ]
