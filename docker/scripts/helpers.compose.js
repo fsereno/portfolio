@@ -54,20 +54,39 @@ const getNode = (dir) => ({
   `
 })
 
+
+
+
+/**
+ * Gets the base version of Nginx service definition.
+ * @returns The development service definition.
+ */
+const getNginxBase = ({name, ports, networks, image}) => ({
+  image: image,
+  ports: ports,
+  container_name: name,
+  networks: networks,
+  mem_limit: '500M',
+  cpus: 0.2
+})
+
 /**
  * Gets the development version of Nginx service definition.
  * @returns The development service definition.
  */
-const getDevNginx = () => ({
-  image: 'nginx:1.23.1',
-  ports: ['80:80'],
-  container_name: 'frontend',
+const getDevNginx = (service) => ({
+  ...getNginxBase(service),
   volumes: [
     '../../nginx.dev.conf:/etc/nginx/conf.d/default.conf'
-  ],
-  networks: ['frontend', 'backend'],
-  mem_limit: '500M',
-  cpus: 0.2
+  ]
+})
+
+/**
+ * Gets the production version of Nginx service definition.
+ * @returns The development service definition.
+ */
+const getProdNginx = (service) => ({
+  ...getNginxBase(service),
 })
 
 /**
@@ -75,16 +94,50 @@ const getDevNginx = () => ({
  * @param {*} - The deconstructed service object.
  * @returns - The development service definition.
  */
-const getDevDotNetService = ({name, ports, networks, dependsOn}) => {
+const getDevDotNetService = (service) => {
+  const {name} = service;
+  const base = getDotNetService({...service, image: 'fabiosereno/portfolio.dotnet.dev:0.0.1'});
+  const _service = {
+    ...base.service,
+    volumes: [`../../app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
+      '../../backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core',
+    ],
+    command: `sh -c "dotnet build /usr/src/app/app/app_${name}/backend/api && dotnet /usr/src/app/app/app_${name}/backend/api/bin/Debug/net7.0/api.dll"`,
+  }
+  return {
+    service: _service,
+    config: base.config
+  }
+}
+
+/**
+ * The production version of the .NET service definition.
+ * @param {*} - The deconstructed service object.
+ * @returns - The development service definition.
+ */
+const getProdDotNetService = (service) => {
+  const base = getDotNetService(service);
+  const _service = {
+    ...base.service,
+    ['x-aws-pull_credentials']: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
+  }
+  return {
+    service: _service,
+    config: base.config
+  }
+}
+
+/**
+ * The base .NET service definition.
+ * @param {*} - The deconstructed service object.
+ * @returns - The development service definition.
+ */
+const getDotNetService = ({name, ports, networks, dependsOn, image}) => {
   const [port] = ports[0].split(':');
   return {
     service: {
-      image: 'fabiosereno/portfolio.dotnet.dev:0.0.1',
-      volumes: [`../../app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
-        '../../backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core',
-      ],
-      container_name: `${name}`,
-      command: `sh -c "dotnet build /usr/src/app/app/app_${name}/backend/api && dotnet /usr/src/app/app/app_${name}/backend/api/bin/Debug/net7.0/api.dll"`,
+      image: image,
+      container_name: name,
       networks: networks,
       ports: ports,
       mem_limit: '500M',
@@ -107,24 +160,17 @@ const getDevDotNetService = ({name, ports, networks, dependsOn}) => {
 }
 
 /**
- * Gets the service definition.
+ * Gets the development version of a service.
  * @param {*} service - The service object.
  * @param {*} isDev - Determines to get the development version or poduction version.
  * @returns - The necessary service definition.
  */
 const getService = (service, isDev) => {
-  return isDev ? getDevService(service) : undefined; // TODO undefined will become prod version of the service definition
-}
-
-/**
- * Gets the development version of a service.
- * @param {*} service - The service object.
- * @returns - The necessary service definition.
- */
-const getDevService = (service) => {
   switch (service.type) {
     case constants.DOT_NET:
-      return getDevDotNetService(service);
+      return isDev ? getDevDotNetService(service) : getProdDotNetService(service);
+    case constants.NGINX:
+      return isDev ? getDevNginx(service) : getProdNginx(service);
     default:
       break;
   }
@@ -143,7 +189,7 @@ const getDependsOn = (dependsOn = []) => ({
  * Gets the openning statement for the Nginx config file.
  * @returns - The openning statement for the Nginx config file.
  */
-const getNginxOpen = () => {
+const getNginxConfOpen = () => {
   return `
     server {
       listen 80;
@@ -152,11 +198,25 @@ const getNginxOpen = () => {
 }
 
 /**
+ * Gets the production root definition for the nginx service.
+ * @returns - The production root definition for the nginx service.
+ */
+const getNginxPodRoot =() => {
+  return `
+      location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        add_header Set-Cookie fs_portfolio_deployment_target=cloud;
+      }
+  `
+}
+
+/**
  * Gets the ending statement for the Nginx config file.
  * @param {*} existingConfig - the config to add the ending statement to.
  * @returns - The config file, followed by the ending statement.
  */
-const getNginxEnd = (existingConfig = '') => existingConfig.concat('}')
+const getNginxConfClose = (existingConfig = '') => existingConfig.concat('}')
 
 /**
  * Appends the new config to the existing Nginx config.
@@ -206,8 +266,9 @@ module.exports = {
   createYaml,
   getService,
   getDependsOn,
-  getNginxOpen,
-  getNginxEnd,
+  getNginxConfOpen,
+  getNginxConfClose,
   appendNginxConfig,
-  createNginxConfig
+  createNginxConfig,
+  getNginxPodRoot
 }

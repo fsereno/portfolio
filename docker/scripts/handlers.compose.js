@@ -29,14 +29,14 @@ const compose = () => {
         const nginxFilename = getNginxFilename();
         const services = {}
         const dependsOn = [];
-        let nginxConfig = helpersCompose.getNginxOpen();
+        let nginxConfig = helpersCompose.getNginxConfOpen();
 
-        if (verbs.hasDev) {
-            console.log(chalk.blue('mode:'), chalk.yellow('Dev'));
+        if (verbs.hasProd) {
+            console.log(chalk.blue('Mode:'), chalk.yellow(verbs.hasProd ? 'Production' : 'Dev'));
         }
 
         if (verbs.hasProd) {
-            console.log(chalk.blue('Mode:'), chalk.yellow('Production'));
+            nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, helpersCompose.getNginxPodRoot());
         }
 
         if (verbs.hasInclude) {
@@ -44,7 +44,7 @@ const compose = () => {
             const includes = helpers.getAll(constants.INCLUDE);
 
             includes.forEach(_service => {
-                const service = serviceConfigs.find(x => x.name === _service);
+                const service = serviceConfigs.find(x => x.id === _service);
                 const doesNotexist = !services[_service];
 
                 if (doesNotexist) {
@@ -60,7 +60,7 @@ const compose = () => {
 
             if (applicationServices) {
                 applicationServices.forEach(_service => {
-                    const service = serviceConfigs.find(x => x.name === _service);
+                    const service = serviceConfigs.find(x => x.id === _service);
                     const serviceConfig = helpersCompose.getService(service, verbs.hasDev);
                     const doesNotexist = !services[_service];
 
@@ -82,7 +82,10 @@ const compose = () => {
             }
         });
 
-        services.nginx = {...helpersCompose.getDevNginx(), ...helpersCompose.getDependsOn(dependsOn)}
+        const nginxType = verbs.hasDev ? 'nginx.dev' : 'nginx.prod';
+        const nginxServiceConfig = serviceConfigs.find(x => x.id === nginxType);
+        const nginxService = helpersCompose.getService(nginxServiceConfig, verbs.hasDev);
+        services.nginx = {...nginxService, ...helpersCompose.getDependsOn(dependsOn)}
 
         if (verbs.hasDev) {
             const name = verbs.hasName ? helpers.get(constants.NAME) : 'home';
@@ -98,7 +101,7 @@ const compose = () => {
 
         const compose = helpersCompose.compose({services, networks});
 
-        nginxConfig = helpersCompose.getNginxEnd(nginxConfig);
+        nginxConfig = helpersCompose.getNginxConfClose(nginxConfig);
 
         // debug
         //console.log(compose);

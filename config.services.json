@@ -1,44 +1,58 @@
 [
     {
+        "id": "coffeeMachine",
         "name": "coffeeMachine",
         "type": ".NET",
         "ports": ["3001:3001"],
         "networks": ["backend"],
-        "image": "portfolio.coffee-machine:0.0.15"
+        "image": "fabiosereno/portfolio.coffee-machine:0.0.15"
     },
     {
+        "id": "dataStructures",
         "name": "dataStructures",
         "type": ".NET",
         "ports": ["3002:3002"],
         "networks": ["backend"],
-        "image": "portfolio.data-structures:0.0.5"
+        "image": "fabiosereno/portfolio.data-structures:0.0.5"
     },
     {
+        "id": "uniqueDataEntry",
         "name": "uniqueDataEntry",
         "type": ".NET",
         "ports": ["3003:3003"],
         "networks": ["backend"],
-        "image": "portfolio.unique-data-entry:0.0.2"
+        "image": "fabiosereno/portfolio.unique-data-entry:0.0.2"
     },
     {
+        "id": "stringSort",
         "name": "stringSort",
         "type": ".NET",
         "ports": ["3004:3004"],
         "networks": ["backend"],
-        "image": "portfolio.string-sort:0.0.1"
+        "image": "fabiosereno/portfolio.string-sort:0.0.1"
     },
     {
+        "id": "entitySort",
         "name": "entitySort",
         "type": ".NET",
         "ports": ["3005:3005"],
         "networks": ["backend"],
-        "image": "portfolio.entity-sort:0.0.4"
+        "image": "fabiosereno/portfolio.entity-sort:0.0.4"
     },
     {
+        "id": "nginx.prod",
         "name": "nginx",
-        "type": "host",
+        "type": "NGINX",
         "ports": ["80:80"],
-        "networks": ["frontend, backend"],
-        "image": "portfolio.nginx:0.5.0"
+        "networks": ["frontend", "backend"],
+        "image": "fabiosereno/portfolio.nginx:0.5.0"
+    },
+    {
+        "id": "nginx.dev",
+        "name": "nginx",
+        "type": "NGINX",
+        "ports": ["80:80"],
+        "networks": ["frontend", "backend"],
+        "image": "nginx:1.23.1"
     }
 ]
