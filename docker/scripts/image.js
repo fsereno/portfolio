@@ -7,3 +7,4 @@ handlers.ifHasUnsupported(verbs.supported);
 handlers.ifHasHelp(verbs.hasHelp, constants.help);
 handlers.validate(verbs.required);
 imageHandlers.runIfHasNameAndTag();
+imageHandlers.runIfHasPushAndTag();
