@@ -40,6 +40,14 @@
         "image": "fabiosereno/portfolio.entity-sort:0.0.4"
     },
     {
+        "id": "nodeToDo",
+        "name": "nodeToDo",
+        "type": "NODE",
+        "ports": ["3006:3006"],
+        "networks": ["backend"],
+        "image": "fabiosereno/portfolio.node-to-do:0.0.1"
+    },
+    {
         "id": "nginx.prod",
         "name": "nginx",
         "type": "NGINX",
