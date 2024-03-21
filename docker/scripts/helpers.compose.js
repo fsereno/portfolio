@@ -172,6 +172,8 @@ const getService = (service, isDev) => {
       return isDev ? getDevDotNetService(service) : getProdDotNetService(service);
     case constants.NGINX:
       return isDev ? getDevNginx(service) : getProdNginx(service);
+    case constants.NODE:
+        return isDev ? {} : {};
     default:
       break;
   }
