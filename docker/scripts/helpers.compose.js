@@ -74,7 +74,7 @@ const getNginxBase = ({name, ports, networks, image}) => ({
  * Gets the development version of Nginx service definition.
  * @returns The development service definition.
  */
-const getDevNginx = (service) => ({
+const getNginxDev = (service) => ({
   ...getNginxBase(service),
   volumes: [
     '../../nginx.dev.conf:/etc/nginx/conf.d/default.conf'
@@ -85,7 +85,7 @@ const getDevNginx = (service) => ({
  * Gets the production version of Nginx service definition.
  * @returns The development service definition.
  */
-const getProdNginx = (service) => ({
+const getNginxProd = (service) => ({
   ...getNginxBase(service),
   ['x-aws-pull_credentials']: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
 })
@@ -97,7 +97,7 @@ const getProdNginx = (service) => ({
  */
 const getDevDotNetService = (service) => {
   const {name} = service;
-  const base = getDotNetService({...service, image: 'fabiosereno/portfolio.dotnet.dev:0.0.1'});
+  const base = getServiceBase({...service, image: 'fabiosereno/portfolio.dotnet.dev:0.0.1'});
   const _service = {
     ...base.service,
     volumes: [`../../app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
@@ -116,8 +116,8 @@ const getDevDotNetService = (service) => {
  * @param {*} - The deconstructed service object.
  * @returns - The development service definition.
  */
-const getProdDotNetService = (service) => {
-  const base = getDotNetService(service);
+const getServiceProd = (service) => {
+  const base = getServiceBase(service);
   const _service = {
     ...base.service,
     ['x-aws-pull_credentials']: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
@@ -129,11 +129,11 @@ const getProdDotNetService = (service) => {
 }
 
 /**
- * The base .NET service definition.
+ * The base service definition.
  * @param {*} - The deconstructed service object.
  * @returns - The development service definition.
  */
-const getDotNetService = ({name, ports, networks, dependsOn, image}) => {
+const getServiceBase = ({name, ports, networks, dependsOn, image}) => {
   const [port] = ports[0].split(':');
   return {
     service: {
@@ -169,11 +169,11 @@ const getDotNetService = ({name, ports, networks, dependsOn, image}) => {
 const getService = (service, isDev) => {
   switch (service.type) {
     case constants.DOT_NET:
-      return isDev ? getDevDotNetService(service) : getProdDotNetService(service);
+      return isDev ? getDevDotNetService(service) : getServiceProd(service);
     case constants.NGINX:
-      return isDev ? getDevNginx(service) : getProdNginx(service);
+      return isDev ? getNginxDev(service) : getNginxProd(service);
     case constants.NODE:
-        return isDev ? {} : {};
+      return isDev ? {} : getServiceProd(service);
     default:
       break;
   }
@@ -204,7 +204,7 @@ const getNginxConfOpen = () => {
  * Gets the production root definition for the nginx service.
  * @returns - The production root definition for the nginx service.
  */
-const getNginxPodRoot =() => {
+const getNginxProdRoot =() => {
   return `
       location / {
         root /usr/share/nginx/html;
@@ -263,8 +263,6 @@ const createYaml = (config, filePath) => {
 
 module.exports = {
   getNode,
-  getDevNginx,
-  getDevDotNetService,
   compose,
   createYaml,
   getService,
@@ -273,5 +271,5 @@ module.exports = {
   getNginxConfClose,
   appendNginxConfig,
   createNginxConfig,
-  getNginxPodRoot
+  getNginxProdRoot
 }

@@ -36,7 +36,7 @@ const compose = () => {
         }
 
         if (verbs.hasProd) {
-            nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, helpersCompose.getNginxPodRoot());
+            nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, helpersCompose.getNginxProdRoot());
         }
 
         if (verbs.hasInclude) {
