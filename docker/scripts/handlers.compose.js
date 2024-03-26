@@ -45,39 +45,42 @@ const compose = () => {
 
             includes.forEach(_service => {
                 const service = serviceConfigs.find(x => x.id === _service);
-                const doesNotexist = !services[_service];
+                const doesNotExist = !services[_service];
 
-                if (doesNotexist) {
+                if (doesNotExist) {
                     console.log(chalk.yellow(`including service: ${_service}`));
                     const serviceConfig = helpersCompose.getService(service, verbs.hasDev)
                     services[_service] = serviceConfig.service;
+
+                    console.log(chalk.blue(`adding nginx config for:`), chalk.yellow(`${_service}`));
+                    nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, serviceConfig.config);
+                }
+            });
+        } else {
+            config.applications.forEach(_application => {
+                const applicationServices = _application.services;
+
+                if (applicationServices) {
+                    applicationServices.forEach(_service => {
+                        const service = serviceConfigs.find(x => x.id === _service);
+                        const serviceConfig = helpersCompose.getService(service, verbs.hasDev);
+                        const doesNotExist = !services[_service];
+
+                        if (doesNotExist && verbs.hasAll) {
+                            console.log(chalk.blue(`adding service:`), chalk.yellow(`${_service}`));
+                            services[_service] = serviceConfig.service;
+
+                            console.log(chalk.blue(`adding nginx config for:`), chalk.yellow(`${_service}`));
+                            nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, serviceConfig.config);
+                        }
+                    });
                 }
             });
         }
 
-        config.applications.forEach(_application => {
-            const applicationServices = _application.services;
-
-            if (applicationServices) {
-                applicationServices.forEach(_service => {
-                    const service = serviceConfigs.find(x => x.id === _service);
-                    const serviceConfig = helpersCompose.getService(service, verbs.hasDev);
-                    const doesNotexist = !services[_service];
-
-                    if (doesNotexist && verbs.hasAll) {
-                        console.log(chalk.blue(`adding service:`), chalk.yellow(`${_service}`));
-                        services[_service] = serviceConfig.service;
-                    }
-
-                    console.log(chalk.blue(`adding nginx config for:`), chalk.yellow(`${_service}`));
-                    nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, serviceConfig.config);
-                });
-            }
-        });
-
         Object.keys(services).forEach(key => {
-            const doesNotexist = !dependsOn.some(x => x === key);
-            if (doesNotexist) {
+            const doesNotExist = !dependsOn.some(x => x === key);
+            if (doesNotExist) {
                 dependsOn.push(key)
             }
         });

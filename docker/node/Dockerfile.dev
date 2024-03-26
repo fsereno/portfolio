@@ -1,0 +1,9 @@
+FROM node:18.14.2 AS base
+
+WORKDIR /app
+
+RUN apt-get update \
+    && apt-get install -y curl
+
+# Entry point to keep the container running
+CMD ["tail", "-f", "/dev/null"]

@@ -249,7 +249,8 @@
             "featured": false,
             "endpoints": {
                 "base": "nodeToDo"
-            }
+            },
+            "services": ["nodeToDo"]
         },
         {
             "name": "Master React Template",

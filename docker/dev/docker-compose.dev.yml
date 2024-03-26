@@ -1,93 +1,19 @@
 version: '3.9'
 services:
-  uniqueDataEntry:
-    image: fabiosereno/portfolio.dotnet.dev:0.0.1
-    container_name: uniqueDataEntry
+  nodeToDo:
+    image: fabiosereno/portfolio.node.dev:0.0.1
+    container_name: nodeToDo
     networks:
       - backend
     ports:
-      - '3003:3003'
+      - '3006:3006'
     mem_limit: 500M
     cpus: 0.2
     depends_on: []
     volumes:
       - >-
-        ../../app/app_uniqueDataEntry/backend/api:/usr/src/app/app/app_uniqueDataEntry/backend/api
-      - ../../backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core
-    command: >-
-      sh -c "dotnet build /usr/src/app/app/app_uniqueDataEntry/backend/api &&
-      dotnet
-      /usr/src/app/app/app_uniqueDataEntry/backend/api/bin/Debug/net7.0/api.dll"
-  dataStructures:
-    image: fabiosereno/portfolio.dotnet.dev:0.0.1
-    container_name: dataStructures
-    networks:
-      - backend
-    ports:
-      - '3002:3002'
-    mem_limit: 500M
-    cpus: 0.2
-    depends_on: []
-    volumes:
-      - >-
-        ../../app/app_dataStructures/backend/api:/usr/src/app/app/app_dataStructures/backend/api
-      - ../../backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core
-    command: >-
-      sh -c "dotnet build /usr/src/app/app/app_dataStructures/backend/api &&
-      dotnet
-      /usr/src/app/app/app_dataStructures/backend/api/bin/Debug/net7.0/api.dll"
-  entitySort:
-    image: fabiosereno/portfolio.dotnet.dev:0.0.1
-    container_name: entitySort
-    networks:
-      - backend
-    ports:
-      - '3005:3005'
-    mem_limit: 500M
-    cpus: 0.2
-    depends_on: []
-    volumes:
-      - >-
-        ../../app/app_entitySort/backend/api:/usr/src/app/app/app_entitySort/backend/api
-      - ../../backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core
-    command: >-
-      sh -c "dotnet build /usr/src/app/app/app_entitySort/backend/api && dotnet
-      /usr/src/app/app/app_entitySort/backend/api/bin/Debug/net7.0/api.dll"
-  stringSort:
-    image: fabiosereno/portfolio.dotnet.dev:0.0.1
-    container_name: stringSort
-    networks:
-      - backend
-    ports:
-      - '3004:3004'
-    mem_limit: 500M
-    cpus: 0.2
-    depends_on: []
-    volumes:
-      - >-
-        ../../app/app_stringSort/backend/api:/usr/src/app/app/app_stringSort/backend/api
-      - ../../backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core
-    command: >-
-      sh -c "dotnet build /usr/src/app/app/app_stringSort/backend/api && dotnet
-      /usr/src/app/app/app_stringSort/backend/api/bin/Debug/net7.0/api.dll"
-  coffeeMachine:
-    image: fabiosereno/portfolio.dotnet.dev:0.0.1
-    container_name: coffeeMachine
-    networks:
-      - backend
-    ports:
-      - '3001:3001'
-    mem_limit: 500M
-    cpus: 0.2
-    depends_on: []
-    volumes:
-      - >-
-        ../../app/app_coffeeMachine/backend/api:/usr/src/app/app/app_coffeeMachine/backend/api
-      - ../../backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core
-    command: >-
-      sh -c "dotnet build /usr/src/app/app/app_coffeeMachine/backend/api &&
-      dotnet
-      /usr/src/app/app/app_coffeeMachine/backend/api/bin/Debug/net7.0/api.dll"
+        ../../app/app_nodeToDo/backend/api:/usr/src/app/app/app_nodeToDo/backend/api
+    command: sh -c "node /usr/src/app/app/app_nodeToDo/backend/api/index.js"
   nginx:
     image: nginx:1.23.1
     ports:
@@ -101,15 +27,11 @@ services:
     volumes:
       - ../../nginx.dev.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - uniqueDataEntry
-      - dataStructures
-      - entitySort
-      - stringSort
-      - coffeeMachine
+      - nodeToDo
   node:
     image: fabiosereno/portfolio.dev:0.0.2
     environment:
-      - dir=home
+      - dir=nodeToDo
     ports:
       - '8080:8080'
     volumes:
@@ -126,11 +48,7 @@ services:
     mem_limit: 500M
     cpus: 0.2
     depends_on:
-      - uniqueDataEntry
-      - dataStructures
-      - entitySort
-      - stringSort
-      - coffeeMachine
+      - nodeToDo
 networks:
   frontend: null
   backend: null

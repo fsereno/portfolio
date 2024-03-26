@@ -91,7 +91,7 @@ const getNginxProd = (service) => ({
 })
 
 /**
- * The development version of the .NET service definition.
+ * The development version of a .NET service definition.
  * @param {*} - The deconstructed service object.
  * @returns - The development service definition.
  */
@@ -110,6 +110,27 @@ const getDevDotNetService = (service) => {
     config: base.config
   }
 }
+
+/**
+ * The development version of a NodeJS service definition.
+ * @param {*} - The deconstructed service object.
+ * @returns - The development service definition.
+ */
+const getDevNodeService = (service) => {
+  const {name} = service;
+  const base = getServiceBase({...service, image: 'fabiosereno/portfolio.node.dev:0.0.1'});
+  const _service = {
+    ...base.service,
+    volumes: [`../../app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
+    ],
+    command: `sh -c "node /usr/src/app/app/app_nodeToDo/backend/api/index.js"`,
+  }
+  return {
+    service: _service,
+    config: base.config
+  }
+}
+
 
 /**
  * The production version of the .NET service definition.
@@ -173,7 +194,7 @@ const getService = (service, isDev) => {
     case constants.NGINX:
       return isDev ? getNginxDev(service) : getNginxProd(service);
     case constants.NODE:
-      return isDev ? {} : getServiceProd(service);
+      return isDev ? getDevNodeService(service) : getServiceProd(service);
     default:
       break;
   }
