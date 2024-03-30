@@ -3,7 +3,6 @@ const constants = require('./constants.compose');
 const helpers = require('./helpers.common');
 const helpersCompose = require('./helpers.compose');
 const verbs = require('./verbs.compose');
-const handlers = require('./handlers.common');
 
 const getComposeFilename = () =>
     `docker-compose${verbs.hasDev
@@ -36,45 +35,23 @@ const compose = () => {
         }
 
         if (verbs.hasProd) {
-            nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, helpersCompose.getNginxProdRoot());
+            helpersCompose.appendNginxConfig(nginxConfig, helpersCompose.getNginxProdRoot());
         }
 
         if (verbs.hasInclude) {
+
             console.log(chalk.blue('Includes detected'))
-            const includes = helpers.getAll(constants.INCLUDE);
 
-            includes.forEach(_service => {
-                const service = serviceConfigs.find(x => x.id === _service);
-                const doesNotExist = !services[_service];
+            const applicationServices = helpers.getAll(constants.INCLUDE);
 
-                if (doesNotExist) {
-                    console.log(chalk.yellow(`including service: ${_service}`));
-                    const serviceConfig = helpersCompose.getService(service, verbs.hasDev)
-                    services[_service] = serviceConfig.service;
+            addServices(applicationServices, serviceConfigs, services, nginxConfig);
 
-                    console.log(chalk.blue(`adding nginx config for:`), chalk.yellow(`${_service}`));
-                    nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, serviceConfig.config);
-                }
-            });
+            console.log(nginxConfig)
         } else {
+
             config.applications.forEach(_application => {
                 const applicationServices = _application.services;
-
-                if (applicationServices) {
-                    applicationServices.forEach(_service => {
-                        const service = serviceConfigs.find(x => x.id === _service);
-                        const serviceConfig = helpersCompose.getService(service, verbs.hasDev);
-                        const doesNotExist = !services[_service];
-
-                        if (doesNotExist && verbs.hasAll) {
-                            console.log(chalk.blue(`adding service:`), chalk.yellow(`${_service}`));
-                            services[_service] = serviceConfig.service;
-
-                            console.log(chalk.blue(`adding nginx config for:`), chalk.yellow(`${_service}`));
-                            nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, serviceConfig.config);
-                        }
-                    });
-                }
+                addServices(applicationServices, serviceConfigs, services, nginxConfig);
             });
         }
 
@@ -94,7 +71,7 @@ const compose = () => {
             const name = verbs.hasName ? helpers.get(constants.NAME) : 'home';
             const node = helpersCompose.getNode(name);
             services.node = {...node.service, ...helpersCompose.getDependsOn(dependsOn)}
-            nginxConfig = helpersCompose.appendNginxConfig(nginxConfig, node.config);
+            helpersCompose.appendNginxConfig(nginxConfig, node.config);
         }
 
         const networks = {
@@ -104,7 +81,7 @@ const compose = () => {
 
         const compose = helpersCompose.compose({services, networks});
 
-        nginxConfig = helpersCompose.getNginxConfClose(nginxConfig);
+        helpersCompose.getNginxConfClose(nginxConfig);
 
         // debug
         //console.log(compose);
@@ -113,6 +90,33 @@ const compose = () => {
 
         helpersCompose.createYaml(compose, yamlPath);
         helpersCompose.createNginxConfig(nginxConfig, nginxFilename);
+}
+
+/**
+ * This method will mutate the services and nginxConfig params to build up the services definition.
+ * @param {*} applicationServices - The discovered services to add
+ * @param {*} services - The dictionary to add to.
+ * @param {*} nginxConfig - The Nginx config needed for each service. 
+ */
+const addServices = (applicationServices = [], serviceConfigs = [], services = {}, nginxConfig = []) => {
+
+    if (applicationServices) {
+
+        applicationServices.forEach(_service => {
+            const service = serviceConfigs.find(x => x.id === _service);
+            const doesNotExist = !services[_service];
+
+            if (doesNotExist) {
+                console.log(chalk.blue(`adding service:`), chalk.yellow(`${_service}`));
+
+                const serviceConfig = helpersCompose.getService(service, verbs.hasDev);
+                services[_service] = serviceConfig.service;
+
+                console.log(chalk.blue(`adding nginx config for:`), chalk.yellow(`${_service}`));
+                helpersCompose.appendNginxConfig(nginxConfig, serviceConfig.config);
+            }
+        });
+    }
 }
 
 module.exports = {

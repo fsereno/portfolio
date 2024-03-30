@@ -4,7 +4,6 @@ const PROD = '--prod';
 const DEV = '--dev';
 const NAME = '--name';
 const INCLUDE = '--include';
-const ALL = '--all';
 const HELP = '--help';
 
 const help = `
@@ -26,8 +25,6 @@ ${chalk.yellow(NAME)} - ${chalk.green('This command is used by specifying the na
 
 ${chalk.yellow(INCLUDE)} - ${chalk.green('This command is used once, followed by the service definitions to include in the compose file.')}
 
-${chalk.yellow(ALL)} - ${chalk.green('This command is used to include all defined services in the compose file.')}
-
 ${chalk.yellow(HELP)} - ${chalk.green('This is help :-)')}`;
 
 module.exports = {
@@ -35,7 +32,6 @@ module.exports = {
     DEV,
     NAME,
     INCLUDE,
-    ALL,
     HELP,
     help,
 };

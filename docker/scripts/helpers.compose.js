@@ -188,6 +188,11 @@ const getServiceBase = ({name, ports, networks, dependsOn, image}) => {
  * @returns - The necessary service definition.
  */
 const getService = (service, isDev) => {
+
+  if (service === undefined) {
+    throw new Error("argument missing for parameter - service");
+  }
+
   switch (service.type) {
     case constants.DOT_NET:
       return isDev ? getDevDotNetService(service) : getServiceProd(service);
@@ -211,15 +216,21 @@ const getDependsOn = (dependsOn = []) => ({
 
 /**
  * Gets the openning statement for the Nginx config file.
- * @returns - The openning statement for the Nginx config file.
+ * @returns - A string array, with the openning statement for the Nginx config file.
  */
 const getNginxConfOpen = () => {
-  return `
+  return [`
     server {
       listen 80;
       server_name frontend;
-  `
+  `]
 }
+
+/**
+ * Gets the ending statement for the Nginx config file.
+ * @returns - The config file, followed by the ending statement.
+ */
+const getNginxConfClose = (existingConfig = []) => existingConfig.push('}')
 
 /**
  * Gets the production root definition for the nginx service.
@@ -236,32 +247,25 @@ const getNginxProdRoot =() => {
 }
 
 /**
- * Gets the ending statement for the Nginx config file.
- * @param {*} existingConfig - the config to add the ending statement to.
- * @returns - The config file, followed by the ending statement.
- */
-const getNginxConfClose = (existingConfig = '') => existingConfig.concat('}')
-
-/**
- * Appends the new config to the existing Nginx config.
+ * Adds the new config to the existing Nginx config array.
  * @param {*} existingConfig - The config to append to.
  * @param {*} newConfig - The new config to add.
  * @returns - The concatenated config.
  */
-const appendNginxConfig = (existingConfig = '', newConfig = '') => existingConfig.concat(newConfig)
+const appendNginxConfig = (existingConfig = [], newConfig = '') => existingConfig.push(newConfig)
 
 /**
  * Creates the Nginx config file at the root of the project.
  * @param {*} config - The config to create.
  * @param {*} filename - The filename for the config file.
  */
-const createNginxConfig = (config = '', filename = '') =>  {
+const createNginxConfig = (config = [], filename = '') =>  {
   try {
     const path = `./${filename}`;
-    fs.writeFileSync(path, config);
+    fs.writeFileSync(path, config.join(""));
     console.log(chalk.green(`Nginx config file created at:`), chalk.yellow(`${path}`));
   } catch (error) {
-    console.error(`Error creating the Nginx config file at: ${path}`, error);
+    console.error(`Error creating the Nginx config file at: ${filename}`, error);
   }
 }
 
