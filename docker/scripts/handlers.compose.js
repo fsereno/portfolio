@@ -18,6 +18,16 @@ const getNginxFilename = () =>
 
 const getPath = () => verbs.hasDev ? `./docker/dev` : './';
 
+const assertMode = () => console.log(chalk.blue('Mode:'), chalk.yellow(verbs.hasProd ? 'Production' : 'Dev'));
+
+const setProdRoot = (nginxConfig = []) => {
+    if (verbs.hasProd) {
+        helpersCompose.appendNginxConfig(nginxConfig, helpersCompose.getNginxProdRoot());
+    }
+}
+
+const assertComplete = () => console.log(chalk.green(`Compose complate...`));
+
 const compose = () => {
 
         const serviceConfigs = helpers.getServicesConfig();
@@ -28,15 +38,10 @@ const compose = () => {
         const nginxFilename = getNginxFilename();
         const services = {}
         const dependsOn = [];
-        let nginxConfig = helpersCompose.getNginxConfOpen();
+        const nginxConfig = helpersCompose.getNginxConfOpen();
 
-        if (verbs.hasProd) {
-            console.log(chalk.blue('Mode:'), chalk.yellow(verbs.hasProd ? 'Production' : 'Dev'));
-        }
-
-        if (verbs.hasProd) {
-            helpersCompose.appendNginxConfig(nginxConfig, helpersCompose.getNginxProdRoot());
-        }
+        assertMode();
+        setProdRoot(nginxConfig);
 
         if (verbs.hasInclude) {
 
@@ -46,7 +51,6 @@ const compose = () => {
 
             addServices(applicationServices, serviceConfigs, services, nginxConfig);
 
-            console.log(nginxConfig)
         } else {
 
             config.applications.forEach(_application => {
@@ -82,14 +86,9 @@ const compose = () => {
         const compose = helpersCompose.compose({services, networks});
 
         helpersCompose.getNginxConfClose(nginxConfig);
-
-        // debug
-        //console.log(compose);
-        //console.log(nginxConfig);
-        // debug
-
         helpersCompose.createYaml(compose, yamlPath);
         helpersCompose.createNginxConfig(nginxConfig, nginxFilename);
+        assertComplete();
 }
 
 /**
