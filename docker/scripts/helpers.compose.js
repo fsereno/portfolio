@@ -17,22 +17,22 @@ const compose = (obj = {}) => {
 }
 
 /**
- * Gets the node service definition.
+ * Gets the development node service definition.
 * @param {*} dir - The application directory to build the dev server against.
  * @returns - The node service definition.
  */
-const getNode = (dir) => ({
+const getNodeDev = (dir) => ({
   service: {
     image: 'fabiosereno/portfolio.dev:0.0.2',
     environment: [`dir=${dir || 'home'}`],
     ports: ['8080:8080'],
     volumes: [
-      '../../config.json:/usr/src/app/config.json',
-      '../../babel.config.json:/usr/src/app/babel.config.json',
-      '../../setupTests.js:/usr/src/app/setupTests.js',
-      '../../app:/usr/src/app/app',
-      '../../docs:/usr/src/app/docs',
-      '../../build:/usr/src/app/build',
+      './config.json:/usr/src/app/config.json',
+      './babel.config.json:/usr/src/app/babel.config.json',
+      './setupTests.js:/usr/src/app/setupTests.js',
+      './app:/usr/src/app/app',
+      './docs:/usr/src/app/docs',
+      './build:/usr/src/app/build',
     ],
     container_name: 'node',
     networks: ['frontend', 'backend'],
@@ -54,9 +54,6 @@ const getNode = (dir) => ({
   `
 })
 
-
-
-
 /**
  * Gets the base version of Nginx service definition.
  * @returns The development service definition.
@@ -77,7 +74,7 @@ const getNginxBase = ({name, ports, networks, image}) => ({
 const getNginxDev = (service) => ({
   ...getNginxBase(service),
   volumes: [
-    '../../nginx.dev.conf:/etc/nginx/conf.d/default.conf'
+    './nginx.dev.conf:/etc/nginx/conf.d/default.conf'
   ]
 })
 
@@ -100,8 +97,8 @@ const getDevDotNetService = (service) => {
   const base = getServiceBase({...service, image: 'fabiosereno/portfolio.dotnet.dev:0.0.1'});
   const _service = {
     ...base.service,
-    volumes: [`../../app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
-      '../../backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core',
+    volumes: [`./app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
+      './backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core',
     ],
     command: `sh -c "dotnet build /usr/src/app/app/app_${name}/backend/api && dotnet /usr/src/app/app/app_${name}/backend/api/bin/Debug/net7.0/api.dll"`,
   }
@@ -121,7 +118,7 @@ const getDevNodeService = (service) => {
   const base = getServiceBase({...service, image: 'fabiosereno/portfolio.node.dev:0.0.1'});
   const _service = {
     ...base.service,
-    volumes: [`../../app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
+    volumes: [`./app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
     ],
     command: `sh -c "node /usr/src/app/app/app_nodeToDo/backend/api/index.js"`,
   }
@@ -287,7 +284,7 @@ const createYaml = (config, filePath) => {
 }
 
 module.exports = {
-  getNode,
+  getNodeDev,
   compose,
   createYaml,
   getService,

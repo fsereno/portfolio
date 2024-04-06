@@ -16,9 +16,9 @@ const getNginxFilename = () =>
         : ''
     }.conf`;
 
-const getPath = () => verbs.hasDev ? `./docker/dev` : './';
+const getPath = () => './';
 
-const assertMode = () => console.log(chalk.blue('Mode:'), chalk.yellow(verbs.hasProd ? 'Production' : 'Dev'));
+const assertMode = () => console.log(chalk.blue('Mode:'), chalk.yellow(verbs.hasProd ? 'Production' : 'Development'));
 
 const setProdRoot = (nginxConfig = []) => {
     if (verbs.hasProd) {
@@ -73,7 +73,7 @@ const compose = () => {
 
         if (verbs.hasDev) {
             const name = verbs.hasName ? helpers.get(constants.NAME) : 'home';
-            const node = helpersCompose.getNode(name);
+            const node = helpersCompose.getNodeDev(name);
             services.node = {...node.service, ...helpersCompose.getDependsOn(dependsOn)}
             helpersCompose.appendNginxConfig(nginxConfig, node.config);
         }
