@@ -5,14 +5,38 @@ const fs = require('fs');
 const CONFIG_PATH = './config.json';
 const CONFIG_SERVICES_PATH = './config.services.json';
 
+/**
+ * Checks if the provided command exists among the command-line arguments.
+ * @param {string} command - The command to check for.
+ * @returns {boolean} True if the command exists among the arguments, otherwise false.
+ */
 const has = (command) => args.some(x => x === command);
+
+/**
+ * Retrieves the value associated with the specified command from the command-line arguments.
+ * @param {string} command - The command to retrieve the value for.
+ * @returns {string|undefined} The value associated with the command, or undefined if not found.
+ */
 const get = (command) => args[args.indexOf(command) + 1];
+
+/**
+ * Retrieves all values associated with the specified command from the command-line arguments.
+ * @param {string} command - The command to retrieve the values for.
+ * @returns {string[]} An array containing all values associated with the command.
+ */
 const getAll = (command) => {
   const all = [...args];
   const specific = all.splice(all.indexOf(command) + 1);
   const values = specific.filter(x => !x.startsWith('--'))
   return values;
 }
+
+/**
+ * Executes the specified command synchronously and exits the process afterward.
+ * @param {string} command - The command to execute.
+ * @param {Object} options - Additional options for the command execution.
+ * @param {Function} [callback=() => undefined] - Optional callback function to execute after command execution.
+ */
 const run = (command, options, callback = () => undefined) => {
   console.log(chalk.green('Running command: ' + command));
   execSync(command, {...options, stdio: 'inherit' });
@@ -22,9 +46,23 @@ const run = (command, options, callback = () => undefined) => {
   process.exit(0);
 }
 
+/**
+ * Retrieves the configuration object from the specified path.
+ * @returns {Object} The configuration object.
+ */
 const getConfig = () => getJson(CONFIG_PATH);
+
+/**
+ * Retrieves the services configuration object from the specified path.
+ * @returns {Object} The services configuration object.
+ */
 const getServicesConfig = () => getJson(CONFIG_SERVICES_PATH);
 
+/**
+ * Reads and parses a JSON file from the specified path.
+ * @param {string} path - The path to the JSON file.
+ * @returns {Object} The parsed JSON object.
+ */
 const getJson = (path) => {
   try {
     const file = fs.readFileSync(path);
