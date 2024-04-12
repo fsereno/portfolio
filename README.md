@@ -65,24 +65,52 @@ Some of the technology used in this project and related projects:
 - Clone this repo to your local machine using `https://github.com/fsereno/portfolio`
 ---
 
-### Run inside a Container using Docker
+### Compose
 
 - Please ensure you have Docker installed and running.
 - Open your preferred command line:
 
-Launch the production environment
+Docker compose files are dynamically built, depending on command line arguments.
 
 ```shell
-$ npm run start
+$ npm run compose -- <options>
 ```
+Passing no arguments will result in adding all available services to the production compose file.
+
+Alternatively, passing --dev will build the development compose file.
+
+```shell
+$ npm run compose -- --dev
+```
+
+However, once again, this will include all available services in the compose file.
+
+To include only specific services in the compose file, use the --include argument:
+
+```shell
+$ npm run compose -- --include dataStructures --dev
+```
+##### This will:
+- Compose the development version of the file.
+- Simply exclude --dev if building for production.
+- Include only the dataStructures service.
+- The necessary Nginx service will also be included.
+
+### Start/Stop
+
+- Please ensure you have Docker installed and running.
+- Open your preferred command line:
+
+```shell
+$ npm run start -- <options>
+```
+Passing no arguments will result in the production environment being started.
+
 ##### This will:
 - Pull all images from Docker Hub.
 - Spin up all services in containers.
 - The application will be available at: http://localhost
 
-```shell
-$ npm run start -- <options>
-```
 To stop one of the above tasks, excluding those which destroy themselves (create, test)
 
 ```shell
@@ -90,12 +118,8 @@ $ npm run stop -- <options>
 ```
 ---
 
-### Tasks
-
-#### Serve a specific application via the development server
-
 ```shell
-$ npm run start  -- --dev --app <application>
+$ npm run start  -- --dev
 ```
 ##### This will:
 - Start the webpack development server.
@@ -106,10 +130,10 @@ $ npm run start  -- --dev --app <application>
 - Open your browser and navigate to http://localhost
 ---
 
-#### Run analysis on a specific application
+#### Run dependency analysis on a specific application
 
 ```shell
-$ npm run start -- --app analysis <application> THIS NEEDS FIXING
+$ npm run start -- --name home --analysis HOW TO DO ANOTHER APP ?
 ```
 ##### This will:
 - Start the analysis server.
