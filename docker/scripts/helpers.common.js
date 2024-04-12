@@ -5,7 +5,7 @@ const fs = require('fs');
 const CONFIG_PATH = './config.json';
 const CONFIG_SERVICES_PATH = './config.services.json';
 
-const has = (command) => !command && args.length === 0 || args.some(x => x === command);
+const has = (command) => args.some(x => x === command);
 const get = (command) => args[args.indexOf(command) + 1];
 const getAll = (command) => {
   const all = [...args];

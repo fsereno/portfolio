@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Docker image build script runner
-
-DOCKER_DIR=$1
-TAG=$2
-
-docker image build -f "docker/$DOCKER_DIR/Dockerfile.dev" -t $TAG .

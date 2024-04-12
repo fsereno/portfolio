@@ -1,6 +1,5 @@
 const chalk = require('chalk');
 
-const PROD = '--prod';
 const DEV = '--dev';
 const NAME = '--name';
 const HELP = '--help';
@@ -21,9 +20,7 @@ Eg. > ${chalk.yellow('npm run (start/stop) -- --help')}
 
 These are the available options:
 
-${chalk.yellow(PROD)} - ${chalk.green('This command allows you to target the production version of a container.')}
-
-${chalk.yellow(DEV)} - ${chalk.green('This command allows you to target the development version of a container.')}
+${chalk.yellow(DEV)} - ${chalk.green('This command allows you to target the development version of a container. Otherwise the production version is used.')}
 
 ${chalk.yellow(NAME)} - ${chalk.green('This command is used by specifying the name of the application you want to target.')}
 
@@ -34,7 +31,6 @@ ${chalk.yellow(TEST)} - ${chalk.green(`This command creates an ephemeral contain
 ${chalk.yellow(HELP)} - ${chalk.green('This is help :-)')}`;
 
 module.exports = {
-    PROD,
     DEV,
     NAME,
     HELP,

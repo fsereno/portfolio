@@ -1,14 +1,13 @@
 const constants = require('./constants.apps');
 const helpers = require('./helpers.common');
 
-const hasProd = helpers.has(constants.PROD);
+const hasProd = !helpers.has(constants.DEV);
 const hasDev = helpers.has(constants.DEV);
 const hasName = helpers.has(constants.NAME);
 const hasHelp = helpers.has(constants.HELP);
 const hasAnalysis = helpers.has(constants.ANALYSIS);
 const hasTest = helpers.has(constants.TEST);
 const supported = [
-    constants.PROD,
     constants.DEV,
     constants.NAME,
     constants.HELP,

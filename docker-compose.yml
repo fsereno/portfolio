@@ -73,7 +73,7 @@ services:
     x-aws-pull_credentials: >-
       arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX
   nginx:
-    image: fabiosereno/portfolio.nginx:0.6.0
+    image: fabiosereno/portfolio.nginx:1.0.0
     ports:
       - '80:80'
     container_name: nginx
