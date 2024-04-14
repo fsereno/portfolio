@@ -1,7 +1,7 @@
 const constants = require('./constants.apps');
 const helpers = require('./helpers.common');
 
-const hasProd = !helpers.has(constants.DEV);
+const hasProd = !helpers.has(constants.DEV) && !helpers.has(constants.ANALYSIS);
 const hasDev = helpers.has(constants.DEV);
 const hasName = helpers.has(constants.NAME);
 const hasHelp = helpers.has(constants.HELP);

@@ -4,6 +4,7 @@ const args = process.argv.slice(2);
 const fs = require('fs');
 const CONFIG_PATH = './config.json';
 const CONFIG_SERVICES_PATH = './config.services.json';
+const constants = require('./constants.common');
 
 /**
  * Checks if the provided command exists among the command-line arguments.
@@ -72,6 +73,40 @@ const getJson = (path) => {
   }
 }
 
+/**
+ * Generates the name of the Docker Compose file based on the environment configuration.
+ * @param {*} hasDev - Generates the development version.
+ * @param {*} hasTest - Generates the test version.
+ * @param {*} hasAnalysis - Generates the analysis version.
+ * @returns The fully formed filename for the compose file.
+ */
+const getComposeFilename = (hasDev = false, hasTest = false, hasAnalysis = false) => {
+
+  let filename = 'docker-compose';
+
+  if (hasDev) filename = `${filename}.${constants.dev}`;
+  if (hasTest) filename = `${filename}.${constants.test}`;
+  if (hasAnalysis) filename = `${filename}.${constants.analysis}`;
+
+  return  `${filename}.${constants.yml}`;
+}
+
+/**
+ * Generates the filename of the NGINX configuration file based on the environment configuration.
+ * @param {*} hasDev - Generates the development version.
+ * @param {*} hasAnalysis - Generates the analysis version.
+ * @returns {string} The filename of the NGINX configuration file.
+ */
+const getNginxFilename = (hasDev = false, hasAnalysis = false) => {
+
+  let filename = 'nginx';
+
+  if (hasDev || hasAnalysis) filename = `${filename}.${constants.dev}`;
+
+  return  `${filename}.${constants.conf}`;
+
+}
+
 module.exports = {
     has,
     get,
@@ -79,5 +114,7 @@ module.exports = {
     run,
     args,
     getConfig,
-    getServicesConfig
+    getServicesConfig,
+    getComposeFilename,
+    getNginxFilename
 };

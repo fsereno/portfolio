@@ -5,26 +5,6 @@ const helpersCompose = require('./helpers.compose');
 const verbs = require('./verbs.compose');
 
 /**
- * Generates the filename of the Docker Compose file based on the environment configuration.
- * @returns {string} The filename of the Docker Compose file.
- */
-const getComposeFilename = () =>
-    `docker-compose${verbs.hasDev
-        ? '.dev'
-        : ''
-    }.yml`;
-
-    /**
- * Generates the filename of the NGINX configuration file based on the environment configuration.
- * @returns {string} The filename of the NGINX configuration file.
- */
-const getNginxFilename = () =>
-    `nginx${verbs.hasDev
-        ? '.dev'
-        : ''
-    }.conf`;
-
-/**
  * Asserts the mode based on whether the production flag is present.
  * Prints the mode to the console.
  */
@@ -51,10 +31,10 @@ const assertComplete = () => console.log(chalk.green(`Compose complate...`));
 const compose = () => {
 
         const serviceConfigs = helpers.getServicesConfig();
-        const yamlFilename = getComposeFilename();
+        const yamlFilename = helpers.getComposeFilename(verbs.hasDev, false, verbs.hasAnalysis);
         const yamlRoot = './';
         const yamlPath = `${yamlRoot}/${yamlFilename}`
-        const nginxFilename = getNginxFilename();
+        const nginxFilename = helpers.getNginxFilename(verbs.hasDev, verbs.hasAnalysis);
         const services = {}
         const dependsOn = [];
         const nginxConfig = helpersCompose.getNginxConfOpen();
@@ -68,7 +48,7 @@ const compose = () => {
         addServices(serviceConfigs, services, nginxConfig);
         buildDependsOn(services, dependsOn);
         addNginx(services, serviceConfigs, dependsOn);
-        addDevServer(services, nginxConfig, dependsOn);
+        addDevServer(services, nginxConfig, dependsOn, serviceConfigs);
 
         const compose = helpersCompose.compose({services, networks});
 
@@ -83,11 +63,14 @@ const compose = () => {
  * @param {object} services - An object representing the services.
  * @param {string[]} nginxConfig - An array representing the NGINX configuration.
  * @param {string[]} dependsOn - An array representing the dependencies.
+ * @param {object[]} serviceConfigs - An array representing the service configurations.
  */
-const addDevServer = (services = {}, nginxConfig = [], dependsOn = []) => {
-    if (verbs.hasDev) {
+const addDevServer = (services = {}, nginxConfig = [], dependsOn = [], serviceConfigs = []) => {
+    if (!verbs.hasProd) {
         const name = verbs.hasName ? helpers.get(constants.NAME) : 'home';
-        const node = helpersCompose.getNodeDev(name);
+        const nodeType = verbs.hasDev ? 'node.dev' : 'node.analysis';
+        const nodeServiceConfig = serviceConfigs.find(x => x.id === nodeType);
+        const node = helpersCompose.getNodeDev(name, nodeServiceConfig);
         services.node = {...node.service, ...helpersCompose.getDependsOn(dependsOn)}
         helpersCompose.appendNginxConfig(nginxConfig, node.config);
     }
@@ -100,9 +83,9 @@ const addDevServer = (services = {}, nginxConfig = [], dependsOn = []) => {
  * @param {string[]} dependsOn - An array representing the dependencies.
  */
 const addNginx = (services = {}, serviceConfigs = [], dependsOn = []) => {
-    const nginxType = verbs.hasDev ? 'nginx.dev' : 'nginx.prod';
+    const nginxType = !verbs.hasProd ? 'nginx.dev' : 'nginx.prod';
     const nginxServiceConfig = serviceConfigs.find(x => x.id === nginxType);
-    const nginxService = helpersCompose.getService(nginxServiceConfig, verbs.hasDev);
+    const nginxService = helpersCompose.getService(nginxServiceConfig, !verbs.hasProd);
     services.nginx = {...nginxService, ...helpersCompose.getDependsOn(dependsOn)}
 }
 
@@ -127,6 +110,13 @@ const buildDependsOn = (services = {}, dependsOn = []) => {
  * @param {string[]} nginxConfig - An array representing the NGINX configuration.
  */
 const addServices = (serviceConfigs = [], services = {}, nginxConfig = []) => {
+
+    if (verbs.hasAnalysis) {
+
+        // analysis requires no other services.
+        return;
+    }
+
     if (verbs.hasInclude) {
 
         console.log(chalk.blue('Includes detected'))

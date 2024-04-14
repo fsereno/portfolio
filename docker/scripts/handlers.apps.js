@@ -9,13 +9,7 @@ const attachmentMode = ( verbs.hasDev || verbs.hasAnalysis || verbs.hasTest || h
  * Generates the name of the Docker Compose file based on the environment configuration.
  * @returns {string} The name of the Docker Compose file.
  */
-const getComposeFile = () =>
-    `docker-compose${verbs.hasDev
-        ? '.dev'
-        : verbs.hasTest
-            ? `.${constants.test}`
-            : ''
-    }.yml`;
+const getComposeFilename = () => helpers.getComposeFilename(verbs.hasDev, verbs.hasTest, verbs.hasAnalysis);
 
 /**
  * Determines the name based on the presence of analysis in verbs.
@@ -30,12 +24,12 @@ const getName = () => verbs.hasAnalysis ? constants.analysis : helpers.get(const
 const start = () => {
     if (verbs.hasName) {
         const name = getName();
-        const composeFile = `./docker/${name}/${getComposeFile()}`;
+        const composeFile = `./docker/${name}/${getComposeFilename()}`;
         const destroyCallback = hasSomeEphemeral ? () => helpers.run(`docker compose -f ${composeFile} down`) : undefined;
         const command = `docker compose -f ${composeFile} up ${attachmentMode}`;
         helpers.run(command, {}, destroyCallback);
     } else {
-        const composeFile = `./${getComposeFile()}`;
+        const composeFile = `./${getComposeFilename()}`;
         const command = `docker compose -f ${composeFile} up ${attachmentMode}`;
         helpers.run(command);
     }
@@ -46,12 +40,12 @@ const start = () => {
  */
 const stop = () => {
     if (verbs.hasName) {
-        const composeFile = getComposeFile();
+        const composeFile = getComposeFilename();
         const name = getName();
         const command = `docker compose -f ./docker/${name}/${composeFile} down`;
         helpers.run(command);
     } else {
-        const composeFile = `./${getComposeFile()}`;
+        const composeFile = `./${getComposeFilename()}`;
         const command = `docker compose -f ${composeFile} down`;
         helpers.run(command);
     }

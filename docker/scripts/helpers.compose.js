@@ -21,11 +21,11 @@ const compose = (obj = {}) => {
 * @param {*} dir - The application directory to build the dev server against.
  * @returns - The node service definition.
  */
-const getNodeDev = (dir) => ({
+const getNodeDev = (dir, {name, ports, networks, image}) => ({
   service: {
-    image: 'fabiosereno/portfolio.dev:0.0.2',
+    image: image,
     environment: [`dir=${dir || 'home'}`],
-    ports: ['8080:8080'],
+    ports: ports,
     volumes: [
       './config.json:/usr/src/app/config.json',
       './babel.config.json:/usr/src/app/babel.config.json',
@@ -34,8 +34,8 @@ const getNodeDev = (dir) => ({
       './docs:/usr/src/app/docs',
       './build:/usr/src/app/build',
     ],
-    container_name: 'node',
-    networks: ['frontend', 'backend'],
+    container_name: name,
+    networks: networks,
     mem_limit: '500M',
     cpus: 0.2
   },

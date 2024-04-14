@@ -24,7 +24,7 @@ ${chalk.yellow(DEV)} - ${chalk.green('This command allows you to target the deve
 
 ${chalk.yellow(NAME)} - ${chalk.green('This command is used by specifying the name of the application you want to target.')}
 
-${chalk.yellow(ANALYSIS)} - ${chalk.green(`This command should be used in conjuction with ${NAME}. Use this to compose the webpack analysis container against an application.`)}
+${chalk.yellow(ANALYSIS)} - ${chalk.green(`This command should be used in conjuction with ${NAME}. This command allows you to start the analysis container. It is used to analyse frontend dependencies.`)}
 
 ${chalk.yellow(TEST)} - ${chalk.green(`This command creates an ephemeral container and executes tests for this application`)}
 
