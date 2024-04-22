@@ -16,7 +16,7 @@ services:
   node:
     image: fabiosereno/portfolio.analysis:0.0.3
     environment:
-      - dir=coffeeMachine
+      - dir=${DIR:-home}
     ports:
       - '8080:8080'
     volumes:

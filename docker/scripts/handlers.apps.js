@@ -11,6 +11,9 @@ const attachmentMode = ( verbs.hasDev || verbs.hasAnalysis || verbs.hasTest || h
  */
 const getComposeFilename = () => helpers.getComposeFilename(verbs.hasDev, verbs.hasTest, verbs.hasAnalysis);
 
+
+const getComposeFilePath = () => verbs.hasName ? `./docker/${getName()}/${getComposeFilename()}` : `./${getComposeFilename()}`;
+
 /**
  * Determines the name based on the presence of analysis in verbs.
  * If analysis is present, returns the analysis constant; otherwise, returns the NAME constant.
@@ -22,33 +25,20 @@ const getName = () => verbs.hasAnalysis ? constants.analysis : helpers.get(const
  * Starts Docker containers based on the configured environment.
  */
 const start = () => {
-    if (verbs.hasName) {
-        const name = getName();
-        const composeFile = `./docker/${name}/${getComposeFilename()}`;
-        const destroyCallback = hasSomeEphemeral ? () => helpers.run(`docker compose -f ${composeFile} down`) : undefined;
-        const command = `docker compose -f ${composeFile} up ${attachmentMode}`;
-        helpers.run(command, {}, destroyCallback);
-    } else {
-        const composeFile = `./${getComposeFilename()}`;
-        const command = `docker compose -f ${composeFile} up ${attachmentMode}`;
-        helpers.run(command);
-    }
+    const composeFile = getComposeFilePath();
+    const destroyCallback = hasSomeEphemeral ? () => helpers.run(`docker compose -f ${composeFile} down`) : undefined;
+    const context = helpers.has(constants.CONTEXT) ? `DIR=${helpers.get(constants.CONTEXT)}` : `DIR=${helpers.get(constants.NAME)}`;
+    const command = `${context} docker compose -f ${composeFile} up ${attachmentMode}`;
+    helpers.run(command, {}, destroyCallback);
 }
 
 /**
  * Stops Docker containers based on the configured environment.
  */
 const stop = () => {
-    if (verbs.hasName) {
-        const composeFile = getComposeFilename();
-        const name = getName();
-        const command = `docker compose -f ./docker/${name}/${composeFile} down`;
-        helpers.run(command);
-    } else {
-        const composeFile = `./${getComposeFilename()}`;
-        const command = `docker compose -f ${composeFile} down`;
-        helpers.run(command);
-    }
+    const composeFile = getComposeFilePath();
+    const command = `docker compose -f ${composeFile} down`;
+    helpers.run(command);
 }
 
 module.exports = {

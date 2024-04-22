@@ -24,7 +24,7 @@ const compose = (obj = {}) => {
 const getNodeDev = (dir, {name, ports, networks, image}) => ({
   service: {
     image: image,
-    environment: [`dir=${dir || 'home'}`],
+    environment: ['dir=${DIR:-home}'],
     ports: ports,
     volumes: [
       './config.json:/usr/src/app/config.json',

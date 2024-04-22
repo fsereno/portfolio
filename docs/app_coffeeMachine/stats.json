@@ -1,8 +1,8 @@
 {
   "hash": "5c1d8ed5ef5912f64967",
   "version": "5.50.0",
-  "time": 31168,
-  "builtAt": 1713129170742,
+  "time": 30883,
+  "builtAt": 1713824124434,
   "publicPath": "auto",
   "outputPath": "/usr/src/app/docs/app_coffeeMachine",
   "assetsByChunkName": {
@@ -2928,8 +2928,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-          "issuerName": "./node_modules/react-bootstrap/esm/Button.js",
+          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+          "issuerName": "./node_modules/react-bootstrap/esm/Modal.js",
           "issuerPath": [
             {
               "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_coffeeMachine/src/app.js",
@@ -2947,16 +2947,16 @@
               "id": "./app/js/modules/react/deploymentModalComponent.js"
             },
             {
-              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-              "name": "./node_modules/react-bootstrap/esm/Button.js",
-              "id": "./node_modules/react-bootstrap/esm/Button.js"
+              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+              "name": "./node_modules/react-bootstrap/esm/Modal.js",
+              "id": "./node_modules/react-bootstrap/esm/Modal.js"
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": "./node_modules/classnames/index.js",
-          "issuerId": "./node_modules/react-bootstrap/esm/Button.js",
+          "issuerId": "./node_modules/react-bootstrap/esm/Modal.js",
           "chunks": [
             "vendor"
           ],
@@ -9349,8 +9349,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-          "issuerName": "./node_modules/react-bootstrap/esm/Button.js",
+          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+          "issuerName": "./node_modules/react-bootstrap/esm/Modal.js",
           "issuerPath": [
             {
               "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_coffeeMachine/src/app.js",
@@ -9368,16 +9368,16 @@
               "id": "./app/js/modules/react/deploymentModalComponent.js"
             },
             {
-              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-              "name": "./node_modules/react-bootstrap/esm/Button.js",
-              "id": "./node_modules/react-bootstrap/esm/Button.js"
+              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+              "name": "./node_modules/react-bootstrap/esm/Modal.js",
+              "id": "./node_modules/react-bootstrap/esm/Modal.js"
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": "./node_modules/react-bootstrap/esm/ThemeProvider.js",
-          "issuerId": "./node_modules/react-bootstrap/esm/Button.js",
+          "issuerId": "./node_modules/react-bootstrap/esm/Modal.js",
           "chunks": [
             "vendor"
           ],
@@ -10103,8 +10103,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-          "issuerName": "./node_modules/react-bootstrap/esm/Button.js",
+          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+          "issuerName": "./node_modules/react-bootstrap/esm/Modal.js",
           "issuerPath": [
             {
               "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_coffeeMachine/src/app.js",
@@ -10122,16 +10122,16 @@
               "id": "./app/js/modules/react/deploymentModalComponent.js"
             },
             {
-              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-              "name": "./node_modules/react-bootstrap/esm/Button.js",
-              "id": "./node_modules/react-bootstrap/esm/Button.js"
+              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+              "name": "./node_modules/react-bootstrap/esm/Modal.js",
+              "id": "./node_modules/react-bootstrap/esm/Modal.js"
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": "./node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/esm/extends.js",
-          "issuerId": "./node_modules/react-bootstrap/esm/Button.js",
+          "issuerId": "./node_modules/react-bootstrap/esm/Modal.js",
           "chunks": [
             "vendor"
           ],
@@ -10672,8 +10672,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-          "issuerName": "./node_modules/react-bootstrap/esm/Button.js",
+          "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+          "issuerName": "./node_modules/react-bootstrap/esm/Modal.js",
           "issuerPath": [
             {
               "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_coffeeMachine/src/app.js",
@@ -10691,16 +10691,16 @@
               "id": "./app/js/modules/react/deploymentModalComponent.js"
             },
             {
-              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-              "name": "./node_modules/react-bootstrap/esm/Button.js",
-              "id": "./node_modules/react-bootstrap/esm/Button.js"
+              "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+              "name": "./node_modules/react-bootstrap/esm/Modal.js",
+              "id": "./node_modules/react-bootstrap/esm/Modal.js"
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": "./node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js",
-          "issuerId": "./node_modules/react-bootstrap/esm/Button.js",
+          "issuerId": "./node_modules/react-bootstrap/esm/Modal.js",
           "chunks": [
             "vendor"
           ],
@@ -22120,8 +22120,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-      "issuerName": "./node_modules/react-bootstrap/esm/Button.js",
+      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+      "issuerName": "./node_modules/react-bootstrap/esm/Modal.js",
       "issuerPath": [
         {
           "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_coffeeMachine/src/app.js",
@@ -22139,16 +22139,16 @@
           "id": "./app/js/modules/react/deploymentModalComponent.js"
         },
         {
-          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-          "name": "./node_modules/react-bootstrap/esm/Button.js",
-          "id": "./node_modules/react-bootstrap/esm/Button.js"
+          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+          "name": "./node_modules/react-bootstrap/esm/Modal.js",
+          "id": "./node_modules/react-bootstrap/esm/Modal.js"
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": "./node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js",
-      "issuerId": "./node_modules/react-bootstrap/esm/Button.js",
+      "issuerId": "./node_modules/react-bootstrap/esm/Modal.js",
       "chunks": [
         "vendor"
       ],
@@ -22408,8 +22408,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-      "issuerName": "./node_modules/react-bootstrap/esm/Button.js",
+      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+      "issuerName": "./node_modules/react-bootstrap/esm/Modal.js",
       "issuerPath": [
         {
           "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_coffeeMachine/src/app.js",
@@ -22427,16 +22427,16 @@
           "id": "./app/js/modules/react/deploymentModalComponent.js"
         },
         {
-          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-          "name": "./node_modules/react-bootstrap/esm/Button.js",
-          "id": "./node_modules/react-bootstrap/esm/Button.js"
+          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+          "name": "./node_modules/react-bootstrap/esm/Modal.js",
+          "id": "./node_modules/react-bootstrap/esm/Modal.js"
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": "./node_modules/react-bootstrap/node_modules/@babel/runtime/helpers/esm/extends.js",
-      "issuerId": "./node_modules/react-bootstrap/esm/Button.js",
+      "issuerId": "./node_modules/react-bootstrap/esm/Modal.js",
       "chunks": [
         "vendor"
       ],
@@ -22878,8 +22878,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-      "issuerName": "./node_modules/react-bootstrap/esm/Button.js",
+      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+      "issuerName": "./node_modules/react-bootstrap/esm/Modal.js",
       "issuerPath": [
         {
           "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_coffeeMachine/src/app.js",
@@ -22897,16 +22897,16 @@
           "id": "./app/js/modules/react/deploymentModalComponent.js"
         },
         {
-          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-          "name": "./node_modules/react-bootstrap/esm/Button.js",
-          "id": "./node_modules/react-bootstrap/esm/Button.js"
+          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+          "name": "./node_modules/react-bootstrap/esm/Modal.js",
+          "id": "./node_modules/react-bootstrap/esm/Modal.js"
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": "./node_modules/classnames/index.js",
-      "issuerId": "./node_modules/react-bootstrap/esm/Button.js",
+      "issuerId": "./node_modules/react-bootstrap/esm/Modal.js",
       "chunks": [
         "vendor"
       ],
@@ -24811,8 +24811,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-      "issuerName": "./node_modules/react-bootstrap/esm/Button.js",
+      "issuer": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+      "issuerName": "./node_modules/react-bootstrap/esm/Modal.js",
       "issuerPath": [
         {
           "identifier": "/usr/src/app/node_modules/babel-loader/lib/index.js!/usr/src/app/app/app_coffeeMachine/src/app.js",
@@ -24830,16 +24830,16 @@
           "id": "./app/js/modules/react/deploymentModalComponent.js"
         },
         {
-          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Button.js",
-          "name": "./node_modules/react-bootstrap/esm/Button.js",
-          "id": "./node_modules/react-bootstrap/esm/Button.js"
+          "identifier": "/usr/src/app/node_modules/react-bootstrap/esm/Modal.js",
+          "name": "./node_modules/react-bootstrap/esm/Modal.js",
+          "id": "./node_modules/react-bootstrap/esm/Modal.js"
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": "./node_modules/react-bootstrap/esm/ThemeProvider.js",
-      "issuerId": "./node_modules/react-bootstrap/esm/Button.js",
+      "issuerId": "./node_modules/react-bootstrap/esm/Modal.js",
       "chunks": [
         "vendor"
       ],
@@ -32393,8 +32393,8 @@
       "name": "HtmlWebpackCompiler",
       "hash": "2bac6ce74d041e2a14fe",
       "version": "5.50.0",
-      "time": 30537,
-      "builtAt": 1713129170231,
+      "time": 30200,
+      "builtAt": 1713824123881,
       "publicPath": "",
       "outputPath": "/usr/src/app/docs/app_coffeeMachine",
       "assetsByChunkName": {},
@@ -35580,8 +35580,8 @@
       "name": "mini-css-extract-plugin /usr/src/app/node_modules/css-loader/dist/cjs.js!/usr/src/app/node_modules/sass-loader/dist/cjs.js!/usr/src/app/app/app_coffeeMachine/sass/styles.scss",
       "hash": "954a25f0a298effced94",
       "version": "5.50.0",
-      "time": 5748,
-      "builtAt": 1713129166786,
+      "time": 6589,
+      "builtAt": 1713824120316,
       "publicPath": "__MINI_CSS_EXTRACT_PLUGIN_PUBLIC_PATH__",
       "outputPath": "/usr/src/app/docs/app_coffeeMachine",
       "assetsByChunkName": {},
