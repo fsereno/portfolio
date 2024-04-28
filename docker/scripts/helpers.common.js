@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const { execSync, exec } = require('child_process');
+const { execSync } = require('child_process');
 const args = process.argv.slice(2);
 const fs = require('fs');
 const CONFIG_PATH = './config.json';
@@ -75,33 +75,50 @@ const getJson = (path) => {
 
 /**
  * Generates the name of the Docker Compose file based on the environment configuration.
- * @param {*} hasDev - Generates the development version.
- * @param {*} hasTest - Generates the test version.
- * @param {*} hasAnalysis - Generates the analysis version.
+ * @param {*} mode - Generates the specified version.
  * @returns The fully formed filename for the compose file.
  */
-const getComposeFilename = (hasDev = false, hasTest = false, hasAnalysis = false) => {
+const getComposeFilename = (mode = "") => {
 
   let filename = 'docker-compose';
 
-  if (hasDev) filename = `${filename}.${constants.dev}`;
-  if (hasTest) filename = `${filename}.${constants.test}`;
-  if (hasAnalysis) filename = `${filename}.${constants.analysis}`;
+  switch (mode) {
+    case constants.dev:
+      filename = `${filename}.${constants.dev}`;
+      break;
+    case constants.test:
+      filename = `${filename}.${constants.test}`;
+      break;
+    case constants.analysis:
+      filename = `${filename}.${constants.analysis}`;
+      break;
+    default:
+      break;
+  }
 
   return  `${filename}.${constants.yml}`;
 }
 
 /**
  * Generates the filename of the NGINX configuration file based on the environment configuration.
- * @param {*} hasDev - Generates the development version.
- * @param {*} hasAnalysis - Generates the analysis version.
+ * @param {*} mode - Generates the specified version.
  * @returns {string} The filename of the NGINX configuration file.
  */
-const getNginxFilename = (hasDev = false, hasAnalysis = false) => {
+const getNginxFilename = (mode = "") => {
 
   let filename = 'nginx';
 
-  if (hasDev || hasAnalysis) filename = `${filename}.${constants.dev}`;
+console.log("MDOE", mode)
+
+  switch (mode) {
+    case constants.dev:
+    case constants.analysis:
+      filename = `${filename}.${constants.dev}`;
+      break;
+
+    default:
+      break;
+  }
 
   return  `${filename}.${constants.conf}`;
 

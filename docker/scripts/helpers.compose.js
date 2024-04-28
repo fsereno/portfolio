@@ -21,7 +21,7 @@ const compose = (obj = {}) => {
 * @param {*} dir - The application directory to build the dev server against.
  * @returns - The node service definition.
  */
-const getNodeDev = (dir, {name, ports, networks, image}) => ({
+const getNodeDev = ({name, ports, networks, image}) => ({
   service: {
     image: image,
     environment: ['dir=${DIR:-home}'],

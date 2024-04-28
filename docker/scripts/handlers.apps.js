@@ -1,4 +1,5 @@
 const constants = require('./constants.apps');
+const constantsCommon = require('./constants.common');
 const helpers = require('./helpers.common');
 const verbs = require('./verbs.apps');
 const handlers = require('./handlers.common');
@@ -9,9 +10,12 @@ const attachmentMode = ( verbs.hasDev || verbs.hasAnalysis || verbs.hasTest || h
  * Generates the name of the Docker Compose file based on the environment configuration.
  * @returns {string} The name of the Docker Compose file.
  */
-const getComposeFilename = () => helpers.getComposeFilename(verbs.hasDev, verbs.hasTest, verbs.hasAnalysis);
+const getComposeFilename = () => helpers.getComposeFilename(helpers.get(constants.MODE));
 
-
+/**
+ * Generates the path of the Docker Compose file based on the environment configuration.
+ * @returns {string} The name of the Docker Compose file.
+ */
 const getComposeFilePath = () => verbs.hasName ? `./docker/${getName()}/${getComposeFilename()}` : `./${getComposeFilename()}`;
 
 /**
@@ -19,7 +23,7 @@ const getComposeFilePath = () => verbs.hasName ? `./docker/${getName()}/${getCom
  * If analysis is present, returns the analysis constant; otherwise, returns the NAME constant.
  * @returns {string} The determined name.
  */
-const getName = () => verbs.hasAnalysis ? constants.analysis : helpers.get(constants.NAME);
+const getName = () => verbs.hasAnalysis ? constantsCommon.analysis : helpers.get(constants.NAME);
 
 /**
  * Starts Docker containers based on the configured environment.
@@ -27,7 +31,7 @@ const getName = () => verbs.hasAnalysis ? constants.analysis : helpers.get(const
 const start = () => {
     const composeFile = getComposeFilePath();
     const destroyCallback = hasSomeEphemeral ? () => helpers.run(`docker compose -f ${composeFile} down`) : undefined;
-    const context = helpers.has(constants.CONTEXT) ? `DIR=${helpers.get(constants.CONTEXT)}` : `DIR=${helpers.get(constants.NAME)}`;
+    const context = helpers.has(constants.CONTEXT) ? `DIR=${helpers.get(constants.CONTEXT)}` : '';
     const command = `${context} docker compose -f ${composeFile} up ${attachmentMode}`;
     helpers.run(command, {}, destroyCallback);
 }

@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 
-const DEV = '--dev';
+const MODE = '--mode';
 const NAME = '--name';
 const TAG = '--tag';
 const PUSH = '--push';
@@ -19,7 +19,7 @@ Eg. > ${chalk.yellow('npm run image -- --help')}
 
 These are the available options:
 
-${chalk.yellow(DEV)} - ${chalk.green('This command is used to image the development version of an application.')}
+${chalk.yellow(MODE)} - ${chalk.green('This command allows you to target a specific mode. Otherwise the production version is used. Available modes are: dev.')}
 
 ${chalk.yellow(NAME)} - ${chalk.green('This command should be followed by the name of the application you intend to image.')}
 
@@ -30,7 +30,7 @@ ${chalk.yellow(PUSH)} - ${chalk.green('This command is used to push an image to 
 ${chalk.yellow(HELP)} - ${chalk.green('This is help :-)')}`;
 
 module.exports = {
-    DEV,
+    MODE,
     NAME,
     TAG,
     PUSH,

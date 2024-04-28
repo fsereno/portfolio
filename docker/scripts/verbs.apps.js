@@ -1,21 +1,21 @@
 const constants = require('./constants.apps');
+const constantsCommon = require('./constants.common');
 const helpers = require('./helpers.common');
 
-const hasProd = !helpers.has(constants.DEV) && !helpers.has(constants.ANALYSIS);
-const hasDev = helpers.has(constants.DEV);
+const hasDev = helpers.get(constants.MODE) === constantsCommon.dev;
+const hasAnalysis = helpers.get(constants.MODE) === constantsCommon.analysis;
+const hasProd = !hasDev && !hasAnalysis;
 const hasName = helpers.has(constants.NAME);
 const hasContext = helpers.has(constants.CONTEXT);
 const hasHelp = helpers.has(constants.HELP);
-const hasAnalysis = helpers.has(constants.ANALYSIS);
 const hasTest = helpers.has(constants.TEST);
 const supported = [
-    constants.DEV,
     constants.NAME,
     constants.CONTEXT,
     constants.HELP,
-    constants.ANALYSIS,
     constants.TEST,
-    constants.REMOVE
+    constants.REMOVE,
+    constants.MODE
 ];
 
 const ephemeral = [constants.TEST, constants.REMOVE];

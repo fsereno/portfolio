@@ -123,7 +123,7 @@ services:
   node:
     image: fabiosereno/portfolio.dev:0.0.2
     environment:
-      - dir=home
+      - dir=${DIR:-home}
     ports:
       - '8080:8080'
     volumes:

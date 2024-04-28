@@ -1,8 +1,7 @@
 const chalk = require('chalk');
 
-const DEV = '--dev';
-const ANALYSIS = '--analysis';
 const NAME = '--name';
+const MODE = '--mode';
 const INCLUDE = '--include';
 const HELP = '--help';
 
@@ -17,9 +16,7 @@ Eg. > ${chalk.yellow('npm run compose -- --help')}
 
 These are the available options:
 
-${chalk.yellow(DEV)} - ${chalk.green('This command allows you to target the development version of a compose file. Otherwise the production version is used.')}
-
-${chalk.yellow(ANALYSIS)} - ${chalk.green(`This command should be used in conjuction with ${NAME}. This command allows you to target the analysis version of a Compose file. It is used to analyse frontend dependencies.`)}
+${chalk.yellow(MODE)} - ${chalk.green('This command allows you to target a specific mode. Otherwise the production version is used. Available modes are: dev, analysis.')}
 
 ${chalk.yellow(NAME)} - ${chalk.green('This command is used by specifying the name of the definition to include in the compose file.')}
 
@@ -28,9 +25,8 @@ ${chalk.yellow(INCLUDE)} - ${chalk.green('This command is used once, followed by
 ${chalk.yellow(HELP)} - ${chalk.green('This is help :-)')}`;
 
 module.exports = {
-    DEV,
-    ANALYSIS,
     NAME,
+    MODE,
     INCLUDE,
     HELP,
     help,

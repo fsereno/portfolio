@@ -31,10 +31,10 @@ const assertComplete = () => console.log(chalk.green(`Compose complate...`));
 const compose = () => {
 
         const serviceConfigs = helpers.getServicesConfig();
-        const yamlFilename = helpers.getComposeFilename(verbs.hasDev, false, verbs.hasAnalysis);
+        const yamlFilename = helpers.getComposeFilename(helpers.get(constants.MODE));
         const yamlRoot = './';
-        const yamlPath = `${yamlRoot}/${yamlFilename}`
-        const nginxFilename = helpers.getNginxFilename(verbs.hasDev, verbs.hasAnalysis);
+        const yamlPath = `${yamlRoot}${yamlFilename}`
+        const nginxFilename = helpers.getNginxFilename(helpers.get(constants.MODE));
         const services = {}
         const dependsOn = [];
         const nginxConfig = helpersCompose.getNginxConfOpen();
@@ -67,10 +67,9 @@ const compose = () => {
  */
 const addDevServer = (services = {}, nginxConfig = [], dependsOn = [], serviceConfigs = []) => {
     if (!verbs.hasProd) {
-        const name = verbs.hasName ? helpers.get(constants.NAME) : 'home';
         const nodeType = verbs.hasDev ? 'node.dev' : 'node.analysis';
         const nodeServiceConfig = serviceConfigs.find(x => x.id === nodeType);
-        const node = helpersCompose.getNodeDev(name, nodeServiceConfig);
+        const node = helpersCompose.getNodeDev(nodeServiceConfig);
         services.node = {...node.service, ...helpersCompose.getDependsOn(dependsOn)}
         helpersCompose.appendNginxConfig(nginxConfig, node.config);
     }
@@ -146,6 +145,7 @@ const addApplicationServices = (applicationServices = [], serviceConfigs = [], s
     if (applicationServices) {
 
         applicationServices.forEach(_service => {
+
             const service = serviceConfigs.find(x => x.id === _service);
             const doesNotExist = !services[_service];
 
