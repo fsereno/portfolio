@@ -6,7 +6,13 @@ const { v4: uuidv4 } = require('uuid');
 /**
  * The registered users.
 */
-const users = [];
+const users = [
+  {
+    id: '1792aef2-2842-40ba-92a7-e7c6288f4595',
+    username: 'tester',
+    password: 'b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86'
+  }
+];
 
 // private members
 /**
