@@ -1,13 +1,10 @@
 
-import { openBrowser, near, link, goto, write, click, closeBrowser, $, text, into, textBox, button, waitFor, evaluate } from 'taiko';
+import { openBrowser, goto, write, click, closeBrowser, $, text, into, textBox, button, waitFor, evaluate } from 'taiko';
 import { ConfigUtil } from '../../../js/modules/utils/configUtil';
-
-// This is a WIP - it appears running these tests on an ARM machine will alwasys fail - need to wait for some deps to be released.
 
 const APPLICATION = "app_nodeToDo";
 const CONFIG = ConfigUtil.get();
 const URL = `http://${CONFIG.dockerHost}/${APPLICATION}/index.html`;
-const browserPath = '/usr/bin/chromium';
 
 beforeAll(async () => {
     await openBrowser({
