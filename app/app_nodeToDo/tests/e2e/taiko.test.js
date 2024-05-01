@@ -11,7 +11,7 @@ const browserPath = '/usr/bin/chromium';
 
 beforeAll(async () => {
     await openBrowser({
-      headless: false,
+      headless: true,
       slowMo: 250,
       args: ['--no-sandbox']
     });
