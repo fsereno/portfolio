@@ -39,7 +39,6 @@ Some of the technology used in this project and related projects:
 - SOLID principles
 - TDD - Test driven development
 - DDD - Domain driven development
----
 
 ## Contents
 
@@ -47,23 +46,19 @@ Some of the technology used in this project and related projects:
 - [Installation](#installation)
 - [Usage](#usage)
 - [Licence](#licence)
----
 
 ## Prerequisites
 
 - Docker (https://www.docker.com/)
 - NodeJS (https://nodejs.org/en/)
----
 
 ## Installation
 
 - Follow these steps to install this repo locally.
----
 
 ### Clone
 
 - Clone this repo to your local machine using `https://github.com/fsereno/portfolio`
----
 
 ### Compose
 
@@ -77,22 +72,21 @@ $ npm run compose -- <options>
 ```
 Passing no arguments will result in adding all available services to the production compose file.
 
-Alternatively, passing --dev will build the development compose file.
+Alternatively, passing --mode dev, will build the development compose file.
 
 ```shell
-$ npm run compose -- --dev
+$ npm run compose -- --mode dev
 ```
-
 However, once again, this will include all available services in the compose file.
 
 To include only specific services in the compose file, use the --include argument:
 
 ```shell
-$ npm run compose -- --include dataStructures --dev
+$ npm run compose -- --include dataStructures --mode dev
 ```
 ##### This will:
 - Compose the development version of the file.
-- Simply exclude --dev if building for production.
+- Simply exclude --mode dev if building for production.
 - Include only the dataStructures service.
 - The necessary Nginx service will also be included.
 
@@ -111,44 +105,61 @@ Passing no arguments will result in the production environment being started.
 - Spin up all services in containers.
 - The application will be available at: http://localhost
 
-To stop one of the above tasks, excluding those which destroy themselves (create, test)
+To stop one of the above tasks, excluding those which destroy themselves:
 
 ```shell
 $ npm run stop -- <options>
 ```
----
+
+Passing --name will start a particular container.
 
 ```shell
-$ npm run start  -- --dev
+$ npm run start -- --name <application_name>
+```
+
+##### This will:
+- Start only the container for the given application.
+- The application will be available at: http://localhost
+
+To stop a particular container:
+
+```shell
+$ npm run stop -- --name <application_name>
+```
+
+To start the development environment:
+
+```shell
+$ npm run start  -- --mode dev --context dataStructures
 ```
 ##### This will:
 - Start the webpack development server.
 - Start the necessary backend services.
-- Watch for any changes on development resources.
-- Hot-reload any changes straight to the browser.
-- The default application is the root application - home
+- Watch for any changes on dataStructures development resources.
+- Hot-reload any changes straight to the browser for the dataStructures application.
+- The default application is the root application - home.
 - Open your browser and navigate to http://localhost
----
 
 #### Run dependency analysis on a specific application
 
 ```shell
-$ npm run start -- --name home --analysis HOW TO DO ANOTHER APP ?
+$ npm run start -- --context dataStructures --mode analysis
 ```
 ##### This will:
-- Start the analysis server.
-- Perform a dependency analysis of the application.
+- Start the webpack analysis server.
+- Perform a dependency analysis of the dataStructures application frontend.
+- The default application is the root application - home.
 - Open your browser and navigate to http://localhost
----
 
 #### Build for release
 
 ```shell
-$ npm run release
+$ npm run task -- --name build
 ```
 ##### This will:
+- Create an ephemeral container to run a task.
 - Build the production static assets directory (dist or docs, depending on the configuration).
----
+- The container is automatically destroyed after use.
 
 #### Run all unit tests
 
@@ -157,7 +168,6 @@ $ npm run test
 ```
 ##### This will:
 - Run all application specific and global unit tests.
----
 
 #### Run all functional end-to-end tests
 
@@ -167,7 +177,6 @@ $ npm run test-apps-e2e
 ##### This will:
 - Run all functional tests from the ./app/tests/functional directory
 - Currently this feature is a work in progress (WIP) and will not work on ARM architecture
----
 
 #### Create a new application
 
@@ -178,9 +187,8 @@ $ npm run create
 - Build applications based on the config.json file.
 - New applications are built based on the 'masterTemplateDir' property.
 - If an application already exists, nothing will be overwritten.
----
 
 ## Licence
 
 - **[MIT licence](https://fsereno.github.io/portfolio/app_licence/index.html)**
-- Copyright 2021 © Fabio Sereno.
+- Copyright 2024 © Fabio Sereno.
