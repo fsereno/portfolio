@@ -151,25 +151,35 @@ $ npm run start -- --context dataStructures --mode analysis
 - The default application is the root application - home.
 - Open your browser and navigate to http://localhost
 
+### Tasks
+
+- Please ensure you have Docker installed and running.
+- Open your preferred command line:
+
+Tasks create ephemeral containers. Containers which are destroyed after a task has completed.
+
 #### Build for release
 
 ```shell
 $ npm run task -- --name build
 ```
 ##### This will:
-- Create an ephemeral container to run a task.
+- Create an ephemeral container to run the task.
 - Build the production static assets directory (dist or docs, depending on the configuration).
 - The container is automatically destroyed after use.
 
-#### Run all unit tests
+#### Run all frontend unit tests
 
 ```shell
-$ npm run test
+$ npm run task --  --name test
 ```
 ##### This will:
+- Create an ephemeral container to run the task.
 - Run all application specific and global unit tests.
 
 #### Run all functional end-to-end tests
+
+Ensure the application is already running first.
 
 ```shell
 $ npm run test-apps-e2e
@@ -181,9 +191,10 @@ $ npm run test-apps-e2e
 #### Create a new application
 
 ```shell
-$ npm run create
+$ npm run task --  --name create
 ```
 ##### This will:
+- Create an ephemeral container to run the task.
 - Build applications based on the config.json file.
 - New applications are built based on the 'masterTemplateDir' property.
 - If an application already exists, nothing will be overwritten.
