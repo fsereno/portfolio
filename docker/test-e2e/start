@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# Test docker compose up script
-
-docker compose up

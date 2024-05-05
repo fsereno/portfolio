@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Docker compose script runner
-
-cd docker/create
-
-sh start
