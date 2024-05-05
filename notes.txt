@@ -1,3 +1,14 @@
+TODO:
+
+Decide on Analysis - given there is now a context for apps
+Maybe keep all the compose for alaysis in place - good handling for nginx port forwarding for example.
+But send it to the alaysis dir ? - no need however to compose with dir ever time anymore.
+How can context help other operations now - it allows for easier testing
+
+Looking at still using the root alaysis file, maybe others in the same way. 
+Simplfied the start stop code - now context can be used on the root.
+
+
 Fixing the E2E tests
 
 Update to latest Node version

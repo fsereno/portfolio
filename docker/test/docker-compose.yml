@@ -1,8 +1,7 @@
 version: '3.9'
 
 services:
-    node:
-        tty: true
+    test:
         image: 'fabiosereno/portfolio.test:0.0.2'
         volumes:
             - '../../config.json:/usr/src/app/config.json'
@@ -11,4 +10,4 @@ services:
             - '../../app:/usr/src/app/app'
             - '../../docs:/usr/src/app/docs'
             - '../../build:/usr/src/app/build'
-        container_name: node
+        container_name: test

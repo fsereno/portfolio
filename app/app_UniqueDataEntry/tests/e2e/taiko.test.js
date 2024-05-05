@@ -5,7 +5,7 @@
 import { openBrowser, goto, write, click, closeBrowser, $, into, textBox, button, waitFor, evaluate, text } from 'taiko';
 import { ConfigUtil } from '../../../js/modules/utils/configUtil';
 
-const APPLICATION = "app_AzureDotNetCoreUniqueDataEntryApi";
+const APPLICATION = "app_uniqueDataEntry";
 const CONFIG = ConfigUtil.get();
 const URL = `http://${CONFIG.dockerHost}/${APPLICATION}/index.html`;
 
@@ -20,9 +20,6 @@ beforeAll(async () => {
 describe(APPLICATION, () => {
   test('Should add an item to the table', async () => {
     await goto(URL);
-    await write('14', into(textBox({ id: 'answerInput' }), { force: true }));
-    await click(button({ id: 'submitPuzzle' }));
-    await waitFor(2000);
     await write('James', into(textBox({ id: 'firstNameInput' })));
     await write('Brown', into(textBox({ id: 'secondNameInput' })));
     await write('(000) 111 222', into(textBox({ id: 'contactInput' })));
@@ -34,9 +31,6 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Should not add a duplicate item to the table', async () => {
     await goto(URL);
-    await write('14', into(textBox({ id: 'answerInput' }), { force: true }));
-    await click(button({ id: 'submitPuzzle' }));
-    await waitFor(2000);
     await write('John', into(textBox({ id: 'firstNameInput' })));
     await write('Doe', into(textBox({ id: 'secondNameInput' })));
     await write('000000000', into(textBox({ id: 'contactInput' })));
@@ -52,9 +46,6 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Should remove an item to the table', async () => {
     await goto(URL);
-    await write('14', into(textBox({ id: 'answerInput' }), { force: true }));
-    await click(button({ id: 'submitPuzzle' }));
-    await waitFor(2000);
     await click($('a.delete[data-index="0"]'));
     const result = await evaluate($('#itemTable'), (element) => element.innerText);
     expect(result).toBe('First name\tSecond name\tContact\tPostcode\tAction');

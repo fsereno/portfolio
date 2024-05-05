@@ -88,7 +88,7 @@ module.exports = {
     },
     logAnalysis: (env) => {
         if (module.exports.isAnalysis(env)) {
-            console.log(chalk.redBright(`Running analysis at: http://${config.host}:${config.port}`));
+            console.log(chalk.greenBright(`Running analysis at: http://${config.host}:${config.port}`));
         }
     },
     logDone: () => console.log(chalk.greenBright("All compilations complete!")),
