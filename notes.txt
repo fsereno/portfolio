@@ -1,5 +1,20 @@
 TODO:
 
+Updates
+Need a new pug-loader for web pack - the old one does not support latest pug version.
+
+"pug-loader": "^2.4.0",
+
+What is "mocha-loader": "^5.1.5", used for ?
+
+packages removed
+"pug-loader": "^2.4.0",
+"mocha-loader": "^5.1.5"
+"sinon-chai": "^3.7.0",
+
+
+Previous.
+
 Decide on Analysis - given there is now a context for apps
 Maybe keep all the compose for alaysis in place - good handling for nginx port forwarding for example.
 But send it to the alaysis dir ? - no need however to compose with dir ever time anymore.
