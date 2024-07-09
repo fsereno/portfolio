@@ -1,6 +1,5 @@
 "use strict;"
 
-import { expect } from 'chai';
 import { getEmailsByThread } from '../src/utils/getEmailsByThread';
 import { INBOX, OUTBOX } from "../src/constants";
 
@@ -33,7 +32,7 @@ describe("getEmailsByThread", () => {
         }
 
         const result = getEmailsByThread(messages, selected);
-        expect(result.length).to.equal(2);
+        expect(result.length).toEqual(2);
     });
 
     it("Should return an empty array when nothing matches", () => {
@@ -60,12 +59,12 @@ describe("getEmailsByThread", () => {
         }
 
         const result = getEmailsByThread(messages, selected);
-        expect(result.length).to.equal(0);
+        expect(result.length).toEqual(0);
     });
 
     it("Should return an empty array when nothing passed", () => {
         const result = getEmailsByThread();
-        expect(result.length).to.equal(0);
+        expect(result.length).toEqual(0);
     });
 
     it("Should return only items from the Inbox when Inbox passed", () => {
@@ -95,7 +94,7 @@ describe("getEmailsByThread", () => {
         }
 
         const result = getEmailsByThread(messages, selected);
-        expect(result.length).to.equal(1);
+        expect(result.length).toEqual(1);
     });
     it("Should not return similar subjects", () => {
 
@@ -125,6 +124,6 @@ describe("getEmailsByThread", () => {
         }
 
         const result = getEmailsByThread(messages, selected);
-        expect(result.length).to.equal(1);
+        expect(result.length).toEqual(1);
     });
 });

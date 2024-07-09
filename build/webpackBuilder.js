@@ -1,105 +1,96 @@
-//const webpackHelper = require("./webpackHelper");
-//const masterWebpackConfig = require("./webpack.config.master");
-//const chalk = require('chalk');
-//const webpack = require('webpack');
+const webpackHelper = require("./webpackHelper");
+const masterWebpackConfig = require("./webpack.config.master");
+const chalk = require('chalk');
+const webpack = require('webpack');
 
-module.exports = async (env) => {
+module.exports = {
+  build: () => {
+    const env = {
+      production: true,
+      WEBPACK_BUILD: true
+    }
+    const webpacks = module.exports.getAllConfig(env);
+    webpackHelper.getVendorWebpackConfig(env, webpacks);
+    webpackHelper.logNumberOfCompilingConfigs(webpacks);
+    webpackHelper.clearOutputDirectory();
+    module.exports.run(webpacks);
+  },
+  run: (configs) => {
 
-  const webpackHelper = await import("./webpackHelper.js");
-  const masterWebpackConfig = await import("./webpack.config.master.js");
-  const chalk = await import('chalk');
-  const webpack = await import('webpack');
+    if (!configs || configs.length === 0) {
+      webpackHelper.logDone();
+      return;
+    }
 
-  return {
+    const config = configs.pop();
+    const compiler = webpack(config);
 
-    build: () => {
-      const env = {
-        production: true,
-        WEBPACK_BUILD: true
-      }
-      const webpacks = module.exports.getAllConfig(env);
-      webpackHelper.getVendorWebpackConfig(env, webpacks);
-      webpackHelper.logNumberOfCompilingConfigs(webpacks);
-      webpackHelper.clearOutputDirectory();
-      module.exports.run(webpacks);
-    },
-    run: (configs) => {
+    webpackHelper.logSingleCompiling(config);
 
-      if (!configs || configs.length === 0) {
-        webpackHelper.logDone();
+    compiler.run((err, stats) => {
+      if (err !== null) {
+        webpackHelper.logSingleError(config);
         return;
       }
-
-      const config = configs.pop();
-      const compiler = webpack(config);
-
-      webpackHelper.logSingleCompiling(config);
-
-      compiler.run((err, stats) => {
-        if (err !== null) {
+      compiler.close((closeErr) => {
+        if (closeErr !== null) {
           webpackHelper.logSingleError(config);
           return;
         }
-        compiler.close((closeErr) => {
-          if (closeErr !== null) {
-            webpackHelper.logSingleError(config);
-            return;
-          }
-          webpackHelper.logSingleCompleted(config);
-          module.exports.run(configs);
-        });
+        webpackHelper.logSingleCompleted(config);
+        module.exports.run(configs);
       });
-    },
-    buildWebpackConfig: (application, env) => {
+    });
+  },
+  buildWebpackConfig: (application, env) => {
 
-      const publicDir = webpackHelper.getFullDirectoryPath(application);
-      let applicationWebpackConfigInstance;
+    const publicDir = webpackHelper.getFullDirectoryPath(application);
+    let applicationWebpackConfigInstance;
 
-      try {
-        const applicationWebpackConfig = require(`${publicDir}/webpack.config`);
-        applicationWebpackConfigInstance = { ...applicationWebpackConfig };
-      } catch (exception) {
-        applicationWebpackConfigInstance = {}
-      };
+    try {
+      const applicationWebpackConfig = require(`${publicDir}/webpack.config`);
+      applicationWebpackConfigInstance = {...applicationWebpackConfig};
+    } catch (exception) {
+      applicationWebpackConfigInstance = {}
+    };
 
-      const master = masterWebpackConfig(env, application);
+    const master = masterWebpackConfig(env, application);
 
-      let webpackConfig = {
-        ...master,
-        ...applicationWebpackConfigInstance
-      };
+    let webpackConfig = {
+      ...master,
+      ...applicationWebpackConfigInstance
+    };
 
-      webpackConfig = webpackHelper.getDevServerConfig(webpackConfig, application, env);
+    webpackConfig = webpackHelper.getDevServerConfig(webpackConfig, application, env);
 
-      let plugins = [...webpackConfig.plugins];
+    let plugins = [...webpackConfig.plugins];
 
-      plugins = webpackHelper.getAnalysisConfig(plugins, env);
+    plugins = webpackHelper.getAnalysisConfig(plugins, env);
 
-      let htmlWebpackPluginConfigs = [];
+    let htmlWebpackPluginConfigs = [];
 
-      try {
-        htmlWebpackPluginConfigs = webpackHelper.getHtmlWebpackPluginObjects(application);
-      } catch (error) {
-        console.log(chalk.redBright(`ERROR: unable to get plugin objects for ${application.name}`));
-      }
-
-      webpackConfig = {
-        ...webpackConfig,
-        plugins: [
-          ...plugins,
-          ...htmlWebpackPluginConfigs
-        ]
-      };
-      return webpackConfig;
-    },
-    getAllConfig: (env) => {
-      const applications = webpackHelper.getApplications(env);
-      let configs = [];
-      applications.forEach(application => {
-        const webpackConfig = module.exports.buildWebpackConfig(application, env);
-        configs = [...configs, webpackConfig]
-      });
-      return configs;
+    try {
+      htmlWebpackPluginConfigs = webpackHelper.getHtmlWebpackPluginObjects(application);
+    } catch (error) {
+      console.log(chalk.redBright(`ERROR: unable to get plugin objects for ${application.name}`));
     }
+
+    webpackConfig = {
+      ...webpackConfig,
+      plugins: [
+        ...plugins,
+        ...htmlWebpackPluginConfigs
+      ]
+    };
+    return webpackConfig;
+  },
+  getAllConfig: (env) => {
+    const applications = webpackHelper.getApplications(env);
+    let configs = [];
+    applications.forEach(application => {
+      const webpackConfig = module.exports.buildWebpackConfig(application, env);
+      configs = [...configs, webpackConfig]
+    });
+    return configs;
   }
 }
