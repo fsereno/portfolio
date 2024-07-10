@@ -4,6 +4,7 @@ import React, { useState, useLayoutEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import { SUBMIT, OUTBOX, MY_ADDRESS, REPLY, SELECT } from '../constants';
 import { EmailContext, EmailClientContext, EmailModalContext} from '../contexts';
 import { ENQUEUE_TOAST, ToasterContext } from '../../../js/modules/react/toasterComponent';
@@ -71,7 +72,7 @@ export function EmailForm() {
 
     return (
         <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
-            <Form.Row>
+            <Row>
                 <Form.Group as={Col}>
                     <Form.Label>
                         From:
@@ -87,8 +88,8 @@ export function EmailForm() {
                         Please enter a value.
                     </Form.Control.Feedback>
                 </Form.Group>
-            </Form.Row>
-            <Form.Row>
+            </Row>
+            <Row>
                 <Form.Group as={Col}>
                     <Form.Label>
                         To:
@@ -105,8 +106,8 @@ export function EmailForm() {
                         Please enter a value.
                     </Form.Control.Feedback>
                 </Form.Group>
-            </Form.Row>
-            <Form.Row>
+            </Row>
+            <Row>
                 <Form.Group as={Col}>
                     <Form.Label>
                         Subject:
@@ -123,8 +124,8 @@ export function EmailForm() {
                         Please enter a value.
                     </Form.Control.Feedback>
                 </Form.Group>
-            </Form.Row>
-            <Form.Row>
+            </Row>
+            <Row>
                 <Form.Group as={Col}>
                     <Form.Label>
                         Message:
@@ -142,12 +143,12 @@ export function EmailForm() {
                         Please enter a value.
                     </Form.Control.Feedback>
                 </Form.Group>
-            </Form.Row>
-            <Form.Row>
+            </Row>
+            <Row>
                 <Form.Group as={Col}>
                     <Button className="float-right" id="submit" variant="dark" type="submit">Submit</Button>
                 </Form.Group>
-            </Form.Row>
+            </Row>
         </Form>
     )
 }
