@@ -1,6 +1,8 @@
 "use strict;"
 
 import React from 'react';
+import CardGroup from 'react-bootstrap/CardGroup';
+import Row from 'react-bootstrap/Row';
 import { ApplicationCard } from './applicationCard';
 import { ApplicationsContext } from '../../../js/modules/react/applicationsContextProvider';
 
@@ -20,7 +22,7 @@ export function CardsContainer() {
                         {featured.map(application => <ApplicationCard key={`featured_${application.folder}`} condition={application.active && application.include} application={application}/>)}
                     </div>
                     <div className="card-columns">
-                        {applications.map(application => <ApplicationCard key={application.folder} condition={application.active && application.include} application={application} />)}
+                        {applications.map((application, idx) => <ApplicationCard key={application.folder} condition={application.active && application.include} application={application} />)}
                     </div>
               </div>
             }

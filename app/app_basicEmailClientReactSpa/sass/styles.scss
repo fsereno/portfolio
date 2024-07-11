@@ -18,4 +18,8 @@ body {
             padding-bottom: 0.25rem;
         }
     }
+
+    .row+.row {
+        margin-top: 1rem;
+    }
 }

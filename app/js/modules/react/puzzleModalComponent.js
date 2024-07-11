@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 export function PuzzleModalComponent(props) {
 
@@ -43,7 +44,7 @@ export function PuzzleModalComponent(props) {
         </Modal.Header>
         <Modal.Body>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Row>
+            <Row>
               <Form.Group as={Col} controlId="answerInput">
                 <Form.Label>{`${props.label || "What is:"} ${props.puzzle} ?`}</Form.Label>
                   <Form.Control
@@ -57,7 +58,7 @@ export function PuzzleModalComponent(props) {
                     {props.error || "Incorrect answer! Please try again."}
                   </Form.Control.Feedback>
               </Form.Group>
-            </Form.Row>
+            </Row>
             <Modal.Footer>
               <Button variant="secondary" onClick={props.handleClose}>
                 Close

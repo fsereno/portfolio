@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 export function FormComponent(props) {
@@ -31,14 +32,16 @@ export function FormComponent(props) {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Row>
+        <Row>
+          <Col>
           <Form.Label>
             Add an Employee
           </Form.Label>
-        </Form.Row>
-        <Form.Row>
+          </Col>
+        </Row>
+        <Row>
           <Col sm={3} className="my-1">
-            <Form.Label htmlFor="nameInput" srOnly>
+            <Form.Label htmlFor="nameInput" className="sr-only">
               Name
             </Form.Label>
             <Form.Control
@@ -55,13 +58,11 @@ export function FormComponent(props) {
             </Form.Control.Feedback>
           </Col>
           <Col sm={3} className="my-1">
-            <Form.Label htmlFor="salaryInput" srOnly>
+            <Form.Label htmlFor="salaryInput" className="sr-only">
               Salary
             </Form.Label>
             <InputGroup>
-              <InputGroup.Prepend>
                 <InputGroup.Text>£</InputGroup.Text>
-              </InputGroup.Prepend>
               <Form.Control
                 id="salaryInput"
                 name="salaryInput"
@@ -79,7 +80,7 @@ export function FormComponent(props) {
           <Col sm={3} className="my-1">
             <Button id="addEmployee_submit" variant="dark" type="submit">Add</Button>
           </Col>
-        </Form.Row>
+        </Row>
       </Form>
     </>
   );

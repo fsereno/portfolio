@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/index';
 
@@ -29,28 +30,24 @@ export function FormComponent(props) {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Row>
-          <Form.Label>
-            Item to add
-          </Form.Label>
-          <InputGroup>
-            <Form.Control
-              name="itemInput"
-              id="itemInput"
-              type="text"
-              placeholder="Add to list..."
-              required
-              onChange={props.onChange}
-              value={props.value}
-            />
-            <InputGroup.Append>
-              <Button id="submit" variant="dark" type="submit">Add item</Button>
-            </InputGroup.Append>
-            <Form.Control.Feedback type="invalid">
-              Please enter a value.
-            </Form.Control.Feedback>
-          </InputGroup>
-        </Form.Row>
+        <Form.Label>
+          Item to add
+        </Form.Label>
+        <InputGroup>
+          <Form.Control
+            name="itemInput"
+            id="itemInput"
+            type="text"
+            placeholder="Add to list..."
+            required
+            onChange={props.onChange}
+            value={props.value}
+          />
+          <Button id="submit" variant="dark" type="submit">Add item</Button>
+          <Form.Control.Feedback type="invalid">
+            Please enter a value.
+          </Form.Control.Feedback>
+        </InputGroup>
       </Form>
     </>
   );

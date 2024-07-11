@@ -3,7 +3,7 @@
 import '../sass/styles.scss';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
@@ -220,7 +220,4 @@ class UniqueDataEntryApp extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <UniqueDataEntryApp />,
-  document.getElementById('result')
-);
+ReactDOM.createRoot(document.getElementById('result')).render(<UniqueDataEntryApp />);

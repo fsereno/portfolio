@@ -28,7 +28,7 @@ export const ApplicationCard = React.memo(({application, condition}) => {
                                 {application.labels ? application.labels.map(x => {
                                     const className = configContext.config.labels[x];
                                     return (
-                                        <Badge key={x} variant={className} className="text-light mr-2">{x}</Badge>
+                                        <Badge key={x} bg={className} className="text-light mr-2">{x}</Badge>
                                     )
                                 }) : null}
                             </Col>

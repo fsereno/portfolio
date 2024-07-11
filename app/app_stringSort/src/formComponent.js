@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 export function FormComponent(props) {
 
@@ -30,7 +31,7 @@ export function FormComponent(props) {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Row>
+        <Row>
           <Form.Group as={Col} md="6" controlId="valuesInput">
             <Form.Label>
               Enter comma seperated values to sort
@@ -47,12 +48,12 @@ export function FormComponent(props) {
               Please enter a value.
             </Form.Control.Feedback>
           </Form.Group>
-        </Form.Row>
-        <Form.Row>
+        </Row>
+        <Row>
           <Form.Group as={Col} md="3">
             <Button id="sort_submit" variant="dark" type="submit">Sort</Button>
           </Form.Group>
-        </Form.Row>
+        </Row>
       </Form>
     </>
   );

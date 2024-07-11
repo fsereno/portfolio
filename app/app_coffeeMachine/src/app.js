@@ -1,12 +1,9 @@
 "use strict;"
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import CoffeeMakerApp from './coffeeMakerApp';
 
 import '../sass/styles.scss';
 
-ReactDOM.render(
-  <CoffeeMakerApp />,
-  document.getElementById('result')
-);
+ReactDOM.createRoot(document.getElementById('result')).render(<CoffeeMakerApp />);

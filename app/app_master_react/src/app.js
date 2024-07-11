@@ -3,7 +3,7 @@
 import "../sass/styles.scss";
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
 import { FormComponent } from './formComponent';
 class ToDoListForm extends React.Component {
@@ -83,7 +83,4 @@ class ToDoListForm extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <ToDoListForm />,
-  document.getElementById('result')
-);
+ReactDOM.createRoot(document.getElementById('result')).render(<ToDoListForm />);

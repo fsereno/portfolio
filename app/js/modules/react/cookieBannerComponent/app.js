@@ -1,6 +1,6 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { CookieBannerComponent } from './cookieBannerComponent';
 
 function App() {
@@ -10,7 +10,5 @@ function App() {
     )
 }
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('cookieBanner')
-);
+
+ReactDOM.createRoot(document.getElementById('cookieBanner')).render(<App />);

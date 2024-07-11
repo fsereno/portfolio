@@ -1,12 +1,11 @@
 "use strict;"
 
 import "../sass/styles.scss";
-
 import 'aframe';
-
 import React from 'react';
-import ReactDOM from 'react-dom';
-class Scene extends React.Component {
+import ReactDOM from 'react-dom/client';
+
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,4 +70,4 @@ class Scene extends React.Component {
   }
 }
 
-ReactDOM.render(<Scene />,document.getElementById('result'));
+ReactDOM.createRoot(document.getElementById('result')).render(<App />);

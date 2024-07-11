@@ -54,7 +54,7 @@ export function FormComponent(props) {
       <Row className="splitter">
         <Col>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Row>
+            <Row>
               <Form.Group as={Col}>
                 <Form.Label>
                   Item to add
@@ -71,15 +71,15 @@ export function FormComponent(props) {
                   Please enter a value.
                 </Form.Control.Feedback>
               </Form.Group>
-            </Form.Row>
-            <Form.Row>
+            </Row>
+            <Row>
             <Form.Group as={Col} xs="auto" md="auto" lg="auto">
                 <Button id={props.id + "_submit"} variant="dark" type="submit">Add</Button>
             </Form.Group>
             <Form.Group as={Col} xs="auto" md="auto" lg="auto">
                 <Button id={props.id + "_remove"} variant="danger" type="button" onClick={props.handleRemove}>Remove</Button>
             </Form.Group>
-            </Form.Row>
+            </Row>
           </Form>
         </Col>
       </Row>

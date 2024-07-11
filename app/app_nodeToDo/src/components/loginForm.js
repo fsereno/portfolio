@@ -3,12 +3,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LoginContext } from '../contexts';
 import { MANAGE } from '../constants';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
-import { Row } from 'react-bootstrap';
+
 
 export function LoginForm() {
 
@@ -61,7 +62,7 @@ export function LoginForm() {
         <Row>
             <Col lg={4}>
                 <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
-                    <Form.Row>
+                    <Row>
                         <Form.Group as={Col}>
                             <Form.Label>
                                 Username:
@@ -77,8 +78,8 @@ export function LoginForm() {
                                 Please enter a valid value
                             </Form.Control.Feedback>
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
+                    </Row>
+                    <Row>
                         <Form.Group as={Col}>
                             <Form.Label>
                                 Password:
@@ -94,8 +95,8 @@ export function LoginForm() {
                                 Please enter a valid value
                             </Form.Control.Feedback>
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
+                    </Row>
+                    <Row>
                         <Form.Group as={Col}>
                             <Button className="float-right" id="submit" variant="dark" type="submit">Login</Button>
                             {showFeedback &&
@@ -104,7 +105,7 @@ export function LoginForm() {
                                 </div>
                             }
                         </Form.Group>
-                    </Form.Row>
+                    </Row>
                 </Form>
             </Col>
         </Row>

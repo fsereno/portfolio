@@ -3,11 +3,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LOGIN, STANDARD_ERROR } from '../constants';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
-import { Row } from 'react-bootstrap';
 import { ToasterContext, ENQUEUE_TOAST } from '../../../js/modules/react/toasterComponent';
 import { ToolTip } from './tooltip';
 import { LoginContext } from '../contexts';
@@ -85,7 +85,7 @@ export function RegisterForm() {
         <Row>
             <Col lg={4}>
                 <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
-                    <Form.Row>
+                    <Row>
                         <Form.Group as={Col}>
                             <Form.Label>
                                 Username <ToolTip message="This is case insensitive" />
@@ -101,8 +101,8 @@ export function RegisterForm() {
                                 Please enter a valid value
                             </Form.Control.Feedback>
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
+                    </Row>
+                    <Row>
                         <Form.Group as={Col}>
                             <Form.Label>
                                 Password <ToolTip message="Alphanumeric and case sensitive. Use a special character!" />
@@ -118,13 +118,13 @@ export function RegisterForm() {
                                 Please enter a valid value
                             </Form.Control.Feedback>
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
+                    </Row>
+                    <Row>
                         <Form.Group as={Col}>
                             <Button className="float-right" id="submit" variant="dark" type="submit">Register</Button>
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
+                    </Row>
+                    <Row>
                         <Form.Group as={Col}>
                             {showFeedback &&
                                 <>
@@ -135,7 +135,7 @@ export function RegisterForm() {
                                 </>
                             }
                         </Form.Group>
-                    </Form.Row>
+                    </Row>
                 </Form>
             </Col>
         </Row>

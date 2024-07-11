@@ -40,14 +40,14 @@ export function LogoutForm() {
         <Row>
             <Col lg={4}>
                 <Form noValidate onSubmit={handleSubmit}>
-                    <Form.Row>
+                    <Row>
                         <Form.Group as={Col}>
                             <Form.Label>
                                 Are you sure you want to logout ?
                             </Form.Label>
                             <Button className="float-right" id="submit" variant="dark" type="submit">Logout</Button>
                         </Form.Group>
-                    </Form.Row>
+                    </Row>
                 </Form>
             </Col>
         </Row>

@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/index';
 
 export function FormComponent(props) {
@@ -37,7 +38,7 @@ export function FormComponent(props) {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Row>
+        <Row>
           <Form.Group as={Col}>
             <Form.Label>
               Item to add
@@ -55,14 +56,14 @@ export function FormComponent(props) {
               Please enter a value.
             </Form.Control.Feedback>
           </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <ButtonGroup aria-label="Basic example">
+        </Row>
+        <Row>
+          <ButtonGroup aria-label="Basic example" as={Col}>
             <Button id="submit" variant="dark" type="submit">Add item</Button>
             <Button id="undo" variant="danger" type="button" onClick={props.handleUndo}>Undo</Button>
             <Button id="redo" variant="dark" type="button" onClick={props.handleRedo}>Redo</Button>
           </ButtonGroup>
-        </Form.Row>
+        </Row>
       </Form>
     </>
   );

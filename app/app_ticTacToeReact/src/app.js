@@ -3,7 +3,7 @@
 import '../sass/styles.scss';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 
 function Square(props) {
   return (
@@ -13,6 +13,26 @@ function Square(props) {
         {props.value}
     </button>
   );
+}
+
+function calculateWinner(squares) {
+  const possibleLines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < possibleLines.length; i++) {
+    const [a, b, c] = possibleLines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
 }
 
 class Board extends React.Component {
@@ -122,27 +142,5 @@ class Game extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <Game />,
-  document.getElementById('result')
-);
 
-function calculateWinner(squares) {
-  const possibleLines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < possibleLines.length; i++) {
-    const [a, b, c] = possibleLines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
-}
+ReactDOM.createRoot(document.getElementById('result')).render(<Game />);

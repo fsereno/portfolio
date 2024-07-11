@@ -4,7 +4,7 @@ import '../sass/styles.scss';
 
 import "regenerator-runtime/runtime";
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Router } from './components/router';
 import { LoginContextProvider } from './components/contextProviders/loginContextProvider';
 import { SpinnerContextProvider } from '../../js/modules/react/spinnerComponent';
@@ -28,4 +28,4 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('result'));
+ReactDOM.createRoot(document.getElementById('result')).render(<App />);

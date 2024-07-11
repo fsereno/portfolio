@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 export function FormComponent(props) {
 
@@ -30,7 +31,7 @@ export function FormComponent(props) {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Row>
+        <Row>
           <Form.Group as={Col} md="2" controlId="firstNameInput">
             <Form.Control
               name="firstNameInput"
@@ -79,7 +80,7 @@ export function FormComponent(props) {
           <Form.Group as={Col} md="3"> 
             <Button variant="dark" id="submit" type="submit">Add item</Button>
           </Form.Group>
-        </Form.Row>
+        </Row>
       </Form>
     </>
   );
