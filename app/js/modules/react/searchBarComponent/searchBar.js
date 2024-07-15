@@ -92,16 +92,16 @@ export function SearchBar({
                     value={searchValue}
                     onChange={onSearchHandler} />
                 {showClear &&
-                    <div className="input-group-text cancelBtn" id={cancelBtnId}>
-                        <button className={`${noQuickFiltersClass}`} type="button" onClick={resetApplications}>
+                    <div className={`input-group-text cancelBtn ${noQuickFiltersClass}`} id={cancelBtnId}>
+                        <button type="button" onClick={resetApplications}>
                             <span className="lr">
                                 <span className="rl"></span>
                             </span>
                         </button>
                     </div>}
                 {showQuickFilters &&
-                    <div className="input-group-text">
-                        <button id={openFilterBtnId} className="openFilterBtn" type="button" data-toggle="collapse" data-target={`#${filterContainerId}`} aria-expanded="false" aria-controls={filterContainerId}>
+                    <div className="input-group-text openFilterBtn">
+                        <button id={openFilterBtnId} type="button" data-bs-toggle="collapse" data-bs-target={`#${filterContainerId}`} aria-expanded="false" aria-controls={filterContainerId}>
                             <i className="fa fa-filter"></i>
                         </button>
                     </div>
@@ -110,7 +110,7 @@ export function SearchBar({
             {showQuickFilters &&
                 <div className="collapse filterContainer" id={filterContainerId}>
                     <div className="pb-3">
-                        <label className="d-flex flex-row justify-content-center">Quick search</label>
+                        <label className="d-flex flex-row justify-content-center mb-2">Quick search</label>
                         <div className="quick-search-filters d-flex justify-content-center">
                             {configContext.config.quickSearch.map(term => <button key={term} type="button" className="btn btn-outline-dark ms-2 p-0" value={term} onClick={handleQuickFilter}>{term}</button>)}
                         </div>
