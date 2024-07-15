@@ -17,7 +17,7 @@ export const Router = () => {
     return (
         <HashRouter>
             <Navbar className="pb-2 px-2 pt-3" id="spaNavBar" bg="dark" variant="dark">
-                <Nav className="mr-auto">
+                <Nav className="me-auto">
                     <NavLink className={({ isActive }) => getActive(isActive)} to={HOME}>Home</NavLink>
                     <NavLink id="inboxNavLink" className={({ isActive }) => getActive(isActive)} to={INBOX}>Inbox</NavLink>
                     <NavLink className={({ isActive }) => getActive(isActive)} to={OUTBOX}>Outbox</NavLink>

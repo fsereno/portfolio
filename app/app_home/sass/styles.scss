@@ -1,4 +1,5 @@
 @import "../../sass/includes/colours.scss";
+@import "../../sass/includes/constants.scss";
 
 #navBar {
   top: -60px;
@@ -12,6 +13,12 @@
 }
 
 #result, #app {
+  .card-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+
   #introContainer {
     color: $white;
     #introContent {
@@ -52,4 +59,13 @@
   #contentContainer {
     min-height: 100vh;
   }
+}
+
+@media only screen and (min-width: $large) {
+  #result {
+    .card-columns {
+      grid-template-columns: auto auto auto;
+    }
+  }
+  
 }

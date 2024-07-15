@@ -1,7 +1,8 @@
 @import "../../../../sass/includes/colours.scss";
 
 .searchBar {
-    .form-control {
+    .form-control.searchInput {
+      padding: 1rem;
       border: 1px solid $darkGrey;
       border-right:none;
       &.no-show-clear, &.no-show-clear:focus{
@@ -19,24 +20,26 @@
       }
     }
     .openFilterBtn {
-      border-left: 1px solid #fff;
+      border-left: 1px solid $real-white;
+      color: $real-white;
+      background: $darkGrey;
+      border: none;
       &:focus {
         box-shadow: none;
       }
     }
     .cancelBtn {
+      background: $real-white;
       button {
-        border-top: 1px solid $darkGrey;
-        border-bottom: 1px solid $darkGrey;
-        border-right: 1px solid #fff;
-        &.no-quick-filters {
-          border-right: 1px solid $darkGrey;
-        }
-        background:transparent;
+        border: none;
+        background:$real-white;
         height: 50px;
         padding: 0 1.5rem;
         &:focus {
           box-shadow: none;
+        }
+        &.no-quick-filters {
+          border-right: 1px solid $darkGrey;
         }
         .lr {
           height: 30px;

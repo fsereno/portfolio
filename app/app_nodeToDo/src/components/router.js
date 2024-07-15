@@ -20,7 +20,7 @@ export const Router = () => {
     return (
         <HashRouter>
             <Navbar className="pb-2 px-2 pt-3" id="spaNavBar" bg="dark" variant="dark">
-                <Nav className="mr-auto">
+                <Nav className="me-auto">
                     {!loginContext.authenticated &&
                         <>
                             <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={LOGIN}>Login</NavLink>
