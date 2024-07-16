@@ -1,7 +1,7 @@
 "use strict;"
 
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
@@ -16,7 +16,7 @@ export function LoginForm() {
     const loginContext = React.useContext(LoginContext);
     const spinnerContext = React.useContext(SpinnerContext);
 
-    const history = useHistory();
+    const history = useNavigate();
 
     const [ showValidation, setShowValidation ] = useState(false);
     const [ showFeedback, setShowFeedback ] = useState(false);
@@ -63,7 +63,7 @@ export function LoginForm() {
             <Col lg={4}>
                 <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
                     <Row>
-                        <Form.Group as={Col}>
+                        <Form.Group as={Col} className="mb-3">
                             <Form.Label>
                                 Username:
                             </Form.Label>
@@ -80,7 +80,7 @@ export function LoginForm() {
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Group as={Col}>
+                        <Form.Group as={Col} className="mb-3">
                             <Form.Label>
                                 Password:
                             </Form.Label>

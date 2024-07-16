@@ -55,7 +55,7 @@ export function FormComponent(props) {
         <Col>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row>
-              <Form.Group as={Col}>
+              <Form.Group as={Col} className="mb-3">
                 <Form.Label>
                   Item to add
                 </Form.Label>
@@ -73,12 +73,10 @@ export function FormComponent(props) {
               </Form.Group>
             </Row>
             <Row>
-            <Form.Group as={Col} xs="auto" md="auto" lg="auto">
-                <Button id={props.id + "_submit"} variant="dark" type="submit">Add</Button>
-            </Form.Group>
-            <Form.Group as={Col} xs="auto" md="auto" lg="auto">
-                <Button id={props.id + "_remove"} variant="danger" type="button" onClick={props.handleRemove}>Remove</Button>
-            </Form.Group>
+              <Form.Group as={Col} xs="auto" md="auto" lg="auto">
+                  <Button id={props.id + "_submit"} variant="dark" type="submit">Add</Button>
+                  <Button id={props.id + "_remove"} variant="danger" type="button" onClick={props.handleRemove}>Remove</Button>
+              </Form.Group>
             </Row>
           </Form>
         </Col>

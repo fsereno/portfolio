@@ -1,14 +1,14 @@
 "use strict;"
 
 import React, { useState} from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
 import { EDIT } from '../constants';
 import { ItemsContext, ManageContext } from '../contexts';
 
 export const ItemToDo = ({item}) => {
 
-    const history = useHistory();
+    const history = useNavigate();
 
     const itemsContext = React.useContext(ItemsContext);
     const spinnerContext = React.useContext(SpinnerContext);

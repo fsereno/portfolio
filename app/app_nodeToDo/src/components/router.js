@@ -1,7 +1,7 @@
 "use strict;"
 
 import React from 'react';
-import { HashRouter, Switch, Route, NavLink, Redirect } from "react-router-dom";
+import { HashRouter, Routes, Route, NavLink, Navigate } from "react-router-dom";
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { LOGIN, MANAGE, LOGOUT, REGISTER, EDIT } from '../constants';
@@ -35,26 +35,14 @@ export const Router = () => {
                     }
                 </Nav>
             </Navbar>
-            <Switch>
-                <Route exact path="/">
-                    <Redirect to={LOGIN}></Redirect>
-                </Route>
-                <Route path={LOGIN}>
-                    {loginContext.authenticated ? <Redirect to={MANAGE} /> : <Login />}
-                </Route>
-                <Route path={REGISTER}>
-                    <Register />
-                </Route>
-                <Route path={MANAGE}>
-                    <ProtectedRoute Component={Manage}/>
-                </Route>
-                <Route path={EDIT}>
-                    <ProtectedRoute Component={Edit}/>
-                </Route>
-                <Route path={LOGOUT}>
-                    <ProtectedRoute Component={Logout} />
-                </Route>
-            </Switch>
+            <Routes>
+                <Route exact path="/" element={<Navigate to={LOGIN}/>} />
+                <Route path={LOGIN} element={loginContext.authenticated ? <Navigate to={LOGIN}/> : <Login />} />
+                <Route path={REGISTER} element={<Register />} />
+                <Route path={MANAGE} element={<ProtectedRoute Component={Manage}/>} />
+                <Route path={EDIT} element={<ProtectedRoute Component={Edit}/>} />
+                <Route path={LOGOUT} element={<ProtectedRoute Component={Logout} />} />
+            </Routes>
         </HashRouter>
     );
 }

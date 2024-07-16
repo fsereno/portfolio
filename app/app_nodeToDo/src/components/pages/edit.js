@@ -4,7 +4,7 @@ import React, { useEffect, useReducer } from 'react';
 import { ContentContainer } from '../contentContainer';
 import { Content } from '../content';
 import { ItemForm } from '../itemForm';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ItemsContext } from '../../contexts';
 import { COPY, ITEM, MANAGE } from '../../constants';
 import { itemReducer } from '../../reducers/itemReducer';
@@ -16,7 +16,7 @@ export function Edit() {
   const itemsContext = React.useContext(ItemsContext);
   const spinnerContext = React.useContext(SpinnerContext);
 
-  const history = useHistory();
+  const history = useNavigate();
   const [state, dispatch] = useReducer(itemReducer, ITEM);
   const doneCallback = () => history.push(MANAGE);
   const failCallback = () => spinnerContext.hideSpinner();

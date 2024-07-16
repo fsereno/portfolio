@@ -23,14 +23,17 @@ export function SearchBar({
     const noQuickFiltersClass = !showQuickFilters ? 'no-quick-filters' : '';
     const noClearWhenNoQuickFiltersClass = !showClear && !showQuickFilters ? 'no-show-clear' : '';
 
-    const resetApplications = () => {
-        setShowClear(false);
+    const resetApplications = (e) => {
+        window.test = e;
+        console.log(e);
+        console.log("clear")
+        /*setShowClear(false);
         setSearcValue("");
         const resetApplications = context.applications.map(application => {
             application.active = application.include ? true : false;
             return application;
         });
-        context.setApplications(resetApplications);
+        context.setApplications(resetApplications);*/
     }
 
     const handleSubmit = (event) => event.preventDefault();

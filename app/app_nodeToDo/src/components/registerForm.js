@@ -1,7 +1,7 @@
 "use strict;"
 
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
@@ -23,7 +23,7 @@ export function RegisterForm() {
     const [ feedbackErrors, setFeedbackErrors ] = useState([]);
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
-    const history = useHistory();
+    const history = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -86,7 +86,7 @@ export function RegisterForm() {
             <Col lg={4}>
                 <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
                     <Row>
-                        <Form.Group as={Col}>
+                        <Form.Group as={Col} className="mb-3">
                             <Form.Label>
                                 Username <ToolTip message="This is case insensitive" />
                             </Form.Label>
@@ -103,7 +103,7 @@ export function RegisterForm() {
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Group as={Col}>
+                        <Form.Group as={Col} className="mb-3">
                             <Form.Label>
                                 Password <ToolTip message="Alphanumeric and case sensitive. Use a special character!" />
                             </Form.Label>
@@ -120,7 +120,7 @@ export function RegisterForm() {
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Group as={Col}>
+                        <Form.Group as={Col} className="mb-3">
                             <Button className="float-right" id="submit" variant="dark" type="submit">Register</Button>
                         </Form.Group>
                     </Row>
