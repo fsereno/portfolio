@@ -73,7 +73,7 @@ export function EmailForm() {
     return (
         <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
             <Row>
-                <Form.Group as={Col}>
+                <Form.Group as={Col} className='mb-3'>
                     <Form.Label>
                         From:
                     </Form.Label>
@@ -90,7 +90,7 @@ export function EmailForm() {
                 </Form.Group>
             </Row>
             <Row>
-                <Form.Group as={Col}>
+                <Form.Group as={Col} className='mb-3'>
                     <Form.Label>
                         To:
                     </Form.Label>
@@ -108,7 +108,7 @@ export function EmailForm() {
                 </Form.Group>
             </Row>
             <Row>
-                <Form.Group as={Col}>
+                <Form.Group as={Col} className='mb-3'>
                     <Form.Label>
                         Subject:
                     </Form.Label>
@@ -126,7 +126,7 @@ export function EmailForm() {
                 </Form.Group>
             </Row>
             <Row>
-                <Form.Group as={Col}>
+                <Form.Group as={Col} className='mb-3'>
                     <Form.Label>
                         Message:
                     </Form.Label>
