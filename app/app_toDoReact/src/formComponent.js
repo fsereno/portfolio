@@ -43,7 +43,7 @@ export function FormComponent(props) {
             onChange={props.onChange}
             value={props.value}
           />
-          <Button id="submit" variant="dark" type="submit">Add item</Button>
+          <Button id="submit" variant="dark" type="submit" className='radius-right'>Add item</Button>
           <Form.Control.Feedback type="invalid">
             Please enter a value.
           </Form.Control.Feedback>

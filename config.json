@@ -78,7 +78,7 @@
         },
         {
             "name": "To-Do List (React Redux)",
-            "subHeading": "A basic list builder using React and Redux",
+            "subHeading": "A basic list builder using React and Redux, demonstrating understanding of immutability.",
             "description": "Using Redux with React to manage application state, implementing Undo and Redo functionality.",
             "searchTerms": "Docker,JavaScript,React,Redux,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "reactRedux",

@@ -66,3 +66,10 @@ h1, h2, h3, h4, h5 {
         border-radius: 0 $border-radius $border-radius 0;
     }
 }
+
+.input-group {
+    > .radius-right {
+        border-top-right-radius: $border-radius $border-radius !important;
+        border-bottom-right-radius: $border-radius $border-radius !important;
+    }
+}
