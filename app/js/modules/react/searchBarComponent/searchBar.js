@@ -24,16 +24,16 @@ export function SearchBar({
     const noClearWhenNoQuickFiltersClass = !showClear && !showQuickFilters ? 'no-show-clear' : '';
 
     const resetApplications = (e) => {
-        window.test = e;
-        console.log(e);
-        console.log("clear")
-        /*setShowClear(false);
+        if (e) {
+            e.stopPropagation();
+        }
+        setShowClear(false);
         setSearcValue("");
         const resetApplications = context.applications.map(application => {
             application.active = application.include ? true : false;
             return application;
         });
-        context.setApplications(resetApplications);*/
+        context.setApplications(resetApplications);
     }
 
     const handleSubmit = (event) => event.preventDefault();
