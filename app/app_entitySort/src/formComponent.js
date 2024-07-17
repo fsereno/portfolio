@@ -62,7 +62,7 @@ export function FormComponent(props) {
               Salary
             </Form.Label>
             <InputGroup>
-                <InputGroup.Text>£</InputGroup.Text>
+                <InputGroup.Text className='left'>£</InputGroup.Text>
               <Form.Control
                 id="salaryInput"
                 name="salaryInput"
@@ -75,7 +75,9 @@ export function FormComponent(props) {
               <Form.Control.Feedback type="invalid">
                 Please enter a value.
               </Form.Control.Feedback>
+             
             </InputGroup>
+            
           </Col>
           <Col sm={3} className="my-1">
             <Button id="addEmployee_submit" variant="dark" type="submit">Add</Button>

@@ -57,3 +57,12 @@ h1, h2, h3, h4, h5 {
 .navbar .navbar-collapse .dropdown-menu {
     min-width: 320px
 }
+
+.input-group {
+    .input-group-text.left {
+        border-radius: $border-radius 0 0 $border-radius;
+    }
+    .input-group-text.right {
+        border-radius: 0 $border-radius $border-radius 0;
+    }
+}

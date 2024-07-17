@@ -32,10 +32,10 @@ export function DeploymentModalComponent({id, title, show, handleClose}) {
           <p>To conserve resources, services are not always available. To proceed, please request a full deployment of the portfolio. This will create a fully containerised environment in the cloud. Once you request the deployment, you will receive a unique URL to access the complete portfolio.</p>
           <Modal.Footer className="flex-box ">
               <a className="btn btn-dark w-100 mb-2" href={gitHubIssueUrl} target="_blank">
-                Raise an Issue on GitHub<i className="fa fa-github ms-2"></i>
+                Raise an Issue on GitHub<i className="fa fa-github ml-2"></i>
               </a>
               <a className="btn btn-dark w-100" href={linkedInUrl} target="_blank">
-                Make Contact on LinkedIn<i className="fa fa fa-linkedin ms-2"></i>
+                Make Contact on LinkedIn<i className="fa fa fa-linkedin ml-2"></i>
               </a>
           </Modal.Footer>
           </Modal.Body>

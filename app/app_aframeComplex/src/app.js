@@ -1,6 +1,8 @@
 "use strict;"
 
 import "../sass/styles.scss";
+import '../../sass/includes/styleDeps.scss';
+
 import 'aframe';
 import React from 'react';
 import ReactDOM from 'react-dom/client';

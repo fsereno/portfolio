@@ -18,8 +18,8 @@ export function EmployeeTableComponent({
                                 <tr>
                                     <th>Name</th>
                                     <th>
-                                        <span className="me-2">Salary</span>
-                                        <button id="sortAsc" className="btn btn-sm btn-dark me-1 px-0" type="button" onClick={handleSortSalaryAsc}><i className="fa fa-fw fa-sort-amount-asc"></i></button>
+                                        <span className="mr-2">Salary</span>
+                                        <button id="sortAsc" className="btn btn-sm btn-dark mr-1 px-0" type="button" onClick={handleSortSalaryAsc}><i className="fa fa-fw fa-sort-amount-asc"></i></button>
                                         <button id="sortDesc" className="btn btn-sm btn-dark px-0" type="button" onClick={handleSortSalaryDesc}><i className="fa fa-fw fa-sort-amount-desc"></i></button>
                                     </th>
                                     <th>Action</th>

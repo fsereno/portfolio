@@ -8,7 +8,7 @@ export const DoneItem = ({item}) => {
             {item.done &&
                 <>
                     <input type="checkbox" checked disabled />
-                    <p className="lead flex-fill ms-3 my-0"><del>{item.description}</del></p>
+                    <p className="lead flex-fill ml-3 my-0"><del>{item.description}</del></p>
                 </>
             }
         </>

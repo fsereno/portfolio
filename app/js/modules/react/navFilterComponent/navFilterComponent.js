@@ -40,7 +40,7 @@ export function NavFilterComponent({isHomeActive, folder}) {
                 })}
                 <div className='dropdown-divider'></div>
                 <a className={`${isHomeActive ? 'active' : ''} dropdown-item`} href={`${dir}/index.html`}>
-                    Home <i className='fa fa-home ms-2'></i>
+                    Home <i className='fa fa-home ml-2'></i>
                 </a>
             </div>
         </>
