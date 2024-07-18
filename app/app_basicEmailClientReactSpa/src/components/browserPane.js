@@ -6,7 +6,7 @@ import { getKeyFromMessage } from '../utils/getKeyFromMessage';
 import { getMessagesByDirectory } from '../utils/getMessagesByDirectory';
 import { EmailContext, EmailClientContext } from '../contexts';
 
-export const BrowserPane = (props) => {
+export const BrowserPane = ({dir, limit}) => {
 
     const context = React.useContext(EmailContext);
 
@@ -30,14 +30,16 @@ export const BrowserPane = (props) => {
     }
 
     const loadMoreClickHandler = () => {
-        const next = getNext(collection, context.state.messages, props.dir, props.limit);
+        const next = getNext(collection, context.state.messages, dir, limit);
         if (next.length !== collection.length) {
             setCollection(next);
         }
     }
 
+    const getTotalMessages = () => context.state.messages.filter(x => x.dir === dir).length;
+
     useLayoutEffect(() => {
-        const firstThree = getNext([], context.state.messages, props.dir);
+        const firstThree = getNext([], context.state.messages, dir);
         setCollection(firstThree);
     }, [context.state.messages]);
 
@@ -59,7 +61,10 @@ export const BrowserPane = (props) => {
                             )
                         })}
                     </div>
-                    <button className="btn btn-dark col-4 mt-5 offset-4" onClick={loadMoreClickHandler}>Load more</button>
+
+                    {collection.length !== getTotalMessages() &&
+                        <button className="btn btn-dark col-4 mt-5 offset-4" onClick={loadMoreClickHandler}>Load more</button>
+                    }
                 </>
             }
             {collection.length === 0 &&

@@ -106,7 +106,7 @@ export function Toast(props) {
 
     return (
         <>
-            <div className="toast" role="alert" aria-live="assertive" aria-atomic="true" style={ { opacity: 1 }}>
+            <div className="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                 <div className="toast-header">
                     <strong className="me-auto text-dark lead">{props.item.heading}</strong>
                     <a href="#" onClick={event => event.preventDefault() & handleClose()}className="text-dark h3 mb-0">
