@@ -100,7 +100,7 @@ export function Toast(props) {
 
     useEffect(() => {
         setTimeout(() => {
-            context.dispatch( { type: DEQUEUE_TOAST });
+            //context.dispatch( { type: DEQUEUE_TOAST });
         }, 5000)
     }, []);
 
