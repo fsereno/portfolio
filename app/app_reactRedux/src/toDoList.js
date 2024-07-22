@@ -96,7 +96,7 @@ export default class ToDoList extends React.Component {
                         <ul id="toDoList" className="list-group">
                             {_store.getState().present.map((item, index) => {
                                 let key = KeyGeneratorUtil.generate(item);
-                                return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
+                                return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge bg-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
                             })}
                         </ul>
                     </div>

@@ -39,7 +39,7 @@ export function FormComponent(props) {
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row>
-          <Form.Group as={Col}>
+          <Form.Group as={Col} className='mb-3'>
             <Form.Label>
               Item to add
             </Form.Label>

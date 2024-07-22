@@ -1,5 +1,18 @@
 TODO:
 
+Can these be removed ?
+
+"webpack-shell-plugin": "^0.5.0"
+"webpack-node-externals": "^3.0.0",
+"@babel/cli": "^7.24.7",
+"@babel/core": "^7.24.7",
+"@babel/plugin-transform-class-properties": "^7.24.7",
+"@babel/preset-env": "^7.24.7",
+"@babel/preset-react": "^7.24.7",
+"@babel/preset-typescript": "^7.24.7",
+"@babel/register": "^7.24.6",
+
+
 Updates
 Need a new pug-loader for web pack - the old one does not support latest pug version.
 

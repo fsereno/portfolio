@@ -77,7 +77,7 @@ export function FormComponent(props) {
               Please enter a value.
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="3"> 
+          <Form.Group as={Col} md="3">
             <Button variant="dark" id="submit" type="submit">Add item</Button>
           </Form.Group>
         </Row>
