@@ -5,5 +5,5 @@ module.exports = {
     "^.+.tsx?$": ["ts-jest", {}],
     "^.+\\.(js|jsx)$": ["babel-jest", {}]
   },
-  setupFilesAfterEnv: [ "./setupTests.js" ]
+  //setupFilesAfterEnv: [ "./setupTests.js" ]
 };
