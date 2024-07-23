@@ -1,11 +1,13 @@
 TODO:
 
+mkae this look better - file:///Users/fabiosereno/sites/portfolio/docs/app_entitySort/index.html
+
 Can these be removed ?
 
 "webpack-shell-plugin": "^0.5.0"
 "webpack-node-externals": "^3.0.0",
 
-
+Babel is needed
 "@babel/cli": "^7.24.7",
 "@babel/core": "^7.24.7",
 "@babel/plugin-transform-class-properties": "^7.24.7",

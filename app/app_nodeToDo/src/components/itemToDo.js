@@ -48,14 +48,14 @@ export const ItemToDo = ({item}) => {
                         onTouchStart={() => setChecked(true)}
                         onTouchEnd={() => setChecked(false)}
                         onMouseLeave={() => setChecked(false)}>
-                        <input className="mr-2" type="checkbox" checked={checked} onChange={onDoneClick} />
+                        <input className="me-2" type="checkbox" checked={checked} onChange={onDoneClick} />
                         {item.description}
                     </a>
                     <div>
-                        <a herf="#" className="edit-item bg-dark btn btn-sm px-2 mr-2 text-white border-0" size="sm" onClick={onEditClick}>
+                        <a herf="#" className="edit-item bg-dark btn btn-sm px-2 me-2 text-white border-0" size="sm" onClick={onEditClick}>
                             <i className="bi bi-pencil-square"></i>
                         </a>
-                        <a href="#" className="delete-item bg-dark btn btn-sm px-2 mr-2 text-white border-0" size="sm" onClick={onDeleteClick}>
+                        <a href="#" className="delete-item bg-dark btn btn-sm px-2 me-2 text-white border-0" size="sm" onClick={onDeleteClick}>
                             <i className="bi bi-x-square"></i>
                         </a>
                     </div>

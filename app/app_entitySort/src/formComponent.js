@@ -34,14 +34,14 @@ export function FormComponent(props) {
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row>
           <Col>
-          <Form.Label>
-            Add an Employee
-          </Form.Label>
+            <Form.Label>
+              Add an Employee
+            </Form.Label>
           </Col>
         </Row>
         <Row>
-          <Col sm={3} className="my-1">
-            <Form.Label htmlFor="nameInput" className="sr-only">
+          <Form.Group as={Col} className='mb-3'>
+            <Form.Label htmlFor="nameInput">
               Name
             </Form.Label>
             <Form.Control
@@ -56,13 +56,15 @@ export function FormComponent(props) {
             <Form.Control.Feedback type="invalid">
               Please enter a value.
             </Form.Control.Feedback>
-          </Col>
-          <Col sm={3} className="my-1">
-            <Form.Label htmlFor="salaryInput" className="sr-only">
+          </Form.Group>
+        </Row>
+        <Row>
+          <Form.Group as={Col} className='mb-3'>
+            <Form.Label htmlFor="salaryInput">
               Salary
             </Form.Label>
             <InputGroup>
-                <InputGroup.Text className='left'>£</InputGroup.Text>
+              <InputGroup.Text className='left'>£</InputGroup.Text>
               <Form.Control
                 id="salaryInput"
                 name="salaryInput"
@@ -75,15 +77,13 @@ export function FormComponent(props) {
               <Form.Control.Feedback type="invalid">
                 Please enter a value.
               </Form.Control.Feedback>
-             
             </InputGroup>
-            
-          </Col>
-          <Col sm={3} className="my-1">
-            <Button id="addEmployee_submit" variant="dark" type="submit">Add</Button>
-          </Col>
+          </Form.Group>
         </Row>
-      </Form>
+          <Form.Group as={Col} className='mb-3'>
+            <Button id="addEmployee_submit" variant="dark" type="submit">Add</Button>
+          </Form.Group>
+    </Form >
     </>
   );
 }

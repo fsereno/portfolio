@@ -222,7 +222,7 @@ class EntitySort extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-12">
+          <div className="col-4">
             <FormComponent
               handleSubmit={this.handleSubmit}
               handleNameChange={this.handleNameChange}
