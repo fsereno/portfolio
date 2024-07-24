@@ -175,7 +175,6 @@ class UniqueDataEntryApp extends React.Component {
         />
         <div className="row splitter">
           <div className="col-lg-12">
-            <h3>Items:</h3>
             <p>Add new items to the table. Only unique entries are allowed.</p>
             <div className="table-responsive">
               <table className="table" id="itemTable">
@@ -189,7 +188,7 @@ class UniqueDataEntryApp extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                {this.state.items.map((item, index) => {
+                  {this.state.items.map((item, index) => {
                     let key = KeyGeneratorUtil.generate(`${item.secondName} ${item.contact} ${item.postCode}`);
                     return (
                       <tr key={key}>
@@ -213,7 +212,7 @@ class UniqueDataEntryApp extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-12">
-            <FormComponent handleSubmit={this.handleSubmit}/>
+            <FormComponent handleSubmit={this.handleSubmit} />
           </div>
         </div>
       </div>

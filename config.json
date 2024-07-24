@@ -88,17 +88,6 @@
             "labels": ["JavaScript"]
         },
         {
-            "name": "To-Do List (Vue)",
-            "subHeading": "A basic list builder using Vue",
-            "description": "Experimenting with Vue, Babel and Webpack.",
-            "searchTerms": "Docker,JavaScript,Vue,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "toDoVue",
-            "active": true,
-            "include": true,
-            "useWebpack": true,
-            "labels": ["JavaScript"]
-        },
-        {
             "name": "Tic-Tac-Toe",
             "subHeading": "A Tic-Tac-Toe game built using React",
             "description": "Demonstrating React state management with immutability, allowing for 'time travel' or 'versioned' data.",

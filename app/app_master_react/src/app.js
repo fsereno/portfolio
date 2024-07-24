@@ -67,7 +67,6 @@ class ToDoListForm extends React.Component {
         <div className="row splitter">
           <div className="col-lg-12">
             <p>Items: {this.state.counter}</p>
-            <p>Item to add: {this.state.value}</p>
           </div>
         </div>
         <div className="row">

@@ -58,11 +58,11 @@ export function FormComponent(props) {
           </Form.Group>
         </Row>
         <Row>
-          <ButtonGroup aria-label="Basic example" as={Col}>
-            <Button id="submit" variant="dark" type="submit">Add item</Button>
-            <Button id="undo" variant="danger" type="button" onClick={props.handleUndo}>Undo</Button>
-            <Button id="redo" variant="dark" type="button" onClick={props.handleRedo}>Redo</Button>
-          </ButtonGroup>
+        <Form.Group as={Col} className='mb-3'>
+            <Button id="submit" variant="dark" type="submit" className="me-2">Add item</Button>
+            <Button id="undo" variant="danger" type="button" className="me-2" onClick={props.handleUndo}>Undo</Button>
+            <Button id="redo" variant="dark" type="button" className="me-2" onClick={props.handleRedo}>Redo</Button>
+          </Form.Group>
         </Row>
       </Form>
     </>

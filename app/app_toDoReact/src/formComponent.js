@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import InputGroup from 'react-bootstrap/InputGroup';
+import Col from 'react-bootstrap/Col';
 import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/index';
 
 export function FormComponent(props) {
@@ -30,10 +30,11 @@ export function FormComponent(props) {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Row>
+        <Form.Group as={Col} className='mb-3'>
         <Form.Label>
           Item to add
         </Form.Label>
-        <InputGroup>
           <Form.Control
             name="itemInput"
             id="itemInput"
@@ -43,11 +44,16 @@ export function FormComponent(props) {
             onChange={props.onChange}
             value={props.value}
           />
-          <Button id="submit" variant="dark" type="submit" className='radius-right'>Add item</Button>
           <Form.Control.Feedback type="invalid">
             Please enter a value.
           </Form.Control.Feedback>
-        </InputGroup>
+          </Form.Group>
+        </Row>
+        <Row>
+          <Form.Group as={Col} className='mb-3'>
+              <Button id="submit" variant="dark" type="submit" className='radius-right'>Add item</Button>
+          </Form.Group>
+        </Row>
       </Form>
     </>
   );

@@ -92,7 +92,6 @@ export default class ToDoList extends React.Component {
             <div>
                 <div className="row splitter">
                     <div className="col-lg-4">
-                        <h3>Result:</h3>
                         <ul id="toDoList" className="list-group">
                             {_store.getState().present.map((item, index) => {
                                 let key = KeyGeneratorUtil.generate(item);
@@ -104,7 +103,6 @@ export default class ToDoList extends React.Component {
                 <div className="row splitter">
                     <div className="col-lg-12">
                         <p>Items: {this.state.counter}</p>
-                        <p>Item to add: {this.state.value}</p>
                     </div>
                 </div>
                 <div className="row">
