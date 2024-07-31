@@ -155,7 +155,7 @@
         },
         {
             "name": "Natural Sorting Algorithm",
-            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET, passing in a custom comparer",
+            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET",
             "description": ".NET Web API with a React UI.",
             "searchTerms": "Docker,Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "stringSort",

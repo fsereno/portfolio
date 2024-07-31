@@ -25,7 +25,7 @@ select.form-control {
     height:50px;
 }
 
-button.btn {
+button.btn, a.btn:not(a.btn.link) {
     padding: 12px;
     min-width: 85px;
 }

@@ -256,7 +256,7 @@ export const homeThreeModule = (async () => {
         setResizeEventHandler();
         createCubes();
         createParticles(20000, 10);
-        addLight(0xFFFFFF, 500, 1000, 0, 10, 10);
+        addLight(0xFFFFFF, 500, 50, 0, 10, 5);
         setMouseMoved();
         initControls();
         setAnimationLoop();
