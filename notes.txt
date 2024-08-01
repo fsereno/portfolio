@@ -1,6 +1,18 @@
 TODO:
 
-mkae this look better - file:///Users/fabiosereno/sites/portfolio/docs/app_entitySort/index.html
+mkae this look better - http://localhost/app_nodeToDo/index.html#/manage
+
+Need to re-image the following:
+Analysis
+build
+create
+dev (done)
+test
+
+All inherit the NPM image.
+
+All images will need pushing to Docker Hub.
+
 
 Can these be removed ?
 

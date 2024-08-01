@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
     test:
-        image: 'fabiosereno/portfolio.test:0.0.2'
+        image: 'fabiosereno/portfolio.test:1.0.0'
         volumes:
             - '../../config.json:/usr/src/app/config.json'
             - '../../babel.config.json:/usr/src/app/babel.config.json'

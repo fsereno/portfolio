@@ -73,7 +73,7 @@ export function RegisterForm() {
 
             spinnerContext.setShow(false);
             toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Registration Successful!", body: `You can now login using your credentials.` } } );
-            history.push(LOGIN);
+            history(LOGIN);
 
         }).catch((err) => {
             debugger;

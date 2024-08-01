@@ -35,7 +35,7 @@ export const ItemToDo = ({item}) => {
     const onEditClick = event => {
         event.preventDefault();
         itemsContext.selectedId.current = item.id;
-        history.push(EDIT);
+        history(EDIT);
     }
 
     return (
@@ -52,10 +52,10 @@ export const ItemToDo = ({item}) => {
                         {item.description}
                     </a>
                     <div>
-                        <a herf="#" className="edit-item bg-dark btn btn-sm px-2 me-2 text-white border-0" size="sm" onClick={onEditClick}>
+                        <a herf="#" className="item-control edit-item btn btn-link p-0 text-dark border-0 me-2" size="sm" onClick={onEditClick}>
                             <i className="bi bi-pencil-square"></i>
                         </a>
-                        <a href="#" className="delete-item bg-dark btn btn-sm px-2 me-2 text-white border-0" size="sm" onClick={onDeleteClick}>
+                        <a href="#" className="item-control delete-item btn btn-link p-0 text-dark border-0" size="sm" onClick={onDeleteClick}>
                             <i className="bi bi-x-square"></i>
                         </a>
                     </div>

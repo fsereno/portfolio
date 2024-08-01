@@ -9,8 +9,8 @@ import { LOGIN, REGISTER } from '../../constants';
 export function Unauthorised() {
 
   const history = useNavigate();
-  const onLoginClick = (e) => { e.preventDefault(); history.push(LOGIN)}
-  const onRegisterClick = (e) => { e.preventDefault(); history.push(REGISTER)}
+  const onLoginClick = (e) => { e.preventDefault(); history(LOGIN)}
+  const onRegisterClick = (e) => { e.preventDefault(); history(REGISTER)}
 
   return (
     <ContentContainer>

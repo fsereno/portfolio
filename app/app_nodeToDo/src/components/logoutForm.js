@@ -19,7 +19,7 @@ export function LogoutForm() {
 
     const doneCallback = () => {
         spinnerContext.setShow(false);
-        history.push(LOGIN);
+        history(LOGIN);
     }
 
     const failCallback = (err) => {
@@ -41,12 +41,10 @@ export function LogoutForm() {
             <Col lg={4}>
                 <Form noValidate onSubmit={handleSubmit}>
                     <Row>
-                        <Form.Group as={Col} className="mb-3">
-                            <Form.Label>
-                                Are you sure you want to logout ?
-                            </Form.Label>
-                            <Button className="float-right" id="submit" variant="dark" type="submit">Logout</Button>
-                        </Form.Group>
+                        <Col>
+                            <p>Are you sure you want to logout ?</p>
+                            <Button id="submit" variant="dark" type="submit">Logout</Button>
+                        </Col>
                     </Row>
                 </Form>
             </Col>

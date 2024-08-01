@@ -54,9 +54,7 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
                                 onChange={event => dispatch({ type: DESCRIPTION, value: event.target.value })}
                                 required
                             />
-                            <InputGroup.Append className="shadow-lg">
-                                <Button className="rounded-right" id="submit" variant="dark" type="submit">Submit</Button>
-                            </InputGroup.Append>
+                                <Button className="radius-right" id="submit" variant="dark" type="submit">Submit</Button>
                             <Form.Control.Feedback type="invalid">
                                 Please enter a value.
                             </Form.Control.Feedback>

@@ -16,6 +16,7 @@ import { ProtectedRoute } from './protectedRoute';
 export const Router = () => {
 
     const loginContext = React.useContext(LoginContext);
+    const getActive = (isActive) => isActive ? "active" : "none";
 
     return (
         <HashRouter>
@@ -23,14 +24,14 @@ export const Router = () => {
                 <Nav className="me-auto">
                     {!loginContext.authenticated &&
                         <>
-                            <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={LOGIN}>Login</NavLink>
-                            <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={REGISTER}>Create a user</NavLink>
+                            <NavLink className={({ isActive }) => getActive(isActive)} to={LOGIN}>Login</NavLink>
+                            <NavLink className={({ isActive }) => getActive(isActive)} to={REGISTER}>Create a user</NavLink>
                         </>
                     }
                     {loginContext.authenticated &&
                         <>
-                            <NavLink activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={MANAGE}>Manage</NavLink>
-                            <NavLink id="logoutNavLink" activeClassName="active" className="nav-link pb-3 pt-1 px-3" to={LOGOUT}>Logout</NavLink>
+                            <NavLink className={({ isActive }) => getActive(isActive)} to={MANAGE}>Manage</NavLink>
+                            <NavLink id="logoutNavLink" className={({ isActive }) => getActive(isActive)} to={LOGOUT}>Logout</NavLink>
                         </>
                     }
                 </Nav>

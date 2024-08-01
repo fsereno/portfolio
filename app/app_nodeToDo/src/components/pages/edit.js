@@ -18,9 +18,9 @@ export function Edit() {
 
   const history = useNavigate();
   const [state, dispatch] = useReducer(itemReducer, ITEM);
-  const doneCallback = () => history.push(MANAGE);
+  const doneCallback = () => history(MANAGE);
   const failCallback = () => spinnerContext.hideSpinner();
-  const onBackClick = () => history.goBack();
+  const onBackClick = () => history(-1);
 
   useEffect(() => {
     if (itemsContext.selectedId.current) {
@@ -31,7 +31,7 @@ export function Edit() {
           dispatch({ type: COPY, value: response.data.item });
         }).catch(() => failCallback());
     } else {
-      history.push(MANAGE);
+      history(MANAGE);
     }
   }, []);
 
@@ -39,9 +39,9 @@ export function Edit() {
     <ContentContainer>
       <Content title="Edit" centre={true} />
       <ItemForm state={state} dispatch={dispatch} submitHandler={itemsContext.updateItem} doneCallback={doneCallback} />
-      <Row className="justify-content-center">
+      <div className="d-flex justify-content-center">
           <Button variant="dark" onClick={onBackClick}>Back</Button>
-      </Row>
+      </div>
     </ContentContainer>
   );
 }

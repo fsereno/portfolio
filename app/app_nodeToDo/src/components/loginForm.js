@@ -28,7 +28,7 @@ export function LoginForm() {
         setShowValidation(false);
         setShowFeedback(false);
         spinnerContext.setShow(false);
-        history.push(MANAGE);
+        history(MANAGE);
     }
 
     const loginFailCallback = (err) => {
