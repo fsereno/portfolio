@@ -67,11 +67,11 @@ const compose = () => {
  */
 const addDevServer = (services = {}, nginxConfig = [], dependsOn = [], serviceConfigs = []) => {
     if (!verbs.hasProd) {
-        const nodeType = verbs.hasDev ? 'node.dev' : 'node.analysis';
-        const nodeServiceConfig = serviceConfigs.find(x => x.id === nodeType);
-        const node = helpersCompose.getNodeDev(nodeServiceConfig);
-        services.node = {...node.service, ...helpersCompose.getDependsOn(dependsOn)}
-        helpersCompose.appendNginxConfig(nginxConfig, node.config);
+        const type = verbs.hasDev ? 'server.dev' : 'server.analysis';
+        const nodeServiceConfig = serviceConfigs.find(x => x.id === type);
+        const server = helpersCompose.getDevServer(nodeServiceConfig);
+        services.server = {...server.service, ...helpersCompose.getDependsOn(dependsOn)}
+        helpersCompose.appendNginxConfig(nginxConfig, server.config);
     }
 }
 

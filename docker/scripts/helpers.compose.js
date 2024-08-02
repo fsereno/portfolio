@@ -21,7 +21,7 @@ const compose = (obj = {}) => {
 * @param {*} dir - The application directory to build the dev server against.
  * @returns - The node service definition.
  */
-const getNodeDev = ({name, ports, networks, image}) => ({
+const getDevServer = ({name, ports, networks, image}) => ({
   service: {
     image: image,
     environment: ['dir=${DIR:-home}'],
@@ -44,7 +44,7 @@ const getNodeDev = ({name, ports, networks, image}) => ({
       proxy_set_header X-Real-IP $remote_addr;
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header X-NginX-Proxy true;
-      proxy_pass http://node:8080;
+      proxy_pass http://server:8080;
       proxy_ssl_session_reuse off;
       proxy_set_header Host $http_host;
       proxy_cache_bypass $http_upgrade;
@@ -115,7 +115,7 @@ const getDevDotNetService = (service) => {
  */
 const getDevNodeService = (service) => {
   const {name} = service;
-  const base = getServiceBase({...service, image: 'fabiosereno/portfolio.node.dev:0.0.1'});
+  const base = getServiceBase({...service, image: 'fabiosereno/portfolio.node.dev:1.0.0'});
   const _service = {
     ...base.service,
     volumes: [`./app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
@@ -284,7 +284,7 @@ const createYaml = (config, filePath) => {
 }
 
 module.exports = {
-  getNodeDev,
+  getDevServer,
   compose,
   createYaml,
   getService,
