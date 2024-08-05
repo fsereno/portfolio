@@ -93,14 +93,14 @@ const getNginxProd = (service) => ({
  * @returns - The development service definition.
  */
 const getDevDotNetService = (service) => {
-  const {name} = service;
-  const base = getServiceBase({...service, image: 'fabiosereno/portfolio.dotnet.dev:0.0.1'});
+  const {name, version} = service;
+  const base = getServiceBase({...service, image: 'fabiosereno/portfolio.dotnet.dev:1.0.0'});
   const _service = {
     ...base.service,
     volumes: [`./app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
       './backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core',
     ],
-    command: `sh -c "dotnet build /usr/src/app/app/app_${name}/backend/api && dotnet /usr/src/app/app/app_${name}/backend/api/bin/Debug/net7.0/api.dll"`,
+    command: `sh -c "dotnet build /usr/src/app/app/app_${name}/backend/api && dotnet /usr/src/app/app/app_${name}/backend/api/bin/Debug/${version}/api.dll"`,
   }
   return {
     service: _service,
