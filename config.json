@@ -67,7 +67,7 @@
         },
         {
             "name": "To-Do List (React)",
-            "subHeading": "A basic list builder using React",
+            "subHeading": "A basic list builder using React.",
             "description": "Using React, with Babel and Webpack.",
             "searchTerms": "Docker,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "toDoReact",
@@ -89,7 +89,7 @@
         },
         {
             "name": "Tic-Tac-Toe",
-            "subHeading": "A Tic-Tac-Toe game built using React",
+            "subHeading": "A Tic-Tac-Toe game built using React.",
             "description": "Demonstrating React state management with immutability, allowing for 'time travel' or 'versioned' data.",
             "searchTerms": "Docker,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "ticTacToeReact",
@@ -100,7 +100,7 @@
         },
         {
             "name": "Unique Data Entry Application",
-            "subHeading": "Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries, with a React UI",
+            "subHeading": "Unique data entry implementing IEqualityComparer to manage illegal duplicate data entries, with a React UI.",
             "description": ".NET Web API with a React UI.",
             "searchTerms": "Docker,Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "uniqueDataEntry",
@@ -117,7 +117,7 @@
         },
         {
             "name": "Data Structures",
-            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack",
+            "subHeading": "First in, first out (FIFO) and last in, first out (LIFO) data structures implementing Queue and Stack.",
             "description": ".NET Web API with a React UI.",
             "searchTerms": "Docker,Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "dataStructures",
@@ -137,7 +137,7 @@
         },
         {
             "name": "Complex Entity Sorting Algorithm",
-            "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types",
+            "subHeading": "A sorting mechanism, implementing IComparable and IComparer to sort complex types.",
             "description": ".NET Web API with a React UI.",
             "searchTerms": "Docker,Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "entitySort",
@@ -155,7 +155,7 @@
         },
         {
             "name": "Natural Sorting Algorithm",
-            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET",
+            "subHeading": "A natural string sorting algorithm, implementing IComparer in .NET.",
             "description": ".NET Web API with a React UI.",
             "searchTerms": "Docker,Cloud,C#,dotnet,.net,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "stringSort",
@@ -172,7 +172,7 @@
         },
         {
             "name": "Coffee Machine",
-            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET",
+            "subHeading": "Demonstraiting knowledge of asynchrony, multithreading and the State Machine in .NET.",
             "description": ".NET Web API with a React UI.",
             "searchTerms": "Docker,Cloud,C#,dotnet,.net,Multithreading,Async,Asynchronous,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "coffeeMachine",
@@ -190,7 +190,7 @@
         },
         {
             "name": "AFrame React Example",
-            "subHeading": "An example AFrame application with React, allowing for user input",
+            "subHeading": "An example AFrame application with React, allowing for user input.",
             "description": "Exploring WebXR applications using AFrame and React. Compiled with Babel and Webpack.",
             "searchTerms": "Docker,JavaScript,AFrame,Babel,Webpack,PUG,HTML,CSS,SASS,VR,Virtual Reality",
             "folder": "aframeComplex",
@@ -201,7 +201,7 @@
         },
         {
             "name": "JS Coding Standards",
-            "subHeading": "A JavaScript Code Style Guide",
+            "subHeading": "A JavaScript Code Style Guide.",
             "description": "By Fabio Sereno",
             "searchTerms": "Docker,JavaScript,SOLID Principles,YAGNI,DRY,KISS",
             "folder": "jsCodingStandards",
@@ -225,7 +225,7 @@
         },
         {
             "name": "NodeJS, To-Do List SPA",
-            "subHeading": "A simple To-Do list application, with user registration and authentication",
+            "subHeading": "A simple To-Do list application, with user registration and authentication.",
             "description": "NodeJS Web API with a React UI.",
             "searchTerms": "Docker,NodeJS,Express,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
             "folder": "nodeToDo",
