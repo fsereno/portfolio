@@ -77,14 +77,5 @@
         "networks": ["frontend", "backend"],
         "version": "20.15.0",
         "image": "fabiosereno/portfolio.dev:1.0.0"
-    },
-    {
-        "id": "server.analysis",
-        "name": "server",
-        "type": "SERVER",
-        "ports": ["8080:8080"],
-        "networks": ["frontend", "backend"],
-        "version": "20.15.0",
-        "image": "fabiosereno/portfolio.analysis:1.0.0"
     }
 ]

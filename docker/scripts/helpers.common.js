@@ -89,9 +89,6 @@ const getComposeFilename = (mode = "") => {
     case constants.test:
       filename = `${filename}.${constants.test}`;
       break;
-    case constants.analysis:
-      filename = `${filename}.${constants.analysis}`;
-      break;
     default:
       break;
   }
@@ -112,7 +109,6 @@ console.log("MDOE", mode)
 
   switch (mode) {
     case constants.dev:
-    case constants.analysis:
       filename = `${filename}.${constants.dev}`;
       break;
 

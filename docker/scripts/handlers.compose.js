@@ -67,7 +67,7 @@ const compose = () => {
  */
 const addDevServer = (services = {}, nginxConfig = [], dependsOn = [], serviceConfigs = []) => {
     if (!verbs.hasProd) {
-        const type = verbs.hasDev ? 'server.dev' : 'server.analysis';
+        const type = 'server.dev';
         const nodeServiceConfig = serviceConfigs.find(x => x.id === type);
         const server = helpersCompose.getDevServer(nodeServiceConfig);
         services.server = {...server.service, ...helpersCompose.getDependsOn(dependsOn)}
@@ -109,12 +109,6 @@ const buildDependsOn = (services = {}, dependsOn = []) => {
  * @param {string[]} nginxConfig - An array representing the NGINX configuration.
  */
 const addServices = (serviceConfigs = [], services = {}, nginxConfig = []) => {
-
-    if (verbs.hasAnalysis) {
-
-        // analysis requires no other services.
-        return;
-    }
 
     if (verbs.hasInclude) {
 

@@ -143,13 +143,13 @@ $ npm run start  -- --mode dev --context dataStructures
 #### Run dependency analysis on a specific application
 
 ```shell
-$ npm run start -- --context dataStructures --mode analysis
+$ npm run analysis dir=dataStructures
 ```
 ##### This will:
 - Start the webpack analysis server.
 - Perform a dependency analysis of the dataStructures application frontend.
 - The default application is the root application - home.
-- Open your browser and navigate to http://localhost
+- Open your browser and navigate to http://localhost:8080
 
 ### Tasks
 
