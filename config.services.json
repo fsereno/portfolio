@@ -6,7 +6,7 @@
         "ports": ["3001:3001"],
         "networks": ["backend"],
         "version": "net8.0",
-        "image": "fabiosereno/portfolio.coffee-machine:0.0.15"
+        "image": "fabiosereno/portfolio.coffee-machine:1.0.0"
     },
     {
         "id": "dataStructures",
