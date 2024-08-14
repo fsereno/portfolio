@@ -31,7 +31,7 @@ export function EmployeeTableComponent({
                                         <tr key={employee.key} id={employee.key}>
                                             <td>{employee.name}</td>
                                             <td>{employee.displaySalary}</td>
-                                            <td><a href="#" className="badge badge-danger delete" data-index={index} onClick={handleDelete}>Delete</a></td>
+                                            <td><a href="#" className="badge bg-danger delete" data-index={index} onClick={handleDelete}>Delete</a></td>
                                         </tr>
                                     )
                                 })}
