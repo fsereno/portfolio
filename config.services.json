@@ -24,7 +24,7 @@
         "ports": ["3003:3003"],
         "networks": ["backend"],
         "version": "net8.0",
-        "image": "fabiosereno/portfolio.unique-data-entry:0.0.2"
+        "image": "fabiosereno/portfolio.unique-data-entry:1.0.0"
     },
     {
         "id": "stringSort",

@@ -196,7 +196,7 @@ class UniqueDataEntryApp extends React.Component {
                         <td>{item.secondName}</td>
                         <td>{item.contact}</td>
                         <td>{item.postCode}</td>
-                        <td><a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
+                        <td><a href="#" className="badge bg-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
                       </tr>
                     )
                   })}

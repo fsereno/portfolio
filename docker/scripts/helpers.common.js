@@ -40,11 +40,14 @@ const getAll = (command) => {
  */
 const run = (command, options, callback = () => undefined) => {
   console.log(chalk.green('Running command: ' + command));
-  execSync(command, {...options, stdio: 'inherit' });
-  if (typeof callback === "function") {
-    callback();
+  try {
+    execSync(command, {...options, stdio: 'inherit' });
+    if (typeof callback === "function") {
+      callback();
+    }
+  } catch (error) {
+    console.error(`Error running command: ${command}`, error);
   }
-  process.exit(0);
 }
 
 /**

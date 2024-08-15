@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const constants = require('./constants.image');
 const helpers = require('./helpers.common');
 const verbs = require('./verbs.image');
@@ -17,7 +18,7 @@ const runIfHasNameAndTag = () => {
 }
 
 /**
- * Pushes an image with tag to the repository.
+ * Pushes an image with tag to the Docker Hub repository.
  * Requires --push and --tag.
  */
 const runIfHasPushAndTag = () => {
@@ -28,7 +29,37 @@ const runIfHasPushAndTag = () => {
     }
 }
 
+/**
+ * Pushes ALL configured application images to the Docker Hub repository.
+ * Requires --push-all.
+ */
+const runIfPushAll = () => {
+    if (verbs.hasPush && verbs.hasAll) {
+        console.log(chalk.green('Pushing ALL configured application images to Docker Hub.'));
+        const serviceConfigs = helpers.getServicesConfig();
+
+        for (let index = 0; index < serviceConfigs.length; index++) {
+
+            const element = serviceConfigs[index];
+            const tag = element.image;
+
+            if (tag && isMyImage(tag)) {
+                const command = `docker image push ${tag}`;
+                helpers.run(command);
+            }
+        }
+        console.log(chalk.green('Completed pushing ALL configured application images to Docker Hub.'));
+    }
+}
+
+/**
+ * Checks if a tag is one of my tags.
+ * @param {string} tag - The tag to check.
+ */
+const isMyImage = (tag) => tag.startsWith('fabiosereno/portfolio');
+
 module.exports = {
     runIfHasNameAndTag,
-    runIfHasPushAndTag
+    runIfHasPushAndTag,
+    runIfPushAll
 };
