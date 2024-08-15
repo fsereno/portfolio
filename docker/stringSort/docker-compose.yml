@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
     stringSort:
-        image: 'fabiosereno/portfolio.string-sort:0.0.1'
+        image: 'fabiosereno/portfolio.string-sort:1.0.0'
         ports:
             - '3004:3004'
         container_name: stringSort
