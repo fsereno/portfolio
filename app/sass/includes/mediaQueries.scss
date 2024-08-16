@@ -1,6 +1,6 @@
 @import "./constants.scss";
 
-@media screen and (max-width: $medium) {
+@media screen and (max-width: $medium-nav) {
     .navbar {
         .navbar-nav .nav-link {
             padding-bottom: 2rem;

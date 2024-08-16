@@ -17,6 +17,12 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1rem;
+    .card {
+      transition: box-shadow .5s;
+      &:hover  {
+        box-shadow: var(--bs-box-shadow) !important;
+      }
+    }
   }
 
   #introContainer {
@@ -64,8 +70,23 @@
 @media only screen and (min-width: $large) {
   #result {
     .card-columns {
-      grid-template-columns: auto auto auto;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
-  
+}
+
+@media only screen and (min-width: $medium) {
+  #result {
+    .card-columns {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+@media only screen and (min-width: $large) {
+  #result {
+    .card-columns {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
 }

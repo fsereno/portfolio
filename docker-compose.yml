@@ -1,65 +1,5 @@
 version: '3.9'
 services:
-  uniqueDataEntry:
-    image: fabiosereno/portfolio.unique-data-entry:1.0.0
-    container_name: uniqueDataEntry
-    networks:
-      - backend
-    ports:
-      - '3003:3003'
-    mem_limit: 500M
-    cpus: 0.2
-    depends_on: []
-    x-aws-pull_credentials: >-
-      arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX
-  dataStructures:
-    image: fabiosereno/portfolio.data-structures:1.0.0
-    container_name: dataStructures
-    networks:
-      - backend
-    ports:
-      - '3002:3002'
-    mem_limit: 500M
-    cpus: 0.2
-    depends_on: []
-    x-aws-pull_credentials: >-
-      arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX
-  entitySort:
-    image: fabiosereno/portfolio.entity-sort:1.0.0
-    container_name: entitySort
-    networks:
-      - backend
-    ports:
-      - '3005:3005'
-    mem_limit: 500M
-    cpus: 0.2
-    depends_on: []
-    x-aws-pull_credentials: >-
-      arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX
-  stringSort:
-    image: fabiosereno/portfolio.string-sort:1.0.0
-    container_name: stringSort
-    networks:
-      - backend
-    ports:
-      - '3004:3004'
-    mem_limit: 500M
-    cpus: 0.2
-    depends_on: []
-    x-aws-pull_credentials: >-
-      arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX
-  coffeeMachine:
-    image: fabiosereno/portfolio.coffee-machine:1.0.0
-    container_name: coffeeMachine
-    networks:
-      - backend
-    ports:
-      - '3001:3001'
-    mem_limit: 500M
-    cpus: 0.2
-    depends_on: []
-    x-aws-pull_credentials: >-
-      arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX
   nodeToDo:
     image: fabiosereno/portfolio.node-to-do:1.0.0
     container_name: nodeToDo
@@ -85,11 +25,6 @@ services:
     x-aws-pull_credentials: >-
       arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX
     depends_on:
-      - uniqueDataEntry
-      - dataStructures
-      - entitySort
-      - stringSort
-      - coffeeMachine
       - nodeToDo
 networks:
   frontend: null

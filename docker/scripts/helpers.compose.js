@@ -3,6 +3,7 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 const constants = require('./constants.common');
 const DOT_NET_DEV_BASE_IMAGE = 'fabiosereno/portfolio.dotnet.dev:1.0.0';
+const NODE_DEV_BASE_IMAGE = 'fabiosereno/portfolio.node.dev:1.0.0';
 
 /**
  * Gets the base compose definition.
@@ -116,7 +117,8 @@ const getDevDotNetService = (service) => {
  */
 const getDevNodeService = (service) => {
   const {name} = service;
-  const base = getServiceBase({...service, image: DOT_NET_DEV_BASE_IMAGE});
+  const base = getServiceBase({...service, image: NODE_DEV_BASE_IMAGE});
+  
   const _service = {
     ...base.service,
     volumes: [`./app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
