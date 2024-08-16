@@ -93,5 +93,5 @@ https://www.npmjs.com/package/puppeteer
 https://stackoverflow.com/questions/58134793/error-while-loading-shared-libraries-libnss3-so-while-running-gtlab-ci-job-to
 https://pptr.dev/#?product=Puppeteer&version=v13.5.0&show=api-pagewaitforselectorselector-options
 
-test
+build
 
