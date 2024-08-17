@@ -243,3 +243,5 @@ docker-token.json
 *.secret.json
 docker-compose.dev.yml
 docker-compose.yml
+nginx.conf
+nginx.dev.conf
