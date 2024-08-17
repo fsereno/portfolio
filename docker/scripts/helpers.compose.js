@@ -86,7 +86,7 @@ const getNginxDev = (service) => ({
  */
 const getNginxProd = (service) => ({
   ...getNginxBase(service),
-  ['x-aws-pull_credentials']: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
+  ['x-aws-pull_credentials']: process.env.AWS_ACCESS_TOKEN
 })
 
 /**

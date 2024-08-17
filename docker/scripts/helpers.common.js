@@ -132,5 +132,6 @@ module.exports = {
     getConfig,
     getServicesConfig,
     getComposeFilename,
-    getNginxFilename
+    getNginxFilename,
+    getJson
 };

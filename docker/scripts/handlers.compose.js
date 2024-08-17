@@ -166,6 +166,17 @@ const addApplicationServices = (applicationServices = [], serviceConfigs = [], s
 */
 const addSecrets = (config = {}, secrets = {}) => {
     const secrets = config.secrets;
+
+    Object.keys(secrets).forEach(key => {
+
+        const value = helpers.getJson(secrets[key]);
+
+        if (value) {
+            process.env[key] = value;
+        }
+    });
+
+
     secrets = {...secrets};
 }
 
