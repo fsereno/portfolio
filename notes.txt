@@ -1,8 +1,5 @@
 TODO:
 
-
-'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
-
 mkae this look better - http://localhost/app_nodeToDo/index.html#/manage
 
 Need to re-image the following:

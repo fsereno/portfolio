@@ -44,8 +44,8 @@ const compose = () => {
             backend: null
         }
 
-        addSecretsToEnv(config);
         assertMode();
+        addSecretsToEnv(config);
         setProdRoot(nginxConfig);
         addServices(config, serviceConfigs, services, nginxConfig);
         buildDependsOn(services, dependsOn);
@@ -170,8 +170,8 @@ const addSecretsToEnv = (config = {}) => {
         const value = helpers.getJson(secrets[key]);
 
         if (value) {
+            console.log(chalk.blue(`adding secret:`), chalk.yellow(`${key}`));
             process.env[key] = value.token;
-            console.log("SECRET", process.env[key])
         }
 
     });
