@@ -24,6 +24,9 @@
     "role": "Software Engineer",
     "description": "Portfolio By Fabio Sereno - Software Engineer",
     "thumbnail": "PortfolioThumbnail.png",
+    "secrets": {
+        "x-aws-pull_credentials" : "./x-aws-pull_credentials.secret.txt"
+    },
     "labels": {
         "JavaScript" : "warning",
         "NodeJS": "success",

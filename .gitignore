@@ -239,3 +239,4 @@ BundleArtifacts/
 
 #specific files
 docker-token.json
+*.secret.txt

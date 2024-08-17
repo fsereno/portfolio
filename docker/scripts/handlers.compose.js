@@ -31,11 +31,13 @@ const assertComplete = () => console.log(chalk.green(`Compose complate...`));
 const compose = () => {
 
         const serviceConfigs = helpers.getServicesConfig();
+        const config = helpers.getConfig();
         const yamlFilename = helpers.getComposeFilename(helpers.get(constants.MODE));
         const yamlRoot = './';
         const yamlPath = `${yamlRoot}${yamlFilename}`
         const nginxFilename = helpers.getNginxFilename(helpers.get(constants.MODE));
         const services = {}
+        const secrets = {}
         const dependsOn = [];
         const nginxConfig = helpersCompose.getNginxConfOpen();
         const networks = {
@@ -45,7 +47,8 @@ const compose = () => {
 
         assertMode();
         setProdRoot(nginxConfig);
-        addServices(serviceConfigs, services, nginxConfig);
+        addServices(config, serviceConfigs, services, nginxConfig);
+        addSecrets(config, secrets);
         buildDependsOn(services, dependsOn);
         addNginx(services, serviceConfigs, dependsOn);
         addDevServer(services, nginxConfig, dependsOn, serviceConfigs);
@@ -104,11 +107,12 @@ const buildDependsOn = (services = {}, dependsOn = []) => {
 
 /**
  * Adds services to the service configurations and NGINX configuration based on the environment configuration.
+ * @param {object} config - An object representing the application configuration.
  * @param {object[]} serviceConfigs - An array representing the service configurations.
  * @param {object} services - An object representing the services.
  * @param {string[]} nginxConfig - An array representing the NGINX configuration.
  */
-const addServices = (serviceConfigs = [], services = {}, nginxConfig = []) => {
+const addServices = (config, serviceConfigs = [], services = {}, nginxConfig = []) => {
 
     if (verbs.hasInclude) {
 
@@ -119,7 +123,6 @@ const addServices = (serviceConfigs = [], services = {}, nginxConfig = []) => {
         addApplicationServices(applicationServices, serviceConfigs, services, nginxConfig);
 
     } else {
-        const config = helpers.getConfig();
 
         config.applications.forEach(_application => {
             const applicationServices = _application.services;
@@ -154,6 +157,16 @@ const addApplicationServices = (applicationServices = [], serviceConfigs = [], s
             }
         });
     }
+}
+
+/**
+ * This method will mutate the secrets object and add the configured secrets.
+ * @param {object} config - An object representing the application configuration.
+ * @param {object} secrets - The secrets object to mutate.
+*/
+const addSecrets = (config = {}, secrets = {}) => {
+    const secrets = config.secrets;
+    secrets = {...secrets};
 }
 
 module.exports = {
