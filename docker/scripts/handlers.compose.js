@@ -37,7 +37,6 @@ const compose = () => {
         const yamlPath = `${yamlRoot}${yamlFilename}`
         const nginxFilename = helpers.getNginxFilename(helpers.get(constants.MODE));
         const services = {}
-        const secrets = {}
         const dependsOn = [];
         const nginxConfig = helpersCompose.getNginxConfOpen();
         const networks = {
@@ -45,10 +44,10 @@ const compose = () => {
             backend: null
         }
 
+        addSecretsToEnv(config);
         assertMode();
         setProdRoot(nginxConfig);
         addServices(config, serviceConfigs, services, nginxConfig);
-        addSecrets(config, secrets);
         buildDependsOn(services, dependsOn);
         addNginx(services, serviceConfigs, dependsOn);
         addDevServer(services, nginxConfig, dependsOn, serviceConfigs);
@@ -160,11 +159,10 @@ const addApplicationServices = (applicationServices = [], serviceConfigs = [], s
 }
 
 /**
- * This method will mutate the secrets object and add the configured secrets.
+ * This method will add the secrets to the node environment.
  * @param {object} config - An object representing the application configuration.
- * @param {object} secrets - The secrets object to mutate.
 */
-const addSecrets = (config = {}, secrets = {}) => {
+const addSecretsToEnv = (config = {}) => {
     const secrets = config.secrets;
 
     Object.keys(secrets).forEach(key => {
@@ -172,12 +170,11 @@ const addSecrets = (config = {}, secrets = {}) => {
         const value = helpers.getJson(secrets[key]);
 
         if (value) {
-            process.env[key] = value;
+            process.env[key] = value.token;
+            console.log("SECRET", process.env[key])
         }
+
     });
-
-
-    secrets = {...secrets};
 }
 
 module.exports = {

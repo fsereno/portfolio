@@ -241,3 +241,5 @@ BundleArtifacts/
 docker-token.json
 *.secret.txt
 *.secret.json
+docker-compose.dev.yml
+docker-compose.yml
