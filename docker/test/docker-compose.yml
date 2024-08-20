@@ -7,6 +7,7 @@ services:
             - '../../config.json:/usr/src/app/config.json'
             - '../../babel.config.json:/usr/src/app/babel.config.json'
             - '../../setupTests.js:/usr/src/app/setupTests.js'
+            - '../../jest.config.js:/usr/src/app/jest.config.js'
             - '../../app:/usr/src/app/app'
             - '../../docs:/usr/src/app/docs'
             - '../../build:/usr/src/app/build'

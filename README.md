@@ -8,6 +8,8 @@ Passionate about software development and constantly eager to learn and adopt th
 ## My Portfolio Repository
 The purpose of this repository is to demonstrate skills in various technologies, coding proficiency and knowledge.
 
+This portfolio showcases a minimum viable product (MVP) for a technology-agnostic cloud deployment solution.
+
 To view a static version of this project with limited functionality, please visit:
 https://fsereno.github.io/portfolio/
 
@@ -16,29 +18,7 @@ To see a fully containerised version of this project deployed to AWS (Amazon Web
 - Raise an issue on Github (https://github.com/fsereno/portfolio/issues)
 - Contact me on LinkedIn (https://www.linkedin.com/in/fabio-sereno-6a97b986/)
 
-This project is both built and deployed with continuous integration and deployment (CI/CD).
-
-Some of the technology used in this project and related projects:
-- .NET (https://dotnet.microsoft.com)
-- Docker (https://www.docker.com/)
-- Docker Hub (https://hub.docker.com/)
-- NodeJS (https://nodejs.org/en/)
-- Webpack (https://webpack.js.org/)
-- Pug (https://pugjs.org/api/getting-started.html)
-- TypeScript (https://www.typescriptlang.org)
-- A-Frame (https://aframe.io/)
-- Sass (https://sass-lang.com/)
-- Three.js (https://threejs.org/)
-- React (https://reactjs.org/)
-- Vue (https://vuejs.org/)
-- Taiko (https://www.npmjs.com/package/taiko)
-- Mocha (https://mochajs.org/)
-- Chai (https://www.chaijs.com/)
-- Enzyme (https://enzymejs.github.io/enzyme/)
-- NUnit (https://nunit.org/)
-- SOLID principles
-- TDD - Test driven development
-- DDD - Domain driven development
+Alternatively to deploy locally, please clone this repository, ensure NodeJS and Docker are installed on your machine and you can then run the production version locally.
 
 ## Contents
 
@@ -82,7 +62,7 @@ However, once again, this will include all available services in the compose fil
 To include only specific services in the compose file, use the --include argument:
 
 ```shell
-$ npm run compose -- --include dataStructures --mode dev
+$ npm run compose -- --mode dev --include dataStructures
 ```
 ##### This will:
 - Compose the development version of the file.
@@ -161,37 +141,23 @@ Tasks create ephemeral containers. Containers which are destroyed after a task h
 #### Build for release
 
 ```shell
-$ npm run task -- --name build
+$ npm run release
 ```
 ##### This will:
-- Create an ephemeral container to run the task.
 - Build the production static assets directory (dist or docs, depending on the configuration).
-- The container is automatically destroyed after use.
 
 #### Run all frontend unit tests
 
 ```shell
-$ npm run task --  --name test
+$ npm run test
 ```
 ##### This will:
-- Create an ephemeral container to run the task.
-- Run all application specific and global unit tests.
-
-#### Run all functional end-to-end tests
-
-Ensure the application is already running first.
-
-```shell
-$ npm run test-apps-e2e
-```
-##### This will:
-- Run all functional tests from the ./app/tests/functional directory
-- Currently this feature is a work in progress (WIP) and will not work on ARM architecture
+- Run all application specific and global frontend unit tests.
 
 #### Create a new application
 
 ```shell
-$ npm run task --  --name create
+$ npm run create
 ```
 ##### This will:
 - Create an ephemeral container to run the task.
