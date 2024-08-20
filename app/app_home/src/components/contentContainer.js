@@ -18,7 +18,6 @@ export function ContentContainer() {
         <div className="col-lg-12">
           <h2 className='display-4'>{context.config.title}</h2>
           <p className="text-muted">{context.config.author} - {context.config.role}</p>
-          <hr />
         </div>
       </div>
       <SearchBar
