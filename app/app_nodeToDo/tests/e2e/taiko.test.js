@@ -8,7 +8,7 @@ const URL = `http://${CONFIG.dockerHost}/${APPLICATION}/index.html`;
 
 beforeAll(async () => {
     await openBrowser({
-      headless: true,
+      headless: false,
       slowMo: 250,
       args: ['--no-sandbox']
     });
@@ -20,6 +20,7 @@ describe(APPLICATION, () => {
     });
     test('Should not login successfully when an invalid user is passed', async () => {
         await goto(URL);
+        await click(button({id: 'cookieBannerBtn'}));
         await write('Someuser123', into(textBox({ id: 'username' })));
         await write('SomePassword123', into(textBox({ id: 'password' })));
         await click(button({ id: 'submit' }));
@@ -31,6 +32,7 @@ describe(APPLICATION, () => {
     test('Should login successfully with tester', async () => {
         let exists = false;
         await goto(URL);
+        await click(button({id: 'cookieBannerBtn'}));
         await write('tester', into(textBox({ id: 'username' })));
         await write('password', into(textBox({ id: 'password' })));
         await click(button({ id: 'submit' }));
@@ -49,6 +51,7 @@ describe(APPLICATION, () => {
     test('Should be able to add and remove an item', async () => {
         let exists = false;
         await goto(URL);
+        await click(button({id: 'cookieBannerBtn'}));
         await write('tester', into(textBox({ id: 'username' })));
         await write('password', into(textBox({ id: 'password' })));
         await click(button({ id: 'submit' }));
@@ -73,6 +76,7 @@ describe(APPLICATION, () => {
     test('Should be able to move an item to Completed items', async () => {
         let exists = false;
         await goto(URL);
+        await click(button({id: 'cookieBannerBtn'}));
         await write('tester', into(textBox({ id: 'username' })));
         await write('password', into(textBox({ id: 'password' })));
         await click(button({ id: 'submit' }));

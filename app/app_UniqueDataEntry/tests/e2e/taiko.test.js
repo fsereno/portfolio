@@ -20,6 +20,7 @@ beforeAll(async () => {
 describe(APPLICATION, () => {
   test('Should add an item to the table', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await write('James', into(textBox({ id: 'firstNameInput' })));
     await write('Brown', into(textBox({ id: 'secondNameInput' })));
     await write('(000) 111 222', into(textBox({ id: 'contactInput' })));
@@ -31,6 +32,7 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Should not add a duplicate item to the table', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await write('John', into(textBox({ id: 'firstNameInput' })));
     await write('Doe', into(textBox({ id: 'secondNameInput' })));
     await write('000000000', into(textBox({ id: 'contactInput' })));
@@ -46,6 +48,7 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Should remove an item to the table', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await click($('a.delete[data-index="0"]'));
     const result = await evaluate($('#itemTable'), (element) => element.innerText);
     expect(result).toBe('First name\tSecond name\tContact\tPostcode\tAction');

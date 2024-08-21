@@ -20,6 +20,7 @@ beforeAll(async () => {
 describe(APPLICATION, () => {
   test('Should not add an item to the queue', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await click(button({ id: 'queueInput_submit' }));
     const error = await $('.was-validated .form-control:invalid').exists();
     const result = await evaluate($('#queueList'), (element) => element.innerText);
@@ -28,6 +29,7 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Should not add an item to the stack', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await click(button({ id: 'stackInput_submit' }));
     const error = await $('.was-validated .form-control:invalid').exists();
     const result = await evaluate($('#stackList'), (element) => element.innerText);
@@ -36,6 +38,7 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Should add an item to the queue', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await write('Item 1', into(textBox({ id: 'queueInput' })));
     await click(button({ id: 'queueInput_submit' }));
     const result = await evaluate($('#queueList'), (element) => element.innerText);
@@ -43,6 +46,7 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Should remove an item to the queue', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await write('Item 1', into(textBox({ id: 'queueInput' })));
     await click(button({ id: 'queueInput_submit' }));
     await waitFor(2000);
@@ -55,6 +59,7 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Should add an item to the stack', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await write('Item 1', into(textBox({ id: 'stackInput' })));
     await click(button({ id: 'stackInput_submit' }));
     const result = await evaluate($('#stackList'), (element) => element.innerText);
@@ -62,6 +67,7 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Should remove an item to the queue', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await write('Item 1', into(textBox({ id: 'stackInput' })));
     await click(button({ id: 'stackInput_submit' }));
     await waitFor(2000);

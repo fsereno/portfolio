@@ -20,6 +20,7 @@ beforeAll(async () => {
 describe(APPLICATION, () => {
   test('Should add an item', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await write('James Bond', into(textBox({id:'nameInput'})));
     await write('95000', into(textBox({id:'salaryInput'})));
     await click(button({id:'addEmployee_submit'}));
@@ -34,12 +35,14 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Should remove an item', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await click(link('delete'));
     const result = await tableCell({row:1, col:1}).exists();
     expect(result).toBeFalsy();
   }, 100000);
   test('Shold sort table ascending', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await write('James Bond', into(textBox({id:'nameInput'})));
     await write('95000', into(textBox({id:'salaryInput'})));
     await click(button({id:'addEmployee_submit'}));
@@ -55,6 +58,7 @@ describe(APPLICATION, () => {
   }, 100000);
   test('Shold sort table ascending', async () => {
     await goto(URL);
+    await click(button({id: 'cookieBannerBtn'}));
     await write('James Bond', into(textBox({id:'nameInput'})));
     await write('95000', into(textBox({id:'salaryInput'})));
     await click(button({id:'addEmployee_submit'}));
