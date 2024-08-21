@@ -51,7 +51,7 @@ export function CookieBannerComponent({isHomeActive}) {
         <>
             <div className={`cookie-banner-container fade-element ${fadeClass}`} id='cookieBannerComponent'>
                 <p>This application uses cookies to determine which services are deployed and do not store any personal data.</p>
-                <button type="button" className="btn btn-sm btn-dark ml-5" onClick={handleOnClick}>Accept</button>
+                <button type="button" className="btn btn-sm btn-dark ms-5" onClick={handleOnClick}>Accept</button>
             </div>
         </>
     );

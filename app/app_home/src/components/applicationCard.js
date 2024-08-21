@@ -22,13 +22,13 @@ export const ApplicationCard = React.memo(({application, condition}) => {
                         <Card.Text>
                             {application.subHeading}
                         </Card.Text>
-                        <Card.Link className="btn btn-outline-dark btn-sm card-link" href={`${configContext.config.prefix}${application.folder}/index.html`}>View application</Card.Link>
+                        <Card.Link className="btn btn-outline-dark btn-sm card-link link" href={`${configContext.config.prefix}${application.folder}/index.html`}>View application</Card.Link>
                         <Row className="mt-3">
                             <Col>
                                 {application.labels ? application.labels.map(x => {
                                     const className = configContext.config.labels[x];
                                     return (
-                                        <Badge key={x} variant={className} className="text-light mr-2">{x}</Badge>
+                                        <Badge key={x} bg={className} className="text-light me-2">{x}</Badge>
                                     )
                                 }) : null}
                             </Col>

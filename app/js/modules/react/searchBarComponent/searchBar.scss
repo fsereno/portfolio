@@ -1,39 +1,48 @@
 @import "../../../../sass/includes/colours.scss";
+@import "../../../../sass/includes/constants.scss";
 
 .searchBar {
-    .form-control {
+    border-radius: $border-radius;
+    .form-control.searchInput {
+      padding: 1rem;
       border: 1px solid $darkGrey;
       border-right:none;
-      &.no-show-clear, &.no-show-clear:focus{
-        border-right:1px solid;
-      }
       &:focus {
         border-right:none;
         box-shadow: none;
       }
-    }
-    span.input-group-text {
-      background: $darkGrey;
-      i {
-        color: $white;
+      &.no-show-clear {
+        border-right: 1px solid $darkGrey;
       }
     }
     .openFilterBtn {
-      border-left: 1px solid #fff;
-      &:focus {
-        box-shadow: none;
+      border-radius: 0 $border-radius $border-radius 0;
+      padding: 0;
+      button {
+        border-radius: 0 $border-radius $border-radius 0;
+        border-left: 1px solid $real-white;
+        color: $real-white;
+        background: $darkGrey;
+        border: none;
+        width: 50px;
+        height: 100%;
+        &:focus, &:hover {
+          box-shadow: none;
+          background: $lightGrey;
+        }
       }
     }
     .cancelBtn {
+      background: $real-white;
+      border-right: none;
+      border-left: none;
+      margin: 0;
+      &.no-quick-filters {
+        border-right: 1px solid $darkGrey;
+      }
       button {
-        border-top: 1px solid $darkGrey;
-        border-bottom: 1px solid $darkGrey;
-        border-right: 1px solid #fff;
-        &.no-quick-filters {
-          border-right: 1px solid $darkGrey;
-        }
-        background:transparent;
-        height: 50px;
+        border: none;
+        background:$real-white;
         padding: 0 1.5rem;
         &:focus {
           box-shadow: none;

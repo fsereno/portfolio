@@ -1,10 +1,8 @@
-const chai = require("chai")
-
 describe("Util", () => {
     describe("Test", () => {
-        it("Should return true", () => {
+        test("Should return true", () => {
             let result = true;
-            chai.expect(result).to.equal(true);
+            expect(result).toBe(true);
         });
     });
 });

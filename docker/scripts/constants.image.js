@@ -4,6 +4,7 @@ const MODE = '--mode';
 const NAME = '--name';
 const TAG = '--tag';
 const PUSH = '--push';
+const ALL = '--all';
 const HELP = '--help';
 
 const help = `
@@ -27,6 +28,8 @@ ${chalk.yellow(TAG)} - ${chalk.green('This command is used to assign a tag to th
 
 ${chalk.yellow(PUSH)} - ${chalk.green('This command is used to push an image to the repository.')}
 
+${chalk.yellow(ALL)} - ${chalk.green('This command is used in conjunction with --push to push all configured application images to Docker Hub.')}
+
 ${chalk.yellow(HELP)} - ${chalk.green('This is help :-)')}`;
 
 module.exports = {
@@ -34,6 +37,7 @@ module.exports = {
     NAME,
     TAG,
     PUSH,
+    ALL,
     HELP,
     help
 };

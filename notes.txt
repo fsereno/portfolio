@@ -1,5 +1,55 @@
 TODO:
 
+mkae this look better - http://localhost/app_nodeToDo/index.html#/manage
+
+Need to re-image the following:
+Analysis
+build
+create
+dev (done)
+test
+
+All inherit the NPM image.
+
+All images will need pushing to Docker Hub.
+
+
+Can these be removed ?
+
+"webpack-shell-plugin": "^0.5.0"
+"webpack-node-externals": "^3.0.0",
+
+Babel is needed
+"@babel/cli": "^7.24.7",
+"@babel/core": "^7.24.7",
+"@babel/plugin-transform-class-properties": "^7.24.7",
+"@babel/preset-env": "^7.24.7",
+"@babel/preset-react": "^7.24.7",
+"@babel/preset-typescript": "^7.24.7",
+"@babel/register": "^7.24.6",
+
+
+Updates
+Need a new pug-loader for web pack - the old one does not support latest pug version.
+
+"pug-loader": "^2.4.0",
+
+What is "mocha-loader": "^5.1.5", used for ?
+
+packages removed
+"pug-loader": "^2.4.0",
+"mocha-loader": "^5.1.5"
+"sinon-chai": "^3.7.0",
+
+Need to find alternatives to:
+Enzyme
+Masonary-layout for grids
+NodeToDo is not working at all
+Needing to put styles in app scss - global are not working - might just need a compile.
+
+
+Previous.
+
 Decide on Analysis - given there is now a context for apps
 Maybe keep all the compose for alaysis in place - good handling for nginx port forwarding for example.
 But send it to the alaysis dir ? - no need however to compose with dir ever time anymore.

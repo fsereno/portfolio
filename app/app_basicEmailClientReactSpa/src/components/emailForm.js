@@ -4,6 +4,7 @@ import React, { useState, useLayoutEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import { SUBMIT, OUTBOX, MY_ADDRESS, REPLY, SELECT } from '../constants';
 import { EmailContext, EmailClientContext, EmailModalContext} from '../contexts';
 import { ENQUEUE_TOAST, ToasterContext } from '../../../js/modules/react/toasterComponent';
@@ -71,8 +72,8 @@ export function EmailForm() {
 
     return (
         <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
-            <Form.Row>
-                <Form.Group as={Col}>
+            <Row>
+                <Form.Group as={Col} className='mb-3'>
                     <Form.Label>
                         From:
                     </Form.Label>
@@ -87,9 +88,9 @@ export function EmailForm() {
                         Please enter a value.
                     </Form.Control.Feedback>
                 </Form.Group>
-            </Form.Row>
-            <Form.Row>
-                <Form.Group as={Col}>
+            </Row>
+            <Row>
+                <Form.Group as={Col} className='mb-3'>
                     <Form.Label>
                         To:
                     </Form.Label>
@@ -105,9 +106,9 @@ export function EmailForm() {
                         Please enter a value.
                     </Form.Control.Feedback>
                 </Form.Group>
-            </Form.Row>
-            <Form.Row>
-                <Form.Group as={Col}>
+            </Row>
+            <Row>
+                <Form.Group as={Col} className='mb-3'>
                     <Form.Label>
                         Subject:
                     </Form.Label>
@@ -123,9 +124,9 @@ export function EmailForm() {
                         Please enter a value.
                     </Form.Control.Feedback>
                 </Form.Group>
-            </Form.Row>
-            <Form.Row>
-                <Form.Group as={Col}>
+            </Row>
+            <Row>
+                <Form.Group as={Col} className='mb-3'>
                     <Form.Label>
                         Message:
                     </Form.Label>
@@ -142,12 +143,12 @@ export function EmailForm() {
                         Please enter a value.
                     </Form.Control.Feedback>
                 </Form.Group>
-            </Form.Row>
-            <Form.Row>
+            </Row>
+            <Row>
                 <Form.Group as={Col}>
                     <Button className="float-right" id="submit" variant="dark" type="submit">Submit</Button>
                 </Form.Group>
-            </Form.Row>
+            </Row>
         </Form>
     )
 }

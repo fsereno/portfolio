@@ -3,8 +3,7 @@ const constantsCommon = require('./constants.common');
 const helpers = require('./helpers.common');
 
 const hasDev = helpers.get(constants.MODE) === constantsCommon.dev;
-const hasAnalysis = helpers.get(constants.MODE) === constantsCommon.analysis;
-const hasProd = !hasDev && !hasAnalysis;
+const hasProd = !hasDev;
 const hasName = helpers.has(constants.NAME);
 const hasContext = helpers.has(constants.CONTEXT);
 const hasHelp = helpers.has(constants.HELP);
@@ -26,7 +25,6 @@ module.exports = {
     hasName,
     hasContext,
     hasHelp,
-    hasAnalysis,
     hasTest,
     supported,
     ephemeral

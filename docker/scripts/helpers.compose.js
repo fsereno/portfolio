@@ -2,6 +2,8 @@ const chalk = require('chalk');
 const fs = require('fs');
 const yaml = require('js-yaml');
 const constants = require('./constants.common');
+const DOT_NET_DEV_BASE_IMAGE = 'fabiosereno/portfolio.dotnet.dev:1.0.0';
+const NODE_DEV_BASE_IMAGE = 'fabiosereno/portfolio.node.dev:1.0.0';
 
 /**
  * Gets the base compose definition.
@@ -21,7 +23,7 @@ const compose = (obj = {}) => {
 * @param {*} dir - The application directory to build the dev server against.
  * @returns - The node service definition.
  */
-const getNodeDev = ({name, ports, networks, image}) => ({
+const getDevServer = ({name, ports, networks, image}) => ({
   service: {
     image: image,
     environment: ['dir=${DIR:-home}'],
@@ -44,7 +46,7 @@ const getNodeDev = ({name, ports, networks, image}) => ({
       proxy_set_header X-Real-IP $remote_addr;
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header X-NginX-Proxy true;
-      proxy_pass http://node:8080;
+      proxy_pass http://server:8080;
       proxy_ssl_session_reuse off;
       proxy_set_header Host $http_host;
       proxy_cache_bypass $http_upgrade;
@@ -84,7 +86,7 @@ const getNginxDev = (service) => ({
  */
 const getNginxProd = (service) => ({
   ...getNginxBase(service),
-  ['x-aws-pull_credentials']: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
+  ['x-aws-pull_credentials']: process.env.AWS_ACCESS_TOKEN
 })
 
 /**
@@ -93,14 +95,14 @@ const getNginxProd = (service) => ({
  * @returns - The development service definition.
  */
 const getDevDotNetService = (service) => {
-  const {name} = service;
-  const base = getServiceBase({...service, image: 'fabiosereno/portfolio.dotnet.dev:0.0.1'});
+  const {name, version} = service;
+  const base = getServiceBase({...service, image: DOT_NET_DEV_BASE_IMAGE});
   const _service = {
     ...base.service,
     volumes: [`./app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
       './backend/Portfolio.Core:/usr/src/app/backend/Portfolio.Core',
     ],
-    command: `sh -c "dotnet build /usr/src/app/app/app_${name}/backend/api && dotnet /usr/src/app/app/app_${name}/backend/api/bin/Debug/net7.0/api.dll"`,
+    command: `sh -c "dotnet build /usr/src/app/app/app_${name}/backend/api && dotnet /usr/src/app/app/app_${name}/backend/api/bin/Debug/${version}/api.dll"`,
   }
   return {
     service: _service,
@@ -115,7 +117,8 @@ const getDevDotNetService = (service) => {
  */
 const getDevNodeService = (service) => {
   const {name} = service;
-  const base = getServiceBase({...service, image: 'fabiosereno/portfolio.node.dev:0.0.1'});
+  const base = getServiceBase({...service, image: NODE_DEV_BASE_IMAGE});
+  
   const _service = {
     ...base.service,
     volumes: [`./app/app_${name}/backend/api:/usr/src/app/app/app_${name}/backend/api`,
@@ -138,7 +141,7 @@ const getServiceProd = (service) => {
   const base = getServiceBase(service);
   const _service = {
     ...base.service,
-    ['x-aws-pull_credentials']: 'arn:aws:secretsmanager:eu-west-2:523190279095:secret:dockerhubAccessToken-1JuRZX'
+    ['x-aws-pull_credentials']: process.env.AWS_ACCESS_TOKEN
   }
   return {
     service: _service,
@@ -284,7 +287,7 @@ const createYaml = (config, filePath) => {
 }
 
 module.exports = {
-  getNodeDev,
+  getDevServer,
   compose,
   createYaml,
   getService,

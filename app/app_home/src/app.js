@@ -1,10 +1,13 @@
 "use strict;"
 
 import "regenerator-runtime/runtime";
+
+import '../../sass/includes/styleDeps.scss';
 import "../sass/styles.scss";
 
+
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { ApplicationsContextProvider } from '../../js/modules/react/applicationsContextProvider';
 import { ContentContainer } from './components/contentContainer';
 import { IntroContainer } from './components/introContainer';
@@ -28,4 +31,4 @@ function App() {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.createRoot(document.getElementById('result')).render(<App />);

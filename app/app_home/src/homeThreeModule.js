@@ -59,7 +59,7 @@ export const homeThreeModule = (async () => {
 
     const setRenderer = () => {
         let container = document.getElementById(CONTAINERID);
-        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(container.offsetWidth, container.offsetHeight);
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -188,8 +188,8 @@ export const homeThreeModule = (async () => {
     }
 
     const createPlane = () =>  {
-        const planeGeometry = new THREE.PlaneBufferGeometry(50, 50, 1, 1 ); 
-        const planeMaterial = new THREE.MeshPhongMaterial( { 
+        const planeGeometry = new THREE.PlaneGeometry(50, 50, 1, 1 ); 
+        const planeMaterial = new THREE.MeshPhongMaterial( {
             color: 0x999999,
             shininess: 150,
             map: planeTexture
@@ -256,7 +256,7 @@ export const homeThreeModule = (async () => {
         setResizeEventHandler();
         createCubes();
         createParticles(20000, 10);
-        addLight(0xFFFFFF, 2, 500, 0, 10, 5);
+        addLight(0xFFFFFF, 500, 50, 0, 10, 5);
         setMouseMoved();
         initControls();
         setAnimationLoop();

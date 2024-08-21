@@ -1,9 +1,10 @@
 "use strict;"
 
+import '../../sass/includes/styleDeps.scss';
 import '../sass/styles.scss';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
@@ -174,7 +175,6 @@ class UniqueDataEntryApp extends React.Component {
         />
         <div className="row splitter">
           <div className="col-lg-12">
-            <h3>Items:</h3>
             <p>Add new items to the table. Only unique entries are allowed.</p>
             <div className="table-responsive">
               <table className="table" id="itemTable">
@@ -188,7 +188,7 @@ class UniqueDataEntryApp extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                {this.state.items.map((item, index) => {
+                  {this.state.items.map((item, index) => {
                     let key = KeyGeneratorUtil.generate(`${item.secondName} ${item.contact} ${item.postCode}`);
                     return (
                       <tr key={key}>
@@ -196,7 +196,7 @@ class UniqueDataEntryApp extends React.Component {
                         <td>{item.secondName}</td>
                         <td>{item.contact}</td>
                         <td>{item.postCode}</td>
-                        <td><a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
+                        <td><a href="#" className="badge bg-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></td>
                       </tr>
                     )
                   })}
@@ -212,7 +212,7 @@ class UniqueDataEntryApp extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-12">
-            <FormComponent handleSubmit={this.handleSubmit}/>
+            <FormComponent handleSubmit={this.handleSubmit} />
           </div>
         </div>
       </div>
@@ -220,7 +220,4 @@ class UniqueDataEntryApp extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <UniqueDataEntryApp />,
-  document.getElementById('result')
-);
+ReactDOM.createRoot(document.getElementById('result')).render(<UniqueDataEntryApp />);

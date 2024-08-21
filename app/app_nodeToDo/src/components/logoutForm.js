@@ -1,7 +1,7 @@
 "use strict;"
 
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -15,11 +15,11 @@ export function LogoutForm() {
     const loginContext = React.useContext(LoginContext);
     const spinnerContext = React.useContext(SpinnerContext);
 
-    const history = useHistory();
+    const history = useNavigate();
 
     const doneCallback = () => {
         spinnerContext.setShow(false);
-        history.push(LOGIN);
+        history(LOGIN);
     }
 
     const failCallback = (err) => {
@@ -40,14 +40,12 @@ export function LogoutForm() {
         <Row>
             <Col lg={4}>
                 <Form noValidate onSubmit={handleSubmit}>
-                    <Form.Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>
-                                Are you sure you want to logout ?
-                            </Form.Label>
-                            <Button className="float-right" id="submit" variant="dark" type="submit">Logout</Button>
-                        </Form.Group>
-                    </Form.Row>
+                    <Row>
+                        <Col>
+                            <p>Are you sure you want to logout ?</p>
+                            <Button id="submit" variant="dark" type="submit">Logout</Button>
+                        </Col>
+                    </Row>
                 </Form>
             </Col>
         </Row>

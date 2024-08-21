@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/index';
@@ -36,7 +37,7 @@ export function FormComponent(props) {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Row>
+        <Row>
           <Form.Label>
             Item to add
           </Form.Label>
@@ -57,7 +58,7 @@ export function FormComponent(props) {
               Please enter a value.
             </Form.Control.Feedback>
           </InputGroup>
-        </Form.Row>
+        </Row>
       </Form>
     </>
   );

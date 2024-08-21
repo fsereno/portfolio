@@ -12,4 +12,6 @@ I've added texture mapping and written a number of 'randomness' generators to en
 
 Below the introduction, you will find a collection of applications available for demonstration within the Portfolio. The search bar allows you to filter through the applications. Additionally, there is a search bar in the top navigation available on every page.
 
+This portfolio showcases a minimum viable product (MVP) for a technology-agnostic cloud deployment solution.
+
 I hope you enjoy exploring and feel free to view the code on GitHub or contact me with any queries.

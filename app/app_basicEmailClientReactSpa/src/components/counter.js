@@ -5,7 +5,7 @@ import Badge from 'react-bootstrap/Badge';
 
 export function Counter(props) {
     return (
-        <Badge pill variant="dark">
+        <Badge pill bg="dark">
             {props.count}
         </Badge>
     )

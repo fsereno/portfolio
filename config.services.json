@@ -5,7 +5,8 @@
         "type": ".NET",
         "ports": ["3001:3001"],
         "networks": ["backend"],
-        "image": "fabiosereno/portfolio.coffee-machine:0.0.15"
+        "version": "net8.0",
+        "image": "fabiosereno/portfolio.coffee-machine:1.0.0"
     },
     {
         "id": "dataStructures",
@@ -13,7 +14,8 @@
         "type": ".NET",
         "ports": ["3002:3002"],
         "networks": ["backend"],
-        "image": "fabiosereno/portfolio.data-structures:0.0.5"
+        "version": "net8.0",
+        "image": "fabiosereno/portfolio.data-structures:1.0.0"
     },
     {
         "id": "uniqueDataEntry",
@@ -21,7 +23,8 @@
         "type": ".NET",
         "ports": ["3003:3003"],
         "networks": ["backend"],
-        "image": "fabiosereno/portfolio.unique-data-entry:0.0.2"
+        "version": "net8.0",
+        "image": "fabiosereno/portfolio.unique-data-entry:1.0.0"
     },
     {
         "id": "stringSort",
@@ -29,7 +32,8 @@
         "type": ".NET",
         "ports": ["3004:3004"],
         "networks": ["backend"],
-        "image": "fabiosereno/portfolio.string-sort:0.0.1"
+        "version": "net8.0",
+        "image": "fabiosereno/portfolio.string-sort:1.0.0"
     },
     {
         "id": "entitySort",
@@ -37,7 +41,8 @@
         "type": ".NET",
         "ports": ["3005:3005"],
         "networks": ["backend"],
-        "image": "fabiosereno/portfolio.entity-sort:0.0.4"
+        "version": "net8.0",
+        "image": "fabiosereno/portfolio.entity-sort:1.0.0"
     },
     {
         "id": "nodeToDo",
@@ -45,7 +50,8 @@
         "type": "NODE",
         "ports": ["3006:3006"],
         "networks": ["backend"],
-        "image": "fabiosereno/portfolio.node-to-do:0.0.2"
+        "version": "20.15.0",
+        "image": "fabiosereno/portfolio.node-to-do:1.0.0"
     },
     {
         "id": "nginx.prod",
@@ -53,7 +59,7 @@
         "type": "NGINX",
         "ports": ["80:80"],
         "networks": ["frontend", "backend"],
-        "image": "fabiosereno/portfolio.nginx:1.1.0"
+        "image": "fabiosereno/portfolio.nginx:1.2.1"
     },
     {
         "id": "nginx.dev",
@@ -61,22 +67,15 @@
         "type": "NGINX",
         "ports": ["80:80"],
         "networks": ["frontend", "backend"],
-        "image": "nginx:1.23.1"
+        "image": "nginx:1.27.1"
     },
     {
-        "id": "node.dev",
-        "name": "node",
-        "type": "NODE",
+        "id": "server.dev",
+        "name": "server",
+        "type": "SERVER",
         "ports": ["8080:8080"],
         "networks": ["frontend", "backend"],
-        "image": "fabiosereno/portfolio.dev:0.0.2"
-    },
-    {
-        "id": "node.analysis",
-        "name": "node",
-        "type": "NODE",
-        "ports": ["8080:8080"],
-        "networks": ["frontend", "backend"],
-        "image": "fabiosereno/portfolio.analysis:0.0.3"
+        "version": "20.15.0",
+        "image": "fabiosereno/portfolio.dev:1.0.0"
     }
 ]

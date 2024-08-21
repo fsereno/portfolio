@@ -8,7 +8,9 @@ export function ReplyPane() {
     return (
         <>
             <EmailForm/>
-            <ReadingPane/>
+            <div className='pt-4'>
+                <ReadingPane/>
+            </div>
         </>
     )
 }

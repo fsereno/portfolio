@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { FilterUtil } from '../../typeScript/Utils/filterUtil/dist/index';
 
 export function FormComponent(props) {
@@ -37,8 +38,8 @@ export function FormComponent(props) {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Row>
-          <Form.Group as={Col}>
+        <Row>
+          <Form.Group as={Col} className='mb-3'>
             <Form.Label>
               Item to add
             </Form.Label>
@@ -55,14 +56,14 @@ export function FormComponent(props) {
               Please enter a value.
             </Form.Control.Feedback>
           </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <ButtonGroup aria-label="Basic example">
-            <Button id="submit" variant="dark" type="submit">Add item</Button>
-            <Button id="undo" variant="danger" type="button" onClick={props.handleUndo}>Undo</Button>
-            <Button id="redo" variant="dark" type="button" onClick={props.handleRedo}>Redo</Button>
-          </ButtonGroup>
-        </Form.Row>
+        </Row>
+        <Row>
+        <Form.Group as={Col} className='mb-3'>
+            <Button id="submit" variant="dark" type="submit" className="me-2">Add item</Button>
+            <Button id="undo" variant="danger" type="button" className="me-2" onClick={props.handleUndo}>Undo</Button>
+            <Button id="redo" variant="dark" type="button" className="me-2" onClick={props.handleRedo}>Redo</Button>
+          </Form.Group>
+        </Row>
       </Form>
     </>
   );

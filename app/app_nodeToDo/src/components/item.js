@@ -7,7 +7,7 @@ import { ItemToDo } from './itemToDo';
 
 export const Item = React.memo(({item}) => {
     return (
-        <ListGroup.Item variant={item.done ? "dark" : "" } className="d-flex justify-content-between align-items-center">
+        <ListGroup.Item variant={item.done ? "dark" : "" } className="d-flex justify-content-between align-items-center px-2">
             <DoneItem item={item} />
             <ItemToDo item={item} />
         </ListGroup.Item>

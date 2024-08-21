@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
     uniqueDataEntry:
-        image: 'fabiosereno/portfolio.unique-data-entry:0.0.2'
+        image: 'fabiosereno/portfolio.unique-data-entry:1.0.0'
         ports:
             - '3003:3003'
         container_name: uniqueDataEntry

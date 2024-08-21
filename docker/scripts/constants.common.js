@@ -3,7 +3,6 @@ const NGINX = 'NGINX'
 const NODE = 'NODE';
 const dev = 'dev';
 const test = 'test';
-const analysis = 'analysis';
 const yml = 'yml';
 const conf = 'conf';
 
@@ -13,7 +12,6 @@ module.exports = {
     NODE,
     dev,
     test,
-    analysis,
     yml,
     conf
 };

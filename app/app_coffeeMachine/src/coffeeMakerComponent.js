@@ -21,8 +21,8 @@ export default class CoffeeMakerComponent extends React.Component {
       <>
         <div className="row mb-3">
           <div className="col-lg-6">
-            <button id="runSync" type="button" className="btn btn-dark mr-2" onClick={this.props.handleRun}>Run Sync</button>
-            <button id="runAsync" type="button" className="btn btn-dark mr-2" onClick={this.props.handleRunAsync}>Run Async</button>
+            <button id="runSync" type="button" className="btn btn-dark me-2" onClick={this.props.handleRun}>Run Sync</button>
+            <button id="runAsync" type="button" className="btn btn-dark me-2" onClick={this.props.handleRunAsync}>Run Async</button>
           </div>
         </div>
         <div className="row">
@@ -36,7 +36,7 @@ export default class CoffeeMakerComponent extends React.Component {
                 let key = KeyGeneratorUtil.generate(item.detail);
                 return (
                   <li key={key} className="list-group-item d-flex align-items-center">
-                      <span className="badge badge-primary badge-pill mr-3 bg-dark">{index+1}</span>
+                      <span className="badge badge-primary badge-pill me-3 bg-dark">{index+1}</span>
                       {item.detail}
                   </li>
                 );

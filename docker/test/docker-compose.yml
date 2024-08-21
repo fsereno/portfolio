@@ -2,11 +2,12 @@ version: '3.9'
 
 services:
     test:
-        image: 'fabiosereno/portfolio.test:0.0.2'
+        image: 'fabiosereno/portfolio.test:1.0.0'
         volumes:
             - '../../config.json:/usr/src/app/config.json'
             - '../../babel.config.json:/usr/src/app/babel.config.json'
             - '../../setupTests.js:/usr/src/app/setupTests.js'
+            - '../../jest.config.js:/usr/src/app/jest.config.js'
             - '../../app:/usr/src/app/app'
             - '../../docs:/usr/src/app/docs'
             - '../../build:/usr/src/app/build'

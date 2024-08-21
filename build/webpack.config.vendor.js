@@ -11,7 +11,6 @@ module.exports = (env) => {
     entry: {
       vendor: [
         'bootstrap',
-        './app/sass/includes/styleDeps.scss',
         './app/js/modules/react/navFilterComponent/app.js',
         './app/js/modules/react/cookieBannerComponent/app.js'
       ]
@@ -41,7 +40,7 @@ module.exports = (env) => {
           ]
         },
         {
-          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          test: /\.woff2(\?\S*)?$/,
           use: [
             {
               loader: 'file-loader',

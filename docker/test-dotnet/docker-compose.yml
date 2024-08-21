@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
     test-dotnet:
-        image: 'fabiosereno/portfolio.dotnet.dev:0.0.1'
+        image: 'fabiosereno/portfolio.dotnet.dev:1.0.0'
         volumes:
             - '../../app/app_${DIR}/backend/api:/usr/src/app/app/app_${DIR}/backend/api'
             - '../../app/app_${DIR}/backend/test:/usr/src/app/app/app_${DIR}/backend/test'

@@ -1,21 +1,22 @@
 "use strict;"
 
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LoginContext } from '../contexts';
 import { MANAGE } from '../constants';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
-import { Row } from 'react-bootstrap';
+
 
 export function LoginForm() {
 
     const loginContext = React.useContext(LoginContext);
     const spinnerContext = React.useContext(SpinnerContext);
 
-    const history = useHistory();
+    const history = useNavigate();
 
     const [ showValidation, setShowValidation ] = useState(false);
     const [ showFeedback, setShowFeedback ] = useState(false);
@@ -27,7 +28,7 @@ export function LoginForm() {
         setShowValidation(false);
         setShowFeedback(false);
         spinnerContext.setShow(false);
-        history.push(MANAGE);
+        history(MANAGE);
     }
 
     const loginFailCallback = (err) => {
@@ -61,8 +62,8 @@ export function LoginForm() {
         <Row>
             <Col lg={4}>
                 <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
-                    <Form.Row>
-                        <Form.Group as={Col}>
+                    <Row>
+                        <Form.Group as={Col} className="mb-3">
                             <Form.Label>
                                 Username:
                             </Form.Label>
@@ -77,9 +78,9 @@ export function LoginForm() {
                                 Please enter a valid value
                             </Form.Control.Feedback>
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Group as={Col}>
+                    </Row>
+                    <Row>
+                        <Form.Group as={Col} className="mb-3">
                             <Form.Label>
                                 Password:
                             </Form.Label>
@@ -94,8 +95,8 @@ export function LoginForm() {
                                 Please enter a valid value
                             </Form.Control.Feedback>
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
+                    </Row>
+                    <Row>
                         <Form.Group as={Col}>
                             <Button className="float-right" id="submit" variant="dark" type="submit">Login</Button>
                             {showFeedback &&
@@ -104,7 +105,7 @@ export function LoginForm() {
                                 </div>
                             }
                         </Form.Group>
-                    </Form.Row>
+                    </Row>
                 </Form>
             </Col>
         </Row>
