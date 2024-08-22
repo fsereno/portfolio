@@ -12,6 +12,7 @@ const STORAGE = sessionStorage;
 export function CookieBannerComponent({isHomeActive}) {
 
     const [ fadeClass, setFadeClass ] = useState(getElementFadeClass(false));
+    const [ show, setShow ] = useState(true);
 
     useEffect(() => {
         if (isHomeActive) {
@@ -25,6 +26,7 @@ export function CookieBannerComponent({isHomeActive}) {
     const handleOnClick = () => {
         STORAGE.setItem(COOKIE_BANNER_ACCEPTED_KEY, true);
         setFadeClass(getElementFadeClass(false));
+        setShow(false);
     }
 
     const handleFade = () => {
@@ -49,10 +51,14 @@ export function CookieBannerComponent({isHomeActive}) {
 
     return (
         <>
-            <div className={`cookie-banner-container fade-element ${fadeClass}`} id='cookieBannerComponent'>
-                <p>This application uses cookies to determine which services are deployed and do not store any personal data.</p>
-                <button type="button" className="btn btn-sm btn-dark ms-5" onClick={handleOnClick}>Accept</button>
-            </div>
+            {show &&
+                <>
+                    <div className={`cookie-banner-container fade-element ${fadeClass}`} id='cookieBannerComponent'>
+                        <p>Test This application uses cookies to determine which services are deployed and do not store any personal data.</p>
+                        <button type="button" id="cookieBannerBtn" className="btn btn-sm btn-dark ms-5" onClick={handleOnClick}>Accept</button>
+                    </div>
+                </>
+            }
         </>
     );
 }

@@ -10,7 +10,7 @@ const users = [
   {
     id: '1792aef2-2842-40ba-92a7-e7c6288f4595',
     username: 'tester',
-    password: 'b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a2ea6d103fd07c95385ffab0cacbc86'
+    password: '9225403c2f02f76d8524810af7752fb015ea34530b23dfcce7151bc0231eb66e0c7720aaf9c67fb67843abd4b6a106053cba5380c43d794b909b29d9b924b3b6'
   }
 ];
 
@@ -191,6 +191,9 @@ const registerUser = (username, password) => {
 
   const id = uuidv4();
   const hashedPassword = createHash(password);
+
+  console.log("HASH", hashedPassword);
+
   const user = { id, username, password: hashedPassword };
 
   users.push(user);
