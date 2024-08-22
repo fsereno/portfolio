@@ -51,7 +51,7 @@
         "ports": ["3006:3006"],
         "networks": ["backend"],
         "version": "20.15.0",
-        "image": "fabiosereno/portfolio.node-to-do:1.0.0"
+        "image": "fabiosereno/portfolio.node-to-do:1.0.1"
     },
     {
         "id": "nginx.prod",
