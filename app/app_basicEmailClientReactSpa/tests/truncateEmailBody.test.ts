@@ -1,6 +1,5 @@
 "use strict;"
 
-import { expect } from 'chai';
 import { truncateEmailBody } from '../src/utils/truncateEmailBody';
 
 describe("truncateEmailBody", () => {
@@ -12,16 +11,16 @@ describe("truncateEmailBody", () => {
 
         const result:string = truncateEmailBody(paragraph, 10);
 
-        expect(result.length).to.equal(10);
+        expect(result.length).toEqual(10);
     });
     it("Should return the same string passed when less than the limit", () => {
         const paragraph: string = "Contrary";
         const result:string = truncateEmailBody(paragraph, 10);
 
-        expect(result.length).to.equal(8);
+        expect(result.length).toEqual(8);
     });
     it("Should return an empty string when nothing is passed", () => {
         const result:string = truncateEmailBody();
-        expect(result.length).to.equal(0);
+        expect(result.length).toEqual(0);
     });
 });

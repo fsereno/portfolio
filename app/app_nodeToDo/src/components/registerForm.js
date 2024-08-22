@@ -1,13 +1,13 @@
 "use strict;"
 
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { LOGIN, STANDARD_ERROR } from '../constants';
 import { SpinnerContext } from '../../../js/modules/react/spinnerComponent';
-import { Row } from 'react-bootstrap';
 import { ToasterContext, ENQUEUE_TOAST } from '../../../js/modules/react/toasterComponent';
 import { ToolTip } from './tooltip';
 import { LoginContext } from '../contexts';
@@ -23,7 +23,7 @@ export function RegisterForm() {
     const [ feedbackErrors, setFeedbackErrors ] = useState([]);
     const [ username, setUsername ] = useState("");
     const [ password, setPassword ] = useState("");
-    const history = useHistory();
+    const history = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -73,7 +73,7 @@ export function RegisterForm() {
 
             spinnerContext.setShow(false);
             toasterContext.dispatch( { type: ENQUEUE_TOAST, item: { heading: "Registration Successful!", body: `You can now login using your credentials.` } } );
-            history.push(LOGIN);
+            history(LOGIN);
 
         }).catch((err) => {
             debugger;
@@ -85,8 +85,8 @@ export function RegisterForm() {
         <Row>
             <Col lg={4}>
                 <Form noValidate validated={showValidation} onSubmit={handleSubmit}>
-                    <Form.Row>
-                        <Form.Group as={Col}>
+                    <Row>
+                        <Form.Group as={Col} className="mb-3">
                             <Form.Label>
                                 Username <ToolTip message="This is case insensitive" />
                             </Form.Label>
@@ -101,9 +101,9 @@ export function RegisterForm() {
                                 Please enter a valid value
                             </Form.Control.Feedback>
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Group as={Col}>
+                    </Row>
+                    <Row>
+                        <Form.Group as={Col} className="mb-3">
                             <Form.Label>
                                 Password <ToolTip message="Alphanumeric and case sensitive. Use a special character!" />
                             </Form.Label>
@@ -118,13 +118,13 @@ export function RegisterForm() {
                                 Please enter a valid value
                             </Form.Control.Feedback>
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Group as={Col}>
+                    </Row>
+                    <Row>
+                        <Form.Group as={Col} className="mb-3">
                             <Button className="float-right" id="submit" variant="dark" type="submit">Register</Button>
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
+                    </Row>
+                    <Row>
                         <Form.Group as={Col}>
                             {showFeedback &&
                                 <>
@@ -135,7 +135,7 @@ export function RegisterForm() {
                                 </>
                             }
                         </Form.Group>
-                    </Form.Row>
+                    </Row>
                 </Form>
             </Col>
         </Row>

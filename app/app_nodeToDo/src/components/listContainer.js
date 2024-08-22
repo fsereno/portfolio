@@ -10,7 +10,7 @@ export const ListContainer = ({items, title, hideItems, onHideClick, collapse}) 
             {items.length > 0 &&
                 <Row className={`justify-content-md-center mt-3 ${hideItems ? "d-none" : ""}`}>
                     <Col lg={10}>
-                        <h4>
+                        <h4 className='d-flex justify-content-between align-items-center'>
                             {title}
                             <a className="float-right text-dark" href="#" onClick={onHideClick}>
                                 {collapse.text}<i className={`bi ${collapse.class} mx-2`}></i>

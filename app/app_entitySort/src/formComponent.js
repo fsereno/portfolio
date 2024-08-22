@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 export function FormComponent(props) {
@@ -31,14 +32,16 @@ export function FormComponent(props) {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Row>
-          <Form.Label>
-            Add an Employee
-          </Form.Label>
-        </Form.Row>
-        <Form.Row>
-          <Col sm={3} className="my-1">
-            <Form.Label htmlFor="nameInput" srOnly>
+        <Row>
+          <Col>
+            <Form.Label>
+              Add an Employee
+            </Form.Label>
+          </Col>
+        </Row>
+        <Row>
+          <Form.Group as={Col} className='mb-3'>
+            <Form.Label htmlFor="nameInput">
               Name
             </Form.Label>
             <Form.Control
@@ -53,15 +56,15 @@ export function FormComponent(props) {
             <Form.Control.Feedback type="invalid">
               Please enter a value.
             </Form.Control.Feedback>
-          </Col>
-          <Col sm={3} className="my-1">
-            <Form.Label htmlFor="salaryInput" srOnly>
+          </Form.Group>
+        </Row>
+        <Row>
+          <Form.Group as={Col} className='mb-3'>
+            <Form.Label htmlFor="salaryInput">
               Salary
             </Form.Label>
             <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text>£</InputGroup.Text>
-              </InputGroup.Prepend>
+              <InputGroup.Text className='left'>£</InputGroup.Text>
               <Form.Control
                 id="salaryInput"
                 name="salaryInput"
@@ -75,12 +78,12 @@ export function FormComponent(props) {
                 Please enter a value.
               </Form.Control.Feedback>
             </InputGroup>
-          </Col>
-          <Col sm={3} className="my-1">
+          </Form.Group>
+        </Row>
+          <Form.Group as={Col} className='mb-3'>
             <Button id="addEmployee_submit" variant="dark" type="submit">Add</Button>
-          </Col>
-        </Form.Row>
-      </Form>
+          </Form.Group>
+    </Form >
     </>
   );
 }

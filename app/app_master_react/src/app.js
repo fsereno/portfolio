@@ -1,9 +1,11 @@
 "use strict;"
 
+import '../../sass/includes/styleDeps.scss';
 import "../sass/styles.scss";
 
+
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
 import { FormComponent } from './formComponent';
 class ToDoListForm extends React.Component {
@@ -65,7 +67,6 @@ class ToDoListForm extends React.Component {
         <div className="row splitter">
           <div className="col-lg-12">
             <p>Items: {this.state.counter}</p>
-            <p>Item to add: {this.state.value}</p>
           </div>
         </div>
         <div className="row">
@@ -83,7 +84,4 @@ class ToDoListForm extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <ToDoListForm />,
-  document.getElementById('result')
-);
+ReactDOM.createRoot(document.getElementById('result')).render(<ToDoListForm />);

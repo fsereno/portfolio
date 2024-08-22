@@ -13,12 +13,11 @@ export function ContentContainer() {
   const topScrollComponentThreshold = 270;
 
   return (
-    <div className={`container-fluid pt-4 bg-white`} id="contentContainer">
+    <div className={`container pt-5 bg-white`} id="contentContainer">
       <div className="row">
         <div className="col-lg-12">
-          <h5>{context.config.title}</h5>
+          <h2 className='display-4'>{context.config.title}</h2>
           <p className="text-muted">{context.config.author} - {context.config.role}</p>
-          <hr />
         </div>
       </div>
       <SearchBar

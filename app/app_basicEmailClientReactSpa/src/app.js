@@ -1,9 +1,10 @@
 "use strict;"
 
+import '../../sass/includes/styleDeps.scss';
 import '../sass/styles.scss';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Router } from './components/router';
 import { EmailContextProvider } from './components/contextProviders/emailContextProvider';
 import { ToasterContextProvider } from '../../js/modules/react/toasterComponent';
@@ -19,4 +20,4 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('result'));
+ReactDOM.createRoot(document.getElementById('result')).render(<App />);

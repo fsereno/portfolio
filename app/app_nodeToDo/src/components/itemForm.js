@@ -40,7 +40,7 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
         <Row className="justify-content-md-center mb-5">
             <Col lg={10}>
                 <Form id="itemForm" noValidate validated={showValidation} onSubmit={handleSubmit}>
-                    <Form.Row>
+                    <Row>
                         <Form.Label>
                             Describe a task to do:
                         </Form.Label>
@@ -54,20 +54,18 @@ export const ItemForm = ({state, dispatch, submitHandler, doneCallback}) => {
                                 onChange={event => dispatch({ type: DESCRIPTION, value: event.target.value })}
                                 required
                             />
-                            <InputGroup.Append className="shadow-lg">
-                                <Button className="rounded-right" id="submit" variant="dark" type="submit">Submit</Button>
-                            </InputGroup.Append>
+                                <Button className="radius-right" id="submit" variant="dark" type="submit">Submit</Button>
                             <Form.Control.Feedback type="invalid">
                                 Please enter a value.
                             </Form.Control.Feedback>
                         </InputGroup>
-                    </Form.Row>
+                    </Row>
                     {showFeedback &&
-                        <Form.Row>
+                        <Row>
                             <Form.Group as={Col}>
                                 <h5 className="edit mt-2 text-danger">{STANDARD_ERROR}</h5>
                             </Form.Group>
-                        </Form.Row>
+                        </Row>
                     }
                 </Form>
             </Col>

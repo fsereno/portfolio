@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 export function FormComponent(props) {
 
@@ -30,8 +31,8 @@ export function FormComponent(props) {
   return (
     <>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Row>
-          <Form.Group as={Col} md="2" controlId="firstNameInput">
+        <Row>
+          <Form.Group as={Col} md="3" controlId="firstNameInput" className='mb-3'>
             <Form.Control
               name="firstNameInput"
               type="text"
@@ -42,7 +43,9 @@ export function FormComponent(props) {
               Please enter a value.
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="2" controlId="secondNameInput">
+        </Row>
+        <Row>
+          <Form.Group as={Col} md="3" controlId="secondNameInput" className='mb-3'>
             <Form.Control
               name="secondNameInput"
               type="text"
@@ -53,7 +56,9 @@ export function FormComponent(props) {
               Please enter a value.
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="2" controlId="contactInput">
+        </Row>
+        <Row>
+          <Form.Group as={Col} md="3" controlId="contactInput" className='mb-3'>
             <Form.Control
               name="contactInput"
               type="text"
@@ -65,7 +70,9 @@ export function FormComponent(props) {
               Please enter a valid value.
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="2" controlId="postCodeInput">
+        </Row>
+        <Row>
+          <Form.Group as={Col} md="3" controlId="postCodeInput" className='mb-3'>
             <Form.Control
               name="postCodeInput"
               type="text"
@@ -76,10 +83,12 @@ export function FormComponent(props) {
               Please enter a value.
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="3"> 
+        </Row>
+        <Row>
+          <Form.Group as={Col} md="3">
             <Button variant="dark" id="submit" type="submit">Add item</Button>
           </Form.Group>
-        </Form.Row>
+        </Row>
       </Form>
     </>
   );

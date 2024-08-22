@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { ApplicationSortUtil } from "../../typeScript/Utils/applicationsSortUtil/index";
 import { Application } from '../../typeScript/Models/Application';
 
@@ -16,29 +15,29 @@ describe("ApplicationSortUtil", () => {
     });
 
     describe("Sorter", () => {
-        it("Should return sorted array of applications", () => {
+        test("Should return sorted array of applications", () => {
 
             applications.sort(ApplicationSortUtil.sorter);
 
-            expect(applications[0].order).to.equal(1);
-            expect(applications[1].order).to.equal(2);
-            expect(applications[2].order).to.equal(5);
-            expect(applications[3].order).to.equal(10);
+            expect(applications[0].order).toBe(1);
+            expect(applications[1].order).toBe(2);
+            expect(applications[2].order).toBe(5);
+            expect(applications[3].order).toBe(10);
         });
-        it("Should return sorted array of applications, with null orders last", () => {
+        test("Should return sorted array of applications, with null orders last", () => {
 
             let applications = [
                 new Application(10),
-                new Application(null),
-                new Application(null),
+                new Application(undefined),
+                new Application(undefined),
                 new Application(5),
             ]
 
             applications.sort(ApplicationSortUtil.sorter);
 
-            expect(applications[0].order).to.equal(5);
-            expect(applications[1].order).to.equal(10);
-            expect(applications.length).to.equal(4);
+            expect(applications[0].order).toBe(5);
+            expect(applications[1].order).toBe(10);
+            expect(applications.length).toBe(4);
         });
     });
 });

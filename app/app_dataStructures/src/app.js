@@ -1,9 +1,10 @@
 "use strict;"
 
+import '../../sass/includes/styleDeps.scss';
 import '../sass/styles.scss';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
@@ -240,7 +241,4 @@ class DataStructuresApp extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <DataStructuresApp />,
-  document.getElementById('result')
-);
+ReactDOM.createRoot(document.getElementById('result')).render(<DataStructuresApp />);

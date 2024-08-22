@@ -40,11 +40,14 @@ const getAll = (command) => {
  */
 const run = (command, options, callback = () => undefined) => {
   console.log(chalk.green('Running command: ' + command));
-  execSync(command, {...options, stdio: 'inherit' });
-  if (typeof callback === "function") {
-    callback();
+  try {
+    execSync(command, {...options, stdio: 'inherit' });
+    if (typeof callback === "function") {
+      callback();
+    }
+  } catch (error) {
+    console.error(`Error running command: ${command}`, error);
   }
-  process.exit(0);
 }
 
 /**
@@ -89,9 +92,6 @@ const getComposeFilename = (mode = "") => {
     case constants.test:
       filename = `${filename}.${constants.test}`;
       break;
-    case constants.analysis:
-      filename = `${filename}.${constants.analysis}`;
-      break;
     default:
       break;
   }
@@ -112,7 +112,6 @@ console.log("MDOE", mode)
 
   switch (mode) {
     case constants.dev:
-    case constants.analysis:
       filename = `${filename}.${constants.dev}`;
       break;
 
@@ -133,5 +132,6 @@ module.exports = {
     getConfig,
     getServicesConfig,
     getComposeFilename,
-    getNginxFilename
+    getNginxFilename,
+    getJson
 };

@@ -23,7 +23,10 @@ export function SearchBar({
     const noQuickFiltersClass = !showQuickFilters ? 'no-quick-filters' : '';
     const noClearWhenNoQuickFiltersClass = !showClear && !showQuickFilters ? 'no-show-clear' : '';
 
-    const resetApplications = () => {
+    const resetApplications = (e) => {
+        if (e) {
+            e.stopPropagation();
+        }
         setShowClear(false);
         setSearcValue("");
         const resetApplications = context.applications.map(application => {
@@ -81,10 +84,8 @@ export function SearchBar({
     return (
         <form onSubmit={handleSubmit}>
             <div id={searchBarId} className="input-group mb-3 shadow searchBar">
-                <div className="input-group-prepend">
-                    <span className="input-group-text">
-                        <i className="fa fa-search"></i>
-                    </span>
+                <div className="input-group-text">
+                    <i className="fa fa-search"></i>
                 </div>
                 <input
                     type="text"
@@ -94,16 +95,16 @@ export function SearchBar({
                     value={searchValue}
                     onChange={onSearchHandler} />
                 {showClear &&
-                    <div className="input-group-append cancelBtn" id={cancelBtnId}>
-                        <button className={`btn ${noQuickFiltersClass}`} type="button" onClick={resetApplications}>
+                    <div className={`input-group-text cancelBtn ${noQuickFiltersClass}`} id={cancelBtnId}>
+                        <button type="button" onClick={resetApplications}>
                             <span className="lr">
                                 <span className="rl"></span>
                             </span>
                         </button>
                     </div>}
                 {showQuickFilters &&
-                    <div className="input-group-append">
-                        <button id={openFilterBtnId} className="btn btn-dark openFilterBtn" type="button" data-toggle="collapse" data-target={`#${filterContainerId}`} aria-expanded="false" aria-controls={filterContainerId}>
+                    <div className="input-group-text openFilterBtn">
+                        <button id={openFilterBtnId} type="button" data-bs-toggle="collapse" data-bs-target={`#${filterContainerId}`} aria-expanded="false" aria-controls={filterContainerId}>
                             <i className="fa fa-filter"></i>
                         </button>
                     </div>
@@ -112,9 +113,9 @@ export function SearchBar({
             {showQuickFilters &&
                 <div className="collapse filterContainer" id={filterContainerId}>
                     <div className="pb-3">
-                        <label className="d-flex flex-row justify-content-center">Quick search</label>
+                        <label className="d-flex flex-row justify-content-center mb-2">Quick search</label>
                         <div className="quick-search-filters d-flex justify-content-center">
-                            {configContext.config.quickSearch.map(term => <button key={term} type="button" className="btn btn-outline-dark ml-2 p-0" value={term} onClick={handleQuickFilter}>{term}</button>)}
+                            {configContext.config.quickSearch.map(term => <button key={term} type="button" className="btn btn-outline-dark me-2 p-0" value={term} onClick={handleQuickFilter}>{term}</button>)}
                         </div>
                     </div>
                 </div>

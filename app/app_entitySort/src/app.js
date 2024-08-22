@@ -1,9 +1,10 @@
 "use strict;"
 
+import '../../sass/includes/styleDeps.scss';
 import '../sass/styles.scss';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { KeyGeneratorUtil } from '../../typeScript/Utils/keyGeneratorUtil/dist/index';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
@@ -221,7 +222,7 @@ class EntitySort extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-12">
+          <div className="col-4">
             <FormComponent
               handleSubmit={this.handleSubmit}
               handleNameChange={this.handleNameChange}
@@ -236,7 +237,4 @@ class EntitySort extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <EntitySort />,
-  document.getElementById('result')
-);
+ReactDOM.createRoot(document.getElementById('result')).render(<EntitySort />);

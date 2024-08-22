@@ -1,9 +1,10 @@
 "use strict;"
 
+import '../../sass/includes/styleDeps.scss';
 import '../sass/styles.scss';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { SpinnerComponent } from '../../js/modules/react/spinnerComponent.js'
 import { ErrorModalComponent } from '../../js/modules/react/errorModalComponent.js';
 import { ConfigUtil } from "../../js/modules/utils/configUtil";
@@ -141,7 +142,4 @@ class StringSort extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <StringSort />,
-  document.getElementById('result')
-);
+ReactDOM.createRoot(document.getElementById('result')).render(<StringSort />);

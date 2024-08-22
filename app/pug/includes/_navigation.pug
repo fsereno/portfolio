@@ -1,5 +1,5 @@
 - var directory = htmlWebpackPlugin.options.locals.application.useRoot ? "./" : "../";
-nav#navBar.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+nav#navBar.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top.px-2
   a.navbar-brand(
       href=directory+"index.html")
     img#navbarImage(src=require("../../images/FSLogo.png").default.replace("../", directory), alt="Fabio Sereno logo image").pull-left
@@ -8,8 +8,8 @@ nav#navBar.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
   button.navbar-toggler(
       id="navbarNavDropdownBtn"
       type='button'
-      data-toggle='collapse'
-      data-target='#navbarNavDropdown'
+      data-bs-toggle='collapse'
+      data-bs-target='#navbarNavDropdown'
       aria-controls='navbarNavDropdown'
       aria-expanded='false'
       aria-label='Toggle navigation')
@@ -22,12 +22,12 @@ nav#navBar.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
         li.nav-item
             a.nav-link(href=directory+"index.html")
                 | Home
-                i.fa.fa-home.ml-2
+                i.fa.fa-home.ms-2
         li.nav-item.dropdown
             a#navbarDropdownMenuLink.nav-link.dropdown-toggle(
                 href='#'
                 role='button'
-                data-toggle='dropdown'
+                data-bs-toggle='dropdown'
                 aria-haspopup='true'
                 aria-expanded='false')
                 | Applications
@@ -38,8 +38,8 @@ nav#navBar.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
                 : htmlWebpackPlugin.options.locals.config.repoRootUrl+htmlWebpackPlugin.options.locals.config.folderRoot+htmlWebpackPlugin.options.locals.config.prefix+htmlWebpackPlugin.options.locals.application.folder),
                 target="_blank")
                 | View on Github
-                i.fa.fa-github.ml-2
+                i.fa.fa-github.ms-2
         li.nav-item
             a.nav-link(href=htmlWebpackPlugin.options.locals.config.linkedInUrl, target="_blank")
                 | Linkedin
-                i.fa.fa-linkedin.ml-2
+                i.fa.fa-linkedin.ms-2

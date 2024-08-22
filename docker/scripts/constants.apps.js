@@ -19,7 +19,7 @@ Eg. > ${chalk.yellow('npm run (start/stop) -- --help')}
 
 These are the available options:
 
-${chalk.yellow(MODE)} - ${chalk.green('This command allows you to target a specific mode. Otherwise the production version is used. Available modes are: dev, analysis.')}
+${chalk.yellow(MODE)} - ${chalk.green('This command allows you to target a specific mode. Otherwise the production version is used. Available modes are: dev.')}
 
 ${chalk.yellow(NAME)} - ${chalk.green('This command is used by specifying the name of the application you want to target.')}
 

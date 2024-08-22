@@ -4,7 +4,7 @@ const helpers = require('./helpers.common');
 const verbs = require('./verbs.apps');
 const handlers = require('./handlers.common');
 const hasSomeEphemeral = handlers.ifHasSome(verbs.ephemeral);
-const attachmentMode = ( verbs.hasDev || verbs.hasAnalysis || verbs.hasTest || hasSomeEphemeral ) ? '' : '-d';
+const attachmentMode = ( verbs.hasDev || verbs.hasTest || hasSomeEphemeral ) ? '' : '-d';
 
 /**
  * Generates the name of the Docker Compose file based on the environment configuration.
@@ -19,11 +19,10 @@ const getComposeFilename = () => helpers.getComposeFilename(helpers.get(constant
 const getComposeFilePath = () => verbs.hasName ? `./docker/${getName()}/${getComposeFilename()}` : `./${getComposeFilename()}`;
 
 /**
- * Determines the name based on the presence of analysis in verbs.
- * If analysis is present, returns the analysis constant; otherwise, returns the NAME constant.
+ * Determines the name.
  * @returns {string} The determined name.
  */
-const getName = () => verbs.hasAnalysis ? constantsCommon.analysis : helpers.get(constants.NAME);
+const getName = () => helpers.get(constants.NAME);
 
 /**
  * Starts Docker containers based on the configured environment.

@@ -31,6 +31,7 @@ const assertComplete = () => console.log(chalk.green(`Compose complate...`));
 const compose = () => {
 
         const serviceConfigs = helpers.getServicesConfig();
+        const config = helpers.getConfig();
         const yamlFilename = helpers.getComposeFilename(helpers.get(constants.MODE));
         const yamlRoot = './';
         const yamlPath = `${yamlRoot}${yamlFilename}`
@@ -44,8 +45,9 @@ const compose = () => {
         }
 
         assertMode();
+        addSecretsToEnv(config);
         setProdRoot(nginxConfig);
-        addServices(serviceConfigs, services, nginxConfig);
+        addServices(config, serviceConfigs, services, nginxConfig);
         buildDependsOn(services, dependsOn);
         addNginx(services, serviceConfigs, dependsOn);
         addDevServer(services, nginxConfig, dependsOn, serviceConfigs);
@@ -67,11 +69,11 @@ const compose = () => {
  */
 const addDevServer = (services = {}, nginxConfig = [], dependsOn = [], serviceConfigs = []) => {
     if (!verbs.hasProd) {
-        const nodeType = verbs.hasDev ? 'node.dev' : 'node.analysis';
-        const nodeServiceConfig = serviceConfigs.find(x => x.id === nodeType);
-        const node = helpersCompose.getNodeDev(nodeServiceConfig);
-        services.node = {...node.service, ...helpersCompose.getDependsOn(dependsOn)}
-        helpersCompose.appendNginxConfig(nginxConfig, node.config);
+        const type = 'server.dev';
+        const nodeServiceConfig = serviceConfigs.find(x => x.id === type);
+        const server = helpersCompose.getDevServer(nodeServiceConfig);
+        services.server = {...server.service, ...helpersCompose.getDependsOn(dependsOn)}
+        helpersCompose.appendNginxConfig(nginxConfig, server.config);
     }
 }
 
@@ -104,17 +106,12 @@ const buildDependsOn = (services = {}, dependsOn = []) => {
 
 /**
  * Adds services to the service configurations and NGINX configuration based on the environment configuration.
+ * @param {object} config - An object representing the application configuration.
  * @param {object[]} serviceConfigs - An array representing the service configurations.
  * @param {object} services - An object representing the services.
  * @param {string[]} nginxConfig - An array representing the NGINX configuration.
  */
-const addServices = (serviceConfigs = [], services = {}, nginxConfig = []) => {
-
-    if (verbs.hasAnalysis) {
-
-        // analysis requires no other services.
-        return;
-    }
+const addServices = (config, serviceConfigs = [], services = {}, nginxConfig = []) => {
 
     if (verbs.hasInclude) {
 
@@ -125,7 +122,6 @@ const addServices = (serviceConfigs = [], services = {}, nginxConfig = []) => {
         addApplicationServices(applicationServices, serviceConfigs, services, nginxConfig);
 
     } else {
-        const config = helpers.getConfig();
 
         config.applications.forEach(_application => {
             const applicationServices = _application.services;
@@ -160,6 +156,25 @@ const addApplicationServices = (applicationServices = [], serviceConfigs = [], s
             }
         });
     }
+}
+
+/**
+ * This method will add the secrets to the node environment.
+ * @param {object} config - An object representing the application configuration.
+*/
+const addSecretsToEnv = (config = {}) => {
+    const secrets = config.secrets;
+
+    Object.keys(secrets).forEach(key => {
+
+        const value = helpers.getJson(secrets[key]);
+
+        if (value) {
+            console.log(chalk.blue(`adding secret:`), chalk.yellow(`${key}`));
+            process.env[key] = value.token;
+        }
+
+    });
 }
 
 module.exports = {

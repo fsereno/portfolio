@@ -33,7 +33,7 @@
   $size: 1.5em;
   background: $darkGrey;
   border-radius: 100%;
-  padding: ($size/8) ($size/8) 0;
+  padding: calc($size / 8) calc($size / 8) 0;
   width:2.5rem;
   height:2.5rem;
   .spinner * {
@@ -50,15 +50,15 @@
     animation-timing-function: linear;
     .circle {
       width: $size;
-      height: ($size/2);
+      height: calc($size / 2);
       overflow: hidden;
     }
     .circle-inner {
       transform: rotate(45deg);
       border-radius: 50%;
-      border: ($size/8) solid $blue;
-      border-right: ($size/8) solid transparent;
-      border-bottom: ($size/8) solid transparent;
+      border: calc($size / 8) solid $blue;
+      border-right: calc($size / 8) solid transparent;
+      border-bottom: calc($size / 8) solid transparent;
       width: 100%;
       height: 200%;
       animation-name: anim-circle-1;

@@ -1,12 +1,11 @@
 "use strict;"
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import CoffeeMakerApp from './coffeeMakerApp';
-
+import '../../sass/includes/styleDeps.scss';
 import '../sass/styles.scss';
 
-ReactDOM.render(
-  <CoffeeMakerApp />,
-  document.getElementById('result')
-);
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import CoffeeMakerApp from './coffeeMakerApp';
+
+ReactDOM.createRoot(document.getElementById('result')).render(<CoffeeMakerApp />);

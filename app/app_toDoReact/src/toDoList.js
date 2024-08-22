@@ -50,11 +50,10 @@ export default class ToDoList extends React.Component {
             <div>
                 <div className="row splitter">
                     <div className="col-lg-4">
-                        <h3>Result:</h3>
                         <ul id="toDoList" className="list-group">
                             {this.state.list.map((item, index) => {
                                 let key = KeyGeneratorUtil.generate(item);
-                                return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge badge-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
+                                return <li key={key} className="list-group-item d-flex justify-content-between align-items-center">{item} <a href="#" className="badge bg-danger delete" data-index={index} onClick={this.handleDelete}>Delete</a></li>
                             })}
                         </ul>
                     </div>
@@ -62,7 +61,6 @@ export default class ToDoList extends React.Component {
                 <div className="row splitter">
                     <div className="col-lg-12">
                         <p>Items: {this.state.counter}</p>
-                        <p>Item to add: {this.state.value}</p>
                     </div>
                 </div>
                 <div className="row">

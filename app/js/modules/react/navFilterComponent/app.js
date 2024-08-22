@@ -1,6 +1,6 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { ApplicationsContextProvider } from '../applicationsContextProvider';
 import { ConfigContextProvider } from '../configContextProvider';
 import { NavFilterComponent } from './navFilterComponent';
@@ -19,7 +19,4 @@ function App() {
     )
 }
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('applicationsDropdown')
-);
+ReactDOM.createRoot(document.getElementById('applicationsDropdown')).render(<App />);
