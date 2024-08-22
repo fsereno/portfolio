@@ -59,7 +59,7 @@
         "type": "NGINX",
         "ports": ["80:80"],
         "networks": ["frontend", "backend"],
-        "image": "fabiosereno/portfolio.nginx:1.2.1"
+        "image": "fabiosereno/portfolio.nginx:1.3.0"
     },
     {
         "id": "nginx.dev",
