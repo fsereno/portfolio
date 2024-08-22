@@ -8,7 +8,7 @@ const URL = `http://${CONFIG.dockerHost}/${APPLICATION}/index.html`;
 
 beforeAll(async () => {
     await openBrowser({
-      headless: false,
+      headless: true,
       slowMo: 250,
       args: ['--no-sandbox']
     });
@@ -34,7 +34,7 @@ describe(APPLICATION, () => {
         await goto(URL);
         await click(button({id: 'cookieBannerBtn'}));
         await write('tester', into(textBox({ id: 'username' })));
-        await write('password', into(textBox({ id: 'password' })));
+        await write('fabio.sereno.123', into(textBox({ id: 'password' })));
         await click(button({ id: 'submit' }));
         await waitFor(2000);
         const error = await text('Username or password does not match.').exists();
@@ -53,7 +53,7 @@ describe(APPLICATION, () => {
         await goto(URL);
         await click(button({id: 'cookieBannerBtn'}));
         await write('tester', into(textBox({ id: 'username' })));
-        await write('password', into(textBox({ id: 'password' })));
+        await write('fabio.sereno.123', into(textBox({ id: 'password' })));
         await click(button({ id: 'submit' }));
         await waitFor(2000);
         await write('A test to do item', into(textBox({id: 'description'})));
@@ -78,7 +78,7 @@ describe(APPLICATION, () => {
         await goto(URL);
         await click(button({id: 'cookieBannerBtn'}));
         await write('tester', into(textBox({ id: 'username' })));
-        await write('password', into(textBox({ id: 'password' })));
+        await write('fabio.sereno.123', into(textBox({ id: 'password' })));
         await click(button({ id: 'submit' }));
         await waitFor(2000);
         await write('A test to do item 2', into(textBox({id: 'description'})));
