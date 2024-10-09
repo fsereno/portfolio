@@ -257,16 +257,15 @@
             "labels": ["JavaScript"]
         },
         {
-            "name": "Test React Template",
-            "subHeading": "Subheading",
-            "description": "Description",
-            "searchTerms": "Docker,JavaScript,React,Babel,Webpack,PUG,HTML,CSS,SASS",
-            "folder": "new_react",
+            "name": "Large Language Model Service",
+            "subHeading": "",
+            "description": "",
+            "searchTerms": "",
+            "folder": "llm_service",
             "masterTemplateDir": "toDoReact",
             "active": true,
             "include": false,
-            "useWebpack": true,
-            "labels": ["JavaScript"]
+            "useWebpack": true
         }
     ]
 }

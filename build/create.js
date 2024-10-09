@@ -24,13 +24,14 @@ function copyRecursiveSync(src, dest) {
     if (sourceExists) {
         const destinationExists = fs.existsSync(dest);
         if (!destinationExists) {
-            console.log(chalk.green('Copying ') + src);
+            console.log(chalk.blue('Copying ') + src);
             if (isSourceDirectory) {
-                console.log(chalk.green('Creating ') + dest);
+                console.log(chalk.yellow('Creating ') + dest);
                 fs.mkdirSync(dest);
                 fs.readdirSync(src).forEach(function (childItemName) {
                     copyRecursiveSync(path.join(src, childItemName), path.join(dest, childItemName));
                 });
+                console.log(chalk.green('Created ') + dest);
             } else {
                 fs.copyFileSync(src, dest);
             }
